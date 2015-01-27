@@ -25,21 +25,28 @@
 
 @interface MojioClient : NSObject
 
-- (void) loginWithClientId : (NSString *)clientId andRedirectUri : (NSString *)redirectUri;
++(id) sharedInstance;
 
--(id) initWithAppId : (NSString *)appId withSecretKey : (NSString *)secretKey withUserOrEmail : (NSString *)userOrEmail withPassword : (NSString *)password ;
+- (void) login;
+- (void) initWithAppId : (NSString *) appId andSecretKey : (NSString *)secretKey andRedirectUrlScheme : (NSString *) urlScheme;
+
+//-(id) initWithAppId : (NSString *)appId withSecretKey : (NSString *)secretKey withUserOrEmail : (NSString *)userOrEmail withPassword : (NSString *)password ;
 - (id) getAsync : (NSString *)entity withParams : (NSArray *)args;
 
 -(Vehicle *) getVehicleData;
 
-@property (nonatomic, readonly) NSString *sandbox;
-@property (nonatomic, readonly) NSString *oAuthAuthorize;
-@property (nonatomic, readonly) NSString *oAuthToken;
 
 @property (nonatomic) int pageSize;
 @property (nonatomic) int sessionTime;
 
 @property (nonatomic, strong) Token *token;
+
+
+@property (nonatomic, strong) NSString *appId;
+@property (nonatomic, strong) NSString *secretKey;
+@property (nonatomic, strong) NSString *redirectUrlScheme;
+@property (nonatomic, strong) NSString *authToken;
+
 
 @property (nonatomic, weak) id <MojioClientDelegate> delegate;
 

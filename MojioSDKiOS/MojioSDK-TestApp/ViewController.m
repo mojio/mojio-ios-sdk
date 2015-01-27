@@ -32,8 +32,8 @@
 }
 
 -(IBAction)loginButtonPressed:(id)sender {
-    self.client = [[MojioClient alloc] initWithAppId:@"f642dfb4-67c2-472a-bec6-a583d3152a01" withSecretKey:@"e28b87cc-2d6f-48e0-b4ef-f728c44b2dcf" withUserOrEmail:@"ashisha@moj.io" withPassword:@"Test123"];
-    self.client.delegate = self; //assign ourselves as the delegate of the Mojio Client
+//    self.client = [[MojioClient alloc] initWithAppId:@"f642dfb4-67c2-472a-bec6-a583d3152a01" withSecretKey:@"e28b87cc-2d6f-48e0-b4ef-f728c44b2dcf" withUserOrEmail:@"ashisha@moj.io" withPassword:@"Test123"];
+//    self.client.delegate = self; //assign ourselves as the delegate of the Mojio Client
     
 }
 
@@ -48,10 +48,7 @@
 
 -(IBAction)oauthLogin:(id)sender {
     
-    NSURL *url = [NSURL URLWithString:@"https://api.moj.io/OAuth2/authorize?response_type=token&client_id=f642dfb4-67c2-472a-bec6-a583d3152a01&redirect_uri=mojioios://"];
-    
-    [[UIApplication sharedApplication] openURL:url];
-    
+    self.client = [[MojioClient alloc] init];
     
 //    AFOAuth2Manager *manager = [[AFOAuth2Manager alloc] initWithBaseURL:baseURL clientID:@"f642dfb4-67c2-472a-bec6-a583d3152a01" secret:@"e28b87cc-2d6f-48e0-b4ef-f728c44b2dcf"];
 //    

@@ -55,50 +55,36 @@
         if (self.map == nil) {
             self.map = [[MapEntity alloc]init];
             
-//            [self.map add:typeof(App) withController:@"apps"];
-//            [self.map add:typeof( withController:<#(NSString *)#>]
         }
     }
     return self;
 }
 
--(void) loginWithClientId:(NSString *)clientId andRedirectUri:(NSString *)redirectUri {
++ (id) sharedInstance {
+    static MojioClient *client = nil;
     
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        client = [[self alloc] init];
+    });
+    
+    return client;
 }
 
--(id) initWithAppId:(NSString *)appId withSecretKey:(NSString *)secretKey withUserOrEmail:(NSString *)userOrEmail withPassword:(NSString *)password {
-
-    self = [super init];
-    
-    if (self) {
-        self.baseApiUrl = [NSString stringWithFormat:@"https://api.moj.io/v1/"];
-        self.manager = [AFHTTPRequestOperationManager manager];
-        
-        NSString *urlString = [NSString stringWithFormat:@"%@/login/%@?secretKey=%@&userOrEmail=%@&password=%@", self.baseApiUrl, appId, secretKey, userOrEmail, password];
-        
-        [self.manager POST:urlString parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            if ([responseObject isKindOfClass:[NSArray class]]) {
-                NSLog(@"an error happened");
-            }
-            else if ([responseObject isKindOfClass:[NSDictionary class]]) {
-//                NSString *userID = (NSString *)[responseObject objectForKey:@"UserId"];
-//                NSString *mojioApiToken = (NSString*)[responseObject objectForKey:@"_id"];
-                
-                self.token = [[Token alloc] init];
-                [self.token setUserId:(NSUUID*)[responseObject objectForKey:@"UserId"]];
-                [self.token setApiToken:(NSString*) [responseObject objectForKey:@"_id"]];
-                
-                // send message that user is logged in
-                [self.delegate loggedIn];
-
-            }
-        }failure:^(AFHTTPRequestOperation *operation, NSError *error ) {
-            NSLog(@"Error is %@", [error localizedDescription]);
-        }];
-    }
-    
-    return self;
+- (void) initWithAppId : (NSString *) appId andSecretKey : (NSString *)secretKey andRedirectUrlScheme:(NSString *)urlScheme {
+    self.appId = appId;
+    self.secretKey = secretKey;
+    self.redirectUrlScheme = urlScheme;
 }
+
+-(void) login {
+    
+    NSString *urlString = [NSString stringWithFormat:@"https://api.moj.io/OAuth2/authorize?response_type=token&client_id=%@&redirect_uri=%@", self.appId, self.redirectUrlScheme];
+    
+    NSURL *url = [NSURL URLWithString:urlString];
+    [[UIApplication sharedApplication] openURL:url];
+}
+
 
 - (Vehicle *) getVehicleData {
     Vehicle *vehicle = [[Vehicle alloc] init];

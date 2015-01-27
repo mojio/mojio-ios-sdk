@@ -7,16 +7,21 @@
 //
 
 #import "AppDelegate.h"
+#import "MojioClient.h"
 
 @interface AppDelegate ()
-
+@property (nonatomic, strong) MojioClient *client;
 @end
 
 @implementation AppDelegate
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+
+    self.client = [MojioClient sharedInstance];
+    [self.client initWithAppId:@"f642dfb4-67c2-472a-bec6-a583d3152a01" andSecretKey:@"6ab44a7f-d47b-4931-91fb-71905173c552" andRedirectUrlScheme:@"mojioios://"];
+    [self.client login];
+    
     return YES;
 }
 
@@ -46,6 +51,8 @@
     NSString *urlString = [url absoluteString];
     NSString *token = [[urlString componentsSeparatedByString:@"&"] firstObject];
     token = [[token componentsSeparatedByString:@"="] lastObject];
+    
+    [self.client setAuthToken:token];
 
     return YES;
 }
