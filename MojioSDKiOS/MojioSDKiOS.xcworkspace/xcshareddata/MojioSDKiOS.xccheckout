@@ -5,7 +5,7 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>8867E7B1-551C-44CC-B9B5-2EBE82468ABC</string>
+	<string>6D9867B0-847E-4187-8FDC-FB682EE40C7D</string>
 	<key>IDESourceControlProjectName</key>
 	<string>MojioSDKiOS</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
@@ -34,7 +34,7 @@
 			<key>IDESourceControlWCCIdentifierKey</key>
 			<string>1181DA172460B7E827F10EFD47AF045486BE5DCB</string>
 			<key>IDESourceControlWCCName</key>
-			<string>mojio-ios-sdk</string>
+			<string>iOS</string>
 		</dict>
 	</array>
 </dict>

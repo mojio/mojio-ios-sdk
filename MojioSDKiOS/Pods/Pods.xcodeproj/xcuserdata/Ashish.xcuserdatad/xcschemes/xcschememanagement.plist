@@ -4,17 +4,27 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Pods-AFNetworking.xcscheme</key>
+		<key>Pods-MojioSDK-TestApp-SVProgressHUD.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-AFOAuth2Manager.xcscheme</key>
+		<key>Pods-MojioSDK-TestApp.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods.xcscheme</key>
+		<key>Pods-MojioSDKiOS-AFNetworking.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-MojioSDKiOS-AFOAuth2Manager.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-MojioSDKiOS.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -22,17 +32,27 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>7FBDA5F0F6E27E71B3EBA33B</key>
+		<key>07DDB6FBE3850B6D50C47F28</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D2220A4C70FD0385012EEDE4</key>
+		<key>0D288EB6D4B90994AC02603F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E85D3D0885C3FDE6DF4E0F52</key>
+		<key>63FB359375CD37161DA2A53D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6A657D3A65EB05EF80465419</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C401284D593AEEF831183E22</key>
 		<dict>
 			<key>primary</key>
 			<true/>
