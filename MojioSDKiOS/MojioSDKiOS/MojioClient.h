@@ -25,6 +25,8 @@
 
 @interface MojioClient : NSObject
 
+- (void) loginWithClientId : (NSString *)clientId andRedirectUri : (NSString *)redirectUri;
+
 -(id) initWithAppId : (NSString *)appId withSecretKey : (NSString *)secretKey withUserOrEmail : (NSString *)userOrEmail withPassword : (NSString *)password ;
 - (id) getAsync : (NSString *)entity withParams : (NSArray *)args;
 

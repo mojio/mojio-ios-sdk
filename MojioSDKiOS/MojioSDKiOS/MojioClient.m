@@ -34,21 +34,6 @@
 }
 
 
-//-(NSString*) typeOfClass:(id)type {
-//    if ([self.map objectForKey:type] != nil) {
-//        return [self.map objectForKey:type];
-//    }
-//    
-//    for (id key in self.map) {
-//        if ([key isKindOfClass:[type class]]) {
-//            [self add:type withController:<#(NSString *)#>]
-//            
-//        }
-//    }
-//    
-//    return nil;
-//}
-
 @end
 
 @interface MojioClient ()
@@ -75,6 +60,10 @@
         }
     }
     return self;
+}
+
+-(void) loginWithClientId:(NSString *)clientId andRedirectUri:(NSString *)redirectUri {
+    
 }
 
 -(id) initWithAppId:(NSString *)appId withSecretKey:(NSString *)secretKey withUserOrEmail:(NSString *)userOrEmail withPassword:(NSString *)password {
