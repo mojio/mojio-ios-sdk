@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "MojioClient.h"
+#import <AFOauth2Manager.h>
 
 @interface ViewController ()
 @property (nonatomic, strong) MojioClient *client;

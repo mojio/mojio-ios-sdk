@@ -8,7 +8,7 @@
 
 #import "MojioClient.h"
 #import "App.h"
-#import "AFNetworking.h"
+#import <AFNetworking.h>
 
 @interface MapEntity()
 

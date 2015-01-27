@@ -1,2 +1,9 @@
-pod 'AFNetworking', '~> 2.2'
-pod 'AFOAuth2Manager', '~> 2.0'
+target 'MojioSDKiOS' do
+    pod 'AFNetworking', '~> 2.2'
+    pod 'AFOAuth2Manager', '~> 2.0'
+end
+
+
+target 'MojioSDK-TestApp' do
+    pod 'SVProgressHUD', '~> 1.1'
+end
