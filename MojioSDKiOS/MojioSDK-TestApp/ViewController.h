@@ -1,14 +1,16 @@
 //
 //  ViewController.h
-//  MojioSDK-TestApp
+//  SdkTryout
 //
-//  Created by Vinson Li on 2015-01-27.
-//  Copyright (c) 2015 Mojio. All rights reserved.
+//  Created by Ashish Agarwal on 2015-01-22.
+//  Copyright (c) 2015 Ashish Agarwal. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
+#import "MojioClient.h"
+#import "Vehicle.h"
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController <MojioClientDelegate>
 
 
 @end
