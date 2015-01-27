@@ -5,24 +5,20 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>397D7CC5-8778-491A-8D72-5E0DC6317762</string>
+	<string>1D2EABC9-99C3-4AF6-969B-2CC105BA0C92</string>
 	<key>IDESourceControlProjectName</key>
-	<string>iOS</string>
+	<string>Mojio-iOS-SDK</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>1181DA172460B7E827F10EFD47AF045486BE5DCB</key>
 		<string>https://github.com/mojio/mojio-ios-sdk.git</string>
-		<key>B96D496287E01C3C03F218BE34169176674BF5C2</key>
-		<string>https://bitbucket.org/agarwalashish/poc-apps.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>SdkTryout/iOS.xcodeproj</string>
+	<string>Mojio-iOS-SDK/Mojio-iOS-SDK.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>1181DA172460B7E827F10EFD47AF045486BE5DCB</key>
 		<string>../../..</string>
-		<key>B96D496287E01C3C03F218BE34169176674BF5C2</key>
-		<string>../../../../Personal</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/mojio/mojio-ios-sdk.git</string>
@@ -39,14 +35,6 @@
 			<string>1181DA172460B7E827F10EFD47AF045486BE5DCB</string>
 			<key>IDESourceControlWCCName</key>
 			<string>mojio-ios-sdk</string>
-		</dict>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>B96D496287E01C3C03F218BE34169176674BF5C2</string>
-			<key>IDESourceControlWCCName</key>
-			<string>Personal</string>
 		</dict>
 	</array>
 </dict>

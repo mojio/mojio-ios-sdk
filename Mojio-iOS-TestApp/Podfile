@@ -1,0 +1,2 @@
+pod 'AFNetworking', '~> 2.2'
+pod 'AFOAuth2Manager', '~> 2.0'
