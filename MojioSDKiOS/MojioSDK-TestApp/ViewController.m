@@ -49,23 +49,23 @@
 }
 
 -(IBAction)tripsButtonPressed:(id)sender {
-    [self.client getEntity:@"Trips" withQueryOptions:nil withParams:nil success:nil fail:nil];
+//    [self.client getEntity:@"Trips" withQueryOptions:nil withParams:nil success:nil fail:nil];
 }
 
 -(IBAction)mojiosButtonPressed:(id)sender {
-    [self.client getEntity:@"Mojios" withQueryOptions:nil withParams:nil success:nil fail:nil];
+//    [self.client getEntity:@"Mojios" withQueryOptions:nil withParams:nil success:nil fail:nil];
 }
 
 -(IBAction)usersButtonPressed:(id)sender {
-    [self.client getEntity:@"Users" withQueryOptions:nil withParams:nil success:nil fail:nil];
+//    [self.client getEntity:@"Users" withQueryOptions:nil withParams:nil success:nil fail:nil];
 }
 
 -(IBAction)appsButtonPressed:(id)sender {
-    [self.client getEntity:@"Apps" withQueryOptions:nil withParams:nil success:nil fail:nil];
+//    [self.client getEntity:@"Apps" withQueryOptions:nil withParams:nil success:nil fail:nil];
 }
 
 -(IBAction)eventsButtonPressed:(id)sender {
-    [self.client getEntity:@"Events" withQueryOptions:nil withParams:nil success:nil fail:nil];
+//    [self.client getEntity:@"Events" withQueryOptions:nil withParams:nil success:nil fail:nil];
 }
 
 -(IBAction)deleteTripsButtonPressed:(id)sender {
@@ -75,12 +75,11 @@
 }
 
 -(IBAction)updateTripsButtonPressed:(id)sender {
-    NSString *contentBody = @"This is the body of the content";
     NSDictionary *queryOptions = @{@"body" : @"This is the body"};
     
     NSArray *params = [NSArray arrayWithObjects:@"21aacb05-9b01-4e48-8841-91132981eed1",@"Store" , nil];
     
-    [self.client updateEntity:@"Vehicles" withQueryOptions:queryOptions withParams:params success:nil fail:nil];
+    [self.client updateEntityWithPath:@"Vehicles/21aacb05-9b01-4e48-8841-91132981eed1/Store/samplekey" withQueryOptions:nil success:nil failure:nil];
     
 }
 

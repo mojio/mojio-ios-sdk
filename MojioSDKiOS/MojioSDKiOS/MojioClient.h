@@ -32,7 +32,6 @@
 
 - (void) initWithAppId : (NSString *) appId andSecretKey : (NSString *)secretKey andRedirectUrlScheme : (NSString *) urlScheme;
 
--(void) getEntity : (NSString *)entity withQueryOptions : (NSDictionary *)queryOptions withParams : (NSArray *)params success : (void (^)(id responseObject)) success fail : (void (^) (NSError *error)) fail;
 
 - (void) deleteEntity : (NSString *)entity withEntityId : (NSString *)entityId withQueryOptions : (NSDictionary *) queryOptions withParams : (NSArray *)params success : (void (^)(id responseObject)) success fail : (void (^) (NSError *error))fail;
 
@@ -41,8 +40,11 @@
 - (void) createEntity : (NSString *)entity withQueryOptions : (NSDictionary *)queryOptions withParams : (NSArray *)params success : (void (^)(id responseObject)) success fail : (void (^) (NSError *error)) fail;
 
 // new calls
+
+// Get Entity with path 
 - (void)getEntityWithPath:(NSString *)path withQueryOptions:(NSDictionary *)queryOptions success:(void (^)(id responseObject))success failure:(void (^) (NSError *error))failure;
 
+- (void)updateEntityWithPath:(NSString*)path withQueryOptions : (NSDictionary *)queryOptions success : (void(^)(void))success failure : (void(^)(void)) failure;
 
 @property (nonatomic) int pageSize;
 @property (nonatomic) int sessionTime;

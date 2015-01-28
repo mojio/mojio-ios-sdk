@@ -122,33 +122,6 @@
     return dict;
 }
 
-// Obsolete call already
--(void) getEntity:(NSString *)entity withQueryOptions:(NSDictionary *)queryOptions withParams:(NSArray *)params success:(void (^)(id responseObject))success fail:(void (^)(NSError * error))fail {
-    
-    NSString *request = [self request:params];
-    NSString *urlString = [NSString stringWithFormat:@"%@/%@",  entity, request];
-    
-    [self.manager GET:urlString parameters:queryOptions success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"%@", responseObject);
-        
-        NSMutableArray *responseObjects = [NSMutableArray array];
-        //TODO - check if response is of type array before adding it to the array
-        
-        for (NSDictionary *dict in [responseObject objectForKey:@"Data"]) {
-            NSError *err;
-            id object = [[NSClassFromString(entity) alloc] initWithDictionary:dict error:&err];
-            [responseObjects addObject:object];
-        }
-        // check for nil
-        success(responseObjects);
-        
-    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"%@", [error localizedDescription]);
-        fail(error);
-    }];
-    
-}
-
 -(void) getEntityWithPath:(NSString *)path withQueryOptions:(NSDictionary *)queryOptions success:(void (^)(id))success failure:(void (^)(NSError *))failure {
     
     [self.manager GET:path parameters:queryOptions success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -163,7 +136,7 @@
             id object = [[NSClassFromString(type) alloc] initWithDictionary:dict error:&err];
             [responseObjects addObject:object];
         }
-        // check for nil
+        // check for nil success
         success(responseObjects);
         
     }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -171,6 +144,21 @@
         failure(error);
     }];
 
+}
+
+- (void) updateEntityWithPath:(NSString *)path withQueryOptions:(NSDictionary *)queryOptions success:(void (^)(void))success failure:(void (^)(void))failure {
+    
+    [self.manager PUT:path parameters:queryOptions success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"%@", responseObject);
+        if (success != nil) {
+            success();
+        }
+    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"%@", [error localizedDescription]);
+        if (failure != nil) {
+            failure ();
+        }
+    }];
 }
 
 -(void) deleteEntity:(NSString *)entity withEntityId : (NSString *)entityId withQueryOptions:(NSDictionary *)queryOptions withParams:(NSArray *)params success:(void (^)(id))success fail:(void (^)(NSError *))fail {
@@ -184,18 +172,6 @@
         NSLog(@"%@", [error localizedDescription]);
     }];
     
-}
-
--(void)updateEntity:(NSString *)entity withQueryOptions:(NSDictionary *)queryOptions withParams:(NSArray *)params success:(void (^)(id))success fail:(void (^)(NSError *))fail {
-    
-    NSString *request = [self request:params];
-    NSString *urlString = [NSString stringWithFormat:@"%@/%@",  entity, request];
-    
-    [self.manager PUT:urlString parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"%@", responseObject);
-    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"%@", [error localizedDescription]);
-    }];
 }
 
 -(NSString *) request : (NSArray *)params {

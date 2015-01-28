@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "JSONModel.h"
-#import "EntityType.h"
 
 @interface Mojio : JSONModel
 
