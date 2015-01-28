@@ -72,17 +72,55 @@
     self.redirectUrlScheme = urlScheme;
 }
 
-- (void) setAuthToken:(NSString *)authToken {
-    _authToken = authToken;
-    [[self.manager requestSerializer] setValue:_authToken forHTTPHeaderField:@"MojioAPIToken"];
+-(void) login {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    //Reuse stored token if it exists and not expired
+    if ([defaults objectForKey:@"MojioAccessToken"] && [defaults doubleForKey:@"MojioTokenExpireTime"] > [NSDate date].timeIntervalSince1970) {
+        self.authToken = [defaults objectForKey:@"MojioAccessToken"];
+        [[self.manager requestSerializer] setValue:_authToken forHTTPHeaderField:@"MojioAPIToken"];
+        
+    }
+    else {
+        NSString *urlString = [NSString stringWithFormat:@"https://api.moj.io/OAuth2/authorize?response_type=token&client_id=%@&redirect_uri=%@", self.appId, self.redirectUrlScheme];
+        
+        NSURL *url = [NSURL URLWithString:urlString];
+        [[UIApplication sharedApplication] openURL:url];
+
+    }
 }
 
--(void) login {
+- (void)handleOpenURL:(NSURL *)url {
+    NSDictionary *params = [self parseQueryString:url.absoluteString];
     
-    NSString *urlString = [NSString stringWithFormat:@"https://api.moj.io/OAuth2/authorize?response_type=token&client_id=%@&redirect_uri=%@", self.appId, self.redirectUrlScheme];
+    NSString *token = params[@"access_token"];
+    NSInteger expires_in = [params[@"expires_in"] integerValue];
+    NSTimeInterval expireTime = [NSDate date].timeIntervalSince1970 + expires_in;
     
-    NSURL *url = [NSURL URLWithString:urlString];
-    [[UIApplication sharedApplication] openURL:url];
+    self.authToken = token;
+    [[self.manager requestSerializer] setValue:_authToken forHTTPHeaderField:@"MojioAPIToken"];
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:token forKey:@"MojioAccessToken"];
+    [defaults setObject:@(expireTime) forKey:@"MojioTokenExpireTime"];
+    [defaults synchronize];
+    
+}
+
+- (NSDictionary *)parseQueryString:(NSString *)query {
+    NSString *paramString = [[query componentsSeparatedByString:@"#"] lastObject];
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    NSArray *pairs = [paramString componentsSeparatedByString:@"&"];
+    
+    for (NSString *pair in pairs) {
+        NSArray *elements = [pair componentsSeparatedByString:@"="];
+        if ([elements count] >= 2) {
+            NSString *key = [[elements objectAtIndex:0] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            NSString *val = [[elements objectAtIndex:1] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            
+            [dict setObject:val forKey:key];
+        }
+    }
+    return dict;
 }
 
 -(void) getEntity:(NSString *)entity withQueryOptions:(NSDictionary *)queryOptions withParams:(NSArray *)params success:(void (^)(id responseObject))success fail:(void (^)(NSError * error))fail {

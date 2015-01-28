@@ -28,9 +28,12 @@
 +(id) sharedInstance;
 
 - (void) login;
+- (void)handleOpenURL:(NSURL *)url;
+
 - (void) initWithAppId : (NSString *) appId andSecretKey : (NSString *)secretKey andRedirectUrlScheme : (NSString *) urlScheme;
 
 -(void) getEntity : (NSString *)entity withQueryOptions : (NSDictionary *)queryOptions withParams : (NSArray *)params success : (void (^)(id responseObject)) success fail : (void (^) (NSError *error)) fail;
+
 
 
 @property (nonatomic) int pageSize;

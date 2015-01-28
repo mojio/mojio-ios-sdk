@@ -36,6 +36,7 @@
     [super viewDidLoad];
     
     self.client = [MojioClient sharedInstance];
+    [self.client login];
 }
 
 -(IBAction)vehicleButtonPressed:(id)sender {
