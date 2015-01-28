@@ -49,9 +49,12 @@
 // Get Entity with path 
 - (void)getEntityWithPath:(NSString *)path withQueryOptions:(NSDictionary *)queryOptions success:(void (^)(id responseObject))success failure:(void (^) (NSError *error))failure;
 
+<<<<<<< HEAD
 - (void)updateEntityWithPath:(NSString*)path withQueryOptions : (NSDictionary *)queryOptions success : (void(^)(void))success failure : (void(^)(void)) failure;
+=======
 - (void)getImage:(NSString*)path success:(void (^)(id responseObject))success failure:(void (^)(NSError *error))failure;
 - (void)postImage:(NSString*)path image:(UIImage*)image success:(void (^)(id))success failure:(void (^)(NSError *))failure;
+>>>>>>> Get and post image methods
 
 @property (nonatomic) int pageSize;
 @property (nonatomic) int sessionTime;

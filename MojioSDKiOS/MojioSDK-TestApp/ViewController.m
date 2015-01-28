@@ -82,13 +82,33 @@
     
 }
 
--(void) loggedIn {
-    
+- (IBAction)getImageButtonPressed:(id)sender {
+    [self.client getImage:@"Vehicles/f3a71223-961b-4425-9c51-8723143b1066/Image" success:^(id responseObject) {
+        
+    } failure:^(NSError *error) {
+        
+    }];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (IBAction)uploadImageButtonPressed:(id)sender {
+    [self.client postImage:@"Vehicles/53cdeca5-b268-4a25-bfde-3938b5cf7d47/Image" image:nil success:^(id responseObject) {
+        
+    } failure:^(NSError *error) {
+        
+    }];
+
+}
+
+- (IBAction)loginButtonPressed:(id)sender {
+    [self.client login];
+}
+
+- (IBAction)logoutButtonPressed:(id)sender {
+    [self.client logout];
+}
+
+-(void) loggedIn {
+    
 }
 
 @end
