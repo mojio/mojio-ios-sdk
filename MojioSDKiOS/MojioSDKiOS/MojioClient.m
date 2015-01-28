@@ -49,7 +49,7 @@
 -(id) init {
     self = [super init];
     if (self) {
-        self.baseApiUrl = [NSString stringWithFormat:@"https://staging.api.moj.io/v1/"];
+        self.baseApiUrl = [NSString stringWithFormat:@"https://api.moj.io/v1/"];
         self.manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:@"https://api.moj.io/v1/"]];
     }
     return self;

@@ -77,9 +77,8 @@
 -(IBAction)updateTripsButtonPressed:(id)sender {
     NSDictionary *queryOptions = @{@"body" : @"This is the body"};
     
-    NSArray *params = [NSArray arrayWithObjects:@"21aacb05-9b01-4e48-8841-91132981eed1",@"Store" , nil];
     
-    [self.client updateEntityWithPath:@"Vehicles/21aacb05-9b01-4e48-8841-91132981eed1/Store/samplekey" withQueryOptions:nil success:nil failure:nil];
+    [self.client updateEntityWithPath:@"Vehicles/a862ef4d-f4f6-433a-a781-4444237fb5f9/Store/samplekey" withQueryOptions:queryOptions success:nil failure:nil];
     
 }
 
