@@ -45,7 +45,7 @@
 }
 
 -(IBAction)vehicleButtonPressed:(id)sender {
-    [self.client getEntity:@"Vehicles" withQueryOptions:nil withParams:nil success:nil fail:nil];
+    [self.client getEntityWithPath:@"Users" withQueryOptions:nil success:nil failure:nil];
 }
 
 -(IBAction)tripsButtonPressed:(id)sender {

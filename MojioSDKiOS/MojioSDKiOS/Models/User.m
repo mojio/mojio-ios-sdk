@@ -6,9 +6,9 @@
 //  Copyright (c) 2015 Mojio. All rights reserved.
 //
 
-#import "Users.h"
+#import "User.h"
 
-@implementation Users
+@implementation User
 
 +(BOOL)propertyIsOptional:(NSString*)propertyName
 {

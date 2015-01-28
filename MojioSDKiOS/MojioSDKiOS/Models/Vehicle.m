@@ -6,9 +6,9 @@
 //  Copyright (c) 2015 Ashish Agarwal. All rights reserved.
 //
 
-#import "Vehicles.h"
+#import "Vehicle.h"
 
-@implementation Vehicles
+@implementation Vehicle
 
 +(BOOL)propertyIsOptional:(NSString*)propertyName
 {

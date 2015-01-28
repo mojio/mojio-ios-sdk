@@ -7,12 +7,12 @@
 //
 
 #import <JSONModel.h>
-#import "Trips.h"
+#import "Trip.h"
 #import "Location.h"
 
-@interface Vehicles : JSONModel
+@interface Vehicle : JSONModel
 
-@property (strong, nonatomic) Trips *CurrentTrip;
+@property (strong, nonatomic) Trip *CurrentTrip;
 @property (strong, nonatomic) NSArray *DiagnosticCodes;
 @property (assign, nonatomic) BOOL FaultsDetected;
 @property (assign, nonatomic) float FuelLevel;

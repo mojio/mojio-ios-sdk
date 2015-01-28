@@ -22,16 +22,14 @@
 		51E5A92F1A7825DB00EEE3BC /* DTC.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E5A90D1A7825DB00EEE3BC /* DTC.m */; };
 		51E5A9301A7825DB00EEE3BC /* Entity.h in Headers */ = {isa = PBXBuildFile; fileRef = 51E5A90E1A7825DB00EEE3BC /* Entity.h */; };
 		51E5A9311A7825DB00EEE3BC /* Entity.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E5A90F1A7825DB00EEE3BC /* Entity.m */; };
-		51E5A9321A7825DB00EEE3BC /* EntityType.h in Headers */ = {isa = PBXBuildFile; fileRef = 51E5A9101A7825DB00EEE3BC /* EntityType.h */; };
-		51E5A9331A7825DB00EEE3BC /* EntityType.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E5A9111A7825DB00EEE3BC /* EntityType.m */; };
 		51E5A9341A7825DB00EEE3BC /* EventBroadcast.h in Headers */ = {isa = PBXBuildFile; fileRef = 51E5A9121A7825DB00EEE3BC /* EventBroadcast.h */; };
 		51E5A9351A7825DB00EEE3BC /* EventBroadcast.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E5A9131A7825DB00EEE3BC /* EventBroadcast.m */; };
 		51E5A9361A7825DB00EEE3BC /* ImageSize.h in Headers */ = {isa = PBXBuildFile; fileRef = 51E5A9141A7825DB00EEE3BC /* ImageSize.h */; };
 		51E5A9371A7825DB00EEE3BC /* ImageSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E5A9151A7825DB00EEE3BC /* ImageSize.m */; };
 		51E5A9381A7825DB00EEE3BC /* Location.h in Headers */ = {isa = PBXBuildFile; fileRef = 51E5A9161A7825DB00EEE3BC /* Location.h */; };
 		51E5A9391A7825DB00EEE3BC /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E5A9171A7825DB00EEE3BC /* Location.m */; };
-		51E5A93A1A7825DB00EEE3BC /* Mojios.h in Headers */ = {isa = PBXBuildFile; fileRef = 51E5A9181A7825DB00EEE3BC /* Mojios.h */; };
-		51E5A93B1A7825DB00EEE3BC /* Mojios.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E5A9191A7825DB00EEE3BC /* Mojios.m */; };
+		51E5A93A1A7825DB00EEE3BC /* Mojio.h in Headers */ = {isa = PBXBuildFile; fileRef = 51E5A9181A7825DB00EEE3BC /* Mojio.h */; };
+		51E5A93B1A7825DB00EEE3BC /* Mojio.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E5A9191A7825DB00EEE3BC /* Mojio.m */; };
 		51E5A93C1A7825DB00EEE3BC /* MojioResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 51E5A91A1A7825DB00EEE3BC /* MojioResponse.h */; };
 		51E5A93D1A7825DB00EEE3BC /* MojioResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E5A91B1A7825DB00EEE3BC /* MojioResponse.m */; };
 		51E5A93E1A7825DB00EEE3BC /* Register.h in Headers */ = {isa = PBXBuildFile; fileRef = 51E5A91C1A7825DB00EEE3BC /* Register.h */; };
@@ -40,8 +38,8 @@
 		51E5A9411A7825DB00EEE3BC /* Storage.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E5A91F1A7825DB00EEE3BC /* Storage.m */; };
 		51E5A9421A7825DB00EEE3BC /* Token.h in Headers */ = {isa = PBXBuildFile; fileRef = 51E5A9201A7825DB00EEE3BC /* Token.h */; };
 		51E5A9431A7825DB00EEE3BC /* Token.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E5A9211A7825DB00EEE3BC /* Token.m */; };
-		51E5A9441A7825DB00EEE3BC /* Vehicles.h in Headers */ = {isa = PBXBuildFile; fileRef = 51E5A9221A7825DB00EEE3BC /* Vehicles.h */; };
-		51E5A9451A7825DB00EEE3BC /* Vehicles.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E5A9231A7825DB00EEE3BC /* Vehicles.m */; };
+		51E5A9441A7825DB00EEE3BC /* Vehicle.h in Headers */ = {isa = PBXBuildFile; fileRef = 51E5A9221A7825DB00EEE3BC /* Vehicle.h */; };
+		51E5A9451A7825DB00EEE3BC /* Vehicle.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E5A9231A7825DB00EEE3BC /* Vehicle.m */; };
 		51E5A9461A7825DB00EEE3BC /* MojioClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 51E5A9241A7825DB00EEE3BC /* MojioClient.h */; };
 		51E5A9471A7825DB00EEE3BC /* MojioClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E5A9251A7825DB00EEE3BC /* MojioClient.m */; };
 		51E5A9671A78279200EEE3BC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E5A9661A78279200EEE3BC /* main.m */; };
@@ -52,14 +50,14 @@
 		51E5A9751A78279200EEE3BC /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51E5A9731A78279200EEE3BC /* LaunchScreen.xib */; };
 		51E5A9811A78279200EEE3BC /* MojioSDK_TestAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E5A9801A78279200EEE3BC /* MojioSDK_TestAppTests.m */; };
 		51E5A9881A7827B400EEE3BC /* MojioSDKiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51E5A8E71A7825BB00EEE3BC /* MojioSDKiOS.framework */; };
-		754D65E21A78678A00B58061 /* Users.h in Headers */ = {isa = PBXBuildFile; fileRef = 754D65E01A78678A00B58061 /* Users.h */; };
-		754D65E31A78678A00B58061 /* Users.m in Sources */ = {isa = PBXBuildFile; fileRef = 754D65E11A78678A00B58061 /* Users.m */; };
-		754D65E61A786D7500B58061 /* Product.h in Headers */ = {isa = PBXBuildFile; fileRef = 754D65E41A786D7500B58061 /* Product.h */; };
-		754D65E71A786D7500B58061 /* Product.m in Sources */ = {isa = PBXBuildFile; fileRef = 754D65E51A786D7500B58061 /* Product.m */; };
 		51E5A9901A786D8000EEE3BC /* Invoice.h in Headers */ = {isa = PBXBuildFile; fileRef = 51E5A98E1A786D8000EEE3BC /* Invoice.h */; };
 		51E5A9911A786D8000EEE3BC /* Invoice.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E5A98F1A786D8000EEE3BC /* Invoice.m */; };
-		75516CD21A785F430014D862 /* Trips.h in Headers */ = {isa = PBXBuildFile; fileRef = 75516CD01A785F430014D862 /* Trips.h */; };
-		75516CD31A785F430014D862 /* Trips.m in Sources */ = {isa = PBXBuildFile; fileRef = 75516CD11A785F430014D862 /* Trips.m */; };
+		754D65E21A78678A00B58061 /* User.h in Headers */ = {isa = PBXBuildFile; fileRef = 754D65E01A78678A00B58061 /* User.h */; };
+		754D65E31A78678A00B58061 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 754D65E11A78678A00B58061 /* User.m */; };
+		754D65E61A786D7500B58061 /* Product.h in Headers */ = {isa = PBXBuildFile; fileRef = 754D65E41A786D7500B58061 /* Product.h */; };
+		754D65E71A786D7500B58061 /* Product.m in Sources */ = {isa = PBXBuildFile; fileRef = 754D65E51A786D7500B58061 /* Product.m */; };
+		75516CD21A785F430014D862 /* Trip.h in Headers */ = {isa = PBXBuildFile; fileRef = 75516CD01A785F430014D862 /* Trip.h */; };
+		75516CD31A785F430014D862 /* Trip.m in Sources */ = {isa = PBXBuildFile; fileRef = 75516CD11A785F430014D862 /* Trip.m */; };
 		75D60EF01A7829B30095C1A7 /* MojioSDKiOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 51E5A8E71A7825BB00EEE3BC /* MojioSDKiOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		76278F43D7DCE9B31A0F9C57 /* libPods-MojioSDKiOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F3D3835805D44AEF5D0211E /* libPods-MojioSDKiOS.a */; };
 		DA12A7C30ADE8CE5F650BFC7 /* libPods-MojioSDK-TestApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 454FE767BD840DAA66BF9A1B /* libPods-MojioSDK-TestApp.a */; };
@@ -126,16 +124,14 @@
 		51E5A90D1A7825DB00EEE3BC /* DTC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTC.m; sourceTree = "<group>"; };
 		51E5A90E1A7825DB00EEE3BC /* Entity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Entity.h; sourceTree = "<group>"; };
 		51E5A90F1A7825DB00EEE3BC /* Entity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Entity.m; sourceTree = "<group>"; };
-		51E5A9101A7825DB00EEE3BC /* EntityType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityType.h; sourceTree = "<group>"; };
-		51E5A9111A7825DB00EEE3BC /* EntityType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityType.m; sourceTree = "<group>"; };
 		51E5A9121A7825DB00EEE3BC /* EventBroadcast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventBroadcast.h; sourceTree = "<group>"; };
 		51E5A9131A7825DB00EEE3BC /* EventBroadcast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventBroadcast.m; sourceTree = "<group>"; };
 		51E5A9141A7825DB00EEE3BC /* ImageSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageSize.h; sourceTree = "<group>"; };
 		51E5A9151A7825DB00EEE3BC /* ImageSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageSize.m; sourceTree = "<group>"; };
 		51E5A9161A7825DB00EEE3BC /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
 		51E5A9171A7825DB00EEE3BC /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
-		51E5A9181A7825DB00EEE3BC /* Mojios.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mojios.h; sourceTree = "<group>"; };
-		51E5A9191A7825DB00EEE3BC /* Mojios.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Mojios.m; sourceTree = "<group>"; };
+		51E5A9181A7825DB00EEE3BC /* Mojio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mojio.h; sourceTree = "<group>"; };
+		51E5A9191A7825DB00EEE3BC /* Mojio.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Mojio.m; sourceTree = "<group>"; };
 		51E5A91A1A7825DB00EEE3BC /* MojioResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MojioResponse.h; sourceTree = "<group>"; };
 		51E5A91B1A7825DB00EEE3BC /* MojioResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MojioResponse.m; sourceTree = "<group>"; };
 		51E5A91C1A7825DB00EEE3BC /* Register.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Register.h; sourceTree = "<group>"; };
@@ -144,8 +140,8 @@
 		51E5A91F1A7825DB00EEE3BC /* Storage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Storage.m; sourceTree = "<group>"; };
 		51E5A9201A7825DB00EEE3BC /* Token.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Token.h; sourceTree = "<group>"; };
 		51E5A9211A7825DB00EEE3BC /* Token.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Token.m; sourceTree = "<group>"; };
-		51E5A9221A7825DB00EEE3BC /* Vehicles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vehicles.h; sourceTree = "<group>"; };
-		51E5A9231A7825DB00EEE3BC /* Vehicles.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Vehicles.m; sourceTree = "<group>"; };
+		51E5A9221A7825DB00EEE3BC /* Vehicle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vehicle.h; sourceTree = "<group>"; };
+		51E5A9231A7825DB00EEE3BC /* Vehicle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Vehicle.m; sourceTree = "<group>"; };
 		51E5A9241A7825DB00EEE3BC /* MojioClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MojioClient.h; sourceTree = "<group>"; };
 		51E5A9251A7825DB00EEE3BC /* MojioClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MojioClient.m; sourceTree = "<group>"; };
 		51E5A9621A78279200EEE3BC /* MojioSDK-TestApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MojioSDK-TestApp.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -161,14 +157,14 @@
 		51E5A97A1A78279200EEE3BC /* MojioSDK-TestAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MojioSDK-TestAppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		51E5A97F1A78279200EEE3BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		51E5A9801A78279200EEE3BC /* MojioSDK_TestAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MojioSDK_TestAppTests.m; sourceTree = "<group>"; };
-		754D65E01A78678A00B58061 /* Users.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Users.h; sourceTree = "<group>"; };
-		754D65E11A78678A00B58061 /* Users.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Users.m; sourceTree = "<group>"; };
-		754D65E41A786D7500B58061 /* Product.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Product.h; sourceTree = "<group>"; };
-		754D65E51A786D7500B58061 /* Product.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Product.m; sourceTree = "<group>"; };
 		51E5A98E1A786D8000EEE3BC /* Invoice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Invoice.h; sourceTree = "<group>"; };
 		51E5A98F1A786D8000EEE3BC /* Invoice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Invoice.m; sourceTree = "<group>"; };
-		75516CD01A785F430014D862 /* Trips.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Trips.h; sourceTree = "<group>"; };
-		75516CD11A785F430014D862 /* Trips.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Trips.m; sourceTree = "<group>"; };
+		754D65E01A78678A00B58061 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		754D65E11A78678A00B58061 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		754D65E41A786D7500B58061 /* Product.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Product.h; sourceTree = "<group>"; };
+		754D65E51A786D7500B58061 /* Product.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Product.m; sourceTree = "<group>"; };
+		75516CD01A785F430014D862 /* Trip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Trip.h; sourceTree = "<group>"; };
+		75516CD11A785F430014D862 /* Trip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Trip.m; sourceTree = "<group>"; };
 		C7EAEEC56F2AB063E28A0912 /* Pods-MojioSDK-TestApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MojioSDK-TestApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MojioSDK-TestApp/Pods-MojioSDK-TestApp.debug.xcconfig"; sourceTree = "<group>"; };
 		D02ADFB11306EE760143103C /* Pods-MojioSDK-TestApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MojioSDK-TestApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-MojioSDK-TestApp/Pods-MojioSDK-TestApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -294,16 +290,14 @@
 				51E5A90D1A7825DB00EEE3BC /* DTC.m */,
 				51E5A90E1A7825DB00EEE3BC /* Entity.h */,
 				51E5A90F1A7825DB00EEE3BC /* Entity.m */,
-				51E5A9101A7825DB00EEE3BC /* EntityType.h */,
-				51E5A9111A7825DB00EEE3BC /* EntityType.m */,
 				51E5A9121A7825DB00EEE3BC /* EventBroadcast.h */,
 				51E5A9131A7825DB00EEE3BC /* EventBroadcast.m */,
 				51E5A9141A7825DB00EEE3BC /* ImageSize.h */,
 				51E5A9151A7825DB00EEE3BC /* ImageSize.m */,
 				51E5A9161A7825DB00EEE3BC /* Location.h */,
 				51E5A9171A7825DB00EEE3BC /* Location.m */,
-				51E5A9181A7825DB00EEE3BC /* Mojios.h */,
-				51E5A9191A7825DB00EEE3BC /* Mojios.m */,
+				51E5A9181A7825DB00EEE3BC /* Mojio.h */,
+				51E5A9191A7825DB00EEE3BC /* Mojio.m */,
 				51E5A91A1A7825DB00EEE3BC /* MojioResponse.h */,
 				51E5A91B1A7825DB00EEE3BC /* MojioResponse.m */,
 				51E5A91C1A7825DB00EEE3BC /* Register.h */,
@@ -312,12 +306,12 @@
 				51E5A91F1A7825DB00EEE3BC /* Storage.m */,
 				51E5A9201A7825DB00EEE3BC /* Token.h */,
 				51E5A9211A7825DB00EEE3BC /* Token.m */,
-				51E5A9221A7825DB00EEE3BC /* Vehicles.h */,
-				51E5A9231A7825DB00EEE3BC /* Vehicles.m */,
-				75516CD01A785F430014D862 /* Trips.h */,
-				75516CD11A785F430014D862 /* Trips.m */,
-				754D65E01A78678A00B58061 /* Users.h */,
-				754D65E11A78678A00B58061 /* Users.m */,
+				51E5A9221A7825DB00EEE3BC /* Vehicle.h */,
+				51E5A9231A7825DB00EEE3BC /* Vehicle.m */,
+				75516CD01A785F430014D862 /* Trip.h */,
+				75516CD11A785F430014D862 /* Trip.m */,
+				754D65E01A78678A00B58061 /* User.h */,
+				754D65E11A78678A00B58061 /* User.m */,
 				754D65E41A786D7500B58061 /* Product.h */,
 				754D65E51A786D7500B58061 /* Product.m */,
 				51E5A98E1A786D8000EEE3BC /* Invoice.h */,
@@ -386,18 +380,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				51E5A9461A7825DB00EEE3BC /* MojioClient.h in Headers */,
-				51E5A9441A7825DB00EEE3BC /* Vehicles.h in Headers */,
+				51E5A9441A7825DB00EEE3BC /* Vehicle.h in Headers */,
 				51E5A92E1A7825DB00EEE3BC /* DTC.h in Headers */,
 				51E5A93C1A7825DB00EEE3BC /* MojioResponse.h in Headers */,
 				51E5A9401A7825DB00EEE3BC /* Storage.h in Headers */,
 				51E5A9361A7825DB00EEE3BC /* ImageSize.h in Headers */,
-				51E5A9321A7825DB00EEE3BC /* EntityType.h in Headers */,
 				51E5A9281A7825DB00EEE3BC /* App.h in Headers */,
 				51E5A93E1A7825DB00EEE3BC /* Register.h in Headers */,
 				51E5A92A1A7825DB00EEE3BC /* AuthenticationProvider.h in Headers */,
 				51E5A9381A7825DB00EEE3BC /* Location.h in Headers */,
-				754D65E21A78678A00B58061 /* Users.h in Headers */,
-				51E5A93A1A7825DB00EEE3BC /* Mojios.h in Headers */,
+				754D65E21A78678A00B58061 /* User.h in Headers */,
+				51E5A93A1A7825DB00EEE3BC /* Mojio.h in Headers */,
 				51E5A9901A786D8000EEE3BC /* Invoice.h in Headers */,
 				51E5A9301A7825DB00EEE3BC /* Entity.h in Headers */,
 				51E5A92C1A7825DB00EEE3BC /* CarState.h in Headers */,
@@ -405,7 +398,7 @@
 				51E5A9261A7825DB00EEE3BC /* Address.h in Headers */,
 				51E5A9421A7825DB00EEE3BC /* Token.h in Headers */,
 				754D65E61A786D7500B58061 /* Product.h in Headers */,
-				75516CD21A785F430014D862 /* Trips.h in Headers */,
+				75516CD21A785F430014D862 /* Trip.h in Headers */,
 				51E5A9341A7825DB00EEE3BC /* EventBroadcast.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -640,21 +633,20 @@
 				51E5A9351A7825DB00EEE3BC /* EventBroadcast.m in Sources */,
 				754D65E71A786D7500B58061 /* Product.m in Sources */,
 				51E5A9311A7825DB00EEE3BC /* Entity.m in Sources */,
-				754D65E31A78678A00B58061 /* Users.m in Sources */,
+				754D65E31A78678A00B58061 /* User.m in Sources */,
 				51E5A9911A786D8000EEE3BC /* Invoice.m in Sources */,
 				51E5A92D1A7825DB00EEE3BC /* CarState.m in Sources */,
 				51E5A9271A7825DB00EEE3BC /* Address.m in Sources */,
-				51E5A9451A7825DB00EEE3BC /* Vehicles.m in Sources */,
+				51E5A9451A7825DB00EEE3BC /* Vehicle.m in Sources */,
 				51E5A92F1A7825DB00EEE3BC /* DTC.m in Sources */,
 				51E5A9291A7825DB00EEE3BC /* App.m in Sources */,
 				51E5A9431A7825DB00EEE3BC /* Token.m in Sources */,
-				75516CD31A785F430014D862 /* Trips.m in Sources */,
+				75516CD31A785F430014D862 /* Trip.m in Sources */,
 				51E5A9471A7825DB00EEE3BC /* MojioClient.m in Sources */,
 				51E5A9391A7825DB00EEE3BC /* Location.m in Sources */,
-				51E5A9331A7825DB00EEE3BC /* EntityType.m in Sources */,
 				51E5A9371A7825DB00EEE3BC /* ImageSize.m in Sources */,
 				51E5A92B1A7825DB00EEE3BC /* AuthenticationProvider.m in Sources */,
-				51E5A93B1A7825DB00EEE3BC /* Mojios.m in Sources */,
+				51E5A93B1A7825DB00EEE3BC /* Mojio.m in Sources */,
 				51E5A93F1A7825DB00EEE3BC /* Register.m in Sources */,
 				51E5A93D1A7825DB00EEE3BC /* MojioResponse.m in Sources */,
 				51E5A9411A7825DB00EEE3BC /* Storage.m in Sources */,

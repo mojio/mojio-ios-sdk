@@ -10,7 +10,7 @@
 #import "JSONModel.h"
 #import "EntityType.h"
 
-@interface Mojios : JSONModel
+@interface Mojio : JSONModel
 
 @property (nonatomic) NSInteger Type;
 @property (nonatomic, strong) NSString *OwnerId;

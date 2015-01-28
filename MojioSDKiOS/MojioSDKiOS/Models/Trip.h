@@ -11,7 +11,7 @@
 #import "Location.h"
 #import "Address.h"
 
-@interface Trips : JSONModel
+@interface Trip : JSONModel
 
 @property (nonatomic, strong) NSNumber<Optional> *Type;
 @property (nonatomic, strong) NSString<Optional> *MojioId;

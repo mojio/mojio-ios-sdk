@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "MojioClient.h"
-#import "Vehicles.h"
+#import "Vehicle.h"
 
 @interface ViewController : UIViewController
 

@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 Mojio. All rights reserved.
 //
 
-#import "Trips.h"
+#import "Trip.h"
 
-@implementation Trips
+@implementation Trip
 
 @end

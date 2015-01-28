@@ -6,9 +6,9 @@
 //  Copyright (c) 2015 Ashish Agarwal. All rights reserved.
 //
 
-#import "Mojios.h"
+#import "Mojio.h"
 
-@implementation Mojios
+@implementation Mojio
 
 +(BOOL)propertyIsOptional:(NSString*)propertyName
 {

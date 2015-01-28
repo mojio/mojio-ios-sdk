@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "JSONModel.h"
 
-@interface Users : JSONModel
+@interface User : JSONModel
 
 @property (nonatomic) float Type;
 @property (nonatomic, strong) NSString *UserName;
