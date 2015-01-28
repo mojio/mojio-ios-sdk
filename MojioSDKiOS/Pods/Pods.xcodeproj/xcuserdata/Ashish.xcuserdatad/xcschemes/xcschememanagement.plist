@@ -24,6 +24,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-MojioSDKiOS-JSONModel.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-MojioSDKiOS.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -32,27 +37,32 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>07DDB6FBE3850B6D50C47F28</key>
+		<key>203472AFF08C1B41C8709331</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>0D288EB6D4B90994AC02603F</key>
+		<key>408BCD5074B589C9A3555769</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>63FB359375CD37161DA2A53D</key>
+		<key>421F840ED979A86A52407834</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6A657D3A65EB05EF80465419</key>
+		<key>582620C077A6FEB09927483B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C401284D593AEEF831183E22</key>
+		<key>978F4082E07DB2F5FF3AB761</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D1396922704057EA4CE3F8AE</key>
 		<dict>
 			<key>primary</key>
 			<true/>

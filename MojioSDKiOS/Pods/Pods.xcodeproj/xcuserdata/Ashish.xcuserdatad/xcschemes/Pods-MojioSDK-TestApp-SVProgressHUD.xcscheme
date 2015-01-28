@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6A657D3A65EB05EF80465419"
+               BlueprintIdentifier = "408BCD5074B589C9A3555769"
                BuildableName = "libPods-MojioSDK-TestApp-SVProgressHUD.a"
                BlueprintName = "Pods-MojioSDK-TestApp-SVProgressHUD"
                ReferencedContainer = "container:Pods.xcodeproj">

@@ -7,15 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "JSONModel.h"
 
-@interface Location : NSObject
+@interface Location : JSONModel
 
-@property (nonatomic) double lat;
-@property (nonatomic) double lng;
-@property (nonatomic) BOOL fromLockedGPS;
-@property (nonatomic) double dilution;
+@property (nonatomic) double Lat;
+@property (nonatomic) double Lng;
+@property (nonatomic) BOOL FromLockedGPS;
+@property (nonatomic) double Dilution;
 
-@property (nonatomic, readonly) BOOL isValid;
+@property (nonatomic, readonly) BOOL IsValid;
 
 -(id) initWithLat : (double)latitude andLongitude : (double)longitude;
 

@@ -14,15 +14,15 @@
 - (id) initWithLat:(double)latitude andLongitude:(double)longitude {
     self = [super init];
     if (self) {
-        self.lat = latitude;
-        self.lng = longitude;
+        self.Lat = latitude;
+        self.Lng = longitude;
     }
     
     return self;
 }
 
 -(BOOL) isValid {
-    return !(isnan(self.lat) || isnan(self.lng)) && !(self.lat == 0 && self.lng ==0);
+    return !(isnan(self.Lat) || isnan(self.Lng)) && !(self.Lat == 0 && self.Lng ==0);
 }
 
 @end

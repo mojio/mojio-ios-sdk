@@ -38,12 +38,14 @@
 }
 
 -(IBAction)vehicleButtonPressed:(id)sender {
-    id response = [self.client getAsync:@"Vehicles" withParams:nil];
+//    id response = [self.client getAsync:@"Vehicles" withParams:nil];
+    self.client = [MojioClient sharedInstance];
+    [self.client getEntity:@"Vehicles" withQueryOptions:nil withParams:nil success:nil fail:nil];
 }
 
 -(IBAction)eventsButtonPressed:(id)sender {
-    id response = [self.client getAsync:@"Trips" withParams:nil];
-    
+    self.client = [MojioClient sharedInstance];
+    [self.client getEntity:@"Trips" withQueryOptions:nil withParams:nil success:nil fail:nil];
 }
 
 -(IBAction)oauthLogin:(id)sender {
@@ -70,7 +72,7 @@
 
 -(void) downloadVehicleData {
     // use mojio client to download vehicle data
-    Vehicle *vehicle = [self.client getVehicleData];
+//    Vehicle *vehicle = [self.client getVehicleData];
 }
 
 

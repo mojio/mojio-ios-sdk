@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "07DDB6FBE3850B6D50C47F28"
+               BlueprintIdentifier = "203472AFF08C1B41C8709331"
                BuildableName = "libPods-MojioSDKiOS-AFOAuth2Manager.a"
                BlueprintName = "Pods-MojioSDKiOS-AFOAuth2Manager"
                ReferencedContainer = "container:Pods.xcodeproj">

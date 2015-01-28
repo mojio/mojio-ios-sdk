@@ -7,14 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "JSONModel.h"
 
-@interface Address : NSObject
+@interface Address : JSONModel
 
-@property (nonatomic, strong) NSString *address1;
-@property (nonatomic, strong) NSString *address2;
-@property (nonatomic, strong) NSString *city;
-@property (nonatomic, strong) NSString *state;
-@property (nonatomic, strong) NSString *zip;
-@property (nonatomic, strong) NSString *country;
+@property (nonatomic, strong) NSString *Address1;
+@property (nonatomic, strong) NSString *Address2;
+@property (nonatomic, strong) NSString *City;
+@property (nonatomic, strong) NSString *State;
+@property (nonatomic, strong) NSString *Zip;
+@property (nonatomic, strong) NSString *Country;
 
 @end

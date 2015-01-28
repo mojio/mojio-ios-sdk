@@ -14,7 +14,7 @@ typedef NS_ENUM(NSInteger, entityType) {
     Storage,
     Product,
     DTC,
-    Trip,
+    Trips,
     Invoice,
     User,
     Log,

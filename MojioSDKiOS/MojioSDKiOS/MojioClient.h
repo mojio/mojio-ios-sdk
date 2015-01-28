@@ -30,10 +30,7 @@
 - (void) login;
 - (void) initWithAppId : (NSString *) appId andSecretKey : (NSString *)secretKey andRedirectUrlScheme : (NSString *) urlScheme;
 
-//-(id) initWithAppId : (NSString *)appId withSecretKey : (NSString *)secretKey withUserOrEmail : (NSString *)userOrEmail withPassword : (NSString *)password ;
-- (id) getAsync : (NSString *)entity withParams : (NSArray *)args;
-
--(Vehicle *) getVehicleData;
+-(void) getEntity : (NSString *)entity withQueryOptions : (NSDictionary *)queryOptions withParams : (NSArray *)params success : (void (^)(id responseObject)) success fail : (void (^) (NSError *error)) fail;
 
 
 @property (nonatomic) int pageSize;
