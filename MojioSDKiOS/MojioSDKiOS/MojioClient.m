@@ -107,7 +107,6 @@
 
 -(NSString *) request : (NSArray *)params {
     NSMutableString *str = [NSMutableString string];
-//    [str appendString:self.baseApiUrl];
     
     //TODO - strip out escape characters from the string
     for (id param in params) {

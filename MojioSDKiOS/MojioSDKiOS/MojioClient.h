@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "MojioResponse.h"
 #import "Token.h"
-#import "Vehicle.h"
+#import "Vehicles.h"
 
 @interface MapEntity : NSObject
 

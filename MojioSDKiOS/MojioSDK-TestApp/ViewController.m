@@ -13,13 +13,20 @@
 @interface ViewController ()
 @property (nonatomic, strong) MojioClient *client;
 
-@property (weak, nonatomic) IBOutlet UIButton *loginButton;
+@property (strong, nonatomic) IBOutlet UIButton *vehiclesButton;
+@property (strong, nonatomic) IBOutlet UIButton *tripsButton;
+@property (strong, nonatomic) IBOutlet UIButton *mojiosButton;
+@property (strong, nonatomic) IBOutlet UIButton *usersButton;
+@property (strong, nonatomic) IBOutlet UIButton *eventsButton;
+@property (strong, nonatomic) IBOutlet UIButton *appsButton;
 
--(IBAction)loginButtonPressed:(id)sender;
 -(IBAction)vehicleButtonPressed:(id)sender;
+-(IBAction)tripsButtonPressed:(id)sender;
+-(IBAction)mojiosButtonPressed:(id)sender;
+-(IBAction)usersButtonPressed:(id)sender;
+-(IBAction)appsButtonPressed:(id)sender;
 -(IBAction)eventsButtonPressed:(id)sender;
 
--(IBAction)oauthLogin:(id)sender;
 
 @end
 
@@ -28,53 +35,36 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Do any additional setup after loading the view, typically from a nib.
-}
-
--(IBAction)loginButtonPressed:(id)sender {
-//    self.client = [[MojioClient alloc] initWithAppId:@"f642dfb4-67c2-472a-bec6-a583d3152a01" withSecretKey:@"e28b87cc-2d6f-48e0-b4ef-f728c44b2dcf" withUserOrEmail:@"ashisha@moj.io" withPassword:@"Test123"];
-//    self.client.delegate = self; //assign ourselves as the delegate of the Mojio Client
-    
+    self.client = [MojioClient sharedInstance];
 }
 
 -(IBAction)vehicleButtonPressed:(id)sender {
-//    id response = [self.client getAsync:@"Vehicles" withParams:nil];
-    self.client = [MojioClient sharedInstance];
     [self.client getEntity:@"Vehicles" withQueryOptions:nil withParams:nil success:nil fail:nil];
 }
 
--(IBAction)eventsButtonPressed:(id)sender {
-    self.client = [MojioClient sharedInstance];
+-(IBAction)tripsButtonPressed:(id)sender {
     [self.client getEntity:@"Trips" withQueryOptions:nil withParams:nil success:nil fail:nil];
 }
 
--(IBAction)oauthLogin:(id)sender {
-    
-    self.client = [[MojioClient alloc] init];
-    
-//    AFOAuth2Manager *manager = [[AFOAuth2Manager alloc] initWithBaseURL:baseURL clientID:@"f642dfb4-67c2-472a-bec6-a583d3152a01" secret:@"e28b87cc-2d6f-48e0-b4ef-f728c44b2dcf"];
-//    
-//    NSDictionary *params = @{@"response_type" : @"token", @"client_id" : @"f642dfb4-67c2-472a-bec6-a583d3152a01" ,  @"redirect_uri" : @"mojioios"};
-//    //@"client_id" : @"f642dfb4-67c2-472a-bec6-a583d3152a01" ,
-//    
-//    [manager authenticateUsingOAuthWithURLString:@"https://api.moj.io/OAuth2Sandbox/authorize" parameters:params success:^(AFOAuthCredential *credential) {
-//        NSLog (@"%@", credential.accessToken);
-//        
-//    }failure:^(NSError *error) {
-//        NSLog(@"%@",[error localizedDescription]);
-//    }];
+-(IBAction)mojiosButtonPressed:(id)sender {
+    [self.client getEntity:@"Mojios" withQueryOptions:nil withParams:nil success:nil fail:nil];
+}
+
+-(IBAction)usersButtonPressed:(id)sender {
+    [self.client getEntity:@"Users" withQueryOptions:nil withParams:nil success:nil fail:nil];
+}
+
+-(IBAction)appsButtonPressed:(id)sender {
+    [self.client getEntity:@"Apps" withQueryOptions:nil withParams:nil success:nil fail:nil];
+}
+
+-(IBAction)eventsButtonPressed:(id)sender {
+    [self.client getEntity:@"Events" withQueryOptions:nil withParams:nil success:nil fail:nil];
 }
 
 -(void) loggedIn {
-    //
-    [self downloadVehicleData];
+    
 }
-
--(void) downloadVehicleData {
-    // use mojio client to download vehicle data
-//    Vehicle *vehicle = [self.client getVehicleData];
-}
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

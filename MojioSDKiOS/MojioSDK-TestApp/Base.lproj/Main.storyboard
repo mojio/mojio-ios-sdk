@@ -16,17 +16,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yxb-cQ-8e2">
-                                <rect key="frame" x="16" y="20" width="67" height="30"/>
-                                <state key="normal" title="Login">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="loginButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="elz-wx-tqO"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nfq-7g-DzS">
-                                <rect key="frame" x="101" y="20" width="57" height="30"/>
+                                <rect key="frame" x="16" y="20" width="57" height="30"/>
                                 <state key="normal" title="Vehicles">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -35,21 +26,48 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iUM-Dt-2hN">
-                                <rect key="frame" x="222" y="20" width="47" height="30"/>
+                                <rect key="frame" x="16" y="58" width="33" height="30"/>
+                                <state key="normal" title="Trips">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="tripsButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="lYK-Gq-TdO"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c3U-dV-vTb">
+                                <rect key="frame" x="16" y="96" width="46" height="30"/>
+                                <state key="normal" title="Mojios">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="mojiosButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="dAF-hv-A6h"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gbx-jW-djU">
+                                <rect key="frame" x="16" y="134" width="40" height="30"/>
+                                <state key="normal" title="Users">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="usersButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Wa5-w3-pu8"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dcB-9s-Xlp">
+                                <rect key="frame" x="16" y="172" width="47" height="30"/>
                                 <state key="normal" title="Events">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="eventsButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="blm-MA-mEE"/>
+                                    <action selector="eventsButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="NjM-dc-51r"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xsM-ER-xnC">
-                                <rect key="frame" x="16" y="127" width="57" height="30"/>
-                                <state key="normal" title="OAuth 2">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="esY-wd-dzu">
+                                <rect key="frame" x="16" y="210" width="36" height="30"/>
+                                <state key="normal" title="Apps">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="oauthLogin:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="v9r-2s-aay"/>
+                                    <action selector="appsButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="3xf-K2-JQk"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -57,12 +75,17 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
-                        <outlet property="loginButton" destination="Yxb-cQ-8e2" id="o9e-xZ-ovQ"/>
+                        <outlet property="appsButton" destination="esY-wd-dzu" id="Ou2-tD-88f"/>
+                        <outlet property="eventsButton" destination="dcB-9s-Xlp" id="BJe-Ue-ZTt"/>
+                        <outlet property="mojiosButton" destination="c3U-dV-vTb" id="Xsv-YC-v77"/>
+                        <outlet property="tripsButton" destination="iUM-Dt-2hN" id="g2P-9D-Nmt"/>
+                        <outlet property="usersButton" destination="Gbx-jW-djU" id="q6L-0y-XOk"/>
+                        <outlet property="vehiclesButton" destination="nfq-7g-DzS" id="SMH-6E-lcs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="434.5" y="332.5"/>
+            <point key="canvasLocation" x="265.5" y="323.5"/>
         </scene>
     </scenes>
 </document>
