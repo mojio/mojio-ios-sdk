@@ -6,12 +6,14 @@
 //  Copyright (c) 2015 Ashish Agarwal. All rights reserved.
 //
 
-#import "Mojio_Mojio.h"
+#import "Mojios.h"
 
-@implementation Mojio_Mojio
+@implementation Mojios
 
-//-(entityType) _entityType {
-//    return EntityType.Mojio;
-//}
++(BOOL)propertyIsOptional:(NSString*)propertyName
+{
+    return YES;
+}
+
 
 @end

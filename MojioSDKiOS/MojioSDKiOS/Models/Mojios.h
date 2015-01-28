@@ -1,5 +1,5 @@
 //
-//  App.h
+//  Mojio_Mojio.h
 //  SdkTryout
 //
 //  Created by Ashish Agarwal on 2015-01-23.
@@ -8,16 +8,15 @@
 
 #import <Foundation/Foundation.h>
 #import "JSONModel.h"
+#import "EntityType.h"
 
-@interface App : NSObject
+@interface Mojios : JSONModel
 
 @property (nonatomic) NSInteger Type;
+@property (nonatomic, strong) NSString *OwnerId;
 @property (nonatomic, strong) NSString *Name;
-@property (nonatomic, strong) NSString *Description;
-@property (nonatomic, strong) NSString *CreationDate;
-@property (nonatomic) NSInteger Downloads;
-@property (nonatomic, strong) NSArray *RedirectUris;
-@property (nonatomic) NSInteger ApplicationType;
+@property (nonatomic, strong) NSString *Imei;
+@property (nonatomic, strong) NSDate *LastContactTime;
 @property (nonatomic, strong) NSString *_id;
 @property (nonatomic) BOOL _deleted;
 
