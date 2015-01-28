@@ -34,8 +34,14 @@
 
 -(void) getEntity : (NSString *)entity withQueryOptions : (NSDictionary *)queryOptions withParams : (NSArray *)params success : (void (^)(id responseObject)) success fail : (void (^) (NSError *error)) fail;
 
-- (void) deleteEntity : (NSString *)entity withQueryOptions : (NSDictionary *) queryOptions withParams : (NSArray *)params success : (void (^)(id responseObject)) success fail : (void (^) (NSError *error))fail;
+- (void) deleteEntity : (NSString *)entity withEntityId : (NSString *)entityId withQueryOptions : (NSDictionary *) queryOptions withParams : (NSArray *)params success : (void (^)(id responseObject)) success fail : (void (^) (NSError *error))fail;
 
+- (void) updateEntity : (NSString *)entity withQueryOptions : (NSDictionary *)queryOptions withParams : (NSArray *)params success : (void (^)(id responseObject)) success fail : (void (^) (NSError *error)) fail;
+
+- (void) createEntity : (NSString *)entity withQueryOptions : (NSDictionary *)queryOptions withParams : (NSArray *)params success : (void (^)(id responseObject)) success fail : (void (^) (NSError *error)) fail;
+
+// new calls
+- (void)getEntityWithPath:(NSString *)path withQueryOptions:(NSDictionary *)queryOptions success:(void (^)(id responseObject))success failure:(void (^) (NSError *error))failure;
 
 
 @property (nonatomic) int pageSize;

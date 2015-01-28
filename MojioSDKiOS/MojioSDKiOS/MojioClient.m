@@ -49,7 +49,7 @@
 -(id) init {
     self = [super init];
     if (self) {
-        self.baseApiUrl = [NSString stringWithFormat:@"https://api.moj.io/v1/"];
+        self.baseApiUrl = [NSString stringWithFormat:@"https://staging.api.moj.io/v1/"];
         self.manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:@"https://api.moj.io/v1/"]];
     }
     return self;
@@ -85,7 +85,6 @@
         
         NSURL *url = [NSURL URLWithString:urlString];
         [[UIApplication sharedApplication] openURL:url];
-
     }
 }
 
@@ -123,6 +122,7 @@
     return dict;
 }
 
+// Obsolete call already
 -(void) getEntity:(NSString *)entity withQueryOptions:(NSDictionary *)queryOptions withParams:(NSArray *)params success:(void (^)(id responseObject))success fail:(void (^)(NSError * error))fail {
     
     NSString *request = [self request:params];
@@ -132,11 +132,14 @@
         NSLog(@"%@", responseObject);
         
         NSMutableArray *responseObjects = [NSMutableArray array];
+        //TODO - check if response is of type array before adding it to the array
+        
         for (NSDictionary *dict in [responseObject objectForKey:@"Data"]) {
             NSError *err;
             id object = [[NSClassFromString(entity) alloc] initWithDictionary:dict error:&err];
             [responseObjects addObject:object];
         }
+        // check for nil
         success(responseObjects);
         
     }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -146,23 +149,59 @@
     
 }
 
--(void) deleteEntity:(NSString *)entity withQueryOptions:(NSDictionary *)queryOptions withParams:(NSArray *)params success:(void (^)(id))success fail:(void (^)(NSError *))fail {
+-(void) getEntityWithPath:(NSString *)path withQueryOptions:(NSDictionary *)queryOptions success:(void (^)(id))success failure:(void (^)(NSError *))failure {
+    
+    [self.manager GET:path parameters:queryOptions success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"%@", responseObject);
+        
+        NSMutableArray *responseObjects = [NSMutableArray array];
+        //TODO - check if response is of type array before adding it to the array
+        
+        for (NSDictionary *dict in [responseObject objectForKey:@"Data"]) {
+            NSError *err;
+            NSString *type = [dict objectForKey:@"Type"];
+            id object = [[NSClassFromString(type) alloc] initWithDictionary:dict error:&err];
+            [responseObjects addObject:object];
+        }
+        // check for nil
+        success(responseObjects);
+        
+    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"%@", [error localizedDescription]);
+        failure(error);
+    }];
+
+}
+
+-(void) deleteEntity:(NSString *)entity withEntityId : (NSString *)entityId withQueryOptions:(NSDictionary *)queryOptions withParams:(NSArray *)params success:(void (^)(id))success fail:(void (^)(NSError *))fail {
+    
+    NSString *request = [self request:params];
+    NSString *urlString = [NSString stringWithFormat:@"%@/%@/%@",  entity, entityId, request];
+    
+    [self.manager DELETE:urlString parameters:queryOptions success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"%@", responseObject);
+    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"%@", [error localizedDescription]);
+    }];
+    
+}
+
+-(void)updateEntity:(NSString *)entity withQueryOptions:(NSDictionary *)queryOptions withParams:(NSArray *)params success:(void (^)(id))success fail:(void (^)(NSError *))fail {
     
     NSString *request = [self request:params];
     NSString *urlString = [NSString stringWithFormat:@"%@/%@",  entity, request];
     
-    [self.manager DELETE:urlString parameters:queryOptions success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
+    [self.manager PUT:urlString parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"%@", responseObject);
     }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
+        NSLog(@"%@", [error localizedDescription]);
     }];
-
 }
 
 -(NSString *) request : (NSArray *)params {
     NSMutableString *str = [NSMutableString string];
     
-//TODO - strip out escape characters from the string
+//    TODO - strip out escape characters from the string
 //    NSCharacterSet *notAllowedChars = [[NSCharacterSet characterSetWithCharactersInString:@""] invertedSet];
 //    str = [[str componentsSeparatedByCharactersInSet:notAllowedChars] componentsJoinedByString:@""];
 

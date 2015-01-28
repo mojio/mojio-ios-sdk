@@ -14,9 +14,13 @@
 
 -(void) setToUnknown;
 
-@property (nonatomic, strong) NSString *code;
-@property (nonatomic, strong) NSString *dtcDescription;
-@property (nonatomic, strong) NSString *source;
+@property (nonatomic) NSInteger Type;
+
+@property (nonatomic, strong) NSString *Code;
+@property (nonatomic, strong) NSString *Description;
+@property (nonatomic, strong) NSString *Source;
+@property (nonatomic, strong) NSString *_id;
+@property (nonatomic)BOOL _deleted;
 
 // memberwise clone
 

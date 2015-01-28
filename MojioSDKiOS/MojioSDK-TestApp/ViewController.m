@@ -19,6 +19,9 @@
 @property (strong, nonatomic) IBOutlet UIButton *usersButton;
 @property (strong, nonatomic) IBOutlet UIButton *eventsButton;
 @property (strong, nonatomic) IBOutlet UIButton *appsButton;
+@property (strong, nonatomic) IBOutlet UIButton *deleteTripsButton;
+@property (strong, nonatomic) IBOutlet UIButton *updateTripsButton;
+
 
 -(IBAction)vehicleButtonPressed:(id)sender;
 -(IBAction)tripsButtonPressed:(id)sender;
@@ -26,6 +29,8 @@
 -(IBAction)usersButtonPressed:(id)sender;
 -(IBAction)appsButtonPressed:(id)sender;
 -(IBAction)eventsButtonPressed:(id)sender;
+-(IBAction)deleteTripsButtonPressed:(id)sender;
+-(IBAction)updateTripsButtonPressed:(id)sender;
 
 
 @end
@@ -61,6 +66,22 @@
 
 -(IBAction)eventsButtonPressed:(id)sender {
     [self.client getEntity:@"Events" withQueryOptions:nil withParams:nil success:nil fail:nil];
+}
+
+-(IBAction)deleteTripsButtonPressed:(id)sender {
+//    NSDictionary *options = @{@"id" : @"e08fff30-6e58-4f3b-a1b2-78b429b04199"};
+    NSArray *params = [NSArray arrayWithObjects:@"Store", @"sample", nil];
+    [self.client deleteEntity:@"Vehicles" withEntityId:@"a862ef4d-f4f6-433a-a781-4444237fb5f9" withQueryOptions:nil withParams:params success:nil fail:nil];
+}
+
+-(IBAction)updateTripsButtonPressed:(id)sender {
+    NSString *contentBody = @"This is the body of the content";
+    NSDictionary *queryOptions = @{@"body" : @"This is the body"};
+    
+    NSArray *params = [NSArray arrayWithObjects:@"21aacb05-9b01-4e48-8841-91132981eed1",@"Store" , nil];
+    
+    [self.client updateEntity:@"Vehicles" withQueryOptions:queryOptions withParams:params success:nil fail:nil];
+    
 }
 
 -(void) loggedIn {
