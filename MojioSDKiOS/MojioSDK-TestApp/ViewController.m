@@ -40,7 +40,7 @@
 -(IBAction)vehicleButtonPressed:(id)sender {
 //    id response = [self.client getAsync:@"Vehicles" withParams:nil];
     self.client = [MojioClient sharedInstance];
-    [self.client getEntity:@"Vehicles" withQueryOptions:nil withParams:nil success:nil fail:nil];
+    [self.client getEntity:@"Invoices" withQueryOptions:nil withParams:nil success:nil fail:nil];
 }
 
 -(IBAction)eventsButtonPressed:(id)sender {
