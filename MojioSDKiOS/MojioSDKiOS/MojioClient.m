@@ -93,22 +93,41 @@
     [self.manager GET:urlString parameters:queryOptions success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"%@", responseObject);
         
+        NSMutableArray *responseObjects = [NSMutableArray array];
         for (NSDictionary *dict in [responseObject objectForKey:@"Data"]) {
             NSError *err;
             id object = [[NSClassFromString(entity) alloc] initWithDictionary:dict error:&err];
+            [responseObjects addObject:object];
         }
+        success(responseObjects);
         
     }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@", [error localizedDescription]);
+        fail(error);
     }];
     
 }
 
+-(void) deleteEntity:(NSString *)entity withQueryOptions:(NSDictionary *)queryOptions withParams:(NSArray *)params success:(void (^)(id))success fail:(void (^)(NSError *))fail {
+    
+    NSString *request = [self request:params];
+    NSString *urlString = [NSString stringWithFormat:@"%@/%@",  entity, request];
+    
+    [self.manager DELETE:urlString parameters:queryOptions success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+    }];
+
+}
 
 -(NSString *) request : (NSArray *)params {
     NSMutableString *str = [NSMutableString string];
     
-    //TODO - strip out escape characters from the string
+//TODO - strip out escape characters from the string
+//    NSCharacterSet *notAllowedChars = [[NSCharacterSet characterSetWithCharactersInString:@""] invertedSet];
+//    str = [[str componentsSeparatedByCharactersInSet:notAllowedChars] componentsJoinedByString:@""];
+
     for (id param in params) {
         if (param!= [NSNull null] && [param isKindOfClass:[NSString class]]) {
             [str appendFormat:@"%@/",param];

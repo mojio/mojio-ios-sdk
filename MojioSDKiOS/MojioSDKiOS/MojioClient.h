@@ -32,6 +32,8 @@
 
 -(void) getEntity : (NSString *)entity withQueryOptions : (NSDictionary *)queryOptions withParams : (NSArray *)params success : (void (^)(id responseObject)) success fail : (void (^) (NSError *error)) fail;
 
+- (void) deleteEntity : (NSString *)entity withQueryOptions : (NSDictionary *) queryOptions withParams : (NSArray *)params success : (void (^)(id responseObject)) success fail : (void (^) (NSError *error))fail;
+
 
 @property (nonatomic) int pageSize;
 @property (nonatomic) int sessionTime;
