@@ -46,6 +46,10 @@
 
 - (void)updateEntityWithPath:(NSString*)path withQueryOptions : (NSDictionary *)queryOptions success : (void(^)(void))success failure : (void(^)(void)) failure;
 
+-(void) createEntityWithPath : (NSString *)path withQueryOptions : (NSDictionary *)queryOptions success : (void (^)(void)) success failure : (void (^)(void))failure;
+
+-(void) deleteEntityWithPath : (NSString *)path withQueryOptions : (NSDictionary *)queryOptions success : (void (^)(void)) success failure : (void (^)(void)) failure;
+
 @property (nonatomic) int pageSize;
 @property (nonatomic) int sessionTime;
 

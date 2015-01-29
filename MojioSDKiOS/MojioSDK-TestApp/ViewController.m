@@ -45,7 +45,7 @@
 }
 
 -(IBAction)vehicleButtonPressed:(id)sender {
-    [self.client getEntityWithPath:@"Users" withQueryOptions:nil success:nil failure:nil];
+    [self.client getEntityWithPath:@"Vehicles/53cdeca5-b268-4a25-bfde-3938b5cf7d47/Store/samplekey/" withQueryOptions:nil success:nil failure:nil];
 }
 
 -(IBAction)tripsButtonPressed:(id)sender {
@@ -75,8 +75,7 @@
 }
 
 -(IBAction)updateTripsButtonPressed:(id)sender {
-    NSDictionary *queryOptions = @{@"body" : @"This is the body"};
-    
+    NSDictionary *queryOptions = @{@"body" : @"\"This is the bodyaasdfasdf \""};
     
     [self.client updateEntityWithPath:@"Vehicles/a862ef4d-f4f6-433a-a781-4444237fb5f9/Store/samplekey" withQueryOptions:queryOptions success:nil failure:nil];
     
