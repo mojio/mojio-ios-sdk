@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
 #import "MojioResponse.h"
 #import "Token.h"
 #import "Vehicle.h"
@@ -24,15 +23,11 @@
 
 @end
 
-/**
- 'MojioClient' is the main class of Mojio SDK.
- */
 @interface MojioClient : NSObject
 
 +(id) sharedInstance;
 
-- (void)login;
-- (void)logout;
+- (void) login;
 - (void)handleOpenURL:(NSURL *)url;
 
 - (void) initWithAppId : (NSString *) appId andSecretKey : (NSString *)secretKey andRedirectUrlScheme : (NSString *) urlScheme;
@@ -50,12 +45,6 @@
 - (void)getEntityWithPath:(NSString *)path withQueryOptions:(NSDictionary *)queryOptions success:(void (^)(id responseObject))success failure:(void (^) (NSError *error))failure;
 
 - (void)updateEntityWithPath:(NSString*)path withQueryOptions : (NSDictionary *)queryOptions success : (void(^)(void))success failure : (void(^)(void)) failure;
-- (void)getImage:(NSString*)path success:(void (^)(id responseObject))success failure:(void (^)(NSError *error))failure;
-- (void)postImage:(NSString*)path image:(UIImage*)image success:(void (^)(id))success failure:(void (^)(NSError *))failure;
-
--(void) createEntityWithPath : (NSString *)path withQueryOptions : (NSDictionary *)queryOptions success : (void (^)(void)) success failure : (void (^)(void))failure;
-
--(void) deleteEntityWithPath : (NSString *)path withQueryOptions : (NSDictionary *)queryOptions success : (void (^)(void)) success failure : (void (^)(void)) failure;
 
 @property (nonatomic) int pageSize;
 @property (nonatomic) int sessionTime;

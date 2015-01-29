@@ -89,12 +89,20 @@
     }
 }
 
+- (void)logout {
+    [[self.manager requestSerializer] setValue:nil forHTTPHeaderField:@"MojioAPIToken"];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults removeObjectForKey:@"MojioAccessToken"];
+    [defaults removeObjectForKey:@"MojioTokenExpireTime"];
+    [defaults synchronize];
+}
+
 - (void)handleOpenURL:(NSURL *)url {
     NSDictionary *params = [self parseQueryString:url.absoluteString];
     
     NSString *token = params[@"access_token"];
-    NSInteger expires_in = [params[@"expires_in"] integerValue];
-    NSTimeInterval expireTime = [NSDate date].timeIntervalSince1970 + expires_in;
+    NSInteger expires_in = [params[@"expires_in"] integerValue]; //expire time in minutes
+    NSTimeInterval expireTime = [NSDate date].timeIntervalSince1970 + expires_in * 60;
     
     self.authToken = token;
     [[self.manager requestSerializer] setValue:_authToken forHTTPHeaderField:@"MojioAPIToken"];
@@ -260,6 +268,52 @@
         }
     }
     return str;
+}
+
+-(void) createVehicle {
+    
+}
+
+- (void)getImage:(NSString*)path success:(void (^)(id))success failure:(void (^)(NSError *))failure {
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:[self.manager.baseURL.absoluteString stringByAppendingString:path]]];
+    [request setValue:self.authToken forHTTPHeaderField:@"MojioAPIToken"];
+    AFHTTPRequestOperation *requestOperation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    requestOperation.responseSerializer = [AFImageResponseSerializer serializer];
+    NSMutableSet *acceptableContentTypes = [requestOperation.responseSerializer.acceptableContentTypes mutableCopy];
+    [acceptableContentTypes addObject:@"image/jpg"];
+    requestOperation.responseSerializer.acceptableContentTypes = acceptableContentTypes;
+    
+    [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        success(responseObject);
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        failure(error);
+    }];
+    [requestOperation start];
+}
+
+- (void)postImage:(NSString*)path image:(UIImage*)image success:(void (^)(id))success failure:(void (^)(NSError *))failure {
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:[self.manager.baseURL.absoluteString stringByAppendingString:path]]];
+    NSString *imageBase64 = [NSString stringWithFormat:@"\"%@\"", [UIImageJPEGRepresentation(image,1) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]];
+    [request setHTTPBody:[imageBase64 dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    [request setValue:self.authToken forHTTPHeaderField:@"MojioAPIToken"];
+    [request setValue:@"application/json; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+    [request setValue:[NSString stringWithFormat:@"%ld",request.HTTPBody.length] forHTTPHeaderField:@"Content-Length"];
+    [request setHTTPMethod:@"POST"];
+    
+    AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    op.responseSerializer = [AFCompoundResponseSerializer serializer];
+    [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"JSON responseObject: %@ ",responseObject);
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", [error localizedDescription]);
+        
+    }];
+    [op start];
+    
 }
 
 @end
