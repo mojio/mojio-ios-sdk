@@ -7,7 +7,7 @@
 //
 
 #import "MojioClient.h"
-#import "App.h"
+//#import "App.h"
 #import <AFNetworking.h>
 #import "JSONModel.h"
 #import "AFURLResponseSerialization.h"
@@ -53,9 +53,7 @@
     if ([defaults objectForKey:@"MojioAccessToken"] && [defaults doubleForKey:@"MojioTokenExpireTime"] > [NSDate date].timeIntervalSince1970) {
         self.authToken = [defaults objectForKey:@"MojioAccessToken"];
         [[self.manager requestSerializer] setValue:_authToken forHTTPHeaderField:@"MojioAPIToken"];
-        
-    }
-    else {
+    } else {
         NSString *urlString = [NSString stringWithFormat:@"https://api.moj.io/OAuth2/authorize?response_type=token&client_id=%@&redirect_uri=%@", self.appId, self.redirectUrlScheme];
         
         NSURL *url = [NSURL URLWithString:urlString];
@@ -153,13 +151,10 @@
     [request setValue:self.authToken forHTTPHeaderField:@"MojioAPIToken"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [request setValue:[NSString stringWithFormat:@"%ld",request.HTTPBody.length] forHTTPHeaderField:@"Content-Length"];
-
     [request setHTTPMethod:@"PUT"];
-    
     
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     operation.responseSerializer = [AFCompoundResponseSerializer serializer];
-    
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *op, id responseObject){
         NSLog(@"%@", responseObject);
     }failure:^(AFHTTPRequestOperation *op, NSError *error) {
@@ -169,37 +164,64 @@
     
 }
 
--(void) createEntityWithPath:(NSString *)path withQueryOptions:(NSDictionary *)queryOptions success:(void (^)(void))success failure:(void (^)(void))failure {
+-(void) createEntityWithPath:(NSString *)path withContentBody:(NSString *)contentBody success:(void (^)(void))success failure:(void (^)(void))failure {
+    NSData *data = [contentBody dataUsingEncoding:NSUTF8StringEncoding];
+    NSString *urlString = [self.manager.baseURL.absoluteString stringByAppendingString:path];
     
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:urlString]];
+    [request setHTTPBody:data];
+    [request setValue:self.authToken forHTTPHeaderField:@"MojioAPIToken"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setValue:[NSString stringWithFormat:@"%ld",request.HTTPBody.length] forHTTPHeaderField:@"Content-Length"];
+    [request setHTTPMethod:@"POST"];
+    
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    operation.responseSerializer = [AFCompoundResponseSerializer serializer];
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *op, id responseObject){
+        NSLog(@"%@", responseObject);
+    }failure:^(AFHTTPRequestOperation *op, NSError *error) {
+        NSLog(@"%@", [error localizedDescription]);
+    }];
+    [operation start];
+
 }
 
--(void) deleteEntity:(NSString *)entity withEntityId : (NSString *)entityId withQueryOptions:(NSDictionary *)queryOptions withParams:(NSArray *)params success:(void (^)(id))success fail:(void (^)(NSError *))fail {
+-(void) deleteEntityWithPath:(NSString *)path success:(void (^)(void))success failure:(void (^)(void))failure {
     
-    NSString *request = [self request:params];
-    NSString *urlString = [NSString stringWithFormat:@"%@/%@/%@",  entity, entityId, request];
-    
-    [self.manager DELETE:urlString parameters:queryOptions success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [self.manager DELETE:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"%@", responseObject);
     }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@", [error localizedDescription]);
     }];
-    
 }
 
--(NSString *) request : (NSArray *)params {
-    NSMutableString *str = [NSMutableString string];
-    
-//    TODO - strip out escape characters from the string
-//    NSCharacterSet *notAllowedChars = [[NSCharacterSet characterSetWithCharactersInString:@""] invertedSet];
-//    str = [[str componentsSeparatedByCharactersInSet:notAllowedChars] componentsJoinedByString:@""];
+//-(void) deleteEntity:(NSString *)entity withEntityId : (NSString *)entityId withQueryOptions:(NSDictionary *)queryOptions withParams:(NSArray *)params success:(void (^)(id))success fail:(void (^)(NSError *))fail {
+//    
+//    NSString *request = [self request:params];
+//    NSString *urlString = [NSString stringWithFormat:@"%@/%@/%@",  entity, entityId, request];
+//    
+//    [self.manager DELETE:urlString parameters:queryOptions success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        NSLog(@"%@", responseObject);
+//    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//        NSLog(@"%@", [error localizedDescription]);
+//    }];
+//    
+//}
 
-    for (id param in params) {
-        if (param!= [NSNull null] && [param isKindOfClass:[NSString class]]) {
-            [str appendFormat:@"%@/",param];
-        }
-    }
-    return str;
-}
+//-(NSString *) request : (NSArray *)params {
+//    NSMutableString *str = [NSMutableString string];
+//    
+////    TODO - strip out escape characters from the string
+////    NSCharacterSet *notAllowedChars = [[NSCharacterSet characterSetWithCharactersInString:@""] invertedSet];
+////    str = [[str componentsSeparatedByCharactersInSet:notAllowedChars] componentsJoinedByString:@""];
+//
+//    for (id param in params) {
+//        if (param!= [NSNull null] && [param isKindOfClass:[NSString class]]) {
+//            [str appendFormat:@"%@/",param];
+//        }
+//    }
+//    return str;
+//}
 
 - (void)getImage:(NSString*)path success:(void (^)(id))success failure:(void (^)(NSError *))failure {
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:[self.manager.baseURL.absoluteString stringByAppendingString:path]]];

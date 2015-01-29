@@ -31,9 +31,9 @@
 -(void) getEntityWithPath:(NSString *)path withQueryOptions:(NSDictionary *)queryOptions success:(void (^)(id responseObject))success failure:(void (^) (NSError *error))failure;
 
 -(void) updateEntityWithPath:(NSString*)path withContentBody : (NSString *)contentBody success : (void(^)(void))success failure : (void(^)(void)) failure;
--(void) createEntityWithPath : (NSString *)path withQueryOptions : (NSDictionary *)queryOptions success : (void (^)(void)) success failure : (void (^)(void))failure;
+-(void) createEntityWithPath : (NSString *)path withContentBody : (NSString *)contentBody success : (void (^)(void)) success failure : (void (^)(void))failure;
 
--(void) deleteEntityWithPath : (NSString *)path withQueryOptions : (NSDictionary *)queryOptions success : (void (^)(void)) success failure : (void (^)(void)) failure;
+-(void) deleteEntityWithPath : (NSString *)path success : (void (^)(void)) success failure : (void (^)(void)) failure;
 
 // Download image
 - (void)getImage:(NSString*)path success:(void (^)(id responseObject))success failure:(void (^)(NSError *error))failure;

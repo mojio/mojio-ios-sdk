@@ -21,6 +21,8 @@
 @property (strong, nonatomic) IBOutlet UIButton *appsButton;
 @property (strong, nonatomic) IBOutlet UIButton *deleteTripsButton;
 @property (strong, nonatomic) IBOutlet UIButton *updateTripsButton;
+@property (strong, nonatomic) IBOutlet UIButton *createEntityButton;
+@property (strong, nonatomic) IBOutlet UIButton *deleteEntityButton;
 
 
 -(IBAction)vehicleButtonPressed:(id)sender;
@@ -31,6 +33,8 @@
 -(IBAction)eventsButtonPressed:(id)sender;
 -(IBAction)deleteTripsButtonPressed:(id)sender;
 -(IBAction)updateTripsButtonPressed:(id)sender;
+-(IBAction)createEntityButtonPressed:(id)sender;
+-(IBAction)deleteEntityButtonPressed:(id)sender;
 
 
 @end
@@ -45,7 +49,7 @@
 }
 
 -(IBAction)vehicleButtonPressed:(id)sender {
-    [self.client getEntityWithPath:@"Vehicles/53cdeca5-b268-4a25-bfde-3938b5cf7d47/Store/samplekey/" withQueryOptions:nil success:nil failure:nil];
+    [self.client getEntityWithPath:@"Vehicles/53cdeca5-b268-4a25-bfde-3938b5cf7d47/Store/newkey/" withQueryOptions:nil success:nil failure:nil];
 }
 
 -(IBAction)tripsButtonPressed:(id)sender {
@@ -81,12 +85,21 @@
     
 }
 
+-(IBAction)createEntityButtonPressed:(id)sender {
+    NSString *content = @"\"This is the value for the specified key\"";
+    [self.client createEntityWithPath:@"Vehicles/53cdeca5-b268-4a25-bfde-3938b5cf7d47/Store/newkey" withContentBody:content success:nil failure:nil];
+}
+
 - (IBAction)getImageButtonPressed:(id)sender {
     [self.client getImage:@"Vehicles/53cdeca5-b268-4a25-bfde-3938b5cf7d47/Image" success:^(id responseObject) {
         
     } failure:^(NSError *error) {
         
     }];
+}
+
+-(IBAction)deleteEntityButtonPressed:(id)sender {
+    [self.client deleteEntityWithPath:@"Vehicles/53cdeca5-b268-4a25-bfde-3938b5cf7d47/Store/newkey" success:nil failure:nil];
 }
 
 - (IBAction)uploadImageButtonPressed:(id)sender {

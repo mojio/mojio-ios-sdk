@@ -115,6 +115,24 @@
                                     <action selector="uploadImageButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="4Gs-jf-E12"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="djx-Kf-KwT">
+                                <rect key="frame" x="16" y="410" width="46" height="30"/>
+                                <state key="normal" title="Create">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="createEntityButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="RBw-h1-vxa"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="No5-Lo-nqD">
+                                <rect key="frame" x="16" y="448" width="44" height="30"/>
+                                <state key="normal" title="Delete">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="deleteEntityButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="E6R-6g-Gcn"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ff8-NS-lP3">
                                 <rect key="frame" x="16" y="296" width="104" height="30"/>
                                 <state key="normal" title="Update Vehicle">
@@ -130,6 +148,8 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="appsButton" destination="esY-wd-dzu" id="Ou2-tD-88f"/>
+                        <outlet property="createEntityButton" destination="djx-Kf-KwT" id="AGX-iK-c3p"/>
+                        <outlet property="deleteEntityButton" destination="No5-Lo-nqD" id="e5u-hD-8YG"/>
                         <outlet property="deleteTripsButton" destination="Q0Y-DZ-moL" id="teN-Qe-yCz"/>
                         <outlet property="eventsButton" destination="dcB-9s-Xlp" id="BJe-Ue-ZTt"/>
                         <outlet property="mojiosButton" destination="c3U-dV-vTb" id="Xsv-YC-v77"/>
