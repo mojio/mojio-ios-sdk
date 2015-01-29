@@ -71,7 +71,7 @@
 -(IBAction)deleteTripsButtonPressed:(id)sender {
 //    NSDictionary *options = @{@"id" : @"e08fff30-6e58-4f3b-a1b2-78b429b04199"};
     NSArray *params = [NSArray arrayWithObjects:@"Store", @"sample", nil];
-    [self.client deleteEntity:@"Vehicles" withEntityId:@"a862ef4d-f4f6-433a-a781-4444237fb5f9" withQueryOptions:nil withParams:params success:nil fail:nil];
+//    [self.client deleteEntity:@"Vehicles" withEntityId:@"a862ef4d-f4f6-433a-a781-4444237fb5f9" withQueryOptions:nil withParams:params success:nil fail:nil];
 }
 
 -(IBAction)updateTripsButtonPressed:(id)sender {

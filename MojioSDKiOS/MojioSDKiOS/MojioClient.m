@@ -12,34 +12,8 @@
 #import "JSONModel.h"
 #import "AFURLResponseSerialization.h"
 
-@interface MapEntity()
-
-@property(nonatomic, strong) NSMutableDictionary *map;
-
--(void) add : (id)type withController : (NSString *)controller;
-//-(NSString *) typeOfClass : (id)type;
-
-@end
-
-@implementation MapEntity
-
--(id) init {
-    self = [super init];
-    if (self) {
-        self.map = [NSMutableDictionary dictionary];
-    }
-    return self;
-}
-
--(void) add:(id)type withController:(NSString *)controller {
-    [self.map setObject:controller forKey:type];
-}
-
-@end
-
 @interface MojioClient ()
 
-@property (nonatomic, strong) MapEntity *map;
 @property (nonatomic, strong) AFHTTPRequestOperationManager *manager;
 @property (nonatomic, strong) NSString *baseApiUrl;
 
