@@ -132,31 +132,6 @@
 
 -(void) getEntityWithPath:(NSString *)path withQueryOptions:(NSDictionary *)queryOptions success:(void (^)(id))success failure:(void (^)(NSError *))failure {
     
-//    [self.manager setre]
-//    self.manager.responseSerializer = AFUR
-//    NSMutableSet *acceptableContentTypes = [self.manager.responseSerializer.acceptableContentTypes mutableCopy];
-//    [acceptableContentTypes addObject:@"application/json"];
-//    [acceptableContentTypes addObject:@"text/html"];
-//    [acceptableContentTypes addObject:@"text/plain"];
-//    
-//    self.manager.responseSerializer = [AFCompoundResponseSerializer serializer];
-//    
-//    self.manager.responseSerializer.acceptableContentTypes = acceptableContentTypes;
-    
-    
-    
-//    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[self.manager.baseURL.absoluteString stringByAppendingString:path]]];
-//    
-//    [NSURLConnection sendAsynchronousRequest:request queue:nil completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-//        NSString *string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-//        
-//    }];
-    
-    
-    
-
-
-    
     self.manager.responseSerializer = [AFCompoundResponseSerializer serializer];
     
     [self.manager GET:path parameters:queryOptions success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -165,8 +140,11 @@
         // if the response is a nsdata
         if ([responseObject isKindOfClass:[NSData class]]) {
             NSString *responseString = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-            
-            // call success
+            NSLog(@"%@", responseString);
+            if (success != nil) {
+                success(responseString);
+            }
+            return;
         }
         
         NSMutableArray *responseObjects = [NSMutableArray array];
@@ -191,50 +169,29 @@
 
 }
 
-- (void) updateEntityWithPath:(NSString *)path withQueryOptions:(NSDictionary *)queryOptions success:(void (^)(void))success failure:(void (^)(void))failure {
+- (void) updateEntityWithPath:(NSString *)path withContentBody:(NSString *)contentBody success:(void (^)(void))success failure:(void (^)(void))failure {
     
-    [self.manager GET:path parameters:queryOptions success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"%@", responseObject);
-        
-        NSMutableArray *responseObjects = [NSMutableArray array];
-        //TODO - check if response is of type array before adding it to the array
-        
-        for (NSDictionary *dict in [responseObject objectForKey:@"Data"]) {
-            NSError *err;
-            NSString *type = [dict objectForKey:@"Type"];
-            id object = [[NSClassFromString(type) alloc] initWithDictionary:dict error:&err];
-            [responseObjects addObject:object];
-        }
-        if (success != nil) {
-            success();
-        }
-        
-    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"%@", [error localizedDescription]);
-        if (failure != nil) {
-            failure();
-        }
-    }];
+    NSData *data = [contentBody dataUsingEncoding:NSUTF8StringEncoding];
+    NSString *urlString = [self.manager.baseURL.absoluteString stringByAppendingString:path];
+   
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:urlString]];
+    [request setHTTPBody:data];
+    [request setValue:self.authToken forHTTPHeaderField:@"MojioAPIToken"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setValue:[NSString stringWithFormat:@"%ld",request.HTTPBody.length] forHTTPHeaderField:@"Content-Length"];
 
+    [request setHTTPMethod:@"PUT"];
     
-//    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:[self.manager.baseURL.absoluteString stringByAppendingString:path]]];
-//    [request setValue:self.authToken forHTTPHeaderField:@"MojioAPIToken"];
-//    [request setHTTPMethod:@"PUT"];
-//    
-//    NSString *body = @"\"This is the body of the request aasdgljsalkd \"";
-//    NSData *data = [body dataUsingEncoding:NSUTF8StringEncoding];
-//    
-//    [request setHTTPBody:data];
-//    
-//    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-//    operation.responseSerializer = [AFJSONResponseSerializer serializer];
-//    
-//    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *op, id responseObject){
-//        NSLog(@"%@", responseObject);
-//    }failure:^(AFHTTPRequestOperation *op, NSError *error) {
-//        NSLog(@"%@", [error localizedDescription]);
-//    }];
-//    [operation start];
+    
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    operation.responseSerializer = [AFCompoundResponseSerializer serializer];
+    
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *op, id responseObject){
+        NSLog(@"%@", responseObject);
+    }failure:^(AFHTTPRequestOperation *op, NSError *error) {
+        NSLog(@"%@", [error localizedDescription]);
+    }];
+    [operation start];
     
 }
 
@@ -268,10 +225,6 @@
         }
     }
     return str;
-}
-
--(void) createVehicle {
-    
 }
 
 - (void)getImage:(NSString*)path success:(void (^)(id))success failure:(void (^)(NSError *))failure {

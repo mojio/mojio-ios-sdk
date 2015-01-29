@@ -75,9 +75,9 @@
 }
 
 -(IBAction)updateTripsButtonPressed:(id)sender {
-    NSDictionary *queryOptions = @{@"body" : @"\"This is the bodyaasdfasdf \""};
-    
-    [self.client updateEntityWithPath:@"Vehicles/a862ef4d-f4f6-433a-a781-4444237fb5f9/Store/samplekey" withQueryOptions:queryOptions success:nil failure:nil];
+
+    NSString *content = @"\"There you go, this is finally working !!\"";
+    [self.client updateEntityWithPath:@"Vehicles/53cdeca5-b268-4a25-bfde-3938b5cf7d47/Store/samplekey" withContentBody:content success:nil failure:nil];
     
 }
 

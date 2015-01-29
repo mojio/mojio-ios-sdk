@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -79,15 +79,6 @@
                                     <action selector="deleteTripsButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="OSe-ST-7O5"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ff8-NS-lP3">
-                                <rect key="frame" x="16" y="296" width="104" height="30"/>
-                                <state key="normal" title="Update Vehicle">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="updateTripsButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="eFJ-Ig-XcR"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ibC-Y0-BTa">
                                 <rect key="frame" x="283" y="20" width="43" height="30"/>
                                 <state key="normal" title="Log in">
@@ -122,6 +113,15 @@
                                 </state>
                                 <connections>
                                     <action selector="uploadImageButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="4Gs-jf-E12"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ff8-NS-lP3">
+                                <rect key="frame" x="16" y="296" width="104" height="30"/>
+                                <state key="normal" title="Update Vehicle">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="updateTripsButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="eFJ-Ig-XcR"/>
                                 </connections>
                             </button>
                         </subviews>
