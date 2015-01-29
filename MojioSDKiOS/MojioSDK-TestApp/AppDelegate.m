@@ -18,7 +18,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
-    self.client = [MojioClient sharedInstance];
+    self.client = [MojioClient client];
     [self.client initWithAppId:@"f642dfb4-67c2-472a-bec6-a583d3152a01" andSecretKey:@"6ab44a7f-d47b-4931-91fb-71905173c552" andRedirectUrlScheme:@"mojioios://"];
     
     return YES;

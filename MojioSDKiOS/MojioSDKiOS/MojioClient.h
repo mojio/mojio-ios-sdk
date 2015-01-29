@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "Token.h"
 
 /**
  'MojioClient' is the main class of Mojio SDK.
@@ -15,7 +16,7 @@
 @interface MojioClient : NSObject
 
 // Initialize the Mojio client
-+(id) sharedInstance;
++(id) client;
 
 - (void)login;
 - (void)logout;

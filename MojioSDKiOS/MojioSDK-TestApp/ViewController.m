@@ -44,8 +44,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.client = [MojioClient sharedInstance];
+    self.client = [MojioClient client];
     [self.client login];
+}
+
+- (BOOL) isLoggedIn {
+    
+    return NO;
 }
 
 -(IBAction)vehicleButtonPressed:(id)sender {
@@ -128,10 +133,6 @@
 
 - (IBAction)logoutButtonPressed:(id)sender {
     [self.client logout];
-}
-
--(void) loggedIn {
-    
 }
 
 @end

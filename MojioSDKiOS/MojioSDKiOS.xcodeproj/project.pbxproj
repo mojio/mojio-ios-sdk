@@ -58,6 +58,7 @@
 		754D65E71A786D7500B58061 /* Product.m in Sources */ = {isa = PBXBuildFile; fileRef = 754D65E51A786D7500B58061 /* Product.m */; };
 		75516CD21A785F430014D862 /* Trip.h in Headers */ = {isa = PBXBuildFile; fileRef = 75516CD01A785F430014D862 /* Trip.h */; };
 		75516CD31A785F430014D862 /* Trip.m in Sources */ = {isa = PBXBuildFile; fileRef = 75516CD11A785F430014D862 /* Trip.m */; };
+		756F5F671A7AFA25000C0B38 /* SplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 756F5F661A7AFA25000C0B38 /* SplashViewController.m */; };
 		75D60EF01A7829B30095C1A7 /* MojioSDKiOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 51E5A8E71A7825BB00EEE3BC /* MojioSDKiOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		76278F43D7DCE9B31A0F9C57 /* libPods-MojioSDKiOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F3D3835805D44AEF5D0211E /* libPods-MojioSDKiOS.a */; };
 		DA12A7C30ADE8CE5F650BFC7 /* libPods-MojioSDK-TestApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 454FE767BD840DAA66BF9A1B /* libPods-MojioSDK-TestApp.a */; };
@@ -165,6 +166,8 @@
 		754D65E51A786D7500B58061 /* Product.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Product.m; sourceTree = "<group>"; };
 		75516CD01A785F430014D862 /* Trip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Trip.h; sourceTree = "<group>"; };
 		75516CD11A785F430014D862 /* Trip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Trip.m; sourceTree = "<group>"; };
+		756F5F651A7AFA25000C0B38 /* SplashViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SplashViewController.h; sourceTree = "<group>"; };
+		756F5F661A7AFA25000C0B38 /* SplashViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SplashViewController.m; sourceTree = "<group>"; };
 		C7EAEEC56F2AB063E28A0912 /* Pods-MojioSDK-TestApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MojioSDK-TestApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MojioSDK-TestApp/Pods-MojioSDK-TestApp.debug.xcconfig"; sourceTree = "<group>"; };
 		D02ADFB11306EE760143103C /* Pods-MojioSDK-TestApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MojioSDK-TestApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-MojioSDK-TestApp/Pods-MojioSDK-TestApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -327,6 +330,8 @@
 				51E5A9691A78279200EEE3BC /* AppDelegate.m */,
 				51E5A96B1A78279200EEE3BC /* ViewController.h */,
 				51E5A96C1A78279200EEE3BC /* ViewController.m */,
+				756F5F651A7AFA25000C0B38 /* SplashViewController.h */,
+				756F5F661A7AFA25000C0B38 /* SplashViewController.m */,
 				51E5A96E1A78279200EEE3BC /* Main.storyboard */,
 				51E5A9711A78279200EEE3BC /* Images.xcassets */,
 				51E5A9731A78279200EEE3BC /* LaunchScreen.xib */,
@@ -668,6 +673,7 @@
 				51E5A96D1A78279200EEE3BC /* ViewController.m in Sources */,
 				51E5A96A1A78279200EEE3BC /* AppDelegate.m in Sources */,
 				51E5A9671A78279200EEE3BC /* main.m in Sources */,
+				756F5F671A7AFA25000C0B38 /* SplashViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

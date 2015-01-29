@@ -29,7 +29,7 @@
     return self;
 }
 
-+ (id) sharedInstance {
++ (id) client {
     static MojioClient *client = nil;
     
     static dispatch_once_t onceToken;
