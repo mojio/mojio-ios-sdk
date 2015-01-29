@@ -2,12 +2,11 @@
 //  MojioClient.m
 //  MojioSDKiOS
 //
-//  Created by Ashish Agarwal on 2015-01-22.
-//  Copyright (c) 2015 Ashish Agarwal. All rights reserved.
+//  Created by Ashish Agarwal on 2015-01-27.
+//  Copyright (c) 2015 Mojio. All rights reserved.
 //
 
 #import "MojioClient.h"
-//#import "App.h"
 #import <AFNetworking.h>
 #import "JSONModel.h"
 #import "AFURLResponseSerialization.h"
@@ -55,7 +54,6 @@
         [[self.manager requestSerializer] setValue:_authToken forHTTPHeaderField:@"MojioAPIToken"];
     } else {
         NSString *urlString = [NSString stringWithFormat:@"https://api.moj.io/OAuth2/authorize?response_type=token&client_id=%@&redirect_uri=%@", self.appId, self.redirectUrlScheme];
-        
         NSURL *url = [NSURL URLWithString:urlString];
         [[UIApplication sharedApplication] openURL:url];
     }
@@ -103,13 +101,9 @@
 }
 
 -(void) getEntityWithPath:(NSString *)path withQueryOptions:(NSDictionary *)queryOptions success:(void (^)(id))success failure:(void (^)(NSError *))failure {
-    
     self.manager.responseSerializer = [AFCompoundResponseSerializer serializer];
     
     [self.manager GET:path parameters:queryOptions success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"%@", responseObject);
-        
-        // if the response is a nsdata
         if ([responseObject isKindOfClass:[NSData class]]) {
             NSString *responseString = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
             NSLog(@"%@", responseString);
@@ -117,28 +111,33 @@
                 success(responseString);
             }
             return;
-        }
-        
-        NSMutableArray *responseObjects = [NSMutableArray array];
-        //TODO - check if response is of type array before adding it to the array
-        
-        for (NSDictionary *dict in [responseObject objectForKey:@"Data"]) {
+        } else if ([responseObject isKindOfClass:[NSDictionary class]]) {
             NSError *err;
-            NSString *type = [dict objectForKey:@"Type"];
-            id object = [[NSClassFromString(type) alloc] initWithDictionary:dict error:&err];
-            [responseObjects addObject:object];
+            NSString *type = [responseObject objectForKey:@"Type"];
+            id object = [[NSClassFromString(type) alloc] initWithDictionary:responseObject error:&err];
+            if (success != nil) {
+                success(object);
+                return;
+            }
+        } else if ([responseObject isKindOfClass:[NSArray class]]) {
+            NSMutableArray *responseObjects = [NSMutableArray array];
+            for (NSDictionary *dict in [responseObject objectForKey:@"Data"]) {
+                NSError *err;
+                NSString *type = [dict objectForKey:@"Type"];
+                id object = [[NSClassFromString(type) alloc] initWithDictionary:dict error:&err];
+                [responseObjects addObject:object];
+            }
+            if (success != nil) {
+                success(responseObjects);
+                return;
+            }
         }
-        if (success != nil) {
-            success(responseObjects);
-        }
-        
-    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@", [error localizedDescription]);
         if (failure != nil) {
             failure(error);
         }
     }];
-
 }
 
 - (void) updateEntityWithPath:(NSString *)path withContentBody:(NSString *)contentBody success:(void (^)(void))success failure:(void (^)(void))failure {
@@ -156,12 +155,15 @@
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     operation.responseSerializer = [AFCompoundResponseSerializer serializer];
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *op, id responseObject){
-        NSLog(@"%@", responseObject);
+        if (success != nil)
+            success();
     }failure:^(AFHTTPRequestOperation *op, NSError *error) {
         NSLog(@"%@", [error localizedDescription]);
+        if (failure != nil) {
+            failure();
+        }
     }];
     [operation start];
-    
 }
 
 -(void) createEntityWithPath:(NSString *)path withContentBody:(NSString *)contentBody success:(void (^)(void))success failure:(void (^)(void))failure {
@@ -178,50 +180,29 @@
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     operation.responseSerializer = [AFCompoundResponseSerializer serializer];
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *op, id responseObject){
-        NSLog(@"%@", responseObject);
+        if (success != nil)
+            success();
     }failure:^(AFHTTPRequestOperation *op, NSError *error) {
         NSLog(@"%@", [error localizedDescription]);
+        if (failure != nil) {
+            failure();
+        }
     }];
     [operation start];
-
 }
 
 -(void) deleteEntityWithPath:(NSString *)path success:(void (^)(void))success failure:(void (^)(void))failure {
     
     [self.manager DELETE:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"%@", responseObject);
+        if (success != nil)
+            success();
     }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@", [error localizedDescription]);
+        if (failure != nil) {
+            failure();
+        }
     }];
 }
-
-//-(void) deleteEntity:(NSString *)entity withEntityId : (NSString *)entityId withQueryOptions:(NSDictionary *)queryOptions withParams:(NSArray *)params success:(void (^)(id))success fail:(void (^)(NSError *))fail {
-//    
-//    NSString *request = [self request:params];
-//    NSString *urlString = [NSString stringWithFormat:@"%@/%@/%@",  entity, entityId, request];
-//    
-//    [self.manager DELETE:urlString parameters:queryOptions success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        NSLog(@"%@", responseObject);
-//    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        NSLog(@"%@", [error localizedDescription]);
-//    }];
-//    
-//}
-
-//-(NSString *) request : (NSArray *)params {
-//    NSMutableString *str = [NSMutableString string];
-//    
-////    TODO - strip out escape characters from the string
-////    NSCharacterSet *notAllowedChars = [[NSCharacterSet characterSetWithCharactersInString:@""] invertedSet];
-////    str = [[str componentsSeparatedByCharactersInSet:notAllowedChars] componentsJoinedByString:@""];
-//
-//    for (id param in params) {
-//        if (param!= [NSNull null] && [param isKindOfClass:[NSString class]]) {
-//            [str appendFormat:@"%@/",param];
-//        }
-//    }
-//    return str;
-//}
 
 - (void)getImage:(NSString*)path success:(void (^)(id))success failure:(void (^)(NSError *))failure {
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:[self.manager.baseURL.absoluteString stringByAppendingString:path]]];
@@ -233,10 +214,12 @@
     requestOperation.responseSerializer.acceptableContentTypes = acceptableContentTypes;
     
     [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        success(responseObject);
-        
+        if (success != nil)
+            success (responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        failure(error);
+        NSLog(@"%@", [error localizedDescription]);
+        if (failure != nil)
+            failure(error);
     }];
     [requestOperation start];
 }
@@ -254,11 +237,14 @@
     AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     op.responseSerializer = [AFCompoundResponseSerializer serializer];
     [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
         NSLog(@"JSON responseObject: %@ ",responseObject);
+        if (success != nil)
+            success(responseObject);
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", [error localizedDescription]);
+        if (failure != nil)
+            failure (error);
         
     }];
     [op start];

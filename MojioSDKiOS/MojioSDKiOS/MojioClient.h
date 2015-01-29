@@ -2,15 +2,12 @@
 //  MojioClient.h
 //  SdkTryout
 //
-//  Created by Ashish Agarwal on 2015-01-22.
-//  Copyright (c) 2015 Ashish Agarwal. All rights reserved.
+//  Created by Ashish Agarwal on 2015-01-27.
+//  Copyright (c) 2015 Mojio. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import "MojioResponse.h"
-#import "Token.h"
-#import "Vehicle.h"
 
 /**
  'MojioClient' is the main class of Mojio SDK.
