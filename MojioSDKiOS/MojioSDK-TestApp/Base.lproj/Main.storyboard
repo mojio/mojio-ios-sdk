@@ -100,7 +100,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="viewOnMapPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="PoN-hC-Cra"/>
+                                    <action selector="viewOnMapButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="E4l-1K-JDx"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gfE-Op-eqQ">
@@ -118,13 +118,41 @@
                         <outlet property="vehicleLicensePlateLabel" destination="gfE-Op-eqQ" id="v1k-CN-MgF"/>
                         <outlet property="vehicleLocationLabel" destination="IoO-fF-A7v" id="CtQ-rG-wrw"/>
                         <outlet property="vehicleNameLabel" destination="6bf-RJ-10j" id="mRH-KR-o1k"/>
-                        <outlet property="viewOnMapButton" destination="Ipc-Be-nQy" id="sXl-kQ-UOz"/>
+                        <outlet property="viewOnMapButton" destination="Ipc-Be-nQy" id="cbz-Hx-Hx5"/>
                         <segue destination="lXT-2C-W9C" kind="presentation" identifier="showLogin" animates="NO" id="58Y-bi-FuO"/>
+                        <segue destination="q1x-2p-FdZ" kind="show" identifier="showMapSegue" id="4h7-Ds-auP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="325.5" y="393.5"/>
+        </scene>
+        <!--Map View Controller-->
+        <scene sceneID="Giq-Vc-b3V">
+            <objects>
+                <viewController id="q1x-2p-FdZ" customClass="MapViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="xtr-Ve-uFz"/>
+                        <viewControllerLayoutGuide type="bottom" id="cX5-VY-utO"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="30f-Za-jSY">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="EEW-iG-dki">
+                                <rect key="frame" x="0.0" y="-8" width="375" height="667"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="mapView" destination="EEW-iG-dki" id="002-jA-dES"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hKT-1l-8dX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="759.5" y="393.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Nme-Pf-DI8">

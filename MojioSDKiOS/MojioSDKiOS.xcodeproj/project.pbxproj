@@ -52,6 +52,7 @@
 		51E5A9881A7827B400EEE3BC /* MojioSDKiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51E5A8E71A7825BB00EEE3BC /* MojioSDKiOS.framework */; };
 		51E5A9901A786D8000EEE3BC /* Invoice.h in Headers */ = {isa = PBXBuildFile; fileRef = 51E5A98E1A786D8000EEE3BC /* Invoice.h */; };
 		51E5A9911A786D8000EEE3BC /* Invoice.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E5A98F1A786D8000EEE3BC /* Invoice.m */; };
+		750F104D1A7BFD97005F25A3 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 750F104C1A7BFD97005F25A3 /* MapViewController.m */; };
 		754D65E21A78678A00B58061 /* User.h in Headers */ = {isa = PBXBuildFile; fileRef = 754D65E01A78678A00B58061 /* User.h */; };
 		754D65E31A78678A00B58061 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 754D65E11A78678A00B58061 /* User.m */; };
 		754D65E61A786D7500B58061 /* Product.h in Headers */ = {isa = PBXBuildFile; fileRef = 754D65E41A786D7500B58061 /* Product.h */; };
@@ -160,6 +161,8 @@
 		51E5A9801A78279200EEE3BC /* MojioSDK_TestAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MojioSDK_TestAppTests.m; sourceTree = "<group>"; };
 		51E5A98E1A786D8000EEE3BC /* Invoice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Invoice.h; sourceTree = "<group>"; };
 		51E5A98F1A786D8000EEE3BC /* Invoice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Invoice.m; sourceTree = "<group>"; };
+		750F104B1A7BFD97005F25A3 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
+		750F104C1A7BFD97005F25A3 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
 		754D65E01A78678A00B58061 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		754D65E11A78678A00B58061 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		754D65E41A786D7500B58061 /* Product.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Product.h; sourceTree = "<group>"; };
@@ -330,6 +333,8 @@
 				51E5A9691A78279200EEE3BC /* AppDelegate.m */,
 				51E5A96B1A78279200EEE3BC /* ViewController.h */,
 				51E5A96C1A78279200EEE3BC /* ViewController.m */,
+				750F104B1A7BFD97005F25A3 /* MapViewController.h */,
+				750F104C1A7BFD97005F25A3 /* MapViewController.m */,
 				756F5F651A7AFA25000C0B38 /* SplashViewController.h */,
 				756F5F661A7AFA25000C0B38 /* SplashViewController.m */,
 				51E5A96E1A78279200EEE3BC /* Main.storyboard */,
@@ -672,6 +677,7 @@
 			files = (
 				51E5A96D1A78279200EEE3BC /* ViewController.m in Sources */,
 				51E5A96A1A78279200EEE3BC /* AppDelegate.m in Sources */,
+				750F104D1A7BFD97005F25A3 /* MapViewController.m in Sources */,
 				51E5A9671A78279200EEE3BC /* main.m in Sources */,
 				756F5F671A7AFA25000C0B38 /* SplashViewController.m in Sources */,
 			);
