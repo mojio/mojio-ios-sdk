@@ -15,6 +15,7 @@
 
 @property (nonatomic, strong) AFHTTPRequestOperationManager *manager;
 @property (nonatomic, strong) NSString *baseApiUrl;
+@property (copy) void (^ loginCompletionBlock)(void);
 
 @end
 
@@ -46,12 +47,15 @@
     self.redirectUrlScheme = urlScheme;
 }
 
--(void) login {
+-(void) loginWithCompletionBlock:(void (^)(void))completionBlock {
+    self.loginCompletionBlock = completionBlock;
+    
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     //Reuse stored token if it exists and not expired
     if ([defaults objectForKey:@"MojioAccessToken"] && [defaults doubleForKey:@"MojioTokenExpireTime"] > [NSDate date].timeIntervalSince1970) {
         self.authToken = [defaults objectForKey:@"MojioAccessToken"];
         [[self.manager requestSerializer] setValue:_authToken forHTTPHeaderField:@"MojioAPIToken"];
+        self.loginCompletionBlock();
     } else {
         NSString *urlString = [NSString stringWithFormat:@"https://api.moj.io/OAuth2/authorize?response_type=token&client_id=%@&redirect_uri=%@", self.appId, self.redirectUrlScheme];
         NSURL *url = [NSURL URLWithString:urlString];
@@ -59,12 +63,13 @@
     }
 }
 
-- (void)logout {
+- (void)logoutWithCompletionBlock:(void (^)(void))completionBlock {
     [[self.manager requestSerializer] setValue:nil forHTTPHeaderField:@"MojioAPIToken"];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults removeObjectForKey:@"MojioAccessToken"];
     [defaults removeObjectForKey:@"MojioTokenExpireTime"];
     [defaults synchronize];
+    completionBlock();
 }
 
 - (void)handleOpenURL:(NSURL *)url {
@@ -81,6 +86,9 @@
     [defaults setObject:token forKey:@"MojioAccessToken"];
     [defaults setObject:@(expireTime) forKey:@"MojioTokenExpireTime"];
     [defaults synchronize];
+    
+    //Call the login success callback
+    self.loginCompletionBlock();
 }
 
 - (NSDictionary *)parseQueryString:(NSString *)query {

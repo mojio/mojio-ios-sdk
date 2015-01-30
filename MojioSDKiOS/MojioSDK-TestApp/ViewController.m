@@ -12,6 +12,7 @@
 
 @interface ViewController ()
 @property (nonatomic, strong) MojioClient *client;
+@property (nonatomic, strong) SplashViewController *splashController;
 
 @property (strong, nonatomic) IBOutlet UIButton *vehiclesButton;
 @property (strong, nonatomic) IBOutlet UIButton *tripsButton;
@@ -41,16 +42,31 @@
 
 @implementation ViewController
 
+-(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([[segue identifier] isEqualToString:@"showLogin"]) {
+        SplashViewController *splashController = [segue destinationViewController];
+        splashController.delegate = self;
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.client = [MojioClient client];
-    [self.client login];
+    [self performSegueWithIdentifier:@"showLogin" sender:nil];
+//    self.splashController.delegate = self;
+    
 }
 
 - (BOOL) isLoggedIn {
-    
+    if (self.client.authToken != nil) {
+        return YES;
+    }
     return NO;
+}
+
+-(void) didLoginWithController:(SplashViewController *)controller {
+    [self dismissViewControllerAnimated:controller completion:nil];
 }
 
 -(IBAction)vehicleButtonPressed:(id)sender {
@@ -127,12 +143,10 @@
 
 }
 
-- (IBAction)loginButtonPressed:(id)sender {
-    [self.client login];
-}
-
 - (IBAction)logoutButtonPressed:(id)sender {
-    [self.client logout];
+    [self.client logoutWithCompletionBlock:^{
+        [self performSegueWithIdentifier:@"showLogin" sender:nil];
+    }];
 }
 
 @end

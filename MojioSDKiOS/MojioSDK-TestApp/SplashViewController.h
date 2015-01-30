@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+@class SplashViewController;
+@protocol SplashControllerDelegate <NSObject>
+
+-(void)didLoginWithController : (SplashViewController *)controller;
+
+@end
+
 @interface SplashViewController : UIViewController
+
+@property (nonatomic, weak) id <SplashControllerDelegate> delegate;
 
 @end

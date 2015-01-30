@@ -18,8 +18,8 @@
 // Initialize the Mojio client
 +(id) client;
 
-- (void)login;
-- (void)logout;
+- (void)loginWithCompletionBlock : (void(^)(void))completionBlock;
+- (void)logoutWithCompletionBlock : (void(^)(void))completionBlock;
 - (void)handleOpenURL:(NSURL *)url;
 
 // Assign the values of the App id, secret key and redirect uri scheme to the client

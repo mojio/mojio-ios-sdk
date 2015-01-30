@@ -7,8 +7,15 @@
 //
 
 #import "SplashViewController.h"
+#import "MojioClient.h"
 
 @interface SplashViewController ()
+
+@property (strong, nonatomic) IBOutlet UIButton *loginButton;
+
+@property (nonatomic, strong) MojioClient *client;
+
+-(IBAction)loginButtonPressed:(id)sender;
 
 @end
 
@@ -16,8 +23,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    self.client = [MojioClient client];
+    
 }
+
+-(IBAction)loginButtonPressed:(id)sender {
+    [self.client loginWithCompletionBlock:^{
+        [self.delegate didLoginWithController:self];
+    }];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

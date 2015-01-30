@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SplashViewController.h"
 #import "MojioClient.h"
 #import "Vehicle.h"
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController <SplashControllerDelegate>
 
 
 @end
