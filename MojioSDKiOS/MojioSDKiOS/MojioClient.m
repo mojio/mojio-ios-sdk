@@ -112,31 +112,38 @@
     self.manager.responseSerializer = [AFCompoundResponseSerializer serializer];
     
     [self.manager GET:path parameters:queryOptions success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
         if ([responseObject isKindOfClass:[NSData class]]) {
             NSString *responseString = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-            NSLog(@"%@", responseString);
-            if (success != nil) {
-                success(responseString);
+            id jsonObject = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
+            if (jsonObject != nil) {
+                if ([jsonObject isKindOfClass:[NSDictionary class]]) {
+                    NSString *type = [jsonObject objectForKey:@"Type"];
+                    NSArray *data = [jsonObject objectForKey:@"Data"];
+                    if (type != nil) {
+                        NSError *err;
+                        id object = [[NSClassFromString(type) alloc] initWithDictionary:jsonObject error:&err];
+                        if (success != nil) {
+                            success(object);
+                            return;
+                        }
+                    } else if (data != nil) {
+                        NSMutableArray *jsonObjects = [NSMutableArray array];
+                        for (NSDictionary *dict in data) {
+                            NSError *err;
+                            NSString *type = [dict objectForKey:@"Type"];
+                            id object = [[NSClassFromString(type) alloc] initWithDictionary:dict error:&err];
+                            [jsonObjects addObject:object];
+                        }
+                        if (success != nil) {
+                            success(jsonObjects);
+                            return;
+                        }
+                    }
+                }
             }
-            return;
-        } else if ([responseObject isKindOfClass:[NSDictionary class]]) {
-            NSError *err;
-            NSString *type = [responseObject objectForKey:@"Type"];
-            id object = [[NSClassFromString(type) alloc] initWithDictionary:responseObject error:&err];
-            if (success != nil) {
-                success(object);
-                return;
-            }
-        } else if ([responseObject isKindOfClass:[NSArray class]]) {
-            NSMutableArray *responseObjects = [NSMutableArray array];
-            for (NSDictionary *dict in [responseObject objectForKey:@"Data"]) {
-                NSError *err;
-                NSString *type = [dict objectForKey:@"Type"];
-                id object = [[NSClassFromString(type) alloc] initWithDictionary:dict error:&err];
-                [responseObjects addObject:object];
-            }
-            if (success != nil) {
-                success(responseObjects);
+            else if (success != nil && responseString != nil) {
+                success (responseString);
                 return;
             }
         }

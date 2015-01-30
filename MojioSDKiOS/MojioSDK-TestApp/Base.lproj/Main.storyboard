@@ -52,114 +52,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nfq-7g-DzS">
-                                <rect key="frame" x="16" y="71" width="57" height="30"/>
-                                <state key="normal" title="Vehicles">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="vehicleButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="bKF-I7-YEx"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iUM-Dt-2hN">
-                                <rect key="frame" x="16" y="123" width="33" height="30"/>
-                                <state key="normal" title="Trips">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="tripsButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="lYK-Gq-TdO"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c3U-dV-vTb">
-                                <rect key="frame" x="16" y="161" width="46" height="30"/>
-                                <state key="normal" title="Mojios">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="mojiosButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="dAF-hv-A6h"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gbx-jW-djU">
-                                <rect key="frame" x="16" y="199" width="40" height="30"/>
-                                <state key="normal" title="Users">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="usersButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Wa5-w3-pu8"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dcB-9s-Xlp">
-                                <rect key="frame" x="16" y="237" width="47" height="30"/>
-                                <state key="normal" title="Events">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="eventsButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="NjM-dc-51r"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="esY-wd-dzu">
-                                <rect key="frame" x="16" y="275" width="36" height="30"/>
-                                <state key="normal" title="Apps">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="appsButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="3xf-K2-JQk"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q0Y-DZ-moL">
-                                <rect key="frame" x="16" y="323" width="74" height="30"/>
-                                <state key="normal" title="Delete Trip">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="deleteTripsButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="OSe-ST-7O5"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ff8-NS-lP3">
-                                <rect key="frame" x="16" y="361" width="104" height="30"/>
-                                <state key="normal" title="Update Vehicle">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="updateTripsButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="eFJ-Ig-XcR"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y9z-0V-QRG">
-                                <rect key="frame" x="16" y="399" width="72" height="30"/>
-                                <state key="normal" title="Get Image">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="getImageButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="jaZ-9i-6JR"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h77-yc-D0Q">
-                                <rect key="frame" x="16" y="437" width="96" height="30"/>
-                                <state key="normal" title="Upload Image">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="uploadImageButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="4Gs-jf-E12"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="djx-Kf-KwT">
-                                <rect key="frame" x="16" y="475" width="46" height="30"/>
-                                <state key="normal" title="Create">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="createEntityButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="RBw-h1-vxa"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="No5-Lo-nqD">
-                                <rect key="frame" x="16" y="513" width="44" height="30"/>
-                                <state key="normal" title="Delete">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="deleteEntityButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="E6R-6g-Gcn"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vA2-Y7-fKO">
                                 <rect key="frame" x="306" y="72" width="53" height="30"/>
                                 <state key="normal" title="Log out">
@@ -169,22 +61,32 @@
                                     <action selector="logoutButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="EWH-Gf-nIk"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4uc-cn-14y">
+                                <rect key="frame" x="16" y="72" width="161" height="30"/>
+                                <state key="normal" title="Getting stuff">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="getEntityButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="mpP-3X-N3K"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OKG-Mm-PH5">
+                                <rect key="frame" x="63" y="139" width="121" height="30"/>
+                                <state key="normal" title="Update ">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="updateEntityButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="SsP-EX-OLq"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="cHj-GA-Mhz"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
-                        <outlet property="appsButton" destination="esY-wd-dzu" id="Ou2-tD-88f"/>
-                        <outlet property="createEntityButton" destination="djx-Kf-KwT" id="AGX-iK-c3p"/>
-                        <outlet property="deleteEntityButton" destination="No5-Lo-nqD" id="e5u-hD-8YG"/>
-                        <outlet property="deleteTripsButton" destination="Q0Y-DZ-moL" id="teN-Qe-yCz"/>
-                        <outlet property="eventsButton" destination="dcB-9s-Xlp" id="BJe-Ue-ZTt"/>
-                        <outlet property="mojiosButton" destination="c3U-dV-vTb" id="Xsv-YC-v77"/>
-                        <outlet property="tripsButton" destination="iUM-Dt-2hN" id="g2P-9D-Nmt"/>
-                        <outlet property="updateTripsButton" destination="ff8-NS-lP3" id="eeV-vN-ors"/>
-                        <outlet property="usersButton" destination="Gbx-jW-djU" id="q6L-0y-XOk"/>
-                        <outlet property="vehiclesButton" destination="nfq-7g-DzS" id="SMH-6E-lcs"/>
+                        <outlet property="getEntityButton" destination="4uc-cn-14y" id="Ib4-Kp-XAm"/>
+                        <outlet property="updateEntityButton" destination="OKG-Mm-PH5" id="fCh-Pm-Ynj"/>
                         <segue destination="lXT-2C-W9C" kind="presentation" identifier="showLogin" animates="NO" id="58Y-bi-FuO"/>
                     </connections>
                 </viewController>

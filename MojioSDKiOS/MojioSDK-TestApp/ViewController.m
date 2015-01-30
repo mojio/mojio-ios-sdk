@@ -14,28 +14,11 @@
 @property (nonatomic, strong) MojioClient *client;
 @property (nonatomic, strong) SplashViewController *splashController;
 
-@property (strong, nonatomic) IBOutlet UIButton *vehiclesButton;
-@property (strong, nonatomic) IBOutlet UIButton *tripsButton;
-@property (strong, nonatomic) IBOutlet UIButton *mojiosButton;
-@property (strong, nonatomic) IBOutlet UIButton *usersButton;
-@property (strong, nonatomic) IBOutlet UIButton *eventsButton;
-@property (strong, nonatomic) IBOutlet UIButton *appsButton;
-@property (strong, nonatomic) IBOutlet UIButton *deleteTripsButton;
-@property (strong, nonatomic) IBOutlet UIButton *updateTripsButton;
-@property (strong, nonatomic) IBOutlet UIButton *createEntityButton;
-@property (strong, nonatomic) IBOutlet UIButton *deleteEntityButton;
+@property (strong, nonatomic) IBOutlet UIButton *getEntityButton;
+@property (strong, nonatomic) IBOutlet UIButton *updateEntityButton;
 
-
--(IBAction)vehicleButtonPressed:(id)sender;
--(IBAction)tripsButtonPressed:(id)sender;
--(IBAction)mojiosButtonPressed:(id)sender;
--(IBAction)usersButtonPressed:(id)sender;
--(IBAction)appsButtonPressed:(id)sender;
--(IBAction)eventsButtonPressed:(id)sender;
--(IBAction)deleteTripsButtonPressed:(id)sender;
--(IBAction)updateTripsButtonPressed:(id)sender;
--(IBAction)createEntityButtonPressed:(id)sender;
--(IBAction)deleteEntityButtonPressed:(id)sender;
+-(IBAction)getEntityButtonPressed:(id)sender;
+-(IBAction)updateEntityButtonPressed:(id)sender;
 
 
 @end
@@ -54,10 +37,29 @@
     
     self.client = [MojioClient client];
     [self performSegueWithIdentifier:@"showLogin" sender:nil];
-//    self.splashController.delegate = self;
     
 }
 
+#pragma mark - crud actions
+-(IBAction)getEntityButtonPressed:(id)sender {
+    NSDictionary *queryOptions = @{@"limit" : @15, @"sortBy" : @"LastTripEvent"};
+//    [self.client getEntityWithPath:@"Vehicles/53cdeca5-b268-4a25-bfde-3938b5cf7d47/Store/samplekey" withQueryOptions:queryOptions success:^(id responseObject) {
+//    
+//    }failure:^(NSError *failure) {
+//        
+//    }];
+    
+//    [self.client getEntityWithPath:@"Vehicles/53cdeca5-b268-4a25-bfde-3938b5cf7d47/" withQueryOptions:queryOptions success:nil failure:nil];
+    [self.client getEntityWithPath:@"Vehicles/" withQueryOptions:queryOptions success:nil failure:nil];
+
+}
+
+-(IBAction)updateEntityButtonPressed:(id)sender {
+    NSString *content = @"\"this is a body\"";
+//    self.client updateEntityWithPath:<#(NSString *)#> withContentBody:<#(NSString *)#> success:<#^(void)success#> failure:<#^(void)failure#>
+}
+
+#pragma mark - Logging In
 - (BOOL) isLoggedIn {
     if (self.client.authToken != nil) {
         return YES;
@@ -69,58 +71,13 @@
     [self dismissViewControllerAnimated:controller completion:nil];
 }
 
--(IBAction)vehicleButtonPressed:(id)sender {
-    [self.client getEntityWithPath:@"Vehicles/53cdeca5-b268-4a25-bfde-3938b5cf7d47/Store/newkey/" withQueryOptions:nil success:nil failure:nil];
-}
-
--(IBAction)tripsButtonPressed:(id)sender {
-//    [self.client getEntity:@"Trips" withQueryOptions:nil withParams:nil success:nil fail:nil];
-}
-
--(IBAction)mojiosButtonPressed:(id)sender {
-//    [self.client getEntity:@"Mojios" withQueryOptions:nil withParams:nil success:nil fail:nil];
-}
-
--(IBAction)usersButtonPressed:(id)sender {
-//    [self.client getEntity:@"Users" withQueryOptions:nil withParams:nil success:nil fail:nil];
-}
-
--(IBAction)appsButtonPressed:(id)sender {
-//    [self.client getEntity:@"Apps" withQueryOptions:nil withParams:nil success:nil fail:nil];
-}
-
--(IBAction)eventsButtonPressed:(id)sender {
-//    [self.client getEntity:@"Events" withQueryOptions:nil withParams:nil success:nil fail:nil];
-}
-
--(IBAction)deleteTripsButtonPressed:(id)sender {
-//    NSDictionary *options = @{@"id" : @"e08fff30-6e58-4f3b-a1b2-78b429b04199"};
-    NSArray *params = [NSArray arrayWithObjects:@"Store", @"sample", nil];
-//    [self.client deleteEntity:@"Vehicles" withEntityId:@"a862ef4d-f4f6-433a-a781-4444237fb5f9" withQueryOptions:nil withParams:params success:nil fail:nil];
-}
-
--(IBAction)updateTripsButtonPressed:(id)sender {
-
-    NSString *content = @"\"There you go, this is finally working !!\"";
-    [self.client updateEntityWithPath:@"Vehicles/53cdeca5-b268-4a25-bfde-3938b5cf7d47/Store/samplekey" withContentBody:content success:nil failure:nil];
-    
-}
-
--(IBAction)createEntityButtonPressed:(id)sender {
-    NSString *content = @"\"This is the value for the specified key\"";
-    [self.client createEntityWithPath:@"Vehicles/53cdeca5-b268-4a25-bfde-3938b5cf7d47/Store/newkey" withContentBody:content success:nil failure:nil];
-}
-
+#pragma mark - Upload/Get Images
 - (IBAction)getImageButtonPressed:(id)sender {
     [self.client getImage:@"Vehicles/53cdeca5-b268-4a25-bfde-3938b5cf7d47/Image" success:^(id responseObject) {
         
     } failure:^(NSError *error) {
         
     }];
-}
-
--(IBAction)deleteEntityButtonPressed:(id)sender {
-    [self.client deleteEntityWithPath:@"Vehicles/53cdeca5-b268-4a25-bfde-3938b5cf7d47/Store/newkey" success:nil failure:nil];
 }
 
 - (IBAction)uploadImageButtonPressed:(id)sender {
