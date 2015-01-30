@@ -13,7 +13,7 @@
 @interface Vehicle : JSONModel
 
 @property (strong, nonatomic) Trip *CurrentTrip;
-@property (strong, nonatomic) NSArray *DiagnosticCodes;
+@property (strong, nonatomic) NSDictionary *DiagnosticCodes;
 @property (assign, nonatomic) BOOL FaultsDetected;
 @property (assign, nonatomic) float FuelLevel;
 @property (assign, nonatomic) BOOL IgnitionOn;

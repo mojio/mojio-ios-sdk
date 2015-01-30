@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 Ashish Agarwal. All rights reserved.
 //
 
-#import "DTC.h"
+#import "DiagnosticCodes.h"
 
-@implementation DTC
+@implementation DiagnosticCodes
 
 @end

@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "SplashViewController.h"
 #import "MojioClient.h"
-#import "Vehicle.h"
 
 @interface ViewController : UIViewController <SplashControllerDelegate>
 

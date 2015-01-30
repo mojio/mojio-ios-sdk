@@ -115,11 +115,22 @@
     return dict;
 }
 
+-(NSString *) urlEncodedString : (NSDictionary *)dictionary {
+    NSMutableString *encodedString = [NSMutableString stringWithFormat:@""];
+    for (id key in dictionary) {
+        NSString *value = [NSString stringWithFormat:@"%@", key];
+        NSString *part = [NSString stringWithFormat:@"%@", [dictionary objectForKey:key]];
+        [encodedString appendFormat:@"%@=%@&", value, part];
+    }
+    // Remove last character as it is &
+    [encodedString deleteCharactersInRange:NSMakeRange([encodedString length]-1, 1)];
+    return encodedString;
+}
+
 -(void) getEntityWithPath:(NSString *)path withQueryOptions:(NSDictionary *)queryOptions success:(void (^)(id))success failure:(void (^)(NSError *))failure {
     self.manager.responseSerializer = [AFCompoundResponseSerializer serializer];
     
     [self.manager GET:path parameters:queryOptions success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
         if ([responseObject isKindOfClass:[NSData class]]) {
             NSString *responseString = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
             id jsonObject = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];

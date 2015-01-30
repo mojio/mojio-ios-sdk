@@ -18,8 +18,8 @@
 		51E5A92B1A7825DB00EEE3BC /* AuthenticationProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E5A9091A7825DB00EEE3BC /* AuthenticationProvider.m */; };
 		51E5A92C1A7825DB00EEE3BC /* CarState.h in Headers */ = {isa = PBXBuildFile; fileRef = 51E5A90A1A7825DB00EEE3BC /* CarState.h */; };
 		51E5A92D1A7825DB00EEE3BC /* CarState.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E5A90B1A7825DB00EEE3BC /* CarState.m */; };
-		51E5A92E1A7825DB00EEE3BC /* DTC.h in Headers */ = {isa = PBXBuildFile; fileRef = 51E5A90C1A7825DB00EEE3BC /* DTC.h */; };
-		51E5A92F1A7825DB00EEE3BC /* DTC.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E5A90D1A7825DB00EEE3BC /* DTC.m */; };
+		51E5A92E1A7825DB00EEE3BC /* DiagnosticCodes.h in Headers */ = {isa = PBXBuildFile; fileRef = 51E5A90C1A7825DB00EEE3BC /* DiagnosticCodes.h */; };
+		51E5A92F1A7825DB00EEE3BC /* DiagnosticCodes.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E5A90D1A7825DB00EEE3BC /* DiagnosticCodes.m */; };
 		51E5A9301A7825DB00EEE3BC /* Entity.h in Headers */ = {isa = PBXBuildFile; fileRef = 51E5A90E1A7825DB00EEE3BC /* Entity.h */; };
 		51E5A9311A7825DB00EEE3BC /* Entity.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E5A90F1A7825DB00EEE3BC /* Entity.m */; };
 		51E5A9341A7825DB00EEE3BC /* EventBroadcast.h in Headers */ = {isa = PBXBuildFile; fileRef = 51E5A9121A7825DB00EEE3BC /* EventBroadcast.h */; };
@@ -121,8 +121,8 @@
 		51E5A9091A7825DB00EEE3BC /* AuthenticationProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthenticationProvider.m; sourceTree = "<group>"; };
 		51E5A90A1A7825DB00EEE3BC /* CarState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CarState.h; sourceTree = "<group>"; };
 		51E5A90B1A7825DB00EEE3BC /* CarState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CarState.m; sourceTree = "<group>"; };
-		51E5A90C1A7825DB00EEE3BC /* DTC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTC.h; sourceTree = "<group>"; };
-		51E5A90D1A7825DB00EEE3BC /* DTC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTC.m; sourceTree = "<group>"; };
+		51E5A90C1A7825DB00EEE3BC /* DiagnosticCodes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiagnosticCodes.h; sourceTree = "<group>"; };
+		51E5A90D1A7825DB00EEE3BC /* DiagnosticCodes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiagnosticCodes.m; sourceTree = "<group>"; };
 		51E5A90E1A7825DB00EEE3BC /* Entity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Entity.h; sourceTree = "<group>"; };
 		51E5A90F1A7825DB00EEE3BC /* Entity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Entity.m; sourceTree = "<group>"; };
 		51E5A9121A7825DB00EEE3BC /* EventBroadcast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventBroadcast.h; sourceTree = "<group>"; };
@@ -289,8 +289,8 @@
 				51E5A9091A7825DB00EEE3BC /* AuthenticationProvider.m */,
 				51E5A90A1A7825DB00EEE3BC /* CarState.h */,
 				51E5A90B1A7825DB00EEE3BC /* CarState.m */,
-				51E5A90C1A7825DB00EEE3BC /* DTC.h */,
-				51E5A90D1A7825DB00EEE3BC /* DTC.m */,
+				51E5A90C1A7825DB00EEE3BC /* DiagnosticCodes.h */,
+				51E5A90D1A7825DB00EEE3BC /* DiagnosticCodes.m */,
 				51E5A90E1A7825DB00EEE3BC /* Entity.h */,
 				51E5A90F1A7825DB00EEE3BC /* Entity.m */,
 				51E5A9121A7825DB00EEE3BC /* EventBroadcast.h */,
@@ -386,7 +386,7 @@
 			files = (
 				51E5A9461A7825DB00EEE3BC /* MojioClient.h in Headers */,
 				51E5A9441A7825DB00EEE3BC /* Vehicle.h in Headers */,
-				51E5A92E1A7825DB00EEE3BC /* DTC.h in Headers */,
+				51E5A92E1A7825DB00EEE3BC /* DiagnosticCodes.h in Headers */,
 				51E5A93C1A7825DB00EEE3BC /* MojioResponse.h in Headers */,
 				51E5A9401A7825DB00EEE3BC /* Storage.h in Headers */,
 				51E5A9361A7825DB00EEE3BC /* ImageSize.h in Headers */,
@@ -643,7 +643,7 @@
 				51E5A92D1A7825DB00EEE3BC /* CarState.m in Sources */,
 				51E5A9271A7825DB00EEE3BC /* Address.m in Sources */,
 				51E5A9451A7825DB00EEE3BC /* Vehicle.m in Sources */,
-				51E5A92F1A7825DB00EEE3BC /* DTC.m in Sources */,
+				51E5A92F1A7825DB00EEE3BC /* DiagnosticCodes.m in Sources */,
 				51E5A9291A7825DB00EEE3BC /* App.m in Sources */,
 				51E5A9431A7825DB00EEE3BC /* Token.m in Sources */,
 				75516CD31A785F430014D862 /* Trip.m in Sources */,

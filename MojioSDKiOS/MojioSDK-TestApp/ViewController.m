@@ -7,15 +7,22 @@
 //
 
 #import "ViewController.h"
-#import "MojioClient.h"
-#import <AFOauth2Manager.h>
+#import "Vehicle.h"
 
 @interface ViewController ()
 @property (nonatomic, strong) MojioClient *client;
 @property (nonatomic, strong) SplashViewController *splashController;
+@property (nonatomic, strong) Vehicle *vehicle;
+
+@property (strong, nonatomic) IBOutlet UIButton *viewOnMapButton;
 
 @property (strong, nonatomic) IBOutlet UIButton *getEntityButton;
 @property (strong, nonatomic) IBOutlet UIButton *updateEntityButton;
+@property (strong, nonatomic) IBOutlet UILabel *vehicleNameLabel;
+@property (strong, nonatomic) IBOutlet UILabel *vehicleLocationLabel;
+@property (strong, nonatomic) IBOutlet UILabel *vehicleLicensePlateLabel;
+
+-(IBAction)viewOnMapPressed:(id)sender;
 
 -(IBAction)getEntityButtonPressed:(id)sender;
 -(IBAction)updateEntityButtonPressed:(id)sender;
@@ -36,7 +43,33 @@
     [super viewDidLoad];
     
     self.client = [MojioClient client];
-    [self performSegueWithIdentifier:@"showLogin" sender:nil];
+    
+    if (![self.client isUserLoggedIn])
+       [self performSegueWithIdentifier:@"showLogin" sender:nil];
+    else
+        [self downloadVehicleData];
+
+    
+    
+}
+
+-(void) downloadVehicleData {
+    NSDictionary *queryOptions = @{@"limit" : @1, @"offset" : @0, @"sortBy" : @"LastContactTime", @"desc" : @"true"};
+    [self.client getEntityWithPath:@"Vehicles" withQueryOptions:queryOptions success:^(id responseObject) {
+        self.vehicle = (Vehicle *) [responseObject firstObject];
+        [self updateVehicleData];
+        [self.viewOnMapButton setHidden:NO];
+        
+    }failure:nil];
+}
+
+-(void) updateVehicleData {
+    [self.vehicleNameLabel setText:[self.vehicle Name]];
+    [self.vehicleLocationLabel setText:[NSString stringWithFormat:@"%f,%f", [[self.vehicle LastLocation] Lat],[[self.vehicle LastLocation] Lng]]];
+    [self.vehicleLicensePlateLabel setText:[self.vehicle LicensePlate]];
+}
+
+-(IBAction)viewOnMapPressed:(id)sender {
     
 }
 
@@ -59,17 +92,20 @@
 //    self.client updateEntityWithPath:<#(NSString *)#> withContentBody:<#(NSString *)#> success:<#^(void)success#> failure:<#^(void)failure#>
 }
 
-#pragma mark - Logging In
-- (BOOL) isLoggedIn {
-    if (self.client.authToken != nil) {
-        return YES;
-    }
-    return NO;
-}
+#pragma mark - Logging In and Out
 
 -(void) didLoginWithController:(SplashViewController *)controller {
-    [self dismissViewControllerAnimated:controller completion:nil];
+    [self dismissViewControllerAnimated:controller completion:^{
+        [self downloadVehicleData];
+    }];
 }
+
+- (IBAction)logoutButtonPressed:(id)sender {
+    [self.client logoutWithCompletionBlock:^{
+        [self performSegueWithIdentifier:@"showLogin" sender:nil];
+    }];
+}
+
 
 #pragma mark - Upload/Get Images
 - (IBAction)getImageButtonPressed:(id)sender {
@@ -100,10 +136,5 @@
 
 }
 
-- (IBAction)logoutButtonPressed:(id)sender {
-    [self.client logoutWithCompletionBlock:^{
-        [self performSegueWithIdentifier:@"showLogin" sender:nil];
-    }];
-}
 
 @end
