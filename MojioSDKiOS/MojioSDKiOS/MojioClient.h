@@ -18,6 +18,7 @@
 // Initialize the Mojio client
 +(id) client;
 
+- (BOOL)isUserLoggedIn;
 - (void)loginWithCompletionBlock : (void(^)(void))completionBlock;
 - (void)logoutWithCompletionBlock : (void(^)(void))completionBlock;
 - (void)handleOpenURL:(NSURL *)url;

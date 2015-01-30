@@ -47,14 +47,21 @@
     self.redirectUrlScheme = urlScheme;
 }
 
+-(BOOL) isUserLoggedIn {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([defaults objectForKey:@"MojioAccessToken"] && [defaults doubleForKey:@"MojioTokenExpireTime"] > [NSDate date].timeIntervalSince1970) {
+        // Assign the value of the token to the client
+        self.authToken = [defaults objectForKey:@"MojioAccessToken"];
+        [[self.manager requestSerializer] setValue:_authToken forHTTPHeaderField:@"MojioAPIToken"];
+        return YES;
+    }
+    return NO;
+}
+
 -(void) loginWithCompletionBlock:(void (^)(void))completionBlock {
     self.loginCompletionBlock = completionBlock;
     
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    //Reuse stored token if it exists and not expired
-    if ([defaults objectForKey:@"MojioAccessToken"] && [defaults doubleForKey:@"MojioTokenExpireTime"] > [NSDate date].timeIntervalSince1970) {
-        self.authToken = [defaults objectForKey:@"MojioAccessToken"];
-        [[self.manager requestSerializer] setValue:_authToken forHTTPHeaderField:@"MojioAPIToken"];
+    if ([self isUserLoggedIn]) {
         self.loginCompletionBlock();
     } else {
         NSString *urlString = [NSString stringWithFormat:@"https://api.moj.io/OAuth2/authorize?response_type=token&client_id=%@&redirect_uri=%@", self.appId, self.redirectUrlScheme];
