@@ -4,7 +4,7 @@
 
 ```
 self.client = [MojioClient client];
-[self.client initWithAppId:[APP_ID] andSecretKey:[SECRET_KEY] andRedirectUrlScheme:[REDIRECT_SCHEME]];
+[self.client initWithAppId:[APP_ID] andSecretKey:[SECRET_KEY] andRedirectUrlScheme:[REDIRECT_SCHEME] andIsSandbox:[YES for sandbox mode, NO for live]];
 ```
 
 ## Authenticating a user
