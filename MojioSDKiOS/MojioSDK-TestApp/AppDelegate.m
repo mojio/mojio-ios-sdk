@@ -19,7 +19,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
     self.client = [MojioClient client];
-    [self.client initWithAppId:@"<app ID>" andSecretKey:@"<secret key>" andRedirectUrlScheme:@"<appname>://"];
+    [self.client initWithAppId:@"<app ID>" andSecretKey:@"<secret key>" andRedirectUrlScheme:@"<appname>://" andIsSandbox:NO];
     
     return YES;
 }
