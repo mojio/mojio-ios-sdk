@@ -50,5 +50,6 @@
 @property (nonatomic, strong) NSString *secretKey;
 @property (nonatomic, strong) NSString *redirectUrlScheme;
 @property (nonatomic, strong) NSString *authToken;
+@property (nonatomic) BOOL isSandbox;
 
 @end

@@ -61,6 +61,10 @@
 		756F5F671A7AFA25000C0B38 /* SplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 756F5F661A7AFA25000C0B38 /* SplashViewController.m */; };
 		75D60EF01A7829B30095C1A7 /* MojioSDKiOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 51E5A8E71A7825BB00EEE3BC /* MojioSDKiOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		76278F43D7DCE9B31A0F9C57 /* libPods-MojioSDKiOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F3D3835805D44AEF5D0211E /* libPods-MojioSDKiOS.a */; };
+		785B95511ABA700A00E120E1 /* Accelerometer.h in Headers */ = {isa = PBXBuildFile; fileRef = 785B954D1ABA700A00E120E1 /* Accelerometer.h */; };
+		785B95521ABA700A00E120E1 /* Accelerometer.m in Sources */ = {isa = PBXBuildFile; fileRef = 785B954E1ABA700A00E120E1 /* Accelerometer.m */; };
+		785B95531ABA700A00E120E1 /* Event.h in Headers */ = {isa = PBXBuildFile; fileRef = 785B954F1ABA700A00E120E1 /* Event.h */; };
+		785B95541ABA700A00E120E1 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 785B95501ABA700A00E120E1 /* Event.m */; };
 		DA12A7C30ADE8CE5F650BFC7 /* libPods-MojioSDK-TestApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 454FE767BD840DAA66BF9A1B /* libPods-MojioSDK-TestApp.a */; };
 /* End PBXBuildFile section */
 
@@ -168,6 +172,10 @@
 		75516CD11A785F430014D862 /* Trip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Trip.m; sourceTree = "<group>"; };
 		756F5F651A7AFA25000C0B38 /* SplashViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SplashViewController.h; sourceTree = "<group>"; };
 		756F5F661A7AFA25000C0B38 /* SplashViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SplashViewController.m; sourceTree = "<group>"; };
+		785B954D1ABA700A00E120E1 /* Accelerometer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Accelerometer.h; path = "../../../../NWHacks2015-TheDanglingPointers/Models/Accelerometer.h"; sourceTree = "<group>"; };
+		785B954E1ABA700A00E120E1 /* Accelerometer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Accelerometer.m; path = "../../../../NWHacks2015-TheDanglingPointers/Models/Accelerometer.m"; sourceTree = "<group>"; };
+		785B954F1ABA700A00E120E1 /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Event.h; path = "../../../../NWHacks2015-TheDanglingPointers/Models/Event.h"; sourceTree = "<group>"; };
+		785B95501ABA700A00E120E1 /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Event.m; path = "../../../../NWHacks2015-TheDanglingPointers/Models/Event.m"; sourceTree = "<group>"; };
 		C7EAEEC56F2AB063E28A0912 /* Pods-MojioSDK-TestApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MojioSDK-TestApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MojioSDK-TestApp/Pods-MojioSDK-TestApp.debug.xcconfig"; sourceTree = "<group>"; };
 		D02ADFB11306EE760143103C /* Pods-MojioSDK-TestApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MojioSDK-TestApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-MojioSDK-TestApp/Pods-MojioSDK-TestApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -281,6 +289,10 @@
 		51E5A9031A7825DB00EEE3BC /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				785B954D1ABA700A00E120E1 /* Accelerometer.h */,
+				785B954E1ABA700A00E120E1 /* Accelerometer.m */,
+				785B954F1ABA700A00E120E1 /* Event.h */,
+				785B95501ABA700A00E120E1 /* Event.m */,
 				51E5A9041A7825DB00EEE3BC /* Address.h */,
 				51E5A9051A7825DB00EEE3BC /* Address.m */,
 				51E5A9061A7825DB00EEE3BC /* App.h */,
@@ -392,6 +404,7 @@
 				51E5A9361A7825DB00EEE3BC /* ImageSize.h in Headers */,
 				51E5A9281A7825DB00EEE3BC /* App.h in Headers */,
 				51E5A93E1A7825DB00EEE3BC /* Register.h in Headers */,
+				785B95531ABA700A00E120E1 /* Event.h in Headers */,
 				51E5A92A1A7825DB00EEE3BC /* AuthenticationProvider.h in Headers */,
 				51E5A9381A7825DB00EEE3BC /* Location.h in Headers */,
 				754D65E21A78678A00B58061 /* User.h in Headers */,
@@ -404,6 +417,7 @@
 				51E5A9421A7825DB00EEE3BC /* Token.h in Headers */,
 				754D65E61A786D7500B58061 /* Product.h in Headers */,
 				75516CD21A785F430014D862 /* Trip.h in Headers */,
+				785B95511ABA700A00E120E1 /* Accelerometer.h in Headers */,
 				51E5A9341A7825DB00EEE3BC /* EventBroadcast.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -635,12 +649,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				785B95541ABA700A00E120E1 /* Event.m in Sources */,
 				51E5A9351A7825DB00EEE3BC /* EventBroadcast.m in Sources */,
 				754D65E71A786D7500B58061 /* Product.m in Sources */,
 				51E5A9311A7825DB00EEE3BC /* Entity.m in Sources */,
 				754D65E31A78678A00B58061 /* User.m in Sources */,
 				51E5A9911A786D8000EEE3BC /* Invoice.m in Sources */,
 				51E5A92D1A7825DB00EEE3BC /* CarState.m in Sources */,
+				785B95521ABA700A00E120E1 /* Accelerometer.m in Sources */,
 				51E5A9271A7825DB00EEE3BC /* Address.m in Sources */,
 				51E5A9451A7825DB00EEE3BC /* Vehicle.m in Sources */,
 				51E5A92F1A7825DB00EEE3BC /* DiagnosticCodes.m in Sources */,

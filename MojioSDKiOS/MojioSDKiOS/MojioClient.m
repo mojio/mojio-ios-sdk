@@ -42,9 +42,14 @@
 }
 
 - (void) initWithAppId : (NSString *) appId andSecretKey : (NSString *)secretKey andRedirectUrlScheme:(NSString *)urlScheme {
+  [self initWithAppId:appId andSecretKey:secretKey andRedirectUrlScheme:urlScheme andIsSandbox:NO];
+}
+
+- (void) initWithAppId : (NSString *) appId andSecretKey : (NSString *)secretKey andRedirectUrlScheme:(NSString *)urlScheme andIsSandbox:(BOOL)isSandbox {
     self.appId = appId;
     self.secretKey = secretKey;
     self.redirectUrlScheme = urlScheme;
+    self.isSandbox = isSandbox;
 }
 
 -(BOOL) isUserLoggedIn {
