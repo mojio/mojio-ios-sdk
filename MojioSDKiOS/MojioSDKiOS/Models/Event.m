@@ -1,14 +1,14 @@
 //
-//  Token.m
-//  Virtual Mechanic
+//  Event.m
+//  VirtualMechanic
 //
-//  Created by Ashish Agarwal on 2015-02-04.
+//  Created by Ashish Agarwal on 2015-02-19.
 //  Copyright (c) 2015 Mojio. All rights reserved.
 //
 
-#import "Token.h"
+#import "Event.h"
 
-@implementation Token
+@implementation Event
 
 +(BOOL)propertyIsOptional:(NSString*)propertyName
 {

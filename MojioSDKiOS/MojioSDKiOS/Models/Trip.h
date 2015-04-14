@@ -13,28 +13,28 @@
 
 @interface Trip : JSONModel
 
-@property (nonatomic, strong) NSNumber<Optional> *Type;
-@property (nonatomic, strong) NSString<Optional> *MojioId;
-@property (nonatomic, strong) NSString<Optional> *StartTime;
-@property (nonatomic, strong) NSString<Optional> *LastUpdatedTime;
-@property (nonatomic, strong) NSString<Optional> *EndTime;
-@property (nonatomic, strong) NSNumber<Optional> *MaxSpeed;
-@property (nonatomic, strong) NSNumber<Optional> *MaxAcceleration;
-@property (nonatomic, strong) NSNumber<Optional> *MaxDeceleration;
-@property (nonatomic, strong) NSNumber<Optional> *MaxRPM;
-@property (nonatomic, strong) NSNumber<Optional> *FuelLevel;
-@property (nonatomic, strong) NSNumber<Optional> *FuelEfficiency;
-@property (nonatomic, strong) NSNumber<Optional> *Distance;
-@property (nonatomic, strong) Location<Optional> *StartLocation;
-@property (nonatomic, strong) Location<Optional> *EndLocation;
-@property (nonatomic, strong) Location<Optional> *LastKnownLocation;
-@property (nonatomic, strong) Address<Optional> *StartAddress;
-@property (nonatomic, strong) Address<Optional> *EndAddress;
-@property (nonatomic, strong) NSNumber<Optional> *ForcefullyEnded;
-@property (nonatomic, strong) NSNumber<Optional> *StartMilage;
-@property (nonatomic, strong) NSNumber<Optional> *EndMilage;
-@property (nonatomic, strong) NSNumber<Optional> *StartOdometer;
-@property (nonatomic, strong) NSString<Optional> *_id;
-@property (nonatomic, strong) NSNumber<Optional> *_deleted;
+@property (nonatomic) int Type;
+@property (nonatomic, strong) NSString *MojioId;
+@property (nonatomic, strong) NSString *StartTime;
+@property (nonatomic, strong) NSString *LastUpdatedTime;
+@property (nonatomic, strong) NSString *EndTime;
+@property (nonatomic) float MaxSpeed;
+@property (nonatomic) float MaxAcceleration;
+@property (nonatomic, strong) NSNumber *MaxDeceleration;
+@property (nonatomic) int MaxRPM;
+@property (nonatomic) float FuelLevel;
+@property (nonatomic) float FuelEfficiency;
+@property (nonatomic) float Distance;
+@property (nonatomic, strong) Location *StartLocation;
+@property (nonatomic, strong) Location *EndLocation;
+@property (nonatomic, strong) Location *LastKnownLocation;
+@property (nonatomic, strong) Address *StartAddress;
+@property (nonatomic, strong) Address *EndAddress;
+@property (nonatomic) BOOL ForcefullyEnded;
+@property (nonatomic) float StartMilage;
+@property (nonatomic) float EndMilage;
+@property (nonatomic) float StartOdometer;
+@property (nonatomic, strong) NSString *_id;
+@property (nonatomic) BOOL _deleted;
 
 @end

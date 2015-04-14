@@ -1,18 +1,19 @@
 //
-//  Token.m
-//  Virtual Mechanic
+//  Developer.m
+//  VirtualMechanic
 //
-//  Created by Ashish Agarwal on 2015-02-04.
+//  Created by Ashish Agarwal on 2015-02-11.
 //  Copyright (c) 2015 Mojio. All rights reserved.
 //
 
-#import "Token.h"
+#import "Developer.h"
 
-@implementation Token
+@implementation Developer
 
 +(BOOL)propertyIsOptional:(NSString*)propertyName
 {
     return YES;
 }
+
 
 @end

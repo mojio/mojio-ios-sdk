@@ -1,14 +1,14 @@
 //
-//  Token.m
-//  Virtual Mechanic
+//  DTC.m
+//  VirtualMechanic
 //
-//  Created by Ashish Agarwal on 2015-02-04.
+//  Created by Ashish Agarwal on 2015-02-12.
 //  Copyright (c) 2015 Mojio. All rights reserved.
 //
 
-#import "Token.h"
+#import "DTC.h"
 
-@implementation Token
+@implementation DTC
 
 +(BOOL)propertyIsOptional:(NSString*)propertyName
 {

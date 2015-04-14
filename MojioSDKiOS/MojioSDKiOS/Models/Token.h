@@ -1,25 +1,24 @@
 //
 //  Token.h
-//  SdkTryout
+//  Virtual Mechanic
 //
-//  Created by Ashish Agarwal on 2015-01-23.
-//  Copyright (c) 2015 Ashish Agarwal. All rights reserved.
+//  Created by Ashish Agarwal on 2015-02-04.
+//  Copyright (c) 2015 Mojio. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
+#import "JSONModel.h"
 
-typedef NS_ENUM(NSInteger, scope) {
-    basic = 0,
-    full =1
-};
+@interface Token : JSONModel
 
-@interface Token : NSObject
-
-@property (nonatomic) NSUUID *appId;
-@property (nonatomic, strong) NSString *apiToken;
-@property (nonatomic) NSUUID *userId;
-@property (nonatomic, strong) NSDate *validUntil;
-@property (nonatomic) enum scope scopes;
-@property (nonatomic) BOOL deprecated;
+@property (nonatomic) NSInteger Type;
+@property (nonatomic, strong) NSString *AppId;
+@property (nonatomic, strong) NSString *UserId;
+@property (nonatomic, strong) NSString *ValidUntil;
+@property (nonatomic) NSInteger Scopes;
+@property (nonatomic) BOOL Sandboxed;
+@property (nonatomic) BOOL Deprecated;
+@property (nonatomic, strong) NSString *_id;
+@property (nonatomic) BOOL _deleted;
 
 @end

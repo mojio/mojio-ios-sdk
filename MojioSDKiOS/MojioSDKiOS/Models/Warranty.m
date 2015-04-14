@@ -1,14 +1,14 @@
 //
-//  Token.m
-//  Virtual Mechanic
+//  Warranty.m
+//  VirtualMechanic
 //
-//  Created by Ashish Agarwal on 2015-02-04.
+//  Created by Ashish Agarwal on 2015-02-26.
 //  Copyright (c) 2015 Mojio. All rights reserved.
 //
 
-#import "Token.h"
+#import "Warranty.h"
 
-@implementation Token
+@implementation Warranty
 
 +(BOOL)propertyIsOptional:(NSString*)propertyName
 {

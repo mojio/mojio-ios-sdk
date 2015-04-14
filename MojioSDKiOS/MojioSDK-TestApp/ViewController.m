@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "MapViewController.h"
 #import "Vehicle.h"
 
 @interface ViewController ()
@@ -22,10 +23,10 @@
 @property (strong, nonatomic) IBOutlet UILabel *vehicleLocationLabel;
 @property (strong, nonatomic) IBOutlet UILabel *vehicleLicensePlateLabel;
 
--(IBAction)viewOnMapPressed:(id)sender;
-
 -(IBAction)getEntityButtonPressed:(id)sender;
 -(IBAction)updateEntityButtonPressed:(id)sender;
+
+-(IBAction) viewOnMapButtonPressed : (id)sender;
 
 
 @end
@@ -36,6 +37,10 @@
     if ([[segue identifier] isEqualToString:@"showLogin"]) {
         SplashViewController *splashController = [segue destinationViewController];
         splashController.delegate = self;
+    }
+    else if ([[segue identifier] isEqualToString:@"showMapSegue"]) {
+        MapViewController *mp = [segue destinationViewController];
+        [mp setVehicle:self.vehicle];
     }
 }
 
@@ -49,8 +54,6 @@
     else
         [self downloadVehicleData];
 
-    
-    
 }
 
 -(void) downloadVehicleData {
@@ -69,8 +72,8 @@
     [self.vehicleLicensePlateLabel setText:[self.vehicle LicensePlate]];
 }
 
--(IBAction)viewOnMapPressed:(id)sender {
-    
+-(IBAction)viewOnMapButtonPressed:(id)sender {
+    [self performSegueWithIdentifier:@"showMapSegue" sender:nil];
 }
 
 #pragma mark - crud actions
