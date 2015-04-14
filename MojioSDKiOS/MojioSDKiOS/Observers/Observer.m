@@ -1,14 +1,14 @@
 //
-//  Token.m
-//  Virtual Mechanic
+//  Observer.m
+//  VirtualMechanic
 //
-//  Created by Ashish Agarwal on 2015-02-04.
+//  Created by Ashish Agarwal on 2015-03-31.
 //  Copyright (c) 2015 Mojio. All rights reserved.
 //
 
-#import "Token.h"
+#import "Observer.h"
 
-@implementation Token
+@implementation Observer
 
 +(BOOL)propertyIsOptional:(NSString*)propertyName
 {

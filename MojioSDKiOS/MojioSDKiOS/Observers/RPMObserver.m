@@ -1,14 +1,14 @@
 //
-//  Token.m
-//  Virtual Mechanic
+//  RPMObserver.m
+//  VirtualMechanic
 //
-//  Created by Ashish Agarwal on 2015-02-04.
+//  Created by Ashish Agarwal on 2015-03-31.
 //  Copyright (c) 2015 Mojio. All rights reserved.
 //
 
-#import "Token.h"
+#import "RPMObserver.h"
 
-@implementation Token
+@implementation RPMObserver
 
 +(BOOL)propertyIsOptional:(NSString*)propertyName
 {
