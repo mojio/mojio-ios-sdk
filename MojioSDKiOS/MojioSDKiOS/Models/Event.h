@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "JSONModel.h"
 #import "DTC.h"
-#import "Accelerometer.h"
+//#import "Accelerometer.h"
 #import "Location.h"
 
 
@@ -24,7 +24,7 @@
 @property (nonatomic, strong) NSString *EventType;
 @property (nonatomic, strong) NSString *Time;
 @property (nonatomic, strong) Location *Location;
-@property (nonatomic, strong) Accelerometer *Accelerometer;
+//@property (nonatomic, strong) Accelerometer *Accelerometer;
 @property (nonatomic) BOOL TimeIsApprox;
 @property (nonatomic) float BatteryVoltage;
 @property (nonatomic) BOOL ConnectionLost;
