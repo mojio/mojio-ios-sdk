@@ -110,34 +110,6 @@
 }
 
 
-#pragma mark - Upload/Get Images
-- (IBAction)getImageButtonPressed:(id)sender {
-    [self.client getImage:@"Vehicles/53cdeca5-b268-4a25-bfde-3938b5cf7d47/Image" success:^(id responseObject) {
-        
-    } failure:^(NSError *error) {
-        
-    }];
-}
-
-- (IBAction)uploadImageButtonPressed:(id)sender {
-    UIImage *image = [UIImage imageNamed:@"logo"];
-    
-    CGRect rect = CGRectMake(0,0,300,300);
-    UIGraphicsBeginImageContext( rect.size );
-    [image drawInRect:rect];
-    UIImage *picture1 = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    NSData *imageData = UIImagePNGRepresentation(picture1);
-    UIImage *img=[UIImage imageWithData:imageData];
-    
-    [self.client postImage:@"Vehicles/53cdeca5-b268-4a25-bfde-3938b5cf7d47/Image" image:img success:^(id responseObject) {
-        
-    } failure:^(NSError *error) {
-        
-    }];
-
-}
 
 
 @end

@@ -7,14 +7,17 @@
 //
 
 #import "MapViewController.h"
+#import "MojioClient.h"
+#import "Observer.h"
 #import "Location.h"
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MapKit.h>
 
 
-@interface MapViewController ()
+@interface MapViewController () <MojioClientDelegate>
 
 @property (strong, nonatomic) IBOutlet MKMapView *mapView;
+@property (strong, nonatomic) MojioClient *mojioClient;
 
 @end
 
@@ -23,7 +26,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    Location *vehicleLocation = self.vehicle.LastLocation;
+    self.mojioClient = [MojioClient client];
+    self.mojioClient.mojioClientDelegate = self;
+    
+    [self drawVehicleOnMap:self.vehicle];
+    [self setupVehicleObserver];
+
+}
+
+-(void) drawVehicleOnMap : (Vehicle *) vehicle {
+    
+    Location *vehicleLocation = vehicle.LastLocation;
     CLLocationCoordinate2D vehicleLocationCoord = CLLocationCoordinate2DMake(vehicleLocation.Lat, vehicleLocation.Lng);
     
     MKMapView *mapView = [[MKMapView alloc] initWithFrame:self.view.bounds];
@@ -38,8 +51,7 @@
     // Add annotation to the map
     MKPointAnnotation *vehicleAnnotation = [[MKPointAnnotation alloc] init];
     [vehicleAnnotation setCoordinate:vehicleLocationCoord];
-    [vehicleAnnotation setTitle:self.vehicle.Name];
-//    [vehicleAnnotation setSubtitle:self.vehicle.LastLocation.];
+    [vehicleAnnotation setTitle:vehicle.Name];
     
     [mapView addAnnotation:vehicleAnnotation];
     
@@ -47,19 +59,46 @@
 
 }
 
+
+-(void) setupVehicleObserver {
+    
+    Observer *vehicleObserver = [[Observer alloc] init];
+    [vehicleObserver setName:@"Vehicle Observer"];
+    [vehicleObserver setSubject:@"Vehicle"];
+    [vehicleObserver setSubjectId:self.vehicle._id];
+    [vehicleObserver setTransports:@"SignalR"];
+    
+    id vehicleJson = [vehicleObserver toJSONString];
+    [self.mojioClient createObserverWithBody:vehicleJson withCompletionBlock:^(id responseObject) {
+        Observer *observer = (Observer *) responseObject;
+        NSString *observerId = [observer _id];
+        [self.mojioClient subscribeToObserverWithId:observerId withCompletionBlock:^(id response) {
+            // now subscribed to the vehicle observer
+        }];
+        
+    }withFailure:^{
+        // do something
+    }];
+}
+
+-(void) receivedMessageFromMojio:(id)message {
+    NSError *err;
+    NSString *type = [message objectForKey:@"Type"];
+    id object = [[NSClassFromString(type) alloc] initWithDictionary:message error:&err];
+    
+    if ([object isKindOfClass:[Vehicle class]]) {
+        Vehicle *vehicle = (Vehicle *) object;
+        [self drawVehicleOnMap:vehicle];
+    }
+
+}
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
