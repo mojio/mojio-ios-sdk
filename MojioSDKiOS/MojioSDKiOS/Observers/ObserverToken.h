@@ -11,6 +11,6 @@
 
 @interface ObserverToken : JSONModel
 
-@property (nonatomic, strong) NSString* Transport;
+@property (nonatomic) NSInteger Transport;
 
 @end

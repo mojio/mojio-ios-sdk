@@ -22,13 +22,13 @@
 @property (assign, nonatomic) float LastAltitude;
 @property (strong, nonatomic) NSArray *LastAltitudes;
 @property (assign, nonatomic) float LastBatteryVoltage;
-@property (strong, nonatomic) NSString *LastContactTime;
+@property (strong, nonatomic) NSDate *LastContactTime;
 @property (assign, nonatomic) float LastDistance;
 @property (assign, nonatomic) float LastFuelEfficiency;
 @property (assign, nonatomic) float LastHeading;
 @property (strong, nonatomic) NSArray *LastHeadings;
 @property (strong, nonatomic) Location *LastLocation;
-@property (strong, nonatomic) NSString *LastLocationTime;
+@property (strong, nonatomic) NSDate *LastLocationTime;
 @property (strong, nonatomic) NSArray *LastLocationTimes;
 @property (strong, nonatomic) NSArray *LastLocations;
 @property (assign, nonatomic) float LastOdometer;

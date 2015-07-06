@@ -46,20 +46,20 @@
 }
 
 -(void) switchAppEnvironment : (NSString *) environment {
-    //    if ([environment isEqualToString:@"develop"])
-    //        self.baseApiUrl = self.developApiUrl;
-    //
-    //    else if ([environment isEqualToString:@"staging"])
-    //        self.baseApiUrl = self.stagingApiUrl;
-    //
-    //    else if ([environment isEqualToString:@"production"])
-    //        self.baseApiUrl = self.productionApiUrl;
-    //
-    //    NSString *accessToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"MojioAccessToken"];
-    //
-    //    self.manager = nil;
-    //    self.manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:self.baseApiUrl]];
-    //    [[self.manager requestSerializer] setValue:accessToken forHTTPHeaderField:@"MojioAPIToken"];
+//    if ([environment isEqualToString:@"develop"])
+//        self.baseApiUrl = self.developApiUrl;
+//    
+//    else if ([environment isEqualToString:@"staging"])
+//        self.baseApiUrl = self.stagingApiUrl;
+//    
+//    else if ([environment isEqualToString:@"production"])
+//        self.baseApiUrl = self.productionApiUrl;
+//    
+//    NSString *accessToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"MojioAccessToken"];
+//
+//    self.manager = nil;
+//    self.manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:self.baseApiUrl]];
+//    [[self.manager requestSerializer] setValue:accessToken forHTTPHeaderField:@"MojioAPIToken"];
 }
 
 -(void) switchSandbox:(BOOL)sandbox withCompletionBlock:(void (^)(void))completionBlock withFailure:(void (^)(void))failure {
@@ -72,9 +72,9 @@
         sandboxEnv = @"false";
     
     NSString *path = [NSString stringWithFormat:@"%@Login/%@/Sandboxed?sandboxed=%@",self.baseApiUrl, accessToken, sandboxEnv];
-    
+
     [self.manager PUT:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        //        NSLog(@"%@", responseObject);
+//        NSLog(@"%@", responseObject);
         if (completionBlock) {
             completionBlock();
         }
@@ -125,7 +125,7 @@
     [defaults setObject:authToken forKey:@"MojioAccessToken"];
     [defaults setObject:[token objectForKey:@"UserId"] forKey:@"UserId"];
     [defaults synchronize];
-    
+
 }
 
 -(void) loginWithCompletionBlock:(void (^)(void))completionBlock {
@@ -251,7 +251,7 @@
                 NSLog(@"Login operation failed with error: %@", [loginError localizedDescription]);
             }];
             
-            
+
         }failure:^(AFHTTPRequestOperation *op, NSError *error) {
             NSLog(@"%@", [error localizedDescription]);
             if (failure != nil) {
@@ -497,7 +497,7 @@ static NSString *urlEncode(id object) {
             if (type != nil && observerType != nil) {
                 NSError *err;
                 id object;
-                if ([observerType isEqualToString:@"Generic"]) {
+                if ([type isEqualToString:@"Generic"]) {
                     object = [[NSClassFromString(type) alloc] initWithDictionary:jsonObject error:&err];
                 }
                 else {
@@ -518,7 +518,7 @@ static NSString *urlEncode(id object) {
         }
     }];
     [operation start];
-    
+
 }
 
 -(void) deleteObserverWithId:(NSString *)observerId withCompletionBlock:(void (^)(void))completionBlock withFailure:(void (^)(void))failure {
@@ -544,22 +544,16 @@ static NSString *urlEncode(id object) {
     hubProxy = [hubConnection createHubProxy:@"ObserverHub"];
     [hubProxy on:@"UpdateEntity" perform:self selector:@selector(incomingMessageStream:)];
     [hubProxy on:@"Error" perform:self selector:@selector(errorInSignalRConnection:)];
-    
+
     [hubConnection start];
-    
     hubConnection.started = ^{
         NSArray *argsArray = @[observerId];
         [hubProxy invoke:@"Subscribe" withArgs:argsArray completionHandler:^(id responseObject) {
-            if (completionBlock) {
-                completionBlock(responseObject);
-            }
-            
             if (responseObject) {
                 [self.mojioClientDelegate invokedConnectionToMojioWithResponse:responseObject];
             }
-            
-            //            else
-            //                [self.mojioClientDelegate invokedConnectionToMojioWithResponse:nil];
+//            else
+//                [self.mojioClientDelegate invokedConnectionToMojioWithResponse:nil];
         }];
     };
 }
@@ -581,7 +575,7 @@ static NSString *urlEncode(id object) {
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:path]];
     [request setValue:self.authTokenId forHTTPHeaderField:@"MojioAPIToken"];
-    
+
     AFHTTPRequestOperation *requestOperation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     requestOperation.responseSerializer = [AFImageResponseSerializer serializer];
     NSMutableSet *acceptableContentTypes = [requestOperation.responseSerializer.acceptableContentTypes mutableCopy];
@@ -603,7 +597,7 @@ static NSString *urlEncode(id object) {
 - (void)postImage:(NSString*)path image:(UIImage*)image success:(void (^)(id))success failure:(void (^)(NSError *))failure {
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:[self.manager.baseURL.absoluteString stringByAppendingString:path]]];
-    
+
     NSString *imageBase64 = [NSString stringWithFormat:@"\"%@\"", [UIImageJPEGRepresentation(image,1) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]];
     [request setHTTPBody:[imageBase64 dataUsingEncoding:NSUTF8StringEncoding]];
     
