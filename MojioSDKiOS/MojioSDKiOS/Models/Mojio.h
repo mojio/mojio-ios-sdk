@@ -11,7 +11,8 @@
 
 @interface Mojio : JSONModel
 
-@property (nonatomic) NSInteger Type;
+@property (nonatomic, strong) NSString *Type;
+@property (nonatomic, strong) NSString *VehicleId;
 @property (nonatomic, strong) NSString *OwnerId;
 @property (nonatomic, strong) NSString *Name;
 @property (nonatomic, strong) NSString *Imei;

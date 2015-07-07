@@ -66,7 +66,8 @@ typedef void (^SRWebSocketStartBlock)(id response, NSError *error);
     [self performConnect:block];
 }
 
-- (void)send:(id <SRConnectionInterface>)connection data:(NSString *)data completionHandler:(void (^)(id response, NSError *error))block {
+- (void)send:(id <SRConnectionInterface>)connection data:(NSString *)data connectionData:(NSString *)connectionData completionHandler:(void (^)(id response, NSError *error))block {
+//- (void)send:(id <SRConnectionInterface>)connection data:(NSString *)data completionHandler:(void (^)(id response, NSError *error))block {
     [_webSocket send:data];
     
     if(block) {
@@ -123,7 +124,7 @@ typedef void (^SRWebSocketStartBlock)(id response, NSError *error);
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)message {
-    SRLogWebSocket(@"WS Receive: %@", message);
+//    SRLogWebSocket(@"WS Receive: %@", message);
     
     BOOL timedOut = NO;
     BOOL disconnected = NO;

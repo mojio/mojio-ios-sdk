@@ -20,7 +20,7 @@
 @property (nonatomic, strong) NSString *ParentId;
 @property (nonatomic, strong) NSString *Subject;
 @property (nonatomic, strong) NSString *SubjectId;
-@property (nonatomic) NSInteger Transports; //always 0
+@property (nonatomic, strong) NSString* Transports; //always 0
 @property (nonatomic, strong) NSString *Status;  // could be string or float instead ??
 @property (nonatomic, strong) NSArray *Tokens;
 @property (nonatomic, strong) NSString *TimeWindow;

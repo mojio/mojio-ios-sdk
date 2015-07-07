@@ -15,6 +15,5 @@
 
 @property (nonatomic, strong) Location *Location;
 @property (nonatomic) float Radius;
-@property (nonatomic) NSInteger Timing;
 
 @end

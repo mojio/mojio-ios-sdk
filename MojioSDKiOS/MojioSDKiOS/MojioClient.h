@@ -129,10 +129,6 @@ typedef enum EventType {
 @property (nonatomic, strong) NSString *redirectUrlScheme;
 @property (nonatomic, strong) NSString *authTokenId;
 
-// For Observers
--(void) createSignalRConnection;
-
-
 
 -(void) cancelAllRequests;
 

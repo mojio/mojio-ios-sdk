@@ -7,7 +7,9 @@
 //
 
 #import "MojioClient.h"
-#import <AFNetworking.h>
+
+#import "AFNetworking.h"
+
 #import "JSONModel.h"
 #import "AFURLResponseSerialization.h"
 #import "SignalR.h"
@@ -22,10 +24,13 @@
 
 @property (copy) void (^ loginCompletionBlock)(void);
 
+@property (nonatomic, strong) NSUserDefaults *sharedAppUserDefaults;
+
 // For SignalR stuff
 //@property (nonatomic, strong) SRHubConnection *hubConnection;
 //@property (nonatomic, strong) SRHubProxy *hubProxy;
 @property (nonatomic, strong) NSString *signalRUrl;
+
 
 @end
 
@@ -41,6 +46,9 @@
         
         self.baseApiUrl = self.productionApiUrl;
         self.manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:self.baseApiUrl]];
+        
+        self.sharedAppUserDefaults = [[NSUserDefaults alloc] initWithSuiteName:kAppGroupName];
+        
     }
     return self;
 }
@@ -63,7 +71,10 @@
 }
 
 -(void) switchSandbox:(BOOL)sandbox withCompletionBlock:(void (^)(void))completionBlock withFailure:(void (^)(void))failure {
-    NSString *accessToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"MojioAccessToken"];
+    
+    //NSString *accessToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"MojioAccessToken"];
+    
+    NSString *accessToken = [self.sharedAppUserDefaults objectForKey:@"MojioAccessToken"];
     
     NSString *sandboxEnv;
     if (sandbox)
@@ -101,12 +112,12 @@
 }
 
 -(BOOL) isUserLoggedIn {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if ([defaults objectForKey:@"MojioAccessToken"]) { //&& [defaults doubleForKey:@"MojioTokenExpireTime"] > [NSDate date].timeIntervalSince1970
+    //NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    if ([self.sharedAppUserDefaults objectForKey:@"MojioAccessToken"]) { //&& [defaults doubleForKey:@"MojioTokenExpireTime"] > [NSDate date].timeIntervalSince1970
         // Assign the value of the token to the client
-        self.authTokenId = [defaults objectForKey:@"MojioAccessToken"];
+        self.authTokenId = [self.sharedAppUserDefaults objectForKey:@"MojioAccessToken"];
         [[self.manager requestSerializer] setValue:_authTokenId forHTTPHeaderField:@"MojioAPIToken"];
-        
         
         
         return YES;
@@ -121,10 +132,10 @@
     self.authTokenId = authToken;
     [[self.manager requestSerializer] setValue:authToken forHTTPHeaderField:@"MojioAPIToken"];
     
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:authToken forKey:@"MojioAccessToken"];
-    [defaults setObject:[token objectForKey:@"UserId"] forKey:@"UserId"];
-    [defaults synchronize];
+    //NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [self.sharedAppUserDefaults setObject:authToken forKey:@"MojioAccessToken"];
+    [self.sharedAppUserDefaults setObject:[token objectForKey:@"UserId"] forKey:@"UserId"];
+    [self.sharedAppUserDefaults synchronize];
 
 }
 
@@ -144,6 +155,9 @@
 
 -(void)loginUserWithUsername:(NSString *)username withPassword:(NSString *)password withCompletionBlock:(void (^)(id))completionBlock failure:(void (^)(void))failure {
     
+    password = [self urlEncodeString:password];
+    username = [self urlEncodeString:username];
+
     AFHTTPRequestOperationManager *loginManager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:self.baseApiUrl]];
     NSString *url = [NSString stringWithFormat:@"%@Login/%@?secretKey=%@&userOrEmail=%@&password=%@", self.baseApiUrl, self.appId, self.secretKey, username, password];
     
@@ -178,9 +192,9 @@
             [[self.manager requestSerializer] setValue:[response objectForKey:@"_id"] forHTTPHeaderField:@"MojioAPIToken"];
             [self saveAuthenticationToken:response];
             
-            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-            [defaults setObject:accessToken forKey:@"MojioFacebookAccessToken"];
-            [defaults synchronize];
+            //NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            [self.sharedAppUserDefaults setObject:accessToken forKey:@"MojioFacebookAccessToken"];
+            [self.sharedAppUserDefaults synchronize];
             
             if (success) {
                 success(response);
@@ -202,12 +216,12 @@
     [[self.manager requestSerializer] setValue:nil forHTTPHeaderField:@"MojioAPIToken"];
     
     // remove all objects from the NSUserDefaults
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSDictionary *defaultsDict = [defaults dictionaryRepresentation];
+    //NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSDictionary *defaultsDict = [self.sharedAppUserDefaults dictionaryRepresentation];
     for (id key in defaultsDict) {
-        [defaults removeObjectForKey:key];
+        [self.sharedAppUserDefaults removeObjectForKey:key];
     }
-    [defaults synchronize];
+    [self.sharedAppUserDefaults synchronize];
     
     if (completionBlock) {
         completionBlock();
@@ -275,10 +289,10 @@
     self.authTokenId = token;
     [[self.manager requestSerializer] setValue:_authTokenId forHTTPHeaderField:@"MojioAPIToken"];
     
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:token forKey:@"MojioAccessToken"];
-    [defaults setObject:@(expireTime) forKey:@"MojioTokenExpireTime"];
-    [defaults synchronize];
+    //NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [self.sharedAppUserDefaults setObject:token forKey:@"MojioAccessToken"];
+    [self.sharedAppUserDefaults setObject:@(expireTime) forKey:@"MojioTokenExpireTime"];
+    [self.sharedAppUserDefaults synchronize];
     
     //Call the login success callback
     if (self.loginCompletionBlock) {
@@ -497,7 +511,7 @@ static NSString *urlEncode(id object) {
             if (type != nil && observerType != nil) {
                 NSError *err;
                 id object;
-                if ([type isEqualToString:@"Generic"]) {
+                if ([observerType isEqualToString:@"Generic"]) {
                     object = [[NSClassFromString(type) alloc] initWithDictionary:jsonObject error:&err];
                 }
                 else {
@@ -546,12 +560,18 @@ static NSString *urlEncode(id object) {
     [hubProxy on:@"Error" perform:self selector:@selector(errorInSignalRConnection:)];
 
     [hubConnection start];
+    
     hubConnection.started = ^{
         NSArray *argsArray = @[observerId];
         [hubProxy invoke:@"Subscribe" withArgs:argsArray completionHandler:^(id responseObject) {
+            if (completionBlock) {
+                completionBlock(responseObject);
+            }
+
             if (responseObject) {
                 [self.mojioClientDelegate invokedConnectionToMojioWithResponse:responseObject];
             }
+            
 //            else
 //                [self.mojioClientDelegate invokedConnectionToMojioWithResponse:nil];
         }];
@@ -617,6 +637,31 @@ static NSString *urlEncode(id object) {
             failure (error);
     }];
     [op start];
+}
+
+-(NSString *) urlEncodeString : (NSString *) string {
+    NSMutableString *escaped = [NSMutableString stringWithString:string];
+    NSRange wholeString = NSMakeRange(0, escaped.length);
+    
+    [escaped replaceOccurrencesOfString:@"$" withString:@"%24" options:NSCaseInsensitiveSearch range:wholeString];
+    [escaped replaceOccurrencesOfString:@"&" withString:@"%26" options:NSCaseInsensitiveSearch range:wholeString];
+    [escaped replaceOccurrencesOfString:@"+" withString:@"%2B" options:NSCaseInsensitiveSearch range:wholeString];
+    [escaped replaceOccurrencesOfString:@"," withString:@"%2C" options:NSCaseInsensitiveSearch range:wholeString];
+    [escaped replaceOccurrencesOfString:@"/" withString:@"%2F" options:NSCaseInsensitiveSearch range:wholeString];
+    [escaped replaceOccurrencesOfString:@":" withString:@"%3A" options:NSCaseInsensitiveSearch range:wholeString];
+    [escaped replaceOccurrencesOfString:@";" withString:@"%3B" options:NSCaseInsensitiveSearch range:wholeString];
+    [escaped replaceOccurrencesOfString:@"=" withString:@"%3D" options:NSCaseInsensitiveSearch range:wholeString];
+    [escaped replaceOccurrencesOfString:@"?" withString:@"%3F" options:NSCaseInsensitiveSearch range:wholeString];
+    [escaped replaceOccurrencesOfString:@"@" withString:@"%40" options:NSCaseInsensitiveSearch range:wholeString];
+    [escaped replaceOccurrencesOfString:@" " withString:@"%20" options:NSCaseInsensitiveSearch range:wholeString];
+    [escaped replaceOccurrencesOfString:@"\t" withString:@"%09" options:NSCaseInsensitiveSearch range:wholeString];
+    [escaped replaceOccurrencesOfString:@"#" withString:@"%23" options:NSCaseInsensitiveSearch range:wholeString];
+    [escaped replaceOccurrencesOfString:@"<" withString:@"%3C" options:NSCaseInsensitiveSearch range:wholeString];
+    [escaped replaceOccurrencesOfString:@">" withString:@"%3E" options:NSCaseInsensitiveSearch range:wholeString];
+    [escaped replaceOccurrencesOfString:@"\"" withString:@"%22" options:NSCaseInsensitiveSearch range:wholeString];
+    [escaped replaceOccurrencesOfString:@"\n" withString:@"%0A" options:NSCaseInsensitiveSearch range:wholeString];
+
+    return escaped;
 }
 
 -(void) cancelAllRequests
