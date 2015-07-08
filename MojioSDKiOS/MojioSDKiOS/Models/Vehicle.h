@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Ashish Agarwal. All rights reserved.
 //
 
-#import "JSONModel.h"
+#import <JSONModel.h>
 #import "Trip.h"
 #import "Location.h"
 

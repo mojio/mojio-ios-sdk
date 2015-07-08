@@ -10,8 +10,6 @@
 #import <UIKit/UIKit.h>
 #import "Token.h"
 
-#define kAppGroupName @"group.caralarm"
-
 @class MojioClient;
 @protocol MojioClientDelegate <NSObject>
 
