@@ -41,7 +41,7 @@ NSDictionary *queryOptions = @{@"limit" : @1, @"offset" : @0, @"sortBy" : @"Last
 ## Getting a specific entity
 
 ```
-[self.client getEntityWithPath:@"Vehicles/[VEHICLE_ID]" withQueryOptions:queryOptions success:^(id responseObject) {
+[self.client getEntityWithPath:[NSString stringWithFormat:@"Vehicles/%@", VEHICLE_ID] withQueryOptions:queryOptions success:^(id responseObject) {
   // executed when the data is successfully fetched
 }failure: ^{
   // executed if there was an error in trying to retrieve data
