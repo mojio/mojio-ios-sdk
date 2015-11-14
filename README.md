@@ -1,5 +1,19 @@
 # mojio-ios-sdk
 
+## Installing the SDK
+
+Step 1. Download the SDK <br/>
+Step 2. Drag the folder MojioSDKiOS/MojioSDKiOS into your XCode project <br/>
+Step 3. Make sure Cocoapods is set up for the project. <br/>
+Step 4. Install the frameworks - JSONModel and AFNetworking <br/>
+```
+pod 'AFNetworking', '2.5.0'
+pod 'JSONModel', '1.0.2'
+```
+Step 5. In Linked Frameworks and Libraries, add the following framework libicucore.tbd. Depending on the version of iOS/XCode, it might be called libicucore.dylib <br/>
+#### For Swift Developers
+Step 6.  Create a bridging header. The steps to create the bridging header are at: http://www.learnswiftonline.com/getting-started/adding-swift-bridging-header/ <br/>
+
 ## Initializing the SDK 
 
 ```
