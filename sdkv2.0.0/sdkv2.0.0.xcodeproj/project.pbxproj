@@ -1,0 +1,506 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		755785451C6BE403000D65B3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755785441C6BE403000D65B3 /* AppDelegate.swift */; };
+		755785471C6BE403000D65B3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755785461C6BE403000D65B3 /* ViewController.swift */; };
+		7557854A1C6BE403000D65B3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 755785481C6BE403000D65B3 /* Main.storyboard */; };
+		7557854C1C6BE403000D65B3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7557854B1C6BE403000D65B3 /* Assets.xcassets */; };
+		7557854F1C6BE403000D65B3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7557854D1C6BE403000D65B3 /* LaunchScreen.storyboard */; };
+		7557855A1C6BE403000D65B3 /* sdkv2_0_0Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755785591C6BE403000D65B3 /* sdkv2_0_0Tests.swift */; };
+		755785691C6BE45C000D65B3 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755785651C6BE45C000D65B3 /* AuthViewController.swift */; };
+		7557856A1C6BE45C000D65B3 /* AuthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 755785661C6BE45C000D65B3 /* AuthViewController.xib */; };
+		7557856B1C6BE45C000D65B3 /* MojioAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755785671C6BE45C000D65B3 /* MojioAuth.swift */; };
+		7557856C1C6BE45C000D65B3 /* MojioClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755785681C6BE45C000D65B3 /* MojioClient.swift */; };
+		F83BD9F586581F007EE25BAF /* Pods_sdkv2_0_0.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12B58B0AAFF9E034431C1B1C /* Pods_sdkv2_0_0.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		755785561C6BE403000D65B3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 755785391C6BE403000D65B3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 755785401C6BE403000D65B3;
+			remoteInfo = sdkv2.0.0;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0E4EC963AE554407DD59F331 /* Pods-sdkv2.0.0.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sdkv2.0.0.debug.xcconfig"; path = "Pods/Target Support Files/Pods-sdkv2.0.0/Pods-sdkv2.0.0.debug.xcconfig"; sourceTree = "<group>"; };
+		12B58B0AAFF9E034431C1B1C /* Pods_sdkv2_0_0.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_sdkv2_0_0.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		755785411C6BE403000D65B3 /* sdkv2.0.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sdkv2.0.0.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		755785441C6BE403000D65B3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		755785461C6BE403000D65B3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		755785491C6BE403000D65B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		7557854B1C6BE403000D65B3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		7557854E1C6BE403000D65B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		755785501C6BE403000D65B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		755785551C6BE403000D65B3 /* sdkv2.0.0Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = sdkv2.0.0Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		755785591C6BE403000D65B3 /* sdkv2_0_0Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sdkv2_0_0Tests.swift; sourceTree = "<group>"; };
+		7557855B1C6BE403000D65B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		755785651C6BE45C000D65B3 /* AuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
+		755785661C6BE45C000D65B3 /* AuthViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AuthViewController.xib; sourceTree = "<group>"; };
+		755785671C6BE45C000D65B3 /* MojioAuth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MojioAuth.swift; sourceTree = "<group>"; };
+		755785681C6BE45C000D65B3 /* MojioClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MojioClient.swift; sourceTree = "<group>"; };
+		E7A991FE380437ACA972E52C /* Pods-sdkv2.0.0.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sdkv2.0.0.release.xcconfig"; path = "Pods/Target Support Files/Pods-sdkv2.0.0/Pods-sdkv2.0.0.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7557853E1C6BE403000D65B3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F83BD9F586581F007EE25BAF /* Pods_sdkv2_0_0.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		755785521C6BE403000D65B3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5D5E1925F4ED146D8F300524 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0E4EC963AE554407DD59F331 /* Pods-sdkv2.0.0.debug.xcconfig */,
+				E7A991FE380437ACA972E52C /* Pods-sdkv2.0.0.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		755785381C6BE403000D65B3 = {
+			isa = PBXGroup;
+			children = (
+				755785431C6BE403000D65B3 /* sdkv2.0.0 */,
+				755785581C6BE403000D65B3 /* sdkv2.0.0Tests */,
+				755785421C6BE403000D65B3 /* Products */,
+				5D5E1925F4ED146D8F300524 /* Pods */,
+				BB1AA5E51CD64A40D8A0544C /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		755785421C6BE403000D65B3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				755785411C6BE403000D65B3 /* sdkv2.0.0.app */,
+				755785551C6BE403000D65B3 /* sdkv2.0.0Tests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		755785431C6BE403000D65B3 /* sdkv2.0.0 */ = {
+			isa = PBXGroup;
+			children = (
+				755785641C6BE45C000D65B3 /* MojioSDK */,
+				755785441C6BE403000D65B3 /* AppDelegate.swift */,
+				755785461C6BE403000D65B3 /* ViewController.swift */,
+				755785481C6BE403000D65B3 /* Main.storyboard */,
+				7557854B1C6BE403000D65B3 /* Assets.xcassets */,
+				7557854D1C6BE403000D65B3 /* LaunchScreen.storyboard */,
+				755785501C6BE403000D65B3 /* Info.plist */,
+			);
+			path = sdkv2.0.0;
+			sourceTree = "<group>";
+		};
+		755785581C6BE403000D65B3 /* sdkv2.0.0Tests */ = {
+			isa = PBXGroup;
+			children = (
+				755785591C6BE403000D65B3 /* sdkv2_0_0Tests.swift */,
+				7557855B1C6BE403000D65B3 /* Info.plist */,
+			);
+			path = sdkv2.0.0Tests;
+			sourceTree = "<group>";
+		};
+		755785641C6BE45C000D65B3 /* MojioSDK */ = {
+			isa = PBXGroup;
+			children = (
+				755785651C6BE45C000D65B3 /* AuthViewController.swift */,
+				755785661C6BE45C000D65B3 /* AuthViewController.xib */,
+				755785671C6BE45C000D65B3 /* MojioAuth.swift */,
+				755785681C6BE45C000D65B3 /* MojioClient.swift */,
+			);
+			path = MojioSDK;
+			sourceTree = "<group>";
+		};
+		BB1AA5E51CD64A40D8A0544C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				12B58B0AAFF9E034431C1B1C /* Pods_sdkv2_0_0.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		755785401C6BE403000D65B3 /* sdkv2.0.0 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7557855E1C6BE403000D65B3 /* Build configuration list for PBXNativeTarget "sdkv2.0.0" */;
+			buildPhases = (
+				90A2D5A5053ED0D1CF1B41D6 /* Check Pods Manifest.lock */,
+				7557853D1C6BE403000D65B3 /* Sources */,
+				7557853E1C6BE403000D65B3 /* Frameworks */,
+				7557853F1C6BE403000D65B3 /* Resources */,
+				207C89C8A10BAF6F51AF511A /* Embed Pods Frameworks */,
+				D688956948CFE45672F292C2 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = sdkv2.0.0;
+			productName = sdkv2.0.0;
+			productReference = 755785411C6BE403000D65B3 /* sdkv2.0.0.app */;
+			productType = "com.apple.product-type.application";
+		};
+		755785541C6BE403000D65B3 /* sdkv2.0.0Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 755785611C6BE403000D65B3 /* Build configuration list for PBXNativeTarget "sdkv2.0.0Tests" */;
+			buildPhases = (
+				755785511C6BE403000D65B3 /* Sources */,
+				755785521C6BE403000D65B3 /* Frameworks */,
+				755785531C6BE403000D65B3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				755785571C6BE403000D65B3 /* PBXTargetDependency */,
+			);
+			name = sdkv2.0.0Tests;
+			productName = sdkv2.0.0Tests;
+			productReference = 755785551C6BE403000D65B3 /* sdkv2.0.0Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		755785391C6BE403000D65B3 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0720;
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = Mojio;
+				TargetAttributes = {
+					755785401C6BE403000D65B3 = {
+						CreatedOnToolsVersion = 7.2;
+					};
+					755785541C6BE403000D65B3 = {
+						CreatedOnToolsVersion = 7.2;
+						TestTargetID = 755785401C6BE403000D65B3;
+					};
+				};
+			};
+			buildConfigurationList = 7557853C1C6BE403000D65B3 /* Build configuration list for PBXProject "sdkv2.0.0" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 755785381C6BE403000D65B3;
+			productRefGroup = 755785421C6BE403000D65B3 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				755785401C6BE403000D65B3 /* sdkv2.0.0 */,
+				755785541C6BE403000D65B3 /* sdkv2.0.0Tests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7557853F1C6BE403000D65B3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7557856A1C6BE45C000D65B3 /* AuthViewController.xib in Resources */,
+				7557854F1C6BE403000D65B3 /* LaunchScreen.storyboard in Resources */,
+				7557854C1C6BE403000D65B3 /* Assets.xcassets in Resources */,
+				7557854A1C6BE403000D65B3 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		755785531C6BE403000D65B3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		207C89C8A10BAF6F51AF511A /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-sdkv2.0.0/Pods-sdkv2.0.0-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		90A2D5A5053ED0D1CF1B41D6 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		D688956948CFE45672F292C2 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-sdkv2.0.0/Pods-sdkv2.0.0-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7557853D1C6BE403000D65B3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				755785471C6BE403000D65B3 /* ViewController.swift in Sources */,
+				755785691C6BE45C000D65B3 /* AuthViewController.swift in Sources */,
+				7557856B1C6BE45C000D65B3 /* MojioAuth.swift in Sources */,
+				755785451C6BE403000D65B3 /* AppDelegate.swift in Sources */,
+				7557856C1C6BE45C000D65B3 /* MojioClient.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		755785511C6BE403000D65B3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7557855A1C6BE403000D65B3 /* sdkv2_0_0Tests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		755785571C6BE403000D65B3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 755785401C6BE403000D65B3 /* sdkv2.0.0 */;
+			targetProxy = 755785561C6BE403000D65B3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		755785481C6BE403000D65B3 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				755785491C6BE403000D65B3 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		7557854D1C6BE403000D65B3 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7557854E1C6BE403000D65B3 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		7557855C1C6BE403000D65B3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		7557855D1C6BE403000D65B3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		7557855F1C6BE403000D65B3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0E4EC963AE554407DD59F331 /* Pods-sdkv2.0.0.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = sdkv2.0.0/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "io.moj.mobile.ios.sdkv2-0-0";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		755785601C6BE403000D65B3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E7A991FE380437ACA972E52C /* Pods-sdkv2.0.0.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = sdkv2.0.0/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "io.moj.mobile.ios.sdkv2-0-0";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		755785621C6BE403000D65B3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = sdkv2.0.0Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "io.moj.mobile.ios.sdkv2-0-0Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/sdkv2.0.0.app/sdkv2.0.0";
+			};
+			name = Debug;
+		};
+		755785631C6BE403000D65B3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = sdkv2.0.0Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "io.moj.mobile.ios.sdkv2-0-0Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/sdkv2.0.0.app/sdkv2.0.0";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7557853C1C6BE403000D65B3 /* Build configuration list for PBXProject "sdkv2.0.0" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7557855C1C6BE403000D65B3 /* Debug */,
+				7557855D1C6BE403000D65B3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7557855E1C6BE403000D65B3 /* Build configuration list for PBXNativeTarget "sdkv2.0.0" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7557855F1C6BE403000D65B3 /* Debug */,
+				755785601C6BE403000D65B3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		755785611C6BE403000D65B3 /* Build configuration list for PBXNativeTarget "sdkv2.0.0Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				755785621C6BE403000D65B3 /* Debug */,
+				755785631C6BE403000D65B3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 755785391C6BE403000D65B3 /* Project object */;
+}
