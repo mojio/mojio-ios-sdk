@@ -1,6 +1,6 @@
 //
 //  MojioAuth.swift
-//  Swifty
+//  MOJIOSDK
 //
 //  Created by Ashish Agarwal on 2016-02-05.
 //  Copyright © 2016 Ashish. All rights reserved.
