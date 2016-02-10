@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 
-        let authClient : MojioAuth = MojioAuth(appId: "55c161e8-e869-48e9-9d64-c1b9227af9fc", redirectURI: "mojiovirtualmechanic://")
+        let authClient : MojioAuth = MojioAuth(appId: "734cc02e-e929-467d-97c8-ed9e9dcd8801", redirectURI: "skdshell://")
         authClient.login( {
             print("user is logged in");
             let viewController : UIViewController = UIStoryboard.init(name: "Main", bundle: NSBundle.mainBundle()).instantiateInitialViewController()!;
