@@ -9,33 +9,24 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import ObjectMapper
 
 class MojioClient: NSObject {
     
+    static let baseUrlString : String = "https://staging-api.moj.io/v2/";
+    
     // this will need a completion block
-    class func getEntityWithPath (path : String, params : NSDictionary?) {
+    class func getEntityWithPath (var path : String, params : NSDictionary?) {
         
-//        Alamofire.request(.GET, path, parameters : nil,  headers : ["MojioAPIToken" : self.authToken()!]).responseJSON{response in
-//            print(response.request);
-//            print(response.response);
-//        }
+        let entityType : String? = path.componentsSeparatedByString("/")[0];
         
-        Alamofire.request(.GET, path, headers: ["MojioAPIToken" : self.authToken()!]).responseJSON { response in
+        path = self.baseUrlString + path;
+        let authToken = self.authToken()!;
+        Alamofire.request(.GET, path, headers: ["MojioAPIToken" : authToken]).responseJSON { response in
             
             let json : JSON! = JSON(response.result.value!);
-            let data = json["Data"].array;
-            
-            if data != nil {
-                for vehicle in data! {
-                    print (vehicle["Id"]);
-                }
-            }
-            
-            let error = json["ashsih"];
-            
-            if error == nil {
-                print ("error is nil");
-            }
+            let test = Mapper<User>().map(json.rawString());
+            print ("test is %@", test);
             
             
         }

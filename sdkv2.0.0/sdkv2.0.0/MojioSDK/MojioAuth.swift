@@ -20,7 +20,7 @@ class MojioAuth: NSObject, AuthControllerDelegate {
         self.appId = appId;
         self.redirectURL = redirectURI;
         
-        let loginString = String (format: "https://accounts.moj.io/oauth2/authorize?response_type=token&redirect_uri=%@&client_id=%@&scope=full", self.redirectURL, self.appId);
+        let loginString = String (format: "https://staging-accounts.moj.io/oauth2/authorize?response_type=token&redirect_uri=%@&client_id=%@&scope=full", self.redirectURL, self.appId);
         self.loginURL = NSURL (string: loginString);
         self.loginCompletion = {};
     }
@@ -39,10 +39,9 @@ class MojioAuth: NSObject, AuthControllerDelegate {
     func mojioAuthControllerLoadURLRequest(request: NSURLRequest) {
         // loading the url request
         let url : NSURL = request.URL!;
-        var urlScheme : String = self.redirectURL.stringByReplacingOccurrencesOfString("://", withString: "");
-        urlScheme = urlScheme.lowercaseString;
+        let urlScheme : String? = url.absoluteString.componentsSeparatedByString("#")[0];
         
-        if url.scheme == urlScheme {
+        if urlScheme != nil && urlScheme == self.redirectURL {
             print("extract auth token over here");
             let string = url.absoluteString;
             let accessToken = (string.componentsSeparatedByString("access_token="))[1].componentsSeparatedByString("&")[0];
@@ -53,6 +52,15 @@ class MojioAuth: NSObject, AuthControllerDelegate {
             self.authController?.dismissViewControllerAnimated(true, completion: nil);
             self.loginCompletion();
         }
+    }
+    
+    func isUserLoggedIn () -> Bool {
+        // TODO: Check expiry of token and refresh token if needed
+        let authToken : String? = NSUserDefaults.standardUserDefaults().objectForKey("MojioAuthToken") as? String;
+        if authToken != nil {
+            return true;
+        }
+        return false;
     }
     
 }
