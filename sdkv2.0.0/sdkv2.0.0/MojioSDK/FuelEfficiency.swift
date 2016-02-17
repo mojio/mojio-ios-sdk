@@ -17,9 +17,9 @@ class FuelEfficiency: Object, Mappable {
     dynamic var BenchmarkTime : NSString? = nil
     dynamic var BenchmarkStatistics : MeasurementStatistics? = nil
     dynamic var Timestamp : NSString? = nil
-    var BaseValue = RealmOptional<Double>()
+    var BaseValue : Float = 0
     dynamic var Unit  : NSString? = nil // ['MilesPerGallon', 'KilometerPerLiter', 'LitersPerHundredKilometers'],
-    var Value = RealmOptional<Double>()
+    var Value : Float = 0
 
     required convenience init?(_ map: Map) {
         self.init()

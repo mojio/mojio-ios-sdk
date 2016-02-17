@@ -12,12 +12,12 @@ import RealmSwift
 
 class Odometer: Object, Mappable {
     
-    var RolloverValue = RealmOptional<Double>()
+    var RolloverValue : Float = 0
     dynamic var BaseUnit : NSString? = nil // ['Meters', 'Miles', 'Kilometers', 'NauticalMiles', 'CentiMeter', 'MilliMeter'],
     dynamic var Timestamp : NSString? = nil
     var BaseValue : Double = 0
     dynamic var Unit : NSString? = nil// ['Meters', 'Miles', 'Kilometers', 'NauticalMiles', 'CentiMeter', 'MilliMeter'],
-    var Value = RealmOptional<Double>()
+    var Value : Float = 0
     
     required convenience init?(_ map: Map) {
         self.init()

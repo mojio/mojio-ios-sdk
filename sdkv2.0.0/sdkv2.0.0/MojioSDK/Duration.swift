@@ -14,9 +14,9 @@ class Duration: Object, Mappable {
     
     dynamic var BaseUnit : NSString? = nil //['Ticks', 'Milliseconds', 'Seconds', 'Minutes', 'Hours', 'Days', 'Weeks']
     dynamic var Timestamp : NSString? = nil
-    var BaseValue = RealmOptional<Double>()
+    var BaseValue : Float = 0
     dynamic var Unit : NSString? = nil  // ['Ticks', 'Milliseconds', 'Seconds', 'Minutes', 'Hours', 'Days', 'Weeks']
-    var Value = RealmOptional<Double>()
+    var Value : Float = 0
     
     required convenience init?(_ map: Map) {
         self.init()

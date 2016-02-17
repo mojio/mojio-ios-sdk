@@ -15,9 +15,9 @@ class FuelLevel: Object, Mappable {
     dynamic var BaseUnit : NSString? = nil //['Percentage']
     dynamic var RiskSeverity : NSString? = nil
     var Timestamp : NSString? = nil
-    var BaseValue = RealmOptional<Double>()
+    var BaseValue : Float = 0
     dynamic var Unit : NSString? = nil  // ['Percentage']
-    var Value = RealmOptional<Double>()
+    var Value : Float = 0
     
     required convenience init?(_ map: Map) {
         self.init()

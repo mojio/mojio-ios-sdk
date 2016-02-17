@@ -14,9 +14,9 @@ class ProperAcceleration: Object, Mappable {
 
     dynamic var BaseUnit : NSString? = nil //['MilliGUnits', 'NewtonsPerKilogram', 'XirgoUnit', 'MetersPerSecondPerSecond', 'CentimetersPerSecondPerSecond', 'GUnits']
     dynamic var Timestamp : NSString? = nil
-    var BaseValue = RealmOptional<Double>()
+    var BaseValue : Float = 0
     dynamic var Unit : NSString? = nil  // ['MilliGUnits', 'NewtonsPerKilogram', 'XirgoUnit', 'MetersPerSecondPerSecond', 'CentimetersPerSecondPerSecond', 'GUnits']
-    var Value = RealmOptional<Double>()
+    var Value : Float = 0
     
     required convenience init?(_ map: Map) {
         self.init()

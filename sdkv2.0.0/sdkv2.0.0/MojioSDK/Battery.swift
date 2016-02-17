@@ -18,9 +18,9 @@ class Battery: Object, Mappable {
     dynamic var HighVoltageDuration : Duration? = nil
     dynamic var BaseUnit : NSString? = nil // ['MilliVolts', 'Volts'],
     dynamic var Timestamp : NSString? = nil
-    var BaseValue = RealmOptional<Double>()
-    dynamic var Unit : NSString? = nil // ['MilliVolts', 'Volts'],
-    var Value = RealmOptional<Double>()
+    var BaseValue : Float = 0
+    dynamic var Unit : NSString? // ['MilliVolts', 'Volts'],
+    var Value : Float = 0
     
     required convenience init?(_ map: Map) {
         self.init()

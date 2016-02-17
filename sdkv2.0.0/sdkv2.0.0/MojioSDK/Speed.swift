@@ -16,9 +16,9 @@ class Speed: Object, Mappable {
     var SpeedBandId = RealmOptional<Int>()
     dynamic var SpeedBandDuration : Duration? = nil
     dynamic var Timestamp  : NSString? = nil
-    var BaseValue : Double = 0
+    var BaseValue : Float = 0
     dynamic var Unit  : NSString? = nil// ['KilometersPerHour', 'MilesPerHour'],
-    var Value : Double = 0
+    var Value : Float = 0
     
     required convenience init?(_ map: Map) {
         self.init()

@@ -15,7 +15,7 @@ class Trip: Object, Mappable {
     dynamic var Name : String? = nil
     var Tags = List<StringObject>();
     dynamic var MojioId : String? = nil
-    var Completed = RealmOptional<Bool>()
+    var Completed = RealmOptional<Bool>(false)
     dynamic var Duration : String? = nil
     dynamic var StartTimestamp : String? = nil
     dynamic var EndTimestamp : String? = nil

@@ -21,9 +21,9 @@ class VinDetails: Object, Mappable {
     var Cylinders = RealmOptional<Int>()
     dynamic var TotalFuelCapacity : FuelCapacity? = nil
     dynamic var FuelType : NSString? = nil
-    var CityFuelEfficiency = RealmOptional<Double>()
-    var HighwayFuelEfficiency = RealmOptional<Double>()
-    var CombinedFuelEfficiency = RealmOptional<Double>()
+    var CityFuelEfficiency : Float = 0
+    var HighwayFuelEfficiency : Float = 0
+    var CombinedFuelEfficiency : Float = 0
     dynamic var Transmission : NSString? = nil
     dynamic var Message : NSString? = nil
     var Success = RealmOptional<Bool>()

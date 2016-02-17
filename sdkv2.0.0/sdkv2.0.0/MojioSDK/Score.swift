@@ -13,9 +13,9 @@ import RealmSwift
 class Score: Object, Mappable {
     
     dynamic var ScoringMethod : NSString? = nil // ['ZScore', 'MinMaxScore']
-    var Value = RealmOptional<Double>()
-    var Percentile = RealmOptional<Double>()
-    var Average = RealmOptional<Double>()
+    var Value : Float = 0
+    var Percentile : Float = 0
+    var Average : Float = 0
     
     required convenience init?(_ map: Map) {
         self.init()

@@ -16,9 +16,9 @@ class Heading: Object, Mappable {
     dynamic var Direction : NSString? = nil
     var LeftTurn = RealmOptional<Bool>()
     dynamic var Timestamp : NSString? = nil
-    var BaseValue = RealmOptional<Double>()
+    var BaseValue : Float = 0
     dynamic var Unit : NSString? = nil  // ['Degree']
-    var Value = RealmOptional<Double>()
+    var Value : Float = 0
     
     required convenience init?(_ map: Map) {
         self.init()
