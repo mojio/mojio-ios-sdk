@@ -29,12 +29,31 @@ class MojioClient: NSObject {
             let dict : NSDictionary? = response.result.value as? NSDictionary
             
             let test = Mapper<Trip>().map(dict!)
-//            let test = Mapper<Trip>().mapArray(dict)
-            
             let realm = try! Realm()
+
+            
             try! realm.write({ () -> Void in
-                realm.add(test!);
+                realm.add(test!)
             })
+            
+
+            
+
+            
+            let alltrips : Results<Trip> = realm.objects(Trip)
+//            print (alltrips)
+            let firstTrip = alltrips[0]
+            print (firstTrip)
+
+//            let id : String = (firstTrip?.Id)!
+//            let odo = firstTrip?.StartOdometer
+//            let location = (firstTrip?.StartLocation)!
+//            
+//            print (location)
+            
+            
+//            let tripa = alltrips.first
+            
             
             print ("test is %@", test);
             

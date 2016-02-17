@@ -20,7 +20,16 @@ class MojioAuth: NSObject, AuthControllerDelegate {
         self.appId = appId;
         self.redirectURL = redirectURI;
         
+        
+        
+        /* For the resource owner flow
+            grant_type=password&password=Test123&username=ashisha@moj.io&client_id=9692e2af-07f6-46ed-b384-1831b739ebf6&client_secret=b463050d-86b3-4c9c-b47b-924addb6e321
+        */
+        
         let loginString = String (format: "https://staging-accounts.moj.io/oauth2/authorize?response_type=token&redirect_uri=%@&client_id=%@&scope=full", self.redirectURL, self.appId);
+//        let loginString = String (format: "https://staging-accounts.moj.io/oauth2/authorize?response_type=token&redirect_uri=%@&client_id=%@&scope=full", self.redirectURL, self.appId);
+//        let loginString = String (format: "https://staging-accounts.moj.io/oauth2/authorize?grant_type=password&password=%@&username=%@&client_id=%@&secret_key=%@", "Test123", "ashisha@moj.io", self.appId, "b463050d-86b3-4c9c-b47b-924addb6e321");
+        
         self.loginURL = NSURL (string: loginString);
         self.loginCompletion = {};
     }
