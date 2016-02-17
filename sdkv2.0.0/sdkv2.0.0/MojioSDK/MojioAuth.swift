@@ -27,8 +27,6 @@ class MojioAuth: NSObject, AuthControllerDelegate {
         */
         
         let loginString = String (format: "https://staging-accounts.moj.io/oauth2/authorize?response_type=token&redirect_uri=%@&client_id=%@&scope=full", self.redirectURL, self.appId);
-//        let loginString = String (format: "https://staging-accounts.moj.io/oauth2/authorize?response_type=token&redirect_uri=%@&client_id=%@&scope=full", self.redirectURL, self.appId);
-//        let loginString = String (format: "https://staging-accounts.moj.io/oauth2/authorize?grant_type=password&password=%@&username=%@&client_id=%@&secret_key=%@", "Test123", "ashisha@moj.io", self.appId, "b463050d-86b3-4c9c-b47b-924addb6e321");
         
         self.loginURL = NSURL (string: loginString);
         self.loginCompletion = {};
@@ -54,22 +52,44 @@ class MojioAuth: NSObject, AuthControllerDelegate {
             print("extract auth token over here");
             let string = url.absoluteString;
             let accessToken = (string.componentsSeparatedByString("access_token="))[1].componentsSeparatedByString("&")[0];
-            NSUserDefaults.standardUserDefaults().setObject(accessToken, forKey: "MojioAuthToken");
-            NSUserDefaults.standardUserDefaults().synchronize();
+            let expiresIn : NSString = (string.componentsSeparatedByString("expires_in="))[1]
             
+            self.saveAuthenticationToken(accessToken, expiresIn: expiresIn)
             
             self.authController?.dismissViewControllerAnimated(true, completion: nil);
             self.loginCompletion();
         }
     }
     
+    
     func isUserLoggedIn () -> Bool {
-        // TODO: Check expiry of token and refresh token if needed
-        let authToken : String? = NSUserDefaults.standardUserDefaults().objectForKey("MojioAuthToken") as? String;
-        if authToken != nil {
-            return true;
+        let authToken : String? = NSUserDefaults.standardUserDefaults().objectForKey("MojioAuthToken") as? String
+        let expiryDate : NSString? = NSUserDefaults.standardUserDefaults().objectForKey("MojioAuthTokenExpiresIn") as? NSString
+        if authToken == nil || expiryDate == nil {
+            return false;
         }
+        
+        // Check if the token is expired
+        let expiresAt : Double = (expiryDate?.doubleValue)!
+        let currentTimeInMS : Double = NSDate().timeIntervalSince1970
+        
+        if currentTimeInMS < expiresAt {
+            return true
+        }
+        
         return false;
+    }
+    
+    func saveAuthenticationToken (token : String, expiresIn : NSString) -> Void {
+        
+        // Save the expiry date of the token in milliseconds since 1970 as it is timezone independent
+        let currentTimeInMS : Double = NSDate().timeIntervalSince1970
+        let expiryTime : NSString = String(format: "%f", (currentTimeInMS + expiresIn.doubleValue * 1000)) as NSString
+        
+        NSUserDefaults.standardUserDefaults().setObject(token, forKey: "MojioAuthToken")
+        NSUserDefaults.standardUserDefaults().setObject(expiryTime, forKey: "MojioAuthTokenExpiresIn")
+        NSUserDefaults.standardUserDefaults().synchronize();
+        
     }
     
 }
