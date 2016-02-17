@@ -8,14 +8,15 @@
 
 import UIKit
 import ObjectMapper
+import RealmSwift
 
-class Image: Mappable {
-    var Src : String?;
-    var Normal : String?;
-    var Thumbnail : String?;
+class Image: Object, Mappable {
+    dynamic var Src : String? = nil
+    dynamic var Normal : String? = nil
+    dynamic var Thumbnail : String? = nil
     
-    required init?(_ map: Map) {
-        
+    required convenience init?(_ map: Map) {
+        self.init()
     }
     
     func mapping(map: Map) {

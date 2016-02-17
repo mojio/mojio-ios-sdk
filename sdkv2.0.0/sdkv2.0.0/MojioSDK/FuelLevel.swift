@@ -8,18 +8,19 @@
 
 import UIKit
 import ObjectMapper
+import RealmSwift
 
-class FuelLevel: Mappable {
+class FuelLevel: Object, Mappable {
     
-    var BaseUnit : NSString?; //['Percentage']
-    var RiskSeverity : NSString?
-    var Timestamp : NSString?;
-    var BaseValue : NSNumber?;
-    var Unit : NSString?;  // ['Percentage']
-    var Value : NSNumber?;
+    dynamic var BaseUnit : NSString? = nil //['Percentage']
+    dynamic var RiskSeverity : NSString? = nil
+    var Timestamp : NSString? = nil
+    var BaseValue = RealmOptional<Double>()
+    dynamic var Unit : NSString? = nil  // ['Percentage']
+    var Value = RealmOptional<Double>()
     
-    required init?(_ map: Map) {
-        
+    required convenience init?(_ map: Map) {
+        self.init()
     }
     
     func mapping(map: Map) {

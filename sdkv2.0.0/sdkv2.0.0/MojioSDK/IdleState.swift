@@ -8,14 +8,15 @@
 
 import UIKit
 import ObjectMapper
+import RealmSwift
 
-class IdleState: Mappable {
+class IdleState: Object, Mappable {
     
-    var Timestamp : NSString?;
-    var Value : Bool?;
+    dynamic var Timestamp : NSString? = nil
+    var Value = RealmOptional<Bool>()
     
-    required init?(_ map: Map) {
-        
+    required convenience init?(_ map: Map) {
+        self.init()
     }
     
     func mapping(map: Map) {

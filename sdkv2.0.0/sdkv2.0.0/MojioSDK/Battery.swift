@@ -8,21 +8,22 @@
 
 import UIKit
 import ObjectMapper
+import RealmSwift
 
-class Battery: Mappable {
+class Battery: Object, Mappable {
     
-    var Connected : Bool?;
-    var RiskSeverity : NSString?; //['Unknown', 'Low', 'Medium', 'High', 'None'],
-    var LowVoltageDuration : Duration?;
-    var HighVoltageDuration : Duration?;
-    var BaseUnit : NSString?; // ['MilliVolts', 'Volts'],
-    var Timestamp : NSString?;
-    var BaseValue : NSNumber?;
-    var Unit : NSString?; // ['MilliVolts', 'Volts'],
-    var Value : NSNumber?;
+    var Connected = RealmOptional<Bool>()
+    dynamic var RiskSeverity : NSString? = nil //['Unknown', 'Low', 'Medium', 'High', 'None'],
+    dynamic var LowVoltageDuration : Duration? = nil
+    dynamic var HighVoltageDuration : Duration? = nil
+    dynamic var BaseUnit : NSString? = nil // ['MilliVolts', 'Volts'],
+    dynamic var Timestamp : NSString? = nil
+    var BaseValue = RealmOptional<Double>()
+    dynamic var Unit : NSString? = nil // ['MilliVolts', 'Volts'],
+    var Value = RealmOptional<Double>()
     
-    required init?(_ map: Map) {
-        
+    required convenience init?(_ map: Map) {
+        self.init()
     }
     
     func mapping(map: Map) {

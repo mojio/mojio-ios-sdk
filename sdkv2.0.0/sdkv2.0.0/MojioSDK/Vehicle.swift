@@ -8,50 +8,80 @@
 
 import UIKit
 import ObjectMapper
+import RealmSwift
 
-class Vehicle: Mappable {
+class Vehicle: Object, Mappable {
     
-    var Name : NSString?;
-    var LicensePlate : NSString?;
-    var VIN : NSString?;
-    var CurrentTrip : NSString?;
-    var MojioId : NSString?;
-    var VehicleImage : Image?;
-    var MilStatus : Bool?;
-    var LastContactTime : NSString?;
-    var DiagnosticCodes : [DiagnosticCode]?;
-    var VehicleAccelerometer : Accelerometer?;
-    var VehicleAcceleration : Acceleration?;
-    var Deceleration : Acceleration?;
-    var VehicleSpeed : Speed?;
-    var VehicleOdometer : Odometer?;
-    var VehicleRPM : RPM?;
-    var VehicleFuelEfficiency : FuelEfficiency?;
-    var FuelEfficiencyCalculationMethod  : NSString?; // ['Query', 'EngineFuelRate', 'MassAirFlow', 'Calculated', 'None'],
-    var VehicleFuelLevel : FuelLevel?;
-    var FuelType : NSString?; // ['Query', 'Gasoline', 'Diesel', 'Electric'],
-    var GatewayTime : NSString?;
-    var VehicleHarshEventState : HarshEventState?;
-    var VehicleIdleState : IdleState?;
-    var VehicleIgnitionState : IgnitionState?;
-    var VehicleBattery : Battery?;
-    var VehicleHeading : Heading?;
-    var VehicleLocation : Location?;
-    var VehicleAccidentState : AccidentState?;
-    var VehicleVinDetails : VinDetails?;
-    var VehicleTowState : TowState?;
-    var VehicleParkedState : ParkedState?;
-    var Tags : NSArray?;
-    var OwnerGroups : NSArray?;
-    var Id : NSString?;
-    var CreatedOn : NSString?;
-    var LastModified : NSString?;
+    dynamic var Name : NSString? = nil
+    dynamic var LicensePlate : NSString? = nil
+    dynamic var VIN : NSString? = nil
+    dynamic var CurrentTrip : NSString? = nil
+    dynamic var MojioId : NSString? = nil
+    dynamic var VehicleImage : Image? = nil
+    var MilStatus = RealmOptional<Bool>()
+    dynamic var LastContactTime : NSString? = nil
+    var DiagnosticCodes = List<DiagnosticCode>()
+    dynamic var VehicleAccelerometer : Accelerometer? = nil
+    dynamic var VehicleAcceleration : Acceleration? = nil
+    dynamic var Deceleration : Acceleration? = nil
+    dynamic var VehicleSpeed : Speed? = nil
+    dynamic var VehicleOdometer : Odometer? = nil
+    dynamic var VehicleRPM : RPM? = nil
+    dynamic var VehicleFuelEfficiency : FuelEfficiency? = nil
+    dynamic var FuelEfficiencyCalculationMethod  : NSString? = nil // ['Query', 'EngineFuelRate', 'MassAirFlow', 'Calculated', 'None'],
+    dynamic var VehicleFuelLevel : FuelLevel? = nil
+    dynamic var FuelType : NSString? = nil // ['Query', 'Gasoline', 'Diesel', 'Electric'],
+    dynamic var GatewayTime : NSString? = nil
+    dynamic var VehicleHarshEventState : HarshEventState? = nil
+    dynamic var VehicleIdleState : IdleState? = nil
+    dynamic var VehicleIgnitionState : IgnitionState? = nil
+    dynamic var VehicleBattery : Battery? = nil
+    dynamic var VehicleHeading : Heading? = nil
+    dynamic var VehicleLocation : Location? = nil
+    dynamic var VehicleAccidentState : AccidentState? = nil
+    dynamic var VehicleVinDetails : VinDetails? = nil
+    dynamic var VehicleTowState : TowState? = nil
+    dynamic var VehicleParkedState : ParkedState? = nil
+    var Tags = List<StringObject>()
+    var OwnerGroups = List<StringObject>()
+    dynamic var Id : NSString? = nil
+    dynamic var CreatedOn : NSString? = nil
+    dynamic var LastModified : NSString? = nil
     
-    required init?(_ map: Map) {
-        
+    required convenience init?(_ map: Map) {
+        self.init()
     }
     
     func mapping(map: Map) {
+        
+        var diagnosticCodes = Array<DiagnosticCode>()
+        diagnosticCodes <- map ["DiagnosticCodes"]
+        
+        for diagnosticCode in diagnosticCodes {
+            self.DiagnosticCodes.append(diagnosticCode)
+        }
+        
+        var tags = Array<String>()
+        tags <- map["Tags"]
+        
+        for tag in tags {
+            let string = StringObject()
+            string.value = tag
+            
+            self.Tags.append(string)
+        }
+        
+        var ownerGroups = Array<String>()
+        ownerGroups <- map["OwnerGroups"]
+        
+        for ownerGroup in ownerGroups {
+            let string = StringObject()
+            string.value = ownerGroup
+            
+            self.OwnerGroups.append(string)
+        }
+        
+
         Name <- map["Name"];
         LicensePlate <- map["LicensePlate"];
         VIN <- map["VIN"];
@@ -60,7 +90,7 @@ class Vehicle: Mappable {
         VehicleImage <- map["Image"];
         MilStatus <- map["MilStatus"];
         LastContactTime <- map["LastContactTime"];
-        DiagnosticCodes <- map["DiagnosticCodes"];
+//        DiagnosticCodes <- map["DiagnosticCodes"];
         VehicleAccelerometer <- map["Accelerometer"];
         VehicleAcceleration <- map["Acceleration"];
         Deceleration <- map["Deceleration"];
@@ -82,8 +112,8 @@ class Vehicle: Mappable {
         VehicleVinDetails <- map["VinDetails"];
         VehicleTowState <- map["TowState"];
         VehicleParkedState <- map["ParkedState"];
-        Tags <- map["Tags"];
-        OwnerGroups <- map["OwnerGroups"];
+//        Tags <- map["Tags"];
+//        OwnerGroups <- map["OwnerGroups"];
         Id <- map["Id"];
         CreatedOn <- map["CreatedOn"];
         LastModified <- map["LastModified"];

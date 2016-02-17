@@ -8,18 +8,19 @@
 
 import UIKit
 import ObjectMapper
+import RealmSwift
 
-class Email: Mappable {
-    var Verified : Bool?;
-    var Address : String?;
+class Email: Object, Mappable {
+    var Verified = RealmOptional<Bool>()
+    dynamic var Address : String? = nil
     
-    required init?(_ map: Map) {
-        
+    required convenience init?(_ map: Map) {
+        self.init();
     }
     
     func mapping(map: Map) {
-        Verified <- map["Verified"];
-        Address <- map["Address"];
+        self.Verified <- map["Verified"];
+        self.Address <- map["Address"];
     }
 
 }

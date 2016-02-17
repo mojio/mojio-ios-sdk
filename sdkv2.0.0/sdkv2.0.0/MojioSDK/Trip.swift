@@ -8,40 +8,52 @@
 
 import UIKit
 import ObjectMapper
+import RealmSwift
 
-class Trip: Mappable {
-    var VehicleId : String?;
-    var Name : String?;
-    var Tags : NSArray?;
-    var MojioId : String?;
-    var Completed : Bool?;
-    var Duration : String?;
-    var StartTimestamp : String?;
-    var EndTimestamp : String?;
-    var StartOdometer : Odometer?
-    var EndOdometer : Odometer?;
-    var StartLocation : Location?;
-    var EndLocation : Location?;
-    var MaxSpeed : Speed?;
-    var MaxRPM : RPM?;
-    var MaxAcceleration : Acceleration?;
-    var MaxDeceleration : Acceleration?;
-    var TripFuelEfficiency : FuelEfficiency?;
-    var StartFuelLevel : FuelLevel?;
-    var EndFuelLevel : FuelLevel?;
-    var Id : String?;
-    var CreatedOn : String?;
-    var LastModified : String?;
+class Trip: Object, Mappable {
+    dynamic var VehicleId : String? = nil
+    dynamic var Name : String? = nil
+    var Tags = List<StringObject>();
+    dynamic var MojioId : String? = nil
+    var Completed = RealmOptional<Bool>()
+    dynamic var Duration : String? = nil
+    dynamic var StartTimestamp : String? = nil
+    dynamic var EndTimestamp : String? = nil
+    dynamic var StartOdometer : Odometer? = nil
+    dynamic var EndOdometer : Odometer? = nil
+    dynamic var StartLocation : Location? = nil
+    dynamic var EndLocation : Location? = nil
+    dynamic var MaxSpeed : Speed? = nil
+    dynamic var MaxRPM : RPM? = nil
+    dynamic var MaxAcceleration : Acceleration? = nil
+    dynamic var MaxDeceleration : Acceleration? = nil
+    dynamic var TripFuelEfficiency : FuelEfficiency? = nil
+    dynamic var StartFuelLevel : FuelLevel? = nil
+    var EndFuelLevel : FuelLevel? = nil
+    dynamic var Id : String? = nil
+    dynamic var CreatedOn : String? = nil
+    dynamic var LastModified : String? = nil
 
-    required init?(_ map: Map) {
-        
+    required convenience init?(_ map: Map) {
+        self.init()
     }
     
     func mapping(map: Map) {
         
+        var tags = Array<String>()
+        tags <- map["Tags"]
+        
+        for tag in tags {
+            let string = StringObject()
+            string.value = tag
+            
+            self.Tags.append(string)
+        }
+
+        
         VehicleId <- map["VehicleId"];
         Name <- map["Name"];
-        Tags <- map["Tags"];
+//        Tags <- map["Tags"];
         MojioId <- map["MojioId"];
         Completed <- map["Completed"];
         Duration <- map["Duration"];

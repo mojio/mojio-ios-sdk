@@ -8,19 +8,20 @@
 
 import UIKit
 import ObjectMapper
+import RealmSwift
 
-class Speed: Mappable {
+class Speed: Object, Mappable {
     
-    var BaseUnit : NSString?; // ['KilometersPerHour', 'MilesPerHour'],
-    var SpeedBandId : NSInteger?;
-    var SpeedBandDuration : Duration?;
-    var Timestamp  : NSString?;
-    var BaseValue : NSNumber?;
-    var Unit  : NSString?;// ['KilometersPerHour', 'MilesPerHour'],
-    var Value : NSNumber?;
+    dynamic var BaseUnit : NSString? = nil // ['KilometersPerHour', 'MilesPerHour'],
+    var SpeedBandId = RealmOptional<Int>()
+    dynamic var SpeedBandDuration : Duration? = nil
+    dynamic var Timestamp  : NSString? = nil
+    var BaseValue : Double = 0
+    dynamic var Unit  : NSString? = nil// ['KilometersPerHour', 'MilesPerHour'],
+    var Value : Double = 0
     
-    required init?(_ map: Map) {
-        
+    required convenience init?(_ map: Map) {
+        self.init()
     }
     
     func mapping(map: Map) {

@@ -8,16 +8,17 @@
 
 import UIKit
 import ObjectMapper
+import RealmSwift
 
-class Score: Mappable {
+class Score: Object, Mappable {
     
-    var ScoringMethod : NSString?; // ['ZScore', 'MinMaxScore']
-    var Value : NSNumber?;
-    var Percentile : NSNumber?;
-    var Average : NSNumber?;
+    dynamic var ScoringMethod : NSString? = nil // ['ZScore', 'MinMaxScore']
+    var Value = RealmOptional<Double>()
+    var Percentile = RealmOptional<Double>()
+    var Average = RealmOptional<Double>()
     
-    required init?(_ map: Map) {
-        
+    required convenience init?(_ map: Map) {
+        self.init()
     }
     
     func mapping(map: Map) {

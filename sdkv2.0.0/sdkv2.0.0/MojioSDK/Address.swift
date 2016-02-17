@@ -8,23 +8,24 @@
 
 import UIKit
 import ObjectMapper
+import RealmSwift
 
-class Address: Mappable {
+class Address: Object, Mappable {
     
-    var HouseNumber : NSString?;
-    var Road : NSString?;
-    var Neighbourhood : NSString?;
-    var Suburb : NSString?;
-    var City : NSString?;
-    var County : NSString?;
-    var State : NSString?;
-    var PostCode : NSString?;
-    var Country : NSString?;
-    var CountryCode : NSString?;
-    var FormattedAddress : NSString?;
+    dynamic var HouseNumber : NSString? = nil
+    dynamic var Road : NSString? = nil
+    dynamic var Neighbourhood : NSString? = nil
+    dynamic var Suburb : NSString? = nil
+    dynamic var City : NSString? = nil
+    dynamic var County : NSString? = nil
+    dynamic var State : NSString? = nil
+    dynamic var PostCode : NSString? = nil
+    dynamic var Country : NSString? = nil
+    dynamic var CountryCode : NSString? = nil
+    dynamic var FormattedAddress : NSString? = nil
     
-    required init?(_ map: Map) {
-        
+    required convenience init?(_ map: Map) {
+        self.init()
     }
     
     func mapping(map: Map) {

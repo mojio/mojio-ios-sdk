@@ -8,27 +8,28 @@
 
 import UIKit
 import ObjectMapper
+import RealmSwift
 
-class VinDetails: Mappable {
+class VinDetails: Object, Mappable {
     
-    var Timestamp : NSString?;
-    var Vin : NSString?;
-    var Year : NSInteger?;
-    var Make : NSString?;
-    var Model : NSString?;
-    var Engine : NSString?;
-    var Cylinders : NSInteger?;
-    var TotalFuelCapacity : FuelCapacity?;
-    var FuelType : NSString?;
-    var CityFuelEfficiency : NSNumber?;
-    var HighwayFuelEfficiency : NSNumber?;
-    var CombinedFuelEfficiency : NSNumber?;
-    var Transmission : NSString?;
-    var Message : NSString?;
-    var Success : Bool?;
+    dynamic var Timestamp : NSString? = nil
+    dynamic var Vin : NSString? = nil
+    var Year = RealmOptional<Int>()
+    dynamic var Make : NSString? = nil
+    dynamic var Model : NSString? = nil
+    dynamic var Engine : NSString? = nil
+    var Cylinders = RealmOptional<Int>()
+    dynamic var TotalFuelCapacity : FuelCapacity? = nil
+    dynamic var FuelType : NSString? = nil
+    var CityFuelEfficiency = RealmOptional<Double>()
+    var HighwayFuelEfficiency = RealmOptional<Double>()
+    var CombinedFuelEfficiency = RealmOptional<Double>()
+    dynamic var Transmission : NSString? = nil
+    dynamic var Message : NSString? = nil
+    var Success = RealmOptional<Bool>()
     
-    required init?(_ map: Map) {
-        
+    required convenience init?(_ map: Map) {
+        self.init()
     }
     
     func mapping(map: Map) {

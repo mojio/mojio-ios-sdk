@@ -8,17 +8,18 @@
 
 import UIKit
 import ObjectMapper
+import RealmSwift
 
-class RPM: Mappable {
+class RPM: Object, Mappable {
     
-    var BaseUnit : NSString?; //['RevolutionsPerMinute'],
-    var Timestamp : NSString?;
-    var BaseValue : NSNumber?;
-    var Unit : NSString?;  //['RevolutionsPerMinute'],
-    var Value : NSNumber?;
+    dynamic var BaseUnit : NSString? = nil //['RevolutionsPerMinute'],
+    dynamic var Timestamp : NSString? = nil
+    var BaseValue = RealmOptional<Double>()
+    dynamic var Unit : NSString? = nil  //['RevolutionsPerMinute'],
+    var Value = RealmOptional<Double>()
     
-    required init?(_ map: Map) {
-        
+    required convenience init?(_ map: Map) {
+        self.init()
     }
     
     func mapping(map: Map) {

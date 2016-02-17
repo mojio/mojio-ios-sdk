@@ -8,19 +8,20 @@
 
 import UIKit
 import ObjectMapper
+import RealmSwift
 
-class Location: Mappable {
-    var LocationAddress : Address?;
-    var Timestamp : NSString?;
-    var Lat : NSNumber?;
-    var Lng  : NSNumber?;
-    var Status : NSString?; // ['Unknown', 'Locked', 'NotLocked', 'Predicted', 'DiffCorrected', 'LastKnown', 'TwoDFix', 'Historic', 'InvalidTime', 'CommunicationsFailure', 'GPSOff', 'PreviousValidState'],
-    var Dilution  : NSNumber?;
-    var Altitude  : NSNumber?;
-    var GeoHash : NSString?;
+class Location: Object, Mappable {
+    dynamic var LocationAddress : Address? = nil
+    dynamic var Timestamp : NSString? = nil
+    var Lat = RealmOptional<Double>()
+    var Lng = RealmOptional<Double>()
+    dynamic var Status : NSString? = nil // ['Unknown', 'Locked', 'NotLocked', 'Predicted', 'DiffCorrected', 'LastKnown', 'TwoDFix', 'Historic', 'InvalidTime', 'CommunicationsFailure', 'GPSOff', 'PreviousValidState'],
+    var Dilution = RealmOptional<Double>()
+    var Altitude = RealmOptional<Double>()
+    dynamic var GeoHash : NSString? = nil
     
-    required init?(_ map: Map) {
-        
+    required convenience init?(_ map: Map) {
+        self.init()
     }
     
     func mapping(map: Map) {

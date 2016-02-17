@@ -8,17 +8,21 @@
 
 import UIKit
 import ObjectMapper
+import RealmSwift
+import Realm
 
-class PhoneNumber: Mappable {
-    var Type : String?; //['Home', 'Work', 'Mobile'],
-    var CountryCode : NSInteger?;
-    var AreaCode : NSInteger?;
-    var Number : NSInteger?;
-    var Ext : NSInteger?;
+class PhoneNumber : Object, Mappable {
+
+    dynamic var Type : String? = nil //['Home', 'Work', 'Mobile'],
+    var CountryCode = RealmOptional<Int>()
+    var AreaCode = RealmOptional<Int>()
+    var Number = RealmOptional<Int>()
+    var Ext = RealmOptional<Int>()
     
-    required init?(_ map: Map) {
-        
+    required convenience init?(_ map: Map) {
+        self.init();
     }
+
     
     func mapping(map: Map) {
         Type <- map["Type"];

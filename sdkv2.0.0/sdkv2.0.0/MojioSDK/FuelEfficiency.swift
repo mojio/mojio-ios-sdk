@@ -8,20 +8,21 @@
 
 import UIKit
 import ObjectMapper
+import RealmSwift
 
-class FuelEfficiency: Mappable {
+class FuelEfficiency: Object, Mappable {
     
-    var BaseUnit : NSString?; // ['MilesPerGallon', 'KilometerPerLiter', 'LitersPerHundredKilometers']
-    var Statistics : MeasurementStatistics?;
-    var BenchmarkTime : NSString?;
-    var BenchmarkStatistics : MeasurementStatistics?;
-    var Timestamp : NSString?;
-    var BaseValue : NSNumber?;
-    var Unit  : NSString?; // ['MilesPerGallon', 'KilometerPerLiter', 'LitersPerHundredKilometers'],
-    var Value : NSNumber?;
+    dynamic var BaseUnit : NSString? = nil // ['MilesPerGallon', 'KilometerPerLiter', 'LitersPerHundredKilometers']
+    dynamic var Statistics : MeasurementStatistics? = nil
+    dynamic var BenchmarkTime : NSString? = nil
+    dynamic var BenchmarkStatistics : MeasurementStatistics? = nil
+    dynamic var Timestamp : NSString? = nil
+    var BaseValue = RealmOptional<Double>()
+    dynamic var Unit  : NSString? = nil // ['MilesPerGallon', 'KilometerPerLiter', 'LitersPerHundredKilometers'],
+    var Value = RealmOptional<Double>()
 
-    required init?(_ map: Map) {
-        
+    required convenience init?(_ map: Map) {
+        self.init()
     }
     
     func mapping(map: Map) {

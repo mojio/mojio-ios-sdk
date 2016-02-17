@@ -10,6 +10,8 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import ObjectMapper
+import RealmSwift
+
 
 class MojioClient: NSObject {
     
@@ -18,19 +20,29 @@ class MojioClient: NSObject {
     // this will need a completion block
     class func getEntityWithPath (var path : String, params : NSDictionary?) {
         
-        let entityType : String? = path.componentsSeparatedByString("/")[0];
+//        let entityType : String? = path.componentsSeparatedByString("/")[0];
         
         path = self.baseUrlString + path;
         let authToken = self.authToken()!;
         Alamofire.request(.GET, path, headers: ["MojioAPIToken" : authToken]).responseJSON { response in
             
-            let json : JSON! = JSON(response.result.value!);
-            let test = Mapper<User>().map(json.rawString());
+            let dict : NSDictionary? = response.result.value as? NSDictionary
+            
+            let test = Mapper<Trip>().map(dict!)
+//            let test = Mapper<Trip>().mapArray(dict)
+            
+            let realm = try! Realm()
+            try! realm.write({ () -> Void in
+                realm.add(test!);
+            })
+            
             print ("test is %@", test);
             
             
         }
     }
+    
+    
     
     class private func authToken () -> String? {
         let authToken : String? = NSUserDefaults.standardUserDefaults().objectForKey("MojioAuthToken") as? String;

@@ -8,36 +8,61 @@
 
 import UIKit
 import ObjectMapper
+import RealmSwift
+import Realm
 
-
-class User : Mappable {
+class User : Object, Mappable {
     
-    var FirstName : String?;
-    var LastName : String?;
-    var UserName : String?;
-    var Emails : [Email]?;
-    var PhoneNumbers : [PhoneNumber]?;
-    var Img : Image?;
-    var Tags : [String]?;
-    var Id : String?;
-    var CreatedOn : String?;
-    var LastModified : String?;
+    dynamic var FirstName : String? = nil
+    dynamic var LastName : String? = nil
+    dynamic var UserName : String? = nil
+    var Emails = List<Email>()
+    var PhoneNumbers = List<PhoneNumber>()
+    dynamic var Img : Image? = nil
+    var Tags = List<StringObject>()
+    dynamic var Id : String? = nil
+    dynamic var CreatedOn : String? = nil
+    dynamic var LastModified : String? = nil
     //    var Links : String?;
     
-    required init?(_ map: Map) {
-        
+    required convenience init?(_ map: Map) {
+        self.init()
     }
     
     func mapping(map: Map) {
-        FirstName <- map["FirstName"];
-        LastName <- map["LastName"];
-        UserName <- map["UserName"];
-        Emails <- map["Emails"];// ?? [];
-        PhoneNumbers <- map["PhoneNumber"];// ?? [];
+        
+        var emails = Array<Email>()
+        emails <- map["Emails"]
+        
+        for email in emails {
+            self.Emails.append(email)
+        }
+        
+        var tags = Array<String>()
+        tags <- map["Tags"]
+        
+        for tag in tags {
+            let string = StringObject()
+            string.value = tag
+            
+            self.Tags.append(string)
+        }
+        
+        var phoneNumbers = Array<PhoneNumber>()
+        phoneNumbers <- map["PhoneNumbers"]
+        
+        for phoneNumber in phoneNumbers {
+            self.PhoneNumbers.append(phoneNumber)
+        }
+        
+        
+        self.FirstName <- map["FirstName"];
+        self.LastName <- map["LastName"];
+        self.UserName <- map["UserName"];
+//        PhoneNumbers <- map["PhoneNumber"];// ?? [];
         Img <- map["Image"];
-        Tags <- map["Tags"];
-        Id <- map["Id"];
-        CreatedOn <- map["CreatedOn"];
-        LastModified <- map["LastModified"];
+        self.Id <- map["Id"];
+        self.CreatedOn <- map["CreatedOn"];
+        self.LastModified <- map["LastModified"];
     }
 }

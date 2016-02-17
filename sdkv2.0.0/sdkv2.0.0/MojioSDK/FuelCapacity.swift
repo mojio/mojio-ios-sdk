@@ -8,17 +8,18 @@
 
 import UIKit
 import ObjectMapper
+import RealmSwift
 
-class FuelCapacity: Mappable {
+class FuelCapacity: Object, Mappable {
     
-    var BaseUnit : NSString?; //['Gallons', 'Liters']
-    var Timestamp : NSString?;
-    var BaseValue : NSNumber?;
-    var Unit : NSString?;  // ['Gallons', 'Liters']
-    var Value : NSNumber?;
+    dynamic var BaseUnit : NSString? = nil //['Gallons', 'Liters'],
+    dynamic var Timestamp : NSString? = nil
+    var BaseValue = RealmOptional<Double>()
+    dynamic var Unit : NSString? = nil  //['Gallons', 'Liters'],
+    var Value = RealmOptional<Double>()
     
-    required init?(_ map: Map) {
-        
+    required convenience init?(_ map: Map) {
+        self.init()
     }
     
     func mapping(map: Map) {
@@ -28,5 +29,5 @@ class FuelCapacity: Mappable {
         Unit <- map["Unit"];
         Value <- map["Value"];
     }
-
+    
 }

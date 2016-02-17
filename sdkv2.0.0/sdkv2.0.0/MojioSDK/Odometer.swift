@@ -8,18 +8,19 @@
 
 import UIKit
 import ObjectMapper
+import RealmSwift
 
-class Odometer: Mappable {
+class Odometer: Object, Mappable {
     
-    var RolloverValue : NSNumber?;
-    var BaseUnit : NSString?; // ['Meters', 'Miles', 'Kilometers', 'NauticalMiles', 'CentiMeter', 'MilliMeter'],
-    var Timestamp : NSString?;
-    var BaseValue : NSNumber?;
-    var Unit : NSString?;// ['Meters', 'Miles', 'Kilometers', 'NauticalMiles', 'CentiMeter', 'MilliMeter'],
-    var Value : NSNumber?;
+    var RolloverValue = RealmOptional<Double>()
+    dynamic var BaseUnit : NSString? = nil // ['Meters', 'Miles', 'Kilometers', 'NauticalMiles', 'CentiMeter', 'MilliMeter'],
+    dynamic var Timestamp : NSString? = nil
+    var BaseValue : Double = 0
+    dynamic var Unit : NSString? = nil// ['Meters', 'Miles', 'Kilometers', 'NauticalMiles', 'CentiMeter', 'MilliMeter'],
+    var Value = RealmOptional<Double>()
     
-    required init?(_ map: Map) {
-        
+    required convenience init?(_ map: Map) {
+        self.init()
     }
     
     func mapping(map: Map) {

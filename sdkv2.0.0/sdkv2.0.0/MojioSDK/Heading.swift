@@ -8,19 +8,20 @@
 
 import UIKit
 import ObjectMapper
+import RealmSwift
 
-class Heading: Mappable {
+class Heading: Object, Mappable {
     
-    var BaseUnit : NSString?; //['Degree']
-    var Direction : NSString?;
-    var LeftTurn : Bool?;
-    var Timestamp : NSString?;
-    var BaseValue : NSNumber?;
-    var Unit : NSString?;  // ['Degree']
-    var Value : NSNumber?;
+    dynamic var BaseUnit : NSString? = nil //['Degree']
+    dynamic var Direction : NSString? = nil
+    var LeftTurn = RealmOptional<Bool>()
+    dynamic var Timestamp : NSString? = nil
+    var BaseValue = RealmOptional<Double>()
+    dynamic var Unit : NSString? = nil  // ['Degree']
+    var Value = RealmOptional<Double>()
     
-    required init?(_ map: Map) {
-        
+    required convenience init?(_ map: Map) {
+        self.init()
     }
     
     func mapping(map: Map) {

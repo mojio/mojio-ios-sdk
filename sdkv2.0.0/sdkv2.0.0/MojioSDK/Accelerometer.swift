@@ -8,17 +8,18 @@
 
 import UIKit
 import ObjectMapper
+import RealmSwift
 
-class Accelerometer: Mappable {
+class Accelerometer: Object, Mappable {
     
-    var X : ProperAcceleration?;
-    var Y : ProperAcceleration?;
-    var Z : ProperAcceleration?;
-    var Magnitude : ProperAcceleration?;
-    var SamplingInterval : Duration?;
+    dynamic var X : ProperAcceleration? = nil
+    dynamic var Y : ProperAcceleration? = nil
+    dynamic var Z : ProperAcceleration? = nil
+    dynamic var Magnitude : ProperAcceleration? = nil
+    dynamic var SamplingInterval : Duration? = nil
     
-    required init?(_ map: Map) {
-        
+    required convenience init?(_ map: Map) {
+        self.init()
     }
     
     func mapping(map: Map) {

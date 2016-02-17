@@ -8,17 +8,18 @@
 
 import UIKit
 import ObjectMapper
+import RealmSwift
 
-class DiagnosticCode: Mappable {
+class DiagnosticCode: Object, Mappable {
     
-    var Code : NSString?;
-    var Description : NSString?;
-    var Timestamp : NSString?;
-    var Severity : NSString?; // ['Unknown', 'Low', 'Medium', 'High', 'None'],
-    var Instructions : NSString?;
+    dynamic var Code : NSString? = nil
+    dynamic var Description : NSString? = nil
+    dynamic var Timestamp : NSString? = nil
+    dynamic var Severity : NSString? = nil // ['Unknown', 'Low', 'Medium', 'High', 'None'],
+    dynamic var Instructions : NSString? = nil
     
-    required init?(_ map: Map) {
-        
+    required convenience init?(_ map: Map) {
+        self.init()
     }
     
     func mapping(map: Map) {

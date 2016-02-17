@@ -8,17 +8,18 @@
 
 import UIKit
 import ObjectMapper
+import RealmSwift
 
-class ProperAcceleration: Mappable {
+class ProperAcceleration: Object, Mappable {
 
-    var BaseUnit : NSString?; //['MilliGUnits', 'NewtonsPerKilogram', 'XirgoUnit', 'MetersPerSecondPerSecond', 'CentimetersPerSecondPerSecond', 'GUnits']
-    var Timestamp : NSString?;
-    var BaseValue : NSNumber?;
-    var Unit : NSString?;  // ['MilliGUnits', 'NewtonsPerKilogram', 'XirgoUnit', 'MetersPerSecondPerSecond', 'CentimetersPerSecondPerSecond', 'GUnits']
-    var Value : NSNumber?;
+    dynamic var BaseUnit : NSString? = nil //['MilliGUnits', 'NewtonsPerKilogram', 'XirgoUnit', 'MetersPerSecondPerSecond', 'CentimetersPerSecondPerSecond', 'GUnits']
+    dynamic var Timestamp : NSString? = nil
+    var BaseValue = RealmOptional<Double>()
+    dynamic var Unit : NSString? = nil  // ['MilliGUnits', 'NewtonsPerKilogram', 'XirgoUnit', 'MetersPerSecondPerSecond', 'CentimetersPerSecondPerSecond', 'GUnits']
+    var Value = RealmOptional<Double>()
     
-    required init?(_ map: Map) {
-        
+    required convenience init?(_ map: Map) {
+        self.init()
     }
     
     func mapping(map: Map) {

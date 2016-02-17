@@ -8,25 +8,45 @@
 
 import UIKit
 import ObjectMapper
+import RealmSwift
 
-class Group: Mappable {
-    var Name : String?;
-    var Description : String?;
-    var Users : [User]?;
-    var Tags : NSArray?;
-    var Id : String?;
-    var CreatedOn : String?;
-    var LastModified : String?;
+class Group: Object, Mappable {
+    dynamic var Name : String? = nil
+    dynamic var Description : String? = nil
+    var Users = List<User>()
+    var Tags = List<StringObject>()
+    dynamic var Id : String? = nil
+    dynamic var CreatedOn : String? = nil
+    dynamic var LastModified : String? = nil
     
-    required init?(_ map: Map) {
-        
+    required convenience init?(_ map: Map) {
+        self.init()
     }
     
     func mapping(map: Map) {
+        
+        var users = Array<User>()
+        users <- map["Users"]
+        
+        for user in users {
+            self.Users.append(user)
+        }
+        
+        var tags = Array<String>()
+        tags <- map["Tags"]
+        
+        for tag in tags {
+            let string = StringObject()
+            string.value = tag
+            
+            self.Tags.append(string)
+        }
+
+        
         Name <- map["Name"];
         Description <- map["Description"];
-        Users <- map["Users"];
-        Tags <- map["Tags"];
+//        Users <- map["Users"];
+//        Tags <- map["Tags"];
         Id <- map["Id"];
         CreatedOn <- map["CreatedOn"];
         LastModified <- map["LastModified"];

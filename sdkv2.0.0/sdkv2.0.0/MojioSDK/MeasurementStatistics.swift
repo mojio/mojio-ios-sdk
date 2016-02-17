@@ -8,23 +8,24 @@
 
 import UIKit
 import ObjectMapper
+import RealmSwift
 
-class MeasurementStatistics: Mappable {
+class MeasurementStatistics: Object, Mappable {
     
-    var NumOfSamples : NSNumber?;
-    var Average : NSNumber?;
-    var Variance : NSNumber?;
-    var StdDev : NSNumber?;
-    var IndexOfDispersion : NSNumber?;
-    var CoeffOfVariation : NSNumber?;
-    var M2 : NSNumber?;
-    var Min : NSNumber?;
-    var Max : NSNumber?;
-    var StandardScore : Score?;
-    var MinMaxScore : Score?;
+    var NumOfSamples = RealmOptional<Double>()
+    var Average = RealmOptional<Double>()
+    var Variance = RealmOptional<Double>()
+    var StdDev = RealmOptional<Double>()
+    var IndexOfDispersion = RealmOptional<Double>()
+    var CoeffOfVariation = RealmOptional<Double>()
+    var M2 = RealmOptional<Double>()
+    var Min = RealmOptional<Double>()
+    var Max = RealmOptional<Double>()
+    dynamic var StandardScore : Score? = nil
+    dynamic var MinMaxScore : Score? = nil
     
-    required init?(_ map: Map) {
-        
+    required convenience init?(_ map: Map) {
+        self.init()
     }
     
     func mapping(map: Map) {

@@ -8,19 +8,20 @@
 
 import UIKit
 import ObjectMapper
+import RealmSwift
 
-class Acceleration: Mappable {
-    
-    var BaseUnit : NSString?; //['MetersPerSecondPerSecond', 'KilometersPerHourPerSecond', 'MilesPerHourPerSecond']
-    var Timestamp : NSString?;
-    var BaseValue : NSNumber?;
-    var Unit : NSString?;  // ['MetersPerSecondPerSecond', 'KilometersPerHourPerSecond', 'MilesPerHourPerSecond']
-    var Value : NSNumber?;
-    
-    required init?(_ map: Map) {
-        
+class Acceleration: Object, Mappable {
+
+    dynamic var BaseUnit : NSString? = nil //['MetersPerSecondPerSecond', 'KilometersPerHourPerSecond', 'MilesPerHourPerSecond'],
+    dynamic var Timestamp : NSString? = nil
+    var BaseValue = RealmOptional<Double>()
+    dynamic var Unit : NSString? = nil  //['MetersPerSecondPerSecond', 'KilometersPerHourPerSecond', 'MilesPerHourPerSecond'],
+    var Value = RealmOptional<Double>()
+
+    required convenience init?(_ map: Map) {
+        self.init()
     }
-    
+
     func mapping(map: Map) {
         BaseUnit <- map["BaseUnit"];
         Timestamp <- map["Timestamp"];
@@ -28,4 +29,5 @@ class Acceleration: Mappable {
         Unit <- map["Unit"];
         Value <- map["Value"];
     }
+
 }
