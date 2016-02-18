@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import KeychainSwift
 
 class MojioAuth: NSObject, AuthControllerDelegate {
     
@@ -57,10 +58,10 @@ class MojioAuth: NSObject, AuthControllerDelegate {
     
     func isUserLoggedIn () -> Bool {
         
-        let keychainWrapper = KeychainWrapper()
-        let authToken : String? = keychainWrapper.myObjectForKey("v_Data") as? String
+        let keychain = KeychainSwift()
+        let authToken : String? = keychain.get("MojioAuthToken")
+        let expiryDate : NSString? = keychain.get("MojioAuthTokenExpiresIn")
 
-        let expiryDate : NSString? = NSUserDefaults.standardUserDefaults().objectForKey("MojioAuthTokenExpiresIn") as? NSString
         if authToken == nil || expiryDate == nil {
             return false;
         }
@@ -84,11 +85,8 @@ class MojioAuth: NSObject, AuthControllerDelegate {
         let expiryDateTimeInMS : Double = currentTimeInMS + (expiresIn * 1000)
         let expiryTime : NSString = String(format: "%f", expiryDateTimeInMS) as NSString
         
-        let keychainWrapper = KeychainWrapper()
-        keychainWrapper.mySetObject(token, forKey: kSecValueData)
-        keychainWrapper.writeToKeychain()
-
-        NSUserDefaults.standardUserDefaults().setObject(expiryTime, forKey: "MojioAuthTokenExpiresIn")
-        NSUserDefaults.standardUserDefaults().synchronize();
+        let keychain = KeychainSwift()
+        keychain.set(token, forKey: "MojioAuthToken")
+        keychain.set(expiryTime as String, forKey: "MojioAuthTokenExpiresIn")
     }
 }
