@@ -54,7 +54,7 @@ class MojioAuth: NSObject, AuthControllerDelegate {
             let accessToken = (string.componentsSeparatedByString("access_token="))[1].componentsSeparatedByString("&")[0];
             let expiresIn : NSString = (string.componentsSeparatedByString("expires_in="))[1]
             
-            self.saveAuthenticationToken(accessToken, expiresIn: expiresIn)
+            self.saveAuthenticationToken(accessToken, expiresIn: expiresIn.doubleValue)
             
             self.authController?.dismissViewControllerAnimated(true, completion: nil);
             self.loginCompletion();
@@ -80,11 +80,13 @@ class MojioAuth: NSObject, AuthControllerDelegate {
         return false;
     }
     
-    func saveAuthenticationToken (token : String, expiresIn : NSString) -> Void {
+    func saveAuthenticationToken (token : String, expiresIn : Double) -> Void {
         
         // Save the expiry date of the token in milliseconds since 1970 as it is timezone independent
+        
         let currentTimeInMS : Double = NSDate().timeIntervalSince1970
-        let expiryTime : NSString = String(format: "%f", (currentTimeInMS + expiresIn.doubleValue * 1000)) as NSString
+        let expiryDateTimeInMS : Double = currentTimeInMS + (expiresIn * 1000)
+        let expiryTime : NSString = String(format: "%f", expiryDateTimeInMS) as NSString
         
         NSUserDefaults.standardUserDefaults().setObject(token, forKey: "MojioAuthToken")
         NSUserDefaults.standardUserDefaults().setObject(expiryTime, forKey: "MojioAuthTokenExpiresIn")
