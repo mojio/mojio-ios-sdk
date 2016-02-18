@@ -17,6 +17,8 @@ class MojioAuth: NSObject, AuthControllerDelegate {
     var loginCompletion : (Void) -> (Void)
     var authController : AuthViewController?
     
+    static let authClient = MojioAuth(appId: <#T##String#>, redirectURI: <#T##String#>)
+    
     init(appId : String, redirectURI : String) {
         self.appId = appId;
         self.redirectURL = redirectURI;
@@ -55,13 +57,12 @@ class MojioAuth: NSObject, AuthControllerDelegate {
         }
     }
     
-    
     func isUserLoggedIn () -> Bool {
         
-        let keychain = KeychainSwift()
-        let authToken : String? = keychain.get("MojioAuthToken")
-        let expiryDate : NSString? = keychain.get("MojioAuthTokenExpiresIn")
-
+        let token = self.getAuthToken()
+        let authToken : String? = token.0
+        let expiryDate : NSString? = token.1
+        
         if authToken == nil || expiryDate == nil {
             return false;
         }
@@ -75,6 +76,20 @@ class MojioAuth: NSObject, AuthControllerDelegate {
         }
         
         return false;
+    }
+    
+    func logout() {
+        let keychain = KeychainSwift()
+        keychain.delete("MojioAuthToken")
+        keychain.delete("MojioAuthTokenExpiresIn")
+    }
+    
+    func getAuthToken () -> (String?, NSString?) {
+        let keychain = KeychainSwift()
+        let authToken : String? = keychain.get("MojioAuthToken")
+        let expiryDate : NSString? = keychain.get("MojioAuthTokenExpiresIn")
+        
+        return (authToken, expiryDate)
     }
     
     func saveAuthenticationToken (token : String, expiresIn : Double) -> Void {

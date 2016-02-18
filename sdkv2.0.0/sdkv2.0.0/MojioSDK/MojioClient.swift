@@ -11,16 +11,17 @@ import Alamofire
 import SwiftyJSON
 import ObjectMapper
 import RealmSwift
-
+import KeychainSwift
 
 class MojioClient: NSObject {
     
     static let baseUrlString : String = "https://staging-api.moj.io/v2/";
+//    let mojioAuth : MojioAuth = MojioAuth(appId: AppConfig.AppId, redirectURI: <#T##String#>))
     
-    // this will need a completion block
+    // TODO: Add completion and failure closures
     class func getEntityWithPath (var path : String, params : NSDictionary?) {
         
-//        let entityType : String? = path.componentsSeparatedByString("/")[0];
+        let entityType : String? = path.componentsSeparatedByString("/")[0];
         
         path = self.baseUrlString + path;
         let authToken = self.authToken()!;
@@ -28,41 +29,13 @@ class MojioClient: NSObject {
             
             let dict : NSDictionary? = response.result.value as? NSDictionary
             
-            let test = Mapper<Trip>().map(dict!)
-            let realm = try! Realm()
-
-            
-            try! realm.write({ () -> Void in
-                realm.add(test!)
-            })
-
-            
-            let alltrips : Results<Trip> = realm.objects(Trip)
-//            print (alltrips)
-            let firstTrip = alltrips[0]
-            print (firstTrip)
-
-//            let id : String = (firstTrip?.Id)!
-//            let odo = firstTrip?.StartOdometer
-//            let location = (firstTrip?.StartLocation)!
-//            
-//            print (location)
-            
-            
-//            let tripa = alltrips.first
-            
-            
-            print ("test is %@", test);
-            
-            
         }
     }
     
-    
-    
     class private func authToken () -> String? {
-        let authToken : String? = NSUserDefaults.standardUserDefaults().objectForKey("MojioAuthToken") as? String;
-        return authToken;
+        let keychain = KeychainSwift()
+        let authToken : String? = keychain.get("MojioAuthToken")
+        return authToken
     }
 
 }
