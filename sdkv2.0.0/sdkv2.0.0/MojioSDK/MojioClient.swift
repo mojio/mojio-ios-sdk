@@ -35,9 +35,6 @@ class MojioClient: NSObject {
             try! realm.write({ () -> Void in
                 realm.add(test!)
             })
-            
-
-            
 
             
             let alltrips : Results<Trip> = realm.objects(Trip)

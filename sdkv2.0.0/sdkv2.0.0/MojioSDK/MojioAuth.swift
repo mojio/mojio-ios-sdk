@@ -20,14 +20,7 @@ class MojioAuth: NSObject, AuthControllerDelegate {
         self.appId = appId;
         self.redirectURL = redirectURI;
         
-        
-        
-        /* For the resource owner flow
-            grant_type=password&password=Test123&username=ashisha@moj.io&client_id=9692e2af-07f6-46ed-b384-1831b739ebf6&client_secret=b463050d-86b3-4c9c-b47b-924addb6e321
-        */
-        
         let loginString = String (format: "https://staging-accounts.moj.io/oauth2/authorize?response_type=token&redirect_uri=%@&client_id=%@&scope=full", self.redirectURL, self.appId);
-        
         self.loginURL = NSURL (string: loginString);
         self.loginCompletion = {};
     }
@@ -63,7 +56,10 @@ class MojioAuth: NSObject, AuthControllerDelegate {
     
     
     func isUserLoggedIn () -> Bool {
-        let authToken : String? = NSUserDefaults.standardUserDefaults().objectForKey("MojioAuthToken") as? String
+        
+        let keychainWrapper = KeychainWrapper()
+        let authToken : String? = keychainWrapper.myObjectForKey("v_Data") as? String
+
         let expiryDate : NSString? = NSUserDefaults.standardUserDefaults().objectForKey("MojioAuthTokenExpiresIn") as? NSString
         if authToken == nil || expiryDate == nil {
             return false;
@@ -88,10 +84,11 @@ class MojioAuth: NSObject, AuthControllerDelegate {
         let expiryDateTimeInMS : Double = currentTimeInMS + (expiresIn * 1000)
         let expiryTime : NSString = String(format: "%f", expiryDateTimeInMS) as NSString
         
-        NSUserDefaults.standardUserDefaults().setObject(token, forKey: "MojioAuthToken")
+        let keychainWrapper = KeychainWrapper()
+        keychainWrapper.mySetObject(token, forKey: kSecValueData)
+        keychainWrapper.writeToKeychain()
+
         NSUserDefaults.standardUserDefaults().setObject(expiryTime, forKey: "MojioAuthTokenExpiresIn")
         NSUserDefaults.standardUserDefaults().synchronize();
-        
     }
-    
 }
