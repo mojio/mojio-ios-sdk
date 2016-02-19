@@ -17,7 +17,7 @@ class MojioAuth: NSObject, AuthControllerDelegate {
     var loginCompletion : (Void) -> (Void)
     var authController : AuthViewController?
     
-    static let authClient = MojioAuth(appId: <#T##String#>, redirectURI: <#T##String#>)
+//    static let authClient = MojioAuth(appId: <#T##String#>, redirectURI: <#T##String#>)
     
     init(appId : String, redirectURI : String) {
         self.appId = appId;
