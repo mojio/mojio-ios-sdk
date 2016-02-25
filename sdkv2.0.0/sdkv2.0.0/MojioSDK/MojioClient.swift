@@ -42,12 +42,13 @@ class MojioClient: NSObject {
     private let PATH_NEXT : String = "next/"
     
     override init () {
-        self.REQUEST_URL = MojioClientEnvironment.clientEnvironment.apiEndpoint()
+        self.REQUEST_URL = MojioClientEnvironment.clientEnvironment.getApiEndpoint()
         // set auth token as the header 
     }
     
-    func get () {
+    func get () -> Self {
         self.REST_METHOD = Method.GET
+        return self
     }
     
     func post () {
@@ -191,9 +192,17 @@ class MojioClient: NSObject {
         let authToken = self.authToken()!;
         
         Alamofire.request(REST_METHOD!, self.REQUEST_URL, headers : ["MojioAPIToken" : authToken]).responseJSON { response in
-            let dict : NSDictionary? = response.result.value as? NSDictionary
-            let json : JSON = JSON(response.result.value ?? [])
-            print (dict)
+            
+            if response.response != nil && response.response?.statusCode == 200 {
+                let dict : NSDictionary? = response.result.value as? NSDictionary
+                if dict != nil {
+                    completion(response: dict!)
+                }
+            }
+            else {
+                failure(error: "Could not complete request")
+            }
+            
         }
         
     }
