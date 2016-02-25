@@ -17,10 +17,6 @@ class MojioClient: NSObject {
     
     static let client = MojioClient()
     
-    private var REQUEST_URL : String
-    private var REST_METHOD : Alamofire.Method?
-    
-    
     private let PATH_APPS : String = "apps/"
     private let PATH_SECRET : String = "secret/"
     private let PATH_GROUPS : String = "groups/"
@@ -40,6 +36,10 @@ class MojioClient: NSObject {
     private let PATH_VIN : String = "vin/"
     private let PATH_SERVICE_SCHEDULE = "serviceschedule/"
     private let PATH_NEXT : String = "next/"
+    
+    private var REQUEST_URL : String
+    private var REST_METHOD : Alamofire.Method?
+    private var ENTITY_REQUESTED : String = ""
     
     override init () {
         self.REQUEST_URL = MojioClientEnvironment.clientEnvironment.getApiEndpoint()
@@ -73,11 +73,13 @@ class MojioClient: NSObject {
         else {
             self.REQUEST_URL = self.REQUEST_URL + self.PATH_APPS
         }
+        self.ENTITY_REQUESTED = PATH_APPS
         return self
     }
     
     func secret () -> Self {
         self.REQUEST_URL = self.REQUEST_URL + self.PATH_SECRET
+        self.ENTITY_REQUESTED = PATH_SECRET
         return self
     }
     
@@ -88,6 +90,7 @@ class MojioClient: NSObject {
         else {
             self.REQUEST_URL = self.REQUEST_URL + self.PATH_GROUPS
         }
+        self.ENTITY_REQUESTED = PATH_GROUPS
         return self
     }
     
@@ -98,31 +101,37 @@ class MojioClient: NSObject {
         else {
             self.REQUEST_URL = self.REQUEST_URL + self.PATH_USERS
         }
+        self.ENTITY_REQUESTED = PATH_USERS
         return self
     }
     
     func me () -> Self {
         self.REQUEST_URL = self.REQUEST_URL + self.PATH_ME
+        self.ENTITY_REQUESTED = PATH_ME
         return self
     }
     
     func history () -> Self {
         self.REQUEST_URL = self.REQUEST_URL + self.PATH_HISTORY
+        self.ENTITY_REQUESTED = PATH_HISTORY
         return self
     }
     
     func states () -> Self {
         self.REQUEST_URL = self.REQUEST_URL + self.PATH_STATES
+        self.ENTITY_REQUESTED = PATH_STATES
         return self
     }
     
     func locations () -> Self {
         self.REQUEST_URL = self.REQUEST_URL + self.PATH_LOCATIONS
+        self.ENTITY_REQUESTED = PATH_LOCATIONS
         return self
     }
     
     func image () -> Self {
         self.REQUEST_URL = self.REQUEST_URL + self.PATH_IMAGE
+        self.ENTITY_REQUESTED = PATH_IMAGE
         return self
     }
     
@@ -133,21 +142,25 @@ class MojioClient: NSObject {
         else {
             self.REQUEST_URL = self.REQUEST_URL + self.PATH_MOJIOS
         }
+        self.ENTITY_REQUESTED = PATH_MOJIOS
         return self
     }
     
     func permission () -> Self {
         self.REQUEST_URL = self.REQUEST_URL + self.PATH_PERMISSION
+        self.ENTITY_REQUESTED = PATH_PERMISSION
         return self
     }
     
     func permissions () -> Self {
         self.REQUEST_URL = self.REQUEST_URL + self.PATH_PERMISSIONS
+        self.ENTITY_REQUESTED = PATH_PERMISSIONS
         return self
     }
     
     func tags (tagId : String) -> Self {
         self.REQUEST_URL = self.REQUEST_URL + self.PATH_TAGS + tagId + "/"
+        self.ENTITY_REQUESTED = PATH_TAGS
         return self
     }
     
@@ -158,6 +171,7 @@ class MojioClient: NSObject {
         else {
             self.REQUEST_URL = self.REQUEST_URL + self.PATH_TRIPS
         }
+        self.ENTITY_REQUESTED = PATH_TRIPS
         return self
     }
     
@@ -168,39 +182,54 @@ class MojioClient: NSObject {
         else {
             self.REQUEST_URL = self.REQUEST_URL + self.PATH_VEHICLES
         }
+        self.ENTITY_REQUESTED = PATH_VEHICLES
         return self
     }
     
     func address () -> Self {
         self.REQUEST_URL = self.REQUEST_URL + self.PATH_ADDRESS
+        self.ENTITY_REQUESTED = PATH_ADDRESS
         return self
     }
     
     func vin () -> Self {
         self.REQUEST_URL = self.REQUEST_URL + self.PATH_VIN
+        self.ENTITY_REQUESTED = PATH_VIN
         return self
     }
     
     func serviceschedule () -> Self {
         self.REQUEST_URL = self.REQUEST_URL + self.PATH_SERVICE_SCHEDULE
+        self.ENTITY_REQUESTED = PATH_SERVICE_SCHEDULE
         return self
     }
     
     func next () -> Self {
         self.REQUEST_URL = self.REQUEST_URL + self.PATH_NEXT
+        self.ENTITY_REQUESTED = PATH_NEXT
         return self
     }
     
     func run (completion : (response : AnyObject) -> Void, failure : (error : String) -> Void){
         let authToken = self.authToken()!;
         
-        Alamofire.request(REST_METHOD!, self.REQUEST_URL, headers : ["MojioAPIToken" : authToken]).responseJSON { response in
+        Alamofire.request(self.REST_METHOD!, self.REQUEST_URL, headers : ["MojioAPIToken" : authToken]).responseJSON { response in
+            
             
             if response.response != nil && response.response?.statusCode == 200 {
-                let dict : NSDictionary? = response.result.value as? NSDictionary
-                if dict != nil {
-                    completion(response: dict!)
-                }
+                
+                let json = JSON((response.result.value as? NSDictionary)!)
+                let classType = NSClassFromString("Motion.Vehicle")! as! Object.Type
+                print (classType)
+                
+//                let clas = aclass.dynamicType.init()
+//                let model =  Mapper<classType.Type>().map((response.result.value as? NSDictionary)!)
+                let dict = (response.result.value as? NSDictionary)!
+                
+                Mapper.map(classType, dict)
+                print (model)
+                
+
             }
             else {
                 failure(error: "Could not complete request")
