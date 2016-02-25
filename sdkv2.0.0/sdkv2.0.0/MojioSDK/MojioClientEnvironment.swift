@@ -75,6 +75,13 @@ class MojioClientEnvironment {
         return false
     }
     
+    func getEnvironment () -> Environment {
+        if self.environment != nil {
+            return self.environment!
+        }
+        return self.getDefaultEnvironment()
+    }
+    
     /**
         Letting an app developer ovveride the default environment. This should be used only for development purposes to test the functionality of the app in different continents
      */
@@ -118,13 +125,6 @@ class MojioClientEnvironment {
         else {
             self.setEnvironment(Environment.AMERICA_PRODUCTION)
         }
-    }
-    
-    func getEnvironment () -> Environment {
-        if self.environment != nil {
-            return self.environment!
-        }
-        return self.getDefaultEnvironment()
     }
     
     func getApiEndpoint () -> String {

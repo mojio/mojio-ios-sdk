@@ -51,16 +51,19 @@ class MojioClient: NSObject {
         return self
     }
     
-    func post () {
+    func post () -> Self {
         self.REST_METHOD = Method.POST
+        return self
     }
     
-    func put () {
+    func put () -> Self {
         self.REST_METHOD = Method.PUT
+        return self
     }
     
-    func delete () {
+    func delete () -> Self {
         self.REST_METHOD = Method.DELETE
+        return self
     }
     
     func apps (appId : String?) -> Self {
@@ -202,11 +205,8 @@ class MojioClient: NSObject {
             else {
                 failure(error: "Could not complete request")
             }
-            
         }
-        
     }
-    
     
     private func authToken () -> String? {
         let keychain = KeychainSwift()
