@@ -215,25 +215,117 @@ class MojioClient: NSObject {
         
         Alamofire.request(self.REST_METHOD!, self.REQUEST_URL, headers : ["MojioAPIToken" : authToken]).responseJSON { response in
             
-            
             if response.response != nil && response.response?.statusCode == 200 {
                 
-                let json = JSON((response.result.value as? NSDictionary)!)
-                let classType = NSClassFromString("Motion.Vehicle")! as! Object.Type
-                print (classType)
+                if self.REST_METHOD! == Alamofire.Method.GET {
+                    let responseDict = response.result.value as? NSDictionary
+                    if responseDict != nil {
+                        let dataArray = responseDict?.objectForKey("Data") as? NSArray
+                        if dataArray == nil {
+                            print ("we have a dictionary")
+                            let obj = self.parseDict(responseDict!)
+                            completion (response: obj!)
+                        }
+                            
+                        else {
+                            let array : NSMutableArray = []
+                            for  obj in dataArray! {
+                                array.addObject(self.parseDict(obj as! NSDictionary)!)
+                            }
+                            
+                            completion(response: array)
+                            
+                        }
+                    }
+                }
+                
+                else if self.REST_METHOD! == Alamofire.Method.DELETE {
+                    completion (response: true)
+                }
+                
+                
+//                let data : NSData? = response.data
+//                
+//                
+//                let jsonDict = try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers)
+//                print (jsonDict)
+                
+                
+//                let json = JSON((response.result.value as? NSDictionary)!)
+//                let classType : Object.Type = NSClassFromString("Motion.Vehicle")! as! Object.Type
+//                print (classType)
                 
 //                let clas = aclass.dynamicType.init()
 //                let model =  Mapper<classType.Type>().map((response.result.value as? NSDictionary)!)
-                let dict = (response.result.value as? NSDictionary)!
                 
-                Mapper.map(classType, dict)
-                print (model)
+                
+//                let dict = (response.result.value as? NSDictionary)!
+//                
+//                Mapper<Vehicle>().map(dict)
+//                print (model)
                 
 
             }
             else {
                 failure(error: "Could not complete request")
             }
+        }
+    }
+    
+    private func parseDict (dict : NSDictionary) -> AnyObject? {
+        switch self.ENTITY_REQUESTED{
+            
+        case self.PATH_APPS:
+            return nil
+            
+        case self.PATH_SECRET:
+            return nil
+            
+        case self.PATH_GROUPS:
+            let model = Mapper<Group>().map(dict)
+            return model!
+            
+        case self.PATH_USERS:
+            let model = Mapper<User>().map(dict)
+            return model!
+            
+        case self.PATH_ME:
+            let model = Mapper<User>().map(dict)
+            return model!
+            
+        case self.PATH_HISTORY:
+            return nil
+            
+        case self.PATH_STATES:
+            return nil
+            
+        case self.PATH_LOCATIONS:
+            let model = Mapper<Location>().map(dict)
+            return model!
+
+        case self.PATH_IMAGE:
+            let model = Mapper<Image>().map(dict)
+            return model!
+
+        case self.PATH_MOJIOS:
+            let model = Mapper<Mojio>().map(dict)
+            return model!
+            
+        case self.PATH_TRIPS:
+            let model = Mapper<Trip>().map(dict)
+            return model!
+
+        case self.PATH_VEHICLES:
+            let model = Mapper<Vehicle>().map(dict)
+            return model!
+            
+        case self.PATH_ADDRESS:
+            let model = Mapper<Address>().map(dict)
+            return model!
+            
+
+        default:
+                return nil
         }
     }
     
