@@ -210,7 +210,33 @@ class MojioClient: NSObject {
         return self
     }
     
+    func run (body : NSString?, completion : (response : AnyObject) -> Void, failure : (error : String) -> Void) {
+        // before every request, make sure user is logged in
+        let authToken = self.authToken()!;
+
+        if self.REST_METHOD! == Alamofire.Method.PUT || self.REST_METHOD! == Alamofire.Method.POST {
+            
+            Alamofire.request(self.REST_METHOD!, self.REQUEST_URL, parameters: [:], encoding: .Custom({
+                (convertible, params) in
+                let mutableRequest : NSMutableURLRequest = convertible.URLRequest.copy() as! NSMutableURLRequest
+                mutableRequest.setValue(authToken, forHTTPHeaderField: "MojioAPIToken")
+                mutableRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+                mutableRequest.HTTPBody = body?.dataUsingEncoding(NSUTF8StringEncoding)
+                return (mutableRequest, nil)
+            })).responseJSON{ response in
+                if response.response?.statusCode == 200 {
+                    completion (response: true)
+                }
+                else {
+                    completion (response: false)
+                }
+            }
+        }
+    }
+    
     func run (completion : (response : AnyObject) -> Void, failure : (error : String) -> Void){
+        // before every request, make sure user is logged in
+        
         let authToken = self.authToken()!;
         
         Alamofire.request(self.REST_METHOD!, self.REQUEST_URL, headers : ["MojioAPIToken" : authToken]).responseJSON { response in
@@ -238,45 +264,47 @@ class MojioClient: NSObject {
                         }
                     }
                 }
-                
+                    
                 else if self.REST_METHOD! == Alamofire.Method.DELETE {
                     completion (response: true)
                 }
                 
                 
-//                let data : NSData? = response.data
-//                
-//                
-//                let jsonDict = try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers)
-//                print (jsonDict)
+                //                let data : NSData? = response.data
+                //
+                //
+                //                let jsonDict = try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers)
+                //                print (jsonDict)
                 
                 
-//                let json = JSON((response.result.value as? NSDictionary)!)
-//                let classType : Object.Type = NSClassFromString("Motion.Vehicle")! as! Object.Type
-//                print (classType)
+                //                let json = JSON((response.result.value as? NSDictionary)!)
+                //                let classType : Object.Type = NSClassFromString("Motion.Vehicle")! as! Object.Type
+                //                print (classType)
                 
-//                let clas = aclass.dynamicType.init()
-//                let model =  Mapper<classType.Type>().map((response.result.value as? NSDictionary)!)
+                //                let clas = aclass.dynamicType.init()
+                //                let model =  Mapper<classType.Type>().map((response.result.value as? NSDictionary)!)
                 
                 
-//                let dict = (response.result.value as? NSDictionary)!
-//                
-//                Mapper<Vehicle>().map(dict)
-//                print (model)
+                //                let dict = (response.result.value as? NSDictionary)!
+                //                
+                //                Mapper<Vehicle>().map(dict)
+                //                print (model)
                 
-
+                
             }
             else {
                 failure(error: "Could not complete request")
             }
         }
+        
     }
     
     private func parseDict (dict : NSDictionary) -> AnyObject? {
         switch self.ENTITY_REQUESTED{
             
         case self.PATH_APPS:
-            return nil
+            let model = Mapper<App>().map(dict)
+            return model!
             
         case self.PATH_SECRET:
             return nil
@@ -322,7 +350,6 @@ class MojioClient: NSObject {
         case self.PATH_ADDRESS:
             let model = Mapper<Address>().map(dict)
             return model!
-            
 
         default:
                 return nil
@@ -372,5 +399,33 @@ class MojioClient: NSObject {
             
         }
 
+    }
+}
+
+extension Object {
+    func toDictionary() -> [String:AnyObject] {
+        let properties = self.objectSchema.properties.map { $0.name }
+        var dicProps = [String:AnyObject]()
+        for (key, value) in self.dictionaryWithValuesForKeys(properties) {
+            if let value = value as? ListBase {
+                dicProps[key] = value.toArray()
+            } else if let value = value as? Object {
+                dicProps[key] = value.toDictionary()
+            } else {
+                dicProps[key] = value
+            }
+        }
+        return dicProps
+    }
+}
+
+extension ListBase {
+    func toArray() -> [AnyObject] {
+        var _toArray = [AnyObject]()
+        for i in 0..<self._rlmArray.count {
+            let obj = unsafeBitCast(self._rlmArray[i], Object.self)
+            _toArray.append(obj.toDictionary())
+        }
+        return _toArray
     }
 }
