@@ -52,6 +52,32 @@ class Vehicle: Object, Mappable {
         self.init()
     }
     
+    func json () -> NSString? {
+        let dictionary : NSMutableDictionary = NSMutableDictionary()
+        
+        if self.Name != nil {
+            dictionary.setObject(self.Name!, forKey: "Name")
+        }
+        if self.LicensePlate != nil {
+            dictionary.setObject(self.LicensePlate!, forKey: "LicensePlate")
+        }
+        if self.VIN != nil {
+            dictionary.setObject(self.VIN!, forKey: "VIN")
+        }
+        if self.VehicleOdometer != nil {
+            let odo = self.VehicleOdometer!.toDictionary()
+            dictionary.setObject(odo, forKey: "Odometer")
+        }
+        
+        if dictionary.count == 0 {
+            return nil
+        }
+        
+        let data = try! NSJSONSerialization.dataWithJSONObject(dictionary, options:  NSJSONWritingOptions.PrettyPrinted)
+        let string : NSString = NSString(data: data, encoding: NSUTF8StringEncoding)!
+        return string
+    }
+    
     func mapping(map: Map) {
         
         var diagnosticCodes = Array<DiagnosticCode>()
@@ -118,6 +144,4 @@ class Vehicle: Object, Mappable {
         CreatedOn <- map["CreatedOn"];
         LastModified <- map["LastModified"];
     }
-
-
 }

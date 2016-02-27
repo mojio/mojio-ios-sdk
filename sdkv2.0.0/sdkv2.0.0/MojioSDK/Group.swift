@@ -23,6 +23,26 @@ class Group: Object, Mappable {
         self.init()
     }
     
+    func json () -> NSString? {
+        let dictionary : NSMutableDictionary = NSMutableDictionary()
+        
+        if self.Name != nil {
+            dictionary.setObject(self.Name!, forKey: "Name")
+        }
+        if self.Description != nil {
+            dictionary.setObject(self.Description!, forKey: "Description")
+        }
+        if self.Users.count > 0 {
+            let array = self.Users.toArray()
+            dictionary.setObject(array, forKey: "Users")
+        }
+        
+        let data = try! NSJSONSerialization.dataWithJSONObject(dictionary, options:  NSJSONWritingOptions.PrettyPrinted)
+        let string : NSString = NSString(data: data, encoding: NSUTF8StringEncoding)!
+        return string
+
+    }
+    
     func mapping(map: Map) {
         
         var users = Array<User>()

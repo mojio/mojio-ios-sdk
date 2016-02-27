@@ -25,6 +25,23 @@ class Mojio: Object, Mappable {
         self.init()
     }
     
+    func json () -> NSString? {
+        let dictionary : NSMutableDictionary = NSMutableDictionary()
+        
+        if self.Name != nil {
+            dictionary.setObject(self.Name!, forKey: "Name")
+        }
+        if self.IMEI != nil {
+            dictionary.setObject(self.IMEI!, forKey: "IMEI")
+        }
+        
+        let data = try! NSJSONSerialization.dataWithJSONObject(dictionary, options:  NSJSONWritingOptions.PrettyPrinted)
+        let string : NSString = NSString(data: data, encoding: NSUTF8StringEncoding)!
+        return string
+        
+    }
+
+    
     func mapping(map: Map) {
         
         var tags = Array<String>()
