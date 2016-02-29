@@ -85,9 +85,15 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-sdkv2.0.0/Alamofire.framework"
+  install_framework "Pods-sdkv2.0.0/ObjectMapper.framework"
+  install_framework "Pods-sdkv2.0.0/Realm.framework"
+  install_framework "Pods-sdkv2.0.0/RealmSwift.framework"
   install_framework "Pods-sdkv2.0.0/SwiftyJSON.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-sdkv2.0.0/Alamofire.framework"
+  install_framework "Pods-sdkv2.0.0/ObjectMapper.framework"
+  install_framework "Pods-sdkv2.0.0/Realm.framework"
+  install_framework "Pods-sdkv2.0.0/RealmSwift.framework"
   install_framework "Pods-sdkv2.0.0/SwiftyJSON.framework"
 fi

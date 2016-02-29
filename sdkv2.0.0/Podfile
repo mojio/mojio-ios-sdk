@@ -7,6 +7,9 @@ target 'sdkv2.0.0' do
 
 pod 'Alamofire'
 pod 'SwiftyJSON'
+pod 'ObjectMapper', '~> 1.1'
+pod 'RealmSwift'
+
 
 end
 
