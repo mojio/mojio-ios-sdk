@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 import ObjectMapper
 import RealmSwift
 
@@ -36,6 +37,24 @@ class Trip: Object, Mappable {
 
     required convenience init?(_ map: Map) {
         self.init()
+    }
+    
+    required init() {
+        super.init()
+        
+    }
+    
+    func json() -> NSString? {
+        
+        let dictionary : NSMutableDictionary = NSMutableDictionary()
+        
+        if self.Name != nil {
+            dictionary.setObject(self.Name!, forKey: "Name")
+        }
+        
+        let data = try! NSJSONSerialization.dataWithJSONObject(dictionary, options:  NSJSONWritingOptions.PrettyPrinted)
+        let string : NSString = NSString(data: data, encoding: NSUTF8StringEncoding)!
+        return string
     }
     
     func mapping(map: Map) {

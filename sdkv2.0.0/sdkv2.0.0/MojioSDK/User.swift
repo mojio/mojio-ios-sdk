@@ -23,10 +23,37 @@ class User : Object, Mappable {
     dynamic var Id : String? = nil
     dynamic var CreatedOn : String? = nil
     dynamic var LastModified : String? = nil
-    //    var Links : String?;
+    
+    /* PUT & POST properties */
+    dynamic var email : String? = nil
     
     required convenience init?(_ map: Map) {
         self.init()
+    }
+    
+    func json () -> NSString? {
+        let dictionary : NSMutableDictionary = NSMutableDictionary()
+        
+        if self.UserName != nil {
+            dictionary.setObject(self.UserName!, forKey: "UserName")
+        }
+        if self.email != nil {
+            dictionary.setObject(self.email!, forKey: "Email")
+        }
+        if self.FirstName != nil {
+            dictionary.setObject(self.FirstName!, forKey: "FirstName")
+        }
+        if self.LastName != nil {
+            dictionary.setObject(self.LastName!, forKey: "LastName")
+        }
+        if self.PhoneNumbers.count > 0 {
+            let array = self.PhoneNumbers.toArray()
+            dictionary.setObject(array, forKey: "PhoneNumbers")
+        }
+        
+        let data = try! NSJSONSerialization.dataWithJSONObject(dictionary, options:  NSJSONWritingOptions.PrettyPrinted)
+        let string : NSString = NSString(data: data, encoding: NSUTF8StringEncoding)!
+        return string
     }
     
     func mapping(map: Map) {
@@ -55,11 +82,9 @@ class User : Object, Mappable {
             self.PhoneNumbers.append(phoneNumber)
         }
         
-        
         self.FirstName <- map["FirstName"];
         self.LastName <- map["LastName"];
         self.UserName <- map["UserName"];
-//        PhoneNumbers <- map["PhoneNumber"];// ?? [];
         Img <- map["Image"];
         self.Id <- map["Id"];
         self.CreatedOn <- map["CreatedOn"];
