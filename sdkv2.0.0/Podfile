@@ -9,7 +9,7 @@ pod 'Alamofire'
 pod 'SwiftyJSON'
 pod 'ObjectMapper', '~> 1.1'
 pod 'RealmSwift'
-
+pod 'KeychainSwift', '~> 3.0'
 
 end
 

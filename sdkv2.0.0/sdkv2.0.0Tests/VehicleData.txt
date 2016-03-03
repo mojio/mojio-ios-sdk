@@ -1,0 +1,212 @@
+{
+"Name": "A BMW",
+"VIN": "999525988441558",
+"MojioId": "1b966032-ba3f-4457-b62d-86584e8105e2",
+"MilStatus": false,
+"LastContactTime": "2016-01-21T19:38:00.019Z",
+"DiagnosticCodes": [],
+"Accelerometer": {
+"X": {
+"BaseUnit": "GUnits",
+"Timestamp": "2016-01-21T19:38:00.019+00:00",
+"BaseValue": 0,
+"Unit": "MilliGUnits",
+"Value": 0
+},
+"Y": {
+"BaseUnit": "GUnits",
+"Timestamp": "2016-01-21T19:38:00.019+00:00",
+"BaseValue": 0,
+"Unit": "MilliGUnits",
+"Value": 0
+},
+"Z": {
+"BaseUnit": "GUnits",
+"Timestamp": "2016-01-21T19:38:00.019+00:00",
+"BaseValue": 0,
+"Unit": "MilliGUnits",
+"Value": 0
+}
+},
+"Acceleration": {
+"BaseUnit": "KilometersPerHourPerSecond",
+"Timestamp": "2016-01-21T19:38:00.019+00:00",
+"BaseValue": 0,
+"Unit": "KilometersPerHourPerSecond",
+"Value": 0
+},
+"Deceleration": {
+"BaseUnit": "KilometersPerHourPerSecond",
+"Timestamp": "2016-01-21T19:38:00.019+00:00",
+"BaseValue": 0,
+"Unit": "KilometersPerHourPerSecond",
+"Value": 0
+},
+"Speed": {
+"BaseUnit": "KilometersPerHour",
+"Timestamp": "2016-01-21T19:38:00.019+00:00",
+"BaseValue": 64,
+"Unit": "KilometersPerHour",
+"Value": 64
+},
+"Odometer": {
+"RolloverValue": 0,
+"BaseUnit": "Meters",
+"Timestamp": "2016-01-21T19:38:00.019+00:00",
+"BaseValue": 21000,
+"Unit": "Meters",
+"Value": 21000
+},
+"RPM": {
+"BaseUnit": "RevolutionsPerMinute",
+"Timestamp": "2016-01-21T19:38:00.019+00:00",
+"BaseValue": 796,
+"Unit": "RevolutionsPerMinute",
+"Value": 796
+},
+"FuelEfficiency": {
+"BaseUnit": "KilometerPerLiter",
+"Statistics": {
+"NumOfSamples": 21,
+"Average": 14.095238095238097,
+"Variance": 1.7904761904761908,
+"StdDev": 1.3380867649282653,
+"IndexOfDispersion": 0.12702702702702703,
+"CoeffOfVariation": 0.09493183129558638,
+"M2": 35.80952380952382,
+"Min": 13.92857142857143,
+"Max": 14.100000000000001,
+"StandardScore": {
+"ScoringMethod": "ZScore",
+"Value": -0.07117482792171731,
+"Percentile": 0,
+"Average": 0.6210475340638886
+},
+"MinMaxScore": {
+"ScoringMethod": "MinMaxScore",
+"Value": 0.9722222222222222,
+"Percentile": 97.22222222222221,
+"Average": 0.9986772486772487
+}
+},
+"BenchmarkTime": "2016-01-21T19:38:01.1009501+00:00",
+"BenchmarkStatistics": {
+"NumOfSamples": 21,
+"Average": 14.095238095238097,
+"Variance": 1.7904761904761908,
+"StdDev": 1.3380867649282653,
+"IndexOfDispersion": 0.12702702702702703,
+"CoeffOfVariation": 0.09493183129558638,
+"M2": 35.80952380952382,
+"Min": 13.92857142857143,
+"Max": 14.100000000000001,
+"StandardScore": {
+"ScoringMethod": "ZScore",
+"Value": -0.07117482792171731,
+"Percentile": 0,
+"Average": 0.6210475340638886
+},
+"MinMaxScore": {
+"ScoringMethod": "MinMaxScore",
+"Value": 0.9722222222222222,
+"Percentile": 97.22222222222221,
+"Average": 0.9986772486772487
+}
+},
+"Timestamp": "2016-01-21T19:38:00.019+00:00",
+"BaseValue": 14,
+"Unit": "KilometerPerLiter",
+"Value": 14
+},
+"FuelEfficiencyCalculationMethod": "Query",
+"FuelLevel": {
+"BaseUnit": "Percentage",
+"RiskSeverity": "None",
+"Timestamp": "2016-01-21T19:38:00.019+00:00",
+"BaseValue": 70,
+"Unit": "Percentage",
+"Value": 70
+},
+"FuelType": "Query",
+"GatewayTime": "2016-01-21T19:38:01.121Z",
+"HarshEventState": {
+"Timestamp": "2016-01-21T19:38:00.019+00:00",
+"Value": false
+},
+"IdleState": {
+"Timestamp": "2016-01-21T19:38:00.019+00:00",
+"Value": false
+},
+"IgnitionState": {
+"Timestamp": "2016-01-21T19:38:00.019+00:00",
+"Value": false
+},
+"Battery": {
+"Connected": true,
+"RiskSeverity": "None",
+"BaseUnit": "MilliVolts",
+"Timestamp": "2016-01-21T19:38:00.019+00:00",
+"BaseValue": 11000,
+"Unit": "Volts",
+"Value": 11
+},
+"Heading": {
+"BaseUnit": "Degree",
+"Direction": "North",
+"LeftTurn": true,
+"Timestamp": "2016-01-21T19:38:00.019+00:00",
+"BaseValue": 0,
+"Unit": "Degree",
+"Value": 0
+},
+"Location": {
+"Address": {
+"HouseNumber": "4600",
+"Road": "Cambie Street",
+"Neighbourhood": "East Side",
+"Suburb": "East Side",
+"City": "Vancouver",
+"County": "Greater Vancouver",
+"State": "British Columbia",
+"PostCode": "V5Y",
+"Country": "Canada",
+"CountryCode": "CA",
+"FormattedAddress": "4600 Cambie St, Vancouver, BC V5Y, Canada"
+},
+"Timestamp": "2016-01-21T19:38:00.019+00:00",
+"Lat": 49.24122,
+"Lng": -123.1153,
+"Status": "Locked",
+"Dilution": 0,
+"Altitude": 0,
+"GeoHash": "c2b2nkn4vsdw"
+},
+"AccidentState": {
+"Timestamp": "2016-01-21T19:38:00.019+00:00",
+"Value": false
+},
+"TowState": {
+"Timestamp": "2016-01-21T19:38:00.019+00:00",
+"Value": false
+},
+"ParkedState": {
+"Timestamp": "2016-01-21T19:38:00.019+00:00",
+"Value": true
+},
+"Tags": [],
+"OwnerGroups": [
+"d9f61f65-ef4b-43bf-bdfe-9299e6fbf5a8"
+],
+"Id": "eff1ccd0-e718-4e28-a985-945a2994f689",
+"CreatedOn": "2016-01-05T03:42:20.738Z",
+"LastModified": "2016-02-26T23:36:13.189Z",
+"Links": {
+"Self": "/v2/vehicles/eff1ccd0-e718-4e28-a985-945a2994f689",
+"Mojio": "/v2/mojios/1b966032-ba3f-4457-b62d-86584e8105e2",
+"Permissions": "/v2/vehicles/eff1ccd0-e718-4e28-a985-945a2994f689/permissions",
+"Permission": "/v2/vehicles/eff1ccd0-e718-4e28-a985-945a2994f689/permission",
+"Trips": "/v2/vehicles/eff1ccd0-e718-4e28-a985-945a2994f689/trips",
+"States": "/v2/vehicles/eff1ccd0-e718-4e28-a985-945a2994f689/history/states",
+"Locations": "/v2/vehicles/eff1ccd0-e718-4e28-a985-945a2994f689/history/locations"
+}
+}
