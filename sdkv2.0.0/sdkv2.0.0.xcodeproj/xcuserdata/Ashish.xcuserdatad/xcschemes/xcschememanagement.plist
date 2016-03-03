@@ -9,6 +9,11 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>sdkv2.0.0Tests.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>9</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
@@ -18,6 +23,11 @@
 			<true/>
 		</dict>
 		<key>755785541C6BE403000D65B3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>756E59A61C88245F004AC466</key>
 		<dict>
 			<key>primary</key>
 			<true/>
