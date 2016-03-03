@@ -27,16 +27,16 @@ class LoginTest: XCTestCase {
         super.tearDown()
     }
     
-    func testLogin() {
+    func testEnvironments () {
         
-        let expectation = expectationWithDescription("Login complete")
+    }
+    
+    func testLogin() {
         
         self.authClient.login({
             XCTAssert(true, "Login successful")
-            expectation.fulfill()
         })
         
-        waitForExpectationsWithTimeout(5000, handler: nil)
     }
     
     func testPerformanceExample() {

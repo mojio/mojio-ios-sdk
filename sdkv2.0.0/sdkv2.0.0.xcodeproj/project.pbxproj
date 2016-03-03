@@ -7,17 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		129478936D8217E16F4AADAD /* Pods_sdkv2_0_0Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B3A918696E142ACBFF983E5 /* Pods_sdkv2_0_0Tests.framework */; };
 		755785451C6BE403000D65B3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755785441C6BE403000D65B3 /* AppDelegate.swift */; };
 		755785471C6BE403000D65B3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755785461C6BE403000D65B3 /* ViewController.swift */; };
 		7557854A1C6BE403000D65B3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 755785481C6BE403000D65B3 /* Main.storyboard */; };
 		7557854C1C6BE403000D65B3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7557854B1C6BE403000D65B3 /* Assets.xcassets */; };
 		7557854F1C6BE403000D65B3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7557854D1C6BE403000D65B3 /* LaunchScreen.storyboard */; };
-		7557855A1C6BE403000D65B3 /* sdkv2_0_0Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755785591C6BE403000D65B3 /* sdkv2_0_0Tests.swift */; };
 		755785691C6BE45C000D65B3 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755785651C6BE45C000D65B3 /* AuthViewController.swift */; };
 		7557856A1C6BE45C000D65B3 /* AuthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 755785661C6BE45C000D65B3 /* AuthViewController.xib */; };
 		7557856B1C6BE45C000D65B3 /* MojioAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755785671C6BE45C000D65B3 /* MojioAuth.swift */; };
 		7557856C1C6BE45C000D65B3 /* MojioClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755785681C6BE45C000D65B3 /* MojioClient.swift */; };
 		756E59AA1C88245F004AC466 /* sdkv2_0_0UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756E59A91C88245F004AC466 /* sdkv2_0_0UITests.swift */; };
+		756E59B21C88E3A5004AC466 /* VehiclesData.txt in Resources */ = {isa = PBXBuildFile; fileRef = 756E59B11C88E3A5004AC466 /* VehiclesData.txt */; };
+		756E59B41C88F1E1004AC466 /* GroupData.txt in Resources */ = {isa = PBXBuildFile; fileRef = 756E59B31C88F1E1004AC466 /* GroupData.txt */; };
+		756E59B51C88F2FD004AC466 /* GroupData.txt in Resources */ = {isa = PBXBuildFile; fileRef = 756E59B31C88F1E1004AC466 /* GroupData.txt */; };
 		75D933051C84D8D900D1D8F0 /* LoginTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D933041C84D8D900D1D8F0 /* LoginTest.swift */; };
 		75D933061C84DA3C00D1D8F0 /* Battery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94E8D1C84D0A500FD2888 /* Battery.swift */; };
 		75D933081C84DA4E00D1D8F0 /* DiagnosticCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94E8F1C84D0A600FD2888 /* DiagnosticCode.swift */; };
@@ -70,7 +73,6 @@
 		75D933761C8506AE00D1D8F0 /* MojioClientTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D933751C8506AE00D1D8F0 /* MojioClientTest.swift */; };
 		75D933781C8508C200D1D8F0 /* VehicleData.txt in Resources */ = {isa = PBXBuildFile; fileRef = 75D933771C8508C200D1D8F0 /* VehicleData.txt */; };
 		75D933791C850FE100D1D8F0 /* VehicleData.txt in Resources */ = {isa = PBXBuildFile; fileRef = 75D933771C8508C200D1D8F0 /* VehicleData.txt */; };
-		75D9337B1C85140D00D1D8F0 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D9337A1C85140D00D1D8F0 /* Request.swift */; };
 		75D9337D1C8517EF00D1D8F0 /* PathTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D9337C1C8517EF00D1D8F0 /* PathTest.swift */; };
 		75D94E881C84D09500FD2888 /* Acceleration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94E831C84D09500FD2888 /* Acceleration.swift */; };
 		75D94E891C84D09500FD2888 /* Accelerometer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94E841C84D09500FD2888 /* Accelerometer.swift */; };
@@ -153,6 +155,7 @@
 /* Begin PBXFileReference section */
 		0E4EC963AE554407DD59F331 /* Pods-sdkv2.0.0.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sdkv2.0.0.debug.xcconfig"; path = "Pods/Target Support Files/Pods-sdkv2.0.0/Pods-sdkv2.0.0.debug.xcconfig"; sourceTree = "<group>"; };
 		12B58B0AAFF9E034431C1B1C /* Pods_sdkv2_0_0.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_sdkv2_0_0.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1E7032C534B485DDB446AF57 /* Pods-sdkv2.0.0Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sdkv2.0.0Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-sdkv2.0.0Tests/Pods-sdkv2.0.0Tests.release.xcconfig"; sourceTree = "<group>"; };
 		755785411C6BE403000D65B3 /* sdkv2.0.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sdkv2.0.0.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		755785441C6BE403000D65B3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		755785461C6BE403000D65B3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -161,7 +164,6 @@
 		7557854E1C6BE403000D65B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		755785501C6BE403000D65B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		755785551C6BE403000D65B3 /* sdkv2.0.0Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = sdkv2.0.0Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		755785591C6BE403000D65B3 /* sdkv2_0_0Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sdkv2_0_0Tests.swift; sourceTree = "<group>"; };
 		7557855B1C6BE403000D65B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		755785651C6BE45C000D65B3 /* AuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		755785661C6BE45C000D65B3 /* AuthViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AuthViewController.xib; sourceTree = "<group>"; };
@@ -170,10 +172,11 @@
 		756E59A71C88245F004AC466 /* sdkv2.0.0UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = sdkv2.0.0UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		756E59A91C88245F004AC466 /* sdkv2_0_0UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sdkv2_0_0UITests.swift; sourceTree = "<group>"; };
 		756E59AB1C88245F004AC466 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		756E59B11C88E3A5004AC466 /* VehiclesData.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VehiclesData.txt; sourceTree = "<group>"; };
+		756E59B31C88F1E1004AC466 /* GroupData.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GroupData.txt; sourceTree = "<group>"; };
 		75D933041C84D8D900D1D8F0 /* LoginTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginTest.swift; sourceTree = "<group>"; };
 		75D933751C8506AE00D1D8F0 /* MojioClientTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MojioClientTest.swift; sourceTree = "<group>"; };
 		75D933771C8508C200D1D8F0 /* VehicleData.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VehicleData.txt; sourceTree = "<group>"; };
-		75D9337A1C85140D00D1D8F0 /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		75D9337C1C8517EF00D1D8F0 /* PathTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PathTest.swift; sourceTree = "<group>"; };
 		75D94E831C84D09500FD2888 /* Acceleration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Acceleration.swift; sourceTree = "<group>"; };
 		75D94E841C84D09500FD2888 /* Accelerometer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Accelerometer.swift; sourceTree = "<group>"; };
@@ -226,6 +229,8 @@
 		75E34FD91C87E36B001B40E0 /* VinData.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VinData.txt; sourceTree = "<group>"; };
 		75E34FDC1C87E3F9001B40E0 /* ServiceScheduleData.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ServiceScheduleData.txt; sourceTree = "<group>"; };
 		75E34FDF1C87E433001B40E0 /* NextServiceData.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NextServiceData.txt; sourceTree = "<group>"; };
+		8FEC8B4BECE8C8AA4CD2A4D4 /* Pods-sdkv2.0.0Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sdkv2.0.0Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-sdkv2.0.0Tests/Pods-sdkv2.0.0Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		9B3A918696E142ACBFF983E5 /* Pods_sdkv2_0_0Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_sdkv2_0_0Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7A991FE380437ACA972E52C /* Pods-sdkv2.0.0.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sdkv2.0.0.release.xcconfig"; path = "Pods/Target Support Files/Pods-sdkv2.0.0/Pods-sdkv2.0.0.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -242,6 +247,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				129478936D8217E16F4AADAD /* Pods_sdkv2_0_0Tests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,6 +266,8 @@
 			children = (
 				0E4EC963AE554407DD59F331 /* Pods-sdkv2.0.0.debug.xcconfig */,
 				E7A991FE380437ACA972E52C /* Pods-sdkv2.0.0.release.xcconfig */,
+				8FEC8B4BECE8C8AA4CD2A4D4 /* Pods-sdkv2.0.0Tests.debug.xcconfig */,
+				1E7032C534B485DDB446AF57 /* Pods-sdkv2.0.0Tests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -303,12 +311,12 @@
 		755785581C6BE403000D65B3 /* sdkv2.0.0Tests */ = {
 			isa = PBXGroup;
 			children = (
-				755785591C6BE403000D65B3 /* sdkv2_0_0Tests.swift */,
 				75D933041C84D8D900D1D8F0 /* LoginTest.swift */,
 				75D933751C8506AE00D1D8F0 /* MojioClientTest.swift */,
-				75D9337A1C85140D00D1D8F0 /* Request.swift */,
 				75D9337C1C8517EF00D1D8F0 /* PathTest.swift */,
 				75D933771C8508C200D1D8F0 /* VehicleData.txt */,
+				756E59B11C88E3A5004AC466 /* VehiclesData.txt */,
+				756E59B31C88F1E1004AC466 /* GroupData.txt */,
 				75E34FCD1C8776EE001B40E0 /* AppData.txt */,
 				75E34FCF1C877724001B40E0 /* MojioData.txt */,
 				75E34FD11C87774E001B40E0 /* TripData.txt */,
@@ -405,6 +413,7 @@
 			isa = PBXGroup;
 			children = (
 				12B58B0AAFF9E034431C1B1C /* Pods_sdkv2_0_0.framework */,
+				9B3A918696E142ACBFF983E5 /* Pods_sdkv2_0_0Tests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -436,9 +445,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 755785611C6BE403000D65B3 /* Build configuration list for PBXNativeTarget "sdkv2.0.0Tests" */;
 			buildPhases = (
+				3917D2A3B92D8C5A4713A68B /* Check Pods Manifest.lock */,
 				755785511C6BE403000D65B3 /* Sources */,
 				755785521C6BE403000D65B3 /* Frameworks */,
 				755785531C6BE403000D65B3 /* Resources */,
+				F950F8B3398438FB32B236E6 /* Embed Pods Frameworks */,
+				088310DDA51F18D05C12D127 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -521,6 +533,7 @@
 				75D933791C850FE100D1D8F0 /* VehicleData.txt in Resources */,
 				75E34FE01C87E433001B40E0 /* NextServiceData.txt in Resources */,
 				75E34FD61C8779B7001B40E0 /* MojioData.txt in Resources */,
+				756E59B51C88F2FD004AC466 /* GroupData.txt in Resources */,
 				7557856A1C6BE45C000D65B3 /* AuthViewController.xib in Resources */,
 				75E34FD71C8779BA001B40E0 /* TripData.txt in Resources */,
 				75E34FD51C8779B4001B40E0 /* AppData.txt in Resources */,
@@ -542,8 +555,10 @@
 				75E34FDB1C87E36B001B40E0 /* VinData.txt in Resources */,
 				75E34FD41C87776A001B40E0 /* UserData.txt in Resources */,
 				75E34FDE1C87E3F9001B40E0 /* ServiceScheduleData.txt in Resources */,
+				756E59B21C88E3A5004AC466 /* VehiclesData.txt in Resources */,
 				75E34FD01C877724001B40E0 /* MojioData.txt in Resources */,
 				75E34FD21C87774E001B40E0 /* TripData.txt in Resources */,
+				756E59B41C88F1E1004AC466 /* GroupData.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -557,6 +572,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		088310DDA51F18D05C12D127 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-sdkv2.0.0Tests/Pods-sdkv2.0.0Tests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		207C89C8A10BAF6F51AF511A /* Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -570,6 +600,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-sdkv2.0.0/Pods-sdkv2.0.0-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3917D2A3B92D8C5A4713A68B /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		90A2D5A5053ED0D1CF1B41D6 /* Check Pods Manifest.lock */ = {
@@ -600,6 +645,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-sdkv2.0.0/Pods-sdkv2.0.0-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F950F8B3398438FB32B236E6 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-sdkv2.0.0Tests/Pods-sdkv2.0.0Tests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -706,14 +766,12 @@
 				75D933311C84DA4E00D1D8F0 /* Accelerometer.swift in Sources */,
 				75D933141C84DA4E00D1D8F0 /* Image.swift in Sources */,
 				75D9330B1C84DA4E00D1D8F0 /* Engine.swift in Sources */,
-				75D9337B1C85140D00D1D8F0 /* Request.swift in Sources */,
 				75D9330C1C84DA4E00D1D8F0 /* FuelCapacity.swift in Sources */,
 				75D933351C84DA4E00D1D8F0 /* AuthViewController.swift in Sources */,
 				75D9332A1C84DA4E00D1D8F0 /* Trip.swift in Sources */,
 				75D933381C84DA4E00D1D8F0 /* MojioClient.swift in Sources */,
 				75D933121C84DA4E00D1D8F0 /* IdleState.swift in Sources */,
 				75D9331D1C84DA4E00D1D8F0 /* PhoneNumber.swift in Sources */,
-				7557855A1C6BE403000D65B3 /* sdkv2_0_0Tests.swift in Sources */,
 				75D9332F1C84DA4E00D1D8F0 /* Warranty.swift in Sources */,
 				75D933051C84D8D900D1D8F0 /* LoginTest.swift in Sources */,
 				75D933211C84DA4E00D1D8F0 /* RPM.swift in Sources */,
@@ -872,6 +930,7 @@
 		};
 		755785621C6BE403000D65B3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8FEC8B4BECE8C8AA4CD2A4D4 /* Pods-sdkv2.0.0Tests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = sdkv2.0.0Tests/Info.plist;
@@ -884,6 +943,7 @@
 		};
 		755785631C6BE403000D65B3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1E7032C534B485DDB446AF57 /* Pods-sdkv2.0.0Tests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = sdkv2.0.0Tests/Info.plist;
@@ -955,6 +1015,7 @@
 				756E59AF1C88245F004AC466 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -2,6 +2,21 @@ PODS:
   - Alamofire (3.2.0)
   - KeychainSwift (3.0.11)
   - ObjectMapper (1.1.5)
+  - OHHTTPStubs (4.7.1):
+    - OHHTTPStubs/Default (= 4.7.1)
+  - OHHTTPStubs/Core (4.7.1)
+  - OHHTTPStubs/Default (4.7.1):
+    - OHHTTPStubs/Core
+    - OHHTTPStubs/JSON
+    - OHHTTPStubs/NSURLSession
+    - OHHTTPStubs/OHPathHelpers
+  - OHHTTPStubs/JSON (4.7.1):
+    - OHHTTPStubs/Core
+  - OHHTTPStubs/NSURLSession (4.7.1):
+    - OHHTTPStubs/Core
+  - OHHTTPStubs/OHPathHelpers (4.7.1)
+  - OHHTTPStubs/Swift (4.7.1):
+    - OHHTTPStubs/Core
   - Realm (0.98.3):
     - Realm/Headers (= 0.98.3)
   - Realm/Headers (0.98.3)
@@ -13,6 +28,8 @@ DEPENDENCIES:
   - Alamofire
   - KeychainSwift (~> 3.0)
   - ObjectMapper (~> 1.1)
+  - OHHTTPStubs
+  - OHHTTPStubs/Swift
   - RealmSwift
   - SwiftyJSON
 
@@ -20,6 +37,7 @@ SPEC CHECKSUMS:
   Alamofire: 4da478599fccddff361205c8929333d7fe18dceb
   KeychainSwift: 0a4214c910423543a42b0f30f25987d46178b6a5
   ObjectMapper: 528b1a6677a6acac7747edd508576983e76a9148
+  OHHTTPStubs: f7d1604d04d37d055460c0ef9af01bb249ded0fa
   Realm: c6a7d00221a2d5177810a674aebd40c5e0b70b0f
   RealmSwift: d6ecad6e4c2a645d6ac956c2c7e9efb375f39c31
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a

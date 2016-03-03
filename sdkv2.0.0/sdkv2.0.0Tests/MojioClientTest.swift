@@ -8,6 +8,8 @@
 
 import XCTest
 import ObjectMapper
+import OHHTTPStubs
+
 @testable import sdkv2_0_0
 
 class MojioClientTest: XCTestCase {
@@ -40,6 +42,8 @@ class MojioClientTest: XCTestCase {
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
+        
+        OHHTTPStubs.removeAllStubs()
     }
     
     func testObjectSerialization () {
@@ -69,6 +73,9 @@ class MojioClientTest: XCTestCase {
         
         client.ENTITY_REQUESTED = self.PATH_NEXT
         let nextService = client.parseDict(toDict("NextServiceData")!) as? NextServiceSchedule
+        
+        client.ENTITY_REQUESTED = self.PATH_GROUPS
+        let group = client.parseDict(toDict("GroupData")!) as? Group
 
         XCTAssertNotNil((vehicle?.isKindOfClass(Vehicle)), "The class is not of type vehicle")
         XCTAssertNotNil((app?.isKindOfClass(App)), "The class is not of type app")
@@ -78,7 +85,8 @@ class MojioClientTest: XCTestCase {
         XCTAssertNotNil((vin?.isKindOfClass(Vin)), "The class is not of type VIN")
         XCTAssertNotNil((serviceSchedule?.isKindOfClass(ServiceSchedule)), "The class is not of type ServiceSchedule")
         XCTAssertNotNil((nextService?.isKindOfClass(NextServiceSchedule)), "The class is not of type Next Service")
-        
+        XCTAssertNotNil((group?.isKindOfClass(Group)), "The class is not of type Group")
+
         XCTAssertNotNil(vehicle?.json(), "Could not serialize vehicle into JSON")
         XCTAssertNotNil(app?.json(), "Could not serialize app into JSON")
         XCTAssertNotNil(mojio?.json(), "Could not serialize Mojio into JSON")
@@ -87,10 +95,56 @@ class MojioClientTest: XCTestCase {
         
     }
     
-    func testCrud () {
-        
+    func testGetObject () {
+        self.executeRestRequest("VehicleData.txt", message: "Failed to fetch vehicle", requestType : "GET")
     }
     
+    func testGetObjects () {
+        self.executeRestRequest("VehiclesData.txt", message: "Failed to fetch all vehicles", requestType : "GET")
+    }
+    
+    func testPutObject () {
+        self.executeRestRequest("VehicleData.txt", message: "Failed to post vehicle", requestType : "PUT")
+    }
+    
+    func testPostObject () {
+        self.executeRestRequest("VehicleData.txt", message: "Failed to post vehicle", requestType : "POST")
+    }
+    
+    func executeRestRequest (fileName : String, message : String, requestType : String) {
+        
+        stub(isHost("staging-api.moj.io")) { _ in
+            let stubPath = OHPathForFile (fileName, self.dynamicType)
+            return fixture(stubPath!, headers : ["Content-Type" : "application/json"])
+        }
+        
+        let expectation = self.expectationWithDescription("Response arrived")
+        
+        if requestType == "GET" {
+            MojioClient().get().vehicles(nil).run({ response in
+                expectation.fulfill()
+                
+                }, failure: { error in
+                    XCTAssertFalse(false, message)
+            })
+        }
+        else if requestType == "PUT" {
+            MojioClient().put().users("user-id").run("", completion: { response in
+                expectation.fulfill()
+                }, failure: { error in
+                    XCTAssertFalse(false, message)
+            })
+        }
+        else if requestType == "POST" {
+            MojioClient().put().vehicles(nil).run("", completion: { response in
+                expectation.fulfill()
+                }, failure: { error in
+                    XCTAssertFalse(false, message)
+            })
+        }
+
+        self.waitForExpectationsWithTimeout(5, handler: nil)
+    }
     
     func toDict (fileName : String) -> NSDictionary? {
         
