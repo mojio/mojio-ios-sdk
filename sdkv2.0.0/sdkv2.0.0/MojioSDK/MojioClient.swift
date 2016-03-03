@@ -37,9 +37,9 @@ class MojioClient: NSObject {
     private let PATH_SERVICE_SCHEDULE = "serviceschedule/"
     private let PATH_NEXT : String = "next/"
     
-    private var REQUEST_URL : String
+    var REQUEST_URL : String
     private var REST_METHOD : Alamofire.Method?
-    private var ENTITY_REQUESTED : String = ""
+    var ENTITY_REQUESTED : String = ""
     
     override init () {
         self.REQUEST_URL = MojioClientEnvironment.clientEnvironment.getApiEndpoint()
@@ -269,28 +269,6 @@ class MojioClient: NSObject {
                     completion (response: true)
                 }
                 
-                
-                //                let data : NSData? = response.data
-                //
-                //
-                //                let jsonDict = try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers)
-                //                print (jsonDict)
-                
-                
-                //                let json = JSON((response.result.value as? NSDictionary)!)
-                //                let classType : Object.Type = NSClassFromString("Motion.Vehicle")! as! Object.Type
-                //                print (classType)
-                
-                //                let clas = aclass.dynamicType.init()
-                //                let model =  Mapper<classType.Type>().map((response.result.value as? NSDictionary)!)
-                
-                
-                //                let dict = (response.result.value as? NSDictionary)!
-                //                
-                //                Mapper<Vehicle>().map(dict)
-                //                print (model)
-                
-                
             }
             else {
                 failure(error: "Could not complete request")
@@ -299,7 +277,7 @@ class MojioClient: NSObject {
         
     }
     
-    private func parseDict (dict : NSDictionary) -> AnyObject? {
+    func parseDict (dict : NSDictionary) -> AnyObject? {
         switch self.ENTITY_REQUESTED{
             
         case self.PATH_APPS:
@@ -350,6 +328,18 @@ class MojioClient: NSObject {
         case self.PATH_ADDRESS:
             let model = Mapper<Address>().map(dict)
             return model!
+            
+        case self.PATH_VIN:
+            let model = Mapper<Vin>().map(dict)
+            return model!
+            
+        case self.PATH_SERVICE_SCHEDULE:
+            let model = Mapper<ServiceSchedule>().map(dict)
+            return model!
+            
+        case self.PATH_NEXT:
+            let model = Mapper<NextServiceSchedule>().map(dict)
+            return model!
 
         default:
                 return nil
@@ -362,44 +352,6 @@ class MojioClient: NSObject {
         return authToken
     }
     
-    func createObserver () {
-        var observer : Observer = Observer()
-        observer.Key = "Ashish Key"
-        observer.Name = "First Vehicle Observer"
-        var transport : Transport = Transport(clientId: "9692e2af-07f6-46ed-b384-1831b739ebf6", hubName: "VehicleHub", callback: nil)
-        
-        observer.Transports = transport
-        var str = observer.toString()
-        let json = JSONSerializer.toJson(observer)
-        
-        
-        let url : String = "https://staging-push.moj.io/v2/vehicles/eff1ccd0-e718-4e28-a985-945a2994f689"
-//        let authToken = self.authToken()!;
-
-        
-        Alamofire.request(Method.GET, url, parameters: [:], encoding: .Custom({
-            (convertible, params) in
-            let mutableRequest = convertible.URLRequest.copy() as! NSMutableURLRequest
-//            mutableRequest.setValue(authToken, forHTTPHeaderField : "MojioAPIToken")
-            mutableRequest.HTTPBody = str.dataUsingEncoding(NSUTF8StringEncoding)
-            return (mutableRequest, nil)
-        })).responseJSON{ response in
-            
-            if response.response?.statusCode != 200 {
-                print ("failed to create observer")
-            }
-            else {
-                let json : JSON = JSON(response.result.value ?? [])
-                if json != nil {
-                    print (json)
-                }
-                else {
-                }
-            }
-            
-        }
-
-    }
 }
 
 extension Object {
