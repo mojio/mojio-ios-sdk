@@ -8,6 +8,22 @@
 
 import UIKit
 
-class Request: NSObject {
-
+public class Request {
+    
+    var request:String?
+    struct response{
+        static var data:NSHTTPURLResponse?
+        static var json:AnyObject?
+        static var error:NSError?
+    }
+    
+    init (request:String){
+        self.request = request
+    }
+    
+    public func responseJSON(options: NSJSONReadingOptions = .AllowFragments, completionHandler: (NSURLRequest, NSHTTPURLResponse?, AnyObject?, NSError?) -> Void) -> Self {
+        
+        completionHandler(NSURLRequest(URL: NSURL(string:self.request!)!), Request.response.data, Request.response.json, Request.response.error)
+        return self
+    }
 }

@@ -6,11 +6,12 @@ build/
 *.mode1v3
 !default.mode1v3
 *.mode2v3
-*.xcscheme
 !default.mode2v3
 *.perspectivev3
 !default.perspectivev3
 *.xcworkspace
+*.xcconfig
+*.xcuserdata
 !default.xcworkspace
 xcuserdata
 profile

@@ -47,7 +47,7 @@ class MojioClientTest: XCTestCase {
         let client : MojioClient = MojioClient()
        
         client.ENTITY_REQUESTED = "vehicles/"
-        let vehicle = client.parseDict (toDict("VehicleData")!) as? Vehicle
+        let vehicle = client.parseDict (toDict("VehicleData")!) 
 
         client.ENTITY_REQUESTED = "apps/"
         let app = client.parseDict (toDict("AppData")!) as? App
@@ -60,19 +60,34 @@ class MojioClientTest: XCTestCase {
         
         client.ENTITY_REQUESTED = "users/"
         let user = client.parseDict (toDict("UserData")!) as? User
-
+        
+        client.ENTITY_REQUESTED = self.PATH_VIN
+        let vin = client.parseDict(toDict("VinData")!) as? Vin
+        
+        client.ENTITY_REQUESTED = self.PATH_SERVICE_SCHEDULE
+        let serviceSchedule = client.parseDict(toDict("ServiceScheduleData")!) as? ServiceSchedule
+        
+        client.ENTITY_REQUESTED = self.PATH_NEXT
+        let nextService = client.parseDict(toDict("NextServiceData")!) as? NextServiceSchedule
 
         XCTAssertNotNil((vehicle?.isKindOfClass(Vehicle)), "The class is not of type vehicle")
         XCTAssertNotNil((app?.isKindOfClass(App)), "The class is not of type app")
         XCTAssertNotNil((mojio?.isKindOfClass(Mojio)), "The class is not of type mojio")
         XCTAssertNotNil((trip?.isKindOfClass(Trip)), "The class is not of type trip")
         XCTAssertNotNil((user?.isKindOfClass(User)), "The class is not of type user")
+        XCTAssertNotNil((vin?.isKindOfClass(Vin)), "The class is not of type VIN")
+        XCTAssertNotNil((serviceSchedule?.isKindOfClass(ServiceSchedule)), "The class is not of type ServiceSchedule")
+        XCTAssertNotNil((nextService?.isKindOfClass(NextServiceSchedule)), "The class is not of type Next Service")
         
         XCTAssertNotNil(vehicle?.json(), "Could not serialize vehicle into JSON")
         XCTAssertNotNil(app?.json(), "Could not serialize app into JSON")
         XCTAssertNotNil(mojio?.json(), "Could not serialize Mojio into JSON")
         XCTAssertNotNil(trip?.json(), "Could not serialize trip into JSON")
         XCTAssertNotNil(user?.json(), "Could not serialize user into JSON")
+        
+    }
+    
+    func testCrud () {
         
     }
     

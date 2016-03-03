@@ -20,7 +20,6 @@ class LoginTest: XCTestCase {
         self.authClient.logout()
         MojioClientEnvironment.clientEnvironment.setEnvironment(Environment.AMERICA_STAGING)
         
-        
     }
     
     override func tearDown() {

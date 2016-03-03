@@ -129,6 +129,12 @@
 		75E34FD61C8779B7001B40E0 /* MojioData.txt in Resources */ = {isa = PBXBuildFile; fileRef = 75E34FCF1C877724001B40E0 /* MojioData.txt */; };
 		75E34FD71C8779BA001B40E0 /* TripData.txt in Resources */ = {isa = PBXBuildFile; fileRef = 75E34FD11C87774E001B40E0 /* TripData.txt */; };
 		75E34FD81C8779BD001B40E0 /* UserData.txt in Resources */ = {isa = PBXBuildFile; fileRef = 75E34FD31C87776A001B40E0 /* UserData.txt */; };
+		75E34FDA1C87E36B001B40E0 /* VinData.txt in Resources */ = {isa = PBXBuildFile; fileRef = 75E34FD91C87E36B001B40E0 /* VinData.txt */; };
+		75E34FDB1C87E36B001B40E0 /* VinData.txt in Resources */ = {isa = PBXBuildFile; fileRef = 75E34FD91C87E36B001B40E0 /* VinData.txt */; };
+		75E34FDD1C87E3F9001B40E0 /* ServiceScheduleData.txt in Resources */ = {isa = PBXBuildFile; fileRef = 75E34FDC1C87E3F9001B40E0 /* ServiceScheduleData.txt */; };
+		75E34FDE1C87E3F9001B40E0 /* ServiceScheduleData.txt in Resources */ = {isa = PBXBuildFile; fileRef = 75E34FDC1C87E3F9001B40E0 /* ServiceScheduleData.txt */; };
+		75E34FE01C87E433001B40E0 /* NextServiceData.txt in Resources */ = {isa = PBXBuildFile; fileRef = 75E34FDF1C87E433001B40E0 /* NextServiceData.txt */; };
+		75E34FE11C87E433001B40E0 /* NextServiceData.txt in Resources */ = {isa = PBXBuildFile; fileRef = 75E34FDF1C87E433001B40E0 /* NextServiceData.txt */; };
 		F83BD9F586581F007EE25BAF /* Pods_sdkv2_0_0.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12B58B0AAFF9E034431C1B1C /* Pods_sdkv2_0_0.framework */; };
 /* End PBXBuildFile section */
 
@@ -215,6 +221,9 @@
 		75E34FCF1C877724001B40E0 /* MojioData.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MojioData.txt; sourceTree = "<group>"; };
 		75E34FD11C87774E001B40E0 /* TripData.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TripData.txt; sourceTree = "<group>"; };
 		75E34FD31C87776A001B40E0 /* UserData.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = UserData.txt; sourceTree = "<group>"; };
+		75E34FD91C87E36B001B40E0 /* VinData.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VinData.txt; sourceTree = "<group>"; };
+		75E34FDC1C87E3F9001B40E0 /* ServiceScheduleData.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ServiceScheduleData.txt; sourceTree = "<group>"; };
+		75E34FDF1C87E433001B40E0 /* NextServiceData.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NextServiceData.txt; sourceTree = "<group>"; };
 		E7A991FE380437ACA972E52C /* Pods-sdkv2.0.0.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sdkv2.0.0.release.xcconfig"; path = "Pods/Target Support Files/Pods-sdkv2.0.0/Pods-sdkv2.0.0.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -293,6 +302,9 @@
 				75E34FCF1C877724001B40E0 /* MojioData.txt */,
 				75E34FD11C87774E001B40E0 /* TripData.txt */,
 				75E34FD31C87776A001B40E0 /* UserData.txt */,
+				75E34FD91C87E36B001B40E0 /* VinData.txt */,
+				75E34FDC1C87E3F9001B40E0 /* ServiceScheduleData.txt */,
+				75E34FDF1C87E433001B40E0 /* NextServiceData.txt */,
 				7557855B1C6BE403000D65B3 /* Info.plist */,
 			);
 			path = sdkv2.0.0Tests;
@@ -464,8 +476,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75E34FDA1C87E36B001B40E0 /* VinData.txt in Resources */,
 				75E34FD81C8779BD001B40E0 /* UserData.txt in Resources */,
 				75D933791C850FE100D1D8F0 /* VehicleData.txt in Resources */,
+				75E34FE01C87E433001B40E0 /* NextServiceData.txt in Resources */,
 				75E34FD61C8779B7001B40E0 /* MojioData.txt in Resources */,
 				7557856A1C6BE45C000D65B3 /* AuthViewController.xib in Resources */,
 				75E34FD71C8779BA001B40E0 /* TripData.txt in Resources */,
@@ -473,6 +487,7 @@
 				7557854F1C6BE403000D65B3 /* LaunchScreen.storyboard in Resources */,
 				7557854C1C6BE403000D65B3 /* Assets.xcassets in Resources */,
 				7557854A1C6BE403000D65B3 /* Main.storyboard in Resources */,
+				75E34FDD1C87E3F9001B40E0 /* ServiceScheduleData.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -480,10 +495,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75E34FE11C87E433001B40E0 /* NextServiceData.txt in Resources */,
 				75D933361C84DA4E00D1D8F0 /* AuthViewController.xib in Resources */,
 				75D933781C8508C200D1D8F0 /* VehicleData.txt in Resources */,
 				75E34FCE1C8776EE001B40E0 /* AppData.txt in Resources */,
+				75E34FDB1C87E36B001B40E0 /* VinData.txt in Resources */,
 				75E34FD41C87776A001B40E0 /* UserData.txt in Resources */,
+				75E34FDE1C87E3F9001B40E0 /* ServiceScheduleData.txt in Resources */,
 				75E34FD01C877724001B40E0 /* MojioData.txt in Resources */,
 				75E34FD21C87774E001B40E0 /* TripData.txt in Resources */,
 			);
