@@ -212,7 +212,7 @@ class MojioClient: NSObject {
     
     func run (body : NSString?, completion : (response : AnyObject) -> Void, failure : (error : String) -> Void) {
         // before every request, make sure user is logged in
-        let authToken = self.authToken()!;
+        let authToken = self.authToken() != nil ? self.authToken()! : ""
 
         if self.REST_METHOD! == Alamofire.Method.PUT || self.REST_METHOD! == Alamofire.Method.POST {
             
@@ -237,7 +237,7 @@ class MojioClient: NSObject {
     func run (completion : (response : AnyObject) -> Void, failure : (error : String) -> Void){
         // before every request, make sure user is logged in
         
-        let authToken = self.authToken()!;
+        let authToken = self.authToken() != nil ? self.authToken()! : ""
         
         Alamofire.request(self.REST_METHOD!, self.REQUEST_URL, headers : ["MojioAPIToken" : authToken]).responseJSON { response in
             
