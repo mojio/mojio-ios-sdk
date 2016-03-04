@@ -10,6 +10,10 @@
 		129478936D8217E16F4AADAD /* Pods_sdkv2_0_0Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B3A918696E142ACBFF983E5 /* Pods_sdkv2_0_0Tests.framework */; };
 		75461F0D1C8A1B1D00DDB557 /* BooleanState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75461F0C1C8A1B1D00DDB557 /* BooleanState.swift */; };
 		75461F111C8A1C8900DDB557 /* BooleanState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75461F0C1C8A1B1D00DDB557 /* BooleanState.swift */; };
+		75461F131C8A3EBE00DDB557 /* VehicleMeasures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75461F121C8A3EBD00DDB557 /* VehicleMeasures.swift */; };
+		75461F141C8A3EBE00DDB557 /* VehicleMeasures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75461F121C8A3EBD00DDB557 /* VehicleMeasures.swift */; };
+		75461F161C8A450C00DDB557 /* VehicleStateData.txt in Resources */ = {isa = PBXBuildFile; fileRef = 75461F151C8A450C00DDB557 /* VehicleStateData.txt */; };
+		75461F171C8A450C00DDB557 /* VehicleStateData.txt in Resources */ = {isa = PBXBuildFile; fileRef = 75461F151C8A450C00DDB557 /* VehicleStateData.txt */; };
 		755785451C6BE403000D65B3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755785441C6BE403000D65B3 /* AppDelegate.swift */; };
 		755785471C6BE403000D65B3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755785461C6BE403000D65B3 /* ViewController.swift */; };
 		7557854A1C6BE403000D65B3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 755785481C6BE403000D65B3 /* Main.storyboard */; };
@@ -147,6 +151,8 @@
 		12B58B0AAFF9E034431C1B1C /* Pods_sdkv2_0_0.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_sdkv2_0_0.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E7032C534B485DDB446AF57 /* Pods-sdkv2.0.0Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sdkv2.0.0Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-sdkv2.0.0Tests/Pods-sdkv2.0.0Tests.release.xcconfig"; sourceTree = "<group>"; };
 		75461F0C1C8A1B1D00DDB557 /* BooleanState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BooleanState.swift; sourceTree = "<group>"; };
+		75461F121C8A3EBD00DDB557 /* VehicleMeasures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VehicleMeasures.swift; sourceTree = "<group>"; };
+		75461F151C8A450C00DDB557 /* VehicleStateData.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VehicleStateData.txt; sourceTree = "<group>"; };
 		755785411C6BE403000D65B3 /* sdkv2.0.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sdkv2.0.0.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		755785441C6BE403000D65B3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		755785461C6BE403000D65B3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -300,6 +306,7 @@
 				75D933751C8506AE00D1D8F0 /* ClientTests.swift */,
 				75D9337C1C8517EF00D1D8F0 /* ApiPathTests.swift */,
 				75D933771C8508C200D1D8F0 /* VehicleData.txt */,
+				75461F151C8A450C00DDB557 /* VehicleStateData.txt */,
 				756E59B11C88E3A5004AC466 /* VehiclesData.txt */,
 				756E59B31C88F1E1004AC466 /* GroupData.txt */,
 				75E34FCD1C8776EE001B40E0 /* AppData.txt */,
@@ -364,6 +371,7 @@
 				75D94EA01C84D0A600FD2888 /* NextServiceSchedule.swift */,
 				75D94EA21C84D0A600FD2888 /* Odometer.swift */,
 				75D94EA41C84D0A600FD2888 /* PhoneNumber.swift */,
+				75461F121C8A3EBD00DDB557 /* VehicleMeasures.swift */,
 				75D94EA51C84D0A600FD2888 /* PlatformServiceSchedule.swift */,
 				75D94EA61C84D0A600FD2888 /* ProperAcceleration.swift */,
 				75D94EA71C84D0A600FD2888 /* Recall.swift */,
@@ -519,6 +527,7 @@
 				75E34FD51C8779B4001B40E0 /* AppData.txt in Resources */,
 				7557854F1C6BE403000D65B3 /* LaunchScreen.storyboard in Resources */,
 				7557854C1C6BE403000D65B3 /* Assets.xcassets in Resources */,
+				75461F161C8A450C00DDB557 /* VehicleStateData.txt in Resources */,
 				7557854A1C6BE403000D65B3 /* Main.storyboard in Resources */,
 				75E34FDD1C87E3F9001B40E0 /* ServiceScheduleData.txt in Resources */,
 			);
@@ -529,6 +538,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				75E34FE11C87E433001B40E0 /* NextServiceData.txt in Resources */,
+				75461F171C8A450C00DDB557 /* VehicleStateData.txt in Resources */,
 				75D933361C84DA4E00D1D8F0 /* AuthViewController.xib in Resources */,
 				75D933781C8508C200D1D8F0 /* VehicleData.txt in Resources */,
 				75E34FCE1C8776EE001B40E0 /* AppData.txt in Resources */,
@@ -687,6 +697,7 @@
 				75D94EBC1C84D0A600FD2888 /* Engine.swift in Sources */,
 				755785451C6BE403000D65B3 /* AppDelegate.swift in Sources */,
 				75D94EE01C84D0A600FD2888 /* Warranty.swift in Sources */,
+				75461F131C8A3EBE00DDB557 /* VehicleMeasures.swift in Sources */,
 				75D94ED31C84D0A600FD2888 /* Score.swift in Sources */,
 				75D94EC21C84D0A600FD2888 /* Heading.swift in Sources */,
 				7557856C1C6BE45C000D65B3 /* MojioClient.swift in Sources */,
@@ -703,6 +714,7 @@
 				75D933231C84DA4E00D1D8F0 /* ServiceBulletin.swift in Sources */,
 				75D933251C84DA4E00D1D8F0 /* Speed.swift in Sources */,
 				75D9331F1C84DA4E00D1D8F0 /* ProperAcceleration.swift in Sources */,
+				75461F141C8A3EBE00DDB557 /* VehicleMeasures.swift in Sources */,
 				75D933301C84DA4E00D1D8F0 /* Acceleration.swift in Sources */,
 				75D933261C84DA4E00D1D8F0 /* StringObject.swift in Sources */,
 				75D933191C84DA4E00D1D8F0 /* NextServiceSchedule.swift in Sources */,

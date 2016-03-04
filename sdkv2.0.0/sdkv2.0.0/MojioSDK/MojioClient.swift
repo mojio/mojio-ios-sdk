@@ -303,7 +303,8 @@ class MojioClient: NSObject {
             return nil
             
         case self.PATH_STATES:
-            return nil
+            let model = Mapper<VehicleMeasures>().map(dict)
+            return model!
             
         case self.PATH_LOCATIONS:
             let model = Mapper<Location>().map(dict)

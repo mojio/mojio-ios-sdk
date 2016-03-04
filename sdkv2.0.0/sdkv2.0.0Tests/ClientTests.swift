@@ -51,7 +51,10 @@ class ClientTests: XCTestCase {
         let client : MojioClient = MojioClient()
        
         client.ENTITY_REQUESTED = "vehicles/"
-        let vehicle = client.parseDict (toDict("VehicleData")!) 
+        let vehicle = client.parseDict (toDict("VehicleData")!)
+        
+        client.ENTITY_REQUESTED = "states/"
+        let states = client.parseDict(toDict("VehicleStateData")!)
 
         client.ENTITY_REQUESTED = "apps/"
         let app = client.parseDict (toDict("AppData")!) as? App
@@ -78,6 +81,7 @@ class ClientTests: XCTestCase {
         let group = client.parseDict(toDict("GroupData")!) as? Group
 
         XCTAssertNotNil((vehicle?.isKindOfClass(Vehicle)), "The class is not of type vehicle")
+        XCTAssertNotNil((states?.isKindOfClass(VehicleMeasures)), "The class is not of type vehicle measure")
         XCTAssertNotNil((app?.isKindOfClass(App)), "The class is not of type app")
         XCTAssertNotNil((mojio?.isKindOfClass(Mojio)), "The class is not of type mojio")
         XCTAssertNotNil((trip?.isKindOfClass(Trip)), "The class is not of type trip")
