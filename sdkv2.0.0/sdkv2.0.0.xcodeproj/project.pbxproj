@@ -327,7 +327,6 @@
 				75D9333A1C84F1FB00D1D8F0 /* Models */,
 				75D933391C84F1D500D1D8F0 /* Authentication */,
 				755785681C6BE45C000D65B3 /* MojioClient.swift */,
-				75D94E9F1C84D0A600FD2888 /* MojioClientEnvironment.swift */,
 			);
 			path = MojioSDK;
 			sourceTree = "<group>";
@@ -368,6 +367,7 @@
 				75D94E9C1C84D0A600FD2888 /* Location.swift */,
 				75D94E9D1C84D0A600FD2888 /* MeasurementStatistics.swift */,
 				75D94E9E1C84D0A600FD2888 /* Mojio.swift */,
+				75D94E9F1C84D0A600FD2888 /* MojioClientEnvironment.swift */,
 				75D94EA01C84D0A600FD2888 /* NextServiceSchedule.swift */,
 				75D94EA21C84D0A600FD2888 /* Odometer.swift */,
 				75D94EA41C84D0A600FD2888 /* PhoneNumber.swift */,
