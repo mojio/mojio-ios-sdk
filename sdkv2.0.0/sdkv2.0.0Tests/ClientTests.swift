@@ -12,7 +12,7 @@ import OHHTTPStubs
 
 @testable import sdkv2_0_0
 
-class MojioClientTest: XCTestCase {
+class ClientTests: XCTestCase {
     
     private let PATH_APPS : String = "apps/"
     private let PATH_SECRET : String = "secret/"
@@ -36,7 +36,7 @@ class MojioClientTest: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        MojioClientEnvironment.clientEnvironment.setEnvironment(Environment.AMERICA_STAGING)
     }
     
     override func tearDown() {

@@ -9,7 +9,7 @@
 import XCTest
 @testable import sdkv2_0_0
 
-class LoginTest: XCTestCase {
+class AuthenticationTests: XCTestCase {
     
     let authClient : MojioAuth = MojioAuth(appId: "81d705ec-4025-4d96-9b30-53d2a43eaa24", redirectURI: "sdkdev://")
     
@@ -18,8 +18,6 @@ class LoginTest: XCTestCase {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         
         self.authClient.logout()
-        MojioClientEnvironment.clientEnvironment.setEnvironment(Environment.AMERICA_STAGING)
-        
     }
     
     override func tearDown() {
@@ -27,16 +25,30 @@ class LoginTest: XCTestCase {
         super.tearDown()
     }
     
-    func testEnvironments () {
-        
+    func testAmericaStaging () {
+        MojioClientEnvironment.clientEnvironment.setEnvironment(Environment.AMERICA_STAGING)
+        self.performLogin()
     }
     
-    func testLogin() {
-        
+    func testAmericaProd () {
+        MojioClientEnvironment.clientEnvironment.setEnvironment(Environment.AMERICA_PRODUCTION)
+        self.performLogin()
+    }
+    
+    func testAmericaDevelop () {
+        MojioClientEnvironment.clientEnvironment.setEnvironment(Environment.AMERICA_DEVELOP)
+        self.performLogin()
+    }
+    
+    func testEuropeProd () {
+        MojioClientEnvironment.clientEnvironment.setEnvironment(Environment.EU_PRODUCTION)
+        self.performLogin()
+    }
+    
+    func performLogin () {
         self.authClient.login({
             XCTAssert(true, "Login successful")
         })
-        
     }
     
     func testPerformanceExample() {
