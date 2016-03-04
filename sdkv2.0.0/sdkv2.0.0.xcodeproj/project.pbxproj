@@ -263,6 +263,23 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		75461F181C8A479500DDB557 /* VinDetails */ = {
+			isa = PBXGroup;
+			children = (
+				75D94E921C84D0A600FD2888 /* Engine.swift */,
+				75D94EA71C84D0A600FD2888 /* Recall.swift */,
+				75D94EAF1C84D0A600FD2888 /* Transmission.swift */,
+				75D94EB41C84D0A600FD2888 /* Vin.swift */,
+				75D94EB51C84D0A600FD2888 /* VinDetails.swift */,
+				75D94EB61C84D0A600FD2888 /* Warranty.swift */,
+				75D94EA01C84D0A600FD2888 /* NextServiceSchedule.swift */,
+				75D94EAA1C84D0A600FD2888 /* ServiceBulletin.swift */,
+				75D94EA51C84D0A600FD2888 /* PlatformServiceSchedule.swift */,
+				75D94EAB1C84D0A600FD2888 /* ServiceSchedule.swift */,
+			);
+			name = VinDetails;
+			sourceTree = "<group>";
+		};
 		755785381C6BE403000D65B3 = {
 			isa = PBXGroup;
 			children = (
@@ -327,6 +344,7 @@
 				75D9333A1C84F1FB00D1D8F0 /* Models */,
 				75D933391C84F1D500D1D8F0 /* Authentication */,
 				755785681C6BE45C000D65B3 /* MojioClient.swift */,
+				75D94E9F1C84D0A600FD2888 /* MojioClientEnvironment.swift */,
 			);
 			path = MojioSDK;
 			sourceTree = "<group>";
@@ -357,7 +375,6 @@
 				75D94E8F1C84D0A600FD2888 /* DiagnosticCode.swift */,
 				75D94E901C84D0A600FD2888 /* Duration.swift */,
 				75D94E911C84D0A600FD2888 /* Email.swift */,
-				75D94E921C84D0A600FD2888 /* Engine.swift */,
 				75D94E931C84D0A600FD2888 /* FuelCapacity.swift */,
 				75D94E941C84D0A600FD2888 /* FuelEfficiency.swift */,
 				75D94E951C84D0A600FD2888 /* FuelLevel.swift */,
@@ -367,32 +384,23 @@
 				75D94E9C1C84D0A600FD2888 /* Location.swift */,
 				75D94E9D1C84D0A600FD2888 /* MeasurementStatistics.swift */,
 				75D94E9E1C84D0A600FD2888 /* Mojio.swift */,
-				75D94E9F1C84D0A600FD2888 /* MojioClientEnvironment.swift */,
-				75D94EA01C84D0A600FD2888 /* NextServiceSchedule.swift */,
 				75D94EA21C84D0A600FD2888 /* Odometer.swift */,
 				75D94EA41C84D0A600FD2888 /* PhoneNumber.swift */,
 				75461F121C8A3EBD00DDB557 /* VehicleMeasures.swift */,
-				75D94EA51C84D0A600FD2888 /* PlatformServiceSchedule.swift */,
 				75D94EA61C84D0A600FD2888 /* ProperAcceleration.swift */,
-				75D94EA71C84D0A600FD2888 /* Recall.swift */,
 				75D94EA81C84D0A600FD2888 /* RPM.swift */,
 				75D94EA91C84D0A600FD2888 /* Score.swift */,
-				75D94EAA1C84D0A600FD2888 /* ServiceBulletin.swift */,
-				75D94EAB1C84D0A600FD2888 /* ServiceSchedule.swift */,
 				75D94EAC1C84D0A600FD2888 /* Speed.swift */,
 				75D94EAD1C84D0A600FD2888 /* StringObject.swift */,
 				75461F0C1C8A1B1D00DDB557 /* BooleanState.swift */,
-				75D94EAF1C84D0A600FD2888 /* Transmission.swift */,
 				75D94EB11C84D0A600FD2888 /* Trip.swift */,
 				75D94EB21C84D0A600FD2888 /* User.swift */,
 				75D94EB31C84D0A600FD2888 /* Vehicle.swift */,
-				75D94EB41C84D0A600FD2888 /* Vin.swift */,
-				75D94EB51C84D0A600FD2888 /* VinDetails.swift */,
-				75D94EB61C84D0A600FD2888 /* Warranty.swift */,
 				75D94E831C84D09500FD2888 /* Acceleration.swift */,
 				75D94E841C84D09500FD2888 /* Accelerometer.swift */,
 				75D94E861C84D09500FD2888 /* Address.swift */,
 				75D94E871C84D09500FD2888 /* App.swift */,
+				75461F181C8A479500DDB557 /* VinDetails */,
 			);
 			name = Models;
 			sourceTree = "<group>";
