@@ -14,12 +14,22 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>OHHTTPStubs.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>ObjectMapper.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
 		<key>Pods-sdkv2.0.0.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-sdkv2.0.0Tests.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -42,12 +52,27 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>194629683B93D1A0FDD5F9A06CF41A69</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>4C698C648EE4D43C6B8BE0BE1FE91737</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6F78F7090988A41B93AB066B790FE6E6</key>
+		<key>65068B06081E7C3728E201FD9DED25E5</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>715178C85E5236D289A7B0A01B5D7CD6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>723AB20C1819508AAA1177E3A23196A3</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -57,12 +82,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9AB5716EF0783C2F4A371BCFF5244CAD</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>AFCD138A2FE6B2A7454812A0BE8F44C1</key>
+		<key>B4C9D6F785F076C2B40EAAACF7D80008</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -72,7 +92,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>CA73DAFD42DC60A5B9237AC87FD8B122</key>
+		<key>CA3A9F1307E84532256054C436F3B284</key>
 		<dict>
 			<key>primary</key>
 			<true/>
