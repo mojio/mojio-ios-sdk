@@ -1,5 +1,5 @@
 //
-//  AccidentState.swift
+//  BooleanState.swift
 //  Motion
 //
 //  Created by Ashish Agarwal on 2016-02-11.
@@ -10,7 +10,7 @@ import UIKit
 import ObjectMapper
 import RealmSwift
 
-class AccidentState: Object, Mappable {
+class BooleanState: Object, Mappable {
     
     dynamic var Timestamp : NSString? = nil
     var Value = RealmOptional<Bool>()

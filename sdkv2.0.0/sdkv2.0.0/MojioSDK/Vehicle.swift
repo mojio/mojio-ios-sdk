@@ -32,16 +32,16 @@ class Vehicle: Object, Mappable {
     dynamic var VehicleFuelLevel : FuelLevel? = nil
     dynamic var FuelType : NSString? = nil // ['Query', 'Gasoline', 'Diesel', 'Electric'],
     dynamic var GatewayTime : NSString? = nil
-    dynamic var VehicleHarshEventState : HarshEventState? = nil
-    dynamic var VehicleIdleState : IdleState? = nil
-    dynamic var VehicleIgnitionState : IgnitionState? = nil
+    dynamic var VehicleHarshEventState : BooleanState? = nil
+    dynamic var VehicleIdleState : BooleanState? = nil
+    dynamic var VehicleIgnitionState : BooleanState? = nil
     dynamic var VehicleBattery : Battery? = nil
     dynamic var VehicleHeading : Heading? = nil
     dynamic var VehicleLocation : Location? = nil
-    dynamic var VehicleAccidentState : AccidentState? = nil
+    dynamic var VehicleAccidentState : BooleanState? = nil
     dynamic var VehicleVinDetails : VinDetails? = nil
-    dynamic var VehicleTowState : TowState? = nil
-    dynamic var VehicleParkedState : ParkedState? = nil
+    dynamic var VehicleTowState : BooleanState? = nil
+    dynamic var VehicleParkedState : BooleanState? = nil
     var Tags = List<StringObject>()
     var OwnerGroups = List<StringObject>()
     dynamic var Id : NSString? = nil
@@ -116,7 +116,6 @@ class Vehicle: Object, Mappable {
         VehicleImage <- map["Image"];
         MilStatus <- map["MilStatus"];
         LastContactTime <- map["LastContactTime"];
-//        DiagnosticCodes <- map["DiagnosticCodes"];
         VehicleAccelerometer <- map["Accelerometer"];
         VehicleAcceleration <- map["Acceleration"];
         Deceleration <- map["Deceleration"];
@@ -138,8 +137,6 @@ class Vehicle: Object, Mappable {
         VehicleVinDetails <- map["VinDetails"];
         VehicleTowState <- map["TowState"];
         VehicleParkedState <- map["ParkedState"];
-//        Tags <- map["Tags"];
-//        OwnerGroups <- map["OwnerGroups"];
         Id <- map["Id"];
         CreatedOn <- map["CreatedOn"];
         LastModified <- map["LastModified"];

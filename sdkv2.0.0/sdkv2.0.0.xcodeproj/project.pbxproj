@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		129478936D8217E16F4AADAD /* Pods_sdkv2_0_0Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B3A918696E142ACBFF983E5 /* Pods_sdkv2_0_0Tests.framework */; };
+		75461F0D1C8A1B1D00DDB557 /* BooleanState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75461F0C1C8A1B1D00DDB557 /* BooleanState.swift */; };
+		75461F111C8A1C8900DDB557 /* BooleanState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75461F0C1C8A1B1D00DDB557 /* BooleanState.swift */; };
 		755785451C6BE403000D65B3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755785441C6BE403000D65B3 /* AppDelegate.swift */; };
 		755785471C6BE403000D65B3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755785461C6BE403000D65B3 /* ViewController.swift */; };
 		7557854A1C6BE403000D65B3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 755785481C6BE403000D65B3 /* Main.storyboard */; };
@@ -31,10 +33,7 @@
 		75D9330D1C84DA4E00D1D8F0 /* FuelEfficiency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94E941C84D0A600FD2888 /* FuelEfficiency.swift */; };
 		75D9330E1C84DA4E00D1D8F0 /* FuelLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94E951C84D0A600FD2888 /* FuelLevel.swift */; };
 		75D9330F1C84DA4E00D1D8F0 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94E961C84D0A600FD2888 /* Group.swift */; };
-		75D933101C84DA4E00D1D8F0 /* HarshEventState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94E971C84D0A600FD2888 /* HarshEventState.swift */; };
 		75D933111C84DA4E00D1D8F0 /* Heading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94E981C84D0A600FD2888 /* Heading.swift */; };
-		75D933121C84DA4E00D1D8F0 /* IdleState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94E991C84D0A600FD2888 /* IdleState.swift */; };
-		75D933131C84DA4E00D1D8F0 /* IgnitionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94E9A1C84D0A600FD2888 /* IgnitionState.swift */; };
 		75D933141C84DA4E00D1D8F0 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94E9B1C84D0A600FD2888 /* Image.swift */; };
 		75D933151C84DA4E00D1D8F0 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94E9C1C84D0A600FD2888 /* Location.swift */; };
 		75D933161C84DA4E00D1D8F0 /* MeasurementStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94E9D1C84D0A600FD2888 /* MeasurementStatistics.swift */; };
@@ -42,7 +41,6 @@
 		75D933181C84DA4E00D1D8F0 /* MojioClientEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94E9F1C84D0A600FD2888 /* MojioClientEnvironment.swift */; };
 		75D933191C84DA4E00D1D8F0 /* NextServiceSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94EA01C84D0A600FD2888 /* NextServiceSchedule.swift */; };
 		75D9331B1C84DA4E00D1D8F0 /* Odometer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94EA21C84D0A600FD2888 /* Odometer.swift */; };
-		75D9331C1C84DA4E00D1D8F0 /* ParkedState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94EA31C84D0A600FD2888 /* ParkedState.swift */; };
 		75D9331D1C84DA4E00D1D8F0 /* PhoneNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94EA41C84D0A600FD2888 /* PhoneNumber.swift */; };
 		75D9331E1C84DA4E00D1D8F0 /* PlatformServiceSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94EA51C84D0A600FD2888 /* PlatformServiceSchedule.swift */; };
 		75D9331F1C84DA4E00D1D8F0 /* ProperAcceleration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94EA61C84D0A600FD2888 /* ProperAcceleration.swift */; };
@@ -53,7 +51,6 @@
 		75D933241C84DA4E00D1D8F0 /* ServiceSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94EAB1C84D0A600FD2888 /* ServiceSchedule.swift */; };
 		75D933251C84DA4E00D1D8F0 /* Speed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94EAC1C84D0A600FD2888 /* Speed.swift */; };
 		75D933261C84DA4E00D1D8F0 /* StringObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94EAD1C84D0A600FD2888 /* StringObject.swift */; };
-		75D933271C84DA4E00D1D8F0 /* TowState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94EAE1C84D0A600FD2888 /* TowState.swift */; };
 		75D933281C84DA4E00D1D8F0 /* Transmission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94EAF1C84D0A600FD2888 /* Transmission.swift */; };
 		75D9332A1C84DA4E00D1D8F0 /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94EB11C84D0A600FD2888 /* Trip.swift */; };
 		75D9332B1C84DA4E00D1D8F0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94EB21C84D0A600FD2888 /* User.swift */; };
@@ -63,7 +60,6 @@
 		75D9332F1C84DA4E00D1D8F0 /* Warranty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94EB61C84D0A600FD2888 /* Warranty.swift */; };
 		75D933301C84DA4E00D1D8F0 /* Acceleration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94E831C84D09500FD2888 /* Acceleration.swift */; };
 		75D933311C84DA4E00D1D8F0 /* Accelerometer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94E841C84D09500FD2888 /* Accelerometer.swift */; };
-		75D933321C84DA4E00D1D8F0 /* AccidentState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94E851C84D09500FD2888 /* AccidentState.swift */; };
 		75D933331C84DA4E00D1D8F0 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94E861C84D09500FD2888 /* Address.swift */; };
 		75D933341C84DA4E00D1D8F0 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94E871C84D09500FD2888 /* App.swift */; };
 		75D933351C84DA4E00D1D8F0 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755785651C6BE45C000D65B3 /* AuthViewController.swift */; };
@@ -76,7 +72,6 @@
 		75D9337D1C8517EF00D1D8F0 /* ApiPathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D9337C1C8517EF00D1D8F0 /* ApiPathTests.swift */; };
 		75D94E881C84D09500FD2888 /* Acceleration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94E831C84D09500FD2888 /* Acceleration.swift */; };
 		75D94E891C84D09500FD2888 /* Accelerometer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94E841C84D09500FD2888 /* Accelerometer.swift */; };
-		75D94E8A1C84D09500FD2888 /* AccidentState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94E851C84D09500FD2888 /* AccidentState.swift */; };
 		75D94E8B1C84D09500FD2888 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94E861C84D09500FD2888 /* Address.swift */; };
 		75D94E8C1C84D09500FD2888 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94E871C84D09500FD2888 /* App.swift */; };
 		75D94EB71C84D0A600FD2888 /* Battery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94E8D1C84D0A500FD2888 /* Battery.swift */; };
@@ -88,10 +83,7 @@
 		75D94EBE1C84D0A600FD2888 /* FuelEfficiency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94E941C84D0A600FD2888 /* FuelEfficiency.swift */; };
 		75D94EBF1C84D0A600FD2888 /* FuelLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94E951C84D0A600FD2888 /* FuelLevel.swift */; };
 		75D94EC01C84D0A600FD2888 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94E961C84D0A600FD2888 /* Group.swift */; };
-		75D94EC11C84D0A600FD2888 /* HarshEventState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94E971C84D0A600FD2888 /* HarshEventState.swift */; };
 		75D94EC21C84D0A600FD2888 /* Heading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94E981C84D0A600FD2888 /* Heading.swift */; };
-		75D94EC31C84D0A600FD2888 /* IdleState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94E991C84D0A600FD2888 /* IdleState.swift */; };
-		75D94EC41C84D0A600FD2888 /* IgnitionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94E9A1C84D0A600FD2888 /* IgnitionState.swift */; };
 		75D94EC51C84D0A600FD2888 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94E9B1C84D0A600FD2888 /* Image.swift */; };
 		75D94EC61C84D0A600FD2888 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94E9C1C84D0A600FD2888 /* Location.swift */; };
 		75D94EC71C84D0A600FD2888 /* MeasurementStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94E9D1C84D0A600FD2888 /* MeasurementStatistics.swift */; };
@@ -99,7 +91,6 @@
 		75D94EC91C84D0A600FD2888 /* MojioClientEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94E9F1C84D0A600FD2888 /* MojioClientEnvironment.swift */; };
 		75D94ECA1C84D0A600FD2888 /* NextServiceSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94EA01C84D0A600FD2888 /* NextServiceSchedule.swift */; };
 		75D94ECC1C84D0A600FD2888 /* Odometer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94EA21C84D0A600FD2888 /* Odometer.swift */; };
-		75D94ECD1C84D0A600FD2888 /* ParkedState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94EA31C84D0A600FD2888 /* ParkedState.swift */; };
 		75D94ECE1C84D0A600FD2888 /* PhoneNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94EA41C84D0A600FD2888 /* PhoneNumber.swift */; };
 		75D94ECF1C84D0A600FD2888 /* PlatformServiceSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94EA51C84D0A600FD2888 /* PlatformServiceSchedule.swift */; };
 		75D94ED01C84D0A600FD2888 /* ProperAcceleration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94EA61C84D0A600FD2888 /* ProperAcceleration.swift */; };
@@ -110,7 +101,6 @@
 		75D94ED51C84D0A600FD2888 /* ServiceSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94EAB1C84D0A600FD2888 /* ServiceSchedule.swift */; };
 		75D94ED61C84D0A600FD2888 /* Speed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94EAC1C84D0A600FD2888 /* Speed.swift */; };
 		75D94ED71C84D0A600FD2888 /* StringObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94EAD1C84D0A600FD2888 /* StringObject.swift */; };
-		75D94ED81C84D0A600FD2888 /* TowState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94EAE1C84D0A600FD2888 /* TowState.swift */; };
 		75D94ED91C84D0A600FD2888 /* Transmission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94EAF1C84D0A600FD2888 /* Transmission.swift */; };
 		75D94EDB1C84D0A600FD2888 /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94EB11C84D0A600FD2888 /* Trip.swift */; };
 		75D94EDC1C84D0A600FD2888 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94EB21C84D0A600FD2888 /* User.swift */; };
@@ -156,6 +146,7 @@
 		0E4EC963AE554407DD59F331 /* Pods-sdkv2.0.0.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sdkv2.0.0.debug.xcconfig"; path = "Pods/Target Support Files/Pods-sdkv2.0.0/Pods-sdkv2.0.0.debug.xcconfig"; sourceTree = "<group>"; };
 		12B58B0AAFF9E034431C1B1C /* Pods_sdkv2_0_0.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_sdkv2_0_0.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E7032C534B485DDB446AF57 /* Pods-sdkv2.0.0Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sdkv2.0.0Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-sdkv2.0.0Tests/Pods-sdkv2.0.0Tests.release.xcconfig"; sourceTree = "<group>"; };
+		75461F0C1C8A1B1D00DDB557 /* BooleanState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BooleanState.swift; sourceTree = "<group>"; };
 		755785411C6BE403000D65B3 /* sdkv2.0.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sdkv2.0.0.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		755785441C6BE403000D65B3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		755785461C6BE403000D65B3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -180,7 +171,6 @@
 		75D9337C1C8517EF00D1D8F0 /* ApiPathTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiPathTests.swift; sourceTree = "<group>"; };
 		75D94E831C84D09500FD2888 /* Acceleration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Acceleration.swift; sourceTree = "<group>"; };
 		75D94E841C84D09500FD2888 /* Accelerometer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Accelerometer.swift; sourceTree = "<group>"; };
-		75D94E851C84D09500FD2888 /* AccidentState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccidentState.swift; sourceTree = "<group>"; };
 		75D94E861C84D09500FD2888 /* Address.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
 		75D94E871C84D09500FD2888 /* App.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		75D94E8D1C84D0A500FD2888 /* Battery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Battery.swift; sourceTree = "<group>"; };
@@ -192,10 +182,7 @@
 		75D94E941C84D0A600FD2888 /* FuelEfficiency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FuelEfficiency.swift; sourceTree = "<group>"; };
 		75D94E951C84D0A600FD2888 /* FuelLevel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FuelLevel.swift; sourceTree = "<group>"; };
 		75D94E961C84D0A600FD2888 /* Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
-		75D94E971C84D0A600FD2888 /* HarshEventState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HarshEventState.swift; sourceTree = "<group>"; };
 		75D94E981C84D0A600FD2888 /* Heading.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Heading.swift; sourceTree = "<group>"; };
-		75D94E991C84D0A600FD2888 /* IdleState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdleState.swift; sourceTree = "<group>"; };
-		75D94E9A1C84D0A600FD2888 /* IgnitionState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IgnitionState.swift; sourceTree = "<group>"; };
 		75D94E9B1C84D0A600FD2888 /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		75D94E9C1C84D0A600FD2888 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		75D94E9D1C84D0A600FD2888 /* MeasurementStatistics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeasurementStatistics.swift; sourceTree = "<group>"; };
@@ -203,7 +190,6 @@
 		75D94E9F1C84D0A600FD2888 /* MojioClientEnvironment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MojioClientEnvironment.swift; sourceTree = "<group>"; };
 		75D94EA01C84D0A600FD2888 /* NextServiceSchedule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NextServiceSchedule.swift; sourceTree = "<group>"; };
 		75D94EA21C84D0A600FD2888 /* Odometer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Odometer.swift; sourceTree = "<group>"; };
-		75D94EA31C84D0A600FD2888 /* ParkedState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParkedState.swift; sourceTree = "<group>"; };
 		75D94EA41C84D0A600FD2888 /* PhoneNumber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneNumber.swift; sourceTree = "<group>"; };
 		75D94EA51C84D0A600FD2888 /* PlatformServiceSchedule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlatformServiceSchedule.swift; sourceTree = "<group>"; };
 		75D94EA61C84D0A600FD2888 /* ProperAcceleration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProperAcceleration.swift; sourceTree = "<group>"; };
@@ -214,7 +200,6 @@
 		75D94EAB1C84D0A600FD2888 /* ServiceSchedule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceSchedule.swift; sourceTree = "<group>"; };
 		75D94EAC1C84D0A600FD2888 /* Speed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Speed.swift; sourceTree = "<group>"; };
 		75D94EAD1C84D0A600FD2888 /* StringObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringObject.swift; sourceTree = "<group>"; };
-		75D94EAE1C84D0A600FD2888 /* TowState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TowState.swift; sourceTree = "<group>"; };
 		75D94EAF1C84D0A600FD2888 /* Transmission.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transmission.swift; sourceTree = "<group>"; };
 		75D94EB11C84D0A600FD2888 /* Trip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
 		75D94EB21C84D0A600FD2888 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -370,10 +355,7 @@
 				75D94E941C84D0A600FD2888 /* FuelEfficiency.swift */,
 				75D94E951C84D0A600FD2888 /* FuelLevel.swift */,
 				75D94E961C84D0A600FD2888 /* Group.swift */,
-				75D94E971C84D0A600FD2888 /* HarshEventState.swift */,
 				75D94E981C84D0A600FD2888 /* Heading.swift */,
-				75D94E991C84D0A600FD2888 /* IdleState.swift */,
-				75D94E9A1C84D0A600FD2888 /* IgnitionState.swift */,
 				75D94E9B1C84D0A600FD2888 /* Image.swift */,
 				75D94E9C1C84D0A600FD2888 /* Location.swift */,
 				75D94E9D1C84D0A600FD2888 /* MeasurementStatistics.swift */,
@@ -381,7 +363,6 @@
 				75D94E9F1C84D0A600FD2888 /* MojioClientEnvironment.swift */,
 				75D94EA01C84D0A600FD2888 /* NextServiceSchedule.swift */,
 				75D94EA21C84D0A600FD2888 /* Odometer.swift */,
-				75D94EA31C84D0A600FD2888 /* ParkedState.swift */,
 				75D94EA41C84D0A600FD2888 /* PhoneNumber.swift */,
 				75D94EA51C84D0A600FD2888 /* PlatformServiceSchedule.swift */,
 				75D94EA61C84D0A600FD2888 /* ProperAcceleration.swift */,
@@ -392,7 +373,7 @@
 				75D94EAB1C84D0A600FD2888 /* ServiceSchedule.swift */,
 				75D94EAC1C84D0A600FD2888 /* Speed.swift */,
 				75D94EAD1C84D0A600FD2888 /* StringObject.swift */,
-				75D94EAE1C84D0A600FD2888 /* TowState.swift */,
+				75461F0C1C8A1B1D00DDB557 /* BooleanState.swift */,
 				75D94EAF1C84D0A600FD2888 /* Transmission.swift */,
 				75D94EB11C84D0A600FD2888 /* Trip.swift */,
 				75D94EB21C84D0A600FD2888 /* User.swift */,
@@ -402,7 +383,6 @@
 				75D94EB61C84D0A600FD2888 /* Warranty.swift */,
 				75D94E831C84D09500FD2888 /* Acceleration.swift */,
 				75D94E841C84D09500FD2888 /* Accelerometer.swift */,
-				75D94E851C84D09500FD2888 /* AccidentState.swift */,
 				75D94E861C84D09500FD2888 /* Address.swift */,
 				75D94E871C84D09500FD2888 /* App.swift */,
 			);
@@ -671,11 +651,8 @@
 			files = (
 				75D94E8B1C84D09500FD2888 /* Address.swift in Sources */,
 				75D94EC71C84D0A600FD2888 /* MeasurementStatistics.swift in Sources */,
-				75D94ECD1C84D0A600FD2888 /* ParkedState.swift in Sources */,
-				75D94ED81C84D0A600FD2888 /* TowState.swift in Sources */,
 				75D94EB91C84D0A600FD2888 /* DiagnosticCode.swift in Sources */,
 				75D94ED01C84D0A600FD2888 /* ProperAcceleration.swift in Sources */,
-				75D94EC11C84D0A600FD2888 /* HarshEventState.swift in Sources */,
 				75D94ECE1C84D0A600FD2888 /* PhoneNumber.swift in Sources */,
 				75D94ED51C84D0A600FD2888 /* ServiceSchedule.swift in Sources */,
 				75D94EDE1C84D0A600FD2888 /* Vin.swift in Sources */,
@@ -690,16 +667,14 @@
 				75D94ED21C84D0A600FD2888 /* RPM.swift in Sources */,
 				75D94EDC1C84D0A600FD2888 /* User.swift in Sources */,
 				75D94ED41C84D0A600FD2888 /* ServiceBulletin.swift in Sources */,
-				75D94EC41C84D0A600FD2888 /* IgnitionState.swift in Sources */,
-				75D94E8A1C84D09500FD2888 /* AccidentState.swift in Sources */,
 				75D94EC91C84D0A600FD2888 /* MojioClientEnvironment.swift in Sources */,
 				75D94EC81C84D0A600FD2888 /* Mojio.swift in Sources */,
 				755785691C6BE45C000D65B3 /* AuthViewController.swift in Sources */,
+				75461F0D1C8A1B1D00DDB557 /* BooleanState.swift in Sources */,
 				75D94EBE1C84D0A600FD2888 /* FuelEfficiency.swift in Sources */,
 				75D94EDF1C84D0A600FD2888 /* VinDetails.swift in Sources */,
 				75D94EBF1C84D0A600FD2888 /* FuelLevel.swift in Sources */,
 				75D94EB71C84D0A600FD2888 /* Battery.swift in Sources */,
-				75D94EC31C84D0A600FD2888 /* IdleState.swift in Sources */,
 				75D94EDB1C84D0A600FD2888 /* Trip.swift in Sources */,
 				75D94EDD1C84D0A600FD2888 /* Vehicle.swift in Sources */,
 				75D94EBD1C84D0A600FD2888 /* FuelCapacity.swift in Sources */,
@@ -727,8 +702,6 @@
 			files = (
 				75D933231C84DA4E00D1D8F0 /* ServiceBulletin.swift in Sources */,
 				75D933251C84DA4E00D1D8F0 /* Speed.swift in Sources */,
-				75D933131C84DA4E00D1D8F0 /* IgnitionState.swift in Sources */,
-				75D933321C84DA4E00D1D8F0 /* AccidentState.swift in Sources */,
 				75D9331F1C84DA4E00D1D8F0 /* ProperAcceleration.swift in Sources */,
 				75D933301C84DA4E00D1D8F0 /* Acceleration.swift in Sources */,
 				75D933261C84DA4E00D1D8F0 /* StringObject.swift in Sources */,
@@ -742,11 +715,9 @@
 				75D933161C84DA4E00D1D8F0 /* MeasurementStatistics.swift in Sources */,
 				75D933221C84DA4E00D1D8F0 /* Score.swift in Sources */,
 				75D933151C84DA4E00D1D8F0 /* Location.swift in Sources */,
-				75D9331C1C84DA4E00D1D8F0 /* ParkedState.swift in Sources */,
 				75D9331B1C84DA4E00D1D8F0 /* Odometer.swift in Sources */,
 				75D9331E1C84DA4E00D1D8F0 /* PlatformServiceSchedule.swift in Sources */,
 				75D9330F1C84DA4E00D1D8F0 /* Group.swift in Sources */,
-				75D933101C84DA4E00D1D8F0 /* HarshEventState.swift in Sources */,
 				75D9332E1C84DA4E00D1D8F0 /* VinDetails.swift in Sources */,
 				75D933111C84DA4E00D1D8F0 /* Heading.swift in Sources */,
 				75D933371C84DA4E00D1D8F0 /* MojioAuth.swift in Sources */,
@@ -754,11 +725,11 @@
 				75D933241C84DA4E00D1D8F0 /* ServiceSchedule.swift in Sources */,
 				75D933081C84DA4E00D1D8F0 /* DiagnosticCode.swift in Sources */,
 				75D933091C84DA4E00D1D8F0 /* Duration.swift in Sources */,
-				75D933271C84DA4E00D1D8F0 /* TowState.swift in Sources */,
 				75D9337D1C8517EF00D1D8F0 /* ApiPathTests.swift in Sources */,
 				75D933331C84DA4E00D1D8F0 /* Address.swift in Sources */,
 				75D933281C84DA4E00D1D8F0 /* Transmission.swift in Sources */,
 				75D9332D1C84DA4E00D1D8F0 /* Vin.swift in Sources */,
+				75461F111C8A1C8900DDB557 /* BooleanState.swift in Sources */,
 				75D9332B1C84DA4E00D1D8F0 /* User.swift in Sources */,
 				75D933171C84DA4E00D1D8F0 /* Mojio.swift in Sources */,
 				75D933761C8506AE00D1D8F0 /* ClientTests.swift in Sources */,
@@ -770,7 +741,6 @@
 				75D933351C84DA4E00D1D8F0 /* AuthViewController.swift in Sources */,
 				75D9332A1C84DA4E00D1D8F0 /* Trip.swift in Sources */,
 				75D933381C84DA4E00D1D8F0 /* MojioClient.swift in Sources */,
-				75D933121C84DA4E00D1D8F0 /* IdleState.swift in Sources */,
 				75D9331D1C84DA4E00D1D8F0 /* PhoneNumber.swift in Sources */,
 				75D9332F1C84DA4E00D1D8F0 /* Warranty.swift in Sources */,
 				75D933051C84D8D900D1D8F0 /* AuthenticationTests.swift in Sources */,
