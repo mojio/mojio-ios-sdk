@@ -23,6 +23,10 @@ class Group: Object, Mappable {
         self.init()
     }
     
+    override static func primaryKey() -> String? {
+        return "Id"
+    }
+    
     func json () -> NSString? {
         let dictionary : NSMutableDictionary = NSMutableDictionary()
         
