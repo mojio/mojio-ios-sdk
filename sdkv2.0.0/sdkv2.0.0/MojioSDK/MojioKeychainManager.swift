@@ -9,11 +9,17 @@
 import UIKit
 import KeychainSwift
 
+enum MojioKeychain : String {
+    case AUTH_TOKEN = "MojioAuthToken"
+    case REFRESH_TOKEN = "MojioAuthRefreshToken"
+    case TOKEN_EXPIRES_IN = "MojioAuthTokenExpiresIn"
+}
+
 class MojioKeychainManager: NSObject {
     
-    private let MOJIO_AUTH_TOKEN_STRING = "MojioAuthToken"
-    private let MOJIO_REFRESH_TOKEN_STRING = "MojioAuthRefreshToken"
-    private let MOJIO_TOKEN_EXPIRES_STRING = "MojioAuthTokenExpiresIn"
+    private let MOJIO_AUTH_TOKEN_STRING : String = MojioKeychain.AUTH_TOKEN.rawValue
+    private let MOJIO_REFRESH_TOKEN_STRING : String = MojioKeychain.REFRESH_TOKEN.rawValue
+    private let MOJIO_TOKEN_EXPIRES_STRING : String = MojioKeychain.TOKEN_EXPIRES_IN.rawValue
     
     func getAuthToken () -> (String?, String?, NSString?) {
         let keychain = KeychainSwift()

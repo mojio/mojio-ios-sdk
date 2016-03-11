@@ -95,7 +95,7 @@ class MojioAuth: NSObject, AuthControllerDelegate {
         let keychain = KeychainSwift()
         
         let accountsEndpoint = MojioClientEnvironment.clientEnvironment.getAccountsEndpoint()
-        let refreshToken = keychain.get("MojioAuthRefreshToken")
+        let refreshToken = keychain.get(MojioKeychain.REFRESH_TOKEN.rawValue)
         
         // TODO: check for expiry of refresh token as well
         if refreshToken == nil {
