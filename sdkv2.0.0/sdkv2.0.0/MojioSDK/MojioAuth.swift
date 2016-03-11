@@ -116,7 +116,7 @@ class MojioAuth: NSObject, AuthControllerDelegate {
                 let refreshToken : String = json["refresh_token"].string!
                 
                 dispatch_async(dispatch_get_main_queue(), {
-                    MojioTokenManager().saveAuthenticationToken(token, refreshToken: refreshToken, expiresIn: exp)
+                    MojioKeychainManager().saveAuthenticationToken(token, refreshToken: refreshToken, expiresIn: exp)
                 })
             }
         }
@@ -124,16 +124,16 @@ class MojioAuth: NSObject, AuthControllerDelegate {
     }
     
     func logout() {
-        MojioTokenManager().deleteTokenFromKeychain()
+        MojioKeychainManager().deleteTokenFromKeychain()
     }
     
     func getAuthToken () -> (String?, String?, NSString?) {
-        return MojioTokenManager().getAuthToken()
+        return MojioKeychainManager().getAuthToken()
     }
     
     func saveAuthenticationToken (token : String, refreshToken : String, expiresIn : Double) -> Void {
         
-        MojioTokenManager().saveAuthenticationToken(token, refreshToken: refreshToken, expiresIn: expiresIn)
+        MojioKeychainManager().saveAuthenticationToken(token, refreshToken: refreshToken, expiresIn: expiresIn)
         
     }
 }

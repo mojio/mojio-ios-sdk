@@ -349,7 +349,7 @@ class MojioClient: NSObject {
     
     private func authToken () -> String? {
         
-        let token = MojioTokenManager().getAuthToken()
+        let token = MojioKeychainManager().getAuthToken()
         let authToken = token.0
         
         return authToken

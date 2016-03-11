@@ -9,7 +9,7 @@
 import UIKit
 import KeychainSwift
 
-class MojioTokenManager: NSObject {
+class MojioKeychainManager: NSObject {
     
     private let MOJIO_AUTH_TOKEN_STRING = "MojioAuthToken"
     private let MOJIO_REFRESH_TOKEN_STRING = "MojioAuthRefreshToken"
@@ -45,7 +45,5 @@ class MojioTokenManager: NSObject {
         keychain.delete(self.MOJIO_AUTH_TOKEN_STRING)
         keychain.delete(self.MOJIO_REFRESH_TOKEN_STRING)
         keychain.delete(self.MOJIO_TOKEN_EXPIRES_STRING)
-    }
-
-
+    }    
 }
