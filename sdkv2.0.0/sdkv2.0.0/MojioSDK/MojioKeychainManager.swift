@@ -13,6 +13,7 @@ enum MojioKeychain : String {
     case AUTH_TOKEN = "MojioAuthToken"
     case REFRESH_TOKEN = "MojioAuthRefreshToken"
     case TOKEN_EXPIRES_IN = "MojioAuthTokenExpiresIn"
+    case URL_ENDPOINT = "MojioEnvironmentEndpoint"
 }
 
 class MojioKeychainManager: NSObject {
@@ -20,14 +21,16 @@ class MojioKeychainManager: NSObject {
     private let MOJIO_AUTH_TOKEN_STRING : String = MojioKeychain.AUTH_TOKEN.rawValue
     private let MOJIO_REFRESH_TOKEN_STRING : String = MojioKeychain.REFRESH_TOKEN.rawValue
     private let MOJIO_TOKEN_EXPIRES_STRING : String = MojioKeychain.TOKEN_EXPIRES_IN.rawValue
+    private let MOJIO_ENVIRONMENT : String = MojioKeychain.URL_ENDPOINT.rawValue
     
-    func getAuthToken () -> (String?, String?, NSString?) {
+    func getAuthToken () -> (String?, String?, NSString?, String?) {
         let keychain = KeychainSwift()
         let authToken : String? = keychain.get(self.MOJIO_AUTH_TOKEN_STRING)
         let refreshToken : String? = keychain.get(self.MOJIO_REFRESH_TOKEN_STRING)
         let expiryDate : NSString? = keychain.get(self.MOJIO_TOKEN_EXPIRES_STRING)
+        let endpoint : String? = keychain.get(self.MOJIO_ENVIRONMENT)
         
-        return (authToken, refreshToken, expiryDate)
+        return (authToken, refreshToken, expiryDate, endpoint)
     }
     
     func saveAuthenticationToken (token : String, refreshToken : String, expiresIn : Double, environmentEndpoint : String) -> Void {
@@ -44,6 +47,7 @@ class MojioKeychainManager: NSObject {
         keychain.set(token, forKey: self.MOJIO_AUTH_TOKEN_STRING)
         keychain.set(refreshToken, forKey : self.MOJIO_REFRESH_TOKEN_STRING)
         keychain.set(expiryTime as String, forKey: self.MOJIO_TOKEN_EXPIRES_STRING)
+        keychain.set(environmentEndpoint, forKey: self.MOJIO_ENVIRONMENT)
     }
     
     func deleteTokenFromKeychain () {
@@ -51,5 +55,6 @@ class MojioKeychainManager: NSObject {
         keychain.delete(self.MOJIO_AUTH_TOKEN_STRING)
         keychain.delete(self.MOJIO_REFRESH_TOKEN_STRING)
         keychain.delete(self.MOJIO_TOKEN_EXPIRES_STRING)
+        keychain.delete(self.MOJIO_ENVIRONMENT)
     }    
 }
