@@ -8,25 +8,31 @@
 
 import UIKit
 import KeychainSwift
+import Alamofire
+import SwiftyJSON
 
 class MojioAuth: NSObject, AuthControllerDelegate {
     
     var appId : String
     var redirectURL : String
+    var secretKey : String
     var loginURL : NSURL!
     var loginCompletion : (Void) -> (Void)
     var authController : AuthViewController?
-    
-//    static let authClient = MojioAuth(appId: <#T##String#>, redirectURI: <#T##String#>)
-    
-    init(appId : String, redirectURI : String) {
-        self.appId = appId;
-        self.redirectURL = redirectURI;
         
-        let loginString = String (format: "https://staging-accounts.moj.io/oauth2/authorize?response_type=token&redirect_uri=%@&client_id=%@&scope=full", self.redirectURL, self.appId);
+    init(appId : String, secretKey : String, redirectURI : String) {
+        self.appId = appId
+        self.redirectURL = redirectURI
+        self.secretKey = secretKey
+        
+        let accountsEndpoint = MojioClientEnvironment.clientEnvironment.getAccountsEndpoint()
+        
+        //TODO: make this accounts endpoint
+        let loginString = String (format: "%@?response_type=token&redirect_uri=%@&client_id=%@&scope=full", accountsEndpoint.0, self.redirectURL, self.appId);
         self.loginURL = NSURL (string: loginString);
         self.loginCompletion = {};
     }
+    
     
     func login (completion : () -> Void) {
         NSURLCache.sharedURLCache().removeAllCachedResponses();
@@ -40,20 +46,36 @@ class MojioAuth: NSObject, AuthControllerDelegate {
     }
     
     func mojioAuthControllerLoadURLRequest(request: NSURLRequest) {
-        // loading the url request
         let url : NSURL = request.URL!;
-        let urlScheme : String? = url.absoluteString.componentsSeparatedByString("#")[0];
         
-        if urlScheme != nil && urlScheme == self.redirectURL {
-            print("extract auth token over here");
-            let string = url.absoluteString;
-            let accessToken = (string.componentsSeparatedByString("access_token="))[1].componentsSeparatedByString("&")[0];
-            let expiresIn : NSString = (string.componentsSeparatedByString("expires_in="))[1]
+        let urlComponents : NSURLComponents = NSURLComponents(URL: url, resolvingAgainstBaseURL: false)!
+        let urlFragment : String? = urlComponents.fragment
+        
+        if urlFragment != nil {
+
+            let dict : NSMutableDictionary = NSMutableDictionary()
             
-            self.saveAuthenticationToken(accessToken, expiresIn: expiresIn.doubleValue)
+            let pathComponents : [String] = urlFragment!.componentsSeparatedByString("&")
+            var accessToken : String
+            var expiresIn : NSString
+
+            for component in pathComponents {
+                if component.containsString("access_token") {
+                    dict.setObject((component.componentsSeparatedByString("="))[1] as String, forKey: "access_token")
+                }
+                if component.containsString("expires_in") {
+                    dict.setObject((component.componentsSeparatedByString("="))[1], forKey: "expires_in")
+                }
+            }
+            
+            accessToken = dict.objectForKey("access_token") as! String
+            expiresIn = dict.objectForKey("expires_in") as! String
+            
+            self.saveAuthenticationToken(accessToken, refreshToken: "", expiresIn: expiresIn.doubleValue, environmentEndpoint: MojioClientEnvironment.clientEnvironment.getApiEndpoint())
             
             self.authController?.dismissViewControllerAnimated(true, completion: nil);
             self.loginCompletion();
+
         }
     }
     
@@ -61,7 +83,7 @@ class MojioAuth: NSObject, AuthControllerDelegate {
         
         let token = self.getAuthToken()
         let authToken : String? = token.0
-        let expiryDate : NSString? = token.1
+        let expiryDate : NSString? = token.2
         
         if authToken == nil || expiryDate == nil {
             return false;
@@ -72,36 +94,60 @@ class MojioAuth: NSObject, AuthControllerDelegate {
         let currentTimeInMS : Double = NSDate().timeIntervalSince1970
         
         if currentTimeInMS < expiresAt {
+            
+            // refresh the app's authentication token on a background thread to reduce the number of occassions when the user gets automatically logged out
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+                self.refreshAuthToken(nil)
+            })
             return true
+        }
+        else { // the auth token may have expired, but the refresh token may still be valid
+            
         }
         
         return false;
     }
     
+    private func refreshAuthToken (completion : (() -> ())?) {
+        let keychain = KeychainSwift()
+        
+        let accountsEndpoint = MojioClientEnvironment.clientEnvironment.getAccountsEndpoint()
+        let refreshToken = keychain.get(MojioKeychain.REFRESH_TOKEN.rawValue)
+        
+        // TODO: check for expiry of refresh token as well
+        if refreshToken == nil {
+            return
+        }
+        
+        Alamofire.request(.POST, accountsEndpoint.1, parameters: [:], encoding: .Custom({
+            (convertible, params) in
+            let mutableRequest = convertible.URLRequest.copy() as! NSMutableURLRequest
+            let postRequest : NSString = NSString(format: "grant_type=refresh_token&refresh_token=%@&client_id=%@&client_secret=%@&redirect_uri=%@", refreshToken!, self.appId, self.secretKey, self.redirectURL)
+            mutableRequest.HTTPBody = postRequest.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
+            return (mutableRequest, nil)
+        })).responseJSON{ response in
+            let json : JSON = JSON(response.result.value ?? [])
+            if json != nil {
+                let token : String = json["access_token"].string!
+                let exp : Double = json["expires_in"].double!
+                let refreshToken : String = json["refresh_token"].string!
+                
+                dispatch_async(dispatch_get_main_queue(), {
+                    MojioKeychainManager().saveAuthenticationToken(token, refreshToken: refreshToken, expiresIn: exp, environmentEndpoint: MojioClientEnvironment.clientEnvironment.getApiEndpoint())
+                })
+            }
+        }
+    }
+    
     func logout() {
-        let keychain = KeychainSwift()
-        keychain.delete("MojioAuthToken")
-        keychain.delete("MojioAuthTokenExpiresIn")
+        MojioKeychainManager().deleteTokenFromKeychain()
     }
     
-    func getAuthToken () -> (String?, NSString?) {
-        let keychain = KeychainSwift()
-        let authToken : String? = keychain.get("MojioAuthToken")
-        let expiryDate : NSString? = keychain.get("MojioAuthTokenExpiresIn")
-        
-        return (authToken, expiryDate)
+    func getAuthToken () -> (String?, String?, NSString?) {
+        return MojioKeychainManager().getAuthToken()
     }
     
-    func saveAuthenticationToken (token : String, expiresIn : Double) -> Void {
-        
-        // Save the expiry date of the token in milliseconds since 1970 as it is timezone independent
-        
-        let currentTimeInMS : Double = NSDate().timeIntervalSince1970
-        let expiryDateTimeInMS : Double = currentTimeInMS + (expiresIn * 1000)
-        let expiryTime : NSString = String(format: "%f", expiryDateTimeInMS) as NSString
-        
-        let keychain = KeychainSwift()
-        keychain.set(token, forKey: "MojioAuthToken")
-        keychain.set(expiryTime as String, forKey: "MojioAuthTokenExpiresIn")
+    func saveAuthenticationToken (token : String, refreshToken : String, expiresIn : Double, environmentEndpoint : String) -> Void {
+        MojioKeychainManager().saveAuthenticationToken(token, refreshToken: refreshToken, expiresIn: expiresIn, environmentEndpoint: environmentEndpoint)
     }
 }

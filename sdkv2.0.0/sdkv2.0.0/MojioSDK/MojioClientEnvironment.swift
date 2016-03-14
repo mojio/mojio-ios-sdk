@@ -39,9 +39,13 @@ class MojioClientEnvironment {
     private let PUSH_STAGING : String = "https://staging-push.moj.io"
     
     // Endpoints for accounts
-    private let ACCOUNTS_PRODUCTION : String = ""
-    private let ACCOUNTS_STAGING : String = ""
-    private let ACCOUNTS_PRODUCTION_EU : String = ""
+    private let AUTHORIZE_PRODUCTION : String = "https://accounts.moj.io/oauth2/authorize"
+    private let AUTHORIZE_STAGING : String = "https://staging-accounts.moj.io/oauth2/authorize"
+    private let AUTHORIZE_PRODUCTION_EU : String = ""
+    
+    private let TOKEN_PRODUCTION : String = "https://accounts.moj.io/oauth2/token"
+    private let TOKEN_STAGING : String = "https://staging-accounts.moj.io/oauth2/token"
+    private let TOKEN_PRODUCTION_EU : String = ""
     
     
     private var apiEndpoint : String = ""
@@ -142,6 +146,24 @@ class MojioClientEnvironment {
             
         case Environment.EU_PRODUCTION:
             return ENDPOINT_PRODUCTION_EU
+        }
+    }
+    
+    func getAccountsEndpoint () -> (String, String) {
+        let currentEnvironment : Environment = self.getEnvironment()
+        switch currentEnvironment {
+            
+        case Environment.AMERICA_PRODUCTION:
+            return (self.AUTHORIZE_PRODUCTION, self.TOKEN_PRODUCTION)
+            
+        case Environment.AMERICA_STAGING:
+            return (self.AUTHORIZE_STAGING, self.TOKEN_STAGING)
+            
+        case Environment.AMERICA_DEVELOP:
+            return ("", "")
+            
+        case Environment.EU_PRODUCTION:
+            return ("", "")
         }
     }
 }

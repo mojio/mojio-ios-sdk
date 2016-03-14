@@ -112,6 +112,8 @@
 		75D94EDE1C84D0A600FD2888 /* Vin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94EB41C84D0A600FD2888 /* Vin.swift */; };
 		75D94EDF1C84D0A600FD2888 /* VinDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94EB51C84D0A600FD2888 /* VinDetails.swift */; };
 		75D94EE01C84D0A600FD2888 /* Warranty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94EB61C84D0A600FD2888 /* Warranty.swift */; };
+		75D9C5031C93890C00A338C8 /* MojioKeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D9C5021C93890C00A338C8 /* MojioKeychainManager.swift */; };
+		75D9C5041C93890C00A338C8 /* MojioKeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D9C5021C93890C00A338C8 /* MojioKeychainManager.swift */; };
 		75E34FCE1C8776EE001B40E0 /* AppData.txt in Resources */ = {isa = PBXBuildFile; fileRef = 75E34FCD1C8776EE001B40E0 /* AppData.txt */; };
 		75E34FD01C877724001B40E0 /* MojioData.txt in Resources */ = {isa = PBXBuildFile; fileRef = 75E34FCF1C877724001B40E0 /* MojioData.txt */; };
 		75E34FD21C87774E001B40E0 /* TripData.txt in Resources */ = {isa = PBXBuildFile; fileRef = 75E34FD11C87774E001B40E0 /* TripData.txt */; };
@@ -213,6 +215,7 @@
 		75D94EB41C84D0A600FD2888 /* Vin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vin.swift; sourceTree = "<group>"; };
 		75D94EB51C84D0A600FD2888 /* VinDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VinDetails.swift; sourceTree = "<group>"; };
 		75D94EB61C84D0A600FD2888 /* Warranty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Warranty.swift; sourceTree = "<group>"; };
+		75D9C5021C93890C00A338C8 /* MojioKeychainManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MojioKeychainManager.swift; sourceTree = "<group>"; };
 		75E34FCD1C8776EE001B40E0 /* AppData.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AppData.txt; sourceTree = "<group>"; };
 		75E34FCF1C877724001B40E0 /* MojioData.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MojioData.txt; sourceTree = "<group>"; };
 		75E34FD11C87774E001B40E0 /* TripData.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TripData.txt; sourceTree = "<group>"; };
@@ -341,6 +344,7 @@
 		755785641C6BE45C000D65B3 /* MojioSDK */ = {
 			isa = PBXGroup;
 			children = (
+				75D9C5021C93890C00A338C8 /* MojioKeychainManager.swift */,
 				75D9333A1C84F1FB00D1D8F0 /* Models */,
 				75D933391C84F1D500D1D8F0 /* Authentication */,
 				755785681C6BE45C000D65B3 /* MojioClient.swift */,
@@ -488,6 +492,7 @@
 				TargetAttributes = {
 					755785401C6BE403000D65B3 = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = R8N6N647SF;
 					};
 					755785541C6BE403000D65B3 = {
 						CreatedOnToolsVersion = 7.2;
@@ -667,6 +672,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75D9C5031C93890C00A338C8 /* MojioKeychainManager.swift in Sources */,
 				75D94E8B1C84D09500FD2888 /* Address.swift in Sources */,
 				75D94EC71C84D0A600FD2888 /* MeasurementStatistics.swift in Sources */,
 				75D94EB91C84D0A600FD2888 /* DiagnosticCode.swift in Sources */,
@@ -745,6 +751,7 @@
 				75D933241C84DA4E00D1D8F0 /* ServiceSchedule.swift in Sources */,
 				75D933081C84DA4E00D1D8F0 /* DiagnosticCode.swift in Sources */,
 				75D933091C84DA4E00D1D8F0 /* Duration.swift in Sources */,
+				75D9C5041C93890C00A338C8 /* MojioKeychainManager.swift in Sources */,
 				75D9337D1C8517EF00D1D8F0 /* ApiPathTests.swift in Sources */,
 				75D933331C84DA4E00D1D8F0 /* Address.swift in Sources */,
 				75D933281C84DA4E00D1D8F0 /* Transmission.swift in Sources */,

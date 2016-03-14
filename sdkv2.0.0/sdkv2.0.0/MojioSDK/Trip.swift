@@ -41,7 +41,10 @@ class Trip: Object, Mappable {
     
     required init() {
         super.init()
-        
+    }
+    
+    override static func primaryKey() -> String? {
+        return "Id"
     }
     
     func json() -> NSString? {

@@ -348,11 +348,12 @@ class MojioClient: NSObject {
     }
     
     private func authToken () -> String? {
-        let keychain = KeychainSwift()
-        let authToken : String? = keychain.get("MojioAuthToken")
+        
+        let token = MojioKeychainManager().getAuthToken()
+        let authToken = token.0
+        
         return authToken
-    }
-    
+    }    
 }
 
 extension Object {
