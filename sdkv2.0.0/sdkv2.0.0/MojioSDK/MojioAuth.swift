@@ -13,20 +13,22 @@ import SwiftyJSON
 
 class MojioAuth: NSObject, AuthControllerDelegate {
     
-    var appId : String?
-    var redirectURL : String?
+    var appId : String
+    var redirectURL : String
+    var secretKey : String
     var loginURL : NSURL!
     var loginCompletion : (Void) -> (Void)
     var authController : AuthViewController?
         
-    init(appId : String, redirectURI : String) {
+    init(appId : String, secretKey : String, redirectURI : String) {
         self.appId = appId
         self.redirectURL = redirectURI
+        self.secretKey = secretKey
         
         let accountsEndpoint = MojioClientEnvironment.clientEnvironment.getAccountsEndpoint()
         
         //TODO: make this accounts endpoint
-        let loginString = String (format: "%@?response_type=token&redirect_uri=%@&client_id=%@&scope=full", accountsEndpoint.0, self.redirectURL!, self.appId!);
+        let loginString = String (format: "%@?response_type=token&redirect_uri=%@&client_id=%@&scope=full", accountsEndpoint.0, self.redirectURL, self.appId);
         self.loginURL = NSURL (string: loginString);
         self.loginCompletion = {};
     }
@@ -44,21 +46,36 @@ class MojioAuth: NSObject, AuthControllerDelegate {
     }
     
     func mojioAuthControllerLoadURLRequest(request: NSURLRequest) {
-        // loading the url request
         let url : NSURL = request.URL!;
-        let urlScheme : String? = url.absoluteString.componentsSeparatedByString("#")[0];
         
-        if urlScheme != nil && urlScheme == self.redirectURL {
-            print("extract auth token over here");
-            let string = url.absoluteString;
-            let accessToken = (string.componentsSeparatedByString("access_token="))[1].componentsSeparatedByString("&")[0];
-            let expiresIn : NSString = (string.componentsSeparatedByString("expires_in="))[1]
-            let refreshToken = (string.componentsSeparatedByString("refresh_token="))[1].componentsSeparatedByString("&")[0];
+        let urlComponents : NSURLComponents = NSURLComponents(URL: url, resolvingAgainstBaseURL: false)!
+        let urlFragment : String? = urlComponents.fragment
+        
+        if urlFragment != nil {
+
+            let dict : NSMutableDictionary = NSMutableDictionary()
             
-            self.saveAuthenticationToken(accessToken, refreshToken: refreshToken, expiresIn: expiresIn.doubleValue)
+            let pathComponents : [String] = urlFragment!.componentsSeparatedByString("&")
+            var accessToken : String
+            var expiresIn : NSString
+
+            for component in pathComponents {
+                if component.containsString("access_token") {
+                    dict.setObject((component.componentsSeparatedByString("="))[1] as String, forKey: "access_token")
+                }
+                if component.containsString("expires_in") {
+                    dict.setObject((component.componentsSeparatedByString("="))[1], forKey: "expires_in")
+                }
+            }
+            
+            accessToken = dict.objectForKey("access_token") as! String
+            expiresIn = dict.objectForKey("expires_in") as! String
+            
+            self.saveAuthenticationToken(accessToken, refreshToken: "", expiresIn: expiresIn.doubleValue)
             
             self.authController?.dismissViewControllerAnimated(true, completion: nil);
             self.loginCompletion();
+
         }
     }
     
@@ -105,7 +122,7 @@ class MojioAuth: NSObject, AuthControllerDelegate {
         Alamofire.request(.POST, accountsEndpoint.1, parameters: [:], encoding: .Custom({
             (convertible, params) in
             let mutableRequest = convertible.URLRequest.copy() as! NSMutableURLRequest
-            let postRequest : NSString = NSString(format: "grant_type=refresh_token&refresh_token=%@&client_id=%@&client_secret=%@&redirect_uri=%@", refreshToken!, AppConfig.AppId, AppConfig.AppSecretKey, AppConfig.AppRedirectUrl)
+            let postRequest : NSString = NSString(format: "grant_type=refresh_token&refresh_token=%@&client_id=%@&client_secret=%@&redirect_uri=%@", refreshToken!, self.appId, self.secretKey, self.redirectURL)
             mutableRequest.HTTPBody = postRequest.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
             return (mutableRequest, nil)
         })).responseJSON{ response in
@@ -120,7 +137,6 @@ class MojioAuth: NSObject, AuthControllerDelegate {
                 })
             }
         }
-        
     }
     
     func logout() {
@@ -132,8 +148,6 @@ class MojioAuth: NSObject, AuthControllerDelegate {
     }
     
     func saveAuthenticationToken (token : String, refreshToken : String, expiresIn : Double) -> Void {
-        
         MojioKeychainManager().saveAuthenticationToken(token, refreshToken: refreshToken, expiresIn: expiresIn)
-        
     }
 }
