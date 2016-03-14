@@ -30,7 +30,7 @@ class MojioKeychainManager: NSObject {
         return (authToken, refreshToken, expiryDate)
     }
     
-    func saveAuthenticationToken (token : String, refreshToken : String, expiresIn : Double) -> Void {
+    func saveAuthenticationToken (token : String, refreshToken : String, expiresIn : Double, environmentEndpoint : String) -> Void {
         
         // Need to delete the tokens from the keychain before saving. This is because overriding does not work with the keychain
         self.deleteTokenFromKeychain()

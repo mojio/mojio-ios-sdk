@@ -71,7 +71,7 @@ class MojioAuth: NSObject, AuthControllerDelegate {
             accessToken = dict.objectForKey("access_token") as! String
             expiresIn = dict.objectForKey("expires_in") as! String
             
-            self.saveAuthenticationToken(accessToken, refreshToken: "", expiresIn: expiresIn.doubleValue)
+            self.saveAuthenticationToken(accessToken, refreshToken: "", expiresIn: expiresIn.doubleValue, environmentEndpoint: MojioClientEnvironment.clientEnvironment.getApiEndpoint())
             
             self.authController?.dismissViewControllerAnimated(true, completion: nil);
             self.loginCompletion();
@@ -133,7 +133,7 @@ class MojioAuth: NSObject, AuthControllerDelegate {
                 let refreshToken : String = json["refresh_token"].string!
                 
                 dispatch_async(dispatch_get_main_queue(), {
-                    MojioKeychainManager().saveAuthenticationToken(token, refreshToken: refreshToken, expiresIn: exp)
+                    MojioKeychainManager().saveAuthenticationToken(token, refreshToken: refreshToken, expiresIn: exp, environmentEndpoint: MojioClientEnvironment.clientEnvironment.getApiEndpoint())
                 })
             }
         }
@@ -147,7 +147,7 @@ class MojioAuth: NSObject, AuthControllerDelegate {
         return MojioKeychainManager().getAuthToken()
     }
     
-    func saveAuthenticationToken (token : String, refreshToken : String, expiresIn : Double) -> Void {
-        MojioKeychainManager().saveAuthenticationToken(token, refreshToken: refreshToken, expiresIn: expiresIn)
+    func saveAuthenticationToken (token : String, refreshToken : String, expiresIn : Double, environmentEndpoint : String) -> Void {
+        MojioKeychainManager().saveAuthenticationToken(token, refreshToken: refreshToken, expiresIn: expiresIn, environmentEndpoint: environmentEndpoint)
     }
 }
