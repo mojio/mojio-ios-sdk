@@ -64,10 +64,8 @@ class MojioClientEnvironment {
     */
     private func isUserInEU () -> Bool {
         
-        let euCountrySet : NSSet = NSSet(array: ["AL", "AD", "AM", "AT", "BY", "BE", "BA", "BG", "CH", "CY", "CZ", "DE",
-            "DK", "EE", "ES", "FO", "FI", "FR", "GB", "GE", "GI", "GR", "HU", "HR",
-            "IE", "IS", "IT", "LT", "LU", "LV", "MC", "MK", "MT", "NO", "NL", "PL",
-            "PT", "RO", "RU", "SE", "SI", "SK", "SM", "TR", "UA", "VA"])
+        // Country codes list are the website: https://www.iso.org/obp/ui/#search/code/
+        let euCountrySet : NSSet = NSSet(array: ["AT", "BE", "BG", "HR", "CY", "CZ", "DK", "EE", "FI", "FR", "DE", "GR", "HU", "IE", "IT", "LV", "LT", "LU", "MT", "NL", "PL", "PT", "RO", "SK", "SI", "ES", "SE", "GB"])
         
         let currentLocale : NSLocale = NSLocale.currentLocale()
         let countryCode = currentLocale.objectForKey(NSLocaleCountryCode) as! String
