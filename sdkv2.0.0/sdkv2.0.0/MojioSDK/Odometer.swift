@@ -17,7 +17,7 @@ class Odometer: Object, Mappable {
     dynamic var Timestamp : NSString? = nil
     var BaseValue : Double = 0
     dynamic var Unit : NSString? = nil// ['Meters', 'Miles', 'Kilometers', 'NauticalMiles', 'CentiMeter', 'MilliMeter'],
-    var Value : Float = 0
+    dynamic var Value : Float = 0
     
     required convenience init?(_ map: Map) {
         self.init()

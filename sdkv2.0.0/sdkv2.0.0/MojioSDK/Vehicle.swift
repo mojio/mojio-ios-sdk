@@ -18,7 +18,7 @@ class Vehicle: Object, Mappable {
     dynamic var CurrentTrip : NSString? = nil
     dynamic var MojioId : NSString? = nil
     dynamic var VehicleImage : Image? = nil
-    var MilStatus = RealmOptional<Bool>()
+    dynamic var MilStatus : Bool = false
     dynamic var LastContactTime : NSString? = nil
     var DiagnosticCodes = List<DiagnosticCode>()
     dynamic var VehicleAccelerometer : Accelerometer? = nil

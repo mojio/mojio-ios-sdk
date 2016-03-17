@@ -14,9 +14,9 @@ class Acceleration: Object, Mappable {
 
     dynamic var BaseUnit : NSString? = nil //['MetersPerSecondPerSecond', 'KilometersPerHourPerSecond', 'MilesPerHourPerSecond'],
     dynamic var Timestamp : NSString? = nil
-    var BaseValue : Float = 0
+    dynamic var BaseValue : Float = 0
     dynamic var Unit : NSString? = nil  //['MetersPerSecondPerSecond', 'KilometersPerHourPerSecond', 'MilesPerHourPerSecond'],
-    var Value : Float = 0
+    dynamic var Value : Float = 0
 
     required convenience init?(_ map: Map) {
         self.init()

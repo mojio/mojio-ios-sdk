@@ -13,11 +13,11 @@ import RealmSwift
 class Location: Object, Mappable {
     dynamic var LocationAddress : Address? = nil
     dynamic var Timestamp : NSString? = nil
-    var Lat : Float = 0
-    var Lng : Float = 0
+    dynamic var Lat : Float = 0
+    dynamic var Lng : Float = 0
     dynamic var Status : NSString? = nil // ['Unknown', 'Locked', 'NotLocked', 'Predicted', 'DiffCorrected', 'LastKnown', 'TwoDFix', 'Historic', 'InvalidTime', 'CommunicationsFailure', 'GPSOff', 'PreviousValidState'],
-    var Dilution : Float = 0
-    var Altitude : Float = 0
+    dynamic var Dilution : Float = 0
+    dynamic var Altitude : Float = 0
     dynamic var GeoHash : NSString? = nil
     
     required convenience init?(_ map: Map) {
