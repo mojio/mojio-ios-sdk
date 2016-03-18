@@ -84,9 +84,16 @@ class MojioAuth: NSObject, AuthControllerDelegate {
         let token = self.getAuthToken()
         let authToken : String? = token.0
         let expiryDate : NSString? = token.2
+        let environmentEndpoint : String? = token.3
         
-        if authToken == nil || expiryDate == nil {
+        if authToken == nil || expiryDate == nil || environmentEndpoint == nil {
             return false;
+        }
+        
+        // Check to see if the environment endpoint in the keychain is the same as the current endpoint
+        // If they are different, return false right away
+        if MojioClientEnvironment.clientEnvironment.getApiEndpoint() != environmentEndpoint {
+            return false
         }
         
         // Check if the token is expired
@@ -143,7 +150,7 @@ class MojioAuth: NSObject, AuthControllerDelegate {
         MojioKeychainManager().deleteTokenFromKeychain()
     }
     
-    func getAuthToken () -> (String?, String?, NSString?) {
+    func getAuthToken () -> (String?, String?, NSString?, String?) {
         return MojioKeychainManager().getAuthToken()
     }
     

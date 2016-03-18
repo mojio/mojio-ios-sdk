@@ -11,7 +11,7 @@ import ObjectMapper
 import RealmSwift
 
 class Email: Object, Mappable {
-    var Verified = RealmOptional<Bool>()
+    dynamic var Verified : Bool = false
     dynamic var Address : String? = nil
     
     required convenience init?(_ map: Map) {

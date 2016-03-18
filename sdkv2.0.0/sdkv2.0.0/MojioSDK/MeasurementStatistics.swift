@@ -12,15 +12,15 @@ import RealmSwift
 
 class MeasurementStatistics: Object, Mappable {
     
-    var NumOfSamples : Float = 0
-    var Average : Float = 0
-    var Variance : Float = 0
-    var StdDev : Float = 0
-    var IndexOfDispersion : Float = 0
-    var CoeffOfVariation : Float = 0
-    var M2 : Float = 0
-    var Min : Float = 0
-    var Max : Float = 0
+    dynamic var NumOfSamples : Float = 0
+    dynamic var Average : Float = 0
+    dynamic var Variance : Float = 0
+    dynamic var StdDev : Float = 0
+    dynamic var IndexOfDispersion : Float = 0
+    dynamic var CoeffOfVariation : Float = 0
+    dynamic var M2 : Float = 0
+    dynamic var Min : Float = 0
+    dynamic var Max : Float = 0
     dynamic var StandardScore : Score? = nil
     dynamic var MinMaxScore : Score? = nil
     

@@ -14,10 +14,10 @@ import Realm
 class PhoneNumber : Object, Mappable {
 
     dynamic var Type : String? = nil //['Home', 'Work', 'Mobile'],
-    var CountryCode = RealmOptional<Int>()
-    var AreaCode = RealmOptional<Int>()
-    var Number = RealmOptional<Int>()
-    var Ext = RealmOptional<Int>()
+    dynamic var CountryCode : Int = 0
+    dynamic var AreaCode : Int = 0
+    dynamic var Number : Int = 0
+    dynamic var Ext : Int = 0
     
     required convenience init?(_ map: Map) {
         self.init();
