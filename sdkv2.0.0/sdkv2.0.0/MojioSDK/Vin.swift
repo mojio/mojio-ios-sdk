@@ -33,6 +33,10 @@ class Vin: Object, Mappable {
         self.init();
     }
     
+    override static func primaryKey() -> String? {
+        return "VIN"
+    }
+    
     func mapping(map: Map) {
         
         var warranties = Array<Warranty>()
