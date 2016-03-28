@@ -210,6 +210,30 @@ class MojioClient: NSObject {
         return self
     }
     
+    func query (top : String?, skip : String?, filter : String?, select : String?, orderby : String?) -> Self {
+        
+        self.REQUEST_URL = self.REQUEST_URL + "?"
+        
+        if top != nil {
+            self.REQUEST_URL = self.REQUEST_URL + "$top=" + top!
+        }
+        if skip != nil {
+            self.REQUEST_URL = self.REQUEST_URL + "$skip=" + skip!
+        }
+        if filter != nil {
+            self.REQUEST_URL = self.REQUEST_URL + "$filter=" + filter!
+        }
+        if select != nil {
+            self.REQUEST_URL = self.REQUEST_URL + "$select=" + select!
+        }
+        if orderby != nil {
+            self.REQUEST_URL = self.REQUEST_URL + "$orderby=" + orderby!
+        }
+
+        return self
+    }
+    
+    
     func run (body : NSString?, completion : (response : AnyObject) -> Void, failure : (error : String) -> Void) {
         // before every request, make sure user is logged in
         let authToken = self.authToken() != nil ? self.authToken()! : ""
