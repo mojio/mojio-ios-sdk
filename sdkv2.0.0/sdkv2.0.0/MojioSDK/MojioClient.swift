@@ -38,6 +38,7 @@ class MojioClient: NSObject {
     private let PATH_NEXT : String = "next/"
     
     var REQUEST_URL : String
+    var REQUEST_PARAMS : NSDictionary?
     private var REST_METHOD : Alamofire.Method?
     var ENTITY_REQUESTED : String = ""
     
@@ -212,24 +213,25 @@ class MojioClient: NSObject {
     
     func query (top : String?, skip : String?, filter : String?, select : String?, orderby : String?) -> Self {
         
-        self.REQUEST_URL = self.REQUEST_URL + "?"
+        let requestParams : NSMutableDictionary = NSMutableDictionary()
         
         if top != nil {
-            self.REQUEST_URL = self.REQUEST_URL + "$top=" + top!
+            requestParams.setObject(top!, forKey: "$top")
         }
         if skip != nil {
-            self.REQUEST_URL = self.REQUEST_URL + "$skip=" + skip!
+            requestParams.setObject(skip!, forKey: "$skip")
         }
         if filter != nil {
-            self.REQUEST_URL = self.REQUEST_URL + "$filter=" + filter!
+            requestParams.setObject(filter!, forKey: "$filter")
         }
         if select != nil {
-            self.REQUEST_URL = self.REQUEST_URL + "$select=" + select!
+            requestParams.setObject(select!, forKey: "$select")
         }
         if orderby != nil {
-            self.REQUEST_URL = self.REQUEST_URL + "$orderby=" + orderby!
+            requestParams.setObject(orderby!, forKey: "$orderby")
         }
-
+        
+        self.REQUEST_PARAMS = requestParams
         return self
     }
     
@@ -259,11 +261,9 @@ class MojioClient: NSObject {
     }
     
     func run (completion : (response : AnyObject) -> Void, failure : (error : String) -> Void){
-        // before every request, make sure user is logged in
-        
         let authToken = self.authToken() != nil ? self.authToken()! : ""
-        
-        Alamofire.request(self.REST_METHOD!, self.REQUEST_URL, headers : ["MojioAPIToken" : authToken]).responseJSON { response in
+
+        Alamofire.request(self.REST_METHOD!, self.REQUEST_URL, parameters : self.REQUEST_PARAMS as? [String : AnyObject], headers : ["MojioAPIToken" : authToken]).responseJSON { response in
             
             if response.response != nil && response.response?.statusCode == 200 {
                 
@@ -272,7 +272,6 @@ class MojioClient: NSObject {
                     if responseDict != nil {
                         let dataArray = responseDict?.objectForKey("Data") as? NSArray
                         if dataArray == nil {
-                            print ("we have a dictionary")
                             let obj = self.parseDict(responseDict!)
                             completion (response: obj!)
                         }
@@ -297,9 +296,9 @@ class MojioClient: NSObject {
             else {
                 failure(error: "Could not complete request")
             }
-        }
-        
+        }        
     }
+    
     
     func parseDict (dict : NSDictionary) -> AnyObject? {
         switch self.ENTITY_REQUESTED{
