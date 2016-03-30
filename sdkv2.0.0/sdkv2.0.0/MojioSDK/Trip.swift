@@ -39,10 +39,6 @@ class Trip: Object, Mappable {
         self.init()
     }
     
-    required init() {
-        super.init()
-    }
-    
     override static func primaryKey() -> String? {
         return "Id"
     }
