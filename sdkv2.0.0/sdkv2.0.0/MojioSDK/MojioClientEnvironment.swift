@@ -24,12 +24,12 @@ enum MojioClientRegion : String {
 
 class MojioClientEnvironment {
     
-    static private let ApiEndpointFormat : String = "https://%@api.moj.io/v2/"
-    static private let PushEndpointFormat : String = "https://%@push.moj.io/v2/"
-    static private let MyMojioEndpointFormat : String = "https://%@my.moj.io/"
-    static private let AccountsEndpointFormat : String = "https://%@accounts.moj.io/"
+    private static let ApiEndpointFormat : String = "https://%@api.moj.io/v2/"
+    private static let PushEndpointFormat : String = "https://%@push.moj.io/v2/"
+    private static let MyMojioEndpointFormat : String = "https://%@my.moj.io/"
+    private static let AccountsEndpointFormat : String = "https://%@accounts.moj.io/"
     
-    static private let clientEnvironment = MojioClientEnvironment()
+    private static let clientEnvironment = MojioClientEnvironment()
     
     internal var region : String?
     
