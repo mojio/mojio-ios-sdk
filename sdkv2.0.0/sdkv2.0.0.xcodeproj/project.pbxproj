@@ -910,7 +910,8 @@
 			baseConfigurationReference = 0E4EC963AE554407DD59F331 /* Pods-sdkv2.0.0.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Ashish Agarwal (RS5GWME5JL)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ashish Agarwal (RS5GWME5JL)";
 				INFOPLIST_FILE = sdkv2.0.0/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "io.moj.mobile.ios.sdkv2-0-0";
