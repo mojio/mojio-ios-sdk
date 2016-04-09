@@ -29,14 +29,14 @@ class MojioClientEnvironment {
     private static let MyMojioEndpointFormat : String = "https://%@my.moj.io/"
     private static let AccountsEndpointFormat : String = "https://%@accounts.moj.io/"
     
-    private static let clientEnvironment = MojioClientEnvironment()
+    static let sharedInstance = MojioClientEnvironment()
     
-    internal var region : String?
+    private var region : String?
     
-    internal var apiEndpoint : String?
-    internal var pushEndpoint : String?
-    internal var myMojioEndpoint : String?
-    internal var accountsEndpoint : String?
+    private var apiEndpoint : String?
+    private var pushEndpoint : String?
+    private var myMojioEndpoint : String?
+    private var accountsEndpoint : String?
     
     init() {
         if self.region == nil {
@@ -44,10 +44,6 @@ class MojioClientEnvironment {
         }
     }
     
-    static func getEnvironment() -> MojioClientEnvironment {
-        return MojioClientEnvironment.clientEnvironment
-    }
-
     func getRegion() -> MojioClientRegion {
         if self.region != nil {
             return MojioClientRegion.init(rawValue: self.region!)!

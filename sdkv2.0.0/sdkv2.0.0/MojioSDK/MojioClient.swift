@@ -46,7 +46,7 @@ class MojioClient: NSObject {
     var requestEntity : MojioApiEndpoints?
     
     override init() {
-        self.baseUrl = MojioClientEnvironment.getEnvironment().getApiEndpoint()
+        self.baseUrl = MojioClientEnvironment.sharedInstance.getApiEndpoint()
         
         // Set Auth Token as the header
     }
