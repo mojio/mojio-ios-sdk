@@ -13,205 +13,203 @@ import ObjectMapper
 import RealmSwift
 import KeychainSwift
 
+enum MojioApiEndpoints : String {
+    case Apps = "apps/"
+    case Secret = "secret/"
+    case Groups = "groups/"
+    case Users = "users/"
+    case Me = "me/"
+    case History = "history/"
+    case States = "states/"
+    case Locations = "locations/"
+    case Image = "image/"
+    case Mojios = "mojios/"
+    case Permission = "permission/"
+    case Permissions = "permissions/"
+    case Tags = "tags/"
+    case Trips = "trips/"
+    case Vehicles = "vehicles/"
+    case Address = "address/"
+    case Vin = "vin/"
+    case ServiceSchedule = "serviceschedule/"
+    case Next = "next/"
+}
+
 class MojioClient: NSObject {
     
     static let client = MojioClient()
     
-    private let PATH_APPS : String = "apps/"
-    private let PATH_SECRET : String = "secret/"
-    private let PATH_GROUPS : String = "groups/"
-    private let PATH_USERS : String = "users/"
-    private let PATH_ME : String = "me/"
-    private let PATH_HISTORY : String = "history/"
-    private let PATH_STATES : String = "states/"
-    private let PATH_LOCATIONS : String = "locations/"
-    private let PATH_IMAGE : String = "image/"
-    private let PATH_MOJIOS : String = "mojios/"
-    private let PATH_PERMISSION : String = "permission/"
-    private let PATH_PERMISSIONS : String = "permissions/"
-    private let PATH_TAGS : String = "tags/"
-    private let PATH_TRIPS : String = "trips/"
-    private let PATH_VEHICLES : String = "vehicles/"
-    private let PATH_ADDRESS : String = "address/"
-    private let PATH_VIN : String = "vin/"
-    private let PATH_SERVICE_SCHEDULE = "serviceschedule/"
-    private let PATH_NEXT : String = "next/"
+    private var baseUrl : String?
+    var requestUrl : String?
+    var requestParams : NSDictionary?
+    private var requestMethod : Alamofire.Method?
+    var requestEntity : MojioApiEndpoints?
     
-    var REQUEST_URL : String
-    var REQUEST_PARAMS : NSDictionary?
-    private var REST_METHOD : Alamofire.Method?
-    var ENTITY_REQUESTED : String = ""
-    
-    override init () {
-        self.REQUEST_URL = MojioClientEnvironment.clientEnvironment.getApiEndpoint()
-        // set auth token as the header 
+    override init() {
+        self.baseUrl = MojioClientEnvironment.sharedInstance.getApiEndpoint()
+        
+        // Set Auth Token as the header
     }
     
-    func get () -> Self {
-        self.REST_METHOD = Method.GET
+    convenience init(clientEnvironment : MojioClientEnvironment) {
+        self.init()
+        self.baseUrl = clientEnvironment.getApiEndpoint()
+    }
+    
+    func get() -> Self {
+        self.requestMethod = Alamofire.Method.GET
         return self
     }
     
-    func post () -> Self {
-        self.REST_METHOD = Method.POST
+    func post() -> Self {
+        self.requestMethod = Alamofire.Method.POST
         return self
     }
     
-    func put () -> Self {
-        self.REST_METHOD = Method.PUT
+    func put() -> Self {
+        self.requestMethod = Alamofire.Method.PUT
         return self
     }
     
-    func delete () -> Self {
-        self.REST_METHOD = Method.DELETE
+    func delete() -> Self {
+        self.requestMethod = Alamofire.Method.DELETE
         return self
     }
     
-    func apps (appId : String?) -> Self {
-        if appId != nil {
-            self.REQUEST_URL = self.REQUEST_URL + self.PATH_APPS + appId! + "/"
-        }
-        else {
-            self.REQUEST_URL = self.REQUEST_URL + self.PATH_APPS
-        }
-        self.ENTITY_REQUESTED = PATH_APPS
+    func apps(appId : String?) -> Self {
+        self.requestEntity = MojioApiEndpoints.Apps
+        self.requestUrl = self.baseUrl! + (self.requestEntity?.rawValue)! + (appId != nil ? appId! + "/" : "")
+        
         return self
     }
     
-    func secret () -> Self {
-        self.REQUEST_URL = self.REQUEST_URL + self.PATH_SECRET
-        self.ENTITY_REQUESTED = PATH_SECRET
+    func secret() -> Self {
+        self.requestEntity = MojioApiEndpoints.Secret
+        self.requestUrl = self.baseUrl! + (self.requestEntity?.rawValue)!
+
         return self
     }
     
-    func groups (groupId : String?) -> Self {
-        if (groupId != nil) {
-            self.REQUEST_URL = self.REQUEST_URL + self.PATH_GROUPS + groupId! + "/"
-        }
-        else {
-            self.REQUEST_URL = self.REQUEST_URL + self.PATH_GROUPS
-        }
-        self.ENTITY_REQUESTED = PATH_GROUPS
+    func groups(groupId : String?) -> Self {
+        self.requestEntity = MojioApiEndpoints.Groups
+        self.requestUrl = self.baseUrl! + (self.requestEntity?.rawValue)! + (groupId != nil ? groupId! + "/" : "")
+
         return self
     }
     
-    func users (userId : String?) -> Self {
-        if userId != nil {
-            self.REQUEST_URL = self.REQUEST_URL + self.PATH_USERS + userId! + "/"
-        }
-        else {
-            self.REQUEST_URL = self.REQUEST_URL + self.PATH_USERS
-        }
-        self.ENTITY_REQUESTED = PATH_USERS
+    func users(userId : String?) -> Self {
+        self.requestEntity = MojioApiEndpoints.Users
+        self.requestUrl = self.baseUrl! + (self.requestEntity?.rawValue)! + (userId != nil ? userId! + "/" : "")
+        
         return self
     }
     
-    func me () -> Self {
-        self.REQUEST_URL = self.REQUEST_URL + self.PATH_ME
-        self.ENTITY_REQUESTED = PATH_ME
+    func me() -> Self {
+        self.requestEntity = MojioApiEndpoints.Me
+        self.requestUrl = self.baseUrl! + (self.requestEntity?.rawValue)!
+        
         return self
     }
     
-    func history () -> Self {
-        self.REQUEST_URL = self.REQUEST_URL + self.PATH_HISTORY
-        self.ENTITY_REQUESTED = PATH_HISTORY
+    func history() -> Self {
+        self.requestEntity = MojioApiEndpoints.History
+        self.requestUrl = self.baseUrl! + (self.requestEntity?.rawValue)!
+        
         return self
     }
     
-    func states () -> Self {
-        self.REQUEST_URL = self.REQUEST_URL + self.PATH_STATES
-        self.ENTITY_REQUESTED = PATH_STATES
+    func states() -> Self {
+        self.requestEntity = MojioApiEndpoints.States
+        self.requestUrl = self.baseUrl! + (self.requestEntity?.rawValue)!
+        
         return self
     }
     
-    func locations () -> Self {
-        self.REQUEST_URL = self.REQUEST_URL + self.PATH_LOCATIONS
-        self.ENTITY_REQUESTED = PATH_LOCATIONS
+    func locations() -> Self {
+        self.requestEntity = MojioApiEndpoints.Locations
+        self.requestUrl = self.baseUrl! + (self.requestEntity?.rawValue)!
+
         return self
     }
     
-    func image () -> Self {
-        self.REQUEST_URL = self.REQUEST_URL + self.PATH_IMAGE
-        self.ENTITY_REQUESTED = PATH_IMAGE
+    func image() -> Self {
+        self.requestEntity = MojioApiEndpoints.Image
+        self.requestUrl = self.baseUrl! + (self.requestEntity?.rawValue)!
+
         return self
     }
     
-    func mojios (mojioId : String?) -> Self {
-        if mojioId != nil {
-            self.REQUEST_URL = self.REQUEST_URL + self.PATH_MOJIOS + mojioId! + "/"
-        }
-        else {
-            self.REQUEST_URL = self.REQUEST_URL + self.PATH_MOJIOS
-        }
-        self.ENTITY_REQUESTED = PATH_MOJIOS
+    func mojios(mojioId : String?) -> Self {
+        self.requestEntity = MojioApiEndpoints.Mojios
+        self.requestUrl = self.baseUrl! + (self.requestEntity?.rawValue)! + (mojioId != nil ? mojioId! + "/" : "")
+
         return self
     }
     
-    func permission () -> Self {
-        self.REQUEST_URL = self.REQUEST_URL + self.PATH_PERMISSION
-        self.ENTITY_REQUESTED = PATH_PERMISSION
+    func permission() -> Self {
+        self.requestEntity = MojioApiEndpoints.Permission
+        self.requestUrl = self.baseUrl! + (self.requestEntity?.rawValue)!
+
         return self
     }
     
-    func permissions () -> Self {
-        self.REQUEST_URL = self.REQUEST_URL + self.PATH_PERMISSIONS
-        self.ENTITY_REQUESTED = PATH_PERMISSIONS
+    func permissions() -> Self {
+        self.requestEntity = MojioApiEndpoints.Permissions
+        self.requestUrl = self.baseUrl! + (self.requestEntity?.rawValue)!
+
         return self
     }
     
-    func tags (tagId : String) -> Self {
-        self.REQUEST_URL = self.REQUEST_URL + self.PATH_TAGS + tagId + "/"
-        self.ENTITY_REQUESTED = PATH_TAGS
+    func tags(tagId : String) -> Self {
+        self.requestEntity = MojioApiEndpoints.Tags
+        self.requestUrl = self.baseUrl! + (self.requestEntity?.rawValue)! + tagId + "/"
+
         return self
     }
     
-    func trips (tripId : String?) -> Self {
-        if tripId != nil {
-            self.REQUEST_URL = self.REQUEST_URL + self.PATH_TRIPS + tripId! + "/"
-        }
-        else {
-            self.REQUEST_URL = self.REQUEST_URL + self.PATH_TRIPS
-        }
-        self.ENTITY_REQUESTED = PATH_TRIPS
+    func trips(tripId : String?) -> Self {
+        self.requestEntity = MojioApiEndpoints.Trips
+        self.requestUrl = self.baseUrl! + (self.requestEntity?.rawValue)! + (tripId != nil ? tripId! + "/" : "")
+
         return self
     }
     
-    func vehicles (vehicleId : String?) -> Self {
-        if vehicleId != nil {
-            self.REQUEST_URL = self.REQUEST_URL + self.PATH_VEHICLES + vehicleId! + "/"
-        }
-        else {
-            self.REQUEST_URL = self.REQUEST_URL + self.PATH_VEHICLES
-        }
-        self.ENTITY_REQUESTED = PATH_VEHICLES
+    func vehicles(vehicleId : String?) -> Self {
+        self.requestEntity = MojioApiEndpoints.Vehicles
+        self.requestUrl = self.baseUrl! + (self.requestEntity?.rawValue)! + (vehicleId != nil ? vehicleId! + "/" : "")
+
         return self
     }
     
-    func address () -> Self {
-        self.REQUEST_URL = self.REQUEST_URL + self.PATH_ADDRESS
-        self.ENTITY_REQUESTED = PATH_ADDRESS
+    func address() -> Self {
+        self.requestEntity = MojioApiEndpoints.Address
+        self.requestUrl = self.baseUrl! + (self.requestEntity?.rawValue)!
+
         return self
     }
     
-    func vin () -> Self {
-        self.REQUEST_URL = self.REQUEST_URL + self.PATH_VIN
-        self.ENTITY_REQUESTED = PATH_VIN
+    func vin() -> Self {
+        self.requestEntity = MojioApiEndpoints.Vin
+        self.requestUrl = self.baseUrl! + (self.requestEntity?.rawValue)!
+
         return self
     }
     
-    func serviceschedule () -> Self {
-        self.REQUEST_URL = self.REQUEST_URL + self.PATH_SERVICE_SCHEDULE
-        self.ENTITY_REQUESTED = PATH_SERVICE_SCHEDULE
+    func serviceSchedule() -> Self {
+        self.requestEntity = MojioApiEndpoints.ServiceSchedule
+        self.requestUrl = self.baseUrl! + (self.requestEntity?.rawValue)!
+
         return self
     }
     
-    func next () -> Self {
-        self.REQUEST_URL = self.REQUEST_URL + self.PATH_NEXT
-        self.ENTITY_REQUESTED = PATH_NEXT
+    func next() -> Self {
+        self.requestEntity = MojioApiEndpoints.Next
+        self.requestUrl = self.baseUrl! + (self.requestEntity?.rawValue)!
+
         return self
     }
     
-    func query (top : String?, skip : String?, filter : String?, select : String?, orderby : String?) -> Self {
+    func query(top : String?, skip : String?, filter : String?, select : String?, orderby : String?) -> Self {
         
         let requestParams : NSMutableDictionary = NSMutableDictionary()
         
@@ -231,21 +229,22 @@ class MojioClient: NSObject {
             requestParams.setObject(orderby!, forKey: "$orderby")
         }
         
-        self.REQUEST_PARAMS = requestParams
+        self.requestParams = requestParams
         return self
     }
     
     
-    func run (body : NSString?, completion : (response : AnyObject) -> Void, failure : (error : String) -> Void) {
-        // before every request, make sure user is logged in
+    func run(body : NSString?, completion : (response : AnyObject) -> Void, failure : (error : String) -> Void) {
+        
+        // Before every request, make sure access token exists
         let authToken = self.authToken() != nil ? self.authToken()! : ""
 
-        if self.REST_METHOD! == Alamofire.Method.PUT || self.REST_METHOD! == Alamofire.Method.POST {
+        if self.requestMethod! == Alamofire.Method.PUT || self.requestMethod! == Alamofire.Method.POST {
             
-            Alamofire.request(self.REST_METHOD!, self.REQUEST_URL, parameters: [:], encoding: .Custom({
+            Alamofire.request(self.requestMethod!, self.requestUrl!, parameters: [:], encoding: .Custom({
                 (convertible, params) in
                 let mutableRequest : NSMutableURLRequest = convertible.URLRequest.copy() as! NSMutableURLRequest
-                mutableRequest.setValue(authToken, forHTTPHeaderField: "MojioAPIToken")
+                mutableRequest.setValue("Bearer " + authToken, forHTTPHeaderField: "Authorization")
                 mutableRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
                 mutableRequest.HTTPBody = body?.dataUsingEncoding(NSUTF8StringEncoding)
                 return (mutableRequest, nil)
@@ -260,14 +259,16 @@ class MojioClient: NSObject {
         }
     }
     
-    func run (completion : (response : AnyObject) -> Void, failure : (error : String) -> Void){
+    func run(completion : (response : AnyObject) -> Void, failure : (error : String) -> Void){
+        
+        // Before every request, make sure access token exists
         let authToken = self.authToken() != nil ? self.authToken()! : ""
 
-        Alamofire.request(self.REST_METHOD!, self.REQUEST_URL, parameters : self.REQUEST_PARAMS as? [String : AnyObject], headers : ["MojioAPIToken" : authToken]).responseJSON { response in
+        Alamofire.request(self.requestMethod!, self.requestUrl!, parameters : self.requestParams as? [String : AnyObject], headers : ["Authorization" : "Bearer " + authToken]).responseJSON { response in
             
             if response.response != nil && response.response?.statusCode == 200 {
                 
-                if self.REST_METHOD! == Alamofire.Method.GET {
+                if self.requestMethod! == Alamofire.Method.GET {
                     let responseDict = response.result.value as? NSDictionary
                     if responseDict != nil {
                         let dataArray = responseDict?.objectForKey("Data") as? NSArray
@@ -288,7 +289,7 @@ class MojioClient: NSObject {
                     }
                 }
                     
-                else if self.REST_METHOD! == Alamofire.Method.DELETE {
+                else if self.requestMethod! == Alamofire.Method.DELETE {
                     completion (response: true)
                 }
                 
@@ -300,68 +301,68 @@ class MojioClient: NSObject {
     }
     
     
-    func parseDict (dict : NSDictionary) -> AnyObject? {
-        switch self.ENTITY_REQUESTED{
+    func parseDict(dict : NSDictionary) -> AnyObject? {
+        switch self.requestEntity! {
             
-        case self.PATH_APPS:
+        case MojioApiEndpoints.Apps:
             let model = Mapper<App>().map(dict)
             return model!
             
-        case self.PATH_SECRET:
+        case MojioApiEndpoints.Secret:
             return nil
             
-        case self.PATH_GROUPS:
+        case MojioApiEndpoints.Groups:
             let model = Mapper<Group>().map(dict)
             return model!
             
-        case self.PATH_USERS:
+        case MojioApiEndpoints.Users:
             let model = Mapper<User>().map(dict)
             return model!
             
-        case self.PATH_ME:
+        case MojioApiEndpoints.Me:
             let model = Mapper<User>().map(dict)
             return model!
             
-        case self.PATH_HISTORY:
+        case MojioApiEndpoints.History:
             return nil
             
-        case self.PATH_STATES:
+        case MojioApiEndpoints.States:
             let model = Mapper<VehicleMeasures>().map(dict)
             return model!
             
-        case self.PATH_LOCATIONS:
+        case MojioApiEndpoints.Locations:
             let model = Mapper<Location>().map(dict)
             return model!
 
-        case self.PATH_IMAGE:
+        case MojioApiEndpoints.Image:
             let model = Mapper<Image>().map(dict)
             return model!
 
-        case self.PATH_MOJIOS:
+        case MojioApiEndpoints.Mojios:
             let model = Mapper<Mojio>().map(dict)
             return model!
             
-        case self.PATH_TRIPS:
+        case MojioApiEndpoints.Trips:
             let model = Mapper<Trip>().map(dict)
             return model!
 
-        case self.PATH_VEHICLES:
+        case MojioApiEndpoints.Vehicles:
             let model = Mapper<Vehicle>().map(dict)
             return model!
             
-        case self.PATH_ADDRESS:
+        case MojioApiEndpoints.Address:
             let model = Mapper<Address>().map(dict)
             return model!
             
-        case self.PATH_VIN:
+        case MojioApiEndpoints.Vin:
             let model = Mapper<Vin>().map(dict)
             return model!
             
-        case self.PATH_SERVICE_SCHEDULE:
+        case MojioApiEndpoints.ServiceSchedule:
             let model = Mapper<ServiceSchedule>().map(dict)
             return model!
             
-        case self.PATH_NEXT:
+        case MojioApiEndpoints.Next:
             let model = Mapper<NextServiceSchedule>().map(dict)
             return model!
 

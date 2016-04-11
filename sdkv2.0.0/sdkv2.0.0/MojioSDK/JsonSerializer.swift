@@ -207,7 +207,7 @@ public class JSONSerializer {
                 handledValue = String(value) != "nil" ? "\"\(value)\"" : "null"
             }
             json += "\"\(propertyName)\": \(handledValue)" + (index < size-1 ? ", " : "")
-            ++index
+            index += 1
         }
         json += "}"
         return json
