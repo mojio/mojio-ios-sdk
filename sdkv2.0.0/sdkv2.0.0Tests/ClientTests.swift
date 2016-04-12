@@ -117,7 +117,7 @@ class ClientTests: XCTestCase {
     
     func executeRestRequest (fileName : String, message : String, requestType : String) {
         
-        stub(isHost("staging-api.moj.io")) { _ in
+        stub(isHost("na-staging-api.moj.io")) { _ in
             let stubPath = OHPathForFile (fileName, self.dynamicType)
             return fixture(stubPath!, headers : ["Content-Type" : "application/json"])
         }
