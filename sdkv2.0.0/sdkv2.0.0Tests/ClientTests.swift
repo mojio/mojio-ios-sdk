@@ -115,6 +115,10 @@ class ClientTests: XCTestCase {
         self.executeRestRequest("VehicleData.txt", message: "Failed to post vehicle", requestType : "POST")
     }
     
+    func testDeleteObject () {
+        self.executeRestRequest("VehicleData.txt", message: "Failed to delete vehicle", requestType: "DELETE")
+    }
+    
     func executeRestRequest (fileName : String, message : String, requestType : String) {
         
         stub(isHost("na-staging-api.moj.io")) { _ in
@@ -125,7 +129,7 @@ class ClientTests: XCTestCase {
         let expectation = self.expectationWithDescription("Response arrived")
         
         if requestType == "GET" {
-            MojioClient().get().vehicles(nil).run({ response in
+            MojioClient().get().vehicles(nil).query("1", skip: "2", filter: "vehicleId=vehicleId", select: "", orderby: "").run({ response in
                 expectation.fulfill()
                 
                 }, failure: { error in
@@ -140,7 +144,14 @@ class ClientTests: XCTestCase {
             })
         }
         else if requestType == "POST" {
-            MojioClient().put().vehicles(nil).run("", completion: { response in
+            MojioClient().post().vehicles(nil).run("", completion: { response in
+                expectation.fulfill()
+                }, failure: { error in
+                    XCTAssertFalse(false, message)
+            })
+        }
+        else if requestType == "DELETE" {
+            MojioClient().delete().vehicles("vehicleId").run({ response in
                 expectation.fulfill()
                 }, failure: { error in
                     XCTAssertFalse(false, message)
