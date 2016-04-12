@@ -30,9 +30,7 @@ class AuthViewController: UIViewController, UIWebViewDelegate {
         super.viewDidLoad()
 
         let request : NSURLRequest = NSURLRequest(URL: self.loginURL);
-        self.webview?.loadRequest(request);
-        // Do any additional setup after loading the view.
-        
+        self.webview?.loadRequest(request);        
     }
     
     //MARK: webview delegate methods
