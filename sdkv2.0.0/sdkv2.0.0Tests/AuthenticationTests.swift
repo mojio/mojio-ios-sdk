@@ -11,7 +11,7 @@ import XCTest
 
 class AuthenticationTests: XCTestCase {
     
-    let authClient : MojioAuth = MojioAuth(appId: "81d705ec-4025-4d96-9b30-53d2a43eaa24", redirectURI: "sdkdev://")
+    let authClient : MojioAuth = MojioAuth (clientId: "81d705ec-4025-4d96-9b30-53d2a43eaa24", clientSecretKey: "2299d863-5a3a-4aea-8bd1-0caf32a412d5", clientRedirectURI: "sdkdev://io.moj")
     
     override func setUp() {
         super.setUp()
@@ -26,22 +26,22 @@ class AuthenticationTests: XCTestCase {
     }
     
     func testAmericaStaging () {
-        MojioClientEnvironment.clientEnvironment.setEnvironment(Environment.AMERICA_STAGING)
+        MojioClientEnvironment.sharedInstance.setRegion(MojioClientRegion.NAStaging)
         self.performLogin()
     }
     
     func testAmericaProd () {
-        MojioClientEnvironment.clientEnvironment.setEnvironment(Environment.AMERICA_PRODUCTION)
+        MojioClientEnvironment.sharedInstance.setRegion(MojioClientRegion.NAProduction)
         self.performLogin()
     }
     
-    func testAmericaDevelop () {
-        MojioClientEnvironment.clientEnvironment.setEnvironment(Environment.AMERICA_DEVELOP)
-        self.performLogin()
-    }
+//    func testAmericaDevelop () {
+//        MojioClientEnvironment.sharedInstance.setRegion(MojioClientRegion.nad)
+//        self.performLogin()
+//    }
     
     func testEuropeProd () {
-        MojioClientEnvironment.clientEnvironment.setEnvironment(Environment.EU_PRODUCTION)
+        MojioClientEnvironment.sharedInstance.setRegion(MojioClientRegion.EUProduction)
         self.performLogin()
     }
     
