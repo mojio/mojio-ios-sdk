@@ -47,6 +47,7 @@ class MojioClient: NSObject {
     
     override init() {
         self.baseUrl = MojioClientEnvironment.sharedInstance.getApiEndpoint()
+        self.requestUrl = self.baseUrl
         
         // Set Auth Token as the header
     }
@@ -54,6 +55,7 @@ class MojioClient: NSObject {
     convenience init(clientEnvironment : MojioClientEnvironment) {
         self.init()
         self.baseUrl = clientEnvironment.getApiEndpoint()
+        self.requestUrl = self.baseUrl
     }
     
     func get() -> Self {
@@ -78,133 +80,133 @@ class MojioClient: NSObject {
     
     func apps(appId : String?) -> Self {
         self.requestEntity = MojioApiEndpoints.Apps
-        self.requestUrl = self.baseUrl! + (self.requestEntity?.rawValue)! + (appId != nil ? appId! + "/" : "")
+        self.requestUrl = self.requestUrl! + (self.requestEntity?.rawValue)! + (appId != nil ? appId! + "/" : "")
         
         return self
     }
     
     func secret() -> Self {
         self.requestEntity = MojioApiEndpoints.Secret
-        self.requestUrl = self.baseUrl! + (self.requestEntity?.rawValue)!
+        self.requestUrl = self.requestUrl! + (self.requestEntity?.rawValue)!
 
         return self
     }
     
     func groups(groupId : String?) -> Self {
         self.requestEntity = MojioApiEndpoints.Groups
-        self.requestUrl = self.baseUrl! + (self.requestEntity?.rawValue)! + (groupId != nil ? groupId! + "/" : "")
+        self.requestUrl = self.requestUrl! + (self.requestEntity?.rawValue)! + (groupId != nil ? groupId! + "/" : "")
 
         return self
     }
     
     func users(userId : String?) -> Self {
         self.requestEntity = MojioApiEndpoints.Users
-        self.requestUrl = self.baseUrl! + (self.requestEntity?.rawValue)! + (userId != nil ? userId! + "/" : "")
+        self.requestUrl = self.requestUrl! + (self.requestEntity?.rawValue)! + (userId != nil ? userId! + "/" : "")
         
         return self
     }
     
     func me() -> Self {
         self.requestEntity = MojioApiEndpoints.Me
-        self.requestUrl = self.baseUrl! + (self.requestEntity?.rawValue)!
+        self.requestUrl = self.requestUrl! + (self.requestEntity?.rawValue)!
         
         return self
     }
     
     func history() -> Self {
         self.requestEntity = MojioApiEndpoints.History
-        self.requestUrl = self.baseUrl! + (self.requestEntity?.rawValue)!
+        self.requestUrl = self.requestUrl! + (self.requestEntity?.rawValue)!
         
         return self
     }
     
     func states() -> Self {
         self.requestEntity = MojioApiEndpoints.States
-        self.requestUrl = self.baseUrl! + (self.requestEntity?.rawValue)!
+        self.requestUrl = self.requestUrl! + (self.requestEntity?.rawValue)!
         
         return self
     }
     
     func locations() -> Self {
         self.requestEntity = MojioApiEndpoints.Locations
-        self.requestUrl = self.baseUrl! + (self.requestEntity?.rawValue)!
+        self.requestUrl = self.requestUrl! + (self.requestEntity?.rawValue)!
 
         return self
     }
     
     func image() -> Self {
         self.requestEntity = MojioApiEndpoints.Image
-        self.requestUrl = self.baseUrl! + (self.requestEntity?.rawValue)!
+        self.requestUrl = self.requestUrl! + (self.requestEntity?.rawValue)!
 
         return self
     }
     
     func mojios(mojioId : String?) -> Self {
         self.requestEntity = MojioApiEndpoints.Mojios
-        self.requestUrl = self.baseUrl! + (self.requestEntity?.rawValue)! + (mojioId != nil ? mojioId! + "/" : "")
+        self.requestUrl = self.requestUrl! + (self.requestEntity?.rawValue)! + (mojioId != nil ? mojioId! + "/" : "")
 
         return self
     }
     
     func permission() -> Self {
         self.requestEntity = MojioApiEndpoints.Permission
-        self.requestUrl = self.baseUrl! + (self.requestEntity?.rawValue)!
+        self.requestUrl = self.requestUrl! + (self.requestEntity?.rawValue)!
 
         return self
     }
     
     func permissions() -> Self {
         self.requestEntity = MojioApiEndpoints.Permissions
-        self.requestUrl = self.baseUrl! + (self.requestEntity?.rawValue)!
+        self.requestUrl = self.requestUrl! + (self.requestEntity?.rawValue)!
 
         return self
     }
     
     func tags(tagId : String) -> Self {
         self.requestEntity = MojioApiEndpoints.Tags
-        self.requestUrl = self.baseUrl! + (self.requestEntity?.rawValue)! + tagId + "/"
+        self.requestUrl = self.requestUrl! + (self.requestEntity?.rawValue)! + tagId + "/"
 
         return self
     }
     
     func trips(tripId : String?) -> Self {
         self.requestEntity = MojioApiEndpoints.Trips
-        self.requestUrl = self.baseUrl! + (self.requestEntity?.rawValue)! + (tripId != nil ? tripId! + "/" : "")
+        self.requestUrl = self.requestUrl! + (self.requestEntity?.rawValue)! + (tripId != nil ? tripId! + "/" : "")
 
         return self
     }
     
     func vehicles(vehicleId : String?) -> Self {
         self.requestEntity = MojioApiEndpoints.Vehicles
-        self.requestUrl = self.baseUrl! + (self.requestEntity?.rawValue)! + (vehicleId != nil ? vehicleId! + "/" : "")
+        self.requestUrl = self.requestUrl! + (self.requestEntity?.rawValue)! + (vehicleId != nil ? vehicleId! + "/" : "")
 
         return self
     }
     
     func address() -> Self {
         self.requestEntity = MojioApiEndpoints.Address
-        self.requestUrl = self.baseUrl! + (self.requestEntity?.rawValue)!
+        self.requestUrl = self.requestUrl! + (self.requestEntity?.rawValue)!
 
         return self
     }
     
     func vin() -> Self {
         self.requestEntity = MojioApiEndpoints.Vin
-        self.requestUrl = self.baseUrl! + (self.requestEntity?.rawValue)!
+        self.requestUrl = self.requestUrl! + (self.requestEntity?.rawValue)!
 
         return self
     }
     
     func serviceSchedule() -> Self {
         self.requestEntity = MojioApiEndpoints.ServiceSchedule
-        self.requestUrl = self.baseUrl! + (self.requestEntity?.rawValue)!
+        self.requestUrl = self.requestUrl! + (self.requestEntity?.rawValue)!
 
         return self
     }
     
     func next() -> Self {
         self.requestEntity = MojioApiEndpoints.Next
-        self.requestUrl = self.baseUrl! + (self.requestEntity?.rawValue)!
+        self.requestUrl = self.requestUrl! + (self.requestEntity?.rawValue)!
 
         return self
     }
