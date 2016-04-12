@@ -41,7 +41,8 @@ class User : Object, Mappable {
         if self.UserName != nil {
             dictionary.setObject(self.UserName!, forKey: "UserName")
         }
-        if self.email != nil {
+        if self.Emails.count > 0 {
+            self.email = (self.Emails.first! as Email).Address
             dictionary.setObject(self.email!, forKey: "Email")
         }
         if self.FirstName != nil {
