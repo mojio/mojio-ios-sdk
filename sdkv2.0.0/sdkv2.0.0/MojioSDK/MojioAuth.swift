@@ -32,7 +32,7 @@ class MojioAuth: NSObject, AuthControllerDelegate {
         self.clientSecretKey = clientSecretKey
         
         // TODO: make this accounts endpoint
-        self.loginURL = NSURL(string: MojioAuth.getTokenUrl(clientRedirectURL, clientId: clientId))
+        self.loginURL = NSURL(string: MojioAuth.getAuthorizeUrl(self.clientRedirectURL, clientId: self.clientId))
         self.loginCompletion = {};
     }
     
@@ -44,7 +44,7 @@ class MojioAuth: NSObject, AuthControllerDelegate {
         self.authController = AuthViewController(nibName : "AuthViewController", bundle: nil);
         self.authController?.delegate = self;
         
-        self.authController?.loginURL = self.loginURL;
+        self.authController?.loginURL = self.loginURL
         UIApplication.sharedApplication().delegate?.window!!.rootViewController = self.authController;
     }
     
@@ -171,5 +171,9 @@ class MojioAuth: NSObject, AuthControllerDelegate {
     
     static func getAuthorizeUrl() -> String {
         return MojioClientEnvironment.sharedInstance.getAccountsEndpoint() + MojioAuthEndpoints.Authorize.rawValue
+    }
+    
+    static func getAuthorizeUrl (redirectUri : String, clientId : String) -> String {
+        return String(format: "%@%@?response_type=token&redirect_uri=%@&client_id=%@&scope=full", MojioClientEnvironment.sharedInstance.getAccountsEndpoint(), MojioAuthEndpoints.Authorize.rawValue, redirectUri.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!, clientId.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)
     }
 }
