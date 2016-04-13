@@ -64,7 +64,7 @@ class MojioClientEnvironment {
     }
     
     func setDefaultRegion () {
-        self.region = MojioClientRegion.getDefaultRegion().rawValue
+        self.setRegion(MojioClientRegion.getDefaultRegion())
     }
     
     func getApiEndpoint () -> String {

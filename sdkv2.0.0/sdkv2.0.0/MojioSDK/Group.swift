@@ -69,8 +69,6 @@ class Group: Object, Mappable {
         
         Name <- map["Name"];
         Description <- map["Description"];
-//        Users <- map["Users"];
-//        Tags <- map["Tags"];
         Id <- map["Id"];
         CreatedOn <- map["CreatedOn"];
         LastModified <- map["LastModified"];

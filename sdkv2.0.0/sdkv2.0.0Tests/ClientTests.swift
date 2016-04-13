@@ -36,7 +36,7 @@ class ClientTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        MojioClientEnvironment.clientEnvironment.setEnvironment(Environment.AMERICA_STAGING)
+        MojioClientEnvironment.sharedInstance.setRegion(MojioClientRegion.NAStaging)
     }
     
     override func tearDown() {
@@ -50,34 +50,34 @@ class ClientTests: XCTestCase {
         
         let client : MojioClient = MojioClient()
        
-        client.ENTITY_REQUESTED = "vehicles/"
+        client.requestEntity = MojioApiEndpoints.Vehicles
         let vehicle = client.parseDict (toDict("VehicleData")!)
         
-        client.ENTITY_REQUESTED = "states/"
+        client.requestEntity = MojioApiEndpoints.States
         let states = client.parseDict(toDict("VehicleStateData")!)
 
-        client.ENTITY_REQUESTED = "apps/"
+        client.requestEntity = MojioApiEndpoints.Apps
         let app = client.parseDict (toDict("AppData")!) as? App
         
-        client.ENTITY_REQUESTED = "mojios/"
+        client.requestEntity = MojioApiEndpoints.Mojios
         let mojio = client.parseDict (toDict("MojioData")!) as? Mojio
         
-        client.ENTITY_REQUESTED = "trips/"
+        client.requestEntity = MojioApiEndpoints.Trips
         let trip = client.parseDict (toDict("TripData")!) as? Trip
         
-        client.ENTITY_REQUESTED = "users/"
+        client.requestEntity = MojioApiEndpoints.Users
         let user = client.parseDict (toDict("UserData")!) as? User
         
-        client.ENTITY_REQUESTED = self.PATH_VIN
+        client.requestEntity = MojioApiEndpoints.Vin
         let vin = client.parseDict(toDict("VinData")!) as? Vin
         
-        client.ENTITY_REQUESTED = self.PATH_SERVICE_SCHEDULE
+        client.requestEntity = MojioApiEndpoints.ServiceSchedule
         let serviceSchedule = client.parseDict(toDict("ServiceScheduleData")!) as? ServiceSchedule
         
-        client.ENTITY_REQUESTED = self.PATH_NEXT
+        client.requestEntity = MojioApiEndpoints.Next
         let nextService = client.parseDict(toDict("NextServiceData")!) as? NextServiceSchedule
         
-        client.ENTITY_REQUESTED = self.PATH_GROUPS
+        client.requestEntity = MojioApiEndpoints.Groups
         let group = client.parseDict(toDict("GroupData")!) as? Group
 
         XCTAssertNotNil((vehicle?.isKindOfClass(Vehicle)), "The class is not of type vehicle")
@@ -115,9 +115,13 @@ class ClientTests: XCTestCase {
         self.executeRestRequest("VehicleData.txt", message: "Failed to post vehicle", requestType : "POST")
     }
     
+    func testDeleteObject () {
+        self.executeRestRequest("VehicleData.txt", message: "Failed to delete vehicle", requestType: "DELETE")
+    }
+    
     func executeRestRequest (fileName : String, message : String, requestType : String) {
         
-        stub(isHost("staging-api.moj.io")) { _ in
+        stub(isHost("na-staging-api.moj.io")) { _ in
             let stubPath = OHPathForFile (fileName, self.dynamicType)
             return fixture(stubPath!, headers : ["Content-Type" : "application/json"])
         }
@@ -125,7 +129,7 @@ class ClientTests: XCTestCase {
         let expectation = self.expectationWithDescription("Response arrived")
         
         if requestType == "GET" {
-            MojioClient().get().vehicles(nil).run({ response in
+            MojioClient().get().vehicles(nil).query("1", skip: "2", filter: "vehicleId=vehicleId", select: "", orderby: "").run({ response in
                 expectation.fulfill()
                 
                 }, failure: { error in
@@ -140,7 +144,14 @@ class ClientTests: XCTestCase {
             })
         }
         else if requestType == "POST" {
-            MojioClient().put().vehicles(nil).run("", completion: { response in
+            MojioClient().post().vehicles(nil).run("", completion: { response in
+                expectation.fulfill()
+                }, failure: { error in
+                    XCTAssertFalse(false, message)
+            })
+        }
+        else if requestType == "DELETE" {
+            MojioClient().delete().vehicles("vehicleId").run({ response in
                 expectation.fulfill()
                 }, failure: { error in
                     XCTAssertFalse(false, message)

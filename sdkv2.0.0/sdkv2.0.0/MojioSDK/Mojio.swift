@@ -63,7 +63,6 @@ class Mojio: Object, Mappable {
         LastContactTime <- map["LastContactTime"];
         GatewayTime <- map["GatewayTime"];
         VehicleId <- map["VehicleId"];
-//        Tags <- map["Tags"];
         Id <- map["Id"];
         CreatedOn <- map["CreatedOn"];
         LastModified <- map["LastModified"];

@@ -33,17 +33,22 @@ class sdkv2_0_0UITests: XCTestCase {
         // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
     
-    func login () {
-        
+    func testLogin () {        
         let app = XCUIApplication()
         app.otherElements["Login to Mojio"].childrenMatchingType(.Link).elementBoundByIndex(0).childrenMatchingType(.Button).element.tap()
         
         let loginToMojioAccountElement = app.otherElements["Login to Mojio account"]
         let textField = loginToMojioAccountElement.childrenMatchingType(.TextField).element
         textField.tap()
-        textField.typeText("ashisha@moj.io")
-        loginToMojioAccountElement.childrenMatchingType(.SecureTextField).element.typeText("Test123")
-        app.buttons["Sign In"].tap()
+        loginToMojioAccountElement.childrenMatchingType(.TextField).element
+        app.typeText("ashisha@moj.io")
+
+        let secureTextField = loginToMojioAccountElement.childrenMatchingType(.SecureTextField).element
+        secureTextField.tap()
+        textField.tap()
+        secureTextField.tap()
+        loginToMojioAccountElement.childrenMatchingType(.SecureTextField).element
+        app.typeText("Test123\r")
         
     }
     

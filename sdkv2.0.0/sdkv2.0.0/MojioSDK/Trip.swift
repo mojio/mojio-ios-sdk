@@ -71,7 +71,6 @@ class Trip: Object, Mappable {
         
         VehicleId <- map["VehicleId"];
         Name <- map["Name"];
-//        Tags <- map["Tags"];
         MojioId <- map["MojioId"];
         Completed <- map["Completed"];
         Duration <- map["Duration"];
