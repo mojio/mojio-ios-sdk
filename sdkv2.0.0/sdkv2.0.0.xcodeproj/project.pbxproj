@@ -1,0 +1,1029 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		129478936D8217E16F4AADAD /* Pods_sdkv2_0_0Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B3A918696E142ACBFF983E5 /* Pods_sdkv2_0_0Tests.framework */; };
+		75461F0D1C8A1B1D00DDB557 /* BooleanState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75461F0C1C8A1B1D00DDB557 /* BooleanState.swift */; };
+		75461F111C8A1C8900DDB557 /* BooleanState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75461F0C1C8A1B1D00DDB557 /* BooleanState.swift */; };
+		75461F131C8A3EBE00DDB557 /* VehicleMeasures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75461F121C8A3EBD00DDB557 /* VehicleMeasures.swift */; };
+		75461F141C8A3EBE00DDB557 /* VehicleMeasures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75461F121C8A3EBD00DDB557 /* VehicleMeasures.swift */; };
+		75461F161C8A450C00DDB557 /* VehicleStateData.txt in Resources */ = {isa = PBXBuildFile; fileRef = 75461F151C8A450C00DDB557 /* VehicleStateData.txt */; };
+		75461F171C8A450C00DDB557 /* VehicleStateData.txt in Resources */ = {isa = PBXBuildFile; fileRef = 75461F151C8A450C00DDB557 /* VehicleStateData.txt */; };
+		755785451C6BE403000D65B3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755785441C6BE403000D65B3 /* AppDelegate.swift */; };
+		755785471C6BE403000D65B3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755785461C6BE403000D65B3 /* ViewController.swift */; };
+		7557854A1C6BE403000D65B3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 755785481C6BE403000D65B3 /* Main.storyboard */; };
+		7557854C1C6BE403000D65B3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7557854B1C6BE403000D65B3 /* Assets.xcassets */; };
+		7557854F1C6BE403000D65B3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7557854D1C6BE403000D65B3 /* LaunchScreen.storyboard */; };
+		755785691C6BE45C000D65B3 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755785651C6BE45C000D65B3 /* AuthViewController.swift */; };
+		7557856A1C6BE45C000D65B3 /* AuthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 755785661C6BE45C000D65B3 /* AuthViewController.xib */; };
+		7557856B1C6BE45C000D65B3 /* MojioAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755785671C6BE45C000D65B3 /* MojioAuth.swift */; };
+		7557856C1C6BE45C000D65B3 /* MojioClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755785681C6BE45C000D65B3 /* MojioClient.swift */; };
+		756E59AA1C88245F004AC466 /* sdkv2_0_0UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756E59A91C88245F004AC466 /* sdkv2_0_0UITests.swift */; };
+		756E59B21C88E3A5004AC466 /* VehiclesData.txt in Resources */ = {isa = PBXBuildFile; fileRef = 756E59B11C88E3A5004AC466 /* VehiclesData.txt */; };
+		756E59B41C88F1E1004AC466 /* GroupData.txt in Resources */ = {isa = PBXBuildFile; fileRef = 756E59B31C88F1E1004AC466 /* GroupData.txt */; };
+		756E59B51C88F2FD004AC466 /* GroupData.txt in Resources */ = {isa = PBXBuildFile; fileRef = 756E59B31C88F1E1004AC466 /* GroupData.txt */; };
+		75D933051C84D8D900D1D8F0 /* AuthenticationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D933041C84D8D900D1D8F0 /* AuthenticationTests.swift */; };
+		75D933061C84DA3C00D1D8F0 /* Battery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94E8D1C84D0A500FD2888 /* Battery.swift */; };
+		75D933081C84DA4E00D1D8F0 /* DiagnosticCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94E8F1C84D0A600FD2888 /* DiagnosticCode.swift */; };
+		75D933091C84DA4E00D1D8F0 /* Duration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94E901C84D0A600FD2888 /* Duration.swift */; };
+		75D9330A1C84DA4E00D1D8F0 /* Email.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94E911C84D0A600FD2888 /* Email.swift */; };
+		75D9330B1C84DA4E00D1D8F0 /* Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94E921C84D0A600FD2888 /* Engine.swift */; };
+		75D9330C1C84DA4E00D1D8F0 /* FuelCapacity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94E931C84D0A600FD2888 /* FuelCapacity.swift */; };
+		75D9330D1C84DA4E00D1D8F0 /* FuelEfficiency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94E941C84D0A600FD2888 /* FuelEfficiency.swift */; };
+		75D9330E1C84DA4E00D1D8F0 /* FuelLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94E951C84D0A600FD2888 /* FuelLevel.swift */; };
+		75D9330F1C84DA4E00D1D8F0 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94E961C84D0A600FD2888 /* Group.swift */; };
+		75D933111C84DA4E00D1D8F0 /* Heading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94E981C84D0A600FD2888 /* Heading.swift */; };
+		75D933141C84DA4E00D1D8F0 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94E9B1C84D0A600FD2888 /* Image.swift */; };
+		75D933151C84DA4E00D1D8F0 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94E9C1C84D0A600FD2888 /* Location.swift */; };
+		75D933161C84DA4E00D1D8F0 /* MeasurementStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94E9D1C84D0A600FD2888 /* MeasurementStatistics.swift */; };
+		75D933171C84DA4E00D1D8F0 /* Mojio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94E9E1C84D0A600FD2888 /* Mojio.swift */; };
+		75D933181C84DA4E00D1D8F0 /* MojioClientEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94E9F1C84D0A600FD2888 /* MojioClientEnvironment.swift */; };
+		75D933191C84DA4E00D1D8F0 /* NextServiceSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94EA01C84D0A600FD2888 /* NextServiceSchedule.swift */; };
+		75D9331B1C84DA4E00D1D8F0 /* Odometer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94EA21C84D0A600FD2888 /* Odometer.swift */; };
+		75D9331D1C84DA4E00D1D8F0 /* PhoneNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94EA41C84D0A600FD2888 /* PhoneNumber.swift */; };
+		75D9331E1C84DA4E00D1D8F0 /* PlatformServiceSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94EA51C84D0A600FD2888 /* PlatformServiceSchedule.swift */; };
+		75D9331F1C84DA4E00D1D8F0 /* ProperAcceleration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94EA61C84D0A600FD2888 /* ProperAcceleration.swift */; };
+		75D933201C84DA4E00D1D8F0 /* Recall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94EA71C84D0A600FD2888 /* Recall.swift */; };
+		75D933211C84DA4E00D1D8F0 /* RPM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94EA81C84D0A600FD2888 /* RPM.swift */; };
+		75D933221C84DA4E00D1D8F0 /* Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94EA91C84D0A600FD2888 /* Score.swift */; };
+		75D933231C84DA4E00D1D8F0 /* ServiceBulletin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94EAA1C84D0A600FD2888 /* ServiceBulletin.swift */; };
+		75D933241C84DA4E00D1D8F0 /* ServiceSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94EAB1C84D0A600FD2888 /* ServiceSchedule.swift */; };
+		75D933251C84DA4E00D1D8F0 /* Speed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94EAC1C84D0A600FD2888 /* Speed.swift */; };
+		75D933261C84DA4E00D1D8F0 /* StringObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94EAD1C84D0A600FD2888 /* StringObject.swift */; };
+		75D933281C84DA4E00D1D8F0 /* Transmission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94EAF1C84D0A600FD2888 /* Transmission.swift */; };
+		75D9332A1C84DA4E00D1D8F0 /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94EB11C84D0A600FD2888 /* Trip.swift */; };
+		75D9332B1C84DA4E00D1D8F0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94EB21C84D0A600FD2888 /* User.swift */; };
+		75D9332C1C84DA4E00D1D8F0 /* Vehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94EB31C84D0A600FD2888 /* Vehicle.swift */; };
+		75D9332D1C84DA4E00D1D8F0 /* Vin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94EB41C84D0A600FD2888 /* Vin.swift */; };
+		75D9332E1C84DA4E00D1D8F0 /* VinDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94EB51C84D0A600FD2888 /* VinDetails.swift */; };
+		75D9332F1C84DA4E00D1D8F0 /* Warranty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94EB61C84D0A600FD2888 /* Warranty.swift */; };
+		75D933301C84DA4E00D1D8F0 /* Acceleration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94E831C84D09500FD2888 /* Acceleration.swift */; };
+		75D933311C84DA4E00D1D8F0 /* Accelerometer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94E841C84D09500FD2888 /* Accelerometer.swift */; };
+		75D933331C84DA4E00D1D8F0 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94E861C84D09500FD2888 /* Address.swift */; };
+		75D933341C84DA4E00D1D8F0 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94E871C84D09500FD2888 /* App.swift */; };
+		75D933351C84DA4E00D1D8F0 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755785651C6BE45C000D65B3 /* AuthViewController.swift */; };
+		75D933361C84DA4E00D1D8F0 /* AuthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 755785661C6BE45C000D65B3 /* AuthViewController.xib */; };
+		75D933371C84DA4E00D1D8F0 /* MojioAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755785671C6BE45C000D65B3 /* MojioAuth.swift */; };
+		75D933381C84DA4E00D1D8F0 /* MojioClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755785681C6BE45C000D65B3 /* MojioClient.swift */; };
+		75D933761C8506AE00D1D8F0 /* ClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D933751C8506AE00D1D8F0 /* ClientTests.swift */; };
+		75D933781C8508C200D1D8F0 /* VehicleData.txt in Resources */ = {isa = PBXBuildFile; fileRef = 75D933771C8508C200D1D8F0 /* VehicleData.txt */; };
+		75D933791C850FE100D1D8F0 /* VehicleData.txt in Resources */ = {isa = PBXBuildFile; fileRef = 75D933771C8508C200D1D8F0 /* VehicleData.txt */; };
+		75D9337D1C8517EF00D1D8F0 /* ApiPathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D9337C1C8517EF00D1D8F0 /* ApiPathTests.swift */; };
+		75D94E881C84D09500FD2888 /* Acceleration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94E831C84D09500FD2888 /* Acceleration.swift */; };
+		75D94E891C84D09500FD2888 /* Accelerometer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94E841C84D09500FD2888 /* Accelerometer.swift */; };
+		75D94E8B1C84D09500FD2888 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94E861C84D09500FD2888 /* Address.swift */; };
+		75D94E8C1C84D09500FD2888 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94E871C84D09500FD2888 /* App.swift */; };
+		75D94EB71C84D0A600FD2888 /* Battery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94E8D1C84D0A500FD2888 /* Battery.swift */; };
+		75D94EB91C84D0A600FD2888 /* DiagnosticCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94E8F1C84D0A600FD2888 /* DiagnosticCode.swift */; };
+		75D94EBA1C84D0A600FD2888 /* Duration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94E901C84D0A600FD2888 /* Duration.swift */; };
+		75D94EBB1C84D0A600FD2888 /* Email.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94E911C84D0A600FD2888 /* Email.swift */; };
+		75D94EBC1C84D0A600FD2888 /* Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94E921C84D0A600FD2888 /* Engine.swift */; };
+		75D94EBD1C84D0A600FD2888 /* FuelCapacity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94E931C84D0A600FD2888 /* FuelCapacity.swift */; };
+		75D94EBE1C84D0A600FD2888 /* FuelEfficiency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94E941C84D0A600FD2888 /* FuelEfficiency.swift */; };
+		75D94EBF1C84D0A600FD2888 /* FuelLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94E951C84D0A600FD2888 /* FuelLevel.swift */; };
+		75D94EC01C84D0A600FD2888 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94E961C84D0A600FD2888 /* Group.swift */; };
+		75D94EC21C84D0A600FD2888 /* Heading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94E981C84D0A600FD2888 /* Heading.swift */; };
+		75D94EC51C84D0A600FD2888 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94E9B1C84D0A600FD2888 /* Image.swift */; };
+		75D94EC61C84D0A600FD2888 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94E9C1C84D0A600FD2888 /* Location.swift */; };
+		75D94EC71C84D0A600FD2888 /* MeasurementStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94E9D1C84D0A600FD2888 /* MeasurementStatistics.swift */; };
+		75D94EC81C84D0A600FD2888 /* Mojio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94E9E1C84D0A600FD2888 /* Mojio.swift */; };
+		75D94EC91C84D0A600FD2888 /* MojioClientEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94E9F1C84D0A600FD2888 /* MojioClientEnvironment.swift */; };
+		75D94ECA1C84D0A600FD2888 /* NextServiceSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94EA01C84D0A600FD2888 /* NextServiceSchedule.swift */; };
+		75D94ECC1C84D0A600FD2888 /* Odometer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94EA21C84D0A600FD2888 /* Odometer.swift */; };
+		75D94ECE1C84D0A600FD2888 /* PhoneNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94EA41C84D0A600FD2888 /* PhoneNumber.swift */; };
+		75D94ECF1C84D0A600FD2888 /* PlatformServiceSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94EA51C84D0A600FD2888 /* PlatformServiceSchedule.swift */; };
+		75D94ED01C84D0A600FD2888 /* ProperAcceleration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94EA61C84D0A600FD2888 /* ProperAcceleration.swift */; };
+		75D94ED11C84D0A600FD2888 /* Recall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94EA71C84D0A600FD2888 /* Recall.swift */; };
+		75D94ED21C84D0A600FD2888 /* RPM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94EA81C84D0A600FD2888 /* RPM.swift */; };
+		75D94ED31C84D0A600FD2888 /* Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94EA91C84D0A600FD2888 /* Score.swift */; };
+		75D94ED41C84D0A600FD2888 /* ServiceBulletin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94EAA1C84D0A600FD2888 /* ServiceBulletin.swift */; };
+		75D94ED51C84D0A600FD2888 /* ServiceSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94EAB1C84D0A600FD2888 /* ServiceSchedule.swift */; };
+		75D94ED61C84D0A600FD2888 /* Speed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94EAC1C84D0A600FD2888 /* Speed.swift */; };
+		75D94ED71C84D0A600FD2888 /* StringObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94EAD1C84D0A600FD2888 /* StringObject.swift */; };
+		75D94ED91C84D0A600FD2888 /* Transmission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94EAF1C84D0A600FD2888 /* Transmission.swift */; };
+		75D94EDB1C84D0A600FD2888 /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94EB11C84D0A600FD2888 /* Trip.swift */; };
+		75D94EDC1C84D0A600FD2888 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94EB21C84D0A600FD2888 /* User.swift */; };
+		75D94EDD1C84D0A600FD2888 /* Vehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94EB31C84D0A600FD2888 /* Vehicle.swift */; };
+		75D94EDE1C84D0A600FD2888 /* Vin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94EB41C84D0A600FD2888 /* Vin.swift */; };
+		75D94EDF1C84D0A600FD2888 /* VinDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94EB51C84D0A600FD2888 /* VinDetails.swift */; };
+		75D94EE01C84D0A600FD2888 /* Warranty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D94EB61C84D0A600FD2888 /* Warranty.swift */; };
+		75D9C5031C93890C00A338C8 /* MojioKeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D9C5021C93890C00A338C8 /* MojioKeychainManager.swift */; };
+		75D9C5041C93890C00A338C8 /* MojioKeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D9C5021C93890C00A338C8 /* MojioKeychainManager.swift */; };
+		75E34FCE1C8776EE001B40E0 /* AppData.txt in Resources */ = {isa = PBXBuildFile; fileRef = 75E34FCD1C8776EE001B40E0 /* AppData.txt */; };
+		75E34FD01C877724001B40E0 /* MojioData.txt in Resources */ = {isa = PBXBuildFile; fileRef = 75E34FCF1C877724001B40E0 /* MojioData.txt */; };
+		75E34FD21C87774E001B40E0 /* TripData.txt in Resources */ = {isa = PBXBuildFile; fileRef = 75E34FD11C87774E001B40E0 /* TripData.txt */; };
+		75E34FD41C87776A001B40E0 /* UserData.txt in Resources */ = {isa = PBXBuildFile; fileRef = 75E34FD31C87776A001B40E0 /* UserData.txt */; };
+		75E34FD51C8779B4001B40E0 /* AppData.txt in Resources */ = {isa = PBXBuildFile; fileRef = 75E34FCD1C8776EE001B40E0 /* AppData.txt */; };
+		75E34FD61C8779B7001B40E0 /* MojioData.txt in Resources */ = {isa = PBXBuildFile; fileRef = 75E34FCF1C877724001B40E0 /* MojioData.txt */; };
+		75E34FD71C8779BA001B40E0 /* TripData.txt in Resources */ = {isa = PBXBuildFile; fileRef = 75E34FD11C87774E001B40E0 /* TripData.txt */; };
+		75E34FD81C8779BD001B40E0 /* UserData.txt in Resources */ = {isa = PBXBuildFile; fileRef = 75E34FD31C87776A001B40E0 /* UserData.txt */; };
+		75E34FDA1C87E36B001B40E0 /* VinData.txt in Resources */ = {isa = PBXBuildFile; fileRef = 75E34FD91C87E36B001B40E0 /* VinData.txt */; };
+		75E34FDB1C87E36B001B40E0 /* VinData.txt in Resources */ = {isa = PBXBuildFile; fileRef = 75E34FD91C87E36B001B40E0 /* VinData.txt */; };
+		75E34FDD1C87E3F9001B40E0 /* ServiceScheduleData.txt in Resources */ = {isa = PBXBuildFile; fileRef = 75E34FDC1C87E3F9001B40E0 /* ServiceScheduleData.txt */; };
+		75E34FDE1C87E3F9001B40E0 /* ServiceScheduleData.txt in Resources */ = {isa = PBXBuildFile; fileRef = 75E34FDC1C87E3F9001B40E0 /* ServiceScheduleData.txt */; };
+		75E34FE01C87E433001B40E0 /* NextServiceData.txt in Resources */ = {isa = PBXBuildFile; fileRef = 75E34FDF1C87E433001B40E0 /* NextServiceData.txt */; };
+		75E34FE11C87E433001B40E0 /* NextServiceData.txt in Resources */ = {isa = PBXBuildFile; fileRef = 75E34FDF1C87E433001B40E0 /* NextServiceData.txt */; };
+		F83BD9F586581F007EE25BAF /* Pods_sdkv2_0_0.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12B58B0AAFF9E034431C1B1C /* Pods_sdkv2_0_0.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		755785561C6BE403000D65B3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 755785391C6BE403000D65B3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 755785401C6BE403000D65B3;
+			remoteInfo = sdkv2.0.0;
+		};
+		756E59AC1C88245F004AC466 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 755785391C6BE403000D65B3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 755785401C6BE403000D65B3;
+			remoteInfo = sdkv2.0.0;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0E4EC963AE554407DD59F331 /* Pods-sdkv2.0.0.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sdkv2.0.0.debug.xcconfig"; path = "Pods/Target Support Files/Pods-sdkv2.0.0/Pods-sdkv2.0.0.debug.xcconfig"; sourceTree = "<group>"; };
+		12B58B0AAFF9E034431C1B1C /* Pods_sdkv2_0_0.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_sdkv2_0_0.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1E7032C534B485DDB446AF57 /* Pods-sdkv2.0.0Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sdkv2.0.0Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-sdkv2.0.0Tests/Pods-sdkv2.0.0Tests.release.xcconfig"; sourceTree = "<group>"; };
+		75461F0C1C8A1B1D00DDB557 /* BooleanState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BooleanState.swift; sourceTree = "<group>"; };
+		75461F121C8A3EBD00DDB557 /* VehicleMeasures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VehicleMeasures.swift; sourceTree = "<group>"; };
+		75461F151C8A450C00DDB557 /* VehicleStateData.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VehicleStateData.txt; sourceTree = "<group>"; };
+		755785411C6BE403000D65B3 /* sdkv2.0.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sdkv2.0.0.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		755785441C6BE403000D65B3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		755785461C6BE403000D65B3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		755785491C6BE403000D65B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		7557854B1C6BE403000D65B3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		7557854E1C6BE403000D65B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		755785501C6BE403000D65B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		755785551C6BE403000D65B3 /* sdkv2.0.0Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = sdkv2.0.0Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7557855B1C6BE403000D65B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		755785651C6BE45C000D65B3 /* AuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
+		755785661C6BE45C000D65B3 /* AuthViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AuthViewController.xib; sourceTree = "<group>"; };
+		755785671C6BE45C000D65B3 /* MojioAuth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MojioAuth.swift; sourceTree = "<group>"; };
+		755785681C6BE45C000D65B3 /* MojioClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MojioClient.swift; sourceTree = "<group>"; };
+		756E59A71C88245F004AC466 /* sdkv2.0.0UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = sdkv2.0.0UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		756E59A91C88245F004AC466 /* sdkv2_0_0UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sdkv2_0_0UITests.swift; sourceTree = "<group>"; };
+		756E59AB1C88245F004AC466 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		756E59B11C88E3A5004AC466 /* VehiclesData.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VehiclesData.txt; sourceTree = "<group>"; };
+		756E59B31C88F1E1004AC466 /* GroupData.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GroupData.txt; sourceTree = "<group>"; };
+		75D933041C84D8D900D1D8F0 /* AuthenticationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationTests.swift; sourceTree = "<group>"; };
+		75D933751C8506AE00D1D8F0 /* ClientTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientTests.swift; sourceTree = "<group>"; };
+		75D933771C8508C200D1D8F0 /* VehicleData.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VehicleData.txt; sourceTree = "<group>"; };
+		75D9337C1C8517EF00D1D8F0 /* ApiPathTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiPathTests.swift; sourceTree = "<group>"; };
+		75D94E831C84D09500FD2888 /* Acceleration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Acceleration.swift; sourceTree = "<group>"; };
+		75D94E841C84D09500FD2888 /* Accelerometer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Accelerometer.swift; sourceTree = "<group>"; };
+		75D94E861C84D09500FD2888 /* Address.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
+		75D94E871C84D09500FD2888 /* App.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
+		75D94E8D1C84D0A500FD2888 /* Battery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Battery.swift; sourceTree = "<group>"; };
+		75D94E8F1C84D0A600FD2888 /* DiagnosticCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiagnosticCode.swift; sourceTree = "<group>"; };
+		75D94E901C84D0A600FD2888 /* Duration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Duration.swift; sourceTree = "<group>"; };
+		75D94E911C84D0A600FD2888 /* Email.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Email.swift; sourceTree = "<group>"; };
+		75D94E921C84D0A600FD2888 /* Engine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Engine.swift; sourceTree = "<group>"; };
+		75D94E931C84D0A600FD2888 /* FuelCapacity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FuelCapacity.swift; sourceTree = "<group>"; };
+		75D94E941C84D0A600FD2888 /* FuelEfficiency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FuelEfficiency.swift; sourceTree = "<group>"; };
+		75D94E951C84D0A600FD2888 /* FuelLevel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FuelLevel.swift; sourceTree = "<group>"; };
+		75D94E961C84D0A600FD2888 /* Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
+		75D94E981C84D0A600FD2888 /* Heading.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Heading.swift; sourceTree = "<group>"; };
+		75D94E9B1C84D0A600FD2888 /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
+		75D94E9C1C84D0A600FD2888 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		75D94E9D1C84D0A600FD2888 /* MeasurementStatistics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeasurementStatistics.swift; sourceTree = "<group>"; };
+		75D94E9E1C84D0A600FD2888 /* Mojio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mojio.swift; sourceTree = "<group>"; };
+		75D94E9F1C84D0A600FD2888 /* MojioClientEnvironment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MojioClientEnvironment.swift; sourceTree = "<group>"; };
+		75D94EA01C84D0A600FD2888 /* NextServiceSchedule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NextServiceSchedule.swift; sourceTree = "<group>"; };
+		75D94EA21C84D0A600FD2888 /* Odometer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Odometer.swift; sourceTree = "<group>"; };
+		75D94EA41C84D0A600FD2888 /* PhoneNumber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneNumber.swift; sourceTree = "<group>"; };
+		75D94EA51C84D0A600FD2888 /* PlatformServiceSchedule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlatformServiceSchedule.swift; sourceTree = "<group>"; };
+		75D94EA61C84D0A600FD2888 /* ProperAcceleration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProperAcceleration.swift; sourceTree = "<group>"; };
+		75D94EA71C84D0A600FD2888 /* Recall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recall.swift; sourceTree = "<group>"; };
+		75D94EA81C84D0A600FD2888 /* RPM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RPM.swift; sourceTree = "<group>"; };
+		75D94EA91C84D0A600FD2888 /* Score.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Score.swift; sourceTree = "<group>"; };
+		75D94EAA1C84D0A600FD2888 /* ServiceBulletin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceBulletin.swift; sourceTree = "<group>"; };
+		75D94EAB1C84D0A600FD2888 /* ServiceSchedule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceSchedule.swift; sourceTree = "<group>"; };
+		75D94EAC1C84D0A600FD2888 /* Speed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Speed.swift; sourceTree = "<group>"; };
+		75D94EAD1C84D0A600FD2888 /* StringObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringObject.swift; sourceTree = "<group>"; };
+		75D94EAF1C84D0A600FD2888 /* Transmission.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transmission.swift; sourceTree = "<group>"; };
+		75D94EB11C84D0A600FD2888 /* Trip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
+		75D94EB21C84D0A600FD2888 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		75D94EB31C84D0A600FD2888 /* Vehicle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vehicle.swift; sourceTree = "<group>"; };
+		75D94EB41C84D0A600FD2888 /* Vin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vin.swift; sourceTree = "<group>"; };
+		75D94EB51C84D0A600FD2888 /* VinDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VinDetails.swift; sourceTree = "<group>"; };
+		75D94EB61C84D0A600FD2888 /* Warranty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Warranty.swift; sourceTree = "<group>"; };
+		75D9C5021C93890C00A338C8 /* MojioKeychainManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MojioKeychainManager.swift; sourceTree = "<group>"; };
+		75E34FCD1C8776EE001B40E0 /* AppData.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AppData.txt; sourceTree = "<group>"; };
+		75E34FCF1C877724001B40E0 /* MojioData.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MojioData.txt; sourceTree = "<group>"; };
+		75E34FD11C87774E001B40E0 /* TripData.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TripData.txt; sourceTree = "<group>"; };
+		75E34FD31C87776A001B40E0 /* UserData.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = UserData.txt; sourceTree = "<group>"; };
+		75E34FD91C87E36B001B40E0 /* VinData.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VinData.txt; sourceTree = "<group>"; };
+		75E34FDC1C87E3F9001B40E0 /* ServiceScheduleData.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ServiceScheduleData.txt; sourceTree = "<group>"; };
+		75E34FDF1C87E433001B40E0 /* NextServiceData.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NextServiceData.txt; sourceTree = "<group>"; };
+		8FEC8B4BECE8C8AA4CD2A4D4 /* Pods-sdkv2.0.0Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sdkv2.0.0Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-sdkv2.0.0Tests/Pods-sdkv2.0.0Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		9B3A918696E142ACBFF983E5 /* Pods_sdkv2_0_0Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_sdkv2_0_0Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E7A991FE380437ACA972E52C /* Pods-sdkv2.0.0.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sdkv2.0.0.release.xcconfig"; path = "Pods/Target Support Files/Pods-sdkv2.0.0/Pods-sdkv2.0.0.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7557853E1C6BE403000D65B3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F83BD9F586581F007EE25BAF /* Pods_sdkv2_0_0.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		755785521C6BE403000D65B3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				129478936D8217E16F4AADAD /* Pods_sdkv2_0_0Tests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		756E59A41C88245F004AC466 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5D5E1925F4ED146D8F300524 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0E4EC963AE554407DD59F331 /* Pods-sdkv2.0.0.debug.xcconfig */,
+				E7A991FE380437ACA972E52C /* Pods-sdkv2.0.0.release.xcconfig */,
+				8FEC8B4BECE8C8AA4CD2A4D4 /* Pods-sdkv2.0.0Tests.debug.xcconfig */,
+				1E7032C534B485DDB446AF57 /* Pods-sdkv2.0.0Tests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		75461F181C8A479500DDB557 /* VinDetails */ = {
+			isa = PBXGroup;
+			children = (
+				75D94E921C84D0A600FD2888 /* Engine.swift */,
+				75D94EA71C84D0A600FD2888 /* Recall.swift */,
+				75D94EAF1C84D0A600FD2888 /* Transmission.swift */,
+				75D94EB41C84D0A600FD2888 /* Vin.swift */,
+				75D94EB51C84D0A600FD2888 /* VinDetails.swift */,
+				75D94EB61C84D0A600FD2888 /* Warranty.swift */,
+				75D94EA01C84D0A600FD2888 /* NextServiceSchedule.swift */,
+				75D94EAA1C84D0A600FD2888 /* ServiceBulletin.swift */,
+				75D94EA51C84D0A600FD2888 /* PlatformServiceSchedule.swift */,
+				75D94EAB1C84D0A600FD2888 /* ServiceSchedule.swift */,
+			);
+			name = VinDetails;
+			sourceTree = "<group>";
+		};
+		755785381C6BE403000D65B3 = {
+			isa = PBXGroup;
+			children = (
+				755785431C6BE403000D65B3 /* sdkv2.0.0 */,
+				755785581C6BE403000D65B3 /* sdkv2.0.0Tests */,
+				756E59A81C88245F004AC466 /* sdkv2.0.0UITests */,
+				755785421C6BE403000D65B3 /* Products */,
+				5D5E1925F4ED146D8F300524 /* Pods */,
+				BB1AA5E51CD64A40D8A0544C /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		755785421C6BE403000D65B3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				755785411C6BE403000D65B3 /* sdkv2.0.0.app */,
+				755785551C6BE403000D65B3 /* sdkv2.0.0Tests.xctest */,
+				756E59A71C88245F004AC466 /* sdkv2.0.0UITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		755785431C6BE403000D65B3 /* sdkv2.0.0 */ = {
+			isa = PBXGroup;
+			children = (
+				755785641C6BE45C000D65B3 /* MojioSDK */,
+				755785441C6BE403000D65B3 /* AppDelegate.swift */,
+				755785461C6BE403000D65B3 /* ViewController.swift */,
+				755785481C6BE403000D65B3 /* Main.storyboard */,
+				7557854B1C6BE403000D65B3 /* Assets.xcassets */,
+				7557854D1C6BE403000D65B3 /* LaunchScreen.storyboard */,
+				755785501C6BE403000D65B3 /* Info.plist */,
+			);
+			path = sdkv2.0.0;
+			sourceTree = "<group>";
+		};
+		755785581C6BE403000D65B3 /* sdkv2.0.0Tests */ = {
+			isa = PBXGroup;
+			children = (
+				75D933041C84D8D900D1D8F0 /* AuthenticationTests.swift */,
+				75D933751C8506AE00D1D8F0 /* ClientTests.swift */,
+				75D9337C1C8517EF00D1D8F0 /* ApiPathTests.swift */,
+				75D933771C8508C200D1D8F0 /* VehicleData.txt */,
+				75461F151C8A450C00DDB557 /* VehicleStateData.txt */,
+				756E59B11C88E3A5004AC466 /* VehiclesData.txt */,
+				756E59B31C88F1E1004AC466 /* GroupData.txt */,
+				75E34FCD1C8776EE001B40E0 /* AppData.txt */,
+				75E34FCF1C877724001B40E0 /* MojioData.txt */,
+				75E34FD11C87774E001B40E0 /* TripData.txt */,
+				75E34FD31C87776A001B40E0 /* UserData.txt */,
+				75E34FD91C87E36B001B40E0 /* VinData.txt */,
+				75E34FDC1C87E3F9001B40E0 /* ServiceScheduleData.txt */,
+				75E34FDF1C87E433001B40E0 /* NextServiceData.txt */,
+				7557855B1C6BE403000D65B3 /* Info.plist */,
+			);
+			path = sdkv2.0.0Tests;
+			sourceTree = "<group>";
+		};
+		755785641C6BE45C000D65B3 /* MojioSDK */ = {
+			isa = PBXGroup;
+			children = (
+				75D9C5021C93890C00A338C8 /* MojioKeychainManager.swift */,
+				75D9333A1C84F1FB00D1D8F0 /* Models */,
+				75D933391C84F1D500D1D8F0 /* Authentication */,
+				755785681C6BE45C000D65B3 /* MojioClient.swift */,
+				75D94E9F1C84D0A600FD2888 /* MojioClientEnvironment.swift */,
+			);
+			path = MojioSDK;
+			sourceTree = "<group>";
+		};
+		756E59A81C88245F004AC466 /* sdkv2.0.0UITests */ = {
+			isa = PBXGroup;
+			children = (
+				756E59A91C88245F004AC466 /* sdkv2_0_0UITests.swift */,
+				756E59AB1C88245F004AC466 /* Info.plist */,
+			);
+			path = sdkv2.0.0UITests;
+			sourceTree = "<group>";
+		};
+		75D933391C84F1D500D1D8F0 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				755785651C6BE45C000D65B3 /* AuthViewController.swift */,
+				755785661C6BE45C000D65B3 /* AuthViewController.xib */,
+				755785671C6BE45C000D65B3 /* MojioAuth.swift */,
+			);
+			name = Authentication;
+			sourceTree = "<group>";
+		};
+		75D9333A1C84F1FB00D1D8F0 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				75D94E8D1C84D0A500FD2888 /* Battery.swift */,
+				75D94E8F1C84D0A600FD2888 /* DiagnosticCode.swift */,
+				75D94E901C84D0A600FD2888 /* Duration.swift */,
+				75D94E911C84D0A600FD2888 /* Email.swift */,
+				75D94E931C84D0A600FD2888 /* FuelCapacity.swift */,
+				75D94E941C84D0A600FD2888 /* FuelEfficiency.swift */,
+				75D94E951C84D0A600FD2888 /* FuelLevel.swift */,
+				75D94E961C84D0A600FD2888 /* Group.swift */,
+				75D94E981C84D0A600FD2888 /* Heading.swift */,
+				75D94E9B1C84D0A600FD2888 /* Image.swift */,
+				75D94E9C1C84D0A600FD2888 /* Location.swift */,
+				75D94E9D1C84D0A600FD2888 /* MeasurementStatistics.swift */,
+				75D94E9E1C84D0A600FD2888 /* Mojio.swift */,
+				75D94EA21C84D0A600FD2888 /* Odometer.swift */,
+				75D94EA41C84D0A600FD2888 /* PhoneNumber.swift */,
+				75461F121C8A3EBD00DDB557 /* VehicleMeasures.swift */,
+				75D94EA61C84D0A600FD2888 /* ProperAcceleration.swift */,
+				75D94EA81C84D0A600FD2888 /* RPM.swift */,
+				75D94EA91C84D0A600FD2888 /* Score.swift */,
+				75D94EAC1C84D0A600FD2888 /* Speed.swift */,
+				75D94EAD1C84D0A600FD2888 /* StringObject.swift */,
+				75461F0C1C8A1B1D00DDB557 /* BooleanState.swift */,
+				75D94EB11C84D0A600FD2888 /* Trip.swift */,
+				75D94EB21C84D0A600FD2888 /* User.swift */,
+				75D94EB31C84D0A600FD2888 /* Vehicle.swift */,
+				75D94E831C84D09500FD2888 /* Acceleration.swift */,
+				75D94E841C84D09500FD2888 /* Accelerometer.swift */,
+				75D94E861C84D09500FD2888 /* Address.swift */,
+				75D94E871C84D09500FD2888 /* App.swift */,
+				75461F181C8A479500DDB557 /* VinDetails */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		BB1AA5E51CD64A40D8A0544C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				12B58B0AAFF9E034431C1B1C /* Pods_sdkv2_0_0.framework */,
+				9B3A918696E142ACBFF983E5 /* Pods_sdkv2_0_0Tests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		755785401C6BE403000D65B3 /* sdkv2.0.0 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7557855E1C6BE403000D65B3 /* Build configuration list for PBXNativeTarget "sdkv2.0.0" */;
+			buildPhases = (
+				90A2D5A5053ED0D1CF1B41D6 /* Check Pods Manifest.lock */,
+				7557853D1C6BE403000D65B3 /* Sources */,
+				7557853E1C6BE403000D65B3 /* Frameworks */,
+				7557853F1C6BE403000D65B3 /* Resources */,
+				207C89C8A10BAF6F51AF511A /* Embed Pods Frameworks */,
+				D688956948CFE45672F292C2 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = sdkv2.0.0;
+			productName = sdkv2.0.0;
+			productReference = 755785411C6BE403000D65B3 /* sdkv2.0.0.app */;
+			productType = "com.apple.product-type.application";
+		};
+		755785541C6BE403000D65B3 /* sdkv2.0.0Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 755785611C6BE403000D65B3 /* Build configuration list for PBXNativeTarget "sdkv2.0.0Tests" */;
+			buildPhases = (
+				3917D2A3B92D8C5A4713A68B /* Check Pods Manifest.lock */,
+				755785511C6BE403000D65B3 /* Sources */,
+				755785521C6BE403000D65B3 /* Frameworks */,
+				755785531C6BE403000D65B3 /* Resources */,
+				F950F8B3398438FB32B236E6 /* Embed Pods Frameworks */,
+				088310DDA51F18D05C12D127 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				755785571C6BE403000D65B3 /* PBXTargetDependency */,
+			);
+			name = sdkv2.0.0Tests;
+			productName = sdkv2.0.0Tests;
+			productReference = 755785551C6BE403000D65B3 /* sdkv2.0.0Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		756E59A61C88245F004AC466 /* sdkv2.0.0UITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 756E59B01C88245F004AC466 /* Build configuration list for PBXNativeTarget "sdkv2.0.0UITests" */;
+			buildPhases = (
+				756E59A31C88245F004AC466 /* Sources */,
+				756E59A41C88245F004AC466 /* Frameworks */,
+				756E59A51C88245F004AC466 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				756E59AD1C88245F004AC466 /* PBXTargetDependency */,
+			);
+			name = sdkv2.0.0UITests;
+			productName = sdkv2.0.0UITests;
+			productReference = 756E59A71C88245F004AC466 /* sdkv2.0.0UITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		755785391C6BE403000D65B3 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0720;
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = Mojio;
+				TargetAttributes = {
+					755785401C6BE403000D65B3 = {
+						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = R8N6N647SF;
+					};
+					755785541C6BE403000D65B3 = {
+						CreatedOnToolsVersion = 7.2;
+						TestTargetID = 755785401C6BE403000D65B3;
+					};
+					756E59A61C88245F004AC466 = {
+						CreatedOnToolsVersion = 7.2.1;
+						TestTargetID = 755785401C6BE403000D65B3;
+					};
+				};
+			};
+			buildConfigurationList = 7557853C1C6BE403000D65B3 /* Build configuration list for PBXProject "sdkv2.0.0" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 755785381C6BE403000D65B3;
+			productRefGroup = 755785421C6BE403000D65B3 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				755785401C6BE403000D65B3 /* sdkv2.0.0 */,
+				755785541C6BE403000D65B3 /* sdkv2.0.0Tests */,
+				756E59A61C88245F004AC466 /* sdkv2.0.0UITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7557853F1C6BE403000D65B3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				75E34FDA1C87E36B001B40E0 /* VinData.txt in Resources */,
+				75E34FD81C8779BD001B40E0 /* UserData.txt in Resources */,
+				75D933791C850FE100D1D8F0 /* VehicleData.txt in Resources */,
+				75E34FE01C87E433001B40E0 /* NextServiceData.txt in Resources */,
+				75E34FD61C8779B7001B40E0 /* MojioData.txt in Resources */,
+				756E59B51C88F2FD004AC466 /* GroupData.txt in Resources */,
+				7557856A1C6BE45C000D65B3 /* AuthViewController.xib in Resources */,
+				75E34FD71C8779BA001B40E0 /* TripData.txt in Resources */,
+				75E34FD51C8779B4001B40E0 /* AppData.txt in Resources */,
+				7557854F1C6BE403000D65B3 /* LaunchScreen.storyboard in Resources */,
+				7557854C1C6BE403000D65B3 /* Assets.xcassets in Resources */,
+				75461F161C8A450C00DDB557 /* VehicleStateData.txt in Resources */,
+				7557854A1C6BE403000D65B3 /* Main.storyboard in Resources */,
+				75E34FDD1C87E3F9001B40E0 /* ServiceScheduleData.txt in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		755785531C6BE403000D65B3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				75E34FE11C87E433001B40E0 /* NextServiceData.txt in Resources */,
+				75461F171C8A450C00DDB557 /* VehicleStateData.txt in Resources */,
+				75D933361C84DA4E00D1D8F0 /* AuthViewController.xib in Resources */,
+				75D933781C8508C200D1D8F0 /* VehicleData.txt in Resources */,
+				75E34FCE1C8776EE001B40E0 /* AppData.txt in Resources */,
+				75E34FDB1C87E36B001B40E0 /* VinData.txt in Resources */,
+				75E34FD41C87776A001B40E0 /* UserData.txt in Resources */,
+				75E34FDE1C87E3F9001B40E0 /* ServiceScheduleData.txt in Resources */,
+				756E59B21C88E3A5004AC466 /* VehiclesData.txt in Resources */,
+				75E34FD01C877724001B40E0 /* MojioData.txt in Resources */,
+				75E34FD21C87774E001B40E0 /* TripData.txt in Resources */,
+				756E59B41C88F1E1004AC466 /* GroupData.txt in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		756E59A51C88245F004AC466 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		088310DDA51F18D05C12D127 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-sdkv2.0.0Tests/Pods-sdkv2.0.0Tests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		207C89C8A10BAF6F51AF511A /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-sdkv2.0.0/Pods-sdkv2.0.0-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3917D2A3B92D8C5A4713A68B /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		90A2D5A5053ED0D1CF1B41D6 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		D688956948CFE45672F292C2 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-sdkv2.0.0/Pods-sdkv2.0.0-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F950F8B3398438FB32B236E6 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-sdkv2.0.0Tests/Pods-sdkv2.0.0Tests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7557853D1C6BE403000D65B3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				75D9C5031C93890C00A338C8 /* MojioKeychainManager.swift in Sources */,
+				75D94E8B1C84D09500FD2888 /* Address.swift in Sources */,
+				75D94EC71C84D0A600FD2888 /* MeasurementStatistics.swift in Sources */,
+				75D94EB91C84D0A600FD2888 /* DiagnosticCode.swift in Sources */,
+				75D94ED01C84D0A600FD2888 /* ProperAcceleration.swift in Sources */,
+				75D94ECE1C84D0A600FD2888 /* PhoneNumber.swift in Sources */,
+				75D94ED51C84D0A600FD2888 /* ServiceSchedule.swift in Sources */,
+				75D94EDE1C84D0A600FD2888 /* Vin.swift in Sources */,
+				75D94EC01C84D0A600FD2888 /* Group.swift in Sources */,
+				75D94ED91C84D0A600FD2888 /* Transmission.swift in Sources */,
+				755785471C6BE403000D65B3 /* ViewController.swift in Sources */,
+				75D94ED71C84D0A600FD2888 /* StringObject.swift in Sources */,
+				75D94ECC1C84D0A600FD2888 /* Odometer.swift in Sources */,
+				75D94EC61C84D0A600FD2888 /* Location.swift in Sources */,
+				75D94E881C84D09500FD2888 /* Acceleration.swift in Sources */,
+				75D94E8C1C84D09500FD2888 /* App.swift in Sources */,
+				75D94ED21C84D0A600FD2888 /* RPM.swift in Sources */,
+				75D94EDC1C84D0A600FD2888 /* User.swift in Sources */,
+				75D94ED41C84D0A600FD2888 /* ServiceBulletin.swift in Sources */,
+				75D94EC91C84D0A600FD2888 /* MojioClientEnvironment.swift in Sources */,
+				75D94EC81C84D0A600FD2888 /* Mojio.swift in Sources */,
+				755785691C6BE45C000D65B3 /* AuthViewController.swift in Sources */,
+				75461F0D1C8A1B1D00DDB557 /* BooleanState.swift in Sources */,
+				75D94EBE1C84D0A600FD2888 /* FuelEfficiency.swift in Sources */,
+				75D94EDF1C84D0A600FD2888 /* VinDetails.swift in Sources */,
+				75D94EBF1C84D0A600FD2888 /* FuelLevel.swift in Sources */,
+				75D94EB71C84D0A600FD2888 /* Battery.swift in Sources */,
+				75D94EDB1C84D0A600FD2888 /* Trip.swift in Sources */,
+				75D94EDD1C84D0A600FD2888 /* Vehicle.swift in Sources */,
+				75D94EBD1C84D0A600FD2888 /* FuelCapacity.swift in Sources */,
+				7557856B1C6BE45C000D65B3 /* MojioAuth.swift in Sources */,
+				75D94ED11C84D0A600FD2888 /* Recall.swift in Sources */,
+				75D94E891C84D09500FD2888 /* Accelerometer.swift in Sources */,
+				75D94EBB1C84D0A600FD2888 /* Email.swift in Sources */,
+				75D94ECA1C84D0A600FD2888 /* NextServiceSchedule.swift in Sources */,
+				75D94EBA1C84D0A600FD2888 /* Duration.swift in Sources */,
+				75D94EBC1C84D0A600FD2888 /* Engine.swift in Sources */,
+				755785451C6BE403000D65B3 /* AppDelegate.swift in Sources */,
+				75D94EE01C84D0A600FD2888 /* Warranty.swift in Sources */,
+				75461F131C8A3EBE00DDB557 /* VehicleMeasures.swift in Sources */,
+				75D94ED31C84D0A600FD2888 /* Score.swift in Sources */,
+				75D94EC21C84D0A600FD2888 /* Heading.swift in Sources */,
+				7557856C1C6BE45C000D65B3 /* MojioClient.swift in Sources */,
+				75D94ED61C84D0A600FD2888 /* Speed.swift in Sources */,
+				75D94EC51C84D0A600FD2888 /* Image.swift in Sources */,
+				75D94ECF1C84D0A600FD2888 /* PlatformServiceSchedule.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		755785511C6BE403000D65B3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				75D933231C84DA4E00D1D8F0 /* ServiceBulletin.swift in Sources */,
+				75D933251C84DA4E00D1D8F0 /* Speed.swift in Sources */,
+				75D9331F1C84DA4E00D1D8F0 /* ProperAcceleration.swift in Sources */,
+				75461F141C8A3EBE00DDB557 /* VehicleMeasures.swift in Sources */,
+				75D933301C84DA4E00D1D8F0 /* Acceleration.swift in Sources */,
+				75D933261C84DA4E00D1D8F0 /* StringObject.swift in Sources */,
+				75D933191C84DA4E00D1D8F0 /* NextServiceSchedule.swift in Sources */,
+				75D933061C84DA3C00D1D8F0 /* Battery.swift in Sources */,
+				75D933201C84DA4E00D1D8F0 /* Recall.swift in Sources */,
+				75D9330A1C84DA4E00D1D8F0 /* Email.swift in Sources */,
+				75D9330D1C84DA4E00D1D8F0 /* FuelEfficiency.swift in Sources */,
+				75D9332C1C84DA4E00D1D8F0 /* Vehicle.swift in Sources */,
+				75D933181C84DA4E00D1D8F0 /* MojioClientEnvironment.swift in Sources */,
+				75D933161C84DA4E00D1D8F0 /* MeasurementStatistics.swift in Sources */,
+				75D933221C84DA4E00D1D8F0 /* Score.swift in Sources */,
+				75D933151C84DA4E00D1D8F0 /* Location.swift in Sources */,
+				75D9331B1C84DA4E00D1D8F0 /* Odometer.swift in Sources */,
+				75D9331E1C84DA4E00D1D8F0 /* PlatformServiceSchedule.swift in Sources */,
+				75D9330F1C84DA4E00D1D8F0 /* Group.swift in Sources */,
+				75D9332E1C84DA4E00D1D8F0 /* VinDetails.swift in Sources */,
+				75D933111C84DA4E00D1D8F0 /* Heading.swift in Sources */,
+				75D933371C84DA4E00D1D8F0 /* MojioAuth.swift in Sources */,
+				75D933341C84DA4E00D1D8F0 /* App.swift in Sources */,
+				75D933241C84DA4E00D1D8F0 /* ServiceSchedule.swift in Sources */,
+				75D933081C84DA4E00D1D8F0 /* DiagnosticCode.swift in Sources */,
+				75D933091C84DA4E00D1D8F0 /* Duration.swift in Sources */,
+				75D9C5041C93890C00A338C8 /* MojioKeychainManager.swift in Sources */,
+				75D9337D1C8517EF00D1D8F0 /* ApiPathTests.swift in Sources */,
+				75D933331C84DA4E00D1D8F0 /* Address.swift in Sources */,
+				75D933281C84DA4E00D1D8F0 /* Transmission.swift in Sources */,
+				75D9332D1C84DA4E00D1D8F0 /* Vin.swift in Sources */,
+				75461F111C8A1C8900DDB557 /* BooleanState.swift in Sources */,
+				75D9332B1C84DA4E00D1D8F0 /* User.swift in Sources */,
+				75D933171C84DA4E00D1D8F0 /* Mojio.swift in Sources */,
+				75D933761C8506AE00D1D8F0 /* ClientTests.swift in Sources */,
+				75D9330E1C84DA4E00D1D8F0 /* FuelLevel.swift in Sources */,
+				75D933311C84DA4E00D1D8F0 /* Accelerometer.swift in Sources */,
+				75D933141C84DA4E00D1D8F0 /* Image.swift in Sources */,
+				75D9330B1C84DA4E00D1D8F0 /* Engine.swift in Sources */,
+				75D9330C1C84DA4E00D1D8F0 /* FuelCapacity.swift in Sources */,
+				75D933351C84DA4E00D1D8F0 /* AuthViewController.swift in Sources */,
+				75D9332A1C84DA4E00D1D8F0 /* Trip.swift in Sources */,
+				75D933381C84DA4E00D1D8F0 /* MojioClient.swift in Sources */,
+				75D9331D1C84DA4E00D1D8F0 /* PhoneNumber.swift in Sources */,
+				75D9332F1C84DA4E00D1D8F0 /* Warranty.swift in Sources */,
+				75D933051C84D8D900D1D8F0 /* AuthenticationTests.swift in Sources */,
+				75D933211C84DA4E00D1D8F0 /* RPM.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		756E59A31C88245F004AC466 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				756E59AA1C88245F004AC466 /* sdkv2_0_0UITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		755785571C6BE403000D65B3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 755785401C6BE403000D65B3 /* sdkv2.0.0 */;
+			targetProxy = 755785561C6BE403000D65B3 /* PBXContainerItemProxy */;
+		};
+		756E59AD1C88245F004AC466 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 755785401C6BE403000D65B3 /* sdkv2.0.0 */;
+			targetProxy = 756E59AC1C88245F004AC466 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		755785481C6BE403000D65B3 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				755785491C6BE403000D65B3 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		7557854D1C6BE403000D65B3 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7557854E1C6BE403000D65B3 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		7557855C1C6BE403000D65B3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Ashish Agarwal (RS5GWME5JL)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ashish Agarwal (RS5GWME5JL)";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "e94ed3c1-4212-41cc-b43d-4f7ddb18b401";
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		7557855D1C6BE403000D65B3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: moj.io Inc. (R8N6N647SF)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: moj.io Inc. (R8N6N647SF)";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "b70cc9bd-e0b9-4dc8-a97e-47977711a001";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		7557855F1C6BE403000D65B3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0E4EC963AE554407DD59F331 /* Pods-sdkv2.0.0.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ashish Agarwal (RS5GWME5JL)";
+				INFOPLIST_FILE = sdkv2.0.0/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "io.moj.mobile.ios.sdkv2-0-0";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "e94ed3c1-4212-41cc-b43d-4f7ddb18b401";
+			};
+			name = Debug;
+		};
+		755785601C6BE403000D65B3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E7A991FE380437ACA972E52C /* Pods-sdkv2.0.0.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: moj.io Inc. (R8N6N647SF)";
+				INFOPLIST_FILE = sdkv2.0.0/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "io.moj.mobile.ios.sdkv2-0-0";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "b70cc9bd-e0b9-4dc8-a97e-47977711a001";
+			};
+			name = Release;
+		};
+		755785621C6BE403000D65B3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8FEC8B4BECE8C8AA4CD2A4D4 /* Pods-sdkv2.0.0Tests.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = sdkv2.0.0Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "io.moj.mobile.ios.sdkv2-0-0Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/sdkv2.0.0.app/sdkv2.0.0";
+			};
+			name = Debug;
+		};
+		755785631C6BE403000D65B3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1E7032C534B485DDB446AF57 /* Pods-sdkv2.0.0Tests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = sdkv2.0.0Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "io.moj.mobile.ios.sdkv2-0-0Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/sdkv2.0.0.app/sdkv2.0.0";
+			};
+			name = Release;
+		};
+		756E59AE1C88245F004AC466 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = sdkv2.0.0UITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "io.moj.mobile.ios.sdkv2-0-0UITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = sdkv2.0.0;
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		756E59AF1C88245F004AC466 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = sdkv2.0.0UITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "io.moj.mobile.ios.sdkv2-0-0UITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = sdkv2.0.0;
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7557853C1C6BE403000D65B3 /* Build configuration list for PBXProject "sdkv2.0.0" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7557855C1C6BE403000D65B3 /* Debug */,
+				7557855D1C6BE403000D65B3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7557855E1C6BE403000D65B3 /* Build configuration list for PBXNativeTarget "sdkv2.0.0" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7557855F1C6BE403000D65B3 /* Debug */,
+				755785601C6BE403000D65B3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		755785611C6BE403000D65B3 /* Build configuration list for PBXNativeTarget "sdkv2.0.0Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				755785621C6BE403000D65B3 /* Debug */,
+				755785631C6BE403000D65B3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		756E59B01C88245F004AC466 /* Build configuration list for PBXNativeTarget "sdkv2.0.0UITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				756E59AE1C88245F004AC466 /* Debug */,
+				756E59AF1C88245F004AC466 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 755785391C6BE403000D65B3 /* Project object */;
+}
