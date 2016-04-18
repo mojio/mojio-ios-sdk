@@ -14,9 +14,9 @@ Pod::Spec.new do |spec|
 
     spec.dependency 'Alamofire'
     spec.dependency 'SwiftyJSON'
-    spec.dependency 'ObjectMapper', '~> 1.1'
+    spec.dependency 'ObjectMapper'
     spec.dependency 'RealmSwift'
-    spec.dependency 'KeychainSwift', '~> 3.0'
+    spec.dependency 'KeychainSwift'
     spec.dependency 'OHHTTPStubs'
     spec.dependency 'OHHTTPStubs/Swift'
 end

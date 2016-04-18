@@ -1,6 +1,6 @@
 //
 //  NextServiceSchedule.swift
-//  Motion
+//  MojioSDK
 //
 //  Created by Ashish Agarwal on 2016-02-26.
 //  Copyright © 2016 Mojio. All rights reserved.
@@ -13,16 +13,24 @@ import RealmSwift
 public class NextServiceSchedule: Object, Mappable {
 
     public dynamic var TimeStamp : String? = nil
-    public var Odometer : Float = 0
+    public dynamic var Odometer : Float = 0
     public var AgeInMonths = RealmOptional<Int>()
     public dynamic var TimeUnits : String? = nil
-    public var TimeValue : Float = 0
+    public dynamic var TimeValue : Float = 0
     public dynamic var DistanceUnits : String? = nil
-    public var DistanceValue : Float = 0
+    public dynamic var DistanceValue : Float = 0
     public var Services = List<PlatformServiceSchedule>()
     
     public required convenience init?(_ map: Map) {
         self.init();
+    }
+    
+    public func AgeInMonthsAsIntNumber() -> NSNumber {
+        return self.AgeInMonths.value! as NSNumber
+    }
+    
+    public func ServicesArray() -> NSArray {
+        return self.Services.toArray()
     }
     
     public func mapping(map: Map) {

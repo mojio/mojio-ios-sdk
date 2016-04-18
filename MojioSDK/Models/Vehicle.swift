@@ -1,6 +1,6 @@
 //
 //  Vehicle.swift
-//  Motion
+//  MojioSDK
 //
 //  Created by Ashish Agarwal on 2016-02-11.
 //  Copyright © 2016 Mojio. All rights reserved.
@@ -54,6 +54,18 @@ public class Vehicle: Object, Mappable {
     
     public override static func primaryKey() -> String? {
         return "Id"
+    }
+    
+    public func DiagnosticCodesArray() -> NSArray {
+        return self.DiagnosticCodes.toArray()
+    }
+    
+    public func TagsArray() -> NSArray {
+        return self.Tags.toArray()
+    }
+    
+    public func OwnerGroupsArray() -> NSArray {
+        return self.OwnerGroups.toArray()
     }
     
     public func json () -> NSString? {

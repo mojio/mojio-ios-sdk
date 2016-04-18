@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-        MojioClientEnvironment.sharedInstance.setRegion(MojioClientRegion.NAStaging)
+        MojioClientEnvironment.SharedInstance.setRegion(MojioClientRegion.NAStaging)
         let authClient : MojioAuth = MojioAuth (clientId: "81d705ec-4025-4d96-9b30-53d2a43eaa24", clientSecretKey: "2299d863-5a3a-4aea-8bd1-0caf32a412d5", clientRedirectURI: "sdkdev://io.moj")
         authClient.login( {
             print("user is logged in");

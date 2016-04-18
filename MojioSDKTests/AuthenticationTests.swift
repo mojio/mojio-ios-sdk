@@ -12,7 +12,7 @@ import XCTest
 
 class AuthenticationTests: XCTestCase {
     
-    let authClient : MojioAuth = MojioAuth (clientId: "81d705ec-4025-4d96-9b30-53d2a43eaa24", clientSecretKey: "2299d863-5a3a-4aea-8bd1-0caf32a412d5", clientRedirectURI: "sdkdev://io.moj")
+    let authClient : AuthClient = AuthClient(clientId: "81d705ec-4025-4d96-9b30-53d2a43eaa24", clientSecretKey: "2299d863-5a3a-4aea-8bd1-0caf32a412d5", clientRedirectURI: "sdkdev://io.moj")
     
     override func setUp() {
         super.setUp()
@@ -27,11 +27,11 @@ class AuthenticationTests: XCTestCase {
     }
     
     func testEndpoints ()  {
-        let apiEndpoint : String = MojioClientEnvironment.sharedInstance.getApiEndpoint()
-        let pushEndpoint : String = MojioClientEnvironment.sharedInstance.getPushEndpoint()
-        let myMojioEndpoint : String = MojioClientEnvironment.sharedInstance.getMyMojioEndpoint()
-        let accountsEndpoint : String = MojioClientEnvironment.sharedInstance.getAccountsEndpoint()
-        let region : MojioRegion = MojioClientEnvironment.sharedInstance.getRegion()
+        let apiEndpoint : String = ClientEnvironment.SharedInstance.getApiEndpoint()
+        let pushEndpoint : String = ClientEnvironment.SharedInstance.getPushEndpoint()
+        let myMojioEndpoint : String = ClientEnvironment.SharedInstance.getMyMojioEndpoint()
+        let accountsEndpoint : String = ClientEnvironment.SharedInstance.getAccountsEndpoint()
+        let region : String = ClientEnvironment.SharedInstance.getRegion()
         
         XCTAssertNotNil(apiEndpoint, "API Endpoint Pass")
         XCTAssertNotNil(pushEndpoint, "Push Endpoint Pass")
@@ -42,12 +42,12 @@ class AuthenticationTests: XCTestCase {
     }
     
     func testAmericaStaging () {
-        MojioClientEnvironment.sharedInstance.setRegion(MojioRegion.NAStaging)
+        ClientEnvironment.SharedInstance.setRegion(MojioRegion.NAStaging)
         self.performLogin()
     }
     
     func testAmericaProd () {
-        MojioClientEnvironment.sharedInstance.setRegion(MojioRegion.NAProduction)
+        ClientEnvironment.SharedInstance.setRegion(MojioRegion.NAProduction)
         self.performLogin()
     }
     
@@ -58,7 +58,7 @@ class AuthenticationTests: XCTestCase {
     
     
     func testEuropeProd () {
-        MojioClientEnvironment.sharedInstance.setRegion(MojioRegion.EUProduction)
+        ClientEnvironment.SharedInstance.setRegion(MojioRegion.EUProduction)
         self.performLogin()
     }
     
@@ -75,7 +75,7 @@ class AuthenticationTests: XCTestCase {
         self.authClient.loginCompletion = {
             XCTAssert(true, "Login successful")
         }
-        self.authClient.mojioAuthControllerLoadURLRequest(urlRequest)
+        self.authClient.authControllerLoadURLRequest(urlRequest)
     }
     
     func testPerformanceExample() {

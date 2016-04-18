@@ -1,6 +1,6 @@
 //
 //  VinDetails.swift
-//  Motion
+//  MojioSDK
 //
 //  Created by Ashish Agarwal on 2016-02-11.
 //  Copyright © 2016 Mojio. All rights reserved.
@@ -30,6 +30,14 @@ public class VinDetails: Object, Mappable {
     
     public required convenience init?(_ map: Map) {
         self.init()
+    }
+    
+    public func YearAsIntNumber() -> NSNumber {
+        return self.Year.value! as NSNumber
+    }
+    
+    public func CylindersIntNumber() -> NSNumber {
+        return self.Cylinders.value! as NSNumber
     }
     
     public func mapping(map: Map) {

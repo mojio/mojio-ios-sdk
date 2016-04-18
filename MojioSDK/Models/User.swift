@@ -1,6 +1,6 @@
 //
 //  User.swift
-//  Motion
+//  MojioSDK
 //
 //  Created by Ashish Agarwal on 2016-02-10.
 //  Copyright © 2016 Mojio. All rights reserved.
@@ -34,6 +34,18 @@ public class User : Object, Mappable {
     public override static func primaryKey() -> String? {
         return "Id"
     }
+    
+    public func EmailsArray() -> NSArray {
+        return self.Emails.toArray()
+    }
+    
+    public func PhoneNumbersArray() -> NSArray {
+        return self.PhoneNumbers.toArray()
+    }
+    
+    public func TagsArray() -> NSArray {
+        return self.Tags.toArray()
+    }
 
     public func json () -> NSString? {
         let dictionary : NSMutableDictionary = NSMutableDictionary()
@@ -52,8 +64,7 @@ public class User : Object, Mappable {
             dictionary.setObject(self.LastName!, forKey: "LastName")
         }
         if self.PhoneNumbers.count > 0 {
-            let array = self.PhoneNumbers.toArray()
-            dictionary.setObject(array, forKey: "PhoneNumbers")
+            dictionary.setObject(self.PhoneNumbers.toArray(), forKey: "PhoneNumbers")
         }
         
         let data = try! NSJSONSerialization.dataWithJSONObject(dictionary, options:  NSJSONWritingOptions.PrettyPrinted)

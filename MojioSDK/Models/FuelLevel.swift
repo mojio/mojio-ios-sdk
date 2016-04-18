@@ -1,6 +1,6 @@
 //
 //  FuelLevel.swift
-//  Motion
+//  MojioSDK
 //
 //  Created by Ashish Agarwal on 2016-02-11.
 //  Copyright © 2016 Mojio. All rights reserved.
@@ -14,7 +14,7 @@ public class FuelLevel: Object, Mappable {
     
     public dynamic var BaseUnit : NSString? = nil //['Percentage']
     public dynamic var RiskSeverity : NSString? = nil
-    public var Timestamp : NSString? = nil
+    public dynamic var Timestamp : NSString? = nil
     public dynamic var BaseValue : Float = 0
     public dynamic var Unit : NSString? = nil  // ['Percentage']
     public dynamic var Value : Float = 0

@@ -1,6 +1,6 @@
 //
 //  Group.swift
-//  Motion
+//  MojioSDK
 //
 //  Created by Ashish Agarwal on 2016-02-10.
 //  Copyright © 2016 Mojio. All rights reserved.
@@ -27,6 +27,14 @@ public class Group: Object, Mappable {
         return "Id"
     }
     
+    public func UsersArray() -> NSArray {
+        return self.Users.toArray()
+    }
+    
+    public func TagsArray() -> NSArray {
+        return self.Tags.toArray()
+    }
+    
     public func json () -> NSString? {
         let dictionary : NSMutableDictionary = NSMutableDictionary()
         
@@ -37,8 +45,7 @@ public class Group: Object, Mappable {
             dictionary.setObject(self.Description!, forKey: "Description")
         }
         if self.Users.count > 0 {
-            let array = self.Users.toArray()
-            dictionary.setObject(array, forKey: "Users")
+            dictionary.setObject(self.Users.toArray(), forKey: "Users")
         }
         
         let data = try! NSJSONSerialization.dataWithJSONObject(dictionary, options:  NSJSONWritingOptions.PrettyPrinted)

@@ -9,14 +9,15 @@
 import UIKit
 
 public protocol AuthControllerDelegate {
-    func mojioAuthControllerLoadURLRequest (request : NSURLRequest);
+    func authControllerLoadURLRequest (request : NSURLRequest);
 }
 
 public class AuthViewController: UIViewController, UIWebViewDelegate {
     
     public var loginURL : NSURL!
     public var delegate : AuthControllerDelegate?
-    @IBOutlet var webview: UIWebView?
+
+    @IBOutlet public var webview: UIWebView?
     
     public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil);
@@ -36,7 +37,7 @@ public class AuthViewController: UIViewController, UIWebViewDelegate {
     //MARK: webview delegate methods
     
     public func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
-        self.delegate?.mojioAuthControllerLoadURLRequest(request);
+        self.delegate?.authControllerLoadURLRequest(request);
         return true;
     }
 

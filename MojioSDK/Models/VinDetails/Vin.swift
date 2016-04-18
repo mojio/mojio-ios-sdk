@@ -1,6 +1,6 @@
 //
 //  VIN.swift
-//  Motion
+//  MojioSDK
 //
 //  Created by Ashish Agarwal on 2016-02-26.
 //  Copyright © 2016 Mojio. All rights reserved.
@@ -21,8 +21,8 @@ public class Vin: Object, Mappable {
     public dynamic var VehicleType : String? = nil
     public dynamic var BodyType : String? = nil
     public dynamic var DriveType : String? = nil
-    public var FuelTankSize : Float = 0
-    public var EPAFuelEfficiency : Float = 0
+    public dynamic var FuelTankSize : Float = 0
+    public dynamic var EPAFuelEfficiency : Float = 0
     public dynamic var VehicleEngine : Engine? = nil
     public dynamic var VehicleTransmission : Transmission? = nil
     public var Warranties = List<Warranty>()
@@ -35,6 +35,22 @@ public class Vin: Object, Mappable {
     
     public override static func primaryKey() -> String? {
         return "VIN"
+    }
+    
+    public func YearAsIntNumber() -> NSNumber {
+        return self.Year.value! as NSNumber
+    }
+    
+    public func WarrantiesArray() -> NSArray {
+        return self.Warranties.toArray()
+    }
+    
+    public func RecallsArray() -> NSArray {
+        return self.Recalls.toArray()
+    }
+    
+    public func ServiceBulletinsArray() -> NSArray {
+        return self.ServiceBulletins.toArray()
     }
     
     public func mapping(map: Map) {

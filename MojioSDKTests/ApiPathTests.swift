@@ -15,7 +15,7 @@ class ApiPathTests: XCTestCase {
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        MojioClientEnvironment.sharedInstance.setRegion(MojioRegion.NAStaging)
+        ClientEnvironment.SharedInstance.setRegion(MojioRegion.NAStaging)
     }
     
     override func tearDown() {
@@ -26,15 +26,15 @@ class ApiPathTests: XCTestCase {
     func testVehiclePaths () {
         
         let vehicleId : String = "eff1ccd0-e718-4e28-a985-945a2994f689"
-        let vehiclesPath : NSString = (MojioClient().vehicles(nil)).requestUrl!
-        let vehicleIdPath : NSString = (MojioClient().vehicles("\(vehicleId)")).requestUrl!
-        let vehicleAddressPath : NSString = (MojioClient().vehicles("\(vehicleId)").address()).requestUrl!
-        let vehicleTripsPath : NSString = (MojioClient().vehicles("\(vehicleId)").trips(nil)).requestUrl!
-        let vehicleVinPath : NSString = (MojioClient().vehicles("\(vehicleId)").vin()).requestUrl!
+        let vehiclesPath : NSString = (RestClient().vehicles(nil)).requestUrl!
+        let vehicleIdPath : NSString = (RestClient().vehicles("\(vehicleId)")).requestUrl!
+        let vehicleAddressPath : NSString = (RestClient().vehicles("\(vehicleId)").address()).requestUrl!
+        let vehicleTripsPath : NSString = (RestClient().vehicles("\(vehicleId)").trips(nil)).requestUrl!
+        let vehicleVinPath : NSString = (RestClient().vehicles("\(vehicleId)").vin()).requestUrl!
         
-        let vehicleServiceSchedulePath : NSString = MojioClient().vehicles("\(vehicleId)").serviceSchedule().requestUrl!
+        let vehicleServiceSchedulePath : NSString = RestClient().vehicles("\(vehicleId)").serviceSchedule().requestUrl!
         
-        let vehicleNextServicePath : NSString = (MojioClient().vehicles("\(vehicleId)").next()).requestUrl!
+        let vehicleNextServicePath : NSString = (RestClient().vehicles("\(vehicleId)").next()).requestUrl!
         
         XCTAssertTrue(vehiclesPath.isEqualToString("https://na-staging-api.moj.io/v2/vehicles/"), "The path to get all vehicles is not correct")
         
@@ -55,11 +55,11 @@ class ApiPathTests: XCTestCase {
     func testUserPaths () {
         let userId : String = "user-id"
         
-        let usersPath : NSString = (MojioClient().users(nil)).requestUrl!
-        let userIdPath : NSString = (MojioClient().users("\(userId)")).requestUrl!
-        let userVehiclesPath : NSString = (MojioClient().users("\(userId)").vehicles(nil)).requestUrl!
-        let userMojiosPath : NSString = (MojioClient().users("\(userId)").mojios(nil)).requestUrl!
-        let userGroupsPath : NSString = (MojioClient().users("\(userId)").groups(nil)).requestUrl!
+        let usersPath : NSString = (RestClient().users(nil)).requestUrl!
+        let userIdPath : NSString = (RestClient().users("\(userId)")).requestUrl!
+        let userVehiclesPath : NSString = (RestClient().users("\(userId)").vehicles(nil)).requestUrl!
+        let userMojiosPath : NSString = (RestClient().users("\(userId)").mojios(nil)).requestUrl!
+        let userGroupsPath : NSString = (RestClient().users("\(userId)").groups(nil)).requestUrl!
         
         XCTAssertTrue(usersPath.isEqualToString("https://na-staging-api.moj.io/v2/users/"), "The path to get all users is incorrect")
         
@@ -76,8 +76,8 @@ class ApiPathTests: XCTestCase {
     func testTripsPaths () {
         let tripId : NSString = "trip-id"
         
-        let tripsPath : NSString = (MojioClient().trips(nil)).requestUrl!
-        let tripIdPath : NSString = (MojioClient().trips("\(tripId)")).requestUrl!
+        let tripsPath : NSString = (RestClient().trips(nil)).requestUrl!
+        let tripIdPath : NSString = (RestClient().trips("\(tripId)")).requestUrl!
         
         XCTAssertTrue(tripsPath.isEqualToString("https://na-staging-api.moj.io/v2/trips/"), "The path to get all trips is incorrect")
         
@@ -88,7 +88,7 @@ class ApiPathTests: XCTestCase {
         let tagId : NSString = "tag-id"
         let resourceId : NSString = "resource-id"
         
-        let tagPath : NSString = (MojioClient().trips("\(resourceId)").tags("\(tagId)")).requestUrl!
+        let tagPath : NSString = (RestClient().trips("\(resourceId)").tags("\(tagId)")).requestUrl!
                 
         XCTAssertTrue(tagPath.isEqualToString("https://na-staging-api.moj.io/v2/trips/\(resourceId)/tags/\(tagId)/"), "The path to get tags is incorrect")
         
@@ -98,7 +98,7 @@ class ApiPathTests: XCTestCase {
         let permissionId : NSString = "permission-id"
         let resourceId : NSString = "resource-id"
         
-        let permissionPath : NSString = (MojioClient().trips("\(resourceId)").tags("\(permissionId)")).requestUrl!
+        let permissionPath : NSString = (RestClient().trips("\(resourceId)").tags("\(permissionId)")).requestUrl!
         
         XCTAssertTrue(permissionPath.isEqualToString("https://na-staging-api.moj.io/v2/trips/\(resourceId)/tags/\(permissionId)/"), "The path to get tags is incorrect")
 
@@ -107,8 +107,8 @@ class ApiPathTests: XCTestCase {
     func testMojiosPaths () {
         let mojioId : NSString = "mojio-id"
         
-        let mojiosPath : NSString = (MojioClient().mojios(nil)).requestUrl!
-        let mojioIdPath : NSString = (MojioClient().mojios("\(mojioId)")).requestUrl!
+        let mojiosPath : NSString = (RestClient().mojios(nil)).requestUrl!
+        let mojioIdPath : NSString = (RestClient().mojios("\(mojioId)")).requestUrl!
         
         XCTAssertTrue(mojiosPath.isEqualToString("https://na-staging-api.moj.io/v2/mojios/"), "The path to get all mojios is incorrect")
         XCTAssertTrue(mojioIdPath.isEqualToString("https://na-staging-api.moj.io/v2/mojios/\(mojioId)/"), "The path to get a mojio is incorrect")
@@ -119,9 +119,9 @@ class ApiPathTests: XCTestCase {
         let userId : NSString = "user-id"
         let vehicleId : NSString = "vehicle-id"
         
-        let appImagePath : NSString = (MojioClient().apps("\(appId)").image()).requestUrl!
-        let userImagePath : NSString = (MojioClient().users("\(userId)").image()).requestUrl!
-        let vehicleImagePath : NSString = (MojioClient().vehicles("\(vehicleId)").image()).requestUrl!
+        let appImagePath : NSString = (RestClient().apps("\(appId)").image()).requestUrl!
+        let userImagePath : NSString = (RestClient().users("\(userId)").image()).requestUrl!
+        let vehicleImagePath : NSString = (RestClient().vehicles("\(vehicleId)").image()).requestUrl!
         
         XCTAssertTrue(appImagePath.isEqualToString("https://na-staging-api.moj.io/v2/apps/\(appId)/image/"), "The path to get an app's image is incorrect")
         XCTAssertTrue(userImagePath.isEqualToString("https://na-staging-api.moj.io/v2/users/\(userId)/image/"), "The path to get an app's image is incorrect")
@@ -131,9 +131,9 @@ class ApiPathTests: XCTestCase {
     
     func testGroupsPaths () {
         let groupId : NSString = "group-id"
-        let groupsPath : NSString = (MojioClient().groups(nil)).requestUrl!
-        let groupIdPath : NSString = (MojioClient().groups("\(groupId)")).requestUrl!
-        let groupUsersPath : NSString = (MojioClient().groups("\(groupId)").users(nil)).requestUrl!
+        let groupsPath : NSString = (RestClient().groups(nil)).requestUrl!
+        let groupIdPath : NSString = (RestClient().groups("\(groupId)")).requestUrl!
+        let groupUsersPath : NSString = (RestClient().groups("\(groupId)").users(nil)).requestUrl!
         
         XCTAssertTrue(groupsPath.isEqualToString("https://na-staging-api.moj.io/v2/groups/"), "The path to get groups is incorrect")
         XCTAssertTrue(groupIdPath.isEqualToString("https://na-staging-api.moj.io/v2/groups/\(groupId)/"), "The path to get a group is incorrect")
@@ -143,9 +143,9 @@ class ApiPathTests: XCTestCase {
     
     func testAppsPaths () {
         let appId : NSString = "app-id"
-        let appsPath : NSString = (MojioClient().apps(nil)).requestUrl!
-        let appIdPath : NSString = (MojioClient().apps("\(appId)")).requestUrl!
-        let appSecretPath : NSString = (MojioClient().apps("\(appId)").secret()).requestUrl!
+        let appsPath : NSString = (RestClient().apps(nil)).requestUrl!
+        let appIdPath : NSString = (RestClient().apps("\(appId)")).requestUrl!
+        let appSecretPath : NSString = (RestClient().apps("\(appId)").secret()).requestUrl!
         
         XCTAssertTrue(appsPath.isEqualToString("https://na-staging-api.moj.io/v2/apps/"), "The path to get the apps is incorrect")
         XCTAssertTrue(appIdPath.isEqualToString("https://na-staging-api.moj.io/v2/apps/\(appId)/"), "The path to get an app is incorrect")

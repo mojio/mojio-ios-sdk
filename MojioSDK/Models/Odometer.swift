@@ -1,6 +1,6 @@
 //
 //  Odometer.swift
-//  Motion
+//  MojioSDK
 //
 //  Created by Ashish Agarwal on 2016-02-11.
 //  Copyright © 2016 Mojio. All rights reserved.
@@ -12,7 +12,7 @@ import RealmSwift
 
 public class Odometer: Object, Mappable {
     
-    public var RolloverValue : Float = 0
+    public dynamic var RolloverValue : Float = 0
     public dynamic var BaseUnit : NSString? = nil // ['Meters', 'Miles', 'Kilometers', 'NauticalMiles', 'CentiMeter', 'MilliMeter'],
     public dynamic var Timestamp : NSString? = nil
     public var BaseValue : Double = 0
