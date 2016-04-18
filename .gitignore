@@ -19,5 +19,3 @@ profile
 DerivedData
 .idea/
 *.swp
-# Pods - for those of you who use CocoaPods
-Pods
