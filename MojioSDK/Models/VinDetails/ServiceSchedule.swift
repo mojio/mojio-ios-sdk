@@ -1,6 +1,6 @@
 //
 //  ServiceSchedule.swift
-//  Motion
+//  MojioSDK
 //
 //  Created by Ashish Agarwal on 2016-02-26.
 //  Copyright © 2016 Mojio. All rights reserved.
@@ -22,8 +22,8 @@ public class ServiceSchedule: Object, Mappable {
     public dynamic var ServiceEvent : String? = nil
     public dynamic var TransNotes : String? = nil
     public dynamic var Units : String? = nil
-    public var Value : Float = 0
-    public var InitialValue : Float = 0
+    public dynamic var Value : Float = 0
+    public dynamic var InitialValue : Float = 0
     public dynamic var IntervalType : String? = nil
     
     public required convenience init?(_ map: Map) {

@@ -1,5 +1,5 @@
 //
-//  MojioClient.swift
+//  RestClient.swift
 //  MojioSDK
 //
 //  Created by Ashish Agarwal on 2016-02-08.
@@ -13,46 +13,45 @@ import ObjectMapper
 import RealmSwift
 import KeychainSwift
 
-public enum MojioApiEndpoints : String {
-    case Apps = "apps/"
-    case Secret = "secret/"
-    case Groups = "groups/"
-    case Users = "users/"
-    case Me = "me/"
-    case History = "history/"
-    case States = "states/"
-    case Locations = "locations/"
-    case Image = "image/"
-    case Mojios = "mojios/"
-    case Permission = "permission/"
-    case Permissions = "permissions/"
-    case Tags = "tags/"
-    case Trips = "trips/"
-    case Vehicles = "vehicles/"
-    case Address = "address/"
-    case Vin = "vin/"
-    case ServiceSchedule = "serviceschedule/"
-    case Next = "next/"
+public class RestClientEndpoints : NSObject {
+    public static let Apps : String = "apps/"
+    public static let Secret : String = "secret/"
+    public static let Groups : String = "groups/"
+    public static let Users : String = "users/"
+    public static let Me : String = "me/"
+    public static let History : String = "history/"
+    public static let States : String = "states/"
+    public static let Locations : String = "locations/"
+    public static let Image : String = "image/"
+    public static let Mojios : String = "mojios/"
+    public static let Permission : String = "permission/"
+    public static let Permissions : String = "permissions/"
+    public static let Tags : String = "tags/"
+    public static let Trips : String = "trips/"
+    public static let Vehicles : String = "vehicles/"
+    public static let Address : String = "address/"
+    public static let Vin : String = "vin/"
+    public static let ServiceSchedule : String = "serviceschedule/"
+    public static let Next : String = "next/"
 }
 
-public class MojioClient: NSObject {
+public class RestClient: NSObject {
     
-    public static let sharedInstance = MojioClient()
-    
-    private var baseUrl : String?
-    public var requestUrl : String?
-    public var requestParams : NSDictionary?
     private var requestMethod : Alamofire.Method?
-    public var requestEntity : MojioApiEndpoints?
+    private var baseUrl : String?
+
+    public dynamic var requestUrl : String?
+    public dynamic var requestParams : NSDictionary?
+    public dynamic var requestEntity : String?
     
     public override init() {
-        self.baseUrl = MojioClientEnvironment.sharedInstance.getApiEndpoint()
+        self.baseUrl = ClientEnvironment.SharedInstance.getApiEndpoint()
         self.requestUrl = self.baseUrl
         
         // Set Auth Token as the header
     }
     
-    public convenience init(clientEnvironment : MojioClientEnvironment) {
+    public convenience init(clientEnvironment : ClientEnvironment) {
         self.init()
         self.baseUrl = clientEnvironment.getApiEndpoint()
         self.requestUrl = self.baseUrl
@@ -79,134 +78,134 @@ public class MojioClient: NSObject {
     }
     
     public func apps(appId : String?) -> Self {
-        self.requestEntity = MojioApiEndpoints.Apps
-        self.requestUrl = self.requestUrl! + (self.requestEntity?.rawValue)! + (appId != nil ? appId! + "/" : "")
+        self.requestEntity = RestClientEndpoints.Apps
+        self.requestUrl = self.requestUrl! + self.requestEntity! + (appId != nil ? appId! + "/" : "")
         
         return self
     }
     
     public func secret() -> Self {
-        self.requestEntity = MojioApiEndpoints.Secret
-        self.requestUrl = self.requestUrl! + (self.requestEntity?.rawValue)!
+        self.requestEntity = RestClientEndpoints.Secret
+        self.requestUrl = self.requestUrl! + self.requestEntity!
 
         return self
     }
     
     public func groups(groupId : String?) -> Self {
-        self.requestEntity = MojioApiEndpoints.Groups
-        self.requestUrl = self.requestUrl! + (self.requestEntity?.rawValue)! + (groupId != nil ? groupId! + "/" : "")
+        self.requestEntity = RestClientEndpoints.Groups
+        self.requestUrl = self.requestUrl! + self.requestEntity! + (groupId != nil ? groupId! + "/" : "")
 
         return self
     }
     
     public func users(userId : String?) -> Self {
-        self.requestEntity = MojioApiEndpoints.Users
-        self.requestUrl = self.requestUrl! + (self.requestEntity?.rawValue)! + (userId != nil ? userId! + "/" : "")
+        self.requestEntity = RestClientEndpoints.Users
+        self.requestUrl = self.requestUrl! + self.requestEntity! + (userId != nil ? userId! + "/" : "")
         
         return self
     }
     
     public func me() -> Self {
-        self.requestEntity = MojioApiEndpoints.Me
-        self.requestUrl = self.requestUrl! + (self.requestEntity?.rawValue)!
+        self.requestEntity = RestClientEndpoints.Me
+        self.requestUrl = self.requestUrl! + self.requestEntity!
         
         return self
     }
     
     public func history() -> Self {
-        self.requestEntity = MojioApiEndpoints.History
-        self.requestUrl = self.requestUrl! + (self.requestEntity?.rawValue)!
+        self.requestEntity = RestClientEndpoints.History
+        self.requestUrl = self.requestUrl! + self.requestEntity!
         
         return self
     }
     
     public func states() -> Self {
-        self.requestEntity = MojioApiEndpoints.States
-        self.requestUrl = self.requestUrl! + (self.requestEntity?.rawValue)!
+        self.requestEntity = RestClientEndpoints.States
+        self.requestUrl = self.requestUrl! + self.requestEntity!
         
         return self
     }
     
     public func locations() -> Self {
-        self.requestEntity = MojioApiEndpoints.Locations
-        self.requestUrl = self.requestUrl! + (self.requestEntity?.rawValue)!
+        self.requestEntity = RestClientEndpoints.Locations
+        self.requestUrl = self.requestUrl! + self.requestEntity!
 
         return self
     }
     
     public func image() -> Self {
-        self.requestEntity = MojioApiEndpoints.Image
-        self.requestUrl = self.requestUrl! + (self.requestEntity?.rawValue)!
+        self.requestEntity = RestClientEndpoints.Image
+        self.requestUrl = self.requestUrl! + self.requestEntity!
 
         return self
     }
     
     public func mojios(mojioId : String?) -> Self {
-        self.requestEntity = MojioApiEndpoints.Mojios
-        self.requestUrl = self.requestUrl! + (self.requestEntity?.rawValue)! + (mojioId != nil ? mojioId! + "/" : "")
+        self.requestEntity = RestClientEndpoints.Mojios
+        self.requestUrl = self.requestUrl! + self.requestEntity! + (mojioId != nil ? mojioId! + "/" : "")
 
         return self
     }
     
     public func permission() -> Self {
-        self.requestEntity = MojioApiEndpoints.Permission
-        self.requestUrl = self.requestUrl! + (self.requestEntity?.rawValue)!
+        self.requestEntity = RestClientEndpoints.Permission
+        self.requestUrl = self.requestUrl! + self.requestEntity!
 
         return self
     }
     
     public func permissions() -> Self {
-        self.requestEntity = MojioApiEndpoints.Permissions
-        self.requestUrl = self.requestUrl! + (self.requestEntity?.rawValue)!
+        self.requestEntity = RestClientEndpoints.Permissions
+        self.requestUrl = self.requestUrl! + self.requestEntity!
 
         return self
     }
     
     public func tags(tagId : String) -> Self {
-        self.requestEntity = MojioApiEndpoints.Tags
-        self.requestUrl = self.requestUrl! + (self.requestEntity?.rawValue)! + tagId + "/"
+        self.requestEntity = RestClientEndpoints.Tags
+        self.requestUrl = self.requestUrl! + self.requestEntity! + tagId + "/"
 
         return self
     }
     
     public func trips(tripId : String?) -> Self {
-        self.requestEntity = MojioApiEndpoints.Trips
-        self.requestUrl = self.requestUrl! + (self.requestEntity?.rawValue)! + (tripId != nil ? tripId! + "/" : "")
+        self.requestEntity = RestClientEndpoints.Trips
+        self.requestUrl = self.requestUrl! + self.requestEntity! + (tripId != nil ? tripId! + "/" : "")
 
         return self
     }
     
     public func vehicles(vehicleId : String?) -> Self {
-        self.requestEntity = MojioApiEndpoints.Vehicles
-        self.requestUrl = self.requestUrl! + (self.requestEntity?.rawValue)! + (vehicleId != nil ? vehicleId! + "/" : "")
+        self.requestEntity = RestClientEndpoints.Vehicles
+        self.requestUrl = self.requestUrl! + self.requestEntity! + (vehicleId != nil ? vehicleId! + "/" : "")
 
         return self
     }
     
     public func address() -> Self {
-        self.requestEntity = MojioApiEndpoints.Address
-        self.requestUrl = self.requestUrl! + (self.requestEntity?.rawValue)!
+        self.requestEntity = RestClientEndpoints.Address
+        self.requestUrl = self.requestUrl! + self.requestEntity!
 
         return self
     }
     
     public func vin() -> Self {
-        self.requestEntity = MojioApiEndpoints.Vin
-        self.requestUrl = self.requestUrl! + (self.requestEntity?.rawValue)!
+        self.requestEntity = RestClientEndpoints.Vin
+        self.requestUrl = self.requestUrl! + self.requestEntity!
 
         return self
     }
     
     public func serviceSchedule() -> Self {
-        self.requestEntity = MojioApiEndpoints.ServiceSchedule
-        self.requestUrl = self.requestUrl! + (self.requestEntity?.rawValue)!
+        self.requestEntity = RestClientEndpoints.ServiceSchedule
+        self.requestUrl = self.requestUrl! + self.requestEntity!
 
         return self
     }
     
     public func next() -> Self {
-        self.requestEntity = MojioApiEndpoints.Next
-        self.requestUrl = self.requestUrl! + (self.requestEntity?.rawValue)!
+        self.requestEntity = RestClientEndpoints.Next
+        self.requestUrl = self.requestUrl! + self.requestEntity!
 
         return self
     }
@@ -306,65 +305,65 @@ public class MojioClient: NSObject {
     public func parseDict(dict : NSDictionary) -> AnyObject? {
         switch self.requestEntity! {
             
-        case MojioApiEndpoints.Apps:
+        case RestClientEndpoints.Apps:
             let model = Mapper<App>().map(dict)
             return model!
             
-        case MojioApiEndpoints.Secret:
+        case RestClientEndpoints.Secret:
             return nil
             
-        case MojioApiEndpoints.Groups:
+        case RestClientEndpoints.Groups:
             let model = Mapper<Group>().map(dict)
             return model!
             
-        case MojioApiEndpoints.Users:
+        case RestClientEndpoints.Users:
             let model = Mapper<User>().map(dict)
             return model!
             
-        case MojioApiEndpoints.Me:
+        case RestClientEndpoints.Me:
             let model = Mapper<User>().map(dict)
             return model!
             
-        case MojioApiEndpoints.History:
+        case RestClientEndpoints.History:
             return nil
             
-        case MojioApiEndpoints.States:
+        case RestClientEndpoints.States:
             let model = Mapper<VehicleMeasures>().map(dict)
             return model!
             
-        case MojioApiEndpoints.Locations:
+        case RestClientEndpoints.Locations:
             let model = Mapper<Location>().map(dict)
             return model!
 
-        case MojioApiEndpoints.Image:
+        case RestClientEndpoints.Image:
             let model = Mapper<Image>().map(dict)
             return model!
 
-        case MojioApiEndpoints.Mojios:
+        case RestClientEndpoints.Mojios:
             let model = Mapper<Mojio>().map(dict)
             return model!
             
-        case MojioApiEndpoints.Trips:
+        case RestClientEndpoints.Trips:
             let model = Mapper<Trip>().map(dict)
             return model!
 
-        case MojioApiEndpoints.Vehicles:
+        case RestClientEndpoints.Vehicles:
             let model = Mapper<Vehicle>().map(dict)
             return model!
             
-        case MojioApiEndpoints.Address:
+        case RestClientEndpoints.Address:
             let model = Mapper<Address>().map(dict)
             return model!
             
-        case MojioApiEndpoints.Vin:
+        case RestClientEndpoints.Vin:
             let model = Mapper<Vin>().map(dict)
             return model!
             
-        case MojioApiEndpoints.ServiceSchedule:
+        case RestClientEndpoints.ServiceSchedule:
             let model = Mapper<ServiceSchedule>().map(dict)
             return model!
             
-        case MojioApiEndpoints.Next:
+        case RestClientEndpoints.Next:
             let model = Mapper<NextServiceSchedule>().map(dict)
             return model!
 
@@ -374,11 +373,8 @@ public class MojioClient: NSObject {
     }
     
     private func authToken () -> String? {
-        
-        let token = MojioKeychainManager().getAuthToken()
-        let authToken = token.0
-        
-        return authToken
+        let authTokens = KeychainManager().getAuthTokens()
+        return authTokens.authToken
     }    
 }
 

@@ -1,5 +1,5 @@
 //
-//  MojioAuth.swift
+//  AuthClient.swift
 //  MojioSDK
 //
 //  Created by Ashish Agarwal on 2016-02-05.
@@ -11,13 +11,13 @@ import KeychainSwift
 import Alamofire
 import SwiftyJSON
 
-public enum MojioAuthEndpoints : String {
-    case Authorize = "oauth2/authorize"
-    case Token = "oauth2/token"
-    case Next = "oauth2/next/"
+public class AuthClientEndpoints : NSObject {
+    public static let Authorize : String = "oauth2/authorize"
+    public static let Token : String = "oauth2/token"
+    public static let Next : String = "oauth2/next/"
 }
 
-public class MojioAuth: NSObject, AuthControllerDelegate {
+public class AuthClient: NSObject, AuthControllerDelegate {
 
     public var clientId : String
     public var clientRedirectURL : String
@@ -32,12 +32,12 @@ public class MojioAuth: NSObject, AuthControllerDelegate {
         self.clientSecretKey = clientSecretKey
         
         // TODO: make this accounts endpoint
-        self.loginURL = NSURL(string: MojioAuth.getAuthorizeUrl(self.clientRedirectURL, clientId: self.clientId))
+        self.loginURL = NSURL(string: AuthClient.getAuthorizeUrl(self.clientRedirectURL, clientId: self.clientId))
         self.loginCompletion = {};
     }
     
     
-    public func login (completion : () -> Void) {
+    public func login(completion : () -> Void) {
         NSURLCache.sharedURLCache().removeAllCachedResponses();
         
         self.loginCompletion = completion;
@@ -48,7 +48,7 @@ public class MojioAuth: NSObject, AuthControllerDelegate {
         UIApplication.sharedApplication().delegate?.window!!.rootViewController = self.authController;
     }
     
-    public func mojioAuthControllerLoadURLRequest(request: NSURLRequest) {
+    public func authControllerLoadURLRequest(request: NSURLRequest) {
         let url : NSURL = request.URL!;
         
         let urlComponents : NSURLComponents = NSURLComponents(URL: url, resolvingAgainstBaseURL: false)!
@@ -74,7 +74,7 @@ public class MojioAuth: NSObject, AuthControllerDelegate {
             accessToken = dict.objectForKey("access_token") as! String
             expiresIn = dict.objectForKey("expires_in") as! String
             
-            self.saveAuthenticationToken(accessToken, refreshToken: "", expiresIn: expiresIn.doubleValue, environmentEndpoint: MojioClientEnvironment.sharedInstance.getApiEndpoint())
+            self.saveAuthenticationToken(accessToken, refreshToken: "", expiresIn: expiresIn.doubleValue, environmentEndpoint: ClientEnvironment.SharedInstance.getApiEndpoint())
             
             self.authController?.dismissViewControllerAnimated(true, completion: nil);
             self.loginCompletion();
@@ -82,12 +82,12 @@ public class MojioAuth: NSObject, AuthControllerDelegate {
         }
     }
     
-    public func isUserLoggedIn () -> Bool {
+    public func isUserLoggedIn() -> Bool {
         
-        let token = self.getAuthToken()
-        let authToken : String? = token.0
-        let expiryDate : NSString? = token.2
-        let environmentEndpoint : String? = token.3
+        let authTokens = self.getAuthTokens()
+        let authToken : String? = authTokens.authToken
+        let expiryDate : NSString? = authTokens.expiryDate
+        let environmentEndpoint : String? = authTokens.endpoint
         
         if authToken == nil || expiryDate == nil || environmentEndpoint == nil {
             return false;
@@ -95,7 +95,7 @@ public class MojioAuth: NSObject, AuthControllerDelegate {
         
         // Check to see if the environment endpoint in the keychain is the same as the current endpoint
         // If they are different, return false right away
-        if MojioClientEnvironment.sharedInstance.getApiEndpoint() != environmentEndpoint {
+        if ClientEnvironment.SharedInstance.getApiEndpoint() != environmentEndpoint {
             return false
         }
         
@@ -118,11 +118,11 @@ public class MojioAuth: NSObject, AuthControllerDelegate {
         return false;
     }
     
-    private func refreshAuthToken (completion : (() -> ())?) {
+    private func refreshAuthToken(completion : (() -> ())?) {
         let keychain = KeychainSwift()
         
-        let authorizeEndpoint = MojioAuth.getAuthorizeUrl()
-        let refreshToken = keychain.get(MojioKeychain.REFRESH_TOKEN.rawValue)
+        let authorizeEndpoint = AuthClient.getAuthorizeUrl()
+        let refreshToken = keychain.get(KeychainKeys.RefreshToken)
         
         // TODO: check for expiry of refresh token as well
         if refreshToken == nil {
@@ -143,37 +143,37 @@ public class MojioAuth: NSObject, AuthControllerDelegate {
                 let refreshToken : String = json["refresh_token"].string!
                 
                 dispatch_async(dispatch_get_main_queue(), {
-                    MojioKeychainManager().saveAuthenticationToken(token, refreshToken: refreshToken, expiresIn: exp, environmentEndpoint: MojioClientEnvironment.sharedInstance.getApiEndpoint())
+                    KeychainManager().saveAuthenticationToken(token, refreshToken: refreshToken, expiresIn: exp, environmentEndpoint: ClientEnvironment.SharedInstance.getApiEndpoint())
                 })
             }
         }
     }
     
     public func logout() {
-        MojioKeychainManager().deleteTokenFromKeychain()
+        KeychainManager().deleteTokenFromKeychain()
     }
     
-    public func getAuthToken () -> (String?, String?, NSString?, String?) {
-        return MojioKeychainManager().getAuthToken()
+    public func getAuthTokens() -> AuthTokens {
+        return KeychainManager().getAuthTokens()
     }
     
-    public func saveAuthenticationToken (token : String, refreshToken : String, expiresIn : Double, environmentEndpoint : String) -> Void {
-        MojioKeychainManager().saveAuthenticationToken(token, refreshToken: refreshToken, expiresIn: expiresIn, environmentEndpoint: environmentEndpoint)
+    public func saveAuthenticationToken(token : String, refreshToken : String, expiresIn : Double, environmentEndpoint : String) -> Void {
+        KeychainManager().saveAuthenticationToken(token, refreshToken: refreshToken, expiresIn: expiresIn, environmentEndpoint: environmentEndpoint)
     }
     
     public static func getTokenUrl() -> String {
-        return MojioClientEnvironment.sharedInstance.getAccountsEndpoint() + MojioAuthEndpoints.Token.rawValue
+        return ClientEnvironment.SharedInstance.getAccountsEndpoint() + AuthClientEndpoints.Token
     }
     
     public static func getTokenUrl(redirectUri : String, clientId : String) -> String {
-        return String(format: "%@%@?response_type=token&redirect_uri=%@&client_id=%@&scope=full", MojioClientEnvironment.sharedInstance.getAccountsEndpoint(), MojioAuthEndpoints.Token.rawValue, redirectUri.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!, clientId.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)
+        return String(format: "%@%@?response_type=token&redirect_uri=%@&client_id=%@&scope=full", ClientEnvironment.SharedInstance.getAccountsEndpoint(), AuthClientEndpoints.Token, redirectUri.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!, clientId.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)
     }
     
     public static func getAuthorizeUrl() -> String {
-        return MojioClientEnvironment.sharedInstance.getAccountsEndpoint() + MojioAuthEndpoints.Authorize.rawValue
+        return ClientEnvironment.SharedInstance.getAccountsEndpoint() + AuthClientEndpoints.Authorize
     }
     
-    public static func getAuthorizeUrl (redirectUri : String, clientId : String) -> String {
-        return String(format: "%@%@?response_type=token&redirect_uri=%@&client_id=%@&scope=full", MojioClientEnvironment.sharedInstance.getAccountsEndpoint(), MojioAuthEndpoints.Authorize.rawValue, redirectUri.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!, clientId.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)
+    public static func getAuthorizeUrl(redirectUri : String, clientId : String) -> String {
+        return String(format: "%@%@?response_type=token&redirect_uri=%@&client_id=%@&scope=full", ClientEnvironment.SharedInstance.getAccountsEndpoint(), AuthClientEndpoints.Authorize, redirectUri.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!, clientId.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)
     }
 }

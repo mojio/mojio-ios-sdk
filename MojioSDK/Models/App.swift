@@ -1,6 +1,6 @@
 //
 //  App.swift
-//  Motion
+//  MojioSDK
 //
 //  Created by Ashish Agarwal on 2016-02-25.
 //  Copyright © 2016 Mojio. All rights reserved.
@@ -30,6 +30,14 @@ public class App: Object, Mappable {
     public override static func primaryKey() -> String? {
         return "Id"
     }
+    
+    public func RedirectUrisArray() -> NSArray {
+        return self.RedirectUris.toArray()
+    }
+    
+    public func TagsArray() -> NSArray {
+        return self.Tags.toArray()
+    }
 
     public func json () -> NSString? {
         let dictionary : NSMutableDictionary = NSMutableDictionary()
@@ -41,8 +49,7 @@ public class App: Object, Mappable {
             dictionary.setObject(self.Description!, forKey: "Description")
         }
         if self.RedirectUris.count > 0 {
-            let array = self.RedirectUris.toArray()
-            dictionary.setObject(array, forKey: "RedirectUris")
+            dictionary.setObject(self.RedirectUris.toArray(), forKey: "RedirectUris")
         }
         
         if dictionary.count == 0 {
@@ -52,6 +59,10 @@ public class App: Object, Mappable {
         let data = try! NSJSONSerialization.dataWithJSONObject(dictionary, options:  NSJSONWritingOptions.PrettyPrinted)
         let string : NSString = NSString(data: data, encoding: NSUTF8StringEncoding)!
         return string
+    }
+    
+    public func DownloadsAsIntNumber() -> NSNumber {
+        return self.Downloads.value! as NSNumber
     }
     
     public func mapping(map: Map) {

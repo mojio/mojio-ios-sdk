@@ -1,5 +1,5 @@
 //
-//  MojioClientTest.swift
+//  ClientTest.swift
 //  MojioSDK
 //
 //  Created by Ashish Agarwal on 2016-02-29.
@@ -36,7 +36,7 @@ class ClientTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        MojioClientEnvironment.sharedInstance.setRegion(MojioRegion.NAStaging)
+        ClientEnvironment.SharedInstance.setRegion(MojioRegion.NAStaging)
     }
     
     override func tearDown() {
@@ -48,36 +48,36 @@ class ClientTests: XCTestCase {
     
     func testObjectSerialization () {
         
-        let client : MojioClient = MojioClient()
+        let client : RestClient = RestClient()
        
-        client.requestEntity = MojioApiEndpoints.Vehicles
+        client.requestEntity = RestClientEndpoints.Vehicles
         let vehicle = client.parseDict (toDict("VehicleData")!)
         
-        client.requestEntity = MojioApiEndpoints.States
+        client.requestEntity = RestClientEndpoints.States
         let states = client.parseDict(toDict("VehicleStateData")!)
 
-        client.requestEntity = MojioApiEndpoints.Apps
+        client.requestEntity = RestClientEndpoints.Apps
         let app = client.parseDict (toDict("AppData")!) as? App
         
-        client.requestEntity = MojioApiEndpoints.Mojios
+        client.requestEntity = RestClientEndpoints.Mojios
         let mojio = client.parseDict (toDict("MojioData")!) as? Mojio
         
-        client.requestEntity = MojioApiEndpoints.Trips
+        client.requestEntity = RestClientEndpoints.Trips
         let trip = client.parseDict (toDict("TripData")!) as? Trip
         
-        client.requestEntity = MojioApiEndpoints.Users
+        client.requestEntity = RestClientEndpoints.Users
         let user = client.parseDict (toDict("UserData")!) as? User
         
-        client.requestEntity = MojioApiEndpoints.Vin
+        client.requestEntity = RestClientEndpoints.Vin
         let vin = client.parseDict(toDict("VinData")!) as? Vin
         
-        client.requestEntity = MojioApiEndpoints.ServiceSchedule
+        client.requestEntity = RestClientEndpoints.ServiceSchedule
         let serviceSchedule = client.parseDict(toDict("ServiceScheduleData")!) as? ServiceSchedule
         
-        client.requestEntity = MojioApiEndpoints.Next
+        client.requestEntity = RestClientEndpoints.Next
         let nextService = client.parseDict(toDict("NextServiceData")!) as? NextServiceSchedule
         
-        client.requestEntity = MojioApiEndpoints.Groups
+        client.requestEntity = RestClientEndpoints.Groups
         let group = client.parseDict(toDict("GroupData")!) as? Group
 
         XCTAssertNotNil((vehicle?.isKindOfClass(Vehicle)), "The class is not of type vehicle")
@@ -129,7 +129,7 @@ class ClientTests: XCTestCase {
         let expectation = self.expectationWithDescription("Response arrived")
         
         if requestType == "GET" {
-            MojioClient().get().vehicles(nil).query("1", skip: "2", filter: "vehicleId=vehicleId", select: "", orderby: "").run({ response in
+            RestClient().get().vehicles(nil).query("1", skip: "2", filter: "vehicleId=vehicleId", select: "", orderby: "").run({ response in
                 expectation.fulfill()
                 
                 }, failure: { error in
@@ -137,21 +137,21 @@ class ClientTests: XCTestCase {
             })
         }
         else if requestType == "PUT" {
-            MojioClient().put().users("user-id").run("", completion: { response in
+            RestClient().put().users("user-id").run("", completion: { response in
                 expectation.fulfill()
                 }, failure: { error in
                     XCTAssertFalse(false, message)
             })
         }
         else if requestType == "POST" {
-            MojioClient().post().vehicles(nil).run("", completion: { response in
+            RestClient().post().vehicles(nil).run("", completion: { response in
                 expectation.fulfill()
                 }, failure: { error in
                     XCTAssertFalse(false, message)
             })
         }
         else if requestType == "DELETE" {
-            MojioClient().delete().vehicles("vehicleId").run({ response in
+            RestClient().delete().vehicles("vehicleId").run({ response in
                 expectation.fulfill()
                 }, failure: { error in
                     XCTAssertFalse(false, message)

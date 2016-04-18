@@ -1,6 +1,6 @@
 //
 //  Engine.swift
-//  Motion
+//  MojioSDK
 //
 //  Created by Ashish Agarwal on 2016-02-26.
 //  Copyright © 2016 Mojio. All rights reserved.
@@ -14,7 +14,7 @@ public class Engine: Object, Mappable {
     
     public dynamic var Name : String? = nil
     public dynamic var Cylinders : String? = nil
-    public var Displacement : Float = 0
+    public dynamic var Displacement : Float = 0
     public dynamic var FuelInduction : String? = nil
     public dynamic var FuelQuality : String? = nil
     public dynamic var FuelType : String? = nil

@@ -1,6 +1,6 @@
 //
 //  Trip.swift
-//  Motion
+//  MojioSDK
 //
 //  Created by Ashish Agarwal on 2016-02-10.
 //  Copyright © 2016 Mojio. All rights reserved.
@@ -41,6 +41,10 @@ public class Trip: Object, Mappable {
     
     public override static func primaryKey() -> String? {
         return "Id"
+    }
+
+    public func TagsArray() -> NSArray {
+        return self.Tags.toArray()
     }
     
     public func json() -> NSString? {

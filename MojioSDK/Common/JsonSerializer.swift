@@ -23,7 +23,7 @@ SOFTWARE.*/
 import Foundation
 
 /// Handles Convertion from instances of objects to JSON strings. Also helps with casting strings of JSON to Arrays or Dictionaries.
-public class JSONSerializer {
+internal class JSONSerializer {
     
     /**
     Errors that indicates failures of JSONSerialization
@@ -31,7 +31,7 @@ public class JSONSerializer {
     - JsonIsNotArray:			-
     - JsonIsNotValid:			-
     */
-    public enum JSONSerializerError: ErrorType {
+    internal enum JSONSerializerError: ErrorType {
         case JsonIsNotDictionary
         case JsonIsNotArray
         case JsonIsNotValid
@@ -44,7 +44,7 @@ public class JSONSerializer {
     - throws: Throws error of type JSONSerializerError. Either JsonIsNotValid or JsonIsNotDictionary. JsonIsNotDictionary will typically be thrown if you try to parse an array of JSON objects.
     - returns: A NSDictionary representation of the JSON string.
     */
-    public static func toDictionary(jsonString: String) throws -> NSDictionary {
+    internal static func toDictionary(jsonString: String) throws -> NSDictionary {
         if let dictionary = try jsonToAnyObject(jsonString) as? NSDictionary {
             return dictionary
         } else {
@@ -58,7 +58,7 @@ public class JSONSerializer {
     - throws: Throws error of type JSONSerializerError. Either JsonIsNotValid or JsonIsNotArray. JsonIsNotArray will typically be thrown if you try to parse a single JSON object.
     - returns: NSArray representation of the JSON objects.
     */
-    public static func toArray(jsonString: String) throws -> NSArray {
+    internal static func toArray(jsonString: String) throws -> NSArray {
         if let array = try jsonToAnyObject(jsonString) as? NSArray {
             return array
         } else {
@@ -93,7 +93,7 @@ public class JSONSerializer {
     - parameter object:	The instantiation of any custom class to be represented as JSON.
     - returns: A string JSON representation of the object.
     */
-    public static func toJson(object: Any) -> String {
+    internal static func toJson(object: Any) -> String {
         var json = "{"
         let mirror = Mirror(reflecting: object)
         

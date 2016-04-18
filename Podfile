@@ -10,9 +10,9 @@ target 'MojioSDK' do
 
     pod 'Alamofire'
     pod 'SwiftyJSON'
-    pod 'ObjectMapper', '~> 1.1'
+    pod 'ObjectMapper'
     pod 'RealmSwift'
-    pod 'KeychainSwift', '~> 3.0'
+    pod 'KeychainSwift'
     pod 'OHHTTPStubs'
     pod 'OHHTTPStubs/Swift'
 end

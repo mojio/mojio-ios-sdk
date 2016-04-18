@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		A3A32F2821CD87B3DC5656AE /* Pods_MojioSDKTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C865634E9F814C1F91FA8B03 /* Pods_MojioSDKTests.framework */; };
+		BC72D7A81CC5615600D9740B /* AuthClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC72D7A41CC5615600D9740B /* AuthClient.swift */; };
+		BC72D7A91CC5615600D9740B /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC72D7A51CC5615600D9740B /* AuthViewController.swift */; };
+		BC72D7AA1CC5615600D9740B /* AuthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC72D7A61CC5615600D9740B /* AuthViewController.xib */; };
+		BC72D7AB1CC5615600D9740B /* RestClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC72D7A71CC5615600D9740B /* RestClient.swift */; };
 		BC879B391CBEFFC000F9177B /* Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B2F1CBEFFC000F9177B /* Engine.swift */; };
 		BC879B3A1CBEFFC000F9177B /* NextServiceSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B301CBEFFC000F9177B /* NextServiceSchedule.swift */; };
 		BC879B3B1CBEFFC000F9177B /* PlatformServiceSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B311CBEFFC000F9177B /* PlatformServiceSchedule.swift */; };
@@ -47,14 +51,10 @@
 		BC879B7A1CBEFFDD00F9177B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B5D1CBEFFDD00F9177B /* User.swift */; };
 		BC879B7B1CBEFFDD00F9177B /* Vehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B5E1CBEFFDD00F9177B /* Vehicle.swift */; };
 		BC879B7C1CBEFFDD00F9177B /* VehicleMeasures.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B5F1CBEFFDD00F9177B /* VehicleMeasures.swift */; };
-		BC879B7E1CBEFFE700F9177B /* MojioAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B7D1CBEFFE700F9177B /* MojioAuth.swift */; };
-		BC879B831CBEFFF400F9177B /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B7F1CBEFFF400F9177B /* AuthViewController.swift */; };
-		BC879B841CBEFFF400F9177B /* AuthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC879B801CBEFFF400F9177B /* AuthViewController.xib */; };
 		BC879B891CBEFFFF00F9177B /* JsonSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B871CBEFFFF00F9177B /* JsonSerializer.swift */; };
 		BC879B8A1CBEFFFF00F9177B /* JsonSerializerSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = BC879B881CBEFFFF00F9177B /* JsonSerializerSwift.h */; };
-		BC879B8E1CBF000A00F9177B /* MojioClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B8B1CBF000A00F9177B /* MojioClient.swift */; };
-		BC879B8F1CBF000A00F9177B /* MojioClientEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B8C1CBF000A00F9177B /* MojioClientEnvironment.swift */; };
-		BC879B901CBF000A00F9177B /* MojioKeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B8D1CBF000A00F9177B /* MojioKeychainManager.swift */; };
+		BC879B8F1CBF000A00F9177B /* ClientEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B8C1CBF000A00F9177B /* ClientEnvironment.swift */; };
+		BC879B901CBF000A00F9177B /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B8D1CBF000A00F9177B /* KeychainManager.swift */; };
 		BC879B9F1CBF044700F9177B /* ApiPathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B911CBF044700F9177B /* ApiPathTests.swift */; };
 		BC879BA01CBF044700F9177B /* AppData.txt in Resources */ = {isa = PBXBuildFile; fileRef = BC879B921CBF044700F9177B /* AppData.txt */; };
 		BC879BA11CBF044700F9177B /* AuthenticationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B931CBF044700F9177B /* AuthenticationTests.swift */; };
@@ -98,6 +98,10 @@
 		59A09A76E8DC58DF6D34C432 /* Pods-MojioSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MojioSDK.release.xcconfig"; path = "Pods/Target Support Files/Pods-MojioSDK/Pods-MojioSDK.release.xcconfig"; sourceTree = "<group>"; };
 		5EC4E97FC29349F849934FC8 /* Pods-MojioSDKTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MojioSDKTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MojioSDKTests/Pods-MojioSDKTests.release.xcconfig"; sourceTree = "<group>"; };
 		B8170DD29A15DE7C48008C85 /* Pods_MojioSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MojioSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BC72D7A41CC5615600D9740B /* AuthClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthClient.swift; path = Client/AuthClient.swift; sourceTree = "<group>"; };
+		BC72D7A51CC5615600D9740B /* AuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthViewController.swift; path = Client/AuthViewController.swift; sourceTree = "<group>"; };
+		BC72D7A61CC5615600D9740B /* AuthViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AuthViewController.xib; path = Client/AuthViewController.xib; sourceTree = "<group>"; };
+		BC72D7A71CC5615600D9740B /* RestClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RestClient.swift; path = Client/RestClient.swift; sourceTree = "<group>"; };
 		BC7372B31CC05BBE00871E3E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = MojioSDKClient/Info.plist; sourceTree = "<group>"; };
 		BC7372B51CC05C6A00871E3E /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = MojioSDKClient/AppDelegate.swift; sourceTree = "<group>"; };
 		BC7372B61CC05C6A00871E3E /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = MojioSDKClient/ViewController.swift; sourceTree = "<group>"; };
@@ -113,8 +117,8 @@
 		BC879B361CBEFFC000F9177B /* Vin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Vin.swift; path = Models/VinDetails/Vin.swift; sourceTree = "<group>"; };
 		BC879B371CBEFFC000F9177B /* VinDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VinDetails.swift; path = Models/VinDetails/VinDetails.swift; sourceTree = "<group>"; };
 		BC879B381CBEFFC000F9177B /* Warranty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Warranty.swift; path = Models/VinDetails/Warranty.swift; sourceTree = "<group>"; };
-		BC879B431CBEFFDD00F9177B /* Acceleration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Acceleration.swift; path = Models/Acceleration.swift; sourceTree = "<group>"; };
-		BC879B441CBEFFDD00F9177B /* Accelerometer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Accelerometer.swift; path = Models/Accelerometer.swift; sourceTree = "<group>"; };
+		BC879B431CBEFFDD00F9177B /* Acceleration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = Acceleration.swift; path = Models/Acceleration.swift; sourceTree = "<group>"; };
+		BC879B441CBEFFDD00F9177B /* Accelerometer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = Accelerometer.swift; path = Models/Accelerometer.swift; sourceTree = "<group>"; };
 		BC879B451CBEFFDD00F9177B /* Address.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Address.swift; path = Models/Address.swift; sourceTree = "<group>"; };
 		BC879B461CBEFFDD00F9177B /* App.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = App.swift; path = Models/App.swift; sourceTree = "<group>"; };
 		BC879B471CBEFFDD00F9177B /* Battery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Battery.swift; path = Models/Battery.swift; sourceTree = "<group>"; };
@@ -142,14 +146,10 @@
 		BC879B5D1CBEFFDD00F9177B /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Models/User.swift; sourceTree = "<group>"; };
 		BC879B5E1CBEFFDD00F9177B /* Vehicle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Vehicle.swift; path = Models/Vehicle.swift; sourceTree = "<group>"; };
 		BC879B5F1CBEFFDD00F9177B /* VehicleMeasures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VehicleMeasures.swift; path = Models/VehicleMeasures.swift; sourceTree = "<group>"; };
-		BC879B7D1CBEFFE700F9177B /* MojioAuth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MojioAuth.swift; path = Auth/MojioAuth.swift; sourceTree = "<group>"; };
-		BC879B7F1CBEFFF400F9177B /* AuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthViewController.swift; path = AuthUI/AuthViewController.swift; sourceTree = "<group>"; };
-		BC879B801CBEFFF400F9177B /* AuthViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AuthViewController.xib; path = AuthUI/AuthViewController.xib; sourceTree = "<group>"; };
 		BC879B871CBEFFFF00F9177B /* JsonSerializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JsonSerializer.swift; path = Common/JsonSerializer.swift; sourceTree = "<group>"; };
 		BC879B881CBEFFFF00F9177B /* JsonSerializerSwift.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JsonSerializerSwift.h; path = Common/JsonSerializerSwift.h; sourceTree = "<group>"; };
-		BC879B8B1CBF000A00F9177B /* MojioClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MojioClient.swift; path = Env/MojioClient.swift; sourceTree = "<group>"; };
-		BC879B8C1CBF000A00F9177B /* MojioClientEnvironment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MojioClientEnvironment.swift; path = Env/MojioClientEnvironment.swift; sourceTree = "<group>"; };
-		BC879B8D1CBF000A00F9177B /* MojioKeychainManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MojioKeychainManager.swift; path = Env/MojioKeychainManager.swift; sourceTree = "<group>"; };
+		BC879B8C1CBF000A00F9177B /* ClientEnvironment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ClientEnvironment.swift; path = Env/ClientEnvironment.swift; sourceTree = "<group>"; };
+		BC879B8D1CBF000A00F9177B /* KeychainManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KeychainManager.swift; path = Env/KeychainManager.swift; sourceTree = "<group>"; };
 		BC879B911CBF044700F9177B /* ApiPathTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiPathTests.swift; sourceTree = "<group>"; };
 		BC879B921CBF044700F9177B /* AppData.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AppData.txt; sourceTree = "<group>"; };
 		BC879B931CBF044700F9177B /* AuthenticationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationTests.swift; sourceTree = "<group>"; };
@@ -246,31 +246,24 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		BC879B291CBEFF7F00F9177B /* Auth */ = {
+		BC879B291CBEFF7F00F9177B /* Client */ = {
 			isa = PBXGroup;
 			children = (
-				BC879B7D1CBEFFE700F9177B /* MojioAuth.swift */,
+				BC72D7A41CC5615600D9740B /* AuthClient.swift */,
+				BC72D7A51CC5615600D9740B /* AuthViewController.swift */,
+				BC72D7A61CC5615600D9740B /* AuthViewController.xib */,
+				BC72D7A71CC5615600D9740B /* RestClient.swift */,
 			);
-			name = Auth;
+			name = Client;
 			sourceTree = "<group>";
 		};
 		BC879B2A1CBEFF8500F9177B /* Env */ = {
 			isa = PBXGroup;
 			children = (
-				BC879B8B1CBF000A00F9177B /* MojioClient.swift */,
-				BC879B8C1CBF000A00F9177B /* MojioClientEnvironment.swift */,
-				BC879B8D1CBF000A00F9177B /* MojioKeychainManager.swift */,
+				BC879B8C1CBF000A00F9177B /* ClientEnvironment.swift */,
+				BC879B8D1CBF000A00F9177B /* KeychainManager.swift */,
 			);
 			name = Env;
-			sourceTree = "<group>";
-		};
-		BC879B2B1CBEFF8C00F9177B /* AuthUI */ = {
-			isa = PBXGroup;
-			children = (
-				BC879B7F1CBEFFF400F9177B /* AuthViewController.swift */,
-				BC879B801CBEFFF400F9177B /* AuthViewController.xib */,
-			);
-			name = AuthUI;
 			sourceTree = "<group>";
 		};
 		BC879B2C1CBEFF9000F9177B /* Common */ = {
@@ -337,13 +330,12 @@
 		BCC2EFB21CBED4E6004D2759 /* MojioSDK */ = {
 			isa = PBXGroup;
 			children = (
-				BC879B291CBEFF7F00F9177B /* Auth */,
-				BC879B2B1CBEFF8C00F9177B /* AuthUI */,
+				BC879B291CBEFF7F00F9177B /* Client */,
 				BC879B2C1CBEFF9000F9177B /* Common */,
 				BC879B2A1CBEFF8500F9177B /* Env */,
-				BCC2EFB51CBED4E6004D2759 /* Info.plist */,
 				BCC2EFD91CBEF74A004D2759 /* Models */,
 				BCC2EFB31CBED4E6004D2759 /* MojioSDK.h */,
+				BCC2EFB51CBED4E6004D2759 /* Info.plist */,
 			);
 			path = MojioSDK;
 			sourceTree = "<group>";
@@ -538,7 +530,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BC879B841CBEFFF400F9177B /* AuthViewController.xib in Resources */,
+				BC72D7AA1CC5615600D9740B /* AuthViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -653,15 +645,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				BC879B671CBEFFDD00F9177B /* TimePeriod.swift in Sources */,
-				BC879B901CBF000A00F9177B /* MojioKeychainManager.swift in Sources */,
+				BC879B901CBF000A00F9177B /* KeychainManager.swift in Sources */,
 				BC879B6D1CBEFFDD00F9177B /* Heading.swift in Sources */,
-				BC879B831CBEFFF400F9177B /* AuthViewController.swift in Sources */,
 				BC879B771CBEFFDD00F9177B /* Speed.swift in Sources */,
 				BC879B701CBEFFDD00F9177B /* MeasurementStatistics.swift in Sources */,
 				BC879B641CBEFFDD00F9177B /* Battery.swift in Sources */,
 				BC879B891CBEFFFF00F9177B /* JsonSerializer.swift in Sources */,
+				BC72D7A91CC5615600D9740B /* AuthViewController.swift in Sources */,
 				BC879B781CBEFFDD00F9177B /* StringObject.swift in Sources */,
 				BC879B601CBEFFDD00F9177B /* Acceleration.swift in Sources */,
+				BC72D7AB1CC5615600D9740B /* RestClient.swift in Sources */,
 				BC879B391CBEFFC000F9177B /* Engine.swift in Sources */,
 				BC879B621CBEFFDD00F9177B /* Address.swift in Sources */,
 				BC879B401CBEFFC000F9177B /* Vin.swift in Sources */,
@@ -669,12 +662,12 @@
 				BC879B6A1CBEFFDD00F9177B /* FuelEfficiency.swift in Sources */,
 				BC879B7C1CBEFFDD00F9177B /* VehicleMeasures.swift in Sources */,
 				BC879B6B1CBEFFDD00F9177B /* FuelLevel.swift in Sources */,
+				BC72D7A81CC5615600D9740B /* AuthClient.swift in Sources */,
 				BC879B791CBEFFDD00F9177B /* Trip.swift in Sources */,
 				BC879B411CBEFFC000F9177B /* VinDetails.swift in Sources */,
 				BC879B681CBEFFDD00F9177B /* Email.swift in Sources */,
 				BC879B711CBEFFDD00F9177B /* Mojio.swift in Sources */,
 				BC879B721CBEFFDD00F9177B /* Odometer.swift in Sources */,
-				BC879B8E1CBF000A00F9177B /* MojioClient.swift in Sources */,
 				BC879B631CBEFFDD00F9177B /* App.swift in Sources */,
 				BC879B661CBEFFDD00F9177B /* DiagnosticCode.swift in Sources */,
 				BC879B3D1CBEFFC000F9177B /* ServiceBulletin.swift in Sources */,
@@ -691,11 +684,10 @@
 				BC879B731CBEFFDD00F9177B /* PhoneNumber.swift in Sources */,
 				BC879B3E1CBEFFC000F9177B /* ServiceSchedule.swift in Sources */,
 				BC879B6C1CBEFFDD00F9177B /* Group.swift in Sources */,
-				BC879B7E1CBEFFE700F9177B /* MojioAuth.swift in Sources */,
 				BC879B651CBEFFDD00F9177B /* BooleanState.swift in Sources */,
 				BC879B3A1CBEFFC000F9177B /* NextServiceSchedule.swift in Sources */,
 				BC879B761CBEFFDD00F9177B /* Score.swift in Sources */,
-				BC879B8F1CBF000A00F9177B /* MojioClientEnvironment.swift in Sources */,
+				BC879B8F1CBF000A00F9177B /* ClientEnvironment.swift in Sources */,
 				BC879B6E1CBEFFDD00F9177B /* Image.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

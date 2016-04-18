@@ -12,6 +12,11 @@ Pod::Spec.new do |spec|
     spec.source = { git: "https://github.com/mojio/mojio-ios-sdk.git", tag: "v#{spec.version}", submodules: true }
     spec.source_files = "MojioSDK/**/*.{h,swift}"
 
+    spec.dependency 'Alamofire'
+    spec.dependency 'SwiftyJSON'
     spec.dependency 'ObjectMapper'
     spec.dependency 'RealmSwift'
+    spec.dependency 'KeychainSwift'
+    spec.dependency 'OHHTTPStubs'
+    spec.dependency 'OHHTTPStubs/Swift'
 end
