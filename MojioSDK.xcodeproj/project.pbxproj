@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A3A32F2821CD87B3DC5656AE /* Pods_MojioSDKTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C865634E9F814C1F91FA8B03 /* Pods_MojioSDKTests.framework */; };
+		BC5F7F031CC58D4000FAB205 /* BaseUnits.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5F7F021CC58D4000FAB205 /* BaseUnits.swift */; };
 		BC72D7A81CC5615600D9740B /* AuthClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC72D7A41CC5615600D9740B /* AuthClient.swift */; };
 		BC72D7A91CC5615600D9740B /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC72D7A51CC5615600D9740B /* AuthViewController.swift */; };
 		BC72D7AA1CC5615600D9740B /* AuthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC72D7A61CC5615600D9740B /* AuthViewController.xib */; };
@@ -98,6 +99,7 @@
 		59A09A76E8DC58DF6D34C432 /* Pods-MojioSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MojioSDK.release.xcconfig"; path = "Pods/Target Support Files/Pods-MojioSDK/Pods-MojioSDK.release.xcconfig"; sourceTree = "<group>"; };
 		5EC4E97FC29349F849934FC8 /* Pods-MojioSDKTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MojioSDKTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MojioSDKTests/Pods-MojioSDKTests.release.xcconfig"; sourceTree = "<group>"; };
 		B8170DD29A15DE7C48008C85 /* Pods_MojioSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MojioSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BC5F7F021CC58D4000FAB205 /* BaseUnits.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseUnits.swift; path = Models/BaseUnits.swift; sourceTree = "<group>"; };
 		BC72D7A41CC5615600D9740B /* AuthClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthClient.swift; path = Client/AuthClient.swift; sourceTree = "<group>"; };
 		BC72D7A51CC5615600D9740B /* AuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthViewController.swift; path = Client/AuthViewController.swift; sourceTree = "<group>"; };
 		BC72D7A61CC5615600D9740B /* AuthViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AuthViewController.xib; path = Client/AuthViewController.xib; sourceTree = "<group>"; };
@@ -333,9 +335,9 @@
 				BC879B291CBEFF7F00F9177B /* Client */,
 				BC879B2C1CBEFF9000F9177B /* Common */,
 				BC879B2A1CBEFF8500F9177B /* Env */,
+				BCC2EFB51CBED4E6004D2759 /* Info.plist */,
 				BCC2EFD91CBEF74A004D2759 /* Models */,
 				BCC2EFB31CBED4E6004D2759 /* MojioSDK.h */,
-				BCC2EFB51CBED4E6004D2759 /* Info.plist */,
 			);
 			path = MojioSDK;
 			sourceTree = "<group>";
@@ -379,10 +381,10 @@
 				BC879B441CBEFFDD00F9177B /* Accelerometer.swift */,
 				BC879B451CBEFFDD00F9177B /* Address.swift */,
 				BC879B461CBEFFDD00F9177B /* App.swift */,
+				BC5F7F021CC58D4000FAB205 /* BaseUnits.swift */,
 				BC879B471CBEFFDD00F9177B /* Battery.swift */,
 				BC879B481CBEFFDD00F9177B /* BooleanState.swift */,
 				BC879B491CBEFFDD00F9177B /* DiagnosticCode.swift */,
-				BC879B4A1CBEFFDD00F9177B /* TimePeriod.swift */,
 				BC879B4B1CBEFFDD00F9177B /* Email.swift */,
 				BC879B4C1CBEFFDD00F9177B /* FuelCapacity.swift */,
 				BC879B4D1CBEFFDD00F9177B /* FuelEfficiency.swift */,
@@ -400,6 +402,7 @@
 				BC879B591CBEFFDD00F9177B /* Score.swift */,
 				BC879B5A1CBEFFDD00F9177B /* Speed.swift */,
 				BC879B5B1CBEFFDD00F9177B /* StringObject.swift */,
+				BC879B4A1CBEFFDD00F9177B /* TimePeriod.swift */,
 				BC879B5C1CBEFFDD00F9177B /* Trip.swift */,
 				BC879B5D1CBEFFDD00F9177B /* User.swift */,
 				BC879B5E1CBEFFDD00F9177B /* Vehicle.swift */,
@@ -664,6 +667,7 @@
 				BC879B6B1CBEFFDD00F9177B /* FuelLevel.swift in Sources */,
 				BC72D7A81CC5615600D9740B /* AuthClient.swift in Sources */,
 				BC879B791CBEFFDD00F9177B /* Trip.swift in Sources */,
+				BC5F7F031CC58D4000FAB205 /* BaseUnits.swift in Sources */,
 				BC879B411CBEFFC000F9177B /* VinDetails.swift in Sources */,
 				BC879B681CBEFFDD00F9177B /* Email.swift in Sources */,
 				BC879B711CBEFFDD00F9177B /* Mojio.swift in Sources */,

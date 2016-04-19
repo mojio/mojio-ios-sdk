@@ -10,12 +10,21 @@ import UIKit
 import ObjectMapper
 import RealmSwift
 
+public class AccelerometerUnits : NSObject {
+    public static let MilliGUnits : String = "MilliGUnits"
+    public static let NewtonsPerKilogram : String = "NewtonsPerKilogram"
+    public static let XirgoUnit : String = "XirgoUnit"
+    public static let MetersPerSecondPerSecond : String = "MetersPerSecondPerSecond"
+    public static let CentimetersPerSecondPerSecond : String = "CentimetersPerSecondPerSecond"
+    public static let GUnits : String = "GUnits"
+}
+
 public class ProperAcceleration: Object, Mappable {
 
-    public dynamic var BaseUnit : NSString? = nil //['MilliGUnits', 'NewtonsPerKilogram', 'XirgoUnit', 'MetersPerSecondPerSecond', 'CentimetersPerSecondPerSecond', 'GUnits']
+    public dynamic var BaseUnit : NSString? = nil
     public dynamic var Timestamp : NSString? = nil
     public dynamic var BaseValue : Float = 0
-    public dynamic var Unit : NSString? = nil  // ['MilliGUnits', 'NewtonsPerKilogram', 'XirgoUnit', 'MetersPerSecondPerSecond', 'CentimetersPerSecondPerSecond', 'GUnits']
+    public dynamic var Unit : NSString? = nil
     public dynamic var Value : Float = 0
     
     public required convenience init?(_ map: Map) {

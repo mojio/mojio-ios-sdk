@@ -10,12 +10,14 @@ import UIKit
 import ObjectMapper
 import RealmSwift
 
+public typealias DiagnosticCodeSeverity = RiskSeverity
+
 public class DiagnosticCode: Object, Mappable {
     
     public dynamic var Code : NSString? = nil
     public dynamic var Description : NSString? = nil
     public dynamic var Timestamp : NSString? = nil
-    public dynamic var Severity : NSString? = nil // ['Unknown', 'Low', 'Medium', 'High', 'None'],
+    public dynamic var Severity : NSString? = nil
     public dynamic var Instructions : NSString? = nil
     
     public required convenience init?(_ map: Map) {

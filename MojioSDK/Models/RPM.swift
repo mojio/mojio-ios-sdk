@@ -10,12 +10,16 @@ import UIKit
 import ObjectMapper
 import RealmSwift
 
+public class RPMUnits : NSObject {
+    public static let RevolutionsPerMinute : String = "RevolutionsPerMinute"
+}
+
 public class RPM: Object, Mappable {
     
-    public dynamic var BaseUnit : NSString? = nil //['RevolutionsPerMinute'],
+    public dynamic var BaseUnit : NSString? = nil
     public dynamic var Timestamp : NSString? = nil
     public dynamic var BaseValue : Float = 0
-    public dynamic var Unit : NSString? = nil  //['RevolutionsPerMinute'],
+    public dynamic var Unit : NSString? = nil
     public dynamic var Value : Float = 0
     
     public required convenience init?(_ map: Map) {

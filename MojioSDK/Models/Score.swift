@@ -10,6 +10,11 @@ import UIKit
 import ObjectMapper
 import RealmSwift
 
+public class ScoreMethods : NSObject {
+    public static let ZScore : String = "ZScore"
+    public static let MinMaxScore : String = "MinMaxScore"
+}
+
 public class Score: Object, Mappable {
     
     public dynamic var ScoringMethod : NSString? = nil // ['ZScore', 'MinMaxScore']
