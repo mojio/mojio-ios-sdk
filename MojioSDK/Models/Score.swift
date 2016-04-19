@@ -17,7 +17,8 @@ public class ScoreMethods : NSObject {
 
 public class Score: Object, Mappable {
     
-    public dynamic var ScoringMethod : NSString? = nil // ['ZScore', 'MinMaxScore']
+    // ScoreMethods
+    public dynamic var ScoringMethod : String? = nil
     public dynamic var Value : Float = 0
     public dynamic var Percentile : Float = 0
     public dynamic var Average : Float = 0

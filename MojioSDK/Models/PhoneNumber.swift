@@ -19,6 +19,7 @@ public class PhoneNumberTypes : NSObject {
 
 public class PhoneNumber : Object, Mappable {
 
+    // PhoneNumberTypes
     public dynamic var Type : String? = nil
     public dynamic var CountryCode : Int = 0
     public dynamic var AreaCode : Int = 0

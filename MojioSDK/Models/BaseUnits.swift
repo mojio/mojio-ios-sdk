@@ -24,3 +24,18 @@ public class DistanceUnits : NSObject {
     public static let CentiMeter : String = "CentiMeter"
     public static let MilliMeter : String = "MilliMeter"
 }
+
+public class FuelType : NSObject {
+    public static let Query : String = "Query"
+    public static let Gasoline : String = "Gasoline"
+    public static let Diesel : String = "Diesel"
+    public static let Electric : String = "Electric"
+}
+
+public class FuelEfficiencyCalculationMethod : NSObject {
+    public static let Query : String = "Query"
+    public static let EngineFuelRate : String = "EngineFuelRate"
+    public static let MassAirFlow : String = "MassAirFlow"
+    public static let Calculated : String = "Calculated"
+    public static let None : String = "None"
+}

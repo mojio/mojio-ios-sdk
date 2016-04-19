@@ -60,13 +60,15 @@ public class LocationStatus : NSObject {
 
 public class Location: Object, Mappable {
     public dynamic var LocationAddress : Address? = nil
-    public dynamic var Timestamp : NSString? = nil
+    public dynamic var Timestamp : String? = nil
     public dynamic var Lat : Float = 0
     public dynamic var Lng : Float = 0
-    public dynamic var Status : NSString? = nil
+    
+    // LocationStatus
+    public dynamic var Status : String? = nil
     public dynamic var Dilution : Float = 0
     public dynamic var Altitude : Float = 0
-    public dynamic var GeoHash : NSString? = nil
+    public dynamic var GeoHash : String? = nil
     
     public required convenience init?(_ map: Map) {
         self.init()

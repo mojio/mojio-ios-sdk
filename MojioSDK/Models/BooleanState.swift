@@ -12,7 +12,7 @@ import RealmSwift
 
 public class BooleanState: Object, Mappable {
     
-    public dynamic var Timestamp : NSString? = nil
+    public dynamic var Timestamp : String? = nil
     public dynamic var Value : Bool = false
     
     public required convenience init?(_ map: Map) {

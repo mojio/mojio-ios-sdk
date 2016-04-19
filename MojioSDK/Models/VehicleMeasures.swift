@@ -20,9 +20,13 @@ public class VehicleMeasures: Object, Mappable {
     public dynamic var Deceleration : Acceleration? = nil
     public var DiagnosticCodes = List<DiagnosticCode>()
     public dynamic var VehicleFuelEfficiency : FuelEfficiency? = nil
+    
+    // FuelEfficiencyCalculationMethod
     public dynamic var FuelEfficiencyCalculationMethod : String? = nil// ['Query', 'EngineFuelRate', 'MassAirFlow', 'Calculated', 'None'],
     public dynamic var VehicleFuelLevel : FuelLevel? = nil
-    public dynamic var FuelType : String? = nil // ['Query', 'Gasoline', 'Diesel', 'Electric'],
+    
+    // FuelType
+    public dynamic var FuelType : String? = nil
     public dynamic var GatewayTime : String? = nil
     public dynamic var HarshEventState : BooleanState? = nil
     public dynamic var VehicleHeading : Heading? = nil

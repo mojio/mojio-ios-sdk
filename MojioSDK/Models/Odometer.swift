@@ -10,15 +10,15 @@ import UIKit
 import ObjectMapper
 import RealmSwift
 
-public class OdometerUnits : DistanceUnits {}
-
 public class Odometer: Object, Mappable {
     
     public dynamic var RolloverValue : Float = 0
-    public dynamic var BaseUnit : NSString? = nil
-    public dynamic var Timestamp : NSString? = nil
+    public dynamic var BaseUnit : String? = nil
+    public dynamic var Timestamp : String? = nil
     public dynamic var BaseValue : Double = 0
-    public dynamic var Unit : NSString? = nil
+    
+    // DistanceUnits
+    public dynamic var Unit : String? = nil
     public dynamic var Value : Float = 0
     
     public required convenience init?(_ map: Map) {

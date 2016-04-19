@@ -235,7 +235,7 @@ public class RestClient: NSObject {
     }
     
     
-    public func run(body : NSString?, completion : (response : AnyObject) -> Void, failure : (error : String) -> Void) {
+    public func run(body : String?, completion : (response : AnyObject) -> Void, failure : (error : String) -> Void) {
         
         // Before every request, make sure access token exists
         let authToken = self.authToken() != nil ? self.authToken()! : ""

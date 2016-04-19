@@ -12,17 +12,17 @@ import RealmSwift
 
 public class Address: Object, Mappable {
     
-    public dynamic var HouseNumber : NSString? = nil
-    public dynamic var Road : NSString? = nil
-    public dynamic var Neighbourhood : NSString? = nil
-    public dynamic var Suburb : NSString? = nil
-    public dynamic var City : NSString? = nil
-    public dynamic var County : NSString? = nil
-    public dynamic var State : NSString? = nil
-    public dynamic var PostCode : NSString? = nil
-    public dynamic var Country : NSString? = nil
-    public dynamic var CountryCode : NSString? = nil
-    public dynamic var FormattedAddress : NSString? = nil
+    public dynamic var HouseNumber : String? = nil
+    public dynamic var Road : String? = nil
+    public dynamic var Neighbourhood : String? = nil
+    public dynamic var Suburb : String? = nil
+    public dynamic var City : String? = nil
+    public dynamic var County : String? = nil
+    public dynamic var State : String? = nil
+    public dynamic var PostCode : String? = nil
+    public dynamic var Country : String? = nil
+    public dynamic var CountryCode : String? = nil
+    public dynamic var FormattedAddress : String? = nil
     
     public required convenience init?(_ map: Map) {
         self.init()

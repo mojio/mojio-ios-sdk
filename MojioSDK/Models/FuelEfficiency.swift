@@ -18,13 +18,15 @@ public class FuelEfficiencyUnits : NSObject {
 
 public class FuelEfficiency: Object, Mappable {
     
-    public dynamic var BaseUnit : NSString? = nil
+    public dynamic var BaseUnit : String? = nil
     public dynamic var Statistics : MeasurementStatistics? = nil
-    public dynamic var BenchmarkTime : NSString? = nil
+    public dynamic var BenchmarkTime : String? = nil
     public dynamic var BenchmarkStatistics : MeasurementStatistics? = nil
-    public dynamic var Timestamp : NSString? = nil
+    public dynamic var Timestamp : String? = nil
     public dynamic var BaseValue : Float = 0
-    public dynamic var Unit  : NSString? = nil
+    
+    // FuelEfficiencyUnits
+    public dynamic var Unit  : String? = nil
     public dynamic var Value : Float = 0
 
     public required convenience init?(_ map: Map) {

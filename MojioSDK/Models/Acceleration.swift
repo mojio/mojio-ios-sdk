@@ -24,10 +24,12 @@ public class AccelerationUnits : NSObject {
 
 public class Acceleration: Object, Mappable {
 
-    public dynamic var BaseUnit : NSString? = nil
-    public dynamic var Timestamp : NSString? = nil
+    public dynamic var BaseUnit : String? = nil
+    public dynamic var Timestamp : String? = nil
     public dynamic var BaseValue : Float = 0
-    public dynamic var Unit : NSString? = nil
+    
+    // AccelerationUnits
+    public dynamic var Unit : String? = nil
     public dynamic var Value : Float = 0
 
     public required convenience init?(_ map: Map) {
