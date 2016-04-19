@@ -10,7 +10,7 @@ import UIKit
 import ObjectMapper
 import RealmSwift
 
-public typealias DiagnosticCodeSeverity = RiskSeverity
+public class DiagnosticCodeSeverity : RiskSeverity {}
 
 public class DiagnosticCode: Object, Mappable {
     

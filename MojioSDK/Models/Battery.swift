@@ -10,7 +10,7 @@ import UIKit
 import ObjectMapper
 import RealmSwift
 
-public typealias BatteryRiskSeverity = RiskSeverity
+public class BatteryRiskSeverity : RiskSeverity {}
 
 public class BatteryVoltageUnits : NSObject {
     public static let MilliVolts : String = "MilliVolts"

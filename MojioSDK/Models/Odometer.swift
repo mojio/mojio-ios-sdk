@@ -10,7 +10,7 @@ import UIKit
 import ObjectMapper
 import RealmSwift
 
-public typealias OdometerUnits = DistanceUnits
+public class OdometerUnits : DistanceUnits {}
 
 public class Odometer: Object, Mappable {
     
