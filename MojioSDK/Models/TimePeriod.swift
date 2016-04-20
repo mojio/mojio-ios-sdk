@@ -10,12 +10,24 @@ import UIKit
 import ObjectMapper
 import RealmSwift
 
+public class TimePeriodUnits : NSObject {
+    public static let Ticks : String = "Ticks"
+    public static let Milliseconds : String = "Milliseconds"
+    public static let Seconds : String = "Seconds"
+    public static let Minutes : String = "Minutes"
+    public static let Hours : String = "Hours"
+    public static let Days : String = "Days"
+    public static let Weeks : String = "Weeks"
+}
+
 public class TimePeriod: Object, Mappable {
     
-    public dynamic var BaseUnit : NSString? = nil //['Ticks', 'Milliseconds', 'Seconds', 'Minutes', 'Hours', 'Days', 'Weeks']
-    public dynamic var Timestamp : NSString? = nil
+    public dynamic var BaseUnit : String? = nil
+    public dynamic var Timestamp : String? = nil
     public dynamic var BaseValue : Float = 0
-    public dynamic var Unit : NSString? = nil  // ['Ticks', 'Milliseconds', 'Seconds', 'Minutes', 'Hours', 'Days', 'Weeks']
+    
+    // TimePeriodUnits
+    public dynamic var Unit : String? = nil
     public dynamic var Value : Float = 0
     
     public required convenience init?(_ map: Map) {

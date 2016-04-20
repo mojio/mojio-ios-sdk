@@ -11,9 +11,16 @@ import ObjectMapper
 import RealmSwift
 import Realm
 
+public class PhoneNumberTypes : NSObject {
+    public static let Home : String = "Home"
+    public static let Work : String = "Work"
+    public static let Mobile : String = "Mobile"
+}
+
 public class PhoneNumber : Object, Mappable {
 
-    public dynamic var Type : String? = nil //['Home', 'Work', 'Mobile'],
+    // PhoneNumberTypes
+    public dynamic var Type : String? = nil
     public dynamic var CountryCode : Int = 0
     public dynamic var AreaCode : Int = 0
     public dynamic var Number : Int = 0

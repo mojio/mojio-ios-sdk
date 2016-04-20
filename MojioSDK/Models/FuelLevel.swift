@@ -10,13 +10,19 @@ import UIKit
 import ObjectMapper
 import RealmSwift
 
+public class FuelLevelUnits : NSObject {
+    public static let Percentage : String = "Percentage"
+}
+
 public class FuelLevel: Object, Mappable {
     
-    public dynamic var BaseUnit : NSString? = nil //['Percentage']
-    public dynamic var RiskSeverity : NSString? = nil
-    public dynamic var Timestamp : NSString? = nil
+    public dynamic var BaseUnit : String? = nil
+    public dynamic var RiskSeverity : String? = nil
+    public dynamic var Timestamp : String? = nil
     public dynamic var BaseValue : Float = 0
-    public dynamic var Unit : NSString? = nil  // ['Percentage']
+    
+    // FuelLevelUnits
+    public dynamic var Unit : String? = nil
     public dynamic var Value : Float = 0
     
     public required convenience init?(_ map: Map) {

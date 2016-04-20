@@ -10,14 +10,21 @@ import UIKit
 import ObjectMapper
 import RealmSwift
 
+public class SpeedUnits : NSObject {
+    public static let KilometersPerHour : String = "KilometersPerHour"
+    public static let MilesPerHour : String = "MilesPerHour"
+}
+
 public class Speed: Object, Mappable {
     
-    public dynamic var BaseUnit : NSString? = nil // ['KilometersPerHour', 'MilesPerHour'],
+    public dynamic var BaseUnit : String? = nil
     public dynamic var SpeedBandId : Int = 0
     public dynamic var SpeedBandDuration : TimePeriod? = nil
-    public dynamic var Timestamp  : NSString? = nil
+    public dynamic var Timestamp  : String? = nil
     public dynamic var BaseValue : Float = 0
-    public dynamic var Unit  : NSString? = nil// ['KilometersPerHour', 'MilesPerHour'],
+    
+    // SpeedUnits
+    public dynamic var Unit  : String? = nil
     public dynamic var Value : Float = 0
     
     public required convenience init?(_ map: Map) {

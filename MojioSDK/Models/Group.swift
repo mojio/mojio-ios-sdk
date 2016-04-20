@@ -35,7 +35,7 @@ public class Group: Object, Mappable {
         return self.Tags.toArray()
     }
     
-    public func json () -> NSString? {
+    public func json () -> String? {
         let dictionary : NSMutableDictionary = NSMutableDictionary()
         
         if self.Name != nil {
@@ -49,8 +49,7 @@ public class Group: Object, Mappable {
         }
         
         let data = try! NSJSONSerialization.dataWithJSONObject(dictionary, options:  NSJSONWritingOptions.PrettyPrinted)
-        let string : NSString = NSString(data: data, encoding: NSUTF8StringEncoding)!
-        return string
+        return NSString(data: data, encoding: NSUTF8StringEncoding)! as String
 
     }
     

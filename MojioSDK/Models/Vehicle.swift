@@ -12,14 +12,14 @@ import RealmSwift
 
 public class Vehicle: Object, Mappable {
     
-    public dynamic var Name : NSString? = nil
-    public dynamic var LicensePlate : NSString? = nil
-    public dynamic var VIN : NSString? = nil
-    public dynamic var CurrentTrip : NSString? = nil
-    public dynamic var MojioId : NSString? = nil
+    public dynamic var Name : String? = nil
+    public dynamic var LicensePlate : String? = nil
+    public dynamic var VIN : String? = nil
+    public dynamic var CurrentTrip : String? = nil
+    public dynamic var MojioId : String? = nil
     public dynamic var VehicleImage : Image? = nil
     public dynamic var MilStatus : Bool = false
-    public dynamic var LastContactTime : NSString? = nil
+    public dynamic var LastContactTime : String? = nil
     public var DiagnosticCodes = List<DiagnosticCode>()
     public dynamic var VehicleAccelerometer : Accelerometer? = nil
     public dynamic var VehicleAcceleration : Acceleration? = nil
@@ -28,10 +28,14 @@ public class Vehicle: Object, Mappable {
     public dynamic var VehicleOdometer : Odometer? = nil
     public dynamic var VehicleRPM : RPM? = nil
     public dynamic var VehicleFuelEfficiency : FuelEfficiency? = nil
-    public dynamic var FuelEfficiencyCalculationMethod  : NSString? = nil // ['Query', 'EngineFuelRate', 'MassAirFlow', 'Calculated', 'None'],
+    
+    // FuelEfficiencyCalculationMethod
+    public dynamic var FuelEfficiencyCalculationMethod : String? = nil
     public dynamic var VehicleFuelLevel : FuelLevel? = nil
-    public dynamic var FuelType : NSString? = nil // ['Query', 'Gasoline', 'Diesel', 'Electric'],
-    public dynamic var GatewayTime : NSString? = nil
+    
+    // FuelType
+    public dynamic var FuelType : String? = nil
+    public dynamic var GatewayTime : String? = nil
     public dynamic var VehicleHarshEventState : BooleanState? = nil
     public dynamic var VehicleIdleState : BooleanState? = nil
     public dynamic var VehicleIgnitionState : BooleanState? = nil
@@ -44,9 +48,9 @@ public class Vehicle: Object, Mappable {
     public dynamic var VehicleParkedState : BooleanState? = nil
     public var Tags = List<StringObject>()
     public var OwnerGroups = List<StringObject>()
-    public dynamic var Id : NSString? = nil
-    public dynamic var CreatedOn : NSString? = nil
-    public dynamic var LastModified : NSString? = nil
+    public dynamic var Id : String? = nil
+    public dynamic var CreatedOn : String? = nil
+    public dynamic var LastModified : String? = nil
     
     public required convenience init?(_ map: Map) {
         self.init()
@@ -68,7 +72,7 @@ public class Vehicle: Object, Mappable {
         return self.OwnerGroups.toArray()
     }
     
-    public func json () -> NSString? {
+    public func json () -> String? {
         let dictionary : NSMutableDictionary = NSMutableDictionary()
         
         if self.Name != nil {
@@ -90,8 +94,7 @@ public class Vehicle: Object, Mappable {
         }
         
         let data = try! NSJSONSerialization.dataWithJSONObject(dictionary, options:  NSJSONWritingOptions.PrettyPrinted)
-        let string : NSString = NSString(data: data, encoding: NSUTF8StringEncoding)!
-        return string
+        return NSString(data: data, encoding: NSUTF8StringEncoding)! as String
     }
     
     public func mapping(map: Map) {

@@ -12,11 +12,13 @@ import RealmSwift
 
 public class DiagnosticCode: Object, Mappable {
     
-    public dynamic var Code : NSString? = nil
-    public dynamic var Description : NSString? = nil
-    public dynamic var Timestamp : NSString? = nil
-    public dynamic var Severity : NSString? = nil // ['Unknown', 'Low', 'Medium', 'High', 'None'],
-    public dynamic var Instructions : NSString? = nil
+    public dynamic var Code : String? = nil
+    public dynamic var Description : String? = nil
+    public dynamic var Timestamp : String? = nil
+    
+    // RiskSeverity
+    public dynamic var Severity : String? = nil
+    public dynamic var Instructions : String? = nil
     
     public required convenience init?(_ map: Map) {
         self.init()

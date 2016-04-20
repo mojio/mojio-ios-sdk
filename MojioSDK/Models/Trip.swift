@@ -17,7 +17,7 @@ public class Trip: Object, Mappable {
     public var Tags = List<StringObject>();
     public dynamic var MojioId : String? = nil
     public dynamic var Completed : Bool = false
-    public dynamic var Duration : String? = nil
+    public dynamic var TimePeriod : String? = nil
     public dynamic var StartTimestamp : String? = nil
     public dynamic var EndTimestamp : String? = nil
     public dynamic var StartOdometer : Odometer? = nil
@@ -30,7 +30,7 @@ public class Trip: Object, Mappable {
     public dynamic var MaxDeceleration : Acceleration? = nil
     public dynamic var TripFuelEfficiency : FuelEfficiency? = nil
     public dynamic var StartFuelLevel : FuelLevel? = nil
-    public var EndFuelLevel : FuelLevel? = nil
+    public dynamic var EndFuelLevel : FuelLevel? = nil
     public dynamic var Id : String? = nil
     public dynamic var CreatedOn : String? = nil
     public dynamic var LastModified : String? = nil
@@ -47,7 +47,7 @@ public class Trip: Object, Mappable {
         return self.Tags.toArray()
     }
     
-    public func json() -> NSString? {
+    public func json() -> String? {
         
         let dictionary : NSMutableDictionary = NSMutableDictionary()
         
@@ -56,8 +56,7 @@ public class Trip: Object, Mappable {
         }
         
         let data = try! NSJSONSerialization.dataWithJSONObject(dictionary, options:  NSJSONWritingOptions.PrettyPrinted)
-        let string : NSString = NSString(data: data, encoding: NSUTF8StringEncoding)!
-        return string
+        return NSString(data: data, encoding: NSUTF8StringEncoding)! as String
     }
     
     public func mapping(map: Map) {
@@ -77,7 +76,7 @@ public class Trip: Object, Mappable {
         Name <- map["Name"];
         MojioId <- map["MojioId"];
         Completed <- map["Completed"];
-        Duration <- map["Duration"];
+        TimePeriod <- map["Duration"];
         StartTimestamp <- map["StartTimestamp"];
         EndTimestamp <- map["EndTimestamp"];
         StartOdometer <- map["StartOdometer"];

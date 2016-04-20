@@ -12,20 +12,20 @@ import RealmSwift
 
 public class VinDetails: Object, Mappable {
     
-    public dynamic var Timestamp : NSString? = nil
-    public dynamic var Vin : NSString? = nil
+    public dynamic var Timestamp : String? = nil
+    public dynamic var Vin : String? = nil
     public var Year = RealmOptional<Int>()
-    public dynamic var Make : NSString? = nil
-    public dynamic var Model : NSString? = nil
-    public dynamic var Engine : NSString? = nil
+    public dynamic var Make : String? = nil
+    public dynamic var Model : String? = nil
+    public dynamic var Engine : String? = nil
     public var Cylinders = RealmOptional<Int>()
     public dynamic var TotalFuelCapacity : FuelCapacity? = nil
-    public dynamic var FuelType : NSString? = nil
+    public dynamic var FuelType : String? = nil
     public var CityFuelEfficiency : Float = 0
     public var HighwayFuelEfficiency : Float = 0
     public var CombinedFuelEfficiency : Float = 0
-    public dynamic var Transmission : NSString? = nil
-    public dynamic var Message : NSString? = nil
+    public dynamic var Transmission : String? = nil
+    public dynamic var Message : String? = nil
     public var Success = RealmOptional<Bool>()
     
     public required convenience init?(_ map: Map) {

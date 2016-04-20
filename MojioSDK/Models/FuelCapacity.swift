@@ -10,12 +10,19 @@ import UIKit
 import ObjectMapper
 import RealmSwift
 
+public class FuelCapacityUnits : NSObject {
+    public static let Gallons : String = "Gallons"
+    public static let Liters : String = "Liters"
+}
+
 public class FuelCapacity: Object, Mappable {
     
-    public dynamic var BaseUnit : NSString? = nil //['Gallons', 'Liters'],
-    public dynamic var Timestamp : NSString? = nil
+    public dynamic var BaseUnit : String? = nil
+    public dynamic var Timestamp : String? = nil
     public dynamic var BaseValue : Float = 0
-    public dynamic var Unit : NSString? = nil  //['Gallons', 'Liters'],
+    
+    // FuelCapacityUnits
+    public dynamic var Unit : String? = nil
     public dynamic var Value : Float = 0
     
     public required convenience init?(_ map: Map) {
