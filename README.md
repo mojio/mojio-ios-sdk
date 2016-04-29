@@ -1,4 +1,4 @@
-# mojio-ios-sdk
+# mojio-ios-sdk (Under Active Development)
 
 ## Installing the SDK
 
