@@ -138,13 +138,16 @@ public class AuthClient: NSObject, AuthControllerDelegate {
         })).responseJSON{ response in
             let json : JSON = JSON(response.result.value ?? [])
             if json != nil {
-                let token : String = json["access_token"].string!
-                let exp : Double = json["expires_in"].double!
-                let refreshToken : String = json["refresh_token"].string!
+                let token : String? = json["access_token"].string
+                let exp : Double? = json["expires_in"].double
+                let refreshToken : String? = json["refresh_token"].string
                 
-                dispatch_async(dispatch_get_main_queue(), {
-                    KeychainManager().saveAuthenticationToken(token, refreshToken: refreshToken, expiresIn: exp, environmentEndpoint: ClientEnvironment.SharedInstance.getApiEndpoint())
-                })
+                if token != nil && exp != nil && refreshToken != nil {
+                    dispatch_async(dispatch_get_main_queue(), {
+                        KeychainManager().saveAuthenticationToken(token!, refreshToken: refreshToken!, expiresIn: exp!, environmentEndpoint: ClientEnvironment.SharedInstance.getApiEndpoint())
+                    })
+                }
+                
             }
         }
     }
