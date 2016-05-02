@@ -16,6 +16,7 @@ public class Mojio: Object, Mappable {
     public dynamic var LastContactTime : String? = nil
     public dynamic var GatewayTime : String? = nil
     public dynamic var VehicleId : String? = nil
+    public dynamic var MojioLocation : Location? = nil
     public var Tags = List<StringObject>()
     public dynamic var Id : String? = nil
     public dynamic var CreatedOn : String? = nil
@@ -66,6 +67,7 @@ public class Mojio: Object, Mappable {
         LastContactTime <- map["LastContactTime"];
         GatewayTime <- map["GatewayTime"];
         VehicleId <- map["VehicleId"];
+        MojioLocation <- map["Location"];
         Id <- map["Id"];
         CreatedOn <- map["CreatedOn"];
         LastModified <- map["LastModified"];
