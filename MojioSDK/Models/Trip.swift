@@ -17,7 +17,7 @@ public class Trip: Object, Mappable {
     public var Tags = List<StringObject>();
     public dynamic var MojioId : String? = nil
     public dynamic var Completed : Bool = false
-    public dynamic var TimePeriod : String? = nil
+    public dynamic var TripDuration : String? = nil
     public dynamic var StartTimestamp : String? = nil
     public dynamic var EndTimestamp : String? = nil
     public dynamic var StartOdometer : Odometer? = nil
@@ -76,7 +76,7 @@ public class Trip: Object, Mappable {
         Name <- map["Name"];
         MojioId <- map["MojioId"];
         Completed <- map["Completed"];
-        TimePeriod <- map["Duration"];
+        TripDuration <- map["Duration"];
         StartTimestamp <- map["StartTimestamp"];
         EndTimestamp <- map["EndTimestamp"];
         StartOdometer <- map["StartOdometer"];
