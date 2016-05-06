@@ -11,6 +11,7 @@ import ObjectMapper
 import RealmSwift
 
 public class Mojio: Object, Mappable {
+    public dynamic var Id : String? = nil
     public dynamic var Name : String? = nil
     public dynamic var IMEI : String? = nil
     public dynamic var LastContactTime : String? = nil
@@ -18,7 +19,7 @@ public class Mojio: Object, Mappable {
     public dynamic var VehicleId : String? = nil
     public dynamic var MojioLocation : Location? = nil
     public var Tags = List<StringObject>()
-    public dynamic var Id : String? = nil
+    public dynamic var ConnectedState : Bool = false
     public dynamic var CreatedOn : String? = nil
     public dynamic var LastModified : String? = nil
 
@@ -62,13 +63,14 @@ public class Mojio: Object, Mappable {
             self.Tags.append(string)
         }
 
+        Id <- map["Id"];
         Name <- map["Name"];
         IMEI <- map["IMEI"];
         LastContactTime <- map["LastContactTime"];
         GatewayTime <- map["GatewayTime"];
         VehicleId <- map["VehicleId"];
         MojioLocation <- map["Location"];
-        Id <- map["Id"];
+        ConnectedState <- map["ConnectedState"]
         CreatedOn <- map["CreatedOn"];
         LastModified <- map["LastModified"];
     }
