@@ -16,6 +16,7 @@ public class MojioRegion : NSObject {
     public static let NAStaging : String = "na-staging-"
     public static let EUStaging : String = "eu-staging-"
     public static let Trial : String = "trial-"
+    public static let Develop : String = "develop-"
 
     static func getDefaultRegion() -> String {
         return Production
