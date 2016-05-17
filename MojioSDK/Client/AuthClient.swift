@@ -203,7 +203,10 @@ public class AuthClient: NSObject, AuthControllerDelegate {
         
         let forgotEndpoint = ClientEnvironment.SharedInstance.getAccountsEndpoint() + AccountClientEndpoints.Forgot
         
-        Alamofire.request(.POST, forgotEndpoint, parameters: ["UserNameEmailOrPhone" : emailOrPhoneNumber], encoding: .JSON, headers: ["Accept" : "application/json"]).responseJSON(completionHandler: { response in
+        let authString = (self.clientId + ":" + self.clientSecretKey).dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!
+        let base64AuthString = authString.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.Encoding76CharacterLineLength).stringByReplacingOccurrencesOfString("\r\n", withString: "")
+        
+        Alamofire.request(.POST, forgotEndpoint, parameters: ["UserNameEmailOrPhone" : emailOrPhoneNumber], encoding: .JSON, headers: ["Accept" : "application/json", "Authorization" : "Basic " + base64AuthString]).responseJSON(completionHandler: { response in
 
             if response.response?.statusCode == 200 {
                 completion(response: response.result.value as? NSDictionary)
@@ -216,12 +219,12 @@ public class AuthClient: NSObject, AuthControllerDelegate {
     
     public func resetPassword(resetToken : String, password : String, completion : (response : NSDictionary?) -> Void, failure : (response : NSDictionary?) -> Void) {
         
-        let forgotEndpoint = ClientEnvironment.SharedInstance.getAccountsEndpoint() + AccountClientEndpoints.Reset
+        let resetEndpoint = ClientEnvironment.SharedInstance.getAccountsEndpoint() + AccountClientEndpoints.Reset
 
         let authString = (self.clientId + ":" + self.clientSecretKey).dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!
         let base64AuthString = authString.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.Encoding76CharacterLineLength).stringByReplacingOccurrencesOfString("\r\n", withString: "")
         
-        Alamofire.request(.POST, forgotEndpoint, parameters: ["ResetToken" : resetToken, "Password" : password, "ConfirmPassword" : password], encoding: .JSON, headers: ["Accept" : "application/json", "Authorization" : "Basic " + base64AuthString]).responseJSON(completionHandler: { response in
+        Alamofire.request(.POST, resetEndpoint, parameters: ["ResetToken" : resetToken, "Password" : password, "ConfirmPassword" : password], encoding: .JSON, headers: ["Accept" : "application/json", "Authorization" : "Basic " + base64AuthString]).responseJSON(completionHandler: { response in
 
             if response.response?.statusCode == 200 {
                 completion(response: response.result.value as? NSDictionary)
