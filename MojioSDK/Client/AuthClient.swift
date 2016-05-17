@@ -17,6 +17,48 @@ public class AuthClientEndpoints : NSObject {
     public static let Next : String = "oauth2/next/"
 }
 
+public class AccountClientEndpoints : NSObject {
+    public static let Register : String = "account/register"
+    public static let Forgot : String = "account/forgot-password"
+    public static let Reset : String = "account/reset-password"
+}
+
+public class ForgotPasswordErrors : NSObject {
+    // User not found
+    public static let NoUserFoundByIdentifier : String = "NoUserFoundByIdentifier"
+    
+    // Maximum hourly reset limit reached
+    public static let ResetAlreadySent : String = "ResetAlreadySent"
+    
+    // Error sending SMS
+    public static let TextSendError : String = "TextSendError"
+    
+    // Invalid email address
+    public static let InvalidEmailContactMojio : String = "InvalidEmailContactMojio"
+    
+    // Email address was rejected
+    public static let IRejectedEmailContactMojio : String = "IRejectedEmailContactMojio"
+    
+    // Invalid phone number
+    public static let InvalidPhoneContactMojio : String = "InvalidPhoneContactMojio"
+}
+
+public class ResetPasswordErrors : NSObject {
+    // Reset link invalid (or expired)
+    public static let InvalidResetLink : String = "InvalidResetLink"
+
+    // Password Required
+    public static let PasswordRequired : String = "PasswordRequired"
+    
+    // Confirmation Password Required
+    public static let ConfirmationPasswordRequired : String = "ConfirmationPasswordRequired"
+    
+    // Password does not match Confirmation Password
+    public static let PasswordsDoNotMatch : String = "PasswordsDoNotMatch"
+    
+    // TODO: Handle Password Too Short/Too Long???
+}
+
 public class AuthClient: NSObject, AuthControllerDelegate {
 
     public var clientId : String
@@ -154,6 +196,40 @@ public class AuthClient: NSObject, AuthControllerDelegate {
     
     public func logout() {
         KeychainManager().deleteTokenFromKeychain()
+    }
+    
+    // Forgot/Reset Password
+    public func forgotPassword(emailOrPhoneNumber : String, completion : (response : NSDictionary?) -> Void, failure : (response : NSDictionary?) -> Void) {
+        
+        let forgotEndpoint = ClientEnvironment.SharedInstance.getAccountsEndpoint() + AccountClientEndpoints.Forgot
+        
+        Alamofire.request(.POST, forgotEndpoint, parameters: ["UserNameEmailOrPhone" : emailOrPhoneNumber], encoding: .JSON, headers: ["Accept" : "application/json"]).responseJSON(completionHandler: { response in
+
+            if response.response?.statusCode == 200 {
+                completion(response: response.result.value as? NSDictionary)
+            }
+            else {
+                failure(response: response.result.value as? NSDictionary)
+            }
+        })
+    }
+    
+    public func resetPassword(resetToken : String, password : String, completion : (response : NSDictionary?) -> Void, failure : (response : NSDictionary?) -> Void) {
+        
+        let forgotEndpoint = ClientEnvironment.SharedInstance.getAccountsEndpoint() + AccountClientEndpoints.Reset
+
+        let authString = (self.clientId + ":" + self.clientSecretKey).dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!
+        let base64AuthString = authString.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.Encoding76CharacterLineLength).stringByReplacingOccurrencesOfString("\r\n", withString: "")
+        
+        Alamofire.request(.POST, forgotEndpoint, parameters: ["ResetToken" : resetToken, "Password" : password, "ConfirmPassword" : password], encoding: .JSON, headers: ["Accept" : "application/json", "Authorization" : "Basic " + base64AuthString]).responseJSON(completionHandler: { response in
+
+            if response.response?.statusCode == 200 {
+                completion(response: response.result.value as? NSDictionary)
+            }
+            else {
+                failure(response: response.result.value as? NSDictionary)
+            }
+        })
     }
     
     public func getAuthTokens() -> AuthTokens {
