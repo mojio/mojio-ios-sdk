@@ -210,12 +210,12 @@ public class RestClient: NSObject {
         return self
     }
     
-    public func query(take : String?, top : String?, skip : String?, filter : String?, select : String?, orderby : String?) -> Self {
+    public func query(take : NSInteger?, top : String?, skip : String?, filter : String?, select : String?, orderby : String?) -> Self {
         
         let requestParams : NSMutableDictionary = NSMutableDictionary()
         
         if take != nil {
-            requestParams.setObject(take!, forKey: "$take")
+            requestParams.setObject(take!, forKey: "take")
         }
         
         if top != nil {
@@ -234,7 +234,9 @@ public class RestClient: NSObject {
             requestParams.setObject(orderby!, forKey: "$orderby")
         }
         
+        self.requestUrl = String(self.requestUrl!.characters.dropLast())
         self.requestParams = requestParams
+        
         return self
     }
     
