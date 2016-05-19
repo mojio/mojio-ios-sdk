@@ -215,19 +215,19 @@ public class RestClient: NSObject {
         let requestParams : NSMutableDictionary = NSMutableDictionary()
         
         if top != nil {
-            requestParams.setObject(top!, forKey: "$top")
+            requestParams.setObject(top!, forKey: "top")
         }
         if skip != nil {
-            requestParams.setObject(skip!, forKey: "$skip")
+            requestParams.setObject(skip!, forKey: "skip")
         }
         if filter != nil {
-            requestParams.setObject(filter!, forKey: "$filter")
+            requestParams.setObject(filter!, forKey: "filter")
         }
         if select != nil {
-            requestParams.setObject(select!, forKey: "$select")
+            requestParams.setObject(select!, forKey: "select")
         }
         if orderby != nil {
-            requestParams.setObject(orderby!, forKey: "$orderby")
+            requestParams.setObject(orderby!, forKey: "orderby")
         }
         
         self.requestParams = requestParams
