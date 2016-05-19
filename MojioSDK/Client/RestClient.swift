@@ -210,9 +210,13 @@ public class RestClient: NSObject {
         return self
     }
     
-    public func query(top : String?, skip : String?, filter : String?, select : String?, orderby : String?) -> Self {
+    public func query(take : String?, top : String?, skip : String?, filter : String?, select : String?, orderby : String?) -> Self {
         
         let requestParams : NSMutableDictionary = NSMutableDictionary()
+        
+        if take != nil {
+            requestParams.setObject(take!, forKey: "$take")
+        }
         
         if top != nil {
             requestParams.setObject(top!, forKey: "$top")
