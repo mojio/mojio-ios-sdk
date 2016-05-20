@@ -11,6 +11,63 @@ import KeychainSwift
 import Alamofire
 import SwiftyJSON
 
+// OAuth 2.0 Object - RFC 6749
+public class AuthToken : NSObject {
+    public dynamic var accessToken : String? = nil
+    public dynamic var expiry : String? = nil
+    public dynamic var refreshToken : String? = nil
+    public dynamic var uniqueId : String? = nil
+    
+    override init() {
+        super.init()
+    }
+    
+    init(accessToken: String?, expiry: String?, refreshToken: String?, uniqueId: String) {
+        super.init()
+
+        self.accessToken = accessToken
+        self.expiry = expiry
+        self.refreshToken = refreshToken
+        self.uniqueId = uniqueId
+    }
+    
+    public func expiryTimestamp() -> Double? {
+        if let timestamp : Double = Double.init(self.expiry!) {
+            return timestamp
+        }
+        
+        return nil
+    }
+    
+    public func expiryDate() -> NSDate? {
+        if let date : NSDate = NSDate.init(timeIntervalSince1970: self.expiryTimestamp()!) {
+            return date
+        }
+        
+        return nil
+    }
+    
+    public func isValid() -> Bool {
+        if self.accessToken == nil || self.expiry == nil || self.uniqueId == nil {
+            return false
+        }
+        
+        // Check if the token is expired
+        guard let timestamp : Double = self.expiryTimestamp()! else {
+            return false
+        }
+        
+        let currentTime : Double = NSDate().timeIntervalSince1970
+        
+        // Check for expiry
+        if currentTime > timestamp {
+            return false
+        }
+        
+        return true
+    }
+}
+
 public class AuthClientEndpoints : NSObject {
     public static let Authorize : String = "oauth2/authorize"
     public static let Token : String = "oauth2/token"
@@ -21,7 +78,26 @@ public class AccountClientEndpoints : NSObject {
     public static let Register : String = "account/register"
     public static let Forgot : String = "account/forgot-password"
     public static let Reset : String = "account/reset-password"
+    public static let ResendPin : String = "account/signin/phone"
 }
+
+public class RegisterErrors : NSObject {
+    // Phone Number Error
+    public static let PhoneNumberMessage : String = "PhoneNumberMessage"
+    
+    // Email Error
+    public static let EmailErrorMessage : String = "EmailErrorMessage"
+    
+    // Password Error
+    public static let PasswordRequired : String = "PasswordRequired"
+    
+    // Confirmation Password Required
+    public static let ConfirmationPasswordRequired : String = "ConfirmationPasswordRequired"
+    
+    // Password does not match Confirmation Password
+    public static let PasswordsDoNotMatch : String = "PasswordsDoNotMatch"
+}
+
 
 public class ForgotPasswordErrors : NSObject {
     // User not found
@@ -61,12 +137,15 @@ public class ResetPasswordErrors : NSObject {
 
 public class AuthClient: NSObject, AuthControllerDelegate {
 
-    public var clientId : String
-    public var clientRedirectURL : String
-    public var clientSecretKey : String
-    public var loginURL : NSURL!
-    public var loginCompletion : (Void) -> (Void)
-    public var authController : AuthViewController?
+    public var clientId: String
+    public var clientRedirectURL: String
+    public var clientSecretKey: String
+    
+    // TODO: Move controller to a consumer role
+    public var loginURL: NSURL!
+    public var loginCompletion: ((authToken: AuthToken) -> Void)? = nil
+    public var loginFailure: ((response: AnyObject?) -> Void)? = nil
+    public var authController: AuthViewController?
         
     public init(clientId : String, clientSecretKey : String, clientRedirectURI : String) {
         self.clientId = clientId
@@ -75,14 +154,13 @@ public class AuthClient: NSObject, AuthControllerDelegate {
         
         // TODO: make this accounts endpoint
         self.loginURL = NSURL(string: AuthClient.getAuthorizeUrl(self.clientRedirectURL, clientId: self.clientId))
-        self.loginCompletion = {};
     }
     
-    
-    public func login(completion : () -> Void) {
+    public func loginViewController(completion : ((authToken: AuthToken) -> Void)?, failure: ((response: AnyObject?) -> Void)?) {
         NSURLCache.sharedURLCache().removeAllCachedResponses();
         
         self.loginCompletion = completion;
+        self.loginFailure = failure
         self.authController = AuthViewController(nibName : "AuthViewController", bundle: nil);
         self.authController?.delegate = self;
         
@@ -92,110 +170,263 @@ public class AuthClient: NSObject, AuthControllerDelegate {
     
     public func authControllerLoadURLRequest(request: NSURLRequest) {
         let url : NSURL = request.URL!;
-        
         let urlComponents : NSURLComponents = NSURLComponents(URL: url, resolvingAgainstBaseURL: false)!
-        let urlFragment : String? = urlComponents.fragment
+        let authToken : AuthToken = AuthToken()
         
-        if urlFragment != nil {
-
-            let dict : NSMutableDictionary = NSMutableDictionary()
-            
-            let pathComponents : [String] = urlFragment!.componentsSeparatedByString("&")
-            var accessToken : String
-            var expiresIn : NSString
-
-            for component in pathComponents {
-                if component.containsString("access_token") {
-                    dict.setObject((component.componentsSeparatedByString("="))[1] as String, forKey: "access_token")
-                }
-                if component.containsString("expires_in") {
-                    dict.setObject((component.componentsSeparatedByString("="))[1], forKey: "expires_in")
+        for queryItem in urlComponents.queryItems! {
+            if queryItem.name == "access_token" {
+                authToken.accessToken = queryItem.value
+            }
+            else if queryItem.name == "expires_in" {
+                if queryItem.value != nil {
+                    if let expiry : Double = Double(queryItem.value!) {
+                        authToken.expiry = String(NSDate.init(timeIntervalSinceNow: expiry).timeIntervalSince1970)
+                    }
                 }
             }
-            
-            accessToken = dict.objectForKey("access_token") as! String
-            expiresIn = dict.objectForKey("expires_in") as! String
-            
-            self.saveAuthenticationToken(accessToken, refreshToken: "", expiresIn: expiresIn.doubleValue, environmentEndpoint: ClientEnvironment.SharedInstance.getApiEndpoint())
-            
-            self.authController?.dismissViewControllerAnimated(true, completion: nil);
-            self.loginCompletion();
-
+            else if queryItem.name == "refresh_token" {
+                authToken.refreshToken = queryItem.value
+            }
         }
+        
+        self.authController?.dismissViewControllerAnimated(true, completion: {
+            self.loginCompletion?(authToken: authToken)
+        });
     }
     
+    // Returns immediately
     public func isUserLoggedIn() -> Bool {
+        let authToken = self.getAuthToken()
         
-        let authTokens = self.getAuthTokens()
-        let authToken : String? = authTokens.authToken
-        let expiryDate : NSString? = authTokens.expiryDate
-        let environmentEndpoint : String? = authTokens.endpoint
-        
-        if authToken == nil || expiryDate == nil || environmentEndpoint == nil {
-            return false;
+        if authToken.accessToken == nil || authToken.expiry == nil || authToken.uniqueId == nil {
+            return false
         }
         
         // Check to see if the environment endpoint in the keychain is the same as the current endpoint
-        // If they are different, return false right away
-        if ClientEnvironment.SharedInstance.getApiEndpoint() != environmentEndpoint {
+        if ClientEnvironment.SharedInstance.getRegion() != authToken.uniqueId {
             return false
         }
         
         // Check if the token is expired
-        let expiresAt : Double = (expiryDate?.doubleValue)!
-        let currentTimeInMS : Double = NSDate().timeIntervalSince1970
-        
-        if currentTimeInMS < expiresAt {
-            
-            // refresh the app's authentication token on a background thread to reduce the number of occassions when the user gets automatically logged out
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-                self.refreshAuthToken(nil)
-            })
-            return true
-        }
-        else { // the auth token may have expired, but the refresh token may still be valid
-            
+        guard let timestamp : Double = authToken.expiryTimestamp()! else {
+            return false
         }
         
-        return false;
+        let currentTime : Double = NSDate().timeIntervalSince1970
+        
+        // Check for expiry
+        if currentTime > timestamp {
+            return false
+        }
+        
+        return true
     }
-    
-    private func refreshAuthToken(completion : (() -> ())?) {
-        let keychain = KeychainSwift()
+
+    // Returns on main thread when complete - refreshes if needed
+    public func isUserLoggedInRefresh(completion: ((success: Bool) -> Void)?) {
+
+        let authToken = self.getAuthToken()
         
-        let authorizeEndpoint = AuthClient.getAuthorizeUrl()
-        let refreshToken = keychain.get(KeychainKeys.RefreshToken)
-        
-        // TODO: check for expiry of refresh token as well
-        if refreshToken == nil {
+        if authToken.accessToken == nil || authToken.expiry == nil || authToken.uniqueId == nil {
+            dispatch_async(dispatch_get_main_queue(), {completion?(success: false)})
+            return
+        }
+
+        // Check to see if the environment endpoint in the keychain is the same as the current endpoint
+        // If they are different, return false right away
+        if ClientEnvironment.SharedInstance.getRegion() != authToken.uniqueId {
+            dispatch_async(dispatch_get_main_queue(), {completion?(success: false)})
             return
         }
         
-        Alamofire.request(.POST, authorizeEndpoint, parameters: [:], encoding: .Custom({
-            (convertible, params) in
-            let mutableRequest = convertible.URLRequest.copy() as! NSMutableURLRequest
-            let postRequest : NSString = NSString(format: "grant_type=refresh_token&refresh_token=%@&client_id=%@&client_secret=%@&redirect_uri=%@", refreshToken!, self.clientId.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!, self.clientSecretKey.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!, self.clientRedirectURL.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)
-            mutableRequest.HTTPBody = postRequest.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
-            return (mutableRequest, nil)
-        })).responseJSON{ response in
-            let json : JSON = JSON(response.result.value ?? [])
-            if json != nil {
-                let token : String? = json["access_token"].string
-                let exp : Double? = json["expires_in"].double
-                let refreshToken : String? = json["refresh_token"].string
-                
-                if token != nil && exp != nil && refreshToken != nil {
-                    dispatch_async(dispatch_get_main_queue(), {
-                        KeychainManager().saveAuthenticationToken(token!, refreshToken: refreshToken!, expiresIn: exp!, environmentEndpoint: ClientEnvironment.SharedInstance.getApiEndpoint())
-                    })
+        // Always attempt to refresh
+        if authToken.refreshToken != nil {
+            self.refreshAuthToken({(success: Bool) in
+                completion?(success: success)
+            })
+        }
+        else {
+            // Check if the token is expired
+            dispatch_async(dispatch_get_main_queue(), {
+                guard let timestamp : Double = authToken.expiryTimestamp()! else {
+                    completion?(success: false)
                 }
                 
+                let currentTime : Double = NSDate().timeIntervalSince1970
+                
+                // Check for expiry
+                if currentTime > timestamp {
+                    completion?(success: false)
+                }
+                
+                completion?(success: true)
+            })
+        }
+    }
+    
+    public func generateBasicAuthHeader() -> String {
+        let authString = (self.clientId + ":" + self.clientSecretKey).dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!
+        let base64AuthString = authString.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.Encoding76CharacterLineLength).stringByReplacingOccurrencesOfString("\r\n", withString: "")
+        return "Basic " + base64AuthString
+    }
+    
+    // Login
+    public func login(username: String, password: String, completion: (authToken: AuthToken) -> Void, failure : (response: NSDictionary?) -> Void) {
+        
+        // The token endpoint is used for the resource owner flow
+        let loginEndpoint = AuthClient.getTokenUrl()
+        
+        Alamofire.request(.POST, loginEndpoint, parameters: ["grant_type" : "password", "password" : password, "username" : username, "client_id" : self.clientId, "client_secret" : self.clientSecretKey], encoding: .URL, headers: ["Accept" : "application/json", "Authorization" : self.generateBasicAuthHeader()]).responseJSON{ response in
+            
+            if response.response?.statusCode == 200 {
+                
+                guard let responseJSON : [String : AnyObject] = response.result.value as? [String : AnyObject] else {
+                    failure(response: nil)
+                    return
+                }
+                
+                if let expiry : Double = responseJSON["expires_in"] as? Double {
+                    guard let authToken: AuthToken = AuthToken(accessToken: (responseJSON["access_token"] as! String), expiry: String(NSDate.init(timeIntervalSinceNow: expiry).timeIntervalSince1970), refreshToken: (responseJSON["refresh_token"] as! String), uniqueId: ClientEnvironment.SharedInstance.getRegion()) else {
+                        failure(response: nil)
+                        return
+                    }
+                    
+                    if authToken.isValid() {
+                        completion(authToken: authToken)
+                    }
+                    else {
+                        failure(response: nil)
+                    }
+                }
+                else {
+                    failure(response: nil)
+                }
+            }
+            else {
+                failure(response: response.result.value as? NSDictionary)
             }
         }
     }
     
+    public func refreshAuthToken(completion: ((success: Bool) -> Void)?) {
+        let keychain = KeychainSwift()
+        
+        let authorizeEndpoint = AuthClient.getTokenUrl()
+
+        guard let refreshToken : String = keychain.get(KeychainKeys.RefreshToken) else {
+            dispatch_async(dispatch_get_main_queue(), {completion?(success: false)})
+            return
+        }
+        
+        Alamofire.request(.POST, authorizeEndpoint, parameters: ["grant_type" : "refresh_token", "refresh_token" : refreshToken, "client_id" : self.clientId, "client_secret" : self.clientSecretKey, "redirect_uri" : self.clientRedirectURL], encoding: ParameterEncoding.URL).responseJSON(completionHandler: {response in
+            
+            dispatch_async(dispatch_get_main_queue(), {
+                if response.response?.statusCode == 200 {
+                    
+                    guard let responseJSON : [String : AnyObject] = response.result.value as? [String : AnyObject] else {
+                        completion?(success: false)
+                        return
+                    }
+                    
+                    if let expiry : Double = responseJSON["expires_in"] as? Double {
+                        guard let authToken: AuthToken = AuthToken(accessToken: (responseJSON["access_token"] as! String), expiry: String(NSDate.init(timeIntervalSinceNow: expiry).timeIntervalSince1970), refreshToken: (responseJSON["refresh_token"] as! String), uniqueId: ClientEnvironment.SharedInstance.getRegion()) else {
+                            completion?(success: false)
+                            return
+                        }
+                        
+                        if authToken.isValid() {
+                            completion?(success: true)
+                        }
+                        else {
+                            completion?(success: false)
+                        }
+                    }
+                    else {
+                        completion?(success: false)
+                    }
+                }
+                else {
+                    // TODO: Return error?
+                    // var resultObj = String.init(data: response.data!, encoding: NSUTF8StringEncoding)
+                    completion?(success: false)
+                }
+            })
+        })
+    }
+    
     public func logout() {
         KeychainManager().deleteTokenFromKeychain()
+    }
+    
+    // Register
+    public func register(mobile: String, email: String, password: String, completion: () -> Void, failure: (response : NSDictionary?) -> Void) {
+        
+        let registerEndpoint = ClientEnvironment.SharedInstance.getAccountsEndpoint() + AccountClientEndpoints.Register
+
+        Alamofire.request(.POST, registerEndpoint, parameters: ["PhoneNumber" : mobile, "Email" : email, "Password" : password, "ConfirmPassword" : password], encoding: .JSON, headers: ["Authorization" : self.generateBasicAuthHeader()]).responseJSON { response in
+
+            if response.response?.statusCode == 200 {
+                completion()
+            }
+            else {
+                failure(response: response.result.value as? NSDictionary)
+            }
+        }
+    }
+    
+    // Verify Phone
+    public func verifyMobilePhone(mobile: String, pin: String, completion: (authToken: AuthToken) -> Void, failure : (response: NSDictionary?) -> Void) {
+        
+        let verifyEndpoint = AuthClient.getTokenUrl()
+        
+        Alamofire.request(.POST, verifyEndpoint, parameters: ["client_id" : self.clientId, "client_secret" : self.clientSecretKey, "grant_type" : "phone", "phone_number" : mobile, "pin" : pin], encoding: .URL, headers: ["Accept" : "application/json", "Authorization" : self.generateBasicAuthHeader()]).responseJSON { response in
+            
+            if response.response?.statusCode == 200 {
+                
+                guard let responseJSON : [String : AnyObject] = response.result.value as? [String : AnyObject] else {
+                    failure(response: nil)
+                    return
+                }
+                
+                if let expiry : Double = responseJSON["expires_in"] as? Double {
+                    guard let authToken: AuthToken = AuthToken(accessToken: (responseJSON["access_token"] as! String), expiry: String(NSDate.init(timeIntervalSinceNow: expiry).timeIntervalSince1970), refreshToken: (responseJSON["refresh_token"] as! String), uniqueId: ClientEnvironment.SharedInstance.getRegion()) else {
+                        failure(response: nil)
+                        return
+                    }
+                    
+                    if authToken.isValid() {
+                        completion(authToken: authToken)
+                    }
+                    else {
+                        failure(response: nil)
+                    }
+                }
+                else {
+                    failure(response: nil)
+                }
+            }
+            else {
+                failure(response: response.result.value as? NSDictionary)
+            }
+        }
+    }
+    
+    // Resend Verification Pin
+    public func resendPhonePin(mobile : String, completion : (() -> Void)?, failure : (() -> Void)?) {
+        
+        let verifyEndpoint = ClientEnvironment.SharedInstance.getAccountsEndpoint() + AccountClientEndpoints.ResendPin
+        
+        // ["PhoneNumber" : mobile]
+        
+        Alamofire.request(.POST, verifyEndpoint, parameters: ["PhoneNumber" : mobile, "grant_type" : "phone"], encoding: .JSON, headers: ["Accept" : "application/json", "Authorization" : self.generateBasicAuthHeader()]).responseJSON { response in
+            
+            if response.response?.statusCode == 200 {
+                completion?()
+            }
+            else {
+                failure?()
+            }
+        }
     }
     
     // Forgot/Reset Password
@@ -203,10 +434,7 @@ public class AuthClient: NSObject, AuthControllerDelegate {
         
         let forgotEndpoint = ClientEnvironment.SharedInstance.getAccountsEndpoint() + AccountClientEndpoints.Forgot
         
-        let authString = (self.clientId + ":" + self.clientSecretKey).dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!
-        let base64AuthString = authString.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.Encoding76CharacterLineLength).stringByReplacingOccurrencesOfString("\r\n", withString: "")
-        
-        Alamofire.request(.POST, forgotEndpoint, parameters: ["UserNameEmailOrPhone" : emailOrPhoneNumber], encoding: .JSON, headers: ["Accept" : "application/json", "Authorization" : "Basic " + base64AuthString]).responseJSON(completionHandler: { response in
+        Alamofire.request(.POST, forgotEndpoint, parameters: ["UserNameEmailOrPhone" : emailOrPhoneNumber], encoding: .JSON, headers: ["Accept" : "application/json", "Authorization" : self.generateBasicAuthHeader()]).responseJSON(completionHandler: { response in
 
             if response.response?.statusCode == 200 {
                 completion(response: response.result.value as? NSDictionary)
@@ -221,10 +449,7 @@ public class AuthClient: NSObject, AuthControllerDelegate {
         
         let resetEndpoint = ClientEnvironment.SharedInstance.getAccountsEndpoint() + AccountClientEndpoints.Reset
 
-        let authString = (self.clientId + ":" + self.clientSecretKey).dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!
-        let base64AuthString = authString.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.Encoding76CharacterLineLength).stringByReplacingOccurrencesOfString("\r\n", withString: "")
-        
-        Alamofire.request(.POST, resetEndpoint, parameters: ["ResetToken" : resetToken, "Password" : password, "ConfirmPassword" : password], encoding: .JSON, headers: ["Accept" : "application/json", "Authorization" : "Basic " + base64AuthString]).responseJSON(completionHandler: { response in
+        Alamofire.request(.POST, resetEndpoint, parameters: ["ResetToken" : resetToken, "Password" : password, "ConfirmPassword" : password], encoding: .JSON, headers: ["Accept" : "application/json", "Authorization" : self.generateBasicAuthHeader()]).responseJSON(completionHandler: { response in
 
             if response.response?.statusCode == 200 {
                 completion(response: response.result.value as? NSDictionary)
@@ -235,12 +460,12 @@ public class AuthClient: NSObject, AuthControllerDelegate {
         })
     }
     
-    public func getAuthTokens() -> AuthTokens {
-        return KeychainManager().getAuthTokens()
+    public func getAuthToken() -> AuthToken {
+        return KeychainManager().getAuthToken()
     }
     
-    public func saveAuthenticationToken(token : String, refreshToken : String, expiresIn : Double, environmentEndpoint : String) -> Void {
-        KeychainManager().saveAuthenticationToken(token, refreshToken: refreshToken, expiresIn: expiresIn, environmentEndpoint: environmentEndpoint)
+    public func saveAuthToken(authToken: AuthToken) -> Void {
+        KeychainManager().saveAuthToken(authToken)
     }
     
     public static func getTokenUrl() -> String {
