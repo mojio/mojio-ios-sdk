@@ -41,7 +41,7 @@ public class RestClient: NSObject {
     private var baseUrl : String?
 
     public dynamic var requestUrl : String?
-    public dynamic var requestParams : NSDictionary?
+    public dynamic var requestParams : [String:AnyObject] = [:]
     public dynamic var requestEntity : String?
     
     public override init() {
@@ -212,26 +212,30 @@ public class RestClient: NSObject {
     
     public func query(take : NSInteger?, top : String?, skip : String?, filter : String?, select : String?, orderby : String?) -> Self {
         
-        let requestParams : NSMutableDictionary = NSMutableDictionary()
+        var requestParams : [String:AnyObject] = [:]
         
         if take != nil {
             requestParams.setObject(take!, forKey: "take")
         }
         
         if top != nil {
-            requestParams.setObject(top!, forKey: "$top")
+            requestParams["top"] = top!
         }
+
         if skip != nil {
-            requestParams.setObject(skip!, forKey: "$skip")
+            requestParams["skip"] = skip!
         }
+
         if filter != nil {
-            requestParams.setObject(filter!, forKey: "$filter")
+            requestParams["filter"] = filter!
         }
+
         if select != nil {
-            requestParams.setObject(select!, forKey: "$select")
+            requestParams["select"] = select!
         }
+
         if orderby != nil {
-            requestParams.setObject(orderby!, forKey: "$orderby")
+            requestParams["select"] = select!
         }
         
         self.requestUrl = String(self.requestUrl!.characters.dropLast())
@@ -240,71 +244,128 @@ public class RestClient: NSObject {
         return self
     }
     
-    
-    public func run(body : String?, completion : (response : AnyObject) -> Void, failure : (error : String) -> Void) {
+    public func run(completion: (response : AnyObject) -> Void, failure: (error : String) -> Void) {
         
         // Before every request, make sure access token exists
-        let authToken = self.authToken() != nil ? self.authToken()! : ""
-
-        if self.requestMethod! == Alamofire.Method.PUT || self.requestMethod! == Alamofire.Method.POST {
-            
-            Alamofire.request(self.requestMethod!, self.requestUrl!, parameters: [:], encoding: .Custom({
-                (convertible, params) in
-                let mutableRequest : NSMutableURLRequest = convertible.URLRequest.copy() as! NSMutableURLRequest
-                mutableRequest.setValue("Bearer " + authToken, forHTTPHeaderField: "Authorization")
-                mutableRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
-                mutableRequest.HTTPBody = body?.dataUsingEncoding(NSUTF8StringEncoding)
-                return (mutableRequest, nil)
-            })).responseJSON{ response in
-                if response.response?.statusCode == 200 {
-                    completion (response: true)
-                }
-                else {
-                    completion (response: false)
-                }
-            }
+        var headers : [String:String] = [:]
+        
+        if let accessToken : String = self.accessToken()! {
+            headers["Authorization"] = "Bearer " + accessToken
         }
-    }
-    
-    public func run(completion : (response : AnyObject) -> Void, failure : (error : String) -> Void){
-        
-        // Before every request, make sure access token exists
-        let authToken = self.authToken() != nil ? self.authToken()! : ""
 
-        Alamofire.request(self.requestMethod!, self.requestUrl!, parameters : self.requestParams as? [String : AnyObject], headers : ["Authorization" : "Bearer " + authToken]).responseJSON { response in
+        Alamofire.request(self.requestMethod!, self.requestUrl!, parameters: self.requestParams, encoding: .URL, headers: headers).responseJSON { response in
             
-            if response.response != nil && response.response?.statusCode == 200 {
-                
-                if self.requestMethod! == Alamofire.Method.GET {
-                    let responseDict = response.result.value as? NSDictionary
-                    if responseDict != nil {
-                        let dataArray = responseDict?.objectForKey("Data") as? NSArray
-                        if dataArray == nil {
-                            let obj = self.parseDict(responseDict!)
-                            completion (response: obj!)
+            if response.response?.statusCode == 200 {
+                if let responseDict = response.result.value as? NSDictionary {
+                    if let dataArray : NSArray = responseDict.objectForKey("Data") as? NSArray {
+                        let array : NSMutableArray = []
+                        for  obj in dataArray {
+                            array.addObject(self.parseDict(obj as! NSDictionary)!)
                         }
-                            
-                        else {
-                            let array : NSMutableArray = []
-                            for  obj in dataArray! {
-                                array.addObject(self.parseDict(obj as! NSDictionary)!)
-                            }
-                            
-                            completion(response: array)
-                            
-                        }
+                        
+                        completion(response: array)
+                    }
+                    else {
+                        let obj = self.parseDict(responseDict)
+                        completion (response: obj!)
                     }
                 }
-                    
-                else if self.requestMethod! == Alamofire.Method.DELETE {
-                    completion (response: true)
+                else {
+                    completion(response: true)
                 }
-                
             }
             else {
+                // print(String.init(data: response.data!, encoding: NSUTF8StringEncoding))
                 failure(error: "Could not complete request")
             }
         }        
+    }
+    
+    public func runEncodeJSON(jsonObject: AnyObject, completion: (response : AnyObject) -> Void, failure: (error : String) -> Void) {
+        
+        // Before every request, make sure access token exists
+        var headers : [String:String] = ["Content-Type" : "application/json", "Accept" : "application/json"]
+        
+        if let accessToken : String = self.accessToken()! {
+            headers["Authorization"] = "Bearer " + accessToken
+        }
+        
+        // Pass parameter or customer encoder is n
+        let request = Alamofire.request(self.requestMethod!, self.requestUrl!, parameters: [:], encoding: .Custom({(convertible, params) in
+
+            // Add JSON object to body
+            let mutableURLRequest = convertible.URLRequest.mutableCopy() as! NSMutableURLRequest
+            mutableURLRequest.HTTPBody = try! NSJSONSerialization.dataWithJSONObject(jsonObject, options: NSJSONWritingOptions())
+            return (mutableURLRequest, nil)
+        }), headers: headers)
+        
+        print(request.debugDescription)
+        
+        request.responseJSON(completionHandler: { response in
+            
+            print(response.debugDescription)
+            
+            if response.response?.statusCode == 200 {
+                if let responseDict = response.result.value as? NSDictionary {
+                    if let dataArray : NSArray = responseDict.objectForKey("Data") as? NSArray {
+                        let array : NSMutableArray = []
+                        for  obj in dataArray {
+                            array.addObject(self.parseDict(obj as! NSDictionary)!)
+                        }
+                        
+                        completion(response: array)
+                    }
+                    else {
+                        let obj = self.parseDict(responseDict)
+                        completion (response: obj!)
+                    }
+                }
+                else {
+                    completion(response: true)
+                }
+            }
+            else {
+                // print(String.init(data: response.data!, encoding: NSUTF8StringEncoding))
+                failure(error: "Could not complete request")
+            }
+        })
+    }
+    
+    public func runEncodeUrl(parameters: [String:AnyObject], completion: (response : AnyObject) -> Void, failure: (error : String) -> Void) {
+        
+        // Before every request, make sure access token exists
+        var headers : [String:String] = [:]
+        
+        if let accessToken : String = self.accessToken()! {
+            headers["Authorization"] = "Bearer " + accessToken
+        }
+        
+        Alamofire.request(self.requestMethod!, self.requestUrl!, parameters: parameters, encoding: .URL, headers: headers).responseJSON { response in
+            
+            if response.response?.statusCode == 200 {
+                if let responseDict = response.result.value as? NSDictionary {
+                    if let dataArray : NSArray = responseDict.objectForKey("Data") as? NSArray {
+                        let array : NSMutableArray = []
+                        for  obj in dataArray {
+                            array.addObject(self.parseDict(obj as! NSDictionary)!)
+                        }
+                        
+                        completion(response: array)
+                    }
+                    else {
+                        let obj = self.parseDict(responseDict)
+                        completion (response: obj!)
+                    }
+                }
+                else {
+                    completion(response: true)
+                }
+            }
+            else {
+                // print(String.init(data: response.data!, encoding: NSUTF8StringEncoding))
+                failure(error: "Could not complete request")
+            }
+        }
     }
     
     
@@ -378,9 +439,8 @@ public class RestClient: NSObject {
         }
     }
     
-    private func authToken () -> String? {
-        let authTokens = KeychainManager().getAuthTokens()
-        return authTokens.authToken
+    private func accessToken() -> String? {
+        return KeychainManager().getAuthToken().accessToken
     }    
 }
 
@@ -409,5 +469,13 @@ public extension ListBase {
             _toArray.append(obj.toDictionary())
         }
         return _toArray
+    }
+}
+
+public extension Dictionary {
+    public mutating func update(updateDict: Dictionary) {
+        for (key, value) in updateDict {
+            self.updateValue(value, forKey:key)
+        }
     }
 }

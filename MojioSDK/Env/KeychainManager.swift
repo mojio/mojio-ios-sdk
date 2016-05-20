@@ -9,56 +9,56 @@
 import UIKit
 import KeychainSwift
 
-public class AuthTokens : NSObject {
-    public dynamic var authToken : String? = nil
-    public dynamic var refreshToken : String? = nil
-    public dynamic var expiryDate : String? = nil
-    public dynamic var endpoint : String? = nil
-}
-
 public class KeychainKeys : NSObject {
-    public static let AuthToken : String = "MojioAuthToken"
-    public static let RefreshToken : String = "MojioAuthRefreshToken"
-    public static let TokenExpiresIn : String = "MojioAuthTokenExpiresIn"
-    public static let UrlEndpoint : String = "MojioEnvironmentEndpoint"
+    public static let AccessToken: String = "MojioSDKAccessToken"
+    public static let RefreshToken: String = "MojioSDKRefreshToken"
+    public static let AccessTokenExpiry: String = "MojioSDKAccessTokenExpiry"
+    public static let UniqueId: String = "MojioSDKUniqueId"
 }
 
 public class KeychainManager: NSObject {
     
-    public func getAuthTokens () -> AuthTokens {
-        let authTokens = AuthTokens.init()
+    public func getAuthToken() -> AuthToken {
+        let authToken = AuthToken.init()
         let keychain = KeychainSwift()
 
-        authTokens.authToken = keychain.get(KeychainKeys.AuthToken)
-        authTokens.refreshToken = keychain.get(KeychainKeys.RefreshToken)
-        authTokens.expiryDate = keychain.get(KeychainKeys.TokenExpiresIn)
-        authTokens.endpoint = keychain.get(KeychainKeys.UrlEndpoint)
+        authToken.accessToken = keychain.get(KeychainKeys.AccessToken)
+        authToken.refreshToken = keychain.get(KeychainKeys.RefreshToken)
+        authToken.expiry = keychain.get(KeychainKeys.AccessTokenExpiry)
+        authToken.uniqueId = keychain.get(KeychainKeys.UniqueId)
         
-        return authTokens
+        return authToken
     }
     
-    public func saveAuthenticationToken (token : String, refreshToken : String, expiresIn : Double, environmentEndpoint : String) -> Void {
+    public func saveAuthToken(authToken: AuthToken) -> Void {
         
         // Need to delete the tokens from the keychain before saving. This is because overriding does not work with the keychain
         self.deleteTokenFromKeychain()
         
-        // Save the expiry date of the token in milliseconds since 1970 as it is timezone independent
-        let currentTimeInMS : Double = NSDate().timeIntervalSince1970
-        let expiryDateTimeInMS : Double = currentTimeInMS + (expiresIn * 1000)
-        let expiryTime : NSString = String(format: "%f", expiryDateTimeInMS) as NSString
-        
         let keychain = KeychainSwift()
-        keychain.set(token, forKey: KeychainKeys.AuthToken)
-        keychain.set(refreshToken, forKey : KeychainKeys.RefreshToken)
-        keychain.set(expiryTime as String, forKey: KeychainKeys.TokenExpiresIn)
-        keychain.set(environmentEndpoint, forKey: KeychainKeys.UrlEndpoint)
+        
+        if let accessToken: String = authToken.accessToken! {
+            keychain.set(accessToken, forKey: KeychainKeys.AccessToken)
+        }
+
+        if let refreshToken: String = authToken.refreshToken! {
+            keychain.set(refreshToken, forKey : KeychainKeys.RefreshToken)
+        }
+        
+        if let expiry: String = authToken.expiry! {
+            keychain.set(expiry as String, forKey: KeychainKeys.AccessTokenExpiry)
+        }
+
+        if let uniqueId: String = authToken.uniqueId! {
+            keychain.set(uniqueId, forKey: KeychainKeys.UniqueId)
+        }
     }
     
-    public func deleteTokenFromKeychain () {
+    public func deleteTokenFromKeychain() {
         let keychain = KeychainSwift()
-        keychain.delete(KeychainKeys.AuthToken)
+        keychain.delete(KeychainKeys.AccessToken)
         keychain.delete(KeychainKeys.RefreshToken)
-        keychain.delete(KeychainKeys.TokenExpiresIn)
-        keychain.delete(KeychainKeys.UrlEndpoint)
+        keychain.delete(KeychainKeys.AccessTokenExpiry)
+        keychain.delete(KeychainKeys.UniqueId)
     }    
 }

@@ -198,7 +198,7 @@ internal class JSONSerializer {
             else if property.displayStyle == Mirror.DisplayStyle.Optional {
                 let str = String(value)
                 if str != "nil" {
-                    handledValue = String(str).substringWithRange(Range<String.Index>(start: str.startIndex.advancedBy(9), end: str.endIndex.advancedBy(-1)))
+                    handledValue = String(str).substringWithRange(str.startIndex.advancedBy(9) ..< str.endIndex.advancedBy(-1))
                 } else {
                     handledValue = "null"
                 }
