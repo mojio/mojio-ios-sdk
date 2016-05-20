@@ -215,7 +215,7 @@ public class RestClient: NSObject {
         var requestParams : [String:AnyObject] = [:]
         
         if take != nil {
-            requestParams.setObject(take!, forKey: "take")
+            requestParams["take"] = take!
         }
         
         if top != nil {
