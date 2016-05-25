@@ -129,7 +129,7 @@ class ClientTests: XCTestCase {
         let expectation = self.expectationWithDescription("Response arrived")
         
         if requestType == "GET" {
-            RestClient().get().vehicles(nil).query("1", skip: "2", filter: "vehicleId=vehicleId", select: "", orderby: "").run({ response in
+            RestClient().get().vehicles(nil).query(1, top:"10", skip: "2", filter: "vehicleId=vehicleId", select: "", orderby: "").run({ response in
                 expectation.fulfill()
                 
                 }, failure: { error in
@@ -137,14 +137,14 @@ class ClientTests: XCTestCase {
             })
         }
         else if requestType == "PUT" {
-            RestClient().put().users("user-id").run("", completion: { response in
+            RestClient().put().users("user-id").run({ response in
                 expectation.fulfill()
                 }, failure: { error in
                     XCTAssertFalse(false, message)
             })
         }
         else if requestType == "POST" {
-            RestClient().post().vehicles(nil).run("", completion: { response in
+            RestClient().post().vehicles(nil).run({ response in
                 expectation.fulfill()
                 }, failure: { error in
                     XCTAssertFalse(false, message)

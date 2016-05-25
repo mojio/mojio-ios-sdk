@@ -72,7 +72,7 @@ class AuthenticationTests: XCTestCase {
         
         let urlRequest : NSURLRequest = NSURLRequest(URL: NSURL(string: "sdkdev://io.moj#access_token=9be67364-3f78-4539-ae64-5861c4dd3584&token_type=bearer&expires_in=43200")!)
         
-        self.authClient.loginCompletion = {
+        self.authClient.loginCompletion = { (authToken) in
             XCTAssert(true, "Login successful")
         }
         self.authClient.authControllerLoadURLRequest(urlRequest)
