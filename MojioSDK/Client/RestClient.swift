@@ -33,28 +33,35 @@ public class RestClientEndpoints : NSObject {
     public static let Vin : String = "vin/"
     public static let ServiceSchedule : String = "serviceschedule/"
     public static let Next : String = "next/"
+    
+    // Storage
+    // Parameters: Type, Id, Key
+    // e.g. trip/{id}/store/{key}
+    public static let Storage : String = "%@/%@/store/%@"
+    
 }
 
 public class RestClient: NSObject {
     
     private var requestMethod : Alamofire.Method?
-    private var baseUrl : String?
 
     public dynamic var requestUrl : String?
+    public dynamic var requestV1Url : String?
     public dynamic var requestParams : [String:AnyObject] = [:]
     public dynamic var requestEntity : String?
+    public dynamic var requestEntityId: String?
     
     public override init() {
-        self.baseUrl = ClientEnvironment.SharedInstance.getApiEndpoint()
-        self.requestUrl = self.baseUrl
+        self.requestUrl = ClientEnvironment.SharedInstance.getApiEndpoint()
+        self.requestV1Url = ClientEnvironment.SharedInstance.getV1ApiEndpoint();
         
         // Set Auth Token as the header
     }
     
     public convenience init(clientEnvironment : ClientEnvironment) {
         self.init()
-        self.baseUrl = clientEnvironment.getApiEndpoint()
-        self.requestUrl = self.baseUrl
+        self.requestUrl = clientEnvironment.getApiEndpoint()
+        self.requestV1Url = clientEnvironment.getV1ApiEndpoint()
     }
     
     public func get() -> Self {
@@ -79,6 +86,7 @@ public class RestClient: NSObject {
     
     public func apps(appId : String?) -> Self {
         self.requestEntity = RestClientEndpoints.Apps
+        self.requestEntityId = appId
         self.requestUrl = self.requestUrl! + self.requestEntity! + (appId != nil ? appId! + "/" : "")
         
         return self
@@ -100,6 +108,7 @@ public class RestClient: NSObject {
     
     public func users(userId : String?) -> Self {
         self.requestEntity = RestClientEndpoints.Users
+        self.requestEntityId = userId
         self.requestUrl = self.requestUrl! + self.requestEntity! + (userId != nil ? userId! + "/" : "")
         
         return self
@@ -142,6 +151,7 @@ public class RestClient: NSObject {
     
     public func mojios(mojioId : String?) -> Self {
         self.requestEntity = RestClientEndpoints.Mojios
+        self.requestEntityId = mojioId
         self.requestUrl = self.requestUrl! + self.requestEntity! + (mojioId != nil ? mojioId! + "/" : "")
 
         return self
@@ -170,6 +180,7 @@ public class RestClient: NSObject {
     
     public func trips(tripId : String?) -> Self {
         self.requestEntity = RestClientEndpoints.Trips
+        self.requestEntityId = tripId
         self.requestUrl = self.requestUrl! + self.requestEntity! + (tripId != nil ? tripId! + "/" : "")
 
         return self
@@ -177,6 +188,7 @@ public class RestClient: NSObject {
     
     public func vehicles(vehicleId : String?) -> Self {
         self.requestEntity = RestClientEndpoints.Vehicles
+        self.requestEntityId = vehicleId
         self.requestUrl = self.requestUrl! + self.requestEntity! + (vehicleId != nil ? vehicleId! + "/" : "")
 
         return self
@@ -208,6 +220,31 @@ public class RestClient: NSObject {
         self.requestUrl = self.requestUrl! + self.requestEntity!
 
         return self
+    }
+    
+    public func storage(key: String) -> Self {
+        
+        switch self.requestEntity! {
+        case RestClientEndpoints.Apps:
+            self.requestUrl = String.init(format: RestClientEndpoints.Storage, "app", self.requestEntityId! , key);
+            break
+        case RestClientEndpoints.Users:
+            self.requestUrl = String.init(format: RestClientEndpoints.Storage, "user", self.requestEntityId!, key);
+            break
+        case RestClientEndpoints.Mojios:
+            self.requestUrl = String.init(format: RestClientEndpoints.Storage, "mojio", self.requestEntityId!, key);
+            break
+        case RestClientEndpoints.Trips:
+            self.requestUrl = String.init(format: RestClientEndpoints.Storage, "trip", self.requestEntityId!, key);
+            break
+        case RestClientEndpoints.Vehicles:
+            self.requestUrl = String.init(format: RestClientEndpoints.Storage, "vehicle", self.requestEntityId!, key);
+            break
+        default:
+            return self;
+        }
+        
+        return self;
     }
     
     public func query(top : String?, skip : String?, filter : String?, select : String?, orderby : String?) -> Self {
@@ -361,7 +398,6 @@ public class RestClient: NSObject {
             }
         }
     }
-    
     
     public func parseDict(dict : NSDictionary) -> AnyObject? {
         switch self.requestEntity! {
