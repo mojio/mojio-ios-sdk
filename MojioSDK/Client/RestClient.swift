@@ -280,7 +280,7 @@ public class RestClient: NSObject {
         // Before every request, make sure access token exists
         var headers : [String:String] = [:]
         
-        if let accessToken : String = self.accessToken()! {
+        if let accessToken : String = self.accessToken() {
             headers["Authorization"] = "Bearer " + accessToken
         }
 

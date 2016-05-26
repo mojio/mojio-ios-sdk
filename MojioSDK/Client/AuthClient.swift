@@ -173,19 +173,21 @@ public class AuthClient: NSObject, AuthControllerDelegate {
         let urlComponents : NSURLComponents = NSURLComponents(URL: url, resolvingAgainstBaseURL: false)!
         let authToken : AuthToken = AuthToken()
         
-        for queryItem in urlComponents.queryItems! {
-            if queryItem.name == "access_token" {
-                authToken.accessToken = queryItem.value
-            }
-            else if queryItem.name == "expires_in" {
-                if queryItem.value != nil {
-                    if let expiry : Double = Double(queryItem.value!) {
-                        authToken.expiry = String(NSDate.init(timeIntervalSinceNow: expiry).timeIntervalSince1970)
+        if let queryItems = urlComponents.queryItems {
+            for queryItem in queryItems {
+                if queryItem.name == "access_token" {
+                    authToken.accessToken = queryItem.value
+                }
+                else if queryItem.name == "expires_in" {
+                    if queryItem.value != nil {
+                        if let expiry : Double = Double(queryItem.value!) {
+                            authToken.expiry = String(NSDate.init(timeIntervalSinceNow: expiry).timeIntervalSince1970)
+                        }
                     }
                 }
-            }
-            else if queryItem.name == "refresh_token" {
-                authToken.refreshToken = queryItem.value
+                else if queryItem.name == "refresh_token" {
+                    authToken.refreshToken = queryItem.value
+                }
             }
         }
         

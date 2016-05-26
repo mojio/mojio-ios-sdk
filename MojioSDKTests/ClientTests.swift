@@ -137,14 +137,14 @@ class ClientTests: XCTestCase {
             })
         }
         else if requestType == "PUT" {
-            RestClient().put().users("user-id").run("", completion: { response in
+            RestClient().put().users("user-id").run({ response in
                 expectation.fulfill()
                 }, failure: { error in
                     XCTAssertFalse(false, message)
             })
         }
         else if requestType == "POST" {
-            RestClient().post().vehicles(nil).run("", completion: { response in
+            RestClient().post().vehicles(nil).run({ response in
                 expectation.fulfill()
                 }, failure: { error in
                     XCTAssertFalse(false, message)
@@ -169,13 +169,5 @@ class ClientTests: XCTestCase {
         let dict = try! NSJSONSerialization.JSONObjectWithData(data!, options: []) as? [String : AnyObject]
         
         return dict
-    }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measureBlock {
-            // Put the code you want to measure the time of here.
-        }
-    }
-    
+    }    
 }
