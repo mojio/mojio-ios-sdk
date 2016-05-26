@@ -255,7 +255,7 @@ public class RestClient: NSObject {
 
         Alamofire.request(self.requestMethod!, self.requestUrl!, parameters: self.requestParams, encoding: .URL, headers: headers).responseJSON { response in
             
-            if response.response?.statusCode == 200 {
+            if response.response?.statusCode == 200 || response.response?.statusCode == 201 {
                 if let responseDict = response.result.value as? NSDictionary {
                     if let dataArray : NSArray = responseDict.objectForKey("Data") as? NSArray {
                         let array : NSMutableArray = []
@@ -266,8 +266,15 @@ public class RestClient: NSObject {
                         completion(response: array)
                     }
                     else {
-                        let obj = self.parseDict(responseDict)
-                        completion (response: obj!)
+                        if let obj = self.parseDict(responseDict) {
+                            completion (response: obj)
+                        }
+                        else {
+                            if let message : String = responseDict.objectForKey("Message") as! String {
+                                completion (response: message)
+                            }
+                        }
+                        
                     }
                 }
                 else {
