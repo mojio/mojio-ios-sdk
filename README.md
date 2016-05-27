@@ -1,81 +1,151 @@
 # mojio-ios-sdk (Under Active Development)
 
-## Installing the SDK
+## Installing the SDK from Cocoapods
 
-Step 1. Download the SDK <br/>
-Step 2. Drag the folder MojioSDKiOS/MojioSDKiOS into your XCode project <br/>
-Step 3. Make sure Cocoapods is set up for the project. <br/>
-Step 4. Install the frameworks - JSONModel and AFNetworking <br/>
+Step 1: Add MojioSDK as a pod to your Podfile <br/>
 ```
-pod 'AFNetworking', '2.5.0'
-pod 'JSONModel', '1.0.2'
+pod 'MojioSDK'
 ```
-Step 5. In Linked Frameworks and Libraries, add the following framework libicucore.tbd. Depending on the version of iOS/XCode, it might be called libicucore.dylib <br/>
-#### For Swift Developers
-Step 6.  Create a bridging header. The steps to create the bridging header are at: http://www.learnswiftonline.com/getting-started/adding-swift-bridging-header/ <br/>
+Step 2: Install or update your Pods <br/>
+```
+pod install or pod update
+```
 
-## Initializing the SDK 
+## Using the SDK
 
+## Initializing Auth & Rest Clients (Swift)
 ```
-self.client = [MojioClient client];
-[self.client initWithAppId:[APP_ID] andSecretKey:[SECRET_KEY] andRedirectUrlScheme:[REDIRECT_SCHEME]];
+import MojioSDK
+
+self.authClient = MojioSDK.AuthClient.init(clientId: <CLIENT_ID>, clientSecretKey:  <CLIENT_SECRET>, clientRedirectURI: <CLIENT_REDIRECT_URI>)
+
+self.restClient : RestClient = RestClient.init(clientEnvironment: ClientEnvironment.SharedInstance)
+```
+
+## Initializing Auth & Rest Clients (Objective-C)
+```
+import "MojioSDK-Swift.h"
+
+self.authClient = [[AuthClient alloc] initWithClientId:<CLIENT_ID> clientSecretKey:<CLIENT_SECRET> clientRedirectURI:<CLIENT_REDIRECT_URI>];
+
+self.restClient = [[RestClient alloc] initWithClientEnvironment:[ClientEnvironment SharedInstance]];1
 ```
 
 ## Authenticating a user
 
-#### Logging In
+#### Logging In/Out (Swift)
 ```
-[self.client loginWithCompletionBlock:^{
-        // this is executed once the user is logged in
-    }];
+self.authClient.login({
+    // Callback is executed once the user is logged in
+}]);
+
+self.authClient.logout()
 ```
-In addition, the application needs to be able to receive the authentication token when the Mojio server redirects it to the app. To do this, add the following lines of code to the app's ApplicationDelegate.m file:
+
+#### Logging In/Out (Objective-C)
 ```
-- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
-    [self.client handleOpenURL:url];
-    return YES;
-}
-```
-#### Logging out
-```
-[self.client logoutWithCompletionBlock:^{
-  // code is executed as soon as the user logs out
+[self.authClient login:^{
+    // Block is executed once the user is logged in
 }];
+
+[self.authClient logout];
 ```
+
 ## Fetching Data
+
+#### In Swift
 ```
-NSDictionary *queryOptions = @{@"limit" : @1, @"offset" : @0, @"sortBy" : @"LastContactTime", @"desc" : @"true"};
-  [self.client getEntityWithPath:@"Vehicles" withQueryOptions:queryOptions success:^(id responseObject) {
-    // executed when the data is successfully fetched
-  }failure: ^{
-    // executed if there was an error in trying to retrieve data
-  }];
+self.restClient.get().vehicles().query(top: <TOP_OFFSET>, skip: <SKIP_COUNT>, filter: <FILTER>, select: <SELECT>, orderby: <ORDER-BY>).run(
+    {
+        response in
+        // Executed when the data is successfully fetched
+    }, failure:
+    {
+        error in
+        // Executed if there was an error in trying to retrieve data
+    }
+)
+```
+#### In Objective-C
+```
+[[restClient get] vehicles:nil] query:<TOP_OFFSET> skip:<SKIP_COUNT> filter:<FILTER> select:<SELECT> orderby:<ORDER-BY>] run:^(id response) {
+    // Executed when the data is successfully fetched
+} failure:^(NSString * error) {
+    // Executed if there was an error in trying to retrieve data
+}];
 ```
 
 ## Getting a specific entity
 
+#### In Swift
 ```
-[self.client getEntityWithPath:[NSString stringWithFormat:@"Vehicles/%@", VEHICLE_ID] withQueryOptions:queryOptions success:^(id responseObject) {
-  // executed when the data is successfully fetched
-}failure: ^{
-  // executed if there was an error in trying to retrieve data
+self.restClient.get().vehicles(<VEHICLE_ID>).run(
+    {
+        response in
+        // Executed when the data is successfully fetched
+    }, failure:
+    {
+        error in
+        // Executed if there was an error in trying to retrieve data
+    }
+)
+```
+
+#### In Objective-C
+```
+[[restClient get] vehicles:<VEHICLE_ID>] run:^(id response) {
+    // Executed when the data is successfully fetched
+} failure:^(NSString * error) {
+    // Executed if there was an error in trying to retrieve data
 }];
 ```
 
 ## Saving an existing entity
+
+#### In Swift
 ```
-[self.client updateEntityWithPath:@"Vehicles/{id}/Store/{key}" withContentBody: [CONTENT] success:^{
-  // executed if the response is 200 or 201
-} failure: ^{
-  // executed if the request failed
-}
+self.restClient.put().vehicles(<VEHICLE_ID>).run(vehicle.json(), completion:
+    {
+        response in
+        // Executed when the data is successfully fetched
+    }, failure:
+    {
+        error in
+        // Executed if there was an error in trying to retrieve data
+    }
+)
+```
+
+#### In Objective-C
+```
+[[restClient put] vehicles:<VEHICLE_ID>] run:vehicle.json(), completion:^(id response) {
+    // Executed when the data is successfully fetched
+} failure:^(NSString * error) {
+    // Executed if there was an error in trying to retrieve data
+}];
 ```
 
 ## Deleting an existing entity
+
+#### In Swift
 ```
-[self.client deleteEntityWithPath:@"Vehicles/{id}/Store/{key}" success:^{
-  // executed if the entity is deleted
-} failure:^{
-  // executed if the request failed
-}
+self.restClient.delete().vehicles(<VEHICLE_ID>).run(
+    {
+        response in
+        // Executed when the data is successfully fetched
+    }, failure:
+    {
+        error in
+        // Executed if there was an error in trying to retrieve data
+    }
+)
+```
+
+#### In Objective-C
+```
+[[restClient delete] vehicles:<VEHICLE_ID>] run:^(id response) {
+    // Executed when the data is successfully fetched
+} failure:^(NSString * error) {
+    // Executed if there was an error in trying to retrieve data
+}];
 ```
