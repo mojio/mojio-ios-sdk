@@ -359,7 +359,7 @@ public class RestClient: NSObject {
     
     
     func handleResponse(response: Response<AnyObject, NSError>, completion: (response :AnyObject) -> Void, failure: (error:String) -> Void){
-        if response.response?.statusCode == 200 {
+        if response.response?.statusCode == 200 || response.response?.statusCode == 201 {
             if let responseDict = response.result.value as? NSDictionary {
                 if let dataArray : NSArray = responseDict.objectForKey("Data") as? NSArray {
                     let array : NSMutableArray = []
@@ -370,11 +370,17 @@ public class RestClient: NSObject {
                     completion(response: array)
                 }
                 else {
-                    let obj = self.parseDict(responseDict)
-                    completion (response: obj!)
+                    if let obj = self.parseDict(responseDict) {
+                        completion (response: obj)
+                    }
+                    else {
+                        if let message : String = responseDict.objectForKey("Message") as? String {
+                            completion (response: message)
+                        }
+                    }
+                    
                 }
-            }
-            else if let responseString = response.result.value as? String {
+            } else if let responseString = response.result.value as? String {
                 completion(response: responseString);
             }
             else {
@@ -385,7 +391,6 @@ public class RestClient: NSObject {
             // print(String.init(data: response.data!, encoding: NSUTF8StringEncoding))
             failure(error: "Could not complete request")
         }
-
     }
     
     public func parseDict(dict : NSDictionary) -> AnyObject? {
