@@ -129,7 +129,7 @@ class ClientTests: XCTestCase {
         let expectation = self.expectationWithDescription("Response arrived")
         
         if requestType == "GET" {
-            RestClient().get().vehicles(nil).query(1, top:"10", skip: "2", filter: "vehicleId=vehicleId", select: "", orderby: "").run({ response in
+            RestClient().get().vehicles(nil).query("1", skip: "2", filter: "vehicleId=vehicleId", select: "", orderby: "").run({ response in
                 expectation.fulfill()
                 
                 }, failure: { error in
@@ -169,13 +169,5 @@ class ClientTests: XCTestCase {
         let dict = try! NSJSONSerialization.JSONObjectWithData(data!, options: []) as? [String : AnyObject]
         
         return dict
-    }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measureBlock {
-            // Put the code you want to measure the time of here.
-        }
-    }
-    
+    }    
 }

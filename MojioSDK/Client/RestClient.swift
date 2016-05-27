@@ -33,28 +33,35 @@ public class RestClientEndpoints : NSObject {
     public static let Vin : String = "vin/"
     public static let ServiceSchedule : String = "serviceschedule/"
     public static let Next : String = "next/"
+    
+    // Storage
+    // Parameters: Type, Id, Key
+    // e.g. trip/{id}/store/{key}
+    public static let Storage : String = "%@%@/store/%@"
+    
 }
 
 public class RestClient: NSObject {
     
     private var requestMethod : Alamofire.Method?
-    private var baseUrl : String?
 
     public dynamic var requestUrl : String?
+    public dynamic var requestV1Url : String?
     public dynamic var requestParams : [String:AnyObject] = [:]
     public dynamic var requestEntity : String?
+    public dynamic var requestEntityId: String?
     
     public override init() {
-        self.baseUrl = ClientEnvironment.SharedInstance.getApiEndpoint()
-        self.requestUrl = self.baseUrl
+        self.requestUrl = ClientEnvironment.SharedInstance.getApiEndpoint()
+        self.requestV1Url = ClientEnvironment.SharedInstance.getV1ApiEndpoint();
         
         // Set Auth Token as the header
     }
     
     public convenience init(clientEnvironment : ClientEnvironment) {
         self.init()
-        self.baseUrl = clientEnvironment.getApiEndpoint()
-        self.requestUrl = self.baseUrl
+        self.requestUrl = clientEnvironment.getApiEndpoint()
+        self.requestV1Url = clientEnvironment.getV1ApiEndpoint()
     }
     
     public func get() -> Self {
@@ -79,6 +86,7 @@ public class RestClient: NSObject {
     
     public func apps(appId : String?) -> Self {
         self.requestEntity = RestClientEndpoints.Apps
+        self.requestEntityId = appId
         self.requestUrl = self.requestUrl! + self.requestEntity! + (appId != nil ? appId! + "/" : "")
         
         return self
@@ -100,6 +108,7 @@ public class RestClient: NSObject {
     
     public func users(userId : String?) -> Self {
         self.requestEntity = RestClientEndpoints.Users
+        self.requestEntityId = userId
         self.requestUrl = self.requestUrl! + self.requestEntity! + (userId != nil ? userId! + "/" : "")
         
         return self
@@ -142,6 +151,7 @@ public class RestClient: NSObject {
     
     public func mojios(mojioId : String?) -> Self {
         self.requestEntity = RestClientEndpoints.Mojios
+        self.requestEntityId = mojioId
         self.requestUrl = self.requestUrl! + self.requestEntity! + (mojioId != nil ? mojioId! + "/" : "")
 
         return self
@@ -170,6 +180,7 @@ public class RestClient: NSObject {
     
     public func trips(tripId : String?) -> Self {
         self.requestEntity = RestClientEndpoints.Trips
+        self.requestEntityId = tripId
         self.requestUrl = self.requestUrl! + self.requestEntity! + (tripId != nil ? tripId! + "/" : "")
 
         return self
@@ -177,6 +188,7 @@ public class RestClient: NSObject {
     
     public func vehicles(vehicleId : String?) -> Self {
         self.requestEntity = RestClientEndpoints.Vehicles
+        self.requestEntityId = vehicleId
         self.requestUrl = self.requestUrl! + self.requestEntity! + (vehicleId != nil ? vehicleId! + "/" : "")
 
         return self
@@ -210,13 +222,36 @@ public class RestClient: NSObject {
         return self
     }
     
-    public func query(take : NSInteger?, top : String?, skip : String?, filter : String?, select : String?, orderby : String?) -> Self {
+    public func storage(key: String) -> Self {
+
+        self.requestUrl = self.requestV1Url! + String.init(format: RestClientEndpoints.Storage, self.requestEntity!, self.requestEntityId! , key);
+
+        /*switch self.requestEntity! {
+        case RestClientEndpoints.Apps:
+            self.requestUrl = String.init(format: RestClientEndpoints.Storage, "app", self.requestEntityId! , key);
+            break
+        case RestClientEndpoints.Users:
+            self.requestUrl = String.init(format: RestClientEndpoints.Storage, "user", self.requestEntityId!, key);
+            break
+        case RestClientEndpoints.Mojios:
+            self.requestUrl = String.init(format: RestClientEndpoints.Storage, "mojio", self.requestEntityId!, key);
+            break
+        case RestClientEndpoints.Trips:
+            self.requestUrl = String.init(format: RestClientEndpoints.Storage, "trip", self.requestEntityId!, key);
+            break
+        case RestClientEndpoints.Vehicles:
+            self.requestUrl = String.init(format: RestClientEndpoints.Storage, "vehicle", self.requestEntityId!, key);
+            break
+        default:
+            return self;
+        }*/
+        
+        return self;
+    }
+    
+    public func query(top : String?, skip : String?, filter : String?, select : String?, orderby : String?) -> Self {
         
         var requestParams : [String:AnyObject] = [:]
-        
-        if take != nil {
-            requestParams["take"] = take!
-        }
         
         if top != nil {
             requestParams["top"] = top!
@@ -238,9 +273,7 @@ public class RestClient: NSObject {
             requestParams["select"] = select!
         }
         
-        self.requestUrl = String(self.requestUrl!.characters.dropLast())
-        self.requestParams = requestParams
-        
+        self.requestParams.update(requestParams)
         return self
     }
     
@@ -254,38 +287,35 @@ public class RestClient: NSObject {
         }
 
         Alamofire.request(self.requestMethod!, self.requestUrl!, parameters: self.requestParams, encoding: .URL, headers: headers).responseJSON { response in
-            
-            if response.response?.statusCode == 200 || response.response?.statusCode == 201 {
-                if let responseDict = response.result.value as? NSDictionary {
-                    if let dataArray : NSArray = responseDict.objectForKey("Data") as? NSArray {
-                        let array : NSMutableArray = []
-                        for  obj in dataArray {
-                            array.addObject(self.parseDict(obj as! NSDictionary)!)
-                        }
-                        
-                        completion(response: array)
-                    }
-                    else {
-                        if let obj = self.parseDict(responseDict) {
-                            completion (response: obj)
-                        }
-                        else {
-                            if let message : String = responseDict.objectForKey("Message") as! String {
-                                completion (response: message)
-                            }
-                        }
-                        
-                    }
-                }
-                else {
-                    completion(response: true)
-                }
-            }
-            else {
-                // print(String.init(data: response.data!, encoding: NSUTF8StringEncoding))
-                failure(error: "Could not complete request")
-            }
+            self.handleResponse(response, completion: completion, failure: failure)
         }        
+    }
+    
+    public func runStringBody(string: String, completion: (response : AnyObject) -> Void, failure: (error : String) -> Void) {
+        
+        // Before every request, make sure access token exists
+        var headers : [String:String] = ["Content-Type" : "application/json", "Accept" : "application/json"]
+        
+        if let accessToken : String = self.accessToken()! {
+            headers["Authorization"] = "Bearer " + accessToken
+        }
+        
+        // Pass parameter or customer encoder is n
+        let request = Alamofire.request(self.requestMethod!, self.requestUrl!, parameters: [:], encoding: .Custom({(convertible, params) in
+            
+            // Add string to body
+            let mutableRequest = convertible.URLRequest.mutableCopy() as! NSMutableURLRequest
+            let quotedString = String.init(format: "\"%@\"", string)
+            mutableRequest.HTTPBody = quotedString.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
+            return (mutableRequest, nil)
+            
+        }), headers: headers)
+        
+        print(request.debugDescription)
+        
+        request.responseJSON(completionHandler: { response in
+            self.handleResponse(response, completion: completion, failure: failure)
+        })
     }
     
     public func runEncodeJSON(jsonObject: AnyObject, completion: (response : AnyObject) -> Void, failure: (error : String) -> Void) {
@@ -309,32 +339,7 @@ public class RestClient: NSObject {
         print(request.debugDescription)
         
         request.responseJSON(completionHandler: { response in
-            
-            print(response.debugDescription)
-            
-            if response.response?.statusCode == 200 {
-                if let responseDict = response.result.value as? NSDictionary {
-                    if let dataArray : NSArray = responseDict.objectForKey("Data") as? NSArray {
-                        let array : NSMutableArray = []
-                        for  obj in dataArray {
-                            array.addObject(self.parseDict(obj as! NSDictionary)!)
-                        }
-                        
-                        completion(response: array)
-                    }
-                    else {
-                        let obj = self.parseDict(responseDict)
-                        completion (response: obj!)
-                    }
-                }
-                else {
-                    completion(response: true)
-                }
-            }
-            else {
-                // print(String.init(data: response.data!, encoding: NSUTF8StringEncoding))
-                failure(error: "Could not complete request")
-            }
+            self.handleResponse(response, completion: completion, failure: failure)
         })
     }
     
@@ -348,33 +353,45 @@ public class RestClient: NSObject {
         }
         
         Alamofire.request(self.requestMethod!, self.requestUrl!, parameters: parameters, encoding: .URL, headers: headers).responseJSON { response in
-            
-            if response.response?.statusCode == 200 {
-                if let responseDict = response.result.value as? NSDictionary {
-                    if let dataArray : NSArray = responseDict.objectForKey("Data") as? NSArray {
-                        let array : NSMutableArray = []
-                        for  obj in dataArray {
-                            array.addObject(self.parseDict(obj as! NSDictionary)!)
-                        }
-                        
-                        completion(response: array)
-                    }
-                    else {
-                        let obj = self.parseDict(responseDict)
-                        completion (response: obj!)
-                    }
-                }
-                else {
-                    completion(response: true)
-                }
-            }
-            else {
-                // print(String.init(data: response.data!, encoding: NSUTF8StringEncoding))
-                failure(error: "Could not complete request")
-            }
+            self.handleResponse(response, completion: completion, failure: failure)
         }
     }
     
+    
+    func handleResponse(response: Response<AnyObject, NSError>, completion: (response :AnyObject) -> Void, failure: (error:String) -> Void){
+        if response.response?.statusCode == 200 || response.response?.statusCode == 201 {
+            if let responseDict = response.result.value as? NSDictionary {
+                if let dataArray : NSArray = responseDict.objectForKey("Data") as? NSArray {
+                    let array : NSMutableArray = []
+                    for  obj in dataArray {
+                        array.addObject(self.parseDict(obj as! NSDictionary)!)
+                    }
+                    
+                    completion(response: array)
+                }
+                else {
+                    if let obj = self.parseDict(responseDict) {
+                        completion (response: obj)
+                    }
+                    else {
+                        if let message : String = responseDict.objectForKey("Message") as? String {
+                            completion (response: message)
+                        }
+                    }
+                    
+                }
+            } else if let responseString = response.result.value as? String {
+                completion(response: responseString);
+            }
+            else {
+                completion(response: true)
+            }
+        }
+        else {
+            // print(String.init(data: response.data!, encoding: NSUTF8StringEncoding))
+            failure(error: "Could not complete request")
+        }
+    }
     
     public func parseDict(dict : NSDictionary) -> AnyObject? {
         switch self.requestEntity! {
