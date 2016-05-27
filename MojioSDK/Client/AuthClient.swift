@@ -225,43 +225,41 @@ public class AuthClient: NSObject, AuthControllerDelegate {
     }
 
     // Returns on main thread when complete - refreshes if needed
-    public func isUserLoggedInRefresh(completion: ((success: Bool) -> Void)?) {
+    public func isUserLoggedInRefresh(completion: (authToken: AuthToken) -> Void, failure : (response: NSDictionary?) -> Void) {
 
         let authToken = self.getAuthToken()
         
         if authToken.accessToken == nil || authToken.expiry == nil || authToken.uniqueId == nil {
-            dispatch_async(dispatch_get_main_queue(), {completion?(success: false)})
+            dispatch_async(dispatch_get_main_queue(), {failure(response: nil)})
             return
         }
 
         // Check to see if the environment endpoint in the keychain is the same as the current endpoint
         // If they are different, return false right away
         if ClientEnvironment.SharedInstance.getRegion() != authToken.uniqueId {
-            dispatch_async(dispatch_get_main_queue(), {completion?(success: false)})
+            dispatch_async(dispatch_get_main_queue(), {failure(response: nil)})
             return
         }
         
         // Always attempt to refresh
         if authToken.refreshToken != nil {
-            self.refreshAuthToken({(success: Bool) in
-                completion?(success: success)
-            })
+            self.refreshAuthToken(completion, failure: failure)
         }
         else {
             // Check if the token is expired
             dispatch_async(dispatch_get_main_queue(), {
                 guard let timestamp : Double = authToken.expiryTimestamp()! else {
-                    completion?(success: false)
+                    failure(response: nil)
                 }
                 
                 let currentTime : Double = NSDate().timeIntervalSince1970
                 
                 // Check for expiry
                 if currentTime > timestamp {
-                    completion?(success: false)
+                    failure(response: nil)
                 }
                 
-                completion?(success: true)
+                completion(authToken: authToken)
             })
         }
     }
@@ -310,13 +308,13 @@ public class AuthClient: NSObject, AuthControllerDelegate {
         }
     }
     
-    public func refreshAuthToken(completion: ((success: Bool) -> Void)?) {
+    public func refreshAuthToken(completion: (authToken: AuthToken) -> Void, failure : (response: NSDictionary?) -> Void) {
         let keychain = KeychainSwift()
         
         let authorizeEndpoint = AuthClient.getTokenUrl()
 
         guard let refreshToken : String = keychain.get(KeychainKeys.RefreshToken) else {
-            dispatch_async(dispatch_get_main_queue(), {completion?(success: false)})
+            dispatch_async(dispatch_get_main_queue(), {failure(response: nil)})
             return
         }
         
@@ -326,31 +324,31 @@ public class AuthClient: NSObject, AuthControllerDelegate {
                 if response.response?.statusCode == 200 {
                     
                     guard let responseJSON : [String : AnyObject] = response.result.value as? [String : AnyObject] else {
-                        completion?(success: false)
+                        failure(response: nil)
                         return
                     }
                     
                     if let expiry : Double = responseJSON["expires_in"] as? Double {
                         guard let authToken: AuthToken = AuthToken(accessToken: (responseJSON["access_token"] as! String), expiry: String(NSDate.init(timeIntervalSinceNow: expiry).timeIntervalSince1970), refreshToken: (responseJSON["refresh_token"] as! String), uniqueId: ClientEnvironment.SharedInstance.getRegion()) else {
-                            completion?(success: false)
+                            failure(response: nil)
                             return
                         }
                         
                         if authToken.isValid() {
-                            completion?(success: true)
+                            completion(authToken: authToken)
                         }
                         else {
-                            completion?(success: false)
+                            failure(response: nil)
                         }
                     }
                     else {
-                        completion?(success: false)
+                        failure(response: nil)
                     }
                 }
                 else {
                     // TODO: Return error?
                     // var resultObj = String.init(data: response.data!, encoding: NSUTF8StringEncoding)
-                    completion?(success: false)
+                    failure(response: nil)
                 }
             })
         })
