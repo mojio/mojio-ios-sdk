@@ -16,29 +16,44 @@ class StorageApiTests: BaseApiTest {
         
         super.runTest("userStorage"){expectation in
             
+            let key : String = "testKey"
+            let value : String = "testValue"
+            // Get Me
             RestClient(clientEnvironment: ClientEnvironment.SharedInstance).get().me()
                 .run({response in
                     
-                    //expectation.fulfill()
-
-                    
+                    // Write some data into Me
                     if let userId = response.Id {
                         
                         let client = RestClient(clientEnvironment: ClientEnvironment.SharedInstance)
-                        client.post().users(userId).storage("testKey").runEncodeJSON( "\"testValue\"", completion: {storageResponse in
+                        client.post().users(userId).storage(key).runStringBody( value, completion: {storageResponse in
                             
-                            expectation.fulfill()
+                            RestClient(clientEnvironment: ClientEnvironment.SharedInstance).get().users(userId).storage(key).run({getResponse in
+                                
+                                if let responseString = getResponse as? String {
+                                    XCTAssertEqual(responseString, value)
+                                }
+                                else {
+                                    XCTFail()
+                                }
+
+                                expectation.fulfill()
+                                
+                                }, failure: {error in
+                                        XCTFail()
+                                        expectation.fulfill()
+                                })
                             
                             
                             }, failure: { error in
-                                XCTAssertFalse(true, "testUserStorage me:" + error)
+                                XCTFail()
                                 expectation.fulfill()
                         })
                     }
                                         
                     
                     }, failure: { error in
-                        XCTAssertFalse(true, "testUserStorage me:" + error)
+                        XCTFail()
                         expectation.fulfill()
                 })
         }
