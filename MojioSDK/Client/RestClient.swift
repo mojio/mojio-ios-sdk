@@ -224,28 +224,7 @@ public class RestClient: NSObject {
     
     public func storage(key: String) -> Self {
 
-        self.requestUrl = self.requestV1Url! + String.init(format: RestClientEndpoints.Storage, self.requestEntity!, self.requestEntityId! , key);
-
-        /*switch self.requestEntity! {
-        case RestClientEndpoints.Apps:
-            self.requestUrl = String.init(format: RestClientEndpoints.Storage, "app", self.requestEntityId! , key);
-            break
-        case RestClientEndpoints.Users:
-            self.requestUrl = String.init(format: RestClientEndpoints.Storage, "user", self.requestEntityId!, key);
-            break
-        case RestClientEndpoints.Mojios:
-            self.requestUrl = String.init(format: RestClientEndpoints.Storage, "mojio", self.requestEntityId!, key);
-            break
-        case RestClientEndpoints.Trips:
-            self.requestUrl = String.init(format: RestClientEndpoints.Storage, "trip", self.requestEntityId!, key);
-            break
-        case RestClientEndpoints.Vehicles:
-            self.requestUrl = String.init(format: RestClientEndpoints.Storage, "vehicle", self.requestEntityId!, key);
-            break
-        default:
-            return self;
-        }*/
-        
+        self.requestUrl = self.requestV1Url! + String.init(format: RestClientEndpoints.Storage, self.requestEntity!, self.requestEntityId! , key); 
         return self;
     }
     
