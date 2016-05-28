@@ -28,12 +28,14 @@ class AuthenticationTests: XCTestCase {
     
     func testEndpoints ()  {
         let apiEndpoint : String = ClientEnvironment.SharedInstance.getApiEndpoint()
+        let apiV1Endpoint : String = ClientEnvironment.SharedInstance.getV1ApiEndpoint()
         let pushEndpoint : String = ClientEnvironment.SharedInstance.getPushEndpoint()
         let myMojioEndpoint : String = ClientEnvironment.SharedInstance.getMyMojioEndpoint()
         let accountsEndpoint : String = ClientEnvironment.SharedInstance.getAccountsEndpoint()
         let region : String = ClientEnvironment.SharedInstance.getRegion()
         
         XCTAssertNotNil(apiEndpoint, "API Endpoint Pass")
+        XCTAssertNotNil(apiV1Endpoint, "API V1 Endpoint Pass")
         XCTAssertNotNil(pushEndpoint, "Push Endpoint Pass")
         XCTAssertNotNil(myMojioEndpoint, "My Mojio Endpoint Pass")
         XCTAssertNotNil(accountsEndpoint, "Accounts Endpoint Pass")
@@ -54,8 +56,7 @@ class AuthenticationTests: XCTestCase {
     func testIsUserLoggedIn () {
         let isUserLoggedIn : Bool = self.authClient.isUserLoggedIn()
         XCTAssertNotNil(isUserLoggedIn, "Able to test if user is currently logged in")
-    }
-    
+    }        
     
     func testEuropeProd () {
         ClientEnvironment.SharedInstance.setRegion(MojioRegion.EUProduction)

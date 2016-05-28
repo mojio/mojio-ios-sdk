@@ -74,6 +74,8 @@
 		BCC2EFBB1CBED4E6004D2759 /* MojioSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCC2EFB11CBED4E6004D2759 /* MojioSDK.framework */; };
 		BCC2EFCF1CBEF6DB004D2759 /* MojioSDKUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC2EFCE1CBEF6DB004D2759 /* MojioSDKUITests.swift */; };
 		BCF2454A1CC0334C006E8BF1 /* Pods_MojioSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8170DD29A15DE7C48008C85 /* Pods_MojioSDK.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		E0312C751CF7782F00B46AA8 /* BaseApiTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0312C741CF7782F00B46AA8 /* BaseApiTest.swift */; };
+		E0312C771CF78EA600B46AA8 /* StorageApiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0312C761CF78EA600B46AA8 /* StorageApiTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -175,6 +177,8 @@
 		BCC2EFCE1CBEF6DB004D2759 /* MojioSDKUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MojioSDKUITests.swift; sourceTree = "<group>"; };
 		BCC2EFD01CBEF6DB004D2759 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C865634E9F814C1F91FA8B03 /* Pods_MojioSDKTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MojioSDKTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E0312C741CF7782F00B46AA8 /* BaseApiTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseApiTest.swift; sourceTree = "<group>"; };
+		E0312C761CF78EA600B46AA8 /* StorageApiTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageApiTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -322,6 +326,8 @@
 		BC879BB51CBF0C1000F9177B /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				E0312C761CF78EA600B46AA8 /* StorageApiTests.swift */,
+				E0312C741CF7782F00B46AA8 /* BaseApiTest.swift */,
 				BC879B911CBF044700F9177B /* ApiPathTests.swift */,
 				BC879B931CBF044700F9177B /* AuthenticationTests.swift */,
 				BC879B941CBF044700F9177B /* ClientTests.swift */,
@@ -700,7 +706,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E0312C771CF78EA600B46AA8 /* StorageApiTests.swift in Sources */,
 				BC879BA11CBF044700F9177B /* AuthenticationTests.swift in Sources */,
+				E0312C751CF7782F00B46AA8 /* BaseApiTest.swift in Sources */,
 				BC879BA21CBF044700F9177B /* ClientTests.swift in Sources */,
 				BC879B9F1CBF044700F9177B /* ApiPathTests.swift in Sources */,
 			);
