@@ -1,5 +1,7 @@
 # mojio-ios-sdk (Under Active Development)
 
+[![Join the chat at https://gitter.im/mojio/mojio-ios-sdk](https://badges.gitter.im/mojio/mojio-ios-sdk.svg)](https://gitter.im/mojio/mojio-ios-sdk?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 ## Installing the SDK
 
 Step 1. Download the SDK <br/>
