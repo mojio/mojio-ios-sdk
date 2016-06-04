@@ -249,7 +249,7 @@ public class RestClient: NSObject {
         }
 
         if orderby != nil {
-            requestParams["select"] = select!
+            requestParams["orderby"] = orderby!
         }
         
         self.requestParams.update(requestParams)
