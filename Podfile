@@ -15,6 +15,7 @@ target 'MojioSDK' do
     pod 'KeychainSwift'
     pod 'OHHTTPStubs'
     pod 'OHHTTPStubs/Swift'
+    pod 'SwiftWebSocket'    
 end
 
 target 'MojioSDKTests' do

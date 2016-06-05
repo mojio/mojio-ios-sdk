@@ -27,7 +27,7 @@ public class ClientEnvironment : NSObject {
     
     private static let ApiEndpointFormat : String = "https://%@api.moj.io/v2/"
     private static let ApiV1EndpointFormat : String = "https://%@api.moj.io/v1/"
-    private static let PushEndpointFormat : String = "https://%@push.moj.io/v2/"
+    private static let PushWSEndpointFormat : String = "ws://%@push.moj.io/v2/"
     private static let MyMojioEndpointFormat : String = "https://%@my.moj.io/"
     private static let AccountsEndpointFormat : String = "https://%@accounts.moj.io/"
     
@@ -37,7 +37,7 @@ public class ClientEnvironment : NSObject {
     
     private var apiEndpoint : String?
     private var apiV1Endpoint : String?
-    private var pushEndpoint : String?
+    private var pushWSEndpoint : String?
     private var myMojioEndpoint : String?
     private var accountsEndpoint : String?
     
@@ -64,7 +64,7 @@ public class ClientEnvironment : NSObject {
         self.region = region
         self.apiEndpoint = String.init(format: ClientEnvironment.ApiEndpointFormat, arguments: [region])
         self.apiV1Endpoint = String.init(format: ClientEnvironment.ApiV1EndpointFormat, arguments: [region]);
-        self.pushEndpoint = String.init(format: ClientEnvironment.PushEndpointFormat, arguments: [region])
+        self.pushWSEndpoint = String.init(format: ClientEnvironment.PushWSEndpointFormat, arguments: [region])
         self.myMojioEndpoint = String.init(format: ClientEnvironment.MyMojioEndpointFormat, arguments: [region])
         self.accountsEndpoint = String.init(format: ClientEnvironment.AccountsEndpointFormat, arguments: [region])
     }
@@ -81,8 +81,8 @@ public class ClientEnvironment : NSObject {
         return apiV1Endpoint!
     }
     
-    public func getPushEndpoint () -> String {
-        return pushEndpoint!
+    public func getPushWSEndpoint () -> String {
+        return pushWSEndpoint!
     }
     
     public func getMyMojioEndpoint () -> String {

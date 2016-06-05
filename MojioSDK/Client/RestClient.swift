@@ -45,6 +45,7 @@ public class RestClient: NSObject {
     
     private var requestMethod : Alamofire.Method?
 
+    public dynamic var pushUrl : String?
     public dynamic var requestUrl : String?
     public dynamic var requestV1Url : String?
     public dynamic var requestParams : [String:AnyObject] = [:]
@@ -54,7 +55,8 @@ public class RestClient: NSObject {
     public override init() {
         self.requestUrl = ClientEnvironment.SharedInstance.getApiEndpoint()
         self.requestV1Url = ClientEnvironment.SharedInstance.getV1ApiEndpoint();
-        
+        self.pushUrl = ClientEnvironment.SharedInstance.getPushWSEndpoint()
+
         // Set Auth Token as the header
     }
     
@@ -62,6 +64,7 @@ public class RestClient: NSObject {
         self.init()
         self.requestUrl = clientEnvironment.getApiEndpoint()
         self.requestV1Url = clientEnvironment.getV1ApiEndpoint()
+        self.pushUrl = clientEnvironment.getPushWSEndpoint()
     }
     
     public func get() -> Self {
@@ -442,7 +445,7 @@ public class RestClient: NSObject {
         }
     }
     
-    private func accessToken() -> String? {
+    func accessToken() -> String? {
         return KeychainManager().getAuthToken().accessToken
     }    
 }
