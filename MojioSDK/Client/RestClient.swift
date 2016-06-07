@@ -341,7 +341,7 @@ public class RestClient: NSObject {
     public func runEncodeUrl(parameters: [String:AnyObject], completion: (response : AnyObject) -> Void, failure: (error : String) -> Void) {
         
         // Before every request, make sure access token exists
-        var headers : [String:String] = ["Content-Type" : "application/json", "Accept" : "application/json"]
+        var headers : [String:String] = [:]
         
         if let accessToken : String = self.accessToken()! {
             headers["Authorization"] = "Bearer " + accessToken
