@@ -16,6 +16,7 @@ public class User : Object, Mappable {
     public dynamic var FirstName : String? = nil
     public dynamic var LastName : String? = nil
     public dynamic var UserName : String? = nil
+    public dynamic var Jurisdiction : String? = nil
     public var Emails = List<Email>()
     public var PhoneNumbers = List<PhoneNumber>()
     public dynamic var Img : Image? = nil
@@ -100,6 +101,7 @@ public class User : Object, Mappable {
         self.FirstName <- map["FirstName"];
         self.LastName <- map["LastName"];
         self.UserName <- map["UserName"];
+        self.Jurisdiction <- map["Jurisdiction"];
         Img <- map["Image"];
         self.Id <- map["Id"];
         self.CreatedOn <- map["CreatedOn"];

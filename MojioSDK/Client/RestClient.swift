@@ -26,6 +26,7 @@ public class RestClientEndpoints : NSObject {
     public static let Mojios : String = "mojios/"
     public static let Permission : String = "permission/"
     public static let Permissions : String = "permissions/"
+    public static let PhoneNumbers : String = "phonenumbers/"
     public static let Tags : String = "tags/"
     public static let Trips : String = "trips/"
     public static let Vehicles : String = "vehicles/"
@@ -157,6 +158,21 @@ public class RestClient: NSObject {
         return self
     }
     
+    public func phonenumbers (phonenumber : String?, sendVerification : Bool?) -> Self {
+        self.requestEntity = RestClientEndpoints.PhoneNumbers
+        
+        var phone : String? = phonenumber
+        
+        if phone != nil && sendVerification == true {
+            phone = phone! + "?sendVerification=true"
+        }
+        
+        self.requestEntityId = phone
+        self.requestUrl = self.requestUrl! + self.requestEntity! + (phone != nil ? phone! : "")
+
+        return self
+    }
+    
     public func permission() -> Self {
         self.requestEntity = RestClientEndpoints.Permission
         self.requestUrl = self.requestUrl! + self.requestEntity!
@@ -259,7 +275,7 @@ public class RestClient: NSObject {
     public func run(completion: (response : AnyObject) -> Void, failure: (error : String) -> Void) {
         
         // Before every request, make sure access token exists
-        var headers : [String:String] = [:]
+        var headers : [String:String] = ["Content-Type" : "application/json", "Accept" : "application/json"]
         
         if let accessToken : String = self.accessToken() {
             headers["Authorization"] = "Bearer " + accessToken
@@ -355,6 +371,9 @@ public class RestClient: NSObject {
                     else {
                         if let message : String = responseDict.objectForKey("Message") as? String {
                             completion (response: message)
+                        }
+                        else {
+                            completion (response: "")
                         }
                     }
                     
