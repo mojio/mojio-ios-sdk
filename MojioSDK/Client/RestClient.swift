@@ -272,7 +272,7 @@ public class RestClient: NSObject {
         return self
     }
     
-    public func run(completion: (response : AnyObject) -> Void, failure: (error : String) -> Void) {
+    public func run(completion: (response : AnyObject) -> Void, failure: (error : AnyObject?) -> Void) {
         
         // Before every request, make sure access token exists
         var headers : [String:String] = ["Content-Type" : "application/json", "Accept" : "application/json"]
@@ -286,7 +286,7 @@ public class RestClient: NSObject {
         }        
     }
     
-    public func runStringBody(string: String, completion: (response : AnyObject) -> Void, failure: (error : String) -> Void) {
+    public func runStringBody(string: String, completion: (response : AnyObject) -> Void, failure: (error : AnyObject?) -> Void) {
         
         // Before every request, make sure access token exists
         var headers : [String:String] = ["Content-Type" : "application/json", "Accept" : "application/json"]
@@ -313,7 +313,7 @@ public class RestClient: NSObject {
         })
     }
     
-    public func runEncodeJSON(jsonObject: AnyObject, completion: (response : AnyObject) -> Void, failure: (error : String) -> Void) {
+    public func runEncodeJSON(jsonObject: AnyObject, completion: (response : AnyObject) -> Void, failure: (error : AnyObject?) -> Void) {
         
         // Before every request, make sure access token exists
         var headers : [String:String] = ["Content-Type" : "application/json", "Accept" : "application/json"]
@@ -338,7 +338,7 @@ public class RestClient: NSObject {
         })
     }
     
-    public func runEncodeUrl(parameters: [String:AnyObject], completion: (response : AnyObject) -> Void, failure: (error : String) -> Void) {
+    public func runEncodeUrl(parameters: [String:AnyObject], completion: (response : AnyObject) -> Void, failure: (error : AnyObject?) -> Void) {
         
         // Before every request, make sure access token exists
         var headers : [String:String] = [:]
@@ -352,8 +352,7 @@ public class RestClient: NSObject {
         }
     }
     
-    
-    func handleResponse(response: Response<AnyObject, NSError>, completion: (response :AnyObject) -> Void, failure: (error:String) -> Void){
+    func handleResponse(response: Response<AnyObject, NSError>, completion: (response :AnyObject) -> Void, failure: (error:AnyObject?) -> Void){
         if response.response?.statusCode == 200 || response.response?.statusCode == 201 {
             if let responseDict = response.result.value as? NSDictionary {
                 if let dataArray : NSArray = responseDict.objectForKey("Data") as? NSArray {
@@ -386,8 +385,13 @@ public class RestClient: NSObject {
             }
         }
         else {
-            // print(String.init(data: response.data!, encoding: NSUTF8StringEncoding))
-            failure(error: "Could not complete request")
+            if let responseDict = response.result.value as? NSDictionary {
+                failure (error: responseDict)
+            }
+                
+            else {
+                failure(error: "Could not complete request")
+            }
         }
     }
     
