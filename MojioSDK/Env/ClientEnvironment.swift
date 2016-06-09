@@ -27,7 +27,7 @@ public class ClientEnvironment : NSObject {
     
     private static let ApiEndpointFormat : String = "https://%@api.moj.io/v2/"
     private static let ApiV1EndpointFormat : String = "https://%@api.moj.io/v1/"
-    private static let PushWSEndpointFormat : String = "ws://%@push.moj.io/v2/"
+    private static let PushWSEndpointFormat : String = "wss://%@api.moj.io/v2/"
     private static let MyMojioEndpointFormat : String = "https://%@my.moj.io/"
     private static let AccountsEndpointFormat : String = "https://%@accounts.moj.io/"
     

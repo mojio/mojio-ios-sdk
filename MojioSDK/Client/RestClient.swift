@@ -113,6 +113,7 @@ public class RestClient: NSObject {
         self.requestEntity = RestClientEndpoints.Users
         self.requestEntityId = userId
         self.requestUrl = self.requestUrl! + self.requestEntity! + (userId != nil ? userId! + "/" : "")
+        self.pushUrl = self.pushUrl! + self.requestEntity! + (userId != nil ? userId! + "/" : "")
         
         return self
     }
@@ -156,6 +157,7 @@ public class RestClient: NSObject {
         self.requestEntity = RestClientEndpoints.Mojios
         self.requestEntityId = mojioId
         self.requestUrl = self.requestUrl! + self.requestEntity! + (mojioId != nil ? mojioId! + "/" : "")
+        self.pushUrl = self.pushUrl! + self.requestEntity! + (mojioId != nil ? mojioId! + "/" : "")
 
         return self
     }
@@ -185,6 +187,7 @@ public class RestClient: NSObject {
         self.requestEntity = RestClientEndpoints.Trips
         self.requestEntityId = tripId
         self.requestUrl = self.requestUrl! + self.requestEntity! + (tripId != nil ? tripId! + "/" : "")
+        self.pushUrl = self.pushUrl! + self.requestEntity! + (tripId != nil ? tripId! + "/" : "")
 
         return self
     }
@@ -193,6 +196,7 @@ public class RestClient: NSObject {
         self.requestEntity = RestClientEndpoints.Vehicles
         self.requestEntityId = vehicleId
         self.requestUrl = self.requestUrl! + self.requestEntity! + (vehicleId != nil ? vehicleId! + "/" : "")
+        self.pushUrl = self.pushUrl! + self.requestEntity! + (vehicleId != nil ? vehicleId! + "/" : "")
 
         return self
     }

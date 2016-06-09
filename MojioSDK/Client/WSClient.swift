@@ -8,14 +8,16 @@
 
 import Foundation
 import SwiftWebSocket
+import SwiftyJSON
+
 
 public class WSClient : RestClient {
     
-    public func watch(callback: (AnyObject) -> Void ) -> WebSocket {
+    public func watch(completion: ((AnyObject) -> Void), failure: (NSError) -> Void) -> WebSocket {
         
-        let request = NSMutableURLRequest(URL: NSURL(string:super.requestUrl!)!)
+        let request = NSMutableURLRequest(URL: NSURL(string:super.pushUrl!)!)
         if let accessToken : String = super.accessToken() {
-            request.addValue("Authorization", forHTTPHeaderField: "Bearer " + accessToken)
+            request.addValue("Bearer " + accessToken, forHTTPHeaderField: "Authorization")
 
         }
         
@@ -27,12 +29,33 @@ public class WSClient : RestClient {
         ws.event.error = { error in
             print("error \(error)")
         }
+        
+        ws.event.open = {
+            print("OPENED")
+        }
         ws.event.message = { message in
             if let text = message as? String {
-                print("recv: \(text)")
-                callback(text)
+                do {
+                    if let data = text.dataUsingEncoding(NSUTF8StringEncoding) {
+                        if let dict = try! NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions()) as? NSDictionary {
+                            if let obj = super.parseDict(dict) {
+                                completion(obj)
+                            }
+                        }
+                    }
+                }
+                catch let error as NSError {
+                    failure(error)
+                }
             }
         }
+        ws.open()
+        
+        /*
+         return AnonymousDisposable {
+         request.cancel()
+         }
+         */
         
         return ws
     }
