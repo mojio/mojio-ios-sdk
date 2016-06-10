@@ -48,14 +48,13 @@ public class User : Object, Mappable {
         return self.Tags.toArray()
     }
 
-    public func json () -> String? {
+    public func jsonDict () -> NSDictionary {
         let dictionary : NSMutableDictionary = NSMutableDictionary()
         
         if self.UserName != nil {
             dictionary.setObject(self.UserName!, forKey: "UserName")
         }
-        if self.Emails.count > 0 {
-            self.email = (self.Emails.first! as Email).Address
+        if self.email != nil {
             dictionary.setObject(self.email!, forKey: "Email")
         }
         if self.FirstName != nil {
@@ -68,8 +67,7 @@ public class User : Object, Mappable {
             dictionary.setObject(self.PhoneNumbers.toArray(), forKey: "PhoneNumbers")
         }
         
-        let data = try! NSJSONSerialization.dataWithJSONObject(dictionary, options:  NSJSONWritingOptions.PrettyPrinted)
-        return NSString(data: data, encoding: NSUTF8StringEncoding)! as String
+        return dictionary
     }
     
     public func mapping(map: Map) {
