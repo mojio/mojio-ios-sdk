@@ -201,6 +201,13 @@ public class RestClient: NSObject {
         return self
     }
     
+    public func vehicleTrips(vehicleId : String) -> Self {
+        self.requestEntity = RestClientEndpoints.Trips
+        self.requestUrl = self.requestUrl! + RestClientEndpoints.Vehicles + vehicleId + "/trips"
+        
+        return self
+    }
+    
     public func address() -> Self {
         self.requestEntity = RestClientEndpoints.Address
         self.requestUrl = self.requestUrl! + self.requestEntity!
