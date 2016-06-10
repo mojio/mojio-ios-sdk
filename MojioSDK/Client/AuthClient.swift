@@ -362,8 +362,9 @@ public class AuthClient: NSObject, AuthControllerDelegate {
     public func register(mobile: String, email: String, password: String, completion: () -> Void, failure: (response : NSDictionary?) -> Void) {
         
         let registerEndpoint = ClientEnvironment.SharedInstance.getAccountsEndpoint() + AccountClientEndpoints.Register
+        let headers = ["Authorization" : self.generateBasicAuthHeader(), "Content-Type" : "application/json", "Accept" : "application/json"]
 
-        Alamofire.request(.POST, registerEndpoint, parameters: ["PhoneNumber" : mobile, "Email" : email, "Password" : password, "ConfirmPassword" : password], encoding: .JSON, headers: ["Authorization" : self.generateBasicAuthHeader()]).responseJSON { response in
+        Alamofire.request(.POST, registerEndpoint, parameters: ["PhoneNumber" : mobile, "Email" : email, "Password" : password, "ConfirmPassword" : password], encoding: .JSON, headers: headers).responseJSON { response in
 
             if response.response?.statusCode == 200 {
                 completion()
