@@ -18,6 +18,8 @@ public class TimePeriodUnits : NSObject {
     public static let Hours : String = "Hours"
     public static let Days : String = "Days"
     public static let Weeks : String = "Weeks"
+    public static let Months : String = "Months"
+    public static let Years : String = "Years"
 }
 
 public class TimePeriod: Object, Mappable {

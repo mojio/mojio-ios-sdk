@@ -25,8 +25,8 @@ public class NextServiceSchedule: Object, Mappable {
         self.init();
     }
     
-    public func AgeInMonthsAsIntNumber() -> NSNumber {
-        return self.AgeInMonths.value! as NSNumber
+    public func AgeInMonthsAsIntNumber() -> NSNumber? {
+        return self.AgeInMonths.value as? NSNumber
     }
     
     public func ServicesArray() -> NSArray {
