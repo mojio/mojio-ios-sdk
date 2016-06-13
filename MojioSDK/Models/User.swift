@@ -16,6 +16,7 @@ public class User : Object, Mappable, Entity {
     public dynamic var FirstName : String? = nil
     public dynamic var LastName : String? = nil
     public dynamic var UserName : String? = nil
+    public dynamic var Jurisdiction : String? = nil
     public var Emails = List<Email>()
     public var PhoneNumbers = List<PhoneNumber>()
     public dynamic var Img : Image? = nil
@@ -47,14 +48,13 @@ public class User : Object, Mappable, Entity {
         return self.Tags.toArray()
     }
 
-    public func json () -> String? {
+    public func jsonDict () -> NSDictionary {
         let dictionary : NSMutableDictionary = NSMutableDictionary()
         
         if self.UserName != nil {
             dictionary.setObject(self.UserName!, forKey: "UserName")
         }
-        if self.Emails.count > 0 {
-            self.email = (self.Emails.first! as Email).Address
+        if self.email != nil {
             dictionary.setObject(self.email!, forKey: "Email")
         }
         if self.FirstName != nil {
@@ -67,8 +67,7 @@ public class User : Object, Mappable, Entity {
             dictionary.setObject(self.PhoneNumbers.toArray(), forKey: "PhoneNumbers")
         }
         
-        let data = try! NSJSONSerialization.dataWithJSONObject(dictionary, options:  NSJSONWritingOptions.PrettyPrinted)
-        return NSString(data: data, encoding: NSUTF8StringEncoding)! as String
+        return dictionary
     }
     
     public func mapping(map: Map) {
@@ -100,6 +99,7 @@ public class User : Object, Mappable, Entity {
         self.FirstName <- map["FirstName"];
         self.LastName <- map["LastName"];
         self.UserName <- map["UserName"];
+        self.Jurisdiction <- map["Jurisdiction"];
         Img <- map["Image"];
         self.Id <- map["Id"];
         self.CreatedOn <- map["CreatedOn"];
