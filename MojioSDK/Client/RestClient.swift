@@ -314,7 +314,11 @@ public class RestClient: NSObject {
             
             // Add string to body
             let mutableRequest = convertible.URLRequest.mutableCopy() as! NSMutableURLRequest
-            let quotedString = String.init(format: "\"%@\"", string)
+            
+            let components = string.componentsSeparatedByString("\\\"")
+            
+            let quoteEscaped = (string as NSString).stringByReplacingOccurrencesOfString("\\\"", withString: "\\ \\ \"")
+            let quotedString = String.init(format: "\"%@\"", quoteEscaped)
             mutableRequest.HTTPBody = quotedString.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
             return (mutableRequest, nil)
             
