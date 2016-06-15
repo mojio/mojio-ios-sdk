@@ -36,7 +36,7 @@ public class NextServiceSchedule: Object, Mappable {
     public func mapping(map: Map) {
         
         var services = Array<PlatformServiceSchedule>()
-        services <- map["Services"]
+        services <- map["Items"]
         
         for service in services {
             self.Services.append(service)
