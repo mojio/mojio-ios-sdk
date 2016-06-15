@@ -72,7 +72,7 @@ public class Vehicle: Object, Mappable, Entity {
         return self.OwnerGroups.toArray()
     }
     
-    public func json () -> String? {
+    public func jsonDict () -> NSDictionary {
         let dictionary : NSMutableDictionary = NSMutableDictionary()
         
         if self.Name != nil {
@@ -89,12 +89,7 @@ public class Vehicle: Object, Mappable, Entity {
             dictionary.setObject(odo, forKey: "Odometer")
         }
         
-        if dictionary.count == 0 {
-            return nil
-        }
-        
-        let data = try! NSJSONSerialization.dataWithJSONObject(dictionary, options:  NSJSONWritingOptions.PrettyPrinted)
-        return NSString(data: data, encoding: NSUTF8StringEncoding)! as String
+        return dictionary
     }
     
     public func mapping(map: Map) {
