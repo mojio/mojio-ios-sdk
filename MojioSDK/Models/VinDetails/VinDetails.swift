@@ -45,7 +45,7 @@ public class VinDetails: Object, Mappable {
         Vin <- map["Vin"];
         Year <- map["Year"];
         Make <- map["Make"];
-        Model <- map[""];
+        Model <- map["Model"];
         Engine <- map["Engine"];
         Cylinders <- map["Cylinders"];
         TotalFuelCapacity <- map["TotalFuelCapacity"];
