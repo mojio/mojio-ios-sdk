@@ -27,6 +27,7 @@ public class RestClientEndpoints : NSObject {
     public static let Permission : String = "permission/"
     public static let Permissions : String = "permissions/"
     public static let PhoneNumbers : String = "phonenumbers/"
+    public static let Emails : String = "emails/"
     public static let Tags : String = "tags/"
     public static let Trips : String = "trips/"
     public static let Vehicles : String = "vehicles/"
@@ -175,6 +176,14 @@ public class RestClient: NSObject {
         self.requestEntityId = phone
         self.requestUrl = self.requestUrl! + self.requestEntity! + (phone != nil ? phone! : "")
 
+        return self
+    }
+    
+    public func emails (email : String?) -> Self {
+        self.requestEntity = RestClientEndpoints.Emails
+        self.requestEntityId = email
+        self.requestUrl = self.requestUrl! + self.requestEntity! + (email != nil ? email! + "/" : "")
+        
         return self
     }
     
