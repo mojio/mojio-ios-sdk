@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6B7344AEFEDC6731687DB2A3 /* Pods_MojioSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D8CC37B8959C27E426C51E2 /* Pods_MojioSDK.framework */; };
+		75F77F0E1D19F504000CC2B4 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 75F77F0D1D19F504000CC2B4 /* libz.tbd */; };
 		BC5F7F031CC58D4000FAB205 /* BaseUnits.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5F7F021CC58D4000FAB205 /* BaseUnits.swift */; };
 		BC72D7A81CC5615600D9740B /* AuthClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC72D7A41CC5615600D9740B /* AuthClient.swift */; };
 		BC72D7A91CC5615600D9740B /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC72D7A51CC5615600D9740B /* AuthViewController.swift */; };
@@ -102,6 +103,7 @@
 		12DB7395EEC25B945C6073A8 /* Pods-MojioSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MojioSDK.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MojioSDK/Pods-MojioSDK.debug.xcconfig"; sourceTree = "<group>"; };
 		2D8CC37B8959C27E426C51E2 /* Pods_MojioSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MojioSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5129D3ED3B56C9F0B8D93690 /* Pods-MojioSDKTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MojioSDKTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MojioSDKTests/Pods-MojioSDKTests.debug.xcconfig"; sourceTree = "<group>"; };
+		75F77F0D1D19F504000CC2B4 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		8B04A6C16725DB2223B32D46 /* Pods-MojioSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MojioSDK.release.xcconfig"; path = "Pods/Target Support Files/Pods-MojioSDK/Pods-MojioSDK.release.xcconfig"; sourceTree = "<group>"; };
 		BC5F7F021CC58D4000FAB205 /* BaseUnits.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseUnits.swift; path = Models/BaseUnits.swift; sourceTree = "<group>"; };
 		BC72D7A41CC5615600D9740B /* AuthClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthClient.swift; path = Client/AuthClient.swift; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75F77F0E1D19F504000CC2B4 /* libz.tbd in Frameworks */,
 				6B7344AEFEDC6731687DB2A3 /* Pods_MojioSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -241,6 +244,7 @@
 		A7800C0AAB5ADDABE55DC5EE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				75F77F0D1D19F504000CC2B4 /* libz.tbd */,
 				2D8CC37B8959C27E426C51E2 /* Pods_MojioSDK.framework */,
 				EE3EF4E93105809182D24A75 /* Pods_MojioSDKTests.framework */,
 			);
@@ -472,6 +476,7 @@
 				BCC2EFB81CBED4E6004D2759 /* Resources */,
 				90D67027F460B7772E3CAF99 /* [CP] Embed Pods Frameworks */,
 				7A905710DE82B9FA4B6842BC /* [CP] Copy Pods Resources */,
+				3500E81221335B57C2E599D2 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -593,6 +598,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		3500E81221335B57C2E599D2 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MojioSDKTests/Pods-MojioSDKTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		51FAF6A8CAF1286DD2744BFF /* [CP] Copy Pods Resources */ = {
