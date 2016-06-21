@@ -19,4 +19,5 @@ Pod::Spec.new do |spec|
     spec.dependency 'KeychainSwift'
     spec.dependency 'OHHTTPStubs'
     spec.dependency 'OHHTTPStubs/Swift'
+    spec.dependency 'SwiftWebSocket'
 end

@@ -15,12 +15,12 @@ target 'MojioSDK' do
     pod 'KeychainSwift', '~> 3.0.16'
     pod 'OHHTTPStubs'
     pod 'OHHTTPStubs/Swift'
-    pod 'SwiftWebSocket'    
+    pod 'SwiftWebSocket'
+
 end
 
 target 'MojioSDKTests' do
     pod 'OHHTTPStubs'
     pod 'OHHTTPStubs/Swift'
-    pod 'SwiftWebSocket'
 end
 

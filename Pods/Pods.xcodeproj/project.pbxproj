@@ -113,34 +113,6 @@
 			<key>sourceTree</key>
 			<string>BUILT_PRODUCTS_DIR</string>
 		</dict>
-		<key>029928A9264238E68A1D3A36BD75C9C5</key>
-		<dict>
-			<key>buildConfigurationList</key>
-			<string>0580AA19AA2BDEF7E7C93104C3FD204F</string>
-			<key>buildPhases</key>
-			<array>
-				<string>705BF29D36DC7722344D43C4950D48A1</string>
-				<string>EBA2BB332F9B8DBA0D2EEEB00C934D57</string>
-				<string>6AA4081223C06345499166326C133978</string>
-			</array>
-			<key>buildRules</key>
-			<array/>
-			<key>dependencies</key>
-			<array>
-				<string>8B451CC3DFF591E9CE0676FD4D9BAD59</string>
-				<string>69CC290334428FE5CC5A2C97B8455F49</string>
-			</array>
-			<key>isa</key>
-			<string>PBXNativeTarget</string>
-			<key>name</key>
-			<string>Pods-MojioSDKTests</string>
-			<key>productName</key>
-			<string>Pods-MojioSDKTests</string>
-			<key>productReference</key>
-			<string>B4EB2A344C28DBCC105D63C9112D9738</string>
-			<key>productType</key>
-			<string>com.apple.product-type.framework</string>
-		</dict>
 		<key>02AC7ECB8ABA283ECE7609F816DE2428</key>
 		<dict>
 			<key>isa</key>
@@ -205,20 +177,6 @@
 					<string>Public</string>
 				</array>
 			</dict>
-		</dict>
-		<key>0580AA19AA2BDEF7E7C93104C3FD204F</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>FFD85EE5F3DF1CEC801D93B46471BC15</string>
-				<string>C53ECF5441533983BFAD946F8EAA0604</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>defaultConfigurationName</key>
-			<string>Release</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
 		</dict>
 		<key>05FE50B833420DFEDE10CC6AA1F314EE</key>
 		<dict>
@@ -2149,20 +2107,6 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>3D4E5369C67CA9D3987B8D796E313B60</key>
-		<dict>
-			<key>fileRef</key>
-			<string>383093844A9269AC93C6930D9A773546</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
 		<key>3E1BEB3C20C4913832CCB616D35D047D</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -3249,6 +3193,19 @@
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
+		<key>60E94FC19F232E2E2459B2BD7FBE8245</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>7128A6A987CE81973E5F17C45592B57E</string>
+			</array>
+			<key>isa</key>
+			<string>PBXHeadersBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
 		<key>61D13265C55123FD1DD89B0121B7732F</key>
 		<dict>
 			<key>fileRef</key>
@@ -3505,30 +3462,6 @@
 				</array>
 			</dict>
 		</dict>
-		<key>69CC290334428FE5CC5A2C97B8455F49</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXTargetDependency</string>
-			<key>name</key>
-			<string>SwiftWebSocket</string>
-			<key>target</key>
-			<string>77D1293169511CB4D9B4B14EE1AC60D9</string>
-			<key>targetProxy</key>
-			<string>E41EE6E32266AC1F6BB7E82CFF8A0D30</string>
-		</dict>
-		<key>6AA4081223C06345499166326C133978</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>3D4E5369C67CA9D3987B8D796E313B60</string>
-			</array>
-			<key>isa</key>
-			<string>PBXHeadersBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
 		<key>6C25CBD042894820F94036A073623C0C</key>
 		<dict>
 			<key>fileRef</key>
@@ -3706,19 +3639,6 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>705BF29D36DC7722344D43C4950D48A1</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>E4EDBEA9BF77F508C929F652FB64A477</string>
-			</array>
-			<key>isa</key>
-			<string>PBXSourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
 		<key>708F62A48068D3AE8C45567FF61B5025</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -3733,6 +3653,20 @@
 			<string>Source/Validation.swift</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
+		</dict>
+		<key>7128A6A987CE81973E5F17C45592B57E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>383093844A9269AC93C6930D9A773546</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
 		</dict>
 		<key>7164BBF578E7543B1707DBC453A6AF27</key>
 		<dict>
@@ -4500,17 +4434,6 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>8B451CC3DFF591E9CE0676FD4D9BAD59</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXTargetDependency</string>
-			<key>name</key>
-			<string>OHHTTPStubs</string>
-			<key>target</key>
-			<string>819D98B2274D0D02398DA2FD14346272</string>
-			<key>targetProxy</key>
-			<string>A6928B3A22C17FFBCCAD61D2860C8651</string>
-		</dict>
 		<key>8B5CF111CB3C3B6CED48F43ECB2988A9</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -4948,6 +4871,70 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
+		<key>996334C1E5516CC856967EEC0E88BD92</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>5FD36344913CB7F9BF7317DA90DE591C</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
+				<string>iPhone Developer</string>
+				<key>CURRENT_PROJECT_VERSION</key>
+				<string>1</string>
+				<key>DEFINES_MODULE</key>
+				<string>YES</string>
+				<key>DYLIB_COMPATIBILITY_VERSION</key>
+				<string>1</string>
+				<key>DYLIB_CURRENT_VERSION</key>
+				<string>1</string>
+				<key>DYLIB_INSTALL_NAME_BASE</key>
+				<string>@rpath</string>
+				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
+				<string>YES</string>
+				<key>INFOPLIST_FILE</key>
+				<string>Target Support Files/Pods-MojioSDKTests/Info.plist</string>
+				<key>INSTALL_PATH</key>
+				<string>$(LOCAL_LIBRARY_DIR)/Frameworks</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>9.0</string>
+				<key>LD_RUNPATH_SEARCH_PATHS</key>
+				<array>
+					<string>$(inherited)</string>
+					<string>@executable_path/Frameworks</string>
+					<string>@loader_path/Frameworks</string>
+				</array>
+				<key>MACH_O_TYPE</key>
+				<string>staticlib</string>
+				<key>MODULEMAP_FILE</key>
+				<string>Target Support Files/Pods-MojioSDKTests/Pods-MojioSDKTests.modulemap</string>
+				<key>MTL_ENABLE_DEBUG_INFO</key>
+				<string>YES</string>
+				<key>OTHER_LDFLAGS</key>
+				<string></string>
+				<key>OTHER_LIBTOOLFLAGS</key>
+				<string></string>
+				<key>PODS_ROOT</key>
+				<string>$(SRCROOT)</string>
+				<key>PRODUCT_NAME</key>
+				<string>Pods_MojioSDKTests</string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>SKIP_INSTALL</key>
+				<string>YES</string>
+				<key>SWIFT_OPTIMIZATION_LEVEL</key>
+				<string>-Onone</string>
+				<key>TARGETED_DEVICE_FAMILY</key>
+				<string>1,2</string>
+				<key>VERSIONING_SYSTEM</key>
+				<string>apple-generic</string>
+				<key>VERSION_INFO_PREFIX</key>
+				<string></string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Debug</string>
+		</dict>
 		<key>999E79CB2DF69DE0766C6E0543592C22</key>
 		<dict>
 			<key>fileRef</key>
@@ -5067,6 +5054,19 @@
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
+		<key>A16D76B3D17526644B96995833663FF5</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>B89B97F0D18027E487667A1721A3DC12</string>
+			</array>
+			<key>isa</key>
+			<string>PBXSourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
 		<key>A35BF9F8F33B6EF6E838E622C90D3F20</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -5107,6 +5107,20 @@
 			<string>RealmSwift/LinkingObjects.swift</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
+		</dict>
+		<key>A4767D7FA9A1BC7B475B7044FFFAB559</key>
+		<dict>
+			<key>buildConfigurations</key>
+			<array>
+				<string>996334C1E5516CC856967EEC0E88BD92</string>
+				<string>C7E81530F2D9BB5A6857E3D300359F37</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
 		</dict>
 		<key>A52B7AB29005AF46C122AD29CDD42BBA</key>
 		<dict>
@@ -5160,19 +5174,6 @@
 			<string>KeychainSwift-prefix.pch</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
-		</dict>
-		<key>A6928B3A22C17FFBCCAD61D2860C8651</key>
-		<dict>
-			<key>containerPortal</key>
-			<string>D41D8CD98F00B204E9800998ECF8427E</string>
-			<key>isa</key>
-			<string>PBXContainerItemProxy</string>
-			<key>proxyType</key>
-			<string>1</string>
-			<key>remoteGlobalIDString</key>
-			<string>819D98B2274D0D02398DA2FD14346272</string>
-			<key>remoteInfo</key>
-			<string>OHHTTPStubs</string>
 		</dict>
 		<key>A6CE7907986CE7CD4D9F2162CE221038</key>
 		<dict>
@@ -5349,13 +5350,6 @@
 			<string>XCBuildConfiguration</string>
 			<key>name</key>
 			<string>Debug</string>
-		</dict>
-		<key>AB9BACC77EA89D7545926CEB8AB8D821</key>
-		<dict>
-			<key>fileRef</key>
-			<string>DF0B14C3EAEA0893CC7869E41B37E763</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
 		</dict>
 		<key>AD0F0BB1C178A6BF8289045A4D629485</key>
 		<dict>
@@ -5726,6 +5720,13 @@
 			<string>26A5F2C2B2E46E0ADF2C913E62106D4E</string>
 			<key>remoteInfo</key>
 			<string>RealmSwift</string>
+		</dict>
+		<key>B89B97F0D18027E487667A1721A3DC12</key>
+		<dict>
+			<key>fileRef</key>
+			<string>532E295497C7DAF69A3C64CA7E1F98F9</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
 		</dict>
 		<key>B8E16D6CC1897CA324312C898171BFD3</key>
 		<dict>
@@ -6210,67 +6211,12 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>C53ECF5441533983BFAD946F8EAA0604</key>
+		<key>C54F1157267AFD4C469094D4113D8AB3</key>
 		<dict>
-			<key>baseConfigurationReference</key>
-			<string>9A45BFFE91D796E3A7D2198C6BFE1151</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
-				<string>iPhone Developer</string>
-				<key>CURRENT_PROJECT_VERSION</key>
-				<string>1</string>
-				<key>DEFINES_MODULE</key>
-				<string>YES</string>
-				<key>DYLIB_COMPATIBILITY_VERSION</key>
-				<string>1</string>
-				<key>DYLIB_CURRENT_VERSION</key>
-				<string>1</string>
-				<key>DYLIB_INSTALL_NAME_BASE</key>
-				<string>@rpath</string>
-				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
-				<string>YES</string>
-				<key>INFOPLIST_FILE</key>
-				<string>Target Support Files/Pods-MojioSDKTests/Info.plist</string>
-				<key>INSTALL_PATH</key>
-				<string>$(LOCAL_LIBRARY_DIR)/Frameworks</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>9.0</string>
-				<key>LD_RUNPATH_SEARCH_PATHS</key>
-				<array>
-					<string>$(inherited)</string>
-					<string>@executable_path/Frameworks</string>
-					<string>@loader_path/Frameworks</string>
-				</array>
-				<key>MACH_O_TYPE</key>
-				<string>staticlib</string>
-				<key>MODULEMAP_FILE</key>
-				<string>Target Support Files/Pods-MojioSDKTests/Pods-MojioSDKTests.modulemap</string>
-				<key>MTL_ENABLE_DEBUG_INFO</key>
-				<string>NO</string>
-				<key>OTHER_LDFLAGS</key>
-				<string></string>
-				<key>OTHER_LIBTOOLFLAGS</key>
-				<string></string>
-				<key>PODS_ROOT</key>
-				<string>$(SRCROOT)</string>
-				<key>PRODUCT_NAME</key>
-				<string>Pods_MojioSDKTests</string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-				<key>SKIP_INSTALL</key>
-				<string>YES</string>
-				<key>TARGETED_DEVICE_FAMILY</key>
-				<string>1,2</string>
-				<key>VERSIONING_SYSTEM</key>
-				<string>apple-generic</string>
-				<key>VERSION_INFO_PREFIX</key>
-				<string></string>
-			</dict>
+			<key>fileRef</key>
+			<string>DF0B14C3EAEA0893CC7869E41B37E763</string>
 			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
+			<string>PBXBuildFile</string>
 		</dict>
 		<key>C5527389A561FBB1361D0728FAFEF428</key>
 		<dict>
@@ -6362,6 +6308,68 @@
 				<key>COMPILER_FLAGS</key>
 				<string>-fno-objc-arc</string>
 			</dict>
+		</dict>
+		<key>C7E81530F2D9BB5A6857E3D300359F37</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>9A45BFFE91D796E3A7D2198C6BFE1151</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
+				<string>iPhone Developer</string>
+				<key>CURRENT_PROJECT_VERSION</key>
+				<string>1</string>
+				<key>DEFINES_MODULE</key>
+				<string>YES</string>
+				<key>DYLIB_COMPATIBILITY_VERSION</key>
+				<string>1</string>
+				<key>DYLIB_CURRENT_VERSION</key>
+				<string>1</string>
+				<key>DYLIB_INSTALL_NAME_BASE</key>
+				<string>@rpath</string>
+				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
+				<string>YES</string>
+				<key>INFOPLIST_FILE</key>
+				<string>Target Support Files/Pods-MojioSDKTests/Info.plist</string>
+				<key>INSTALL_PATH</key>
+				<string>$(LOCAL_LIBRARY_DIR)/Frameworks</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>9.0</string>
+				<key>LD_RUNPATH_SEARCH_PATHS</key>
+				<array>
+					<string>$(inherited)</string>
+					<string>@executable_path/Frameworks</string>
+					<string>@loader_path/Frameworks</string>
+				</array>
+				<key>MACH_O_TYPE</key>
+				<string>staticlib</string>
+				<key>MODULEMAP_FILE</key>
+				<string>Target Support Files/Pods-MojioSDKTests/Pods-MojioSDKTests.modulemap</string>
+				<key>MTL_ENABLE_DEBUG_INFO</key>
+				<string>NO</string>
+				<key>OTHER_LDFLAGS</key>
+				<string></string>
+				<key>OTHER_LIBTOOLFLAGS</key>
+				<string></string>
+				<key>PODS_ROOT</key>
+				<string>$(SRCROOT)</string>
+				<key>PRODUCT_NAME</key>
+				<string>Pods_MojioSDKTests</string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>SKIP_INSTALL</key>
+				<string>YES</string>
+				<key>TARGETED_DEVICE_FAMILY</key>
+				<string>1,2</string>
+				<key>VERSIONING_SYSTEM</key>
+				<string>apple-generic</string>
+				<key>VERSION_INFO_PREFIX</key>
+				<string></string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Release</string>
 		</dict>
 		<key>C81A4E7FF36DD10405F757E5C05ADA5E</key>
 		<dict>
@@ -6649,7 +6657,7 @@
 				<string>D5D6200D4BE741574DBD4FB768A6F55B</string>
 				<string>819D98B2274D0D02398DA2FD14346272</string>
 				<string>28DFF27D7D495D2D691322BA0ABBCEBB</string>
-				<string>029928A9264238E68A1D3A36BD75C9C5</string>
+				<string>D9D89CDC0C74C9ECE41A19163750E3E6</string>
 				<string>16DF1553F3F9FA47B13C6868D3BBDD57</string>
 				<string>26A5F2C2B2E46E0ADF2C913E62106D4E</string>
 				<string>77D1293169511CB4D9B4B14EE1AC60D9</string>
@@ -6926,6 +6934,33 @@
 			<key>runOnlyForDeploymentPostprocessing</key>
 			<string>0</string>
 		</dict>
+		<key>D9D89CDC0C74C9ECE41A19163750E3E6</key>
+		<dict>
+			<key>buildConfigurationList</key>
+			<string>A4767D7FA9A1BC7B475B7044FFFAB559</string>
+			<key>buildPhases</key>
+			<array>
+				<string>A16D76B3D17526644B96995833663FF5</string>
+				<string>FD731F5A384C67DE0C8C3D19D4836BE2</string>
+				<string>60E94FC19F232E2E2459B2BD7FBE8245</string>
+			</array>
+			<key>buildRules</key>
+			<array/>
+			<key>dependencies</key>
+			<array>
+				<string>DEE51B0665A97DE74D2F04F2B8202FAA</string>
+			</array>
+			<key>isa</key>
+			<string>PBXNativeTarget</string>
+			<key>name</key>
+			<string>Pods-MojioSDKTests</string>
+			<key>productName</key>
+			<string>Pods-MojioSDKTests</string>
+			<key>productReference</key>
+			<string>B4EB2A344C28DBCC105D63C9112D9738</string>
+			<key>productType</key>
+			<string>com.apple.product-type.framework</string>
+		</dict>
 		<key>DA09FE85EE780124DAD60223497F7BF1</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -7106,6 +7141,17 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
+		<key>DEE51B0665A97DE74D2F04F2B8202FAA</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXTargetDependency</string>
+			<key>name</key>
+			<string>OHHTTPStubs</string>
+			<key>target</key>
+			<string>819D98B2274D0D02398DA2FD14346272</string>
+			<key>targetProxy</key>
+			<string>F58187DC7AA95785A5C57182CB5EA7D7</string>
+		</dict>
 		<key>DF0B14C3EAEA0893CC7869E41B37E763</key>
 		<dict>
 			<key>isa</key>
@@ -7233,19 +7279,6 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>E41EE6E32266AC1F6BB7E82CFF8A0D30</key>
-		<dict>
-			<key>containerPortal</key>
-			<string>D41D8CD98F00B204E9800998ECF8427E</string>
-			<key>isa</key>
-			<string>PBXContainerItemProxy</string>
-			<key>proxyType</key>
-			<string>1</string>
-			<key>remoteGlobalIDString</key>
-			<string>77D1293169511CB4D9B4B14EE1AC60D9</string>
-			<key>remoteInfo</key>
-			<string>SwiftWebSocket</string>
-		</dict>
 		<key>E437C1E272C35D0D65146C983B0195C9</key>
 		<dict>
 			<key>fileRef</key>
@@ -7282,13 +7315,6 @@
 				<key>COMPILER_FLAGS</key>
 				<string>-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@"1.0.1"' -D__ASSERTMACROS__</string>
 			</dict>
-		</dict>
-		<key>E4EDBEA9BF77F508C929F652FB64A477</key>
-		<dict>
-			<key>fileRef</key>
-			<string>532E295497C7DAF69A3C64CA7E1F98F9</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
 		</dict>
 		<key>E583E787F6A9FCA43DA914E519643F00</key>
 		<dict>
@@ -7444,19 +7470,6 @@
 			<string>Pods_MojioSDK.framework</string>
 			<key>sourceTree</key>
 			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>EBA2BB332F9B8DBA0D2EEEB00C934D57</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>AB9BACC77EA89D7545926CEB8AB8D821</string>
-			</array>
-			<key>isa</key>
-			<string>PBXFrameworksBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
 		</dict>
 		<key>ED376F5A85C7B357D9F22E5CAF095AA6</key>
 		<dict>
@@ -7741,6 +7754,19 @@
 			<key>productType</key>
 			<string>com.apple.product-type.framework</string>
 		</dict>
+		<key>F58187DC7AA95785A5C57182CB5EA7D7</key>
+		<dict>
+			<key>containerPortal</key>
+			<string>D41D8CD98F00B204E9800998ECF8427E</string>
+			<key>isa</key>
+			<string>PBXContainerItemProxy</string>
+			<key>proxyType</key>
+			<string>1</string>
+			<key>remoteGlobalIDString</key>
+			<string>819D98B2274D0D02398DA2FD14346272</string>
+			<key>remoteInfo</key>
+			<string>OHHTTPStubs</string>
+		</dict>
 		<key>F7B3D5476A9BBC679EAC586568B1BCA2</key>
 		<dict>
 			<key>buildActionMask</key>
@@ -7960,6 +7986,19 @@
 				<string>-DOS_OBJECT_USE_OBJC=0</string>
 			</dict>
 		</dict>
+		<key>FD731F5A384C67DE0C8C3D19D4836BE2</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>C54F1157267AFD4C469094D4113D8AB3</string>
+			</array>
+			<key>isa</key>
+			<string>PBXFrameworksBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
 		<key>FDC9BFFD9CC56F0CA81F2F023808D2E2</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -8074,70 +8113,6 @@
 			<string>ObjectMapper/Transforms/TransformOf.swift</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
-		</dict>
-		<key>FFD85EE5F3DF1CEC801D93B46471BC15</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>5FD36344913CB7F9BF7317DA90DE591C</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
-				<string>iPhone Developer</string>
-				<key>CURRENT_PROJECT_VERSION</key>
-				<string>1</string>
-				<key>DEFINES_MODULE</key>
-				<string>YES</string>
-				<key>DYLIB_COMPATIBILITY_VERSION</key>
-				<string>1</string>
-				<key>DYLIB_CURRENT_VERSION</key>
-				<string>1</string>
-				<key>DYLIB_INSTALL_NAME_BASE</key>
-				<string>@rpath</string>
-				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
-				<string>YES</string>
-				<key>INFOPLIST_FILE</key>
-				<string>Target Support Files/Pods-MojioSDKTests/Info.plist</string>
-				<key>INSTALL_PATH</key>
-				<string>$(LOCAL_LIBRARY_DIR)/Frameworks</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>9.0</string>
-				<key>LD_RUNPATH_SEARCH_PATHS</key>
-				<array>
-					<string>$(inherited)</string>
-					<string>@executable_path/Frameworks</string>
-					<string>@loader_path/Frameworks</string>
-				</array>
-				<key>MACH_O_TYPE</key>
-				<string>staticlib</string>
-				<key>MODULEMAP_FILE</key>
-				<string>Target Support Files/Pods-MojioSDKTests/Pods-MojioSDKTests.modulemap</string>
-				<key>MTL_ENABLE_DEBUG_INFO</key>
-				<string>YES</string>
-				<key>OTHER_LDFLAGS</key>
-				<string></string>
-				<key>OTHER_LIBTOOLFLAGS</key>
-				<string></string>
-				<key>PODS_ROOT</key>
-				<string>$(SRCROOT)</string>
-				<key>PRODUCT_NAME</key>
-				<string>Pods_MojioSDKTests</string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-				<key>SKIP_INSTALL</key>
-				<string>YES</string>
-				<key>SWIFT_OPTIMIZATION_LEVEL</key>
-				<string>-Onone</string>
-				<key>TARGETED_DEVICE_FAMILY</key>
-				<string>1,2</string>
-				<key>VERSIONING_SYSTEM</key>
-				<string>apple-generic</string>
-				<key>VERSION_INFO_PREFIX</key>
-				<string></string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
 		</dict>
 		<key>FFEB44C9159E3FC74F18517CDEE49808</key>
 		<dict>
