@@ -3,6 +3,4 @@ framework module OHHTTPStubs {
 
   export *
   module * { export * }
-
-  private header "OHHTTPStubsMethodSwizzling.h"
 }

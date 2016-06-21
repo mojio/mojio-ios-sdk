@@ -1,4 +1,4 @@
-# Helper functions for storing text in Keychain for iOS, macOS, tvOS and WatchOS
+# Helper functions for storing text in Keychain for iOS, OS X, tvOS and WatchOS
 
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)][carthage]
 [![CocoaPods Version](https://img.shields.io/cocoapods/v/KeychainSwift.svg?style=flat)][cocoadocs]
@@ -8,20 +8,7 @@
 [carthage]: https://github.com/Carthage/Carthage
 
 This is a collection of helper functions for saving text and data in the Keychain.
- As you probably noticed Apple's keychain API is a bit verbose. This library was designed to provide shorter syntax for accomplishing a simple task: reading/writing text values for specified keys:
-
- ```Swift
-let keychain = KeychainSwift()
-keychain.set("hello world", forKey: "my key")
-keychain.get("my key")
- ```
-
- The Keychain library includes the following features:
-
- * <a href="#usage">Get, set and delete string, boolean and Data Keychain items</a>
- * <a href="#keychain_item_access">Specify item access security level</a>
- * <a href="#keychain_synchronization">Synchronize items through iCloud</a>
- * <a href="#keychain_access_groups">Share Keychain items with other apps</a>
+ As you probably noticed Apple's keychain API is a bit verbose. This library was designed to provide shorter syntax for accomplishing a simple task: reading/writing text values for specified keys.
 
 ## What's Keychain?
 
@@ -32,33 +19,40 @@ Keychain is a secure storage. You can store all kind of sensitive data in it: us
 
 There are three ways you can add KeychainSwift to your Xcode project.
 
-#### Add source (iOS 7+)
+**Add source (iOS 7+)**
 
 Simply add [KeychainSwiftDistrib.swift](https://github.com/marketplacer/keychain-swift/blob/master/Distrib/KeychainSwiftDistrib.swift) file into your Xcode project.
 
-#### Setup with Carthage (iOS 8+)
+**Setup with Carthage (iOS 8+)**
 
-Alternatively, add `github "marketplacer/keychain-swift" ~> 4.0` to your Cartfile and run `carthage update`.
+Alternatively, add `github "marketplacer/keychain-swift" ~> 3.0` to your Cartfile and run `carthage update`.
 
-#### Setup with CocoaPods (iOS 8+)
+**Setup with CocoaPods (iOS 8+)**
 
 If you are using CocoaPods add this text to your Podfile and run `pod install`.
 
     use_frameworks!
-    target 'Your target name'
-    pod 'KeychainSwift', '~> 4.0'
+    pod 'KeychainSwift', '~> 3.0'
+
+Here is how to use KeychainSwift in a *WatchKit extension* with CocoaPods.
+
+    use_frameworks!
+
+    target 'YourWatchApp Extension Target Name' do
+      platform :watchos, '2.0'
+      pod 'KeychainSwift', '~> 3.0'
+    end
 
 
-#### Legacy Swift versions
+**Setup in Swift 1.2 project**
 
-Setup a [previous version](https://github.com/marketplacer/keychain-swift/wiki/Legacy-Swift-versions) of the library if you use an older version of Swift.
-
+Use the [previous version of the library](https://github.com/marketplacer/keychain-swift/wiki/Swift-1.2-setup).
 
 **iOS 7 support**
 
 Use [iOS 7 compatible](https://github.com/marketplacer/keychain-swift/blob/iOS7/Distrib/KeychainSwiftDistrib.swift) version of the library.
 
-<h2 id="usage">Usage</h2>
+## Usage
 
 Add `import KeychainSwift` to your source code if you used Carthage or CocoaPods setup methods.
 
@@ -83,12 +77,12 @@ keychain.set(true, forKey: "my key")
 keychain.getBool("my key")
 ```
 
-#### Data values
+#### NSData values
 
 ```Swift
 let keychain = KeychainSwift()
 
-keychain.set(dataObject, forKey: "my key")
+keychain.set(nsDataObject, forKey: "my key")
 
 keychain.getData("my key")
 ```
@@ -98,33 +92,32 @@ keychain.getData("my key")
 ```Swift
 keychain.delete("my key") // Remove single key
 
-keychain.clear() // Delete everything from app's Keychain. Does not work on macOS.
+keychain.clear() // Delete everything from app's Keychain. Does not work on OS X.
 ```
 
 ## Advanced options
 
-
-<h3 id="keychain_item_access">Keychain item access</h3>
+### Keychain item access
 
 Use `withAccess` parameter to specify the security level of the keychain storage.
-By default the `.accessibleWhenUnlocked` option is used. It is one of the most restrictive options and provides good data protection.
+By default the `.AccessibleWhenUnlocked` option is used. It is one of the most restrictive options and provides good data protection.
 
 ```
-KeychainSwift().set("Hello world", forKey: "key 1", withAccess: .accessibleWhenUnlocked)
+KeychainSwift().set("Hello world", forKey: "key 1", withAccess: .AccessibleWhenUnlocked)
 ```
 
-You can use `.accessibleAfterFirstUnlock` if you need your app to access the keychain item while in the background. Note that it is less secure than the `.accessibleWhenUnlocked` option.
+You can use `.AccessibleAfterFirstUnlock` if you need your app to access the keychain item while in the background. Note that it is less secure than the `.AccessibleWhenUnlocked` option.
 
 See the list of all available [access options](https://github.com/marketplacer/keychain-swift/blob/master/KeychainSwift/KeychainSwiftAccessOptions.swift).
 
 
-<h3 id="keychain_synchronization">Synchronizing keychain items with other devices</h3>
+### Synchronizing keychain items with other devices
 
 Set `synchronizable` property to `true` to enable keychain items synchronization across user's multiple devices. The synchronization will work for users who have the "Keychain" enabled in the iCloud settings on their devices.
 
 Setting `synchronizable` property to `true` will add the item to other devices with the `set` method and obtain synchronizable items with the `get` command. Deleting a synchronizable item will remove it from all devices.
 
-Note that you do NOT need to enable iCloud or Keychain Sharing capabilities in your app's target for this feature to work.
+Note that you do not need to enable iCloud or Keychain Sharing capabilities in your app's target for this feature to work.
 
 ```Swift
 // First device
@@ -138,10 +131,9 @@ keychain.synchronizable = true
 keychain.get("my key") // Returns "hello world"
 ```
 
+### Sharing keychain items with other apps
 
-<h3 id="keychain_access_groups">Sharing keychain items with other apps</h3>
-
-In order to share keychain items between apps on the same device they need to have common *Keychain Groups* registered in *Capabilities > Keychain Sharing* settings. [This tutorial](http://evgenii.com/blog/sharing-keychain-in-ios/) shows how to set it up.
+In order to share keychain items between apps they need to have common *Keychain Groups* registered in *Capabilities > Keychain Sharing* settings. [This tutorial](http://evgenii.com/blog/sharing-keychain-in-ios/) shows how to set it up.
 
 Use `accessGroup` property to access shared keychain items. In the following example we specify an access group "CS671JRA62.com.myapp.KeychainGroup" that will be used to set, get and delete an item "my key".
 
@@ -213,12 +205,9 @@ Here are some other Keychain libraries.
 
 * The code is based on this example: [https://gist.github.com/s-aska/e7ad24175fb7b04f78e7](https://gist.github.com/s-aska/e7ad24175fb7b04f78e7)
 * Thanks to [glyuck](https://github.com/glyuck) for taming booleans.
-* Thanks to [pepibumur](https://github.com/pepibumur) for adding macOS, watchOS and tvOS support.
+* Thanks to [pepibumur](https://github.com/pepibumur) for adding OS X, watchOS and tvOS support.
 * Thanks to [ezura](https://github.com/ezura) for iOS 7 support.
 * Thanks to [mikaoj](https://github.com/mikaoj) for adding keychain synchronization.
-* Thanks to [tcirwin](https://github.com/tcirwin) for adding Swift 3.0 support.
-
-
 
 ## License
 

@@ -12,7 +12,7 @@ target 'MojioSDK' do
     pod 'SwiftyJSON'
     pod 'ObjectMapper'
     pod 'RealmSwift'
-    pod 'KeychainSwift'
+    pod 'KeychainSwift', '~> 3.0.16'
     pod 'OHHTTPStubs'
     pod 'OHHTTPStubs/Swift'
     pod 'SwiftWebSocket'    
