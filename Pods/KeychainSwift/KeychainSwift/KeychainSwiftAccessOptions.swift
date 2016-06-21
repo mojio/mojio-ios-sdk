@@ -16,7 +16,7 @@ public enum KeychainSwiftAccessOptions {
   This is the default value for keychain items added without explicitly setting an accessibility constant.
   
   */
-  case accessibleWhenUnlocked
+  case AccessibleWhenUnlocked
   
   /**
   
@@ -25,7 +25,7 @@ public enum KeychainSwiftAccessOptions {
   This is recommended for items that need to be accessible only while the application is in the foreground. Items with this attribute do not migrate to a new device. Thus, after restoring from a backup of a different device, these items will not be present.
   
   */
-  case accessibleWhenUnlockedThisDeviceOnly
+  case AccessibleWhenUnlockedThisDeviceOnly
   
   /**
   
@@ -34,7 +34,7 @@ public enum KeychainSwiftAccessOptions {
   After the first unlock, the data remains accessible until the next restart. This is recommended for items that need to be accessed by background applications. Items with this attribute migrate to a new device when using encrypted backups.
   
   */
-  case accessibleAfterFirstUnlock
+  case AccessibleAfterFirstUnlock
   
   /**
   
@@ -43,7 +43,7 @@ public enum KeychainSwiftAccessOptions {
   After the first unlock, the data remains accessible until the next restart. This is recommended for items that need to be accessed by background applications. Items with this attribute do not migrate to a new device. Thus, after restoring from a backup of a different device, these items will not be present.
   
   */
-  case accessibleAfterFirstUnlockThisDeviceOnly
+  case AccessibleAfterFirstUnlockThisDeviceOnly
   
   /**
   
@@ -52,7 +52,7 @@ public enum KeychainSwiftAccessOptions {
   This is not recommended for application use. Items with this attribute migrate to a new device when using encrypted backups.
   
   */
-  case accessibleAlways
+  case AccessibleAlways
   
   /**
   
@@ -61,7 +61,7 @@ public enum KeychainSwiftAccessOptions {
   This is recommended for items that only need to be accessible while the application is in the foreground. Items with this attribute never migrate to a new device. After a backup is restored to a new device, these items are missing. No items can be stored in this class on devices without a passcode. Disabling the device passcode causes all items in this class to be deleted.
   
   */
-  case accessibleWhenPasscodeSetThisDeviceOnly
+  case AccessibleWhenPasscodeSetThisDeviceOnly
   
   /**
   
@@ -70,38 +70,38 @@ public enum KeychainSwiftAccessOptions {
   This is not recommended for application use. Items with this attribute do not migrate to a new device. Thus, after restoring from a backup of a different device, these items will not be present.
   
   */
-  case accessibleAlwaysThisDeviceOnly
+  case AccessibleAlwaysThisDeviceOnly
   
   static var defaultOption: KeychainSwiftAccessOptions {
-    return .accessibleWhenUnlocked
+    return .AccessibleWhenUnlocked
   }
   
   var value: String {
     switch self {
-    case .accessibleWhenUnlocked:
+    case .AccessibleWhenUnlocked:
       return toString(kSecAttrAccessibleWhenUnlocked)
       
-    case .accessibleWhenUnlockedThisDeviceOnly:
+    case .AccessibleWhenUnlockedThisDeviceOnly:
       return toString(kSecAttrAccessibleWhenUnlockedThisDeviceOnly)
       
-    case .accessibleAfterFirstUnlock:
+    case .AccessibleAfterFirstUnlock:
       return toString(kSecAttrAccessibleAfterFirstUnlock)
       
-    case .accessibleAfterFirstUnlockThisDeviceOnly:
+    case .AccessibleAfterFirstUnlockThisDeviceOnly:
       return toString(kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly)
       
-    case .accessibleAlways:
+    case .AccessibleAlways:
       return toString(kSecAttrAccessibleAlways)
       
-    case .accessibleWhenPasscodeSetThisDeviceOnly:
+    case .AccessibleWhenPasscodeSetThisDeviceOnly:
       return toString(kSecAttrAccessibleWhenPasscodeSetThisDeviceOnly)
       
-    case .accessibleAlwaysThisDeviceOnly:
+    case .AccessibleAlwaysThisDeviceOnly:
       return toString(kSecAttrAccessibleAlwaysThisDeviceOnly)
     }
   }
   
-  func toString(_ value: CFString) -> String {
+  func toString(value: CFStringRef) -> String {
     return KeychainSwiftConstants.toString(value)
   }
 }
