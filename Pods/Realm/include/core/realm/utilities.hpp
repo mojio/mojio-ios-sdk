@@ -28,7 +28,6 @@
 #include <functional>
 
 #ifdef _MSC_VER
-#  include <win32/types.h>
 #  include <intrin.h>
 #endif
 
@@ -49,7 +48,7 @@
 #  define REALM_ARCH_ARM
 #endif
 
-#if defined _LP64 || defined __LP64__ || defined __64BIT__ || _ADDR64 || defined _WIN64 || defined __arch64__ || __WORDSIZE == 64 || (defined __sparc && defined __sparcv9) || defined __x86_64 || defined __amd64 || defined __x86_64__ || defined _M_X64 || defined _M_IA64 || defined __ia64 || defined __IA64__
+#if defined _LP64 || defined __LP64__ || defined __64BIT__ || defined _ADDR64 || defined _WIN64 || defined __arch64__ || (defined(__WORDSIZE) && __WORDSIZE == 64) || (defined __sparc && defined __sparcv9) || defined __x86_64 || defined __amd64 || defined __x86_64__ || defined _M_X64 || defined _M_IA64 || defined __ia64 || defined __IA64__
 #  define REALM_PTR_64
 #endif
 
@@ -70,7 +69,7 @@ template<int version>
 REALM_FORCEINLINE bool sseavx()
 {
 /*
-    Return wether or not SSE 3.0 (if version = 30) or 4.2 (for version = 42) is supported. Return value
+    Return whether or not SSE 3.0 (if version = 30) or 4.2 (for version = 42) is supported. Return value
     is based on the CPUID instruction.
 
     sse_support = -1: No SSE support
@@ -190,6 +189,18 @@ enum IndexMethod {
     index_FindAll_nocopy,
     index_Count
 };
+
+
+// realm::is_any<T, U1, U2, U3, ...> ==
+// std::is_same<T, U1>::value || std::is_same<T, U2>::value || std::is_same<T, U3>::value ...
+template<typename... T>
+struct is_any : std::false_type { };
+
+template<typename T, typename... Ts>
+struct is_any<T, T, Ts...> : std::true_type { };
+
+template<typename T, typename U, typename... Ts>
+struct is_any<T, U, Ts...> : is_any<T, Ts...> { };
 
 
 // Use safe_equal() instead of std::equal() when comparing sequences which can have a 0 elements.

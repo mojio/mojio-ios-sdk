@@ -10,7 +10,7 @@ public struct MojioError : ErrorType {
     public var message : String?
     public var code : String?
     
-    public init(message : String?, code : String? = nil) {
+    public init(message : String?, code : String?) {
         self.message = message
         self.code = code
     }

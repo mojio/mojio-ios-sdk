@@ -667,9 +667,9 @@ public:
     /// destroy_deep() for every contained 'ref' element.
     static void destroy_deep(MemRef, Allocator&) noexcept;
 
-    Allocator& get_alloc() const noexcept 
-    { 
-        return m_alloc;     
+    Allocator& get_alloc() const noexcept
+    {
+        return m_alloc;
     }
 
     // Serialization
@@ -1148,6 +1148,9 @@ private:
 
     template<size_t w>
     size_t find_gte(const int64_t target, size_t start, Array const* indirection) const;
+
+    template<size_t w>
+    size_t adjust_ge(size_t start, size_t end, int_fast64_t limit, int_fast64_t diff);
 
 protected:
     /// The total size in bytes (including the header) of a new empty
@@ -1825,16 +1828,6 @@ inline void Array::adjust(size_t begin, size_t end, int_fast64_t diff)
         adjust(i, diff); // Throws
 }
 
-inline void Array::adjust_ge(int_fast64_t limit, int_fast64_t diff)
-{
-    size_t n = size();
-    for (size_t i = 0; i != n; ++i) {
-        int_fast64_t v = get(i);
-        if (v >= limit)
-            set(i, int64_t(v + diff)); // Throws
-    }
-}
-
 
 
 //-------------------------------------------------
@@ -2481,7 +2474,7 @@ If pattern == false:
     'index' tells the row index of a single match and 'value' tells its value. Return false to make Array-finder break its search or return true to let it continue until
     'end' or 'limit'.
 
-Array-finder decides itself if - and when - it wants to pass you an indexpattern. It depends on array bit width, match frequency, and wether the arithemetic and
+Array-finder decides itself if - and when - it wants to pass you an indexpattern. It depends on array bit width, match frequency, and whether the arithemetic and
 computations for the given search criteria makes it feasible to construct such a pattern.
 */
 
@@ -2642,7 +2635,7 @@ bool Array::find_optimized(int64_t value, size_t start, size_t end, size_t basei
         // Huge speed optimizations are possible here! This is a very simple generic method.
         for (; start2 < end; start2++) {
             int64_t v = get<bitwidth>(start2 + 1);
-            if (c(v, value, v == get(0), find_null)) {                
+            if (c(v, value, v == get(0), find_null)) {
                 util::Optional<int64_t> v2(v == get(0) ? util::none : util::make_optional(v));
                 if (!find_action<action, Callback>(start2 + baseindex, v2, state, callback))
                     return false; // tell caller to stop aggregating/search

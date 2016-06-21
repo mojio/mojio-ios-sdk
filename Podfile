@@ -21,5 +21,6 @@ end
 target 'MojioSDKTests' do
     pod 'OHHTTPStubs'
     pod 'OHHTTPStubs/Swift'
+    pod 'SwiftWebSocket'
 end
 

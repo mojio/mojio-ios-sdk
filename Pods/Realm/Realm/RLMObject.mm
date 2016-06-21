@@ -58,34 +58,18 @@
     return [super initWithValue:value schema:schema];
 }
 
-- (instancetype)initWithObject:(id)object {
-    return [self initWithValue:object];
-}
-
 #pragma mark - Class-based Object Creation
 
 + (instancetype)createInDefaultRealmWithValue:(id)value {
     return (RLMObject *)RLMCreateObjectInRealmWithValue([RLMRealm defaultRealm], [self className], value, false);
 }
 
-+ (instancetype)createInDefaultRealmWithObject:(id)object {
-    return [self createInDefaultRealmWithValue:object];
-}
-
 + (instancetype)createInRealm:(RLMRealm *)realm withValue:(id)value {
     return (RLMObject *)RLMCreateObjectInRealmWithValue(realm, [self className], value, false);
 }
 
-+ (instancetype)createInRealm:(RLMRealm *)realm withObject:(id)object {
-    return [self createInRealm:realm withValue:object];
-}
-
 + (instancetype)createOrUpdateInDefaultRealmWithValue:(id)value {
     return [self createOrUpdateInRealm:[RLMRealm defaultRealm] withValue:value];
-}
-
-+ (instancetype)createOrUpdateInDefaultRealmWithObject:(id)object {
-    return [self createOrUpdateInDefaultRealmWithValue:object];
 }
 
 + (instancetype)createOrUpdateInRealm:(RLMRealm *)realm withValue:(id)value {
@@ -96,10 +80,6 @@
         @throw [NSException exceptionWithName:@"RLMExecption" reason:reason userInfo:nil];
     }
     return (RLMObject *)RLMCreateObjectInRealmWithValue(realm, [self className], value, true);
-}
-
-+ (instancetype)createOrUpdateInRealm:(RLMRealm *)realm withObject:(id)object {
-    return [self createOrUpdateInRealm:realm withValue:object];
 }
 
 #pragma mark - Subscripting
@@ -164,10 +144,6 @@
 
 #pragma mark - Other Instance Methods
 
-- (NSArray *)linkingObjectsOfClass:(NSString *)className forProperty:(NSString *)property {
-    return RLMObjectBaseLinkingObjectsOfClass(self, className, property);
-}
-
 - (BOOL)isEqualToObject:(RLMObject *)object {
     return [object isKindOfClass:RLMObject.class] && RLMObjectBaseAreEqual(self, object);
 }
@@ -180,6 +156,10 @@
 
 + (NSArray *)indexedProperties {
     return @[];
+}
+
++ (NSDictionary *)linkingObjectsProperties {
+    return @{};
 }
 
 + (NSDictionary *)defaultPropertyValues {
@@ -212,6 +192,34 @@
 
 - (void)setValue:(id)value forUndefinedKey:(NSString *)key {
     RLMDynamicValidatedSet(self, key, value);
+}
+
+@end
+
+@implementation RLMWeakObjectHandle {
+    realm::Row _row;
+    RLMRealm *_realm;
+    RLMObjectSchema *_objectSchema;
+    Class _objectClass;
+}
+
+- (instancetype)initWithObject:(RLMObjectBase *)object {
+    if (!(self = [super init])) {
+        return nil;
+    }
+
+    _row = object->_row;
+    _realm = object->_realm;
+    _objectSchema = object->_objectSchema;
+    _objectClass = object.class;
+
+    return self;
+}
+
+- (RLMObjectBase *)object {
+    RLMObjectBase *object = [[_objectClass alloc] initWithRealm:_realm schema:_objectSchema];
+    object->_row = std::move(_row);
+    return object;
 }
 
 @end

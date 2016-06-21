@@ -90,6 +90,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-MojioSDK/ObjectMapper.framework"
   install_framework "Pods-MojioSDK/Realm.framework"
   install_framework "Pods-MojioSDK/RealmSwift.framework"
+  install_framework "Pods-MojioSDK/SwiftWebSocket.framework"
   install_framework "Pods-MojioSDK/SwiftyJSON.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
@@ -99,5 +100,6 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-MojioSDK/ObjectMapper.framework"
   install_framework "Pods-MojioSDK/Realm.framework"
   install_framework "Pods-MojioSDK/RealmSwift.framework"
+  install_framework "Pods-MojioSDK/SwiftWebSocket.framework"
   install_framework "Pods-MojioSDK/SwiftyJSON.framework"
 fi
