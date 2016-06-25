@@ -8,7 +8,6 @@
 
 import Foundation
 
-public protocol Entity {
-    var Id : String? { get set }
+public protocol EmptyInit {
     init()
 }
