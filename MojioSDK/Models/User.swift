@@ -11,7 +11,7 @@ import ObjectMapper
 import RealmSwift
 import Realm
 
-public class User : Object, Mappable, Entity {
+public class User : Object, Mappable, EmptyInit {
     
     public dynamic var FirstName : String? = nil
     public dynamic var LastName : String? = nil

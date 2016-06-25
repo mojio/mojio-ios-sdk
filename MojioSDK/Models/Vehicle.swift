@@ -10,7 +10,7 @@ import UIKit
 import ObjectMapper
 import RealmSwift
 
-public class Vehicle: Object, Mappable, Entity {
+public class Vehicle: Object, Mappable, EmptyInit {
     
     public dynamic var Name : String? = nil
     public dynamic var LicensePlate : String? = nil

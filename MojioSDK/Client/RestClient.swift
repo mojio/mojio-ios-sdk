@@ -54,10 +54,15 @@ public class RestClient: NSObject {
     public dynamic var requestEntity : String?
     public dynamic var requestEntityId: String?
     
+    private var sinceBeforeFormatter = NSDateFormatter()
+    private static let SinceBeforeDateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"
+    
     public override init() {
         self.requestUrl = ClientEnvironment.SharedInstance.getApiEndpoint()
         self.requestV1Url = ClientEnvironment.SharedInstance.getV1ApiEndpoint();
         self.pushUrl = ClientEnvironment.SharedInstance.getPushWSEndpoint()
+
+        self.sinceBeforeFormatter.dateFormat = RestClient.SinceBeforeDateFormat
 
         // Set Auth Token as the header
     }
@@ -267,32 +272,48 @@ public class RestClient: NSObject {
         return self;
     }
     
-    public func query(top : String?, skip : String?, filter : String?, select : String?, orderby : String?) -> Self {
+    public func query(top : String?, skip : String?, filter : String?, select : String?, orderby : String?, since: NSDate?, before: NSDate?, fields: [String]?) -> Self {
         
         var requestParams : [String:AnyObject] = [:]
         
-        if top != nil {
-            requestParams["top"] = top!
+        if let top = top {
+            requestParams["top"] = top
         }
 
-        if skip != nil {
-            requestParams["skip"] = skip!
+        if let skip = skip {
+            requestParams["skip"] = skip
         }
 
-        if filter != nil {
-            requestParams["filter"] = filter!
+        if let filter = filter {
+            requestParams["filter"] = filter
         }
 
-        if select != nil {
-            requestParams["select"] = select!
+        if let select = select {
+            requestParams["select"] = select
         }
 
-        if orderby != nil {
-            requestParams["orderby"] = orderby!
+        if let orderby = orderby {
+            requestParams["orderby"] = orderby
+        }
+        
+        if let date = since {
+            requestParams["since"] = self.sinceBeforeFormatter.stringFromDate(date)
+        }
+
+        if let date = before {
+            requestParams["before"] = self.sinceBeforeFormatter.stringFromDate(date)
+        }
+        
+        if let fields = fields where fields.count > 0 {
+            requestParams["fields"] = fields.joinWithSeparator(",")
         }
         
         self.requestParams.update(requestParams)
         return self
+    }
+    
+    public func query(top : String?, skip : String?, filter : String?, select : String?, orderby : String?) -> Self {
+        return self.query(top, skip : skip, filter : filter, select : select, orderby : orderby, since: nil, before: nil, fields: nil)
     }
     
     public func run(completion: (response : AnyObject) -> Void, failure: (error : AnyObject?) -> Void) {
@@ -304,9 +325,13 @@ public class RestClient: NSObject {
             headers["Authorization"] = "Bearer " + accessToken
         }
 
-        Alamofire.request(self.requestMethod!, self.requestUrl!, parameters: self.requestParams, encoding: .URL, headers: headers).responseJSON { response in
+        let request = Alamofire.request(self.requestMethod!, self.requestUrl!, parameters: self.requestParams, encoding: .URL, headers: headers).responseJSON { response in
             self.handleResponse(response, completion: completion, failure: failure)
-        }        
+        }
+        
+        #if DEBUG
+            print(request.debugDescription)
+        #endif
     }
     
     public func runStringBody(string: String, completion: (response : AnyObject) -> Void, failure: (error : AnyObject?) -> Void) {
@@ -333,7 +358,9 @@ public class RestClient: NSObject {
             
         }), headers: headers)
         
-        print(request.debugDescription)
+        #if DEBUG
+            print(request.debugDescription)
+        #endif
         
         request.responseJSON(completionHandler: { response in
             self.handleResponse(response, completion: completion, failure: failure)
@@ -358,7 +385,9 @@ public class RestClient: NSObject {
             return (mutableURLRequest, nil)
         }), headers: headers)
         
-        print(request.debugDescription)
+        #if DEBUG
+            print(request.debugDescription)
+        #endif
         
         request.responseJSON(completionHandler: { response in
             self.handleResponse(response, completion: completion, failure: failure)
