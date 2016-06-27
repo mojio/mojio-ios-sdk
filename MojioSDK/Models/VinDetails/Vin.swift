@@ -15,7 +15,7 @@ public class Vin: Object, Mappable {
     public dynamic var VIN : String? = nil
     public dynamic var Timestamp : String? = nil
     public dynamic var Market : String? = nil
-    public var Year = RealmOptional<Int>()
+    public var Year : Int = 0
     public dynamic var Make : String? = nil
     public dynamic var Model : String? = nil
     public dynamic var VehicleType : String? = nil
@@ -36,11 +36,7 @@ public class Vin: Object, Mappable {
     public override static func primaryKey() -> String? {
         return "VIN"
     }
-    
-    public func YearAsIntNumber() -> NSNumber {
-        return self.Year.value! as NSNumber
-    }
-    
+        
     public func WarrantiesArray() -> NSArray {
         return self.Warranties.toArray()
     }

@@ -14,7 +14,7 @@ public class VinDetails: Object, Mappable {
     
     public dynamic var Timestamp : String? = nil
     public dynamic var Vin : String? = nil
-    public var Year = RealmOptional<Int>()
+    public var Year : Int = 0
     public dynamic var Make : String? = nil
     public dynamic var Model : String? = nil
     public dynamic var Engine : String? = nil
@@ -31,11 +31,7 @@ public class VinDetails: Object, Mappable {
     public required convenience init?(_ map: Map) {
         self.init()
     }
-    
-    public func YearAsIntNumber() -> NSNumber {
-        return self.Year.value! as NSNumber
-    }
-    
+        
     public func CylindersIntNumber() -> NSNumber {
         return self.Cylinders.value! as NSNumber
     }
