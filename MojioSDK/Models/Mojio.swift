@@ -10,7 +10,7 @@ import UIKit
 import ObjectMapper
 import RealmSwift
 
-public class Mojio: Object, Mappable, EmptyInit {
+public class Mojio: Object, Mappable {
     public dynamic var Id : String? = nil
     public dynamic var Name : String? = nil
     public dynamic var IMEI : String? = nil

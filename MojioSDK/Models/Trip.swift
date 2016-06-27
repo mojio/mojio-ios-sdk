@@ -11,7 +11,7 @@ import Foundation
 import ObjectMapper
 import RealmSwift
 
-public class Trip: Object, Mappable, EmptyInit {
+public class Trip: Object, Mappable {
     public dynamic var VehicleId : String? = nil
     public dynamic var Name : String? = nil
     public var Tags = List<StringObject>();

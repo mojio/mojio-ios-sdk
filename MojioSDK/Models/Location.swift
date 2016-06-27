@@ -58,7 +58,7 @@ public class LocationStatus : NSObject {
     public static let PreviousValidState : String = "PreviousValidState"
 }
 
-public class Location: Object, Mappable, EmptyInit {
+public class Location: Object, Mappable {
     public dynamic var LocationAddress : Address? = nil
     public dynamic var Timestamp : String? = nil
     public dynamic var Lat : Float = 0

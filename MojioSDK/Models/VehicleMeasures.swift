@@ -10,7 +10,7 @@ import UIKit
 import ObjectMapper
 import RealmSwift
 
-public class VehicleMeasures: Object, Mappable, EmptyInit {
+public class VehicleMeasures: Object, Mappable {
     
     public dynamic var VehicleAcceleration : Acceleration? = nil
     public dynamic var VehicleAccelerometer : Accelerometer? = nil
