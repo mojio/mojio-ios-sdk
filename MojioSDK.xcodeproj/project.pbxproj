@@ -71,10 +71,10 @@
 		BC879BAA1CBF044700F9177B /* VehiclesData.txt in Resources */ = {isa = PBXBuildFile; fileRef = BC879B9C1CBF044700F9177B /* VehiclesData.txt */; };
 		BC879BAB1CBF044700F9177B /* VehicleStateData.txt in Resources */ = {isa = PBXBuildFile; fileRef = BC879B9D1CBF044700F9177B /* VehicleStateData.txt */; };
 		BC879BAC1CBF044700F9177B /* VinData.txt in Resources */ = {isa = PBXBuildFile; fileRef = BC879B9E1CBF044700F9177B /* VinData.txt */; };
+		BC8ECA501D226690009C6164 /* WifiRadio.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC8ECA4F1D226690009C6164 /* WifiRadio.swift */; };
 		BCC2EFB41CBED4E6004D2759 /* MojioSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = BCC2EFB31CBED4E6004D2759 /* MojioSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BCC2EFBB1CBED4E6004D2759 /* MojioSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCC2EFB11CBED4E6004D2759 /* MojioSDK.framework */; };
 		BCC2EFCF1CBEF6DB004D2759 /* MojioSDKUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC2EFCE1CBEF6DB004D2759 /* MojioSDKUITests.swift */; };
-		BCC8A49D1D19EAAD00E14E2B /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC8A49B1D19EAAD00E14E2B /* Entity.swift */; };
 		BCC8A49E1D19EAAD00E14E2B /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC8A49C1D19EAAD00E14E2B /* Error.swift */; };
 		BCC8A4A01D19EABF00E14E2B /* WSClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC8A49F1D19EABF00E14E2B /* WSClient.swift */; };
 		C67BB6D6DAEBC839F3C0B254 /* Pods_MojioSDKTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE3EF4E93105809182D24A75 /* Pods_MojioSDKTests.framework */; };
@@ -172,6 +172,7 @@
 		BC879B9C1CBF044700F9177B /* VehiclesData.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VehiclesData.txt; sourceTree = "<group>"; };
 		BC879B9D1CBF044700F9177B /* VehicleStateData.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VehicleStateData.txt; sourceTree = "<group>"; };
 		BC879B9E1CBF044700F9177B /* VinData.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VinData.txt; sourceTree = "<group>"; };
+		BC8ECA4F1D226690009C6164 /* WifiRadio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WifiRadio.swift; path = Models/WifiRadio.swift; sourceTree = "<group>"; };
 		BCC2EFB11CBED4E6004D2759 /* MojioSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MojioSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCC2EFB31CBED4E6004D2759 /* MojioSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MojioSDK.h; sourceTree = "<group>"; };
 		BCC2EFB51CBED4E6004D2759 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -180,7 +181,6 @@
 		BCC2EFCC1CBEF6DB004D2759 /* MojioSDKUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MojioSDKUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCC2EFCE1CBEF6DB004D2759 /* MojioSDKUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MojioSDKUITests.swift; sourceTree = "<group>"; };
 		BCC2EFD01CBEF6DB004D2759 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BCC8A49B1D19EAAD00E14E2B /* Entity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Entity.swift; path = Models/Entity.swift; sourceTree = "<group>"; };
 		BCC8A49C1D19EAAD00E14E2B /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Error.swift; path = Models/Error.swift; sourceTree = "<group>"; };
 		BCC8A49F1D19EABF00E14E2B /* WSClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WSClient.swift; path = Client/WSClient.swift; sourceTree = "<group>"; };
 		E0312C741CF7782F00B46AA8 /* BaseApiTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseApiTest.swift; sourceTree = "<group>"; };
@@ -392,7 +392,6 @@
 				BC879B481CBEFFDD00F9177B /* BooleanState.swift */,
 				BC879B491CBEFFDD00F9177B /* DiagnosticCode.swift */,
 				BC879B4B1CBEFFDD00F9177B /* Email.swift */,
-				BCC8A49B1D19EAAD00E14E2B /* Entity.swift */,
 				BCC8A49C1D19EAAD00E14E2B /* Error.swift */,
 				BC879B4C1CBEFFDD00F9177B /* FuelCapacity.swift */,
 				BC879B4D1CBEFFDD00F9177B /* FuelEfficiency.swift */,
@@ -416,6 +415,7 @@
 				BC879B5E1CBEFFDD00F9177B /* Vehicle.swift */,
 				BC879B5F1CBEFFDD00F9177B /* VehicleMeasures.swift */,
 				BC879B2E1CBEFFB000F9177B /* VinDetails */,
+				BC8ECA4F1D226690009C6164 /* WifiRadio.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -684,12 +684,12 @@
 			files = (
 				BC879B671CBEFFDD00F9177B /* TimePeriod.swift in Sources */,
 				BC879B901CBF000A00F9177B /* KeychainManager.swift in Sources */,
+				BC8ECA501D226690009C6164 /* WifiRadio.swift in Sources */,
 				BC879B6D1CBEFFDD00F9177B /* Heading.swift in Sources */,
 				BC879B771CBEFFDD00F9177B /* Speed.swift in Sources */,
 				BC879B701CBEFFDD00F9177B /* MeasurementStatistics.swift in Sources */,
 				BC879B641CBEFFDD00F9177B /* Battery.swift in Sources */,
 				BC879B891CBEFFFF00F9177B /* JsonSerializer.swift in Sources */,
-				BCC8A49D1D19EAAD00E14E2B /* Entity.swift in Sources */,
 				BC72D7A91CC5615600D9740B /* AuthViewController.swift in Sources */,
 				BC879B781CBEFFDD00F9177B /* StringObject.swift in Sources */,
 				BC879B601CBEFFDD00F9177B /* Acceleration.swift in Sources */,
