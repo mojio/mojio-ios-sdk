@@ -80,6 +80,11 @@
 		C67BB6D6DAEBC839F3C0B254 /* Pods_MojioSDKTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE3EF4E93105809182D24A75 /* Pods_MojioSDKTests.framework */; };
 		E0312C751CF7782F00B46AA8 /* BaseApiTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0312C741CF7782F00B46AA8 /* BaseApiTest.swift */; };
 		E0312C771CF78EA600B46AA8 /* StorageApiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0312C761CF78EA600B46AA8 /* StorageApiTests.swift */; };
+		E0E63D2F1D21E01A00DDF336 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E63D2E1D21E01A00DDF336 /* Activity.swift */; };
+		E0E63D351D21E4B900DDF336 /* VehicleActivityData.txt in Resources */ = {isa = PBXBuildFile; fileRef = E0E63D341D21E4B900DDF336 /* VehicleActivityData.txt */; };
+		E0E63D3B1D21EB0700DDF336 /* ActivityLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E63D3A1D21EB0700DDF336 /* ActivityLocation.swift */; };
+		E0E63D3D1D21F0D200DDF336 /* ActivityLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E63D3C1D21F0D200DDF336 /* ActivityLink.swift */; };
+		E0E63D3F1D22147400DDF336 /* BaseActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E63D3E1D22147400DDF336 /* BaseActivity.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -185,6 +190,11 @@
 		BCC8A49F1D19EABF00E14E2B /* WSClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WSClient.swift; path = Client/WSClient.swift; sourceTree = "<group>"; };
 		E0312C741CF7782F00B46AA8 /* BaseApiTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseApiTest.swift; sourceTree = "<group>"; };
 		E0312C761CF78EA600B46AA8 /* StorageApiTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageApiTests.swift; sourceTree = "<group>"; };
+		E0E63D2E1D21E01A00DDF336 /* Activity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Activity.swift; path = "Models/Activity Streams/Activity.swift"; sourceTree = "<group>"; };
+		E0E63D341D21E4B900DDF336 /* VehicleActivityData.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VehicleActivityData.txt; sourceTree = "<group>"; };
+		E0E63D3A1D21EB0700DDF336 /* ActivityLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActivityLocation.swift; path = "Models/Activity Streams/ActivityLocation.swift"; sourceTree = "<group>"; };
+		E0E63D3C1D21F0D200DDF336 /* ActivityLink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActivityLink.swift; path = "Models/Activity Streams/ActivityLink.swift"; sourceTree = "<group>"; };
+		E0E63D3E1D22147400DDF336 /* BaseActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseActivity.swift; path = "Models/Activity Streams/BaseActivity.swift"; sourceTree = "<group>"; };
 		EE3EF4E93105809182D24A75 /* Pods_MojioSDKTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MojioSDKTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F687FCD3CDD1EFCBD22CB91E /* Pods-MojioSDKTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MojioSDKTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MojioSDKTests/Pods-MojioSDKTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -319,6 +329,7 @@
 				BC879B9C1CBF044700F9177B /* VehiclesData.txt */,
 				BC879B9D1CBF044700F9177B /* VehicleStateData.txt */,
 				BC879B9E1CBF044700F9177B /* VinData.txt */,
+				E0E63D341D21E4B900DDF336 /* VehicleActivityData.txt */,
 			);
 			name = Data;
 			sourceTree = "<group>";
@@ -383,6 +394,7 @@
 		BCC2EFD91CBEF74A004D2759 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				E0E63D2D1D21DF3200DDF336 /* Activity Streams */,
 				BC879B431CBEFFDD00F9177B /* Acceleration.swift */,
 				BC879B441CBEFFDD00F9177B /* Accelerometer.swift */,
 				BC879B451CBEFFDD00F9177B /* Address.swift */,
@@ -418,6 +430,17 @@
 				BC879B2E1CBEFFB000F9177B /* VinDetails */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		E0E63D2D1D21DF3200DDF336 /* Activity Streams */ = {
+			isa = PBXGroup;
+			children = (
+				E0E63D2E1D21E01A00DDF336 /* Activity.swift */,
+				E0E63D3A1D21EB0700DDF336 /* ActivityLocation.swift */,
+				E0E63D3C1D21F0D200DDF336 /* ActivityLink.swift */,
+				E0E63D3E1D22147400DDF336 /* BaseActivity.swift */,
+			);
+			name = "Activity Streams";
 			sourceTree = "<group>";
 		};
 		E237B93C3A63C45BF68CDBF8 /* Pods */ = {
@@ -561,6 +584,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E0E63D351D21E4B900DDF336 /* VehicleActivityData.txt in Resources */,
 				BC879BA81CBF044700F9177B /* UserData.txt in Resources */,
 				BC879BA31CBF044700F9177B /* GroupData.txt in Resources */,
 				BC879BA71CBF044700F9177B /* TripData.txt in Resources */,
@@ -683,6 +707,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BC879B671CBEFFDD00F9177B /* TimePeriod.swift in Sources */,
+				E0E63D3D1D21F0D200DDF336 /* ActivityLink.swift in Sources */,
 				BC879B901CBF000A00F9177B /* KeychainManager.swift in Sources */,
 				BC879B6D1CBEFFDD00F9177B /* Heading.swift in Sources */,
 				BC879B771CBEFFDD00F9177B /* Speed.swift in Sources */,
@@ -711,7 +736,9 @@
 				BC879B711CBEFFDD00F9177B /* Mojio.swift in Sources */,
 				BC879B721CBEFFDD00F9177B /* Odometer.swift in Sources */,
 				BC879B631CBEFFDD00F9177B /* App.swift in Sources */,
+				E0E63D3B1D21EB0700DDF336 /* ActivityLocation.swift in Sources */,
 				BC879B661CBEFFDD00F9177B /* DiagnosticCode.swift in Sources */,
+				E0E63D2F1D21E01A00DDF336 /* Activity.swift in Sources */,
 				BC879B3D1CBEFFC000F9177B /* ServiceBulletin.swift in Sources */,
 				BC879B3F1CBEFFC000F9177B /* Transmission.swift in Sources */,
 				BC879B3B1CBEFFC000F9177B /* PlatformServiceSchedule.swift in Sources */,
@@ -723,6 +750,7 @@
 				BC879B611CBEFFDD00F9177B /* Accelerometer.swift in Sources */,
 				BC879B691CBEFFDD00F9177B /* FuelCapacity.swift in Sources */,
 				BC879B741CBEFFDD00F9177B /* ProperAcceleration.swift in Sources */,
+				E0E63D3F1D22147400DDF336 /* BaseActivity.swift in Sources */,
 				BC879B731CBEFFDD00F9177B /* PhoneNumber.swift in Sources */,
 				BC879B3E1CBEFFC000F9177B /* ServiceSchedule.swift in Sources */,
 				BC879B6C1CBEFFDD00F9177B /* Group.swift in Sources */,

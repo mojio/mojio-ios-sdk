@@ -29,7 +29,7 @@ class AuthenticationTests: XCTestCase {
     func testEndpoints ()  {
         let apiEndpoint : String = ClientEnvironment.SharedInstance.getApiEndpoint()
         let apiV1Endpoint : String = ClientEnvironment.SharedInstance.getV1ApiEndpoint()
-        let pushEndpoint : String = ClientEnvironment.SharedInstance.getPushEndpoint()
+        let pushEndpoint : String = ClientEnvironment.SharedInstance.getPushWSEndpoint()
         let myMojioEndpoint : String = ClientEnvironment.SharedInstance.getMyMojioEndpoint()
         let accountsEndpoint : String = ClientEnvironment.SharedInstance.getAccountsEndpoint()
         let region : String = ClientEnvironment.SharedInstance.getRegion()

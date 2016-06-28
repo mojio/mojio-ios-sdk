@@ -70,7 +70,7 @@ class ClientTests: XCTestCase {
         
         client.requestEntity = RestClientEndpoints.Vin
         let vin = client.parseDict(toDict("VinData")!) as? Vin
-        
+
         client.requestEntity = RestClientEndpoints.ServiceSchedule
         let serviceSchedule = client.parseDict(toDict("ServiceScheduleData")!) as? ServiceSchedule
         
@@ -79,6 +79,10 @@ class ClientTests: XCTestCase {
         
         client.requestEntity = RestClientEndpoints.Groups
         let group = client.parseDict(toDict("GroupData")!) as? Group
+
+        client.requestEntity = RestClientEndpoints.Activities
+        let activities = toArray(client, fileName: "VehicleActivityData")
+        //let activity = client.parseDict(toDict("VehicleActivityData")!) as? Activity
 
         XCTAssertNotNil((vehicle?.isKindOfClass(Vehicle)), "The class is not of type vehicle")
         XCTAssertNotNil((states?.isKindOfClass(VehicleMeasures)), "The class is not of type vehicle measure")
@@ -91,11 +95,13 @@ class ClientTests: XCTestCase {
         XCTAssertNotNil((nextService?.isKindOfClass(NextServiceSchedule)), "The class is not of type Next Service")
         XCTAssertNotNil((group?.isKindOfClass(Group)), "The class is not of type Group")
 
-        XCTAssertNotNil(vehicle?.json(), "Could not serialize vehicle into JSON")
+        XCTAssertNotNil(activities, "Activities not read")
+
+        XCTAssertNotNil(vehicle?.jsonDict(), "Could not serialize vehicle into JSON")
         XCTAssertNotNil(app?.json(), "Could not serialize app into JSON")
         XCTAssertNotNil(mojio?.json(), "Could not serialize Mojio into JSON")
         XCTAssertNotNil(trip?.json(), "Could not serialize trip into JSON")
-        XCTAssertNotNil(user?.json(), "Could not serialize user into JSON")
+        XCTAssertNotNil(user?.jsonDict(), "Could not serialize user into JSON")
         
     }
     
@@ -169,5 +175,18 @@ class ClientTests: XCTestCase {
         let dict = try! NSJSONSerialization.JSONObjectWithData(data!, options: []) as? [String : AnyObject]
         
         return dict
-    }    
+    }
+    
+    func toArray (client : RestClient, fileName : String) -> NSMutableArray? {
+        if let responseDict = toDict(fileName) {
+            if let dataArray : NSArray = responseDict.objectForKey("Data") as? NSArray {
+                let array : NSMutableArray = []
+                for  obj in dataArray {
+                    array.addObject(client.parseDict(obj as! NSDictionary)!)
+                }
+                return array
+            }
+        }
+        return nil
+    }
 }
