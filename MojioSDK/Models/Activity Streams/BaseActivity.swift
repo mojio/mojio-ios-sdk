@@ -9,7 +9,7 @@
 import Foundation
 import ObjectMapper
 
-@objc public class BaseActivity : NSObject, Mappable, Entity{
+@objc public class BaseActivity : NSObject, Mappable {
     public dynamic var Id : String? = nil
 
     public dynamic var Name : String? = nil
