@@ -19,6 +19,7 @@ public class Mojio: Object, Mappable, Entity {
     public dynamic var VehicleId : String? = nil
     public dynamic var MojioLocation : Location? = nil
     public var Tags = List<StringObject>()
+    public dynamic var Wifi : WifiRadio? = nil
     public dynamic var ConnectedState : Bool = false
     public dynamic var CreatedOn : String? = nil
     public dynamic var LastModified : String? = nil
@@ -67,6 +68,7 @@ public class Mojio: Object, Mappable, Entity {
         Name <- map["Name"];
         IMEI <- map["IMEI"];
         LastContactTime <- map["LastContactTime"];
+        Wifi <- map["WifiRadio"]
         GatewayTime <- map["GatewayTime"];
         VehicleId <- map["VehicleId"];
         MojioLocation <- map["Location"];
