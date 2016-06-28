@@ -35,12 +35,12 @@ public class RestClientEndpoints : NSObject {
     public static let Vin : String = "vin/"
     public static let ServiceSchedule : String = "serviceschedule/"
     public static let Next : String = "next/"
+    public static let Activities : String = "activities/"
     
     // Storage
     // Parameters: Type, Id, Key
-    // e.g. trip/{id}/store/{key}
+    // e.g. trips/{id}/store/{key}
     public static let Storage : String = "%@%@/store/%@"
-    
 }
 
 public class RestClient: NSObject {
@@ -268,8 +268,13 @@ public class RestClient: NSObject {
     
     public func storage(key: String) -> Self {
 
-        self.requestUrl = self.requestV1Url! + String.init(format: RestClientEndpoints.Storage, self.requestEntity!, self.requestEntityId! , key); 
-        return self;
+        self.requestUrl = self.requestV1Url! + String.init(format: RestClientEndpoints.Storage, self.requestEntity!, self.requestEntityId! , key)
+        return self
+    }
+    
+    public func activities() -> Self {
+        self.requestUrl = self.requestUrl! + self.requestEntity! + RestClientEndpoints.Activities
+        return self
     }
     
     public func query(top : String?, skip : String?, filter : String?, select : String?, orderby : String?, since: NSDate?, before: NSDate?, fields: [String]?) -> Self {
@@ -514,6 +519,10 @@ public class RestClient: NSObject {
             
         case RestClientEndpoints.Next:
             let model = Mapper<NextServiceSchedule>().map(dict)
+            return model!
+
+        case RestClientEndpoints.Activities:
+            let model = Mapper<Activity>().map(dict)
             return model!
 
         default:
