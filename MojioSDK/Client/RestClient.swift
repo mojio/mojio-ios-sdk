@@ -523,7 +523,7 @@ public class RestClient: NSObject {
             return model!
 
         case RestClientEndpoints.Activities:
-            let model = Mapper<Activity>().map(dict)
+            let model = Mapper<RootActivity>().map(dict)
             return model!
 
         default:
