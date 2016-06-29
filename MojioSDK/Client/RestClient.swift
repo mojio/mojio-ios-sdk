@@ -273,7 +273,8 @@ public class RestClient: NSObject {
     }
     
     public func activities() -> Self {
-        self.requestUrl = self.requestUrl! + self.requestEntity! + RestClientEndpoints.Activities
+        self.requestEntity = RestClientEndpoints.Activities
+        self.requestUrl = self.requestUrl! + RestClientEndpoints.Activities
         return self
     }
     
@@ -522,7 +523,7 @@ public class RestClient: NSObject {
             return model!
 
         case RestClientEndpoints.Activities:
-            let model = Mapper<Activity>().map(dict)
+            let model = Mapper<RootActivity>().map(dict)
             return model!
 
         default:

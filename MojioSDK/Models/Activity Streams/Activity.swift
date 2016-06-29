@@ -1,5 +1,5 @@
 //
-//  Activity.swift
+//  BaseActivity.swift
 //  MojioSDK
 //
 //  Created by Narayan Sainaney on 2016-06-27.
@@ -9,36 +9,37 @@
 import Foundation
 import ObjectMapper
 
-public class Activity : BaseActivity {
+@objc public class Activity : BaseActivity {
     public dynamic var StartTime : String? = nil
     public dynamic var EndTime : String? = nil
     public dynamic var Duration : String? = nil
     public dynamic var Published : String? = nil
     public dynamic var Updated : String? = nil
-
-    public dynamic var Actor : BaseActivity? = nil
-    public dynamic var Target : BaseActivity? = nil
-    public dynamic var Result : BaseActivity? = nil
-    public dynamic var Object : BaseActivity? = nil
+    
+    public dynamic var Context : String? = nil
+    
+    public dynamic var Location : ActivityLocation? = nil
+    public dynamic var Origin : ActivityLocation? = nil
     public dynamic var Summary : Dictionary<String,String>? = nil
-
+    
+    public required override init() {
+        super.init()
+    }
+    
     public required convenience init?(_ map: Map) {
         self.init()
     }
-
+    
     public override func mapping(map: Map) {
         super.mapping(map)
-        
+        Context <- map["Context"]
+        Location <- map["Location"]
+        Origin <- map["Origin"]
         StartTime <- map["StartTime"]
         EndTime <- map["EndTime"]
         Duration <- map["Duration"]
         Published <- map["Published"]
         Updated <- map["Updated"]
-        
-        Actor <- map["Actor"]
-        Target <- map["Target"]
-        Result <- map["Result"]
-        Object <- map["Object"]
-        Summary <- map["SummaryMap"]        
+        Summary <- map["SummaryMap"]
     }
 }
