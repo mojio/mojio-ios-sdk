@@ -278,7 +278,8 @@ public class RestClient: NSObject {
         return self
     }
     
-    public func query(top : String?, skip : String?, filter : String?, select : String?, orderby : String?, since: NSDate?, before: NSDate?, fields: [String]?) -> Self {
+    
+    public func query(top : String? = nil, skip : String? = nil, filter : String? = nil, select : String? = nil, orderby : String? = nil, count : String? = nil, since: NSDate? = nil, before: NSDate? = nil, fields: [String]? = nil) -> Self {
         
         var requestParams : [String:AnyObject] = [:]
         
@@ -302,6 +303,10 @@ public class RestClient: NSObject {
             requestParams["orderby"] = orderby
         }
         
+        if let count = count {
+            requestParams["includeCount"] = count
+        }
+        
         if let date = since {
             requestParams["since"] = self.sinceBeforeFormatter.stringFromDate(date)
         }
@@ -314,13 +319,16 @@ public class RestClient: NSObject {
             requestParams["fields"] = fields.joinWithSeparator(",")
         }
         
+        
         self.requestParams.update(requestParams)
         return self
     }
     
-    public func query(top : String?, skip : String?, filter : String?, select : String?, orderby : String?) -> Self {
+    /*
+     Don't need this helper function given default values in the other query function
+     public func query(top : String?, skip : String?, filter : String?, select : String?, orderby : String?) -> Self {
         return self.query(top, skip : skip, filter : filter, select : select, orderby : orderby, since: nil, before: nil, fields: nil)
-    }
+    }*/
     
     public func run(completion: (response : AnyObject) -> Void, failure: (error : AnyObject?) -> Void) {
         
@@ -422,8 +430,14 @@ public class RestClient: NSObject {
                     for  obj in dataArray {
                         array.addObject(self.parseDict(obj as! NSDictionary)!)
                     }
+                    var comp : AnyObject = array
+                    if let doCount = requestParams["includeCount"] {
+                        if let count = responseDict.objectForKey("TotalCount") as? Int {
+                            comp = Result(data: array, count: count)
+                        }
+                    }
                     
-                    completion(response: array)
+                    completion(response: comp)
                 }
                 else {
                     if let obj = self.parseDict(responseDict) {
