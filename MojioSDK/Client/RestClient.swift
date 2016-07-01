@@ -36,6 +36,7 @@ public class RestClientEndpoints : NSObject {
     public static let ServiceSchedule : String = "serviceschedule/"
     public static let Next : String = "next/"
     public static let Activities : String = "activities/"
+    public static let NotificationSettings : String = "activities/settings/"
     
     // Storage
     // Parameters: Type, Id, Key
@@ -230,13 +231,12 @@ public class RestClient: NSObject {
 
         return self
     }
-    
-//    public func vehicleTrips(vehicleId : String) -> Self {
-//        self.requestEntity = RestClientEndpoints.Trips
-//        self.requestUrl = self.requestUrl! + RestClientEndpoints.Vehicles + vehicleId + "/trips"
-//        
-//        return self
-//    }
+
+    public func notificationSettings() -> Self {
+        self.requestEntity = RestClientEndpoints.NotificationSettings
+        self.requestUrl = self.requestUrl! + RestClientEndpoints.NotificationSettings
+        return self
+    }
     
     public func address() -> Self {
         self.requestEntity = RestClientEndpoints.Address
@@ -538,6 +538,10 @@ public class RestClient: NSObject {
 
         case RestClientEndpoints.Activities:
             let model = Mapper<RootActivity>().map(dict)
+            return model!
+            
+        case RestClientEndpoints.NotificationSettings:
+            let model = Mapper<NotificationsSettings>().map(dict)
             return model!
 
         default:
