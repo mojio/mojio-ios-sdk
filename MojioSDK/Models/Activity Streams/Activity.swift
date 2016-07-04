@@ -9,7 +9,7 @@
 import Foundation
 import ObjectMapper
 
-@objc public class Activity : BaseActivity {
+public class Activity : BaseActivity {
     public dynamic var StartTime : String? = nil
     public dynamic var EndTime : String? = nil
     public dynamic var Duration : String? = nil
@@ -21,6 +21,7 @@ import ObjectMapper
     public dynamic var Location : ActivityLocation? = nil
     public dynamic var Origin : ActivityLocation? = nil
     public dynamic var Summary : Dictionary<String,String>? = nil
+    public var Icon : Dictionary<String, AnyObject>? = nil
     
     public required override init() {
         super.init()
@@ -41,5 +42,6 @@ import ObjectMapper
         Published <- map["Published"]
         Updated <- map["Updated"]
         Summary <- map["SummaryMap"]
+        Icon <- map["Icon"]
     }
 }
