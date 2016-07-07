@@ -13,6 +13,8 @@ import ObjectMapper
 import RealmSwift
 import KeychainSwift
 
+public class NextDone {}
+
 public class RestClientEndpoints : NSObject {
     public static let Apps : String = "apps/"
     public static let Secret : String = "secret/"
@@ -55,6 +57,9 @@ public class RestClient: NSObject {
     public dynamic var requestEntity : String?
     public dynamic var requestEntityId: String?
     
+    private dynamic var doNext : Bool = false
+    private dynamic var nextUrl : String? = nil
+    
     private var sinceBeforeFormatter = NSDateFormatter()
     private static let SinceBeforeDateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"
     
@@ -92,6 +97,11 @@ public class RestClient: NSObject {
     
     public func delete() -> Self {
         self.requestMethod = Alamofire.Method.DELETE
+        return self
+    }
+    
+    public func continueNext() -> Self {
+        self.doNext = true
         return self
     }
     
@@ -438,6 +448,25 @@ public class RestClient: NSObject {
                     }
                     
                     completion(response: comp)
+
+                    if (self.doNext) {
+                        if let links = responseDict.objectForKey("Links") as? NSDictionary {
+                            if let next = links.objectForKey("Next") as? String {
+                                // Server sends the same nextUrl sometimes when you've reached the end
+                                if let decoded = next.stringByReplacingPercentEscapesUsingEncoding(NSUTF8StringEncoding) {
+                                    if (decoded != self.nextUrl) {
+                                        self.nextUrl = decoded
+                                        self.requestUrl = decoded
+                                        self.requestParams = [:]
+                                        self.run(completion, failure:  failure)
+                                        return
+                                    }
+                                }
+                            }
+                        }
+                        completion(response: NextDone())
+                    }
+                    
                 }
                 else {
                     if let obj = self.parseDict(responseDict) {
