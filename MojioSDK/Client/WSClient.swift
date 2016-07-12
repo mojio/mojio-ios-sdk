@@ -24,15 +24,15 @@ public class WSClient : RestClient {
         let ws = WebSocket(request: request)
         
         ws.event.close = { code, reason, clean in
-            print("close")
+            print("WEBSOCKET: CLOSED")
         }
         ws.event.error = { error in
-            print("error \(error)")
+            print("WEBSOCKET ERROR: \(error)")
+        }
+        ws.event.open = {
+            print("WEBSOCKET: OPENED")
         }
         
-        ws.event.open = {
-            print("OPENED")
-        }
         ws.event.message = { message in
             if let text = message as? String {
                 do {
