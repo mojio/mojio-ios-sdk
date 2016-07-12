@@ -15,7 +15,7 @@ public class Odometer: Object, Mappable {
     public dynamic var RolloverValue : Float = 0
     public dynamic var BaseUnit : String? = nil
     public dynamic var Timestamp : String? = nil
-    public dynamic var BaseValue : Double = 0
+    public dynamic var BaseValue : Float = 0
     
     // DistanceUnits
     public dynamic var Unit : String? = nil
