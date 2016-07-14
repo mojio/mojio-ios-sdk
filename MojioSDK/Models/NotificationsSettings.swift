@@ -32,6 +32,16 @@ import ObjectMapper
         self.init()
     }
     
+    public func jsonDict () -> NSDictionary {
+        var dictionary = self.toJSON()
+        
+        if let threshold = self.SpeedThreshold {
+            dictionary["SpeedThreshold"] = threshold.jsonDict()
+        }
+        
+        return dictionary
+    }
+    
     public func mapping(map: Map) {        
         SpeedThreshold <- map["SpeedThreshold"]
         EnableGeofenceActivity <- map["EnableGeofenceActivity"]
