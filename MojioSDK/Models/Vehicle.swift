@@ -81,11 +81,13 @@ public class Vehicle: Object, Mappable {
         if self.LicensePlate != nil {
             dictionary.setObject(self.LicensePlate!, forKey: "LicensePlate")
         }
-//        if self.VIN != nil {
-//            dictionary.setObject(self.VIN!, forKey: "VIN")
-//        }
+        
+        if self.VIN != nil {
+            dictionary.setObject(self.VIN!, forKey: "VIN")
+        }
+
         if self.VehicleOdometer != nil {
-            let odo = self.VehicleOdometer!.toDictionary()
+            let odo = self.VehicleOdometer!.jsonDict()
             dictionary.setObject(odo, forKey: "Odometer")
         }
         
