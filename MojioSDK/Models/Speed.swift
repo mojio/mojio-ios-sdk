@@ -31,6 +31,18 @@ public class Speed: Object, Mappable {
         self.init()
     }
     
+    public func jsonDict () -> NSDictionary {
+        let dictionary : NSMutableDictionary = NSMutableDictionary()
+        
+        if self.Unit != nil {
+            dictionary.setObject(self.Unit!, forKey: "Unit")
+        }
+        
+        dictionary.setObject(self.Value, forKey: "Value")
+        
+        return dictionary
+    }
+    
     public func mapping(map: Map) {
         BaseUnit <- map["BaseUnit"];
         SpeedBandId <- map["SpeedBandId"];
