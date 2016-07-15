@@ -13,7 +13,7 @@ import SwiftyJSON
 
 public class WSClient : RestClient {
     
-    public func watch(next: ((AnyObject) -> Void), completion: () -> Void, failure: (ErrorType) -> Void) -> WebSocket {
+    public func watch(next: ((AnyObject) -> Void), completion: () -> Void, failure: (ErrorType) -> Void, file: String = #file) -> WebSocket {
         
         
         let request = NSMutableURLRequest(URL: NSURL(string:super.pushUrl!)!)
@@ -25,16 +25,16 @@ public class WSClient : RestClient {
         let ws = WebSocket(request: request)
         
         ws.event.close = { code, reason, clean in
-            print("WEBSOCKET: CLOSED")
+            print("WEBSOCKET: CLOSED - \(file)")
             completion()
         }
         
         ws.event.error = { error in
-            print("WEBSOCKET ERROR: \(error)")
+            print("WEBSOCKET ERROR:  - \(file) : \(error)")
             failure(MojioError(code: "WebSocketError", message: "Error received \(error)"))
         }
         ws.event.open = {
-            print("WEBSOCKET: OPENED")
+            print("WEBSOCKET: OPENED - \(file)")
         }
         
         ws.event.message = { message in
