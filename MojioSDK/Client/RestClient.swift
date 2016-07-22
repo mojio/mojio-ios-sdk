@@ -39,6 +39,9 @@ public class RestClientEndpoints : NSObject {
     public static let Next : String = "next/"
     public static let Activities : String = "activities/"
     public static let NotificationSettings : String = "activities/settings/"
+    public static let WifiRadio : String = "wifiradio/"
+    public static let Transactions : String = "transactions/"
+    
     
     // Storage
     // Parameters: Type, Id, Key
@@ -288,6 +291,21 @@ public class RestClient: NSObject {
         return self
     }
     
+    public func wifiRadio() -> Self {
+        self.requestEntity = RestClientEndpoints.WifiRadio
+        self.requestUrl = self.requestUrl! + self.requestEntity!
+        
+        return self
+    }
+    
+    public func transactions(transactionId: String?) -> Self {
+        self.requestEntity = RestClientEndpoints.Transactions
+        self.requestEntityId = transactionId
+        self.requestUrl = self.requestUrl! + self.requestEntity! + (transactionId != nil ? transactionId! + "/" : "")
+        self.pushUrl = self.pushUrl! + self.requestEntity! + (transactionId != nil ? transactionId! + "/" : "")
+        
+        return self
+    }
     
     public func query(top : String? = nil, skip : String? = nil, filter : String? = nil, select : String? = nil, orderby : String? = nil, count : String? = nil, since: NSDate? = nil, before: NSDate? = nil, fields: [String]? = nil) -> Self {
         
@@ -372,8 +390,6 @@ public class RestClient: NSObject {
             
             // Add string to body
             let mutableRequest = convertible.URLRequest.mutableCopy() as! NSMutableURLRequest
-            
-            let components = string.componentsSeparatedByString("\\\"")
             
             let quoteEscaped = (string as NSString).stringByReplacingOccurrencesOfString("\\\"", withString: "\\ \\ \"")
             let quotedString = String.init(format: "\"%@\"", quoteEscaped)
@@ -572,6 +588,14 @@ public class RestClient: NSObject {
         case RestClientEndpoints.NotificationSettings:
             let model = Mapper<NotificationsSettings>().map(dict)
             return model!
+            
+        case RestClientEndpoints.WifiRadio:
+            // Returns Transaction Id
+            return dict["TransactionId"]
+            
+        case RestClientEndpoints.Transactions:
+            // Returns Transaction State
+            return dict["State"]
 
         default:
                 return nil

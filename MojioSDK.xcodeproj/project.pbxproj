@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		6B7344AEFEDC6731687DB2A3 /* Pods_MojioSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D8CC37B8959C27E426C51E2 /* Pods_MojioSDK.framework */; };
 		75F77F0E1D19F504000CC2B4 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 75F77F0D1D19F504000CC2B4 /* libz.tbd */; };
+		BC31E3CE1D419E80001649A7 /* Distance.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC31E3CD1D419E80001649A7 /* Distance.swift */; };
+		BC31E3D31D419F5D001649A7 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC31E3CF1D419F5D001649A7 /* Activity.swift */; };
+		BC31E3D41D419F5D001649A7 /* ActivityLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC31E3D01D419F5D001649A7 /* ActivityLocation.swift */; };
+		BC31E3D51D419F5D001649A7 /* BaseActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC31E3D11D419F5D001649A7 /* BaseActivity.swift */; };
+		BC31E3D61D419F5D001649A7 /* RootActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC31E3D21D419F5D001649A7 /* RootActivity.swift */; };
 		BC5F7F031CC58D4000FAB205 /* BaseUnits.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5F7F021CC58D4000FAB205 /* BaseUnits.swift */; };
 		BC72D7A81CC5615600D9740B /* AuthClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC72D7A41CC5615600D9740B /* AuthClient.swift */; };
 		BC72D7A91CC5615600D9740B /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC72D7A51CC5615600D9740B /* AuthViewController.swift */; };
@@ -82,11 +87,7 @@
 		E0312C771CF78EA600B46AA8 /* StorageApiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0312C761CF78EA600B46AA8 /* StorageApiTests.swift */; };
 		E06C95691D25CA2A006AECBB /* NotificationsSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06C95671D25CA2A006AECBB /* NotificationsSettings.swift */; };
 		E06C956A1D25CA2A006AECBB /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06C95681D25CA2A006AECBB /* Result.swift */; };
-		E0E63D2F1D21E01A00DDF336 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E63D2E1D21E01A00DDF336 /* Activity.swift */; };
 		E0E63D351D21E4B900DDF336 /* VehicleActivityData.txt in Resources */ = {isa = PBXBuildFile; fileRef = E0E63D341D21E4B900DDF336 /* VehicleActivityData.txt */; };
-		E0E63D3B1D21EB0700DDF336 /* ActivityLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E63D3A1D21EB0700DDF336 /* ActivityLocation.swift */; };
-		E0E63D3D1D21F0D200DDF336 /* ActivityLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E63D3C1D21F0D200DDF336 /* ActivityLink.swift */; };
-		E0E63D3F1D22147400DDF336 /* BaseActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E63D3E1D22147400DDF336 /* BaseActivity.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -112,6 +113,11 @@
 		5129D3ED3B56C9F0B8D93690 /* Pods-MojioSDKTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MojioSDKTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MojioSDKTests/Pods-MojioSDKTests.debug.xcconfig"; sourceTree = "<group>"; };
 		75F77F0D1D19F504000CC2B4 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		8B04A6C16725DB2223B32D46 /* Pods-MojioSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MojioSDK.release.xcconfig"; path = "Pods/Target Support Files/Pods-MojioSDK/Pods-MojioSDK.release.xcconfig"; sourceTree = "<group>"; };
+		BC31E3CD1D419E80001649A7 /* Distance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Distance.swift; path = Models/Distance.swift; sourceTree = "<group>"; };
+		BC31E3CF1D419F5D001649A7 /* Activity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Activity.swift; path = "Models/Activity Streams/Activity.swift"; sourceTree = "<group>"; };
+		BC31E3D01D419F5D001649A7 /* ActivityLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActivityLocation.swift; path = "Models/Activity Streams/ActivityLocation.swift"; sourceTree = "<group>"; };
+		BC31E3D11D419F5D001649A7 /* BaseActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseActivity.swift; path = "Models/Activity Streams/BaseActivity.swift"; sourceTree = "<group>"; };
+		BC31E3D21D419F5D001649A7 /* RootActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RootActivity.swift; path = "Models/Activity Streams/RootActivity.swift"; sourceTree = "<group>"; };
 		BC5F7F021CC58D4000FAB205 /* BaseUnits.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseUnits.swift; path = Models/BaseUnits.swift; sourceTree = "<group>"; };
 		BC72D7A41CC5615600D9740B /* AuthClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthClient.swift; path = Client/AuthClient.swift; sourceTree = "<group>"; };
 		BC72D7A51CC5615600D9740B /* AuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthViewController.swift; path = Client/AuthViewController.swift; sourceTree = "<group>"; };
@@ -194,11 +200,7 @@
 		E0312C761CF78EA600B46AA8 /* StorageApiTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageApiTests.swift; sourceTree = "<group>"; };
 		E06C95671D25CA2A006AECBB /* NotificationsSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotificationsSettings.swift; path = Models/NotificationsSettings.swift; sourceTree = "<group>"; };
 		E06C95681D25CA2A006AECBB /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Result.swift; path = Models/Result.swift; sourceTree = "<group>"; };
-		E0E63D2E1D21E01A00DDF336 /* Activity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Activity.swift; path = "Models/Activity Streams/Activity.swift"; sourceTree = "<group>"; };
 		E0E63D341D21E4B900DDF336 /* VehicleActivityData.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VehicleActivityData.txt; sourceTree = "<group>"; };
-		E0E63D3A1D21EB0700DDF336 /* ActivityLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActivityLocation.swift; path = "Models/Activity Streams/ActivityLocation.swift"; sourceTree = "<group>"; };
-		E0E63D3C1D21F0D200DDF336 /* ActivityLink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActivityLink.swift; path = "Models/Activity Streams/ActivityLink.swift"; sourceTree = "<group>"; };
-		E0E63D3E1D22147400DDF336 /* BaseActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseActivity.swift; path = "Models/Activity Streams/BaseActivity.swift"; sourceTree = "<group>"; };
 		EE3EF4E93105809182D24A75 /* Pods_MojioSDKTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MojioSDKTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F687FCD3CDD1EFCBD22CB91E /* Pods-MojioSDKTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MojioSDKTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MojioSDKTests/Pods-MojioSDKTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -398,15 +400,16 @@
 		BCC2EFD91CBEF74A004D2759 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				E0E63D2D1D21DF3200DDF336 /* Activity Streams */,
 				BC879B431CBEFFDD00F9177B /* Acceleration.swift */,
 				BC879B441CBEFFDD00F9177B /* Accelerometer.swift */,
+				E0E63D2D1D21DF3200DDF336 /* ActivityStreams */,
 				BC879B451CBEFFDD00F9177B /* Address.swift */,
 				BC879B461CBEFFDD00F9177B /* App.swift */,
 				BC5F7F021CC58D4000FAB205 /* BaseUnits.swift */,
 				BC879B471CBEFFDD00F9177B /* Battery.swift */,
 				BC879B481CBEFFDD00F9177B /* BooleanState.swift */,
 				BC879B491CBEFFDD00F9177B /* DiagnosticCode.swift */,
+				BC31E3CD1D419E80001649A7 /* Distance.swift */,
 				BC879B4B1CBEFFDD00F9177B /* Email.swift */,
 				BCC8A49C1D19EAAD00E14E2B /* Error.swift */,
 				BC879B4C1CBEFFDD00F9177B /* FuelCapacity.swift */,
@@ -438,15 +441,15 @@
 			name = Models;
 			sourceTree = "<group>";
 		};
-		E0E63D2D1D21DF3200DDF336 /* Activity Streams */ = {
+		E0E63D2D1D21DF3200DDF336 /* ActivityStreams */ = {
 			isa = PBXGroup;
 			children = (
-				E0E63D2E1D21E01A00DDF336 /* Activity.swift */,
-				E0E63D3A1D21EB0700DDF336 /* ActivityLocation.swift */,
-				E0E63D3C1D21F0D200DDF336 /* ActivityLink.swift */,
-				E0E63D3E1D22147400DDF336 /* BaseActivity.swift */,
+				BC31E3CF1D419F5D001649A7 /* Activity.swift */,
+				BC31E3D01D419F5D001649A7 /* ActivityLocation.swift */,
+				BC31E3D11D419F5D001649A7 /* BaseActivity.swift */,
+				BC31E3D21D419F5D001649A7 /* RootActivity.swift */,
 			);
-			name = "Activity Streams";
+			name = ActivityStreams;
 			sourceTree = "<group>";
 		};
 		E237B93C3A63C45BF68CDBF8 /* Pods */ = {
@@ -713,10 +716,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				BC879B671CBEFFDD00F9177B /* TimePeriod.swift in Sources */,
-				E0E63D3D1D21F0D200DDF336 /* ActivityLink.swift in Sources */,
 				BC879B901CBF000A00F9177B /* KeychainManager.swift in Sources */,
 				BC8ECA501D226690009C6164 /* WifiRadio.swift in Sources */,
 				BC879B6D1CBEFFDD00F9177B /* Heading.swift in Sources */,
+				BC31E3D51D419F5D001649A7 /* BaseActivity.swift in Sources */,
 				BC879B771CBEFFDD00F9177B /* Speed.swift in Sources */,
 				BC879B701CBEFFDD00F9177B /* MeasurementStatistics.swift in Sources */,
 				BC879B641CBEFFDD00F9177B /* Battery.swift in Sources */,
@@ -729,6 +732,7 @@
 				BC879B621CBEFFDD00F9177B /* Address.swift in Sources */,
 				BC879B401CBEFFC000F9177B /* Vin.swift in Sources */,
 				BC879B6F1CBEFFDD00F9177B /* Location.swift in Sources */,
+				BC31E3D31D419F5D001649A7 /* Activity.swift in Sources */,
 				BCC8A49E1D19EAAD00E14E2B /* Error.swift in Sources */,
 				BC879B6A1CBEFFDD00F9177B /* FuelEfficiency.swift in Sources */,
 				BCC8A4A01D19EABF00E14E2B /* WSClient.swift in Sources */,
@@ -741,11 +745,10 @@
 				BC879B411CBEFFC000F9177B /* VinDetails.swift in Sources */,
 				BC879B681CBEFFDD00F9177B /* Email.swift in Sources */,
 				BC879B711CBEFFDD00F9177B /* Mojio.swift in Sources */,
+				BC31E3D61D419F5D001649A7 /* RootActivity.swift in Sources */,
 				BC879B721CBEFFDD00F9177B /* Odometer.swift in Sources */,
 				BC879B631CBEFFDD00F9177B /* App.swift in Sources */,
-				E0E63D3B1D21EB0700DDF336 /* ActivityLocation.swift in Sources */,
 				BC879B661CBEFFDD00F9177B /* DiagnosticCode.swift in Sources */,
-				E0E63D2F1D21E01A00DDF336 /* Activity.swift in Sources */,
 				BC879B3D1CBEFFC000F9177B /* ServiceBulletin.swift in Sources */,
 				BC879B3F1CBEFFC000F9177B /* Transmission.swift in Sources */,
 				BC879B3B1CBEFFC000F9177B /* PlatformServiceSchedule.swift in Sources */,
@@ -756,9 +759,9 @@
 				BC879B3C1CBEFFC000F9177B /* Recall.swift in Sources */,
 				BC879B421CBEFFC000F9177B /* Warranty.swift in Sources */,
 				BC879B611CBEFFDD00F9177B /* Accelerometer.swift in Sources */,
+				BC31E3CE1D419E80001649A7 /* Distance.swift in Sources */,
 				BC879B691CBEFFDD00F9177B /* FuelCapacity.swift in Sources */,
 				BC879B741CBEFFDD00F9177B /* ProperAcceleration.swift in Sources */,
-				E0E63D3F1D22147400DDF336 /* BaseActivity.swift in Sources */,
 				BC879B731CBEFFDD00F9177B /* PhoneNumber.swift in Sources */,
 				BC879B3E1CBEFFC000F9177B /* ServiceSchedule.swift in Sources */,
 				BC879B6C1CBEFFDD00F9177B /* Group.swift in Sources */,
@@ -767,6 +770,7 @@
 				BC879B761CBEFFDD00F9177B /* Score.swift in Sources */,
 				BC879B8F1CBF000A00F9177B /* ClientEnvironment.swift in Sources */,
 				BC879B6E1CBEFFDD00F9177B /* Image.swift in Sources */,
+				BC31E3D41D419F5D001649A7 /* ActivityLocation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
