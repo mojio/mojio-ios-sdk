@@ -26,6 +26,22 @@ public class Distance: Object, Mappable {
         self.init()
     }
     
+    public func jsonDict() -> NSDictionary {
+        var dictionary : [String:AnyObject] = [:]
+        
+        if let baseUnit = self.BaseUnit {
+            dictionary["BaseUnit"] = baseUnit
+            dictionary["BaseValue"] = self.BaseValue
+        }
+        
+        if let unit = self.Unit {
+            dictionary["Unit"] = unit
+            dictionary["Value"] = self.Value
+        }
+
+        return dictionary
+    }
+    
     public func mapping(map: Map) {
         BaseUnit <- map["BaseUnit"];
         SpeedBandId <- map["SpeedBandId"];

@@ -82,6 +82,7 @@
 		BCC2EFCF1CBEF6DB004D2759 /* MojioSDKUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC2EFCE1CBEF6DB004D2759 /* MojioSDKUITests.swift */; };
 		BCC8A49E1D19EAAD00E14E2B /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC8A49C1D19EAAD00E14E2B /* Error.swift */; };
 		BCC8A4A01D19EABF00E14E2B /* WSClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC8A49F1D19EABF00E14E2B /* WSClient.swift */; };
+		BCF2DE4A1D454B8D00EDD376 /* Geofence.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF2DE491D454B8D00EDD376 /* Geofence.swift */; };
 		C67BB6D6DAEBC839F3C0B254 /* Pods_MojioSDKTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE3EF4E93105809182D24A75 /* Pods_MojioSDKTests.framework */; };
 		E0312C751CF7782F00B46AA8 /* BaseApiTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0312C741CF7782F00B46AA8 /* BaseApiTest.swift */; };
 		E0312C771CF78EA600B46AA8 /* StorageApiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0312C761CF78EA600B46AA8 /* StorageApiTests.swift */; };
@@ -196,6 +197,7 @@
 		BCC2EFD01CBEF6DB004D2759 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BCC8A49C1D19EAAD00E14E2B /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Error.swift; path = Models/Error.swift; sourceTree = "<group>"; };
 		BCC8A49F1D19EABF00E14E2B /* WSClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WSClient.swift; path = Client/WSClient.swift; sourceTree = "<group>"; };
+		BCF2DE491D454B8D00EDD376 /* Geofence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Geofence.swift; path = Models/Geofence.swift; sourceTree = "<group>"; };
 		E0312C741CF7782F00B46AA8 /* BaseApiTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseApiTest.swift; sourceTree = "<group>"; };
 		E0312C761CF78EA600B46AA8 /* StorageApiTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageApiTests.swift; sourceTree = "<group>"; };
 		E06C95671D25CA2A006AECBB /* NotificationsSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotificationsSettings.swift; path = Models/NotificationsSettings.swift; sourceTree = "<group>"; };
@@ -415,6 +417,7 @@
 				BC879B4C1CBEFFDD00F9177B /* FuelCapacity.swift */,
 				BC879B4D1CBEFFDD00F9177B /* FuelEfficiency.swift */,
 				BC879B4E1CBEFFDD00F9177B /* FuelLevel.swift */,
+				BCF2DE491D454B8D00EDD376 /* Geofence.swift */,
 				BC879B4F1CBEFFDD00F9177B /* Group.swift */,
 				BC879B501CBEFFDD00F9177B /* Heading.swift */,
 				BC879B511CBEFFDD00F9177B /* Image.swift */,
@@ -736,6 +739,7 @@
 				BCC8A49E1D19EAAD00E14E2B /* Error.swift in Sources */,
 				BC879B6A1CBEFFDD00F9177B /* FuelEfficiency.swift in Sources */,
 				BCC8A4A01D19EABF00E14E2B /* WSClient.swift in Sources */,
+				BCF2DE4A1D454B8D00EDD376 /* Geofence.swift in Sources */,
 				BC879B7C1CBEFFDD00F9177B /* VehicleMeasures.swift in Sources */,
 				E06C956A1D25CA2A006AECBB /* Result.swift in Sources */,
 				BC879B6B1CBEFFDD00F9177B /* FuelLevel.swift in Sources */,
