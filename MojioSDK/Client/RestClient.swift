@@ -41,7 +41,7 @@ public class RestClientEndpoints : NSObject {
     public static let NotificationSettings : String = "activities/settings/"
     public static let WifiRadio : String = "wifiradio/"
     public static let Transactions : String = "transactions/"
-    
+    public static let Geofences : String = "geofences/"
     
     // Storage
     // Parameters: Type, Id, Key
@@ -303,6 +303,15 @@ public class RestClient: NSObject {
         self.requestEntityId = transactionId
         self.requestUrl = self.requestUrl! + self.requestEntity! + (transactionId != nil ? transactionId! + "/" : "")
         self.pushUrl = self.pushUrl! + self.requestEntity! + (transactionId != nil ? transactionId! + "/" : "")
+        
+        return self
+    }
+    
+    public func geofences(geofenceId: String?) -> Self {
+        self.requestEntity = RestClientEndpoints.Geofences
+        self.requestEntityId = geofenceId
+        self.requestUrl = self.requestUrl! + self.requestEntity! + (geofenceId != nil ? geofenceId! + "/" : "")
+        self.pushUrl = self.pushUrl! + self.requestEntity! + (geofenceId != nil ? geofenceId! + "/" : "")
         
         return self
     }
@@ -596,6 +605,10 @@ public class RestClient: NSObject {
         case RestClientEndpoints.Transactions:
             // Returns Transaction State
             return dict["State"]
+            
+        case RestClientEndpoints.Geofences:
+            let model = Mapper<Geofence>().map(dict)
+            return model!
 
         default:
                 return nil
