@@ -52,7 +52,37 @@ public class WifiRadio: Object, Mappable  {
         }
         
         if let timeToLive: Int = timeToLive where timeToLive > 0 {
-            dictionary.setObject(NSNumber(long: timeToLive).stringValue, forKey: "TimeToLive")
+            let formatter = NSNumberFormatter()
+            formatter.minimumIntegerDigits = 2
+            formatter.maximumIntegerDigits = 2
+            formatter.minimumFractionDigits = 0
+            formatter.maximumFractionDigits = 0
+            
+            var timespan = ""
+
+            let seconds = formatter.stringFromNumber(NSNumber(long: timeToLive % 60)) ?? ""
+            if timeToLive < 60 {
+                // Less than 60 seconds
+                timespan = String(format:"00:00:%@", seconds)
+            }
+            else {
+                let minutes = formatter.stringFromNumber(NSNumber(long: (timeToLive % 3600) / 60)) ?? ""
+                if timeToLive < 3600 {
+                    // Less than 1 hour
+                    timespan = String(
+                        format:"00:%@:%@",
+                        minutes,
+                        seconds)
+                }
+                else {
+                    let hours = formatter.stringFromNumber(NSNumber(long: timeToLive / 3600)) ?? ""
+                    timespan = String(format:"%@:%@:%@", hours, minutes, seconds)
+                }
+            }
+            
+            if timespan.characters.count > 0 {
+                dictionary.setObject(timespan, forKey: "TimeToLive")
+            }
         }
         
         return dictionary
