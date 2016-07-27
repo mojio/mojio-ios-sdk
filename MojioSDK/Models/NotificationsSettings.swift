@@ -67,6 +67,12 @@ public class NotificationsSettings : NSObject, Mappable {
             dictionary["SpeedThreshold"] = threshold.jsonDict()
         }
         
+        var geofences: [[String: AnyObject]] = []
+        for geofence in self.Geofences {
+            geofences.append(geofence.toJSON())
+        }
+        dictionary["Geofences"] = geofences
+        
         return dictionary
     }
     
