@@ -9,13 +9,13 @@
 import Foundation
 import ObjectMapper
 
-@objc public class BaseActivity : NSObject, Mappable {
+public class BaseActivity : NSObject, Mappable {
     public dynamic var Id : String? = nil
     public dynamic var Type : String? = nil
     public dynamic var Href : String? = nil
     public dynamic var Name : String? = nil
     public dynamic var NameMap : Dictionary<String, String>? = nil
-
+    
     public required convenience init?(_ map: Map) {
         self.init()
     }

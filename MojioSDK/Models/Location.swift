@@ -63,6 +63,7 @@ public class Location: Object, Mappable {
     public dynamic var Timestamp : String? = nil
     public dynamic var Lat : Float = 0
     public dynamic var Lng : Float = 0
+    public dynamic var Radius : Float = 0
     
     // LocationStatus
     public dynamic var Status : String? = nil

@@ -23,6 +23,7 @@ public class ActivityLocation : BaseActivity {
         var location = Location()
         location.Lat = self.Latitude
         location.Lng = self.Longitude
+        location.Radius = self.Radius
         location.Altitude = self.Altitude
         if let name = super.Name {
             location.LocationAddress = Address()
