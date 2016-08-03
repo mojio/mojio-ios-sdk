@@ -57,8 +57,9 @@ public class Geofence: Object, Mappable {
     public dynamic var Name: String? = nil
     public dynamic var Description: String? = nil
     public dynamic var Region: GeofenceRegion? = nil
-    public dynamic var Enabled: Bool = false
     public var Tags = List<StringObject>()
+    public dynamic var CreatedOn : String? = nil
+    public dynamic var LastModified : String? = nil
     
     public required convenience init?(_ map: Map) {
         self.init()
@@ -99,7 +100,8 @@ public class Geofence: Object, Mappable {
         Name <- map["Name"]
         Description <- map["Description"]
         Region <- map["Region"]
-        Enabled <- map["Enabled"]
+        CreatedOn <- map["CreatedOn"];
+        LastModified <- map["LastModified"];
         
         var tags = Array<String>()
         tags <- map["Tags"]
