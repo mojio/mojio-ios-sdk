@@ -36,21 +36,27 @@ public class WifiRadio: Object, Mappable  {
     }
    
     // Time to live in seconds for the update request 
-    public func jsonDict(timeToLive: Int? = nil) -> NSDictionary {
+    public func jsonDict(timeToLive: Int? = nil, fields: [String]? = nil) -> NSDictionary {
         let dictionary : NSMutableDictionary = NSMutableDictionary()
         
-        if let ssid = self.SSID {
+        // Default to use all fields
+        var updateFields: Set<String> = ["SSID", "Password", "Status"]
+        if let fields = fields {
+            updateFields = Set<String>(fields)
+        }
+
+        if let ssid = self.SSID where updateFields.contains("SSID") {
             dictionary.setObject(ssid, forKey: "SSID")
         }
 
-        if let password = self.Password {
+        if let password = self.Password where updateFields.contains("Password") {
             dictionary.setObject(password, forKey: "Password")
         }
-        
-        if let status = self.Status {
+
+        if let status = self.Status where updateFields.contains("Status") {
             dictionary.setObject(status, forKey: "Status")
         }
-        
+
         if let timeToLive: Int = timeToLive where timeToLive > 0 {
             let formatter = NSNumberFormatter()
             formatter.minimumIntegerDigits = 2
