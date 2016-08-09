@@ -358,15 +358,25 @@ public class AuthClient: NSObject, AuthControllerDelegate {
     }
     
     // Register
-    public func register(mobile: String, email: String, password: String, completion: () -> Void, failure: (response : NSDictionary?) -> Void) {
+    public func register(mobile: String, email: String, password: String, completion: (authToken: AuthToken) -> Void, failure: (response : NSDictionary?) -> Void) {
         
         let registerEndpoint = ClientEnvironment.SharedInstance.getAccountsEndpoint() + AccountClientEndpoints.Register
         let headers = ["Authorization" : self.generateBasicAuthHeader(), "Content-Type" : "application/json", "Accept" : "application/json"]
 
+        // Step 1: Create an account for the user
         Alamofire.request(.POST, registerEndpoint, parameters: ["PhoneNumber" : mobile, "Email" : email, "Password" : password, "ConfirmPassword" : password], encoding: .JSON, headers: headers).responseJSON { response in
 
             if response.response?.statusCode == 200 {
-                completion()
+                
+                // Step 2: If account creation was successful, log the user in
+                self.login(email, password: password, completion: {authToken in
+                    
+                    completion(authToken: authToken)
+                    
+                    }, failure: {response in
+                        failure(response: response)
+                })
+                
             }
             else {
                 failure(response: response.result.value as? NSDictionary)
