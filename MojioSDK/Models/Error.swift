@@ -18,3 +18,15 @@ public struct MojioError : ErrorType {
         self.dictionary = dictionary
     }
 }
+
+public struct AuthDisplayError : ErrorType {
+    public var message1 : String?
+    public var message2 : String?
+    public var message3 : String?
+
+    public init(message1 : String?, message2 : String? = nil, message3 : String? = nil) {
+        self.message1 = message1
+        self.message2 = message2
+        self.message3 = message3
+    }
+}
