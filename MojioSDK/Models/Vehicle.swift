@@ -15,6 +15,8 @@ public class Vehicle: Object, Mappable {
     public dynamic var Name : String? = nil
     public dynamic var LicensePlate : String? = nil
     public dynamic var VIN : String? = nil
+    public dynamic var DetectedVIN : String? = nil
+    public dynamic var OverrideVIN : String? = nil    
     public dynamic var CurrentTrip : String? = nil
     public dynamic var MojioId : String? = nil
     public dynamic var VehicleImage : Image? = nil
@@ -79,6 +81,13 @@ public class Vehicle: Object, Mappable {
             dictionary.setObject(self.VIN!, forKey: "VIN")
         }
 
+        if let detectedVin = self.DetectedVIN {
+            dictionary["DetectedVIN"] = detectedVin
+        }
+        
+        if let overrideVIN = self.OverrideVIN {
+            dictionary["OverrideVIN"] = overrideVIN
+        }
         return dictionary
     }
     
@@ -133,6 +142,8 @@ public class Vehicle: Object, Mappable {
         Name <- map["Name"];
         LicensePlate <- map["LicensePlate"];
         VIN <- map["VIN"];
+        DetectedVIN <- map["DetectedVIN"];
+        OverrideVIN <- map["OverrideVIN"];
         CurrentTrip <- map["CurrentTrip"];
         MojioId <- map["MojioId"];
         VehicleImage <- map["Image"];
