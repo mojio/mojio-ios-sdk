@@ -54,6 +54,8 @@ public class Vehicle: Object, Mappable {
     public dynamic var CreatedOn : String? = nil
     public dynamic var LastModified : String? = nil
     
+    public dynamic var Deleted : Bool = false
+    
     public required convenience init?(_ map: Map) {
         self.init()
     }
@@ -173,5 +175,6 @@ public class Vehicle: Object, Mappable {
         Id <- map["Id"];
         CreatedOn <- map["CreatedOn"];
         LastModified <- map["LastModified"];
+        Deleted <- map["Deleted"];
     }
 }

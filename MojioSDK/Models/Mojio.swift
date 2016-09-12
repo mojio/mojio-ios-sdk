@@ -23,6 +23,7 @@ public class Mojio: Object, Mappable {
     public dynamic var ConnectedState : Bool = false
     public dynamic var CreatedOn : String? = nil
     public dynamic var LastModified : String? = nil
+    public dynamic var Deleted : Bool = false
 
     public required convenience init?(_ map: Map) {
         self.init()
@@ -75,5 +76,6 @@ public class Mojio: Object, Mappable {
         ConnectedState <- map["ConnectedState"]
         CreatedOn <- map["CreatedOn"];
         LastModified <- map["LastModified"];
+        Deleted <- map["Deleted"];
     }
 }
