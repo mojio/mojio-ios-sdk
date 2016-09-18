@@ -11,7 +11,7 @@ target 'MojioSDK' do
     pod 'Alamofire', '3.4.1'
     pod 'SwiftyJSON'
     pod 'ObjectMapper'
-    pod 'RealmSwift'
+    pod 'RealmSwift', '1.0.2'
     pod 'KeychainSwift', '~> 3.0.16'
     pod 'OHHTTPStubs'
     pod 'OHHTTPStubs/Swift'
