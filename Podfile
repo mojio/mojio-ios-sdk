@@ -8,10 +8,10 @@ workspace 'MojioSDK.xcworkspace'
 target 'MojioSDK' do
     xcodeproj 'MojioSDK.xcodeproj'
 
-    pod 'Alamofire', '3.4.1'
+    pod 'Alamofire'
     pod 'SwiftyJSON'
     pod 'ObjectMapper'
-    pod 'RealmSwift', '1.0.2'
+    pod 'RealmSwift'
     pod 'KeychainSwift', '~> 3.0.16'
     pod 'OHHTTPStubs'
     pod 'OHHTTPStubs/Swift'
