@@ -28,7 +28,7 @@ public class VehicleMeasures: Object, Mappable {
     // FuelType
     public dynamic var FuelType : String? = nil
     public dynamic var GatewayTime : String? = nil
-    public dynamic var HarshEventState : BooleanState? = nil
+    public dynamic var HarshEventState : HarshEvent? = nil
     public dynamic var VehicleHeading : Heading? = nil
     public dynamic var IdleState : BooleanState? = nil
     public dynamic var IgnitionState : BooleanState? = nil
@@ -44,6 +44,7 @@ public class VehicleMeasures: Object, Mappable {
     public dynamic var VirtualOdometer : Odometer? = nil
     public dynamic var VehicleOdometer : Odometer? = nil
     public dynamic var Time : String? = nil
+    public dynamic var DisturbanceState : BooleanState? = nil
     
     public required convenience init?(_ map: Map) {
         self.init()

@@ -9,7 +9,7 @@ target 'MojioSDK' do
     xcodeproj 'MojioSDK.xcodeproj'
 
     pod 'Alamofire', '3.4.1'
-    pod 'SwiftyJSON'
+    pod 'SwiftyJSON', '2.3.2'
     pod 'ObjectMapper'
     pod 'RealmSwift', '1.0.2'
     pod 'KeychainSwift', '~> 3.0.16'

@@ -38,7 +38,7 @@ public class Vehicle: Object, Mappable {
     // FuelType
     public dynamic var FuelType : String? = nil
     public dynamic var GatewayTime : String? = nil
-    public dynamic var VehicleHarshEventState : BooleanState? = nil
+    public dynamic var VehicleHarshEventState : HarshEvent? = nil
     public dynamic var VehicleIdleState : BooleanState? = nil
     public dynamic var VehicleIgnitionState : BooleanState? = nil
     public dynamic var VehicleBattery : Battery? = nil

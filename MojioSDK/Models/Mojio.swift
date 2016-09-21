@@ -20,7 +20,7 @@ public class Mojio: Object, Mappable {
     public dynamic var MojioLocation : Location? = nil
     public var Tags = List<StringObject>()
     public dynamic var Wifi : WifiRadio? = nil
-    public dynamic var ConnectedState : Bool = false
+    public dynamic var ConnectedState : BooleanState? = nil
     public dynamic var CreatedOn : String? = nil
     public dynamic var LastModified : String? = nil
     public dynamic var Deleted : Bool = false
