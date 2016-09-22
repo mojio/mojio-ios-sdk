@@ -89,6 +89,8 @@
 		E06C95691D25CA2A006AECBB /* NotificationsSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06C95671D25CA2A006AECBB /* NotificationsSettings.swift */; };
 		E06C956A1D25CA2A006AECBB /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06C95681D25CA2A006AECBB /* Result.swift */; };
 		E0E63D351D21E4B900DDF336 /* VehicleActivityData.txt in Resources */ = {isa = PBXBuildFile; fileRef = E0E63D341D21E4B900DDF336 /* VehicleActivityData.txt */; };
+		F9623AAE1D935D74005C10F2 /* IdleState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9623AAD1D935D74005C10F2 /* IdleState.swift */; };
+		F9E9FDAE1D93122A00DCB690 /* HarshEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E9FDAD1D93122A00DCB690 /* HarshEvent.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -205,6 +207,8 @@
 		E0E63D341D21E4B900DDF336 /* VehicleActivityData.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VehicleActivityData.txt; sourceTree = "<group>"; };
 		EE3EF4E93105809182D24A75 /* Pods_MojioSDKTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MojioSDKTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F687FCD3CDD1EFCBD22CB91E /* Pods-MojioSDKTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MojioSDKTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MojioSDKTests/Pods-MojioSDKTests.release.xcconfig"; sourceTree = "<group>"; };
+		F9623AAD1D935D74005C10F2 /* IdleState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IdleState.swift; path = Models/IdleState.swift; sourceTree = "<group>"; };
+		F9E9FDAD1D93122A00DCB690 /* HarshEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HarshEvent.swift; path = Models/HarshEvent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -402,6 +406,7 @@
 		BCC2EFD91CBEF74A004D2759 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				F9623AAD1D935D74005C10F2 /* IdleState.swift */,
 				BC879B431CBEFFDD00F9177B /* Acceleration.swift */,
 				BC879B441CBEFFDD00F9177B /* Accelerometer.swift */,
 				E0E63D2D1D21DF3200DDF336 /* ActivityStreams */,
@@ -419,6 +424,7 @@
 				BC879B4E1CBEFFDD00F9177B /* FuelLevel.swift */,
 				BCF2DE491D454B8D00EDD376 /* Geofence.swift */,
 				BC879B4F1CBEFFDD00F9177B /* Group.swift */,
+				F9E9FDAD1D93122A00DCB690 /* HarshEvent.swift */,
 				BC879B501CBEFFDD00F9177B /* Heading.swift */,
 				BC879B511CBEFFDD00F9177B /* Image.swift */,
 				BC879B521CBEFFDD00F9177B /* Location.swift */,
@@ -735,6 +741,7 @@
 				BC879B621CBEFFDD00F9177B /* Address.swift in Sources */,
 				BC879B401CBEFFC000F9177B /* Vin.swift in Sources */,
 				BC879B6F1CBEFFDD00F9177B /* Location.swift in Sources */,
+				F9E9FDAE1D93122A00DCB690 /* HarshEvent.swift in Sources */,
 				BC31E3D31D419F5D001649A7 /* Activity.swift in Sources */,
 				BCC8A49E1D19EAAD00E14E2B /* Error.swift in Sources */,
 				BC879B6A1CBEFFDD00F9177B /* FuelEfficiency.swift in Sources */,
@@ -766,6 +773,7 @@
 				BC31E3CE1D419E80001649A7 /* Distance.swift in Sources */,
 				BC879B691CBEFFDD00F9177B /* FuelCapacity.swift in Sources */,
 				BC879B741CBEFFDD00F9177B /* ProperAcceleration.swift in Sources */,
+				F9623AAE1D935D74005C10F2 /* IdleState.swift in Sources */,
 				BC879B731CBEFFDD00F9177B /* PhoneNumber.swift in Sources */,
 				BC879B3E1CBEFFC000F9177B /* ServiceSchedule.swift in Sources */,
 				BC879B6C1CBEFFDD00F9177B /* Group.swift in Sources */,
