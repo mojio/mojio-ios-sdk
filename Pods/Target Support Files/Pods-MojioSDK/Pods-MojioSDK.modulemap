@@ -1,6 +1,0 @@
-framework module Pods_MojioSDK {
-  umbrella header "Pods-MojioSDK-umbrella.h"
-
-  export *
-  module * { export * }
-}
