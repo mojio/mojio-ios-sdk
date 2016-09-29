@@ -8,8 +8,6 @@
 
 import Foundation
 import ObjectMapper
-import RealmSwift
-import Realm
 
 public class GeofenceRegionType : NSObject {
     public static let Circle = "Circle"

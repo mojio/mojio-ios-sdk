@@ -8,7 +8,6 @@
 
 import UIKit
 import ObjectMapper
-import RealmSwift
 
 public class Mojio: Mappable {
     public dynamic var Id : String? = nil

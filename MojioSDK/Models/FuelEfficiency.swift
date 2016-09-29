@@ -8,7 +8,6 @@
 
 import UIKit
 import ObjectMapper
-import RealmSwift
 
 public class FuelEfficiencyUnits : NSObject {
     public static let MilesPerGallon : String = "MilesPerGallon"

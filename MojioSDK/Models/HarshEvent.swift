@@ -8,7 +8,6 @@
 
 import UIKit
 import ObjectMapper
-import RealmSwift
 
 public class HarshEventEventTypes : NSObject {
     public static let Acceleration : String = "Acceleration"

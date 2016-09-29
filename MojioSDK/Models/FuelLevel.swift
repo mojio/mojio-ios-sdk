@@ -8,7 +8,6 @@
 
 import UIKit
 import ObjectMapper
-import RealmSwift
 
 public class FuelLevelUnits : NSObject {
     public static let Percentage : String = "Percentage"

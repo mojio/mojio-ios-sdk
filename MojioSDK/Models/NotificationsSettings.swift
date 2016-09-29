@@ -8,7 +8,6 @@
 
 import Foundation
 import ObjectMapper
-import RealmSwift
 
 public class SettingsGeofence : Mappable {
     

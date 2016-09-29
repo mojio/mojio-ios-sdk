@@ -8,7 +8,6 @@
 
 import UIKit
 import ObjectMapper
-import RealmSwift
 
 public class HeadingUnits : NSObject {
     public static let Degree : String = "Degree"

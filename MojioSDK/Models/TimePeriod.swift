@@ -8,7 +8,6 @@
 
 import UIKit
 import ObjectMapper
-import RealmSwift
 
 public class TimePeriodUnits : NSObject {
     public static let Ticks : String = "Ticks"

@@ -10,7 +10,6 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import ObjectMapper
-import RealmSwift
 import KeychainSwift
 
 public class NextDone {}
@@ -618,34 +617,6 @@ public class RestClient: NSObject {
     func accessToken() -> String? {
         return KeychainManager().getAuthToken().accessToken
     }    
-}
-
-public extension Object {
-    public func toDictionary() -> [String:AnyObject] {
-        let properties = self.objectSchema.properties.map { $0.name }
-        var dicProps = [String:AnyObject]()
-        for (key, value) in self.dictionaryWithValuesForKeys(properties) {
-            if let value = value as? ListBase {
-                dicProps[key] = value.toArray()
-            } else if let value = value as? Object {
-                dicProps[key] = value.toDictionary()
-            } else {
-                dicProps[key] = value
-            }
-        }
-        return dicProps
-    }
-}
-
-public extension ListBase {
-    public func toArray() -> [AnyObject] {
-        var _toArray = [AnyObject]()
-        for i in 0..<self._rlmArray.count {
-            let obj = unsafeBitCast(self._rlmArray[i], Object.self)
-            _toArray.append(obj.toDictionary())
-        }
-        return _toArray
-    }
 }
 
 public extension Dictionary {

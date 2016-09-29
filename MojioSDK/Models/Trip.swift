@@ -9,12 +9,11 @@
 import UIKit
 import Foundation
 import ObjectMapper
-import RealmSwift
 
 public class Trip: Mappable {
     public dynamic var VehicleId : String? = nil
     public dynamic var Name : String? = nil
-    public var Tags = List<StringObject>();
+    public var Tags : [String] = []
     public dynamic var MojioId : String? = nil
     public dynamic var Completed : Bool = false
     public dynamic var TripDuration : String? = nil
@@ -47,10 +46,6 @@ public class Trip: Mappable {
     public static func primaryKey() -> String? {
         return "Id"
     }
-
-    public func TagsArray() -> NSArray {
-        return self.Tags.toArray()
-    }
     
     public func json() -> String? {
         
@@ -65,17 +60,7 @@ public class Trip: Mappable {
     }
     
     public func mapping(map: Map) {
-        
-        var tags = Array<String>()
-        tags <- map["Tags"]
-        
-        for tag in tags {
-            let string = StringObject()
-            string.value = tag
-            
-            self.Tags.append(string)
-        }
-        
+                
         VehicleId <- map["VehicleId"];
         Name <- map["Name"];
         MojioId <- map["MojioId"];
@@ -98,6 +83,7 @@ public class Trip: Mappable {
         Id <- map["Id"];
         CreatedOn <- map["CreatedOn"];
         LastModified <- map["LastModified"];
-        
+        Tags <- map["Tags"]
+
     }
 }

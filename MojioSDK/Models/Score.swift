@@ -8,7 +8,6 @@
 
 import UIKit
 import ObjectMapper
-import RealmSwift
 
 public class ScoreMethods {
     public static let ZScore : String = "ZScore"

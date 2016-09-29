@@ -8,7 +8,6 @@
 
 import UIKit
 import ObjectMapper
-import RealmSwift
 
 public class SpeedUnits {
     public static let KilometersPerHour : String = "KilometersPerHour"

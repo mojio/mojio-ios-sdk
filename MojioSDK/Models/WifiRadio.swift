@@ -8,7 +8,6 @@
 
 import UIKit
 import ObjectMapper
-import RealmSwift
 
 public class TransactionState: NSObject {
     public static let Pending = "Pending"
