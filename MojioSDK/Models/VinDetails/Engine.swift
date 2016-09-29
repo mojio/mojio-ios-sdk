@@ -10,7 +10,7 @@ import UIKit
 import ObjectMapper
 import RealmSwift
 
-public class Engine: Object, Mappable {
+public class Engine: Mappable {
     
     public dynamic var Name : String? = nil
     public dynamic var Cylinders : String? = nil
@@ -25,6 +25,10 @@ public class Engine: Object, Mappable {
         self.init();
     }
     
+    public required init() {
+        
+    }
+
     public func mapping(map: Map) {
         Name <- map["Name"]
         Cylinders <- map["Cylinders"]

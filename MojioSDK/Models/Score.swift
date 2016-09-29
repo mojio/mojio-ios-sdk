@@ -10,12 +10,12 @@ import UIKit
 import ObjectMapper
 import RealmSwift
 
-public class ScoreMethods : NSObject {
+public class ScoreMethods {
     public static let ZScore : String = "ZScore"
     public static let MinMaxScore : String = "MinMaxScore"
 }
 
-public class Score: Object, Mappable {
+public class Score: Mappable {
     
     // ScoreMethods
     public dynamic var ScoringMethod : String? = nil
@@ -27,11 +27,15 @@ public class Score: Object, Mappable {
         self.init()
     }
     
+    public required init() {
+        
+    }
+
     public func mapping(map: Map) {
-        ScoringMethod <- map["ScoringMethod"];
-        Value <- map["Value"];
-        Percentile <- map["Percentile"];
-        Average <- map["Average"];
+        ScoringMethod <- map["ScoringMethod"]
+        Value <- map["Value"]
+        Percentile <- map["Percentile"]
+        Average <- map["Average"]
     }
 
 }

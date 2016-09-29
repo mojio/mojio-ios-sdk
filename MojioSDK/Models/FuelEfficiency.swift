@@ -16,12 +16,12 @@ public class FuelEfficiencyUnits : NSObject {
     public static let LitersPerHundredKilometers : String = "LitersPerHundredKilometers"
 }
 
-public class FuelEfficiency: Object, Mappable {
+public class FuelEfficiency: Mappable {
     
     public dynamic var BaseUnit : String? = nil
-    public dynamic var Statistics : MeasurementStatistics? = nil
+    public var Statistics : MeasurementStatistics? = nil
     public dynamic var BenchmarkTime : String? = nil
-    public dynamic var BenchmarkStatistics : MeasurementStatistics? = nil
+    public var BenchmarkStatistics : MeasurementStatistics? = nil
     public dynamic var Timestamp : String? = nil
     public dynamic var BaseValue : Float = 0
     
@@ -33,15 +33,19 @@ public class FuelEfficiency: Object, Mappable {
         self.init()
     }
     
+    public required init() {
+        
+    }
+
     public func mapping(map: Map) {
-        BaseUnit <- map["BaseUnit"];
-        Statistics <- map["Statistics"];
-        BenchmarkTime <- map["BenchmarkTime"];
-        BenchmarkStatistics <- map["BenchmarkStatistics"];
-        Timestamp <- map["Timestamp"];
-        BaseValue <- map["BaseValue"];
-        Unit <- map["Unit"];
-        Value <- map["Value"];
+        BaseUnit <- map["BaseUnit"]
+        Statistics <- map["Statistics"]
+        BenchmarkTime <- map["BenchmarkTime"]
+        BenchmarkStatistics <- map["BenchmarkStatistics"]
+        Timestamp <- map["Timestamp"]
+        BaseValue <- map["BaseValue"]
+        Unit <- map["Unit"]
+        Value <- map["Value"]
     }
 
 }

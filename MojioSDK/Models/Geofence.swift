@@ -15,17 +15,21 @@ public class GeofenceRegionType : NSObject {
     public static let Circle = "Circle"
 }
 
-public class GeofenceRegion : Object, Mappable {
+public class GeofenceRegion : Mappable {
 
     public dynamic var Type: String? = nil
     public dynamic var Lat: Double = 0
     public dynamic var Lng: Double = 0
-    public dynamic var Radius: Distance? = nil
+    public var Radius: Distance? = nil
     
     public required convenience init?(_ map: Map) {
         self.init()
     }
     
+    public required init() {
+        
+    }
+
     public func jsonDict() -> NSDictionary {
         var dictionary : [String:AnyObject] = [:]
         
@@ -51,13 +55,13 @@ public class GeofenceRegion : Object, Mappable {
     }
 }
 
-public class Geofence: Object, Mappable {
+public class Geofence: Mappable {
     
     public dynamic var Id : String? = nil
     public dynamic var Name: String? = nil
     public dynamic var Description: String? = nil
-    public dynamic var Region: GeofenceRegion? = nil
-    public var Tags = List<StringObject>()
+    public var Region: GeofenceRegion? = nil
+    public var Tags : [String] = []
     public dynamic var CreatedOn : String? = nil
     public dynamic var LastModified : String? = nil
     
@@ -65,12 +69,12 @@ public class Geofence: Object, Mappable {
         self.init()
     }
     
-    public override static func primaryKey() -> String? {
-        return "Id"
+    public required init() {
+        
     }
-    
-    public func TagsArray() -> NSArray {
-        return self.Tags.toArray()
+
+    public static func primaryKey() -> String? {
+        return "Id"
     }
     
     public func jsonDict() -> NSDictionary {
@@ -100,17 +104,8 @@ public class Geofence: Object, Mappable {
         Name <- map["Name"]
         Description <- map["Description"]
         Region <- map["Region"]
-        CreatedOn <- map["CreatedOn"];
-        LastModified <- map["LastModified"];
-        
-        var tags = Array<String>()
-        tags <- map["Tags"]
-        
-        for tag in tags {
-            let string = StringObject()
-            string.value = tag
-            
-            self.Tags.append(string)
-        }
+        CreatedOn <- map["CreatedOn"]
+        LastModified <- map["LastModified"]
+        Tags <- map["Tags"]
     }
 }

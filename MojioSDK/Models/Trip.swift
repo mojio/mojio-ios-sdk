@@ -11,27 +11,27 @@ import Foundation
 import ObjectMapper
 import RealmSwift
 
-public class Trip: Object, Mappable {
+public class Trip: Mappable {
     public dynamic var VehicleId : String? = nil
     public dynamic var Name : String? = nil
     public var Tags = List<StringObject>();
     public dynamic var MojioId : String? = nil
     public dynamic var Completed : Bool = false
     public dynamic var TripDuration : String? = nil
-    public dynamic var TripDistance : Distance? = nil
+    public var TripDistance : Distance? = nil
     public dynamic var StartTimestamp : String? = nil
     public dynamic var EndTimestamp : String? = nil
-    public dynamic var StartOdometer : Odometer? = nil
-    public dynamic var EndOdometer : Odometer? = nil
-    public dynamic var StartLocation : Location? = nil
-    public dynamic var EndLocation : Location? = nil
-    public dynamic var MaxSpeed : Speed? = nil
-    public dynamic var MaxRPM : RPM? = nil
-    public dynamic var MaxAcceleration : Acceleration? = nil
-    public dynamic var MaxDeceleration : Acceleration? = nil
-    public dynamic var TripFuelEfficiency : FuelEfficiency? = nil
-    public dynamic var StartFuelLevel : FuelLevel? = nil
-    public dynamic var EndFuelLevel : FuelLevel? = nil
+    public var StartOdometer : Odometer? = nil
+    public var EndOdometer : Odometer? = nil
+    public var StartLocation : Location? = nil
+    public var EndLocation : Location? = nil
+    public var MaxSpeed : Speed? = nil
+    public var MaxRPM : RPM? = nil
+    public var MaxAcceleration : Acceleration? = nil
+    public var MaxDeceleration : Acceleration? = nil
+    public var TripFuelEfficiency : FuelEfficiency? = nil
+    public var StartFuelLevel : FuelLevel? = nil
+    public var EndFuelLevel : FuelLevel? = nil
     public dynamic var Id : String? = nil
     public dynamic var CreatedOn : String? = nil
     public dynamic var LastModified : String? = nil
@@ -40,7 +40,11 @@ public class Trip: Object, Mappable {
         self.init()
     }
     
-    public override static func primaryKey() -> String? {
+    public required init() {
+        
+    }
+
+    public static func primaryKey() -> String? {
         return "Id"
     }
 
@@ -71,7 +75,6 @@ public class Trip: Object, Mappable {
             
             self.Tags.append(string)
         }
-
         
         VehicleId <- map["VehicleId"];
         Name <- map["Name"];

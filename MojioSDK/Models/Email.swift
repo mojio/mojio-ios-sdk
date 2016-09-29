@@ -8,14 +8,17 @@
 
 import UIKit
 import ObjectMapper
-import RealmSwift
 
-public class Email: Object, Mappable {
+public class Email: Mappable {
     public dynamic var Verified : Bool = false
     public dynamic var Address : String? = nil
     
     public required convenience init?(_ map: Map) {
         self.init();
+    }
+    
+    public required init () {
+        
     }
     
     public func mapping(map: Map) {

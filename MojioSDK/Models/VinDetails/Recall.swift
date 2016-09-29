@@ -10,7 +10,7 @@ import UIKit
 import ObjectMapper
 import RealmSwift
 
-public class Recall: Object, Mappable {
+public class Recall: Mappable {
     
     public dynamic var Title : String? = nil
     public dynamic var NHTSACampaignNumber : String? = nil
@@ -38,6 +38,10 @@ public class Recall: Object, Mappable {
         self.init();
     }
     
+    public required init() {
+        
+    }
+
     public func mapping(map: Map) {
         
         Title <- map["Title"]

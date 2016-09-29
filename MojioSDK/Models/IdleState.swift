@@ -10,22 +10,26 @@ import UIKit
 import ObjectMapper
 import RealmSwift
 
-public class IdleState: Object, Mappable {
+public class IdleState: Mappable {
     
     public dynamic var Timestamp : String? = nil
     public dynamic var Value : Bool = false
     public dynamic var StartTime : String? = nil
-    public dynamic var Duration : TimePeriod? = nil
+    public var Duration : TimePeriod? = nil
     
     public required convenience init?(_ map: Map) {
         self.init()
     }
     
+    public required init() {
+        
+    }
+
     public func mapping(map: Map) {
-        Timestamp <- map["Timestamp"];
-        Value <- map["Value"];
-        StartTime <- map["StartTime"];
-        Duration <- map["Duration"];
+        Timestamp <- map["Timestamp"]
+        Value <- map["Value"]
+        StartTime <- map["StartTime"]
+        Duration <- map["Duration"]
     }
     
 }

@@ -10,17 +10,17 @@ import UIKit
 import ObjectMapper
 import RealmSwift
 
-public class Mojio: Object, Mappable {
+public class Mojio: Mappable {
     public dynamic var Id : String? = nil
     public dynamic var Name : String? = nil
     public dynamic var IMEI : String? = nil
     public dynamic var LastContactTime : String? = nil
     public dynamic var GatewayTime : String? = nil
     public dynamic var VehicleId : String? = nil
-    public dynamic var MojioLocation : Location? = nil
-    public var Tags = List<StringObject>()
-    public dynamic var Wifi : WifiRadio? = nil
-    public dynamic var ConnectedState : BooleanState? = nil
+    public var MojioLocation : Location? = nil
+    public var Tags : [String] = []
+    public var Wifi : WifiRadio? = nil
+    public var ConnectedState : BooleanState? = nil
     public dynamic var CreatedOn : String? = nil
     public dynamic var LastModified : String? = nil
     public dynamic var Deleted : Bool = false
@@ -29,12 +29,12 @@ public class Mojio: Object, Mappable {
         self.init()
     }
     
-    public override static func primaryKey() -> String? {
-        return "Id"
+    public required init() {
+        
     }
 
-    public func TagsArray() -> NSArray {
-        return self.Tags.toArray()
+    public static func primaryKey() -> String? {
+        return "Id"
     }
     
     public func json () -> String? {
@@ -54,28 +54,18 @@ public class Mojio: Object, Mappable {
 
     
     public func mapping(map: Map) {
-        
-        var tags = Array<String>()
-        tags <- map["Tags"]
-        
-        for tag in tags {
-            let string = StringObject()
-            string.value = tag
-            
-            self.Tags.append(string)
-        }
-
-        Id <- map["Id"];
-        Name <- map["Name"];
-        IMEI <- map["IMEI"];
-        LastContactTime <- map["LastContactTime"];
+        Id <- map["Id"]
+        Name <- map["Name"]
+        IMEI <- map["IMEI"]
+        LastContactTime <- map["LastContactTime"]
         Wifi <- map["WifiRadio"]
-        GatewayTime <- map["GatewayTime"];
-        VehicleId <- map["VehicleId"];
-        MojioLocation <- map["Location"];
+        GatewayTime <- map["GatewayTime"]
+        VehicleId <- map["VehicleId"]
+        MojioLocation <- map["Location"]
         ConnectedState <- map["ConnectedState"]
-        CreatedOn <- map["CreatedOn"];
-        LastModified <- map["LastModified"];
-        Deleted <- map["Deleted"];
+        CreatedOn <- map["CreatedOn"]
+        LastModified <- map["LastModified"]
+        Tags <- map["Tags"]
+        Deleted <- map["Deleted"]
     }
 }

@@ -22,7 +22,7 @@ public class TimePeriodUnits : NSObject {
     public static let Years : String = "Years"
 }
 
-public class TimePeriod: Object, Mappable {
+public class TimePeriod: Mappable {
     
     public dynamic var BaseUnit : String? = nil
     public dynamic var Timestamp : String? = nil
@@ -36,12 +36,16 @@ public class TimePeriod: Object, Mappable {
         self.init()
     }
     
+    public required init() {
+        
+    }
+
     public func mapping(map: Map) {
-        BaseUnit <- map["BaseUnit"];
-        Timestamp <- map["Timestamp"];
-        BaseValue <- map["BaseValue"];
-        Unit <- map["Unit"];
-        Value <- map["Value"];
+        BaseUnit <- map["BaseUnit"]
+        Timestamp <- map["Timestamp"]
+        BaseValue <- map["BaseValue"]
+        Unit <- map["Unit"]
+        Value <- map["Value"]
     }
 
 }

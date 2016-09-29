@@ -8,41 +8,31 @@
 
 import UIKit
 import ObjectMapper
-import RealmSwift
 
-public class App: Object, Mappable {
+public class App: Mappable {
     
     public dynamic var Name : String? = nil
     public dynamic var Description : String? = nil
-    public var Downloads = RealmOptional<Int>()
-    public var RedirectUris = List<StringObject>()
-    public dynamic var AppImage : Image? = nil
-    public var Tags = List<StringObject>()
+    public var Downloads : Int? = nil
+    public var RedirectUris : [String] = []
+    public var AppImage : Image? = nil
+    public var Tags : [String] = []
     public dynamic var Id : String? = nil
     public dynamic var CreatedOn : String? = nil
     public dynamic var LastModified : String? = nil
 
-    
     public required convenience init?(_ map: Map) {
         self.init();
     }
     
-    public override static func primaryKey() -> String? {
+    public static func primaryKey() -> String? {
         return "Id"
     }
     
-    public func DownloadsAsIntNumber() -> NSNumber {
-        return self.Downloads.value! as NSNumber
+    public required init() {
+        
     }
     
-    public func RedirectUrisArray() -> NSArray {
-        return self.RedirectUris.toArray()
-    }
-    
-    public func TagsArray() -> NSArray {
-        return self.Tags.toArray()
-    }
-
     public func json () -> String? {
         let dictionary : NSMutableDictionary = NSMutableDictionary()
         
@@ -53,7 +43,7 @@ public class App: Object, Mappable {
             dictionary.setObject(self.Description!, forKey: "Description")
         }
         if self.RedirectUris.count > 0 {
-            dictionary.setObject(self.RedirectUris.toArray(), forKey: "RedirectUris")
+            dictionary.setObject(self.RedirectUris, forKey: "RedirectUris")
         }
         
         if dictionary.count == 0 {
@@ -67,30 +57,12 @@ public class App: Object, Mappable {
     
     public func mapping(map: Map) {
         
-        var tags = Array<String>()
-        tags <- map["Tags"]
-        
-        for tag in tags {
-            let string = StringObject()
-            string.value = tag
-            
-            self.Tags.append(string)
-        }
-        
-        var redirectURIs = Array<String>()
-        redirectURIs <- map["RedirectUris"]
-        
-        for uri in redirectURIs {
-            let string = StringObject()
-            string.value = uri
-            
-            self.Tags.append(string)
-        }
-
         Name <- map["Name"]
         Description <- map["Description"]
         Downloads <- map["Downloads"]
+        RedirectUris <- map["RedirectUris"]
         AppImage <- map["Image"]
+        Tags <- map["Tags"]
         Id <- map["Id"]
         CreatedOn <- map["CreatedOn"]
         LastModified <- map["LastModified"]

@@ -22,7 +22,7 @@ public class WifiRadioStatus: NSObject {
     public static let Disconnected = "Disconnected"
 }
 
-public class WifiRadio: Object, Mappable  {
+public class WifiRadio: Mappable  {
     
     public dynamic var TimeStamp : String? = nil
     public dynamic var SSID : String? = nil
@@ -35,7 +35,11 @@ public class WifiRadio: Object, Mappable  {
         self.init()
     }
    
-    // Time to live in seconds for the update request 
+    public required init() {
+        
+    }
+
+    // Time to live in seconds for the update request
     public func jsonDict(timeToLive: Int? = nil, fields: [String]? = nil) -> NSDictionary {
         let dictionary : NSMutableDictionary = NSMutableDictionary()
         

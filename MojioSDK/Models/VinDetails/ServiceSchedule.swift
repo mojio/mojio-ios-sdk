@@ -10,7 +10,7 @@ import UIKit
 import ObjectMapper
 import RealmSwift
 
-public class ServiceSchedule: Object, Mappable {
+public class ServiceSchedule: Mappable {
     
     public dynamic var MaintenanceCategory : String? = nil
     public dynamic var MaintenanceName : String? = nil
@@ -30,6 +30,10 @@ public class ServiceSchedule: Object, Mappable {
         self.init();
     }
     
+    public required init() {
+        
+    }
+
     public func mapping(map: Map) {
         
         MaintenanceCategory <- map["MaintenanceCategory"]

@@ -15,7 +15,7 @@ public class FuelCapacityUnits : NSObject {
     public static let Liters : String = "Liters"
 }
 
-public class FuelCapacity: Object, Mappable {
+public class FuelCapacity: Mappable {
     
     public dynamic var BaseUnit : String? = nil
     public dynamic var Timestamp : String? = nil
@@ -29,12 +29,16 @@ public class FuelCapacity: Object, Mappable {
         self.init()
     }
     
+    public required init() {
+        
+    }
+    
     public func mapping(map: Map) {
-        BaseUnit <- map["BaseUnit"];
-        Timestamp <- map["Timestamp"];
-        BaseValue <- map["BaseValue"];
-        Unit <- map["Unit"];
-        Value <- map["Value"];
+        BaseUnit <- map["BaseUnit"]
+        Timestamp <- map["Timestamp"]
+        BaseValue <- map["BaseValue"]
+        Unit <- map["Unit"]
+        Value <- map["Value"]
     }
     
 }

@@ -10,7 +10,7 @@ import UIKit
 import ObjectMapper
 import RealmSwift
 
-public class ServiceBulletin: Object, Mappable {
+public class ServiceBulletin: Mappable {
     
     public dynamic var ItemNumber : String? = nil
     public dynamic var BulletinNumber : String? = nil
@@ -24,8 +24,11 @@ public class ServiceBulletin: Object, Mappable {
         self.init();
     }
     
-    public func mapping(map: Map) {
+    public required init() {
         
+    }
+
+    public func mapping(map: Map) {
         ItemNumber <- map["ItemNumber"]
         BulletinNumber <- map["BulletinNumber"]
         ReplacementBulletinNumber <- map["ReplacementBulletinNumber"]
@@ -33,6 +36,5 @@ public class ServiceBulletin: Object, Mappable {
         Component <- map["Component"]
         BulletinDate <- map["BulletinDate"]
         Summary <- map["Summary"]
-
     }
 }

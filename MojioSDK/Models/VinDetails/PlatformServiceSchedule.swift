@@ -10,7 +10,7 @@ import UIKit
 import ObjectMapper
 import RealmSwift
 
-public class PlatformServiceSchedule: Object, Mappable {
+public class PlatformServiceSchedule: Mappable {
     
     public dynamic var InitialValue : Float = 0
     public dynamic var IntervalType : String? = nil
@@ -31,6 +31,10 @@ public class PlatformServiceSchedule: Object, Mappable {
         self.init();
     }
     
+    public required init() {
+        
+    }
+
     public func mapping(map: Map) {
 
         InitialValue <- map["InitialValue"]

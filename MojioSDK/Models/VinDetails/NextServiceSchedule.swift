@@ -8,39 +8,27 @@
 
 import UIKit
 import ObjectMapper
-import RealmSwift
 
-public class NextServiceSchedule: Object, Mappable {
+public class NextServiceSchedule: Mappable {
 
     public dynamic var TimeStamp : String? = nil
     public dynamic var Odometer : Float = 0
-    public var AgeInMonths = RealmOptional<Int>()
+    public var AgeInMonths : Int? = nil
     public dynamic var TimeUnits : String? = nil
     public dynamic var TimeValue : Float = 0
     public dynamic var DistanceUnits : String? = nil
     public dynamic var DistanceValue : Float = 0
-    public var Services = List<PlatformServiceSchedule>()
+    public var Services : [PlatformServiceSchedule] = []
     
     public required convenience init?(_ map: Map) {
         self.init();
     }
     
-    public func AgeInMonthsAsIntNumber() -> NSNumber? {
-        return self.AgeInMonths.value as? NSNumber
-    }
-    
-    public func ServicesArray() -> NSArray {
-        return self.Services.toArray()
+    public required init() {
+        
     }
     
     public func mapping(map: Map) {
-        
-        var services = Array<PlatformServiceSchedule>()
-        services <- map["Items"]
-        
-        for service in services {
-            self.Services.append(service)
-        }
         
         TimeStamp <- map["TimeStamp"]
         Odometer <- map["Odometer"]
@@ -49,5 +37,7 @@ public class NextServiceSchedule: Object, Mappable {
         TimeValue <- map["TimeValue"]
         DistanceUnits <- map["DistanceUnits"]
         DistanceValue <- map["DistanceValue"]
+        Services <- map["Items"]
+
     }
 }

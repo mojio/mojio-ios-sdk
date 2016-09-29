@@ -10,7 +10,7 @@ import UIKit
 import ObjectMapper
 import RealmSwift
 
-public class Odometer: Object, Mappable {
+public class Odometer: Mappable {
     
     public dynamic var RolloverValue : Float = 0
     public dynamic var BaseUnit : String? = nil
@@ -25,6 +25,10 @@ public class Odometer: Object, Mappable {
         self.init()
     }
     
+    public required init() {
+        
+    }
+
     public func jsonDict () -> NSDictionary {
         let dictionary : NSMutableDictionary = NSMutableDictionary()
         
@@ -38,11 +42,11 @@ public class Odometer: Object, Mappable {
     }
     
     public func mapping(map: Map) {
-        RolloverValue <- map["RolloverValue"];
-        BaseUnit <- map["BaseUnit"];
-        Timestamp <- map["Timestamp"];
-        BaseValue <- map["BaseValue"];
-        Unit <- map["Unit"];
-        Value <- map["Value"];
+        RolloverValue <- map["RolloverValue"]
+        BaseUnit <- map["BaseUnit"]
+        Timestamp <- map["Timestamp"]
+        BaseValue <- map["BaseValue"]
+        Unit <- map["Unit"]
+        Value <- map["Value"]
     }
 }
