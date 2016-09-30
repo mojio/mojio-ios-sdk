@@ -64,7 +64,7 @@ public class RestClient: NSObject {
     private dynamic var nextUrl : String? = nil
     
     private var sinceBeforeFormatter = NSDateFormatter()
-    private static let SinceBeforeDateFormat = "yyyy-MM-dd'T'HH:mm"
+    private static let SinceBeforeDateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
     
     public override init() {
         self.requestUrl = ClientEnvironment.SharedInstance.getApiEndpoint()
