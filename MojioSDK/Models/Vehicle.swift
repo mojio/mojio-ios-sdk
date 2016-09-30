@@ -38,8 +38,8 @@ public class Vehicle: Object, Mappable {
     // FuelType
     public dynamic var FuelType : String? = nil
     public dynamic var GatewayTime : String? = nil
-    public dynamic var VehicleHarshEventState : BooleanState? = nil
-    public dynamic var VehicleIdleState : BooleanState? = nil
+    public dynamic var VehicleHarshEventState : HarshEvent? = nil
+    public dynamic var VehicleIdleState : IdleState? = nil
     public dynamic var VehicleIgnitionState : BooleanState? = nil
     public dynamic var VehicleBattery : Battery? = nil
     public dynamic var VehicleHeading : Heading? = nil
@@ -53,6 +53,8 @@ public class Vehicle: Object, Mappable {
     public dynamic var Id : String? = nil
     public dynamic var CreatedOn : String? = nil
     public dynamic var LastModified : String? = nil
+    
+    public dynamic var Deleted : Bool = false
     
     public required convenience init?(_ map: Map) {
         self.init()
@@ -173,5 +175,6 @@ public class Vehicle: Object, Mappable {
         Id <- map["Id"];
         CreatedOn <- map["CreatedOn"];
         LastModified <- map["LastModified"];
+        Deleted <- map["Deleted"];
     }
 }
