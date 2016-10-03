@@ -19,7 +19,7 @@ public class FuelVolumeUnits : NSObject {
     public static let Milliliter    : String = "Milliliter"
 }
 
-class FuelVolume: Object, Mappable {
+public class FuelVolume: Object, Mappable {
 
     public dynamic var BaseUnit : String? = nil
     public dynamic var Timestamp : String? = nil
