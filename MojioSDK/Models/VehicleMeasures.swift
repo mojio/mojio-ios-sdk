@@ -24,6 +24,7 @@ public class VehicleMeasures: Object, Mappable {
     // FuelEfficiencyCalculationMethod
     public dynamic var FuelEfficiencyCalculationMethod : String? = nil// ['Query', 'EngineFuelRate', 'MassAirFlow', 'Calculated', 'None'],
     public dynamic var VehicleFuelLevel : FuelLevel? = nil
+    public dynamic var VehicleFuelVolume : FuelVolume? = nil
 
     // FuelType
     public dynamic var FuelType : String? = nil
@@ -67,6 +68,7 @@ public class VehicleMeasures: Object, Mappable {
         VehicleFuelEfficiency <- map["FuelEfficiency"]
         FuelEfficiencyCalculationMethod <- map["FuelEfficiencyCalculationMethod"]
         VehicleFuelLevel <- map["FuelLevel"]
+        VehicleFuelVolume <- map["FuelVolume"]
         FuelType <- map["FuelType"]
         GatewayTime <- map["GatewayTime"]
         HarshEventState <- map["HarshEventState"]
