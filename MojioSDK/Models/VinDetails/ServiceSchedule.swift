@@ -12,19 +12,15 @@ import RealmSwift
 
 public class ServiceSchedule: Object, Mappable {
     
+    public dynamic var TransNotes : String? = nil
+    public dynamic var ScheduleName : String? = nil
+    public dynamic var ScheduleDescription : String? = nil
     public dynamic var MaintenanceCategory : String? = nil
     public dynamic var MaintenanceName : String? = nil
     public dynamic var MaintenanceNotes : String? = nil
-    public dynamic var OperatingParameter : String? = nil
-    public dynamic var OperatingParameterNotes : String? = nil
-    public dynamic var ScheduleDescription : String? = nil
-    public dynamic var ScheduleName : String? = nil
-    public dynamic var ServiceEvent : String? = nil
-    public dynamic var TransNotes : String? = nil
-    public dynamic var Units : String? = nil
-    public dynamic var Value : Float = 0
-    public dynamic var InitialValue : Float = 0
-    public dynamic var IntervalType : String? = nil
+    
+    public var Intervals = List<ServiceInterval>()
+    public var Events = List<ServiceEvent>()
     
     public required convenience init?(_ map: Map) {
         self.init();
@@ -35,15 +31,22 @@ public class ServiceSchedule: Object, Mappable {
         MaintenanceCategory <- map["MaintenanceCategory"]
         MaintenanceName <- map["MaintenanceName"]
         MaintenanceNotes <- map["MaintenanceNotes"]
-        OperatingParameter <- map["OperatingParameter"]
-        OperatingParameterNotes <- map["OperatingParameterNotes"]
         ScheduleDescription <- map["ScheduleDescription"]
         ScheduleName <- map["ScheduleName"]
-        ServiceEvent <- map["ServiceEvent"]
         TransNotes <- map["TransNotes"]
-        Units <- map["Units"]
-        Value <- map["Value"]
-        InitialValue <- map["InitialValue"]
-        IntervalType <- map["IntervalType"]
+        
+        var events = Array<ServiceEvent>()
+        events <- map["Events"]
+        
+        for event in events {
+            self.Events.append(event)
+        }
+        
+        var intervals = Array<ServiceInterval>()
+        intervals <- map["Intervals"]
+        
+        for interval in intervals {
+            self.Intervals.append(interval)
+        }
     }
 }

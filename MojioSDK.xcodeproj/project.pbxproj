@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		644017561DA4318F00DAA73D /* ServiceEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644017551DA4318F00DAA73D /* ServiceEvent.swift */; };
+		644017581DA431DE00DAA73D /* ServiceInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644017571DA431DE00DAA73D /* ServiceInterval.swift */; };
 		644017541DA2AC9A00DAA73D /* AggregationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644017531DA2AC9A00DAA73D /* AggregationData.swift */; };
 		644214DE1D9E6500005A86C5 /* FuelVolume.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644214DD1D9E6500005A86C5 /* FuelVolume.swift */; };
 		6B7344AEFEDC6731687DB2A3 /* Pods_MojioSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D8CC37B8959C27E426C51E2 /* Pods_MojioSDK.framework */; };
@@ -116,6 +118,8 @@
 		12DB7395EEC25B945C6073A8 /* Pods-MojioSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MojioSDK.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MojioSDK/Pods-MojioSDK.debug.xcconfig"; sourceTree = "<group>"; };
 		2D8CC37B8959C27E426C51E2 /* Pods_MojioSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MojioSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5129D3ED3B56C9F0B8D93690 /* Pods-MojioSDKTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MojioSDKTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MojioSDKTests/Pods-MojioSDKTests.debug.xcconfig"; sourceTree = "<group>"; };
+		644017551DA4318F00DAA73D /* ServiceEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ServiceEvent.swift; path = Models/VinDetails/ServiceEvent.swift; sourceTree = "<group>"; };
+		644017571DA431DE00DAA73D /* ServiceInterval.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ServiceInterval.swift; path = Models/VinDetails/ServiceInterval.swift; sourceTree = "<group>"; };
 		644017531DA2AC9A00DAA73D /* AggregationData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AggregationData.swift; path = "Models/AggregationData.swift"; sourceTree = "<group>"; };
 		644214DD1D9E6500005A86C5 /* FuelVolume.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FuelVolume.swift; path = Models/FuelVolume.swift; sourceTree = "<group>"; };
 		75F77F0D1D19F504000CC2B4 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
@@ -315,6 +319,8 @@
 				BC879B311CBEFFC000F9177B /* PlatformServiceSchedule.swift */,
 				BC879B321CBEFFC000F9177B /* Recall.swift */,
 				BC879B331CBEFFC000F9177B /* ServiceBulletin.swift */,
+				644017551DA4318F00DAA73D /* ServiceEvent.swift */,
+				644017571DA431DE00DAA73D /* ServiceInterval.swift */,
 				BC879B341CBEFFC000F9177B /* ServiceSchedule.swift */,
 				BC879B351CBEFFC000F9177B /* Transmission.swift */,
 				BC879B361CBEFFC000F9177B /* Vin.swift */,
@@ -760,7 +766,9 @@
 				BC72D7A81CC5615600D9740B /* AuthClient.swift in Sources */,
 				BC879B791CBEFFDD00F9177B /* Trip.swift in Sources */,
 				BC5F7F031CC58D4000FAB205 /* BaseUnits.swift in Sources */,
+				644017581DA431DE00DAA73D /* ServiceInterval.swift in Sources */,
 				BC879B411CBEFFC000F9177B /* VinDetails.swift in Sources */,
+				644017561DA4318F00DAA73D /* ServiceEvent.swift in Sources */,
 				BC879B681CBEFFDD00F9177B /* Email.swift in Sources */,
 				BC879B711CBEFFDD00F9177B /* Mojio.swift in Sources */,
 				BC31E3D61D419F5D001649A7 /* RootActivity.swift in Sources */,
