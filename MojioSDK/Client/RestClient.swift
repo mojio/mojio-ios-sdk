@@ -460,7 +460,11 @@ public class RestClient: NSObject {
     func handleResponse(response: Response<AnyObject, NSError>, completion: (response :AnyObject) -> Void, failure: (error:AnyObject?) -> Void){
         if response.response?.statusCode == 200 || response.response?.statusCode == 201 {
             if let responseDict = response.result.value as? NSDictionary {
-                if let dataArray : NSArray = responseDict.objectForKey("Data") as? NSArray {
+                
+                let dataKey = self.requestEntity == RestClientEndpoints.ServiceSchedule ? "Items" : "Data"
+                
+                if let dataArray : NSArray = responseDict.objectForKey(dataKey) as? NSArray {
+
                     let array : NSMutableArray = []
                     for  obj in dataArray {
                         array.addObject(self.parseDict(obj as! NSDictionary)!)
