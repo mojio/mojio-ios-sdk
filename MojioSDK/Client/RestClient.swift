@@ -317,7 +317,7 @@ public class RestClient: NSObject {
         return self
     }
     
-    public func aggregatesForVehicle(ofType type: String?) -> Self {
+    public func aggregates(ofType type: String?) -> Self {
         
         self.requestEntity = RestClientEndpoints.Aggregates
         self.requestUrl = self.requestUrl! + self.requestEntity! + (type != nil ? type! + "/" : "")
