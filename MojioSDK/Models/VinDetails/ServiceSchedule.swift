@@ -20,7 +20,14 @@ public class ServiceSchedule: Object, Mappable {
     }
     
     public func mapping(map: Map) {
+        
+        var items = Array<ServiceScheduleItem>()
+        items <- map["Items"]
+        
+        for item in items {
+            Items.append(item)
+        }
+        
         VIN <- map["VIN"]
-        Items <- map["Items"]
     }
 }

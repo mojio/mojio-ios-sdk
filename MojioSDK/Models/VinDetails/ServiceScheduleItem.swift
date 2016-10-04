@@ -26,14 +26,27 @@ public class ServiceScheduleItem: Object, Mappable {
     }
 
     public func mapping(map: Map) {
+        
+        var intervals = Array<ServiceInterval>()
+        intervals <- map["Intervals"]
+        
+        for interval in intervals {
+            Intervals.append(interval)
+        }
+        
+        var events = Array<ServiceEvent>()
+        events <- map["Events"]
+        
+        for event in events {
+            Events.append(event)
+        }
+        
         TransNotes <- map["TransNotes"]
         ScheduleName <- map["ScheduleName"]
         ScheduleDescription <- map["ScheduleDescription"]
         MaintenanceCategory <- map["MaintenanceCategory"]
         MaintenanceName <- map["MaintenanceName"]
         MaintenanceNotes <- map["MaintenanceNotes"]
-        Intervals <- map["Intervals"]
-        Events <- map["Events"]
     }
 
 }
