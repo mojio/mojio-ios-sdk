@@ -42,12 +42,12 @@ public class RestClientEndpoints : NSObject {
     public static let WifiRadio : String = "wifiradio/"
     public static let Transactions : String = "transactions/"
     public static let Geofences : String = "geofences/"
+    public static let Aggregates : String = "aggregates/"
     
     // Storage
     // Parameters: Type, Id, Key
     // e.g. trips/{id}/store/{key}
     public static let Storage : String = "%@%@/store/%@"
-    public static let Aggregates : String = "vehicles/%@/aggregates/%@"
 }
 
 public class RestClient: NSObject {
@@ -317,10 +317,10 @@ public class RestClient: NSObject {
         return self
     }
     
-    public func aggregatesForVehicle(vehicleId: String?, ofType type: String?) -> Self {
+    public func aggregatesForVehicle(ofType type: String?) -> Self {
         
         self.requestEntity = RestClientEndpoints.Aggregates
-        self.requestUrl = self.requestUrl! + String.init(format: RestClientEndpoints.Aggregates, vehicleId!, type!)
+        self.requestUrl = self.requestUrl! + self.requestEntity! + (type != nil ? type! + "/" : "")
         
         return self
     }
