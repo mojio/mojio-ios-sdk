@@ -42,6 +42,7 @@ public class RestClientEndpoints : NSObject {
     public static let WifiRadio : String = "wifiradio/"
     public static let Transactions : String = "transactions/"
     public static let Geofences : String = "geofences/"
+    public static let Aggregates : String = "aggregates/"
     
     // Storage
     // Parameters: Type, Id, Key
@@ -312,6 +313,14 @@ public class RestClient: NSObject {
         self.requestEntityId = geofenceId
         self.requestUrl = self.requestUrl! + self.requestEntity! + (geofenceId != nil ? geofenceId! + "/" : "")
         self.pushUrl = self.pushUrl! + self.requestEntity! + (geofenceId != nil ? geofenceId! + "/" : "")
+        
+        return self
+    }
+    
+    public func aggregates(ofType type: String?) -> Self {
+        
+        self.requestEntity = RestClientEndpoints.Aggregates
+        self.requestUrl = self.requestUrl! + self.requestEntity! + (type != nil ? type! + "/" : "")
         
         return self
     }
@@ -614,6 +623,10 @@ public class RestClient: NSObject {
             let model = Mapper<Geofence>().map(dict)
             return model!
 
+        case RestClientEndpoints.Aggregates:
+            let model = Mapper<AggregationData>().map(dict)
+            return model!
+            
         default:
                 return nil
         }

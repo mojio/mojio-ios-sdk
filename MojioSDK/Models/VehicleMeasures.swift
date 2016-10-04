@@ -25,6 +25,7 @@ public class VehicleMeasures: Object, Mappable {
     public dynamic var FuelEfficiencyCalculationMethod : String? = nil// ['Query', 'EngineFuelRate', 'MassAirFlow', 'Calculated', 'None'],
     public dynamic var VehicleFuelLevel : FuelLevel? = nil
     public dynamic var VehicleFuelVolume : FuelVolume? = nil
+
     // FuelType
     public dynamic var FuelType : String? = nil
     public dynamic var GatewayTime : String? = nil
