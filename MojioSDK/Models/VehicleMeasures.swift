@@ -8,62 +8,67 @@
 
 import UIKit
 import ObjectMapper
+import RealmSwift
 
-public class VehicleMeasures: Mappable {
+public class VehicleMeasures: Object, Mappable {
     
-    public var VehicleAcceleration : Acceleration? = nil
-    public var VehicleAccelerometer : Accelerometer? = nil
-    public var AccidentState : BooleanState? = nil
-    public var VehicleBattery : Battery? = nil
+    public dynamic var VehicleAcceleration : Acceleration? = nil
+    public dynamic var VehicleAccelerometer : Accelerometer? = nil
+    public dynamic var AccidentState : BooleanState? = nil
+    public dynamic var VehicleBattery : Battery? = nil
     public dynamic var CurrentTrip : String? = nil
-    public var Deceleration : Acceleration? = nil
-    public var DiagnosticCodes : [DiagnosticCode] = []
-    public var VehicleFuelEfficiency : FuelEfficiency? = nil
+    public dynamic var Deceleration : Acceleration? = nil
+    public var DiagnosticCodes = List<DiagnosticCode>()
+    public dynamic var VehicleFuelEfficiency : FuelEfficiency? = nil
     
     // FuelEfficiencyCalculationMethod
     public dynamic var FuelEfficiencyCalculationMethod : String? = nil// ['Query', 'EngineFuelRate', 'MassAirFlow', 'Calculated', 'None'],
-    public var VehicleFuelLevel : FuelLevel? = nil
-    
+    public dynamic var VehicleFuelLevel : FuelLevel? = nil
+    public dynamic var VehicleFuelVolume : FuelVolume? = nil
+
     // FuelType
     public dynamic var FuelType : String? = nil
     public dynamic var GatewayTime : String? = nil
-    public var HarshEventState : HarshEvent? = nil
-    public var VehicleHeading : Heading? = nil
-    public var VehicleIdleState : IdleState? = nil
-    public var IgnitionState : BooleanState? = nil
-    public var VehicleLocation : Location? = nil
-    public var MilStatus : Bool? = nil
+    public dynamic var HarshEventState : HarshEvent? = nil
+    public dynamic var VehicleHeading : Heading? = nil
+    public dynamic var VehicleIdleState : IdleState? = nil
+    public dynamic var IgnitionState : BooleanState? = nil
+    public dynamic var VehicleLocation : Location? = nil
+    public var MilStatus = RealmOptional<Bool>()
     public dynamic var MojioId : String? = nil
-    public var ParkedState : BooleanState? = nil
-    public var VehicleRPM : RPM? = nil
-    public var VehicleSpeed : Speed? = nil
-    public var TowState : BooleanState? = nil
+    public dynamic var ParkedState : BooleanState? = nil
+    public dynamic var VehicleRPM : RPM? = nil
+    public dynamic var VehicleSpeed : Speed? = nil
+    public dynamic var TowState : BooleanState? = nil
     public dynamic var VIN : String? = nil
-    public var VehicleVinDetails : VinDetails? = nil
-    public var VirtualOdometer : Odometer? = nil
-    public var VehicleOdometer : Odometer? = nil
+    public dynamic var VehicleVinDetails : VinDetails? = nil
+    public dynamic var VirtualOdometer : Odometer? = nil
+    public dynamic var VehicleOdometer : Odometer? = nil
     public dynamic var Time : String? = nil
-    public var DisturbanceState : BooleanState? = nil
+    public dynamic var DisturbanceState : BooleanState? = nil
     
     public required convenience init?(_ map: Map) {
         self.init()
     }
 
-    public required init() {
+    public func mapping(map: Map) {
+        var diagnosticCodes = Array<DiagnosticCode>()
+        diagnosticCodes <- map ["DiagnosticCodes"]
         
-    }
-
-    public func mapping(map: Map) {        
+        for diagnosticCode in diagnosticCodes {
+            self.DiagnosticCodes.append(diagnosticCode)
+        }
+        
         VehicleAcceleration <- map["Acceleration"]
         VehicleAccelerometer <- map["Accelerometer"]
         AccidentState <- map["AccidentState"]
         VehicleBattery <- map["Battery"]
         CurrentTrip <- map["CurrentTrip"]
         Deceleration <- map["Deceleration"]
-        DiagnosticCodes <- map ["DiagnosticCodes"]
         VehicleFuelEfficiency <- map["FuelEfficiency"]
         FuelEfficiencyCalculationMethod <- map["FuelEfficiencyCalculationMethod"]
         VehicleFuelLevel <- map["FuelLevel"]
+        VehicleFuelVolume <- map["FuelVolume"]
         FuelType <- map["FuelType"]
         GatewayTime <- map["GatewayTime"]
         HarshEventState <- map["HarshEventState"]

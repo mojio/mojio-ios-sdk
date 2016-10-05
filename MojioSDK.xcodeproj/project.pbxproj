@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		644017541DA2AC9A00DAA73D /* AggregationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644017531DA2AC9A00DAA73D /* AggregationData.swift */; };
+		644214DE1D9E6500005A86C5 /* FuelVolume.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644214DD1D9E6500005A86C5 /* FuelVolume.swift */; };
 		6B7344AEFEDC6731687DB2A3 /* Pods_MojioSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D8CC37B8959C27E426C51E2 /* Pods_MojioSDK.framework */; };
 		75F77F0E1D19F504000CC2B4 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 75F77F0D1D19F504000CC2B4 /* libz.tbd */; };
 		BC31E3CE1D419E80001649A7 /* Distance.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC31E3CD1D419E80001649A7 /* Distance.swift */; };
@@ -114,6 +116,8 @@
 		12DB7395EEC25B945C6073A8 /* Pods-MojioSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MojioSDK.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MojioSDK/Pods-MojioSDK.debug.xcconfig"; sourceTree = "<group>"; };
 		2D8CC37B8959C27E426C51E2 /* Pods_MojioSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MojioSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5129D3ED3B56C9F0B8D93690 /* Pods-MojioSDKTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MojioSDKTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MojioSDKTests/Pods-MojioSDKTests.debug.xcconfig"; sourceTree = "<group>"; };
+		644017531DA2AC9A00DAA73D /* AggregationData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AggregationData.swift; path = "Models/AggregationData.swift"; sourceTree = "<group>"; };
+		644214DD1D9E6500005A86C5 /* FuelVolume.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FuelVolume.swift; path = Models/FuelVolume.swift; sourceTree = "<group>"; };
 		75F77F0D1D19F504000CC2B4 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		8B04A6C16725DB2223B32D46 /* Pods-MojioSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MojioSDK.release.xcconfig"; path = "Pods/Target Support Files/Pods-MojioSDK/Pods-MojioSDK.release.xcconfig"; sourceTree = "<group>"; };
 		BC31E3CD1D419E80001649A7 /* Distance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Distance.swift; path = Models/Distance.swift; sourceTree = "<group>"; };
@@ -406,11 +410,11 @@
 		BCC2EFD91CBEF74A004D2759 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				F9623AAD1D935D74005C10F2 /* IdleState.swift */,
 				BC879B431CBEFFDD00F9177B /* Acceleration.swift */,
 				BC879B441CBEFFDD00F9177B /* Accelerometer.swift */,
 				E0E63D2D1D21DF3200DDF336 /* ActivityStreams */,
 				BC879B451CBEFFDD00F9177B /* Address.swift */,
+				644017531DA2AC9A00DAA73D /* AggregationData.swift */,
 				BC879B461CBEFFDD00F9177B /* App.swift */,
 				BC5F7F021CC58D4000FAB205 /* BaseUnits.swift */,
 				BC879B471CBEFFDD00F9177B /* Battery.swift */,
@@ -422,10 +426,12 @@
 				BC879B4C1CBEFFDD00F9177B /* FuelCapacity.swift */,
 				BC879B4D1CBEFFDD00F9177B /* FuelEfficiency.swift */,
 				BC879B4E1CBEFFDD00F9177B /* FuelLevel.swift */,
+				644214DD1D9E6500005A86C5 /* FuelVolume.swift */,
 				BCF2DE491D454B8D00EDD376 /* Geofence.swift */,
 				BC879B4F1CBEFFDD00F9177B /* Group.swift */,
 				F9E9FDAD1D93122A00DCB690 /* HarshEvent.swift */,
 				BC879B501CBEFFDD00F9177B /* Heading.swift */,
+				F9623AAD1D935D74005C10F2 /* IdleState.swift */,
 				BC879B511CBEFFDD00F9177B /* Image.swift */,
 				BC879B521CBEFFDD00F9177B /* Location.swift */,
 				BC879B531CBEFFDD00F9177B /* MeasurementStatistics.swift */,
@@ -731,6 +737,7 @@
 				BC31E3D51D419F5D001649A7 /* BaseActivity.swift in Sources */,
 				BC879B771CBEFFDD00F9177B /* Speed.swift in Sources */,
 				BC879B701CBEFFDD00F9177B /* MeasurementStatistics.swift in Sources */,
+				644214DE1D9E6500005A86C5 /* FuelVolume.swift in Sources */,
 				BC879B641CBEFFDD00F9177B /* Battery.swift in Sources */,
 				BC879B891CBEFFFF00F9177B /* JsonSerializer.swift in Sources */,
 				BC72D7A91CC5615600D9740B /* AuthViewController.swift in Sources */,
@@ -759,6 +766,7 @@
 				BC31E3D61D419F5D001649A7 /* RootActivity.swift in Sources */,
 				BC879B721CBEFFDD00F9177B /* Odometer.swift in Sources */,
 				BC879B631CBEFFDD00F9177B /* App.swift in Sources */,
+				644017541DA2AC9A00DAA73D /* AggregationData.swift in Sources */,
 				BC879B661CBEFFDD00F9177B /* DiagnosticCode.swift in Sources */,
 				BC879B3D1CBEFFC000F9177B /* ServiceBulletin.swift in Sources */,
 				BC879B3F1CBEFFC000F9177B /* Transmission.swift in Sources */,
