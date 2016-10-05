@@ -8,73 +8,62 @@
 
 import UIKit
 import ObjectMapper
-import RealmSwift
 
-public class Vehicle: Object, Mappable {
+public class Vehicle: Mappable {
     
     public dynamic var Name : String? = nil
     public dynamic var LicensePlate : String? = nil
     public dynamic var VIN : String? = nil
     public dynamic var DetectedVIN : String? = nil
-    public dynamic var OverrideVIN : String? = nil    
+    public dynamic var OverrideVIN : String? = nil
     public dynamic var CurrentTrip : String? = nil
     public dynamic var MojioId : String? = nil
-    public dynamic var VehicleImage : Image? = nil
-    public dynamic var MilStatus : Bool = false
+    public var VehicleImage : Image? = nil
+    public var MilStatus : Bool = false
     public dynamic var LastContactTime : String? = nil
-    public var DiagnosticCodes = List<DiagnosticCode>()
-    public dynamic var VehicleAccelerometer : Accelerometer? = nil
-    public dynamic var VehicleAcceleration : Acceleration? = nil
-    public dynamic var Deceleration : Acceleration? = nil
-    public dynamic var VehicleSpeed : Speed? = nil
-    public dynamic var VehicleOdometer : Odometer? = nil
-    public dynamic var VehicleRPM : RPM? = nil
-    public dynamic var VehicleFuelEfficiency : FuelEfficiency? = nil
+    public var DiagnosticCodes : [DiagnosticCode] = []
+    public var VehicleAccelerometer : Accelerometer? = nil
+    public var VehicleAcceleration : Acceleration? = nil
+    public var Deceleration : Acceleration? = nil
+    public var VehicleSpeed : Speed? = nil
+    public var VehicleOdometer : Odometer? = nil
+    public var VehicleRPM : RPM? = nil
+    public var VehicleFuelEfficiency : FuelEfficiency? = nil
     
     // FuelEfficiencyCalculationMethod
     public dynamic var FuelEfficiencyCalculationMethod : String? = nil
-    public dynamic var VehicleFuelLevel : FuelLevel? = nil
-    public dynamic var VehicleFuelVolume : FuelVolume? = nil
+    public var VehicleFuelLevel : FuelLevel? = nil
+    public var VehicleFuelVolume : FuelVolume? = nil
     
     // FuelType
     public dynamic var FuelType : String? = nil
     public dynamic var GatewayTime : String? = nil
-    public dynamic var VehicleHarshEventState : HarshEvent? = nil
-    public dynamic var VehicleIdleState : IdleState? = nil
-    public dynamic var VehicleIgnitionState : BooleanState? = nil
-    public dynamic var VehicleBattery : Battery? = nil
-    public dynamic var VehicleHeading : Heading? = nil
-    public dynamic var VehicleLocation : Location? = nil
-    public dynamic var VehicleAccidentState : BooleanState? = nil
-    public dynamic var VehicleVinDetails : VinDetails? = nil
-    public dynamic var VehicleTowState : BooleanState? = nil
-    public dynamic var VehicleParkedState : BooleanState? = nil
-    public var Tags = List<StringObject>()
-    public var OwnerGroups = List<StringObject>()
+    public var VehicleHarshEventState : HarshEvent? = nil
+    public var VehicleIdleState : IdleState? = nil
+    public var VehicleIgnitionState : BooleanState? = nil
+    public var VehicleBattery : Battery? = nil
+    public var VehicleHeading : Heading? = nil
+    public var VehicleLocation : Location? = nil
+    public var VehicleAccidentState : BooleanState? = nil
+    public var VehicleVinDetails : VinDetails? = nil
+    public var VehicleTowState : BooleanState? = nil
+    public var VehicleParkedState : BooleanState? = nil
+    public var Tags : [String] = []
+    public var OwnerGroups : [String] = []
     public dynamic var Id : String? = nil
     public dynamic var CreatedOn : String? = nil
     public dynamic var LastModified : String? = nil
     
-    public dynamic var Deleted : Bool = false
+    public var Deleted : Bool = false
     
     public required convenience init?(_ map: Map) {
         self.init()
     }
     
-    public override static func primaryKey() -> String? {
+    public required init() {}
+    
+    public static func primaryKey() -> String? {
         return "Id"
-    }
-    
-    public func DiagnosticCodesArray() -> NSArray {
-        return self.DiagnosticCodes.toArray()
-    }
-    
-    public func TagsArray() -> NSArray {
-        return self.Tags.toArray()
-    }
-    
-    public func OwnerGroupsArray() -> NSArray {
-        return self.OwnerGroups.toArray()
     }
     
     public func jsonVINDict () -> NSDictionary {
@@ -114,69 +103,45 @@ public class Vehicle: Object, Mappable {
     
     public func mapping(map: Map) {
         
-        var diagnosticCodes = Array<DiagnosticCode>()
-        diagnosticCodes <- map ["DiagnosticCodes"]
-        
-        for diagnosticCode in diagnosticCodes {
-            self.DiagnosticCodes.append(diagnosticCode)
-        }
-        
-        var tags = Array<String>()
-        tags <- map["Tags"]
-        
-        for tag in tags {
-            let string = StringObject()
-            string.value = tag
-            
-            self.Tags.append(string)
-        }
-        
-        var ownerGroups = Array<String>()
-        ownerGroups <- map["OwnerGroups"]
-        
-        for ownerGroup in ownerGroups {
-            let string = StringObject()
-            string.value = ownerGroup
-            
-            self.OwnerGroups.append(string)
-        }
-        
-
-        Name <- map["Name"];
-        LicensePlate <- map["LicensePlate"];
-        VIN <- map["VIN"];
-        DetectedVIN <- map["DetectedVIN"];
-        OverrideVIN <- map["OverrideVIN"];
-        CurrentTrip <- map["CurrentTrip"];
-        MojioId <- map["MojioId"];
-        VehicleImage <- map["Image"];
-        MilStatus <- map["MilStatus"];
-        LastContactTime <- map["LastContactTime"];
-        VehicleAccelerometer <- map["Accelerometer"];
-        VehicleAcceleration <- map["Acceleration"];
-        Deceleration <- map["Deceleration"];
-        VehicleSpeed <- map["Speed"];
-        VehicleOdometer <- map["Odometer"];
-        VehicleRPM <- map["RPM"];
-        VehicleFuelEfficiency <- map["FuelEfficiency"];
-        FuelEfficiencyCalculationMethod <- map["FuelEfficiencyCalculationMethod"];
-        VehicleFuelLevel <- map["FuelLevel"];
+        Name <- map["Name"]
+        LicensePlate <- map["LicensePlate"]
+        VIN <- map["VIN"]
+        DetectedVIN <- map["DetectedVIN"]
+        OverrideVIN <- map["OverrideVIN"]
+        CurrentTrip <- map["CurrentTrip"]
+        MojioId <- map["MojioId"]
+        VehicleImage <- map["Image"]
+        MilStatus <- map["MilStatus"]
+        DiagnosticCodes <- map ["DiagnosticCodes"]
+        LastContactTime <- map["LastContactTime"]
+        VehicleAccelerometer <- map["Accelerometer"]
+        VehicleAcceleration <- map["Acceleration"]
+        Deceleration <- map["Deceleration"]
+        VehicleSpeed <- map["Speed"]
+        VehicleOdometer <- map["Odometer"]
+        VehicleRPM <- map["RPM"]
+        VehicleFuelEfficiency <- map["FuelEfficiency"]
+        FuelEfficiencyCalculationMethod <- map["FuelEfficiencyCalculationMethod"]
+        VehicleFuelLevel <- map["FuelLevel"]
         VehicleFuelVolume <- map["FuelVolume"]
-        FuelType <- map["FuelType"];
-        GatewayTime <- map["GatewayTime"];
-        VehicleHarshEventState <- map["HarshEventState"];
-        VehicleIdleState <- map["IdleState"];
-        VehicleIgnitionState <- map["IgnitionState"];
-        VehicleBattery <- map["Battery"];
+        FuelType <- map["FuelType"]
+        GatewayTime <- map["GatewayTime"]
+        VehicleHarshEventState <- map["HarshEventState"]
+        VehicleIdleState <- map["IdleState"]
+        VehicleIgnitionState <- map["IgnitionState"]
+        VehicleBattery <- map["Battery"]
         VehicleHeading <- map["Heading"];
-        VehicleLocation <- map["Location"];
-        VehicleAccidentState <- map["AccidentState"];
-        VehicleVinDetails <- map["VinDetails"];
-        VehicleTowState <- map["TowState"];
-        VehicleParkedState <- map["ParkedState"];
-        Id <- map["Id"];
-        CreatedOn <- map["CreatedOn"];
-        LastModified <- map["LastModified"];
-        Deleted <- map["Deleted"];
+        VehicleLocation <- map["Location"]
+        VehicleAccidentState <- map["AccidentState"]
+        VehicleVinDetails <- map["VinDetails"]
+        VehicleTowState <- map["TowState"]
+        VehicleParkedState <- map["ParkedState"]
+        OwnerGroups <- map["OwnerGroups"]
+        Id <- map["Id"]
+        Tags <- map["Tags"]
+        CreatedOn <- map["CreatedOn"]
+        LastModified <- map["LastModified"]
+        Deleted <- map["Deleted"]
+    
     }
 }

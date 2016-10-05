@@ -10,7 +10,7 @@ import UIKit
 import ObjectMapper
 import RealmSwift
 
-public class ServiceInterval: Object, Mappable {
+public class ServiceInterval: Mappable {
     
     public dynamic var OperatingParameter: String? = nil
     public dynamic var OperatingParameterNotes: String? = nil
