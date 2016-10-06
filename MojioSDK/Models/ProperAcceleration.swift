@@ -8,9 +8,8 @@
 
 import UIKit
 import ObjectMapper
-import RealmSwift
 
-public class AccelerometerUnits : NSObject {
+public class AccelerometerUnits  {
     public static let MilliGUnits : String = "MilliGUnits"
     public static let NewtonsPerKilogram : String = "NewtonsPerKilogram"
     public static let XirgoUnit : String = "XirgoUnit"
@@ -19,7 +18,7 @@ public class AccelerometerUnits : NSObject {
     public static let GUnits : String = "GUnits"
 }
 
-public class ProperAcceleration: Object, Mappable {
+public class ProperAcceleration: Mappable {
 
     public dynamic var BaseUnit : String? = nil
     public dynamic var Timestamp : String? = nil
@@ -33,12 +32,16 @@ public class ProperAcceleration: Object, Mappable {
         self.init()
     }
     
+    public required init() {
+        
+    }
+
     public func mapping(map: Map) {
-        BaseUnit <- map["BaseUnit"];
-        Timestamp <- map["Timestamp"];
-        BaseValue <- map["BaseValue"];
-        Unit <- map["Unit"];
-        Value <- map["Value"];
+        BaseUnit <- map["BaseUnit"]
+        Timestamp <- map["Timestamp"]
+        BaseValue <- map["BaseValue"]
+        Unit <- map["Unit"]
+        Value <- map["Value"]
     }
 
 }

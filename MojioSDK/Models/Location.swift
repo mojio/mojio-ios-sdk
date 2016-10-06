@@ -8,7 +8,6 @@
 
 import UIKit
 import ObjectMapper
-import RealmSwift
 
 public class LocationStatus : NSObject {
     // Status not known
@@ -58,8 +57,8 @@ public class LocationStatus : NSObject {
     public static let PreviousValidState : String = "PreviousValidState"
 }
 
-public class Location: Object, Mappable {
-    public dynamic var LocationAddress : Address? = nil
+public class Location: Mappable {
+    public var LocationAddress : Address? = nil
     public dynamic var Timestamp : String? = nil
     public dynamic var Lat : Float = 0
     public dynamic var Lng : Float = 0
@@ -75,15 +74,19 @@ public class Location: Object, Mappable {
         self.init()
     }
     
+    public required init() {
+        
+    }
+
     public func mapping(map: Map) {
-        LocationAddress <- map["Address"];
-        Timestamp <- map["Timestamp"];
-        Lat <- map["Lat"];
-        Lng <- map["Lng"];
-        Status <- map["Status"];
-        Dilution <- map["Dilution"];
-        Altitude <- map["Altitude"];
-        GeoHash <- map["GeoHash"];
+        LocationAddress <- map["Address"]
+        Timestamp <- map["Timestamp"]
+        Lat <- map["Lat"]
+        Lng <- map["Lng"]
+        Status <- map["Status"]
+        Dilution <- map["Dilution"]
+        Altitude <- map["Altitude"]
+        GeoHash <- map["GeoHash"]
     }
 
 }

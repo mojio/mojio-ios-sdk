@@ -8,9 +8,8 @@
 
 import UIKit
 import ObjectMapper
-import RealmSwift
 
-public class DiagnosticCode: Object, Mappable {
+public class DiagnosticCode: Mappable {
     
     public dynamic var Code : String? = nil
     public dynamic var Description : String? = nil
@@ -22,6 +21,10 @@ public class DiagnosticCode: Object, Mappable {
     
     public required convenience init?(_ map: Map) {
         self.init()
+    }
+    
+    public required init() {
+        
     }
     
     public func mapping(map: Map) {

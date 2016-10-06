@@ -8,19 +8,17 @@
 
 import UIKit
 import ObjectMapper
-import RealmSwift
-import Realm
 
-public class User : Object, Mappable {
+public class User : Mappable {
     
     public dynamic var FirstName : String? = nil
     public dynamic var LastName : String? = nil
     public dynamic var UserName : String? = nil
     public dynamic var Jurisdiction : String? = nil
-    public var Emails = List<Email>()
-    public var PhoneNumbers = List<PhoneNumber>()
-    public dynamic var Img : Image? = nil
-    public var Tags = List<StringObject>()
+    public var Emails : [Email] = []
+    public var PhoneNumbers : [PhoneNumber] = []
+    public var Img : Image? = nil
+    public var Tags : [String] = []
     public dynamic var Id : String? = nil
     public dynamic var CreatedOn : String? = nil
     public dynamic var LastModified : String? = nil
@@ -32,20 +30,24 @@ public class User : Object, Mappable {
         self.init()
     }
     
-    public override static func primaryKey() -> String? {
+    public required init() {
+        
+    }
+    
+    public static func primaryKey() -> String? {
         return "Id"
     }
     
     public func EmailsArray() -> NSArray {
-        return self.Emails.toArray()
+        return self.Emails
     }
     
     public func PhoneNumbersArray() -> NSArray {
-        return self.PhoneNumbers.toArray()
+        return self.PhoneNumbers
     }
     
     public func TagsArray() -> NSArray {
-        return self.Tags.toArray()
+        return self.Tags
     }
 
     public func jsonDict () -> NSDictionary {
@@ -64,7 +66,7 @@ public class User : Object, Mappable {
             dictionary.setObject(self.LastName!, forKey: "LastName")
         }
         if self.PhoneNumbers.count > 0 {
-            dictionary.setObject(self.PhoneNumbers.toArray(), forKey: "PhoneNumbers")
+            dictionary.setObject(self.PhoneNumbers, forKey: "PhoneNumbers")
         }
         
         return dictionary
@@ -72,37 +74,16 @@ public class User : Object, Mappable {
     
     public func mapping(map: Map) {
         
-        var emails = Array<Email>()
-        emails <- map["Emails"]
-        
-        for email in emails {
-            self.Emails.append(email)
-        }
-        
-        var tags = Array<String>()
-        tags <- map["Tags"]
-        
-        for tag in tags {
-            let string = StringObject()
-            string.value = tag
-            
-            self.Tags.append(string)
-        }
-        
-        var phoneNumbers = Array<PhoneNumber>()
-        phoneNumbers <- map["PhoneNumbers"]
-        
-        for phoneNumber in phoneNumbers {
-            self.PhoneNumbers.append(phoneNumber)
-        }
-        
-        self.FirstName <- map["FirstName"];
-        self.LastName <- map["LastName"];
-        self.UserName <- map["UserName"];
-        self.Jurisdiction <- map["Jurisdiction"];
-        Img <- map["Image"];
-        self.Id <- map["Id"];
-        self.CreatedOn <- map["CreatedOn"];
-        self.LastModified <- map["LastModified"];
+        self.FirstName <- map["FirstName"]
+        self.LastName <- map["LastName"]
+        self.UserName <- map["UserName"]
+        self.Jurisdiction <- map["Jurisdiction"]
+        self.Emails <- map["Emails"]
+        self.PhoneNumbers <- map["PhoneNumbers"]
+        self.Img <- map["Image"]
+        self.Tags <- map["Tags"]
+        self.Id <- map["Id"]
+        self.CreatedOn <- map["CreatedOn"]
+        self.LastModified <- map["LastModified"]
     }
 }

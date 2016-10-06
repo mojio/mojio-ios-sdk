@@ -8,26 +8,18 @@
 
 import UIKit
 import ObjectMapper
-import RealmSwift
 
-public class ServiceSchedule: Object, Mappable {
+public class ServiceSchedule: Mappable {
     
     public dynamic var VIN : String? = nil
-    public var Items = List<ServiceScheduleItem>()
+    public var Items : [ServiceScheduleItem] = []
     
     public required convenience init?(_ map: Map) {
         self.init()
     }
     
     public func mapping(map: Map) {
-        
-        var items = Array<ServiceScheduleItem>()
-        items <- map["Items"]
-        
-        for item in items {
-            Items.append(item)
-        }
-        
         VIN <- map["VIN"]
+        Items <- map["Items"]
     }
 }

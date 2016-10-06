@@ -10,7 +10,7 @@ import UIKit
 import ObjectMapper
 import RealmSwift
 
-public class ServiceEvent: Object, Mappable {
+public class ServiceEvent: Mappable {
     
     public dynamic var ComputerCode: String? = nil
     public dynamic var Event: String? = nil

@@ -8,9 +8,8 @@
 
 import UIKit
 import ObjectMapper
-import RealmSwift
 
-public class Transmission: Object, Mappable {
+public class Transmission: Mappable {
     
     public dynamic var Name : String? = nil
     public dynamic var Type : String? = nil
@@ -21,6 +20,10 @@ public class Transmission: Object, Mappable {
         self.init();
     }
     
+    public required init() {
+        
+    }
+
     public func mapping(map: Map) {
         Name <- map["Name"]
         Type <- map["Type"]

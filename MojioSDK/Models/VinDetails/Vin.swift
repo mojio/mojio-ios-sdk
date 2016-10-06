@@ -7,10 +7,9 @@
 //
 
 import UIKit
-import RealmSwift
 import ObjectMapper
 
-public class Vin: Object, Mappable {
+public class Vin: Mappable {
     
     public dynamic var VIN : String? = nil
     public dynamic var Timestamp : String? = nil
@@ -23,54 +22,29 @@ public class Vin: Object, Mappable {
     public dynamic var DriveType : String? = nil
     public dynamic var FuelTankSize : Float = 0
     public dynamic var EPAFuelEfficiency : Float = 0
-    public dynamic var VehicleEngine : Engine? = nil
-    public dynamic var VehicleTransmission : Transmission? = nil
-    public var Warranties = List<Warranty>()
-    public var Recalls = List<Recall>()
-    public var ServiceBulletins = List<ServiceBulletin>()
+    public var VehicleEngine : Engine? = nil
+    public var VehicleTransmission : Transmission? = nil
+    public var Warranties : [Warranty] = []
+    public var Recalls : [Recall] = []
+    public var ServiceBulletins : [ServiceBulletin] = []
     
     public required convenience init?(_ map: Map) {
         self.init();
     }
     
-    public override static func primaryKey() -> String? {
+    public required init() {
+        
+    }
+
+    public static func primaryKey() -> String? {
         return "VIN"
     }
         
     public func WarrantiesArray() -> NSArray {
-        return self.Warranties.toArray()
-    }
-    
-    public func RecallsArray() -> NSArray {
-        return self.Recalls.toArray()
-    }
-    
-    public func ServiceBulletinsArray() -> NSArray {
-        return self.ServiceBulletins.toArray()
+        return self.Warranties
     }
     
     public func mapping(map: Map) {
-        
-        var warranties = Array<Warranty>()
-        warranties <- map["Warranties"]
-        
-        for warranty in warranties {
-            self.Warranties.append(warranty)
-        }
-        
-        var recalls = Array<Recall>()
-        recalls <- map["Recalls"]
-        
-        for recall in recalls {
-            self.Recalls.append(recall)
-        }
-
-        var serviceBulletins = Array<ServiceBulletin>()
-        serviceBulletins <- map["ServiceBulletins"]
-        
-        for serviceBulletin in serviceBulletins {
-            self.ServiceBulletins.append(serviceBulletin)
-        }
         
         VIN <- map["VIN"]
         Timestamp <- map["Timestamp"]
@@ -85,6 +59,9 @@ public class Vin: Object, Mappable {
         EPAFuelEfficiency <- map["EPAFuelEfficiency"]
         VehicleEngine <- map["Engine"]
         VehicleTransmission <- map["Transmission"]
-        
-    }    
+        Warranties <- map["Warranties"]
+        Recalls <- map["Recalls"]
+        ServiceBulletins <- map["ServiceBulletins"]
+
+    }
 }

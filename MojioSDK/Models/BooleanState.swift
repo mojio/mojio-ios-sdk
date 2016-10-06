@@ -8,9 +8,8 @@
 
 import UIKit
 import ObjectMapper
-import RealmSwift
 
-public class BooleanState: Object, Mappable {
+public class BooleanState: Mappable {
     
     public dynamic var Timestamp : String? = nil
     public dynamic var Value : Bool = false
@@ -19,9 +18,13 @@ public class BooleanState: Object, Mappable {
         self.init()
     }
     
+    public required init() {
+        
+    }
+    
     public func mapping(map: Map) {
-        Timestamp <- map["Timestamp"];
-        Value <- map["Value"];
+        Timestamp <- map["Timestamp"]
+        Value <- map["Value"]
     }
     
 }

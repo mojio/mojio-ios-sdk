@@ -8,13 +8,12 @@
 
 import UIKit
 import ObjectMapper
-import RealmSwift
 
 public class HeadingUnits : NSObject {
     public static let Degree : String = "Degree"
 }
 
-public class Heading: Object, Mappable {
+public class Heading: Mappable {
     
     public dynamic var BaseUnit : String? = nil
     public dynamic var Direction : String? = nil
@@ -30,14 +29,18 @@ public class Heading: Object, Mappable {
         self.init()
     }
     
+    public required init() {
+        
+    }
+
     public func mapping(map: Map) {
-        BaseUnit <- map["BaseUnit"];
-        Direction <- map["Direction"];
-        LeftTurn <- map["LeftTurn"];
-        Timestamp <- map["Timestamp"];
-        BaseValue <- map["BaseValue"];
-        Unit <- map["Unit"];
-        Value <- map["Value"];
+        BaseUnit <- map["BaseUnit"]
+        Direction <- map["Direction"]
+        LeftTurn <- map["LeftTurn"]
+        Timestamp <- map["Timestamp"]
+        BaseValue <- map["BaseValue"]
+        Unit <- map["Unit"]
+        Value <- map["Value"]
     }
 
 }

@@ -8,9 +8,8 @@
 
 import UIKit
 import ObjectMapper
-import RealmSwift
 
-public class Address: Object, Mappable {
+public class Address: Mappable {
     
     public dynamic var HouseNumber : String? = nil
     public dynamic var Road : String? = nil
@@ -28,18 +27,22 @@ public class Address: Object, Mappable {
         self.init()
     }
     
+    public required init() {
+        
+    }
+    
     public func mapping(map: Map) {
-        HouseNumber <- map["HouseNumber"];
-        Road <- map["Road"];
-        Neighbourhood <- map["Neighbourhood"];
-        Suburb <- map["Suburb"];
-        City <- map["City"];
-        County <- map["County"];
-        State <- map["State"];
-        PostCode <- map["PostCode"];
-        Country <- map["Country"];
-        CountryCode <- map["CountryCode"];
-        FormattedAddress <- map["FormattedAddress"];
+        HouseNumber <- map["HouseNumber"]
+        Road <- map["Road"]
+        Neighbourhood <- map["Neighbourhood"]
+        Suburb <- map["Suburb"]
+        City <- map["City"]
+        County <- map["County"]
+        State <- map["State"]
+        PostCode <- map["PostCode"]
+        Country <- map["Country"]
+        CountryCode <- map["CountryCode"]
+        FormattedAddress <- map["FormattedAddress"]
     }
 
 }

@@ -8,13 +8,12 @@
 
 import UIKit
 import ObjectMapper
-import RealmSwift
 
-public class Group: Object, Mappable {
+public class Group: Mappable {
     public dynamic var Name : String? = nil
     public dynamic var Description : String? = nil
-    public var Users = List<User>()
-    public var Tags = List<StringObject>()
+    public var Users : [User] = []
+    public var Tags : [String] = []
     public dynamic var Id : String? = nil
     public dynamic var CreatedOn : String? = nil
     public dynamic var LastModified : String? = nil
@@ -23,16 +22,12 @@ public class Group: Object, Mappable {
         self.init()
     }
     
-    public override static func primaryKey() -> String? {
+    public required init() {
+        
+    }
+
+    public static func primaryKey() -> String? {
         return "Id"
-    }
-    
-    public func UsersArray() -> NSArray {
-        return self.Users.toArray()
-    }
-    
-    public func TagsArray() -> NSArray {
-        return self.Tags.toArray()
     }
     
     public func json () -> String? {
@@ -45,7 +40,7 @@ public class Group: Object, Mappable {
             dictionary.setObject(self.Description!, forKey: "Description")
         }
         if self.Users.count > 0 {
-            dictionary.setObject(self.Users.toArray(), forKey: "Users")
+            dictionary.setObject(self.Users, forKey: "Users")
         }
         
         let data = try! NSJSONSerialization.dataWithJSONObject(dictionary, options:  NSJSONWritingOptions.PrettyPrinted)
@@ -66,12 +61,8 @@ public class Group: Object, Mappable {
         tags <- map["Tags"]
         
         for tag in tags {
-            let string = StringObject()
-            string.value = tag
-            
-            self.Tags.append(string)
+            self.Tags.append(tag)
         }
-
         
         Name <- map["Name"];
         Description <- map["Description"];

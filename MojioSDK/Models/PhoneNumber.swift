@@ -8,16 +8,18 @@
 
 import UIKit
 import ObjectMapper
-import RealmSwift
-import Realm
 
-public class PhoneNumber : Object, Mappable {
+public class PhoneNumber : Mappable {
 
     public dynamic var PhoneNumber : String? = nil
     public dynamic var Verified : Bool = false
     
     public required convenience init?(_ map: Map) {
-        self.init();
+        self.init()
+    }
+    
+    public required init() {
+        
     }
     
     public func mapping(map: Map) {

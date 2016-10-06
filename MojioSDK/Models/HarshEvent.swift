@@ -8,7 +8,6 @@
 
 import UIKit
 import ObjectMapper
-import RealmSwift
 
 public class HarshEventEventTypes : NSObject {
     public static let Acceleration : String = "Acceleration"
@@ -25,7 +24,7 @@ public class HarshEventTurnTypes : NSObject {
     public static let Right : String = "Right"
 }
 
-public class HarshEvent: Object, Mappable {
+public class HarshEvent: Mappable {
     
     public dynamic var Timestamp : String? = nil
     public dynamic var Value : Bool = false
@@ -36,6 +35,10 @@ public class HarshEvent: Object, Mappable {
         self.init()
     }
     
+    public required init() {
+        
+    }
+
     public func mapping(map: Map) {
         Timestamp <- map["Timestamp"];
         Value <- map["Value"];

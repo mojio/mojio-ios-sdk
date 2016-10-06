@@ -8,9 +8,8 @@
 
 import UIKit
 import ObjectMapper
-import RealmSwift
 
-public class ServiceScheduleItem: Object, Mappable {
+public class ServiceScheduleItem: Mappable {
     
     public dynamic var TransNotes: String? = nil
     public dynamic var ScheduleName: String? = nil
@@ -18,8 +17,8 @@ public class ServiceScheduleItem: Object, Mappable {
     public dynamic var MaintenanceCategory: String? = nil
     public dynamic var MaintenanceName: String? = nil
     public dynamic var MaintenanceNotes: String? = nil
-    public var Intervals = List<ServiceInterval>()
-    public var Events = List<ServiceEvent>()
+    public var Intervals : [ServiceInterval] = []
+    public var Events : [ServiceEvent] = []
     
     public required convenience init?(_ map: Map) {
         self.init()
@@ -27,26 +26,14 @@ public class ServiceScheduleItem: Object, Mappable {
 
     public func mapping(map: Map) {
         
-        var intervals = Array<ServiceInterval>()
-        intervals <- map["Intervals"]
-        
-        for interval in intervals {
-            Intervals.append(interval)
-        }
-        
-        var events = Array<ServiceEvent>()
-        events <- map["Events"]
-        
-        for event in events {
-            Events.append(event)
-        }
-        
         TransNotes <- map["TransNotes"]
         ScheduleName <- map["ScheduleName"]
         ScheduleDescription <- map["ScheduleDescription"]
         MaintenanceCategory <- map["MaintenanceCategory"]
         MaintenanceName <- map["MaintenanceName"]
         MaintenanceNotes <- map["MaintenanceNotes"]
+        Intervals <- map["Intervals"]
+        Events <- map["Events"]
     }
 
 }
