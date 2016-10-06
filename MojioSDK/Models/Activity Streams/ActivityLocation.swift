@@ -20,7 +20,7 @@ public class ActivityLocation : BaseActivity {
     }
     
     public func toLocation() -> Location {
-        var location = Location()
+        let location = Location()
         location.Lat = self.Latitude
         location.Lng = self.Longitude
         location.Radius = self.Radius
