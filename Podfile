@@ -11,7 +11,6 @@ target 'MojioSDK' do
     pod 'Alamofire', '3.5.0'
     pod 'SwiftyJSON', '2.3.2'
     pod 'ObjectMapper', '~> 1.1'
-    pod 'RealmSwift', '1.1.0'
     pod 'KeychainSwift', :git => 'https://github.com/marketplacer/keychain-swift', :branch => 'swift_2_3'
     pod 'OHHTTPStubs'
     pod 'OHHTTPStubs/Swift'

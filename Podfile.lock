@@ -17,11 +17,6 @@ PODS:
   - OHHTTPStubs/OHPathHelpers (5.2.1)
   - OHHTTPStubs/Swift (5.2.1):
     - OHHTTPStubs/Core
-  - Realm (1.1.0):
-    - Realm/Headers (= 1.1.0)
-  - Realm/Headers (1.1.0)
-  - RealmSwift (1.1.0):
-    - Realm (= 1.1.0)
   - SwiftWebSocket (2.6.4)
   - SwiftyJSON (2.3.2)
 
@@ -31,7 +26,6 @@ DEPENDENCIES:
   - ObjectMapper (~> 1.1)
   - OHHTTPStubs
   - OHHTTPStubs/Swift
-  - RealmSwift (= 1.1.0)
   - SwiftWebSocket
   - SwiftyJSON (= 2.3.2)
 
@@ -50,11 +44,9 @@ SPEC CHECKSUMS:
   KeychainSwift: a5bb85cd498ce2217b55e055ec59e9268d83384c
   ObjectMapper: 386645adca9d9d23b95eda43090b09d66444cf14
   OHHTTPStubs: 3a42f25c00563b71355ac73112ba2324e9e6cef4
-  Realm: ceecf1a4540c4ce9efe196fe73fa9855bce05bd8
-  RealmSwift: 838058b2db95b12cb86bd0cf209df642c33fb60a
   SwiftWebSocket: fdb5b4393cede304d44befbaeb0c8ef14c28d3bb
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
-PODFILE CHECKSUM: aee22c141954aa438eed3070fd9fd0bfb409e479
+PODFILE CHECKSUM: f535a651c974c36e7a997d8335e9331591e6cbc3
 
 COCOAPODS: 1.1.0.rc.2
