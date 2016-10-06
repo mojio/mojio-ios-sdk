@@ -474,7 +474,7 @@ public class RestClient: NSObject {
                         array.addObject(self.parseDict(obj as! NSDictionary)!)
                     }
                     var comp : AnyObject = array
-                    if let doCount = requestParams["includeCount"] {
+                    if requestParams["includeCount"] != nil {
                         if let count = responseDict.objectForKey("TotalCount") as? Int {
                             comp = Result(data: array, count: count)
                         }
@@ -486,7 +486,7 @@ public class RestClient: NSObject {
                         if let links = responseDict.objectForKey("Links") as? NSDictionary {
                             if let next = links.objectForKey("Next") as? String {
                                 // Server sends the same nextUrl sometimes when you've reached the end
-                                if let decoded = next.stringByReplacingPercentEscapesUsingEncoding(NSUTF8StringEncoding) {
+                                if let decoded = next.stringByRemovingPercentEncoding {
                                     if (decoded != self.nextUrl) {
                                         self.nextUrl = decoded
                                         self.requestUrl = decoded

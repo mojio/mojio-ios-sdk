@@ -8,14 +8,13 @@
 
 import Foundation
 import ObjectMapper
-import RealmSwift
 
 public class AggregationDataMeasurementType: NSObject {
     
     public static let MeasureBattery : String = "battery"
 }
 
-public class AggregationData: Object, Mappable {
+public class AggregationData: Mappable {
 
     public dynamic var Total        : Float = 0
     public dynamic var Average      : Float = 0

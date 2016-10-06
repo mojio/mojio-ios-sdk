@@ -8,7 +8,6 @@
 
 import UIKit
 import ObjectMapper
-import RealmSwift
 
 public class FuelVolumeUnits : NSObject {
     public static let Gallon        : String = "Gallon"
@@ -19,7 +18,7 @@ public class FuelVolumeUnits : NSObject {
     public static let Milliliter    : String = "Milliliter"
 }
 
-public class FuelVolume: Object, Mappable {
+public class FuelVolume: Mappable {
 
     public dynamic var BaseUnit : String? = nil
     public dynamic var Timestamp : String? = nil

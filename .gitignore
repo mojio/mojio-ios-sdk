@@ -1,5 +1,7 @@
 # Xcode
 .DS_Store
+**/Pods/
+Manifest.lock
 build/
 *.pbxuser
 !default.pbxuser

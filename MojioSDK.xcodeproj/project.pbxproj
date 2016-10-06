@@ -17,6 +17,9 @@
 		BC31E3D51D419F5D001649A7 /* BaseActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC31E3D11D419F5D001649A7 /* BaseActivity.swift */; };
 		BC31E3D61D419F5D001649A7 /* RootActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC31E3D21D419F5D001649A7 /* RootActivity.swift */; };
 		BC5F7F031CC58D4000FAB205 /* BaseUnits.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5F7F021CC58D4000FAB205 /* BaseUnits.swift */; };
+		BC717D9A1DA6EFA20052317C /* ServiceEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC717D971DA6EFA20052317C /* ServiceEvent.swift */; };
+		BC717D9B1DA6EFA20052317C /* ServiceInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC717D981DA6EFA20052317C /* ServiceInterval.swift */; };
+		BC717D9C1DA6EFA20052317C /* ServiceScheduleItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC717D991DA6EFA20052317C /* ServiceScheduleItem.swift */; };
 		BC72D7A81CC5615600D9740B /* AuthClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC72D7A41CC5615600D9740B /* AuthClient.swift */; };
 		BC72D7A91CC5615600D9740B /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC72D7A51CC5615600D9740B /* AuthViewController.swift */; };
 		BC72D7AA1CC5615600D9740B /* AuthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC72D7A61CC5615600D9740B /* AuthViewController.xib */; };
@@ -55,7 +58,6 @@
 		BC879B751CBEFFDD00F9177B /* RPM.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B581CBEFFDD00F9177B /* RPM.swift */; };
 		BC879B761CBEFFDD00F9177B /* Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B591CBEFFDD00F9177B /* Score.swift */; };
 		BC879B771CBEFFDD00F9177B /* Speed.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B5A1CBEFFDD00F9177B /* Speed.swift */; };
-		BC879B781CBEFFDD00F9177B /* StringObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B5B1CBEFFDD00F9177B /* StringObject.swift */; };
 		BC879B791CBEFFDD00F9177B /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B5C1CBEFFDD00F9177B /* Trip.swift */; };
 		BC879B7A1CBEFFDD00F9177B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B5D1CBEFFDD00F9177B /* User.swift */; };
 		BC879B7B1CBEFFDD00F9177B /* Vehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B5E1CBEFFDD00F9177B /* Vehicle.swift */; };
@@ -116,7 +118,7 @@
 		12DB7395EEC25B945C6073A8 /* Pods-MojioSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MojioSDK.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MojioSDK/Pods-MojioSDK.debug.xcconfig"; sourceTree = "<group>"; };
 		2D8CC37B8959C27E426C51E2 /* Pods_MojioSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MojioSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5129D3ED3B56C9F0B8D93690 /* Pods-MojioSDKTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MojioSDKTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MojioSDKTests/Pods-MojioSDKTests.debug.xcconfig"; sourceTree = "<group>"; };
-		644017531DA2AC9A00DAA73D /* AggregationData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AggregationData.swift; path = "Models/AggregationData.swift"; sourceTree = "<group>"; };
+		644017531DA2AC9A00DAA73D /* AggregationData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AggregationData.swift; path = Models/AggregationData.swift; sourceTree = "<group>"; };
 		644214DD1D9E6500005A86C5 /* FuelVolume.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FuelVolume.swift; path = Models/FuelVolume.swift; sourceTree = "<group>"; };
 		75F77F0D1D19F504000CC2B4 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		8B04A6C16725DB2223B32D46 /* Pods-MojioSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MojioSDK.release.xcconfig"; path = "Pods/Target Support Files/Pods-MojioSDK/Pods-MojioSDK.release.xcconfig"; sourceTree = "<group>"; };
@@ -126,6 +128,9 @@
 		BC31E3D11D419F5D001649A7 /* BaseActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseActivity.swift; path = "Models/Activity Streams/BaseActivity.swift"; sourceTree = "<group>"; };
 		BC31E3D21D419F5D001649A7 /* RootActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RootActivity.swift; path = "Models/Activity Streams/RootActivity.swift"; sourceTree = "<group>"; };
 		BC5F7F021CC58D4000FAB205 /* BaseUnits.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseUnits.swift; path = Models/BaseUnits.swift; sourceTree = "<group>"; };
+		BC717D971DA6EFA20052317C /* ServiceEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ServiceEvent.swift; path = Models/VinDetails/ServiceEvent.swift; sourceTree = "<group>"; };
+		BC717D981DA6EFA20052317C /* ServiceInterval.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ServiceInterval.swift; path = Models/VinDetails/ServiceInterval.swift; sourceTree = "<group>"; };
+		BC717D991DA6EFA20052317C /* ServiceScheduleItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ServiceScheduleItem.swift; path = Models/VinDetails/ServiceScheduleItem.swift; sourceTree = "<group>"; };
 		BC72D7A41CC5615600D9740B /* AuthClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthClient.swift; path = Client/AuthClient.swift; sourceTree = "<group>"; };
 		BC72D7A51CC5615600D9740B /* AuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthViewController.swift; path = Client/AuthViewController.swift; sourceTree = "<group>"; };
 		BC72D7A61CC5615600D9740B /* AuthViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AuthViewController.xib; path = Client/AuthViewController.xib; sourceTree = "<group>"; };
@@ -169,7 +174,6 @@
 		BC879B581CBEFFDD00F9177B /* RPM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RPM.swift; path = Models/RPM.swift; sourceTree = "<group>"; };
 		BC879B591CBEFFDD00F9177B /* Score.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Score.swift; path = Models/Score.swift; sourceTree = "<group>"; };
 		BC879B5A1CBEFFDD00F9177B /* Speed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Speed.swift; path = Models/Speed.swift; sourceTree = "<group>"; };
-		BC879B5B1CBEFFDD00F9177B /* StringObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StringObject.swift; path = Models/StringObject.swift; sourceTree = "<group>"; };
 		BC879B5C1CBEFFDD00F9177B /* Trip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Trip.swift; path = Models/Trip.swift; sourceTree = "<group>"; };
 		BC879B5D1CBEFFDD00F9177B /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Models/User.swift; sourceTree = "<group>"; };
 		BC879B5E1CBEFFDD00F9177B /* Vehicle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Vehicle.swift; path = Models/Vehicle.swift; sourceTree = "<group>"; };
@@ -315,7 +319,10 @@
 				BC879B311CBEFFC000F9177B /* PlatformServiceSchedule.swift */,
 				BC879B321CBEFFC000F9177B /* Recall.swift */,
 				BC879B331CBEFFC000F9177B /* ServiceBulletin.swift */,
+				BC717D971DA6EFA20052317C /* ServiceEvent.swift */,
+				BC717D981DA6EFA20052317C /* ServiceInterval.swift */,
 				BC879B341CBEFFC000F9177B /* ServiceSchedule.swift */,
+				BC717D991DA6EFA20052317C /* ServiceScheduleItem.swift */,
 				BC879B351CBEFFC000F9177B /* Transmission.swift */,
 				BC879B361CBEFFC000F9177B /* Vin.swift */,
 				BC879B371CBEFFC000F9177B /* VinDetails.swift */,
@@ -444,7 +451,6 @@
 				BC879B581CBEFFDD00F9177B /* RPM.swift */,
 				BC879B591CBEFFDD00F9177B /* Score.swift */,
 				BC879B5A1CBEFFDD00F9177B /* Speed.swift */,
-				BC879B5B1CBEFFDD00F9177B /* StringObject.swift */,
 				BC879B4A1CBEFFDD00F9177B /* TimePeriod.swift */,
 				BC879B5C1CBEFFDD00F9177B /* Trip.swift */,
 				BC879B5D1CBEFFDD00F9177B /* User.swift */,
@@ -566,12 +572,15 @@
 					BCC2EFB01CBED4E6004D2759 = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = R8N6N647SF;
+						LastSwiftMigration = 0800;
 					};
 					BCC2EFB91CBED4E6004D2759 = {
 						CreatedOnToolsVersion = 7.3;
+						LastSwiftMigration = 0800;
 					};
 					BCC2EFCB1CBEF6DB004D2759 = {
 						CreatedOnToolsVersion = 7.3;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -645,7 +654,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		3500E81221335B57C2E599D2 /* Embed Pods Frameworks */ = {
@@ -690,7 +699,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		7A905710DE82B9FA4B6842BC /* [CP] Copy Pods Resources */ = {
@@ -740,8 +749,8 @@
 				644214DE1D9E6500005A86C5 /* FuelVolume.swift in Sources */,
 				BC879B641CBEFFDD00F9177B /* Battery.swift in Sources */,
 				BC879B891CBEFFFF00F9177B /* JsonSerializer.swift in Sources */,
+				BC717D9C1DA6EFA20052317C /* ServiceScheduleItem.swift in Sources */,
 				BC72D7A91CC5615600D9740B /* AuthViewController.swift in Sources */,
-				BC879B781CBEFFDD00F9177B /* StringObject.swift in Sources */,
 				BC879B601CBEFFDD00F9177B /* Acceleration.swift in Sources */,
 				BC72D7AB1CC5615600D9740B /* RestClient.swift in Sources */,
 				BC879B391CBEFFC000F9177B /* Engine.swift in Sources */,
@@ -761,7 +770,9 @@
 				BC879B791CBEFFDD00F9177B /* Trip.swift in Sources */,
 				BC5F7F031CC58D4000FAB205 /* BaseUnits.swift in Sources */,
 				BC879B411CBEFFC000F9177B /* VinDetails.swift in Sources */,
+				BC717D9B1DA6EFA20052317C /* ServiceInterval.swift in Sources */,
 				BC879B681CBEFFDD00F9177B /* Email.swift in Sources */,
+				BC717D9A1DA6EFA20052317C /* ServiceEvent.swift in Sources */,
 				BC879B711CBEFFDD00F9177B /* Mojio.swift in Sources */,
 				BC31E3D61D419F5D001649A7 /* RootActivity.swift in Sources */,
 				BC879B721CBEFFDD00F9177B /* Odometer.swift in Sources */,
@@ -940,6 +951,7 @@
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -967,6 +979,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 2.3;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -984,6 +997,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.moj.mobile.ios.SDK.MojioSDKTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
@@ -999,6 +1013,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.moj.mobile.ios.SDK.MojioSDKTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
 		};
@@ -1013,6 +1028,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = io.moj.mobile.ios.SDK.MojioSDKUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
@@ -1027,6 +1043,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = io.moj.mobile.ios.SDK.MojioSDKUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
 		};
