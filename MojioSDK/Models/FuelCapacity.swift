@@ -9,35 +9,10 @@
 import UIKit
 import ObjectMapper
 
-public class FuelCapacityUnits : NSObject {
-    public static let Gallons : String = "Gallons"
-    public static let Liters : String = "Liters"
-}
-
-public class FuelCapacity: Mappable {
-    
-    public dynamic var BaseUnit : String? = nil
-    public dynamic var Timestamp : String? = nil
-    public dynamic var BaseValue : Float = 0
-    
-    // FuelCapacityUnits
-    public dynamic var Unit : String? = nil
-    public dynamic var Value : Float = 0
+// Units in FuelCapacityUnits
+public class FuelCapacity: DeviceMeasurement {
     
     public required convenience init?(_ map: Map) {
         self.init()
     }
-    
-    public required init() {
-        
-    }
-    
-    public func mapping(map: Map) {
-        BaseUnit <- map["BaseUnit"]
-        Timestamp <- map["Timestamp"]
-        BaseValue <- map["BaseValue"]
-        Unit <- map["Unit"]
-        Value <- map["Value"]
-    }
-    
 }

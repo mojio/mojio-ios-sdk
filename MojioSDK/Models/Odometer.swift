@@ -9,25 +9,15 @@
 import UIKit
 import ObjectMapper
 
-public class Odometer: Mappable {
+// Units in DistanceUnits
+public class Odometer: DeviceMeasurement {
     
     public dynamic var RolloverValue : Float = 0
-    public dynamic var BaseUnit : String? = nil
-    public dynamic var Timestamp : String? = nil
-    public dynamic var BaseValue : Float = 0
-    
-    // DistanceUnits
-    public dynamic var Unit : String? = nil
-    public dynamic var Value : Float = 0
     
     public required convenience init?(_ map: Map) {
         self.init()
     }
     
-    public required init() {
-        
-    }
-
     public func jsonDict () -> NSDictionary {
         let dictionary : NSMutableDictionary = NSMutableDictionary()
         
@@ -40,12 +30,9 @@ public class Odometer: Mappable {
         return dictionary
     }
     
-    public func mapping(map: Map) {
+    public override func mapping(map: Map) {
+        super.mapping(map)
+
         RolloverValue <- map["RolloverValue"]
-        BaseUnit <- map["BaseUnit"]
-        Timestamp <- map["Timestamp"]
-        BaseValue <- map["BaseValue"]
-        Unit <- map["Unit"]
-        Value <- map["Value"]
     }
 }

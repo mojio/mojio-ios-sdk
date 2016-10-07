@@ -9,39 +9,10 @@
 import UIKit
 import ObjectMapper
 
-public class AccelerometerUnits  {
-    public static let MilliGUnits : String = "MilliGUnits"
-    public static let NewtonsPerKilogram : String = "NewtonsPerKilogram"
-    public static let XirgoUnit : String = "XirgoUnit"
-    public static let MetersPerSecondPerSecond : String = "MetersPerSecondPerSecond"
-    public static let CentimetersPerSecondPerSecond : String = "CentimetersPerSecondPerSecond"
-    public static let GUnits : String = "GUnits"
-}
-
-public class ProperAcceleration: Mappable {
-
-    public dynamic var BaseUnit : String? = nil
-    public dynamic var Timestamp : String? = nil
-    public dynamic var BaseValue : Float = 0
-    
-    // AccelerometerUnits
-    public dynamic var Unit : String? = nil
-    public dynamic var Value : Float = 0
+// Units in AccelerometerUnits
+public class ProperAcceleration: DeviceMeasurement {
     
     public required convenience init?(_ map: Map) {
         self.init()
     }
-    
-    public required init() {
-        
-    }
-
-    public func mapping(map: Map) {
-        BaseUnit <- map["BaseUnit"]
-        Timestamp <- map["Timestamp"]
-        BaseValue <- map["BaseValue"]
-        Unit <- map["Unit"]
-        Value <- map["Value"]
-    }
-
 }

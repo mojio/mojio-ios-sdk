@@ -9,18 +9,7 @@
 import UIKit
 import ObjectMapper
 
-public class AccelerationUnits : NSObject {
-    
-    // Meters per second per second
-    public static let MetersPerSecondPerSecond : String = "MetersPerSecondPerSecond"
-    
-    // KiloMeters per hour per second
-    public static let KilometersPerHourPerSecond : String  = "KilometersPerHourPerSecond"
-    
-    // Miles per hour per second
-    public static let MilesPerHourPerSecond : String = "MilesPerHourPerSecond"
-}
-
+// Units are in AccelerationUnits
 public class Acceleration: DeviceMeasurement {
     public required convenience init?(_ map: Map) {
         self.init()
