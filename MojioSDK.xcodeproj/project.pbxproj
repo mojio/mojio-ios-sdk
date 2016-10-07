@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		22D54CCB1DA8038F007925FB /* VehicleStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D54CCA1DA8038F007925FB /* VehicleStatistics.swift */; };
 		644017541DA2AC9A00DAA73D /* AggregationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644017531DA2AC9A00DAA73D /* AggregationData.swift */; };
 		644214DE1D9E6500005A86C5 /* FuelVolume.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644214DD1D9E6500005A86C5 /* FuelVolume.swift */; };
 		6B7344AEFEDC6731687DB2A3 /* Pods_MojioSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D8CC37B8959C27E426C51E2 /* Pods_MojioSDK.framework */; };
@@ -116,6 +117,7 @@
 
 /* Begin PBXFileReference section */
 		12DB7395EEC25B945C6073A8 /* Pods-MojioSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MojioSDK.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MojioSDK/Pods-MojioSDK.debug.xcconfig"; sourceTree = "<group>"; };
+		22D54CCA1DA8038F007925FB /* VehicleStatistics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VehicleStatistics.swift; path = Models/VehicleStatistics.swift; sourceTree = "<group>"; };
 		2D8CC37B8959C27E426C51E2 /* Pods_MojioSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MojioSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5129D3ED3B56C9F0B8D93690 /* Pods-MojioSDKTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MojioSDKTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MojioSDKTests/Pods-MojioSDKTests.debug.xcconfig"; sourceTree = "<group>"; };
 		644017531DA2AC9A00DAA73D /* AggregationData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AggregationData.swift; path = Models/AggregationData.swift; sourceTree = "<group>"; };
@@ -455,6 +457,7 @@
 				BC879B5C1CBEFFDD00F9177B /* Trip.swift */,
 				BC879B5D1CBEFFDD00F9177B /* User.swift */,
 				BC879B5E1CBEFFDD00F9177B /* Vehicle.swift */,
+				22D54CCA1DA8038F007925FB /* VehicleStatistics.swift */,
 				BC879B5F1CBEFFDD00F9177B /* VehicleMeasures.swift */,
 				BC879B2E1CBEFFB000F9177B /* VinDetails */,
 				BC8ECA4F1D226690009C6164 /* WifiRadio.swift */,
@@ -768,6 +771,7 @@
 				BC879B6B1CBEFFDD00F9177B /* FuelLevel.swift in Sources */,
 				BC72D7A81CC5615600D9740B /* AuthClient.swift in Sources */,
 				BC879B791CBEFFDD00F9177B /* Trip.swift in Sources */,
+				22D54CCB1DA8038F007925FB /* VehicleStatistics.swift in Sources */,
 				BC5F7F031CC58D4000FAB205 /* BaseUnits.swift in Sources */,
 				BC879B411CBEFFC000F9177B /* VinDetails.swift in Sources */,
 				BC717D9B1DA6EFA20052317C /* ServiceInterval.swift in Sources */,
