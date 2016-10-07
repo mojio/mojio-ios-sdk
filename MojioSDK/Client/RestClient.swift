@@ -42,6 +42,7 @@ public class RestClientEndpoints : NSObject {
     public static let Transactions : String = "transactions/"
     public static let Geofences : String = "geofences/"
     public static let Aggregates : String = "aggregates/"
+    public static let Statistics : String = "statistics/"
     
     // Storage
     // Parameters: Type, Id, Key
@@ -320,6 +321,13 @@ public class RestClient: NSObject {
         
         self.requestEntity = RestClientEndpoints.Aggregates
         self.requestUrl = self.requestUrl! + self.requestEntity! + (type != nil ? type! + "/" : "")
+        
+        return self
+    }
+    
+    public func statistics() -> Self {
+        self.requestEntity = RestClientEndpoints.Statistics
+        self.requestUrl = self.requestUrl! + self.requestEntity!
         
         return self
     }
@@ -622,6 +630,10 @@ public class RestClient: NSObject {
             let model = Mapper<AggregationData>().map(dict)
             return model!
             
+        case RestClientEndpoints.Statistics:
+            let model = Mapper<VehicleStatistics>().map(dict)
+            return model!
+
         default:
                 return nil
         }
