@@ -21,29 +21,8 @@ public class AccelerationUnits : NSObject {
     public static let MilesPerHourPerSecond : String = "MilesPerHourPerSecond"
 }
 
-public class Acceleration: Mappable {
-
-    public dynamic var BaseUnit : String? = nil
-    public dynamic var Timestamp : String? = nil
-    public dynamic var BaseValue : Float = 0
-    
-    // AccelerationUnits
-    public dynamic var Unit : String? = nil
-    public dynamic var Value : Float = 0
-
+public class Acceleration: DeviceMeasurement {
     public required convenience init?(_ map: Map) {
         self.init()
-    }
-    
-    public required init() {
-        
-    }
-
-    public func mapping(map: Map) {
-        BaseUnit <- map["BaseUnit"]
-        Timestamp <- map["Timestamp"]
-        BaseValue <- map["BaseValue"]
-        Unit <- map["Unit"]
-        Value <- map["Value"]
     }
 }
