@@ -41,9 +41,9 @@ public class VehicleStaticsItem: Mappable {
     
     public dynamic var BaseUnit : String? = nil
     public dynamic var Timestamp : String? = nil
-    public dynamic var BaseValue : String? = nil
+    public dynamic var BaseValue : Float = 0
     public dynamic var Unit : String? = nil
-    public dynamic var Value : String? = nil
+    public dynamic var Value : Float = 0
     
     public required convenience init?(_ map: Map) {
         self.init()
