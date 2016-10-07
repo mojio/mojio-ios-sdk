@@ -11,11 +11,11 @@ import ObjectMapper
 
 public class VehicleStatistics: Mappable {
     
-    public var EstimatedFuelLevel : VehicleRiskSeverityStaticsItem? = nil
-    public var EstimatedFuelVolume : VehicleStaticsItem? = nil
-    public var AverageFuelEfficiency : VehicleStaticsItem? = nil
-    public var TotalRange : VehicleStaticsItem? = nil
-    public var CurrentRange : VehicleStaticsItem? = nil
+    public var EstimatedFuelLevel : FuelLevel? = nil
+    public var EstimatedFuelVolume : FuelVolume? = nil
+    public var AverageFuelEfficiency : FuelEfficiency? = nil
+    public var TotalRange : Distance? = nil
+    public var CurrentRange : Distance? = nil
     
     public required convenience init?(_ map: Map) {
         self.init()
@@ -33,49 +33,4 @@ public class VehicleStatistics: Mappable {
         CurrentRange <- map["CurrentRange"]
     }
 
-}
-
-public class VehicleStaticsItem: Mappable {
-    
-    public dynamic var BaseUnit : String? = nil
-    public dynamic var Timestamp : String? = nil
-    public dynamic var BaseValue : Float = 0
-    public dynamic var Unit : String? = nil
-    public dynamic var Value : Float = 0
-    
-    public required convenience init?(_ map: Map) {
-        self.init()
-    }
-    
-    public required init() {
-        
-    }
-    
-    public func mapping(map: Map) {
-        BaseUnit <- map["BaseUnit"]
-        Timestamp <- map["Timestamp"]
-        BaseValue <- map["BaseValue"]
-        Unit <- map["Unit"]
-        Value <- map["Value"]
-    }
-    
-}
-
-public class VehicleRiskSeverityStaticsItem: VehicleStaticsItem {
-    
-    public dynamic var RiskSeverity : String? = nil
-    
-    public required convenience init?(_ map: Map) {
-        self.init()
-    }
-    
-    public required init() {
-        super.init()
-    }
-    
-    override public func mapping(map: Map) {
-        super.mapping(map)
-        RiskSeverity <- map["RiskSeverity"]
-    }
-    
 }
