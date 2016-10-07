@@ -11,6 +11,7 @@
 		644214DE1D9E6500005A86C5 /* FuelVolume.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644214DD1D9E6500005A86C5 /* FuelVolume.swift */; };
 		6B7344AEFEDC6731687DB2A3 /* Pods_MojioSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D8CC37B8959C27E426C51E2 /* Pods_MojioSDK.framework */; };
 		75F77F0E1D19F504000CC2B4 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 75F77F0D1D19F504000CC2B4 /* libz.tbd */; };
+		887014791DA833CA00EFEC6D /* VehicleStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887014781DA833CA00EFEC6D /* VehicleStatistics.swift */; };
 		BC31E3CE1D419E80001649A7 /* Distance.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC31E3CD1D419E80001649A7 /* Distance.swift */; };
 		BC31E3D31D419F5D001649A7 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC31E3CF1D419F5D001649A7 /* Activity.swift */; };
 		BC31E3D41D419F5D001649A7 /* ActivityLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC31E3D01D419F5D001649A7 /* ActivityLocation.swift */; };
@@ -122,6 +123,7 @@
 		644017531DA2AC9A00DAA73D /* AggregationData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AggregationData.swift; path = Models/AggregationData.swift; sourceTree = "<group>"; };
 		644214DD1D9E6500005A86C5 /* FuelVolume.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FuelVolume.swift; path = Models/FuelVolume.swift; sourceTree = "<group>"; };
 		75F77F0D1D19F504000CC2B4 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		887014781DA833CA00EFEC6D /* VehicleStatistics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VehicleStatistics.swift; path = Models/VehicleStatistics.swift; sourceTree = "<group>"; };
 		8B04A6C16725DB2223B32D46 /* Pods-MojioSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MojioSDK.release.xcconfig"; path = "Pods/Target Support Files/Pods-MojioSDK/Pods-MojioSDK.release.xcconfig"; sourceTree = "<group>"; };
 		BC31E3CD1D419E80001649A7 /* Distance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Distance.swift; path = Models/Distance.swift; sourceTree = "<group>"; };
 		BC31E3CF1D419F5D001649A7 /* Activity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Activity.swift; path = "Models/Activity Streams/Activity.swift"; sourceTree = "<group>"; };
@@ -459,6 +461,7 @@
 				BC879B5D1CBEFFDD00F9177B /* User.swift */,
 				BC879B5E1CBEFFDD00F9177B /* Vehicle.swift */,
 				BC879B5F1CBEFFDD00F9177B /* VehicleMeasures.swift */,
+				887014781DA833CA00EFEC6D /* VehicleStatistics.swift */,
 				BC879B2E1CBEFFB000F9177B /* VinDetails */,
 				BC8ECA4F1D226690009C6164 /* WifiRadio.swift */,
 			);
@@ -784,6 +787,7 @@
 				BC879B661CBEFFDD00F9177B /* DiagnosticCode.swift in Sources */,
 				BC879B3D1CBEFFC000F9177B /* ServiceBulletin.swift in Sources */,
 				BC879B3F1CBEFFC000F9177B /* Transmission.swift in Sources */,
+				887014791DA833CA00EFEC6D /* VehicleStatistics.swift in Sources */,
 				BC879B3B1CBEFFC000F9177B /* PlatformServiceSchedule.swift in Sources */,
 				BC879B7B1CBEFFDD00F9177B /* Vehicle.swift in Sources */,
 				BC879B751CBEFFDD00F9177B /* RPM.swift in Sources */,
