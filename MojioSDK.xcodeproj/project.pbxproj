@@ -18,7 +18,7 @@
 		BC31E3D51D419F5D001649A7 /* BaseActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC31E3D11D419F5D001649A7 /* BaseActivity.swift */; };
 		BC31E3D61D419F5D001649A7 /* RootActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC31E3D21D419F5D001649A7 /* RootActivity.swift */; };
 		BC3C66421DA8196A00179344 /* DeviceMeasurement.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC3C66411DA8196A00179344 /* DeviceMeasurement.swift */; };
-		BC5F7F031CC58D4000FAB205 /* BaseUnits.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5F7F021CC58D4000FAB205 /* BaseUnits.swift */; };
+		BC5F7F031CC58D4000FAB205 /* Units.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5F7F021CC58D4000FAB205 /* Units.swift */; };
 		BC717D9A1DA6EFA20052317C /* ServiceEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC717D971DA6EFA20052317C /* ServiceEvent.swift */; };
 		BC717D9B1DA6EFA20052317C /* ServiceInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC717D981DA6EFA20052317C /* ServiceInterval.swift */; };
 		BC717D9C1DA6EFA20052317C /* ServiceScheduleItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC717D991DA6EFA20052317C /* ServiceScheduleItem.swift */; };
@@ -131,7 +131,7 @@
 		BC31E3D11D419F5D001649A7 /* BaseActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseActivity.swift; path = "Models/Activity Streams/BaseActivity.swift"; sourceTree = "<group>"; };
 		BC31E3D21D419F5D001649A7 /* RootActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RootActivity.swift; path = "Models/Activity Streams/RootActivity.swift"; sourceTree = "<group>"; };
 		BC3C66411DA8196A00179344 /* DeviceMeasurement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DeviceMeasurement.swift; path = Models/DeviceMeasurement.swift; sourceTree = "<group>"; };
-		BC5F7F021CC58D4000FAB205 /* BaseUnits.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseUnits.swift; path = Models/BaseUnits.swift; sourceTree = "<group>"; };
+		BC5F7F021CC58D4000FAB205 /* Units.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Units.swift; path = Models/Units.swift; sourceTree = "<group>"; };
 		BC717D971DA6EFA20052317C /* ServiceEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ServiceEvent.swift; path = Models/VinDetails/ServiceEvent.swift; sourceTree = "<group>"; };
 		BC717D981DA6EFA20052317C /* ServiceInterval.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ServiceInterval.swift; path = Models/VinDetails/ServiceInterval.swift; sourceTree = "<group>"; };
 		BC717D991DA6EFA20052317C /* ServiceScheduleItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ServiceScheduleItem.swift; path = Models/VinDetails/ServiceScheduleItem.swift; sourceTree = "<group>"; };
@@ -427,7 +427,6 @@
 				BC879B451CBEFFDD00F9177B /* Address.swift */,
 				644017531DA2AC9A00DAA73D /* AggregationData.swift */,
 				BC879B461CBEFFDD00F9177B /* App.swift */,
-				BC5F7F021CC58D4000FAB205 /* BaseUnits.swift */,
 				BC879B471CBEFFDD00F9177B /* Battery.swift */,
 				BC879B481CBEFFDD00F9177B /* BooleanState.swift */,
 				BC3C66411DA8196A00179344 /* DeviceMeasurement.swift */,
@@ -458,6 +457,7 @@
 				BC879B5A1CBEFFDD00F9177B /* Speed.swift */,
 				BC879B4A1CBEFFDD00F9177B /* TimePeriod.swift */,
 				BC879B5C1CBEFFDD00F9177B /* Trip.swift */,
+				BC5F7F021CC58D4000FAB205 /* Units.swift */,
 				BC879B5D1CBEFFDD00F9177B /* User.swift */,
 				BC879B5E1CBEFFDD00F9177B /* Vehicle.swift */,
 				BC879B5F1CBEFFDD00F9177B /* VehicleMeasures.swift */,
@@ -774,7 +774,7 @@
 				BC879B6B1CBEFFDD00F9177B /* FuelLevel.swift in Sources */,
 				BC72D7A81CC5615600D9740B /* AuthClient.swift in Sources */,
 				BC879B791CBEFFDD00F9177B /* Trip.swift in Sources */,
-				BC5F7F031CC58D4000FAB205 /* BaseUnits.swift in Sources */,
+				BC5F7F031CC58D4000FAB205 /* Units.swift in Sources */,
 				BC879B411CBEFFC000F9177B /* VinDetails.swift in Sources */,
 				BC717D9B1DA6EFA20052317C /* ServiceInterval.swift in Sources */,
 				BC879B681CBEFFDD00F9177B /* Email.swift in Sources */,

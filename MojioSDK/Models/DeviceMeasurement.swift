@@ -9,6 +9,7 @@
 import Foundation
 import ObjectMapper
 
+// Base Device Measurement
 public class DeviceMeasurement: Mappable {
 
     public dynamic var BaseUnit : String? = nil
@@ -22,6 +23,8 @@ public class DeviceMeasurement: Mappable {
     public required convenience init?(_ map: Map) {
         self.init()
     }
+    
+    public required init() {}
     
     public func mapping(map: Map) {
         BaseUnit <- map["BaseUnit"]
