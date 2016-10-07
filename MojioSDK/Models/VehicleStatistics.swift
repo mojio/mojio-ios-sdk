@@ -16,6 +16,7 @@ public class VehicleStatistics: Mappable {
     public var AverageFuelEfficiency : FuelEfficiency? = nil
     public var TotalRange : Distance? = nil
     public var CurrentRange : Distance? = nil
+    public dynamic var LastFillUpDate : String? = nil
     
     public required convenience init?(_ map: Map) {
         self.init()
@@ -31,6 +32,7 @@ public class VehicleStatistics: Mappable {
         AverageFuelEfficiency <- map["AverageFuelEfficiency"]
         TotalRange <- map["TotalRange"]
         CurrentRange <- map["CurrentRange"]
+        LastFillUpDate <- map["LastFillUpDate"]
     }
 
 }
