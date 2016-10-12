@@ -26,7 +26,7 @@ DEPENDENCIES:
   - ObjectMapper (~> 1.1)
   - OHHTTPStubs
   - OHHTTPStubs/Swift
-  - SwiftWebSocket
+  - SwiftWebSocket (= 2.6.4)
   - SwiftyJSON (= 2.3.2)
 
 EXTERNAL SOURCES:
@@ -47,6 +47,6 @@ SPEC CHECKSUMS:
   SwiftWebSocket: fdb5b4393cede304d44befbaeb0c8ef14c28d3bb
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
-PODFILE CHECKSUM: f535a651c974c36e7a997d8335e9331591e6cbc3
+PODFILE CHECKSUM: 83c6fead4560d0f78473b41ec26a0f0166fc7e10
 
-COCOAPODS: 1.1.0.rc.2
+COCOAPODS: 1.1.0.rc.3
