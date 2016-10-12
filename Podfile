@@ -14,7 +14,7 @@ target 'MojioSDK' do
     pod 'KeychainSwift', :git => 'https://github.com/marketplacer/keychain-swift', :branch => 'swift_2_3'
     pod 'OHHTTPStubs'
     pod 'OHHTTPStubs/Swift'
-    pod 'SwiftWebSocket'
+    pod 'SwiftWebSocket', '2.6.4'
 
 end
 

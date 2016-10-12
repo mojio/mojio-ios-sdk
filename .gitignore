@@ -2,6 +2,7 @@
 .DS_Store
 **/Pods/
 Manifest.lock
+Podfile.lock
 build/
 *.pbxuser
 !default.pbxuser
