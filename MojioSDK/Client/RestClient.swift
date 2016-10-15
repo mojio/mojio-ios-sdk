@@ -288,7 +288,8 @@ public class RestClient: NSObject {
     
     public func activities() -> Self {
         self.requestEntity = RestClientEndpoints.Activities
-        self.requestUrl = self.requestUrl! + RestClientEndpoints.Activities
+        self.requestUrl = self.requestUrl! + self.requestEntity!
+        self.pushUrl = self.pushUrl! + self.requestEntity! + "/"
         return self
     }
     
