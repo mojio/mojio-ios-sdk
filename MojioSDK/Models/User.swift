@@ -65,9 +65,6 @@ public class User : Mappable {
         if self.LastName != nil {
             dictionary.setObject(self.LastName!, forKey: "LastName")
         }
-        if self.PhoneNumbers.count > 0 {
-            dictionary.setObject(self.PhoneNumbers, forKey: "PhoneNumbers")
-        }
         
         return dictionary
     }
