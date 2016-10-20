@@ -11,6 +11,7 @@ import ObjectMapper
 
 public class DiagnosticCode: Mappable {
     
+    public dynamic var Ignored : Bool = false
     public dynamic var Code : String? = nil
     public dynamic var Description : String? = nil
     public dynamic var Timestamp : String? = nil
@@ -18,6 +19,10 @@ public class DiagnosticCode: Mappable {
     // RiskSeverity
     public dynamic var Severity : String? = nil
     public dynamic var Instructions : String? = nil
+    
+    // Type
+    public dynamic var StateType : String? = nil
+    public dynamic var Type : String? = nil
     
     public required convenience init?(_ map: Map) {
         self.init()
@@ -27,12 +32,22 @@ public class DiagnosticCode: Mappable {
         
     }
     
+    public func jsonIgnoredDict () -> NSDictionary {
+        let dictionary : NSMutableDictionary = NSMutableDictionary()
+        
+        dictionary.setObject(self.Ignored, forKey: "Ignored")
+        return dictionary
+    }
+    
     public func mapping(map: Map) {
+        Ignored <- map["Ignored"];
         Code <- map["Code"];
         Description <- map["Description"];
         Timestamp <- map["Timestamp"];
         Severity <- map["Severity"];
         Instructions <- map["Instructions"];
+        StateType <- map["StateType"];
+        Type <- map["Type"];
     }
 
 }
