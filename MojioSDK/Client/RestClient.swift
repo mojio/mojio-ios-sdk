@@ -43,6 +43,7 @@ public class RestClientEndpoints : NSObject {
     public static let Geofences : String = "geofences/"
     public static let Aggregates : String = "aggregates/"
     public static let Statistics : String = "statistics/"
+    public static let DiagnosticCodes : String = "diagnosticcodes/"
     
     // Storage
     // Parameters: Type, Id, Key
@@ -333,6 +334,14 @@ public class RestClient: NSObject {
         return self
     }
 
+    public func diagnosticCodes(code: String?) -> Self {
+        
+        self.requestEntity = RestClientEndpoints.DiagnosticCodes
+        self.requestUrl = self.requestUrl! + self.requestEntity! + (code != nil ? code! + "/" : "")
+        
+        return self
+    }
+    
     public func query(top : String? = nil, skip : String? = nil, filter : String? = nil, select : String? = nil, orderby : String? = nil, count : String? = nil, since: NSDate? = nil, before: NSDate? = nil, fields: [String]? = nil) -> Self {
         
         var requestParams : [String:AnyObject] = [:]
