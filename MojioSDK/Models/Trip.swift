@@ -31,6 +31,9 @@ public class Trip: Mappable {
     public var TripFuelEfficiency : FuelEfficiency? = nil
     public var StartFuelLevel : FuelLevel? = nil
     public var EndFuelLevel : FuelLevel? = nil
+    public var IldingCount : Int? = nil
+    public var HarshAcclCount : Int? = nil
+    public var HarshDecelCount : Int? = nil
     public dynamic var Id : String? = nil
     public dynamic var CreatedOn : String? = nil
     public dynamic var LastModified : String? = nil
@@ -80,6 +83,9 @@ public class Trip: Mappable {
         TripFuelEfficiency <- map["FuelEfficiency"];
         StartFuelLevel <- map["StartFuelLevel"];
         EndFuelLevel <- map["EndFuelLevel"];
+        IdlingCount <- map["IdlingCount"];
+        HarshAcclCount <- map["HarshAcclCount"];
+        HarshDecelCount <- map["HarshDecelCount"];
         Id <- map["Id"];
         CreatedOn <- map["CreatedOn"];
         LastModified <- map["LastModified"];
