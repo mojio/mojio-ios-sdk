@@ -9,16 +9,16 @@
 import UIKit
 import ObjectMapper
 
-public class VehicleStatistics: Mappable {
+open class VehicleStatistics: Mappable {
     
-    public var EstimatedFuelLevel : FuelLevel? = nil
-    public var EstimatedFuelVolume : FuelVolume? = nil
-    public var AverageFuelEfficiency : FuelEfficiency? = nil
-    public var TotalRange : Distance? = nil
-    public var CurrentRange : Distance? = nil
-    public dynamic var LastFillUpDate : String? = nil
+    open var EstimatedFuelLevel : FuelLevel? = nil
+    open var EstimatedFuelVolume : FuelVolume? = nil
+    open var AverageFuelEfficiency : FuelEfficiency? = nil
+    open var TotalRange : Distance? = nil
+    open var CurrentRange : Distance? = nil
+    open dynamic var LastFillUpDate : String? = nil
     
-    public required convenience init?(_ map: Map) {
+    public required convenience init?(map: Map) {
         self.init()
     }
     
@@ -26,7 +26,7 @@ public class VehicleStatistics: Mappable {
         
     }
     
-    public func mapping(map: Map) {
+    open func mapping(map: Map) {
         EstimatedFuelLevel <- map["EstimatedFuelLevel"]
         EstimatedFuelVolume <- map["EstimatedFuelVolume"]
         AverageFuelEfficiency <- map["AverageFuelEfficiency"]

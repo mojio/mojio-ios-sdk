@@ -9,28 +9,28 @@
 import Foundation
 import ObjectMapper
 
-public class AggregationDataMeasurementType: NSObject {
+open class AggregationDataMeasurementType: NSObject {
     
-    public static let MeasureBattery : String = "battery"
+    open static let MeasureBattery : String = "battery"
 }
 
-public class AggregationData: Mappable {
+open class AggregationData: Mappable {
 
-    public dynamic var Total        : Float = 0
-    public dynamic var Average      : Float = 0
-    public dynamic var Max          : Float = 0
-    public dynamic var Min          : Float = 0
-    public dynamic var Units        : String?
-    public dynamic var Date         : String?
-    public dynamic var EndDate      : String?
-    public dynamic var Count        : Int = 0
-    public dynamic var TripCount    : Int = 0
+    open dynamic var Total        : Float = 0
+    open dynamic var Average      : Float = 0
+    open dynamic var Max          : Float = 0
+    open dynamic var Min          : Float = 0
+    open dynamic var Units        : String?
+    open dynamic var Date         : String?
+    open dynamic var EndDate      : String?
+    open dynamic var Count        : Int = 0
+    open dynamic var TripCount    : Int = 0
     
-    public required convenience init?(_ map: Map) {
+    public required convenience init?(map: Map) {
         self.init()
     }
     
-    public func mapping(map: Map) {
+    open func mapping(map: Map) {
         Total       <- map["Total"]
         Average     <- map["Average"]
         Max         <- map["Max"]

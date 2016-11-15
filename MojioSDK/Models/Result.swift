@@ -10,9 +10,9 @@
 import Foundation
 import ObjectMapper
 
-public class Result {
-    public var TotalCount : Int? = nil
-    public var Data : NSArray? = nil
+open class Result {
+    open var TotalCount : Int? = nil
+    open var Data : NSArray? = nil
     
     public init(data: NSArray?, count :Int? = nil) {
         self.Data = data

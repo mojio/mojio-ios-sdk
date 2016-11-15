@@ -9,18 +9,18 @@
 import UIKit
 import ObjectMapper
 
-public class Engine: Mappable {
+open class Engine: Mappable {
     
-    public dynamic var Name : String? = nil
-    public dynamic var Cylinders : String? = nil
-    public dynamic var Displacement : Float = 0
-    public dynamic var FuelInduction : String? = nil
-    public dynamic var FuelQuality : String? = nil
-    public dynamic var FuelType : String? = nil
-    public dynamic var MaxHp : String? = nil
-    public dynamic var MaxHpAt : String? = nil
+    open dynamic var Name : String? = nil
+    open dynamic var Cylinders : String? = nil
+    open dynamic var Displacement : Float = 0
+    open dynamic var FuelInduction : String? = nil
+    open dynamic var FuelQuality : String? = nil
+    open dynamic var FuelType : String? = nil
+    open dynamic var MaxHp : String? = nil
+    open dynamic var MaxHpAt : String? = nil
 
-    public required convenience init?(_ map: Map) {
+    public required convenience init?(map: Map) {
         self.init();
     }
     
@@ -28,7 +28,7 @@ public class Engine: Mappable {
         
     }
 
-    public func mapping(map: Map) {
+    open func mapping(map: Map) {
         Name <- map["Name"]
         Cylinders <- map["Cylinders"]
         Displacement <- map["Displacement"]

@@ -9,25 +9,25 @@
 import UIKit
 import ObjectMapper
 
-public class VinDetails: Mappable {
+open class VinDetails: Mappable {
     
-    public dynamic var Timestamp : String? = nil
-    public dynamic var Vin : String? = nil
-    public var Year : Int = 0
-    public dynamic var Make : String? = nil
-    public dynamic var Model : String? = nil
-    public dynamic var Engine : String? = nil
-    public var Cylinders : Int? = nil
-    public  var TotalFuelCapacity : FuelCapacity? = nil
-    public dynamic var FuelType : String? = nil
-    public var CityFuelEfficiency : Float = 0
-    public var HighwayFuelEfficiency : Float = 0
-    public var CombinedFuelEfficiency : Float = 0
-    public dynamic var Transmission : String? = nil
-    public dynamic var Message : String? = nil
-    public var Success : Bool? = nil
+    open dynamic var Timestamp : String? = nil
+    open dynamic var Vin : String? = nil
+    open var Year : Int = 0
+    open dynamic var Make : String? = nil
+    open dynamic var Model : String? = nil
+    open dynamic var Engine : String? = nil
+    open var Cylinders : Int? = nil
+    open  var TotalFuelCapacity : FuelCapacity? = nil
+    open dynamic var FuelType : String? = nil
+    open var CityFuelEfficiency : Float = 0
+    open var HighwayFuelEfficiency : Float = 0
+    open var CombinedFuelEfficiency : Float = 0
+    open dynamic var Transmission : String? = nil
+    open dynamic var Message : String? = nil
+    open var Success : Bool? = nil
     
-    public required convenience init?(_ map: Map) {
+    public required convenience init?(map: Map) {
         self.init()
     }
     
@@ -35,7 +35,7 @@ public class VinDetails: Mappable {
         
     }
     
-    public func mapping(map: Map) {
+    open func mapping(map: Map) {
         Timestamp <- map["Timestamp"];
         Vin <- map["Vin"];
         Year <- map["Year"];

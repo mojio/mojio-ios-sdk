@@ -9,31 +9,31 @@
 import UIKit
 import ObjectMapper
 
-public class Recall: Mappable {
+open class Recall: Mappable {
     
-    public dynamic var Title : String? = nil
-    public dynamic var NHTSACampaignNumber : String? = nil
-    public dynamic var MFRCampaignNumber : String? = nil
-    public dynamic var ComponentDescription : String? = nil
-    public dynamic var ReportManufacturer : String? = nil
-    public dynamic var ManufacturingStartDate : String? = nil
-    public dynamic var ManufacturingEndDate : String? = nil
-    public dynamic var RecallTypeCode : String? = nil
-    public dynamic var PotentialUnitsAffected : String? = nil
-    public dynamic var OwnerNotificationDate : String? = nil
-    public dynamic var RecallInitiator : String? = nil
-    public dynamic var ProductManufacturer : String? = nil
-    public dynamic var ReportReceivedDate : String? = nil
-    public dynamic var RecordCreationDate : String? = nil
-    public dynamic var RegulationPartNumber : String? = nil
-    public dynamic var FMVVSNumber : String? = nil
-    public dynamic var DefectSummary : String? = nil
-    public dynamic var ConsequenceSummary : String? = nil
-    public dynamic var CorrectiveAction : String? = nil
-    public dynamic var Notes : String? = nil
-    public dynamic var RecalledComponentId : String? = nil
+    open dynamic var Title : String? = nil
+    open dynamic var NHTSACampaignNumber : String? = nil
+    open dynamic var MFRCampaignNumber : String? = nil
+    open dynamic var ComponentDescription : String? = nil
+    open dynamic var ReportManufacturer : String? = nil
+    open dynamic var ManufacturingStartDate : String? = nil
+    open dynamic var ManufacturingEndDate : String? = nil
+    open dynamic var RecallTypeCode : String? = nil
+    open dynamic var PotentialUnitsAffected : String? = nil
+    open dynamic var OwnerNotificationDate : String? = nil
+    open dynamic var RecallInitiator : String? = nil
+    open dynamic var ProductManufacturer : String? = nil
+    open dynamic var ReportReceivedDate : String? = nil
+    open dynamic var RecordCreationDate : String? = nil
+    open dynamic var RegulationPartNumber : String? = nil
+    open dynamic var FMVVSNumber : String? = nil
+    open dynamic var DefectSummary : String? = nil
+    open dynamic var ConsequenceSummary : String? = nil
+    open dynamic var CorrectiveAction : String? = nil
+    open dynamic var Notes : String? = nil
+    open dynamic var RecalledComponentId : String? = nil
     
-    public required convenience init?(_ map: Map) {
+    public required convenience init?(map: Map) {
         self.init();
     }
     
@@ -41,7 +41,7 @@ public class Recall: Mappable {
         
     }
 
-    public func mapping(map: Map) {
+    open func mapping(map: Map) {
         
         Title <- map["Title"]
         NHTSACampaignNumber <- map["NHTSACampaignNumber"]

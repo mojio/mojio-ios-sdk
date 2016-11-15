@@ -9,14 +9,14 @@
 import UIKit
 import ObjectMapper
 
-public class Warranty: Mappable {
+open class Warranty: Mappable {
     
-    public dynamic var Name : String? = nil
-    public dynamic var Type : String? = nil
-    public dynamic var Months : String? = nil
-    public dynamic var Km : String? = nil
+    open dynamic var Name : String? = nil
+    open dynamic var WarrantyType : String? = nil
+    open dynamic var Months : String? = nil
+    open dynamic var Km : String? = nil
     
-    public required convenience init?(_ map: Map) {
+    public required convenience init?(map: Map) {
         self.init();
     }
     
@@ -24,9 +24,9 @@ public class Warranty: Mappable {
         
     }
 
-    public func mapping(map: Map) {
+    open func mapping(map: Map) {
         Name <- map["Name"]
-        Type <- map["Type"]
+        WarrantyType <- map["Type"]
         Months <- map["Months"]
         Km <- map["Km"]
     }

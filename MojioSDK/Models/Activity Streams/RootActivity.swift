@@ -9,19 +9,19 @@
 import Foundation
 import ObjectMapper
 
-public class RootActivity : Activity {
+open class RootActivity : Activity {
 
-    public dynamic var Actor : Activity? = nil
-    public dynamic var Target : Activity? = nil
-    public dynamic var Result : Activity? = nil
-    public dynamic var Object : Activity? = nil
+    open dynamic var Actor : Activity? = nil
+    open dynamic var Target : Activity? = nil
+    open dynamic var Result : Activity? = nil
+    open dynamic var Object : Activity? = nil
 
-    public required convenience init?(_ map: Map) {
+    public required convenience init?(map: Map) {
         self.init()
     }
 
-    public override func mapping(map: Map) {
-        super.mapping(map)
+    open override func mapping(map: Map) {
+        super.mapping(map: map)
                 
         Actor <- map["Actor"]
         Target <- map["Target"]

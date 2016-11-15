@@ -10,9 +10,9 @@ import UIKit
 import ObjectMapper
 
 // Units in FuelEfficiencyUnits
-public class FuelEfficiency: DeviceMeasurement {
+open class FuelEfficiency: DeviceMeasurement {
 
-    public required convenience init?(_ map: Map) {
+    public required convenience init?(map: Map) {
         self.init()
     }
 }

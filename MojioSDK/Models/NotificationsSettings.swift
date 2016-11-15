@@ -9,13 +9,13 @@
 import Foundation
 import ObjectMapper
 
-public class SettingsGeofence : Mappable {
+open class SettingsGeofence : Mappable {
     
-    public dynamic var Id : String? = nil
-    public dynamic var EnableEnterActivity: Bool = false
-    public dynamic var EnableExitActivity: Bool = false
+    open dynamic var Id : String? = nil
+    open dynamic var EnableEnterActivity: Bool = false
+    open dynamic var EnableExitActivity: Bool = false
     
-    public required convenience init?(_ map: Map) {
+    public required convenience init?(map: Map) {
         self.init()
     }
     
@@ -23,39 +23,39 @@ public class SettingsGeofence : Mappable {
         
     }
 
-    public static func primaryKey() -> String? {
+    open static func primaryKey() -> String? {
         return "Id"
     }
     
-    public func mapping(map: Map) {
+    open func mapping(map: Map) {
         Id <- map["Id"]
         EnableEnterActivity <- map["EnableEnterActivity"]
         EnableExitActivity <- map["EnableExitActivity"]
     }
 }
 
-public class NotificationsSettings :  Mappable {
+open class NotificationsSettings :  Mappable {
     
-    public var SpeedThreshold : Speed? = nil
-    public dynamic var EnableTripCompletedActivity : Bool = false
-    public dynamic var EnableTripStartActivity : Bool = false
-    public dynamic var EnableLowFuelActivity : Bool = false
-    public dynamic var EnableLowBatteryActivity : Bool = false
-    public dynamic var EnableSpeedActivity : Bool = false
-    public dynamic var EnableDtcActivity : Bool = false
-    public dynamic var EnableCheckEngineActivity : Bool = false
-    public dynamic var EnableTowActivity : Bool = false
-    public dynamic var EnableMaintenanceActivity : Bool = false
-    public dynamic var EnableRecallActivity : Bool = false
-    public dynamic var EnableServiceBulletinActivity : Bool = false
-    public dynamic var EnableDisturbanceActivity : Bool = false
-    public dynamic var EnableAccidentActivity : Bool = false
-    public dynamic var EnableDeviceUnpluggedActivity : Bool = false
+    open var SpeedThreshold : Speed? = nil
+    open dynamic var EnableTripCompletedActivity : Bool = false
+    open dynamic var EnableTripStartActivity : Bool = false
+    open dynamic var EnableLowFuelActivity : Bool = false
+    open dynamic var EnableLowBatteryActivity : Bool = false
+    open dynamic var EnableSpeedActivity : Bool = false
+    open dynamic var EnableDtcActivity : Bool = false
+    open dynamic var EnableCheckEngineActivity : Bool = false
+    open dynamic var EnableTowActivity : Bool = false
+    open dynamic var EnableMaintenanceActivity : Bool = false
+    open dynamic var EnableRecallActivity : Bool = false
+    open dynamic var EnableServiceBulletinActivity : Bool = false
+    open dynamic var EnableDisturbanceActivity : Bool = false
+    open dynamic var EnableAccidentActivity : Bool = false
+    open dynamic var EnableDeviceUnpluggedActivity : Bool = false
 
-    public dynamic var EnableGeofenceActivity : Bool = false
-    public  var Geofences : [SettingsGeofence] = []
+    open dynamic var EnableGeofenceActivity : Bool = false
+    open  var Geofences : [SettingsGeofence] = []
     
-    public required convenience init?(_ map: Map) {
+    public required convenience init?(map: Map) {
         self.init()
     }
     
@@ -63,14 +63,14 @@ public class NotificationsSettings :  Mappable {
         
     }
     
-    public func jsonDict () -> NSDictionary {
+    open func jsonDict () -> [String: Any] {
         var dictionary = self.toJSON()
         
         if let threshold = self.SpeedThreshold {
             dictionary["SpeedThreshold"] = threshold.jsonDict()
         }
         
-        var geofences: [[String: AnyObject]] = []
+        var geofences: [[String: Any]] = []
         for geofence in self.Geofences {
             geofences.append(geofence.toJSON())
         }
@@ -79,7 +79,7 @@ public class NotificationsSettings :  Mappable {
         return dictionary
     }
     
-    public func mapping(map: Map) {        
+    open func mapping(map: Map) {        
         SpeedThreshold <- map["SpeedThreshold"]
         EnableTripStartActivity <- map["EnableTripStartActivity"]
         EnableTripCompletedActivity <- map["EnableTripCompletedActivity"]

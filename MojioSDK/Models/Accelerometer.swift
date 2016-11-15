@@ -9,15 +9,15 @@
 import UIKit
 import ObjectMapper
 
-public class Accelerometer: Mappable {
+open class Accelerometer: Mappable {
     
-    public var X : ProperAcceleration? = nil
-    public var Y : ProperAcceleration? = nil
-    public var Z : ProperAcceleration? = nil
-    public var Magnitude : ProperAcceleration? = nil
-    public var SamplingInterval : TimePeriod? = nil
+    open var X : ProperAcceleration? = nil
+    open var Y : ProperAcceleration? = nil
+    open var Z : ProperAcceleration? = nil
+    open var Magnitude : ProperAcceleration? = nil
+    open var SamplingInterval : TimePeriod? = nil
     
-    public required convenience init?(_ map: Map) {
+    public required convenience init?(map: Map) {
         self.init()
     }
     
@@ -25,7 +25,7 @@ public class Accelerometer: Mappable {
         
     }
     
-    public func mapping(map: Map) {
+    open func mapping(map: Map) {
         X <- map["X"]
         Y <- map["Y"]
         Z <- map["Z"]

@@ -10,20 +10,20 @@ import UIKit
 import ObjectMapper
 
 // Units in SpeedUnits
-public class Speed: DeviceMeasurement {
+open class Speed: DeviceMeasurement {
     
-    public required convenience init?(_ map: Map) {
+    public required convenience init?(map: Map) {
         self.init()
     }
     
-    public func jsonDict () -> NSDictionary {
+    open func jsonDict () -> NSDictionary {
         let dictionary : NSMutableDictionary = NSMutableDictionary()
         
         if self.Unit != nil {
-            dictionary.setObject(self.Unit!, forKey: "Unit")
+            dictionary.setObject(self.Unit!, forKey: "Unit" as NSCopying)
         }
         
-        dictionary.setObject(self.Value, forKey: "Value")
+        dictionary.setObject(self.Value, forKey: "Value" as NSCopying)
         
         return dictionary
     }

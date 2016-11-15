@@ -9,21 +9,21 @@
 import UIKit
 import ObjectMapper
 
-public class Address: Mappable {
+open class Address: Mappable {
     
-    public dynamic var HouseNumber : String? = nil
-    public dynamic var Road : String? = nil
-    public dynamic var Neighbourhood : String? = nil
-    public dynamic var Suburb : String? = nil
-    public dynamic var City : String? = nil
-    public dynamic var County : String? = nil
-    public dynamic var State : String? = nil
-    public dynamic var PostCode : String? = nil
-    public dynamic var Country : String? = nil
-    public dynamic var CountryCode : String? = nil
-    public dynamic var FormattedAddress : String? = nil
+    open dynamic var HouseNumber : String? = nil
+    open dynamic var Road : String? = nil
+    open dynamic var Neighbourhood : String? = nil
+    open dynamic var Suburb : String? = nil
+    open dynamic var City : String? = nil
+    open dynamic var County : String? = nil
+    open dynamic var State : String? = nil
+    open dynamic var PostCode : String? = nil
+    open dynamic var Country : String? = nil
+    open dynamic var CountryCode : String? = nil
+    open dynamic var FormattedAddress : String? = nil
     
-    public required convenience init?(_ map: Map) {
+    public required convenience init?(map: Map) {
         self.init()
     }
     
@@ -31,7 +31,7 @@ public class Address: Mappable {
         
     }
     
-    public func mapping(map: Map) {
+    open func mapping(map: Map) {
         HouseNumber <- map["HouseNumber"]
         Road <- map["Road"]
         Neighbourhood <- map["Neighbourhood"]

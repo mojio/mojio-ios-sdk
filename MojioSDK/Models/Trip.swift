@@ -10,35 +10,35 @@ import UIKit
 import Foundation
 import ObjectMapper
 
-public class Trip: Mappable {
-    public dynamic var VehicleId : String? = nil
-    public dynamic var Name : String? = nil
-    public var Tags : [String] = []
-    public dynamic var MojioId : String? = nil
-    public dynamic var Completed : Bool = false
-    public dynamic var TripDuration : String? = nil
-    public var TripDistance : Distance? = nil
-    public dynamic var StartTimestamp : String? = nil
-    public dynamic var EndTimestamp : String? = nil
-    public var StartOdometer : Odometer? = nil
-    public var EndOdometer : Odometer? = nil
-    public var StartLocation : Location? = nil
-    public var EndLocation : Location? = nil
-    public var MaxSpeed : Speed? = nil
-    public var MaxRPM : RPM? = nil
-    public var MaxAcceleration : Acceleration? = nil
-    public var MaxDeceleration : Acceleration? = nil
-    public var TripFuelEfficiency : FuelEfficiency? = nil
-    public var StartFuelLevel : FuelLevel? = nil
-    public var EndFuelLevel : FuelLevel? = nil
-    public var IdlingCount : Int? = nil
-    public var HarshAccelCount : Int? = nil
-    public var HarshDecelCount : Int? = nil
-    public dynamic var Id : String? = nil
-    public dynamic var CreatedOn : String? = nil
-    public dynamic var LastModified : String? = nil
+open class Trip: Mappable {
+    open dynamic var VehicleId : String? = nil
+    open dynamic var Name : String? = nil
+    open var Tags : [String] = []
+    open dynamic var MojioId : String? = nil
+    open dynamic var Completed : Bool = false
+    open dynamic var TripDuration : String? = nil
+    open var TripDistance : Distance? = nil
+    open dynamic var StartTimestamp : String? = nil
+    open dynamic var EndTimestamp : String? = nil
+    open var StartOdometer : Odometer? = nil
+    open var EndOdometer : Odometer? = nil
+    open var StartLocation : Location? = nil
+    open var EndLocation : Location? = nil
+    open var MaxSpeed : Speed? = nil
+    open var MaxRPM : RPM? = nil
+    open var MaxAcceleration : Acceleration? = nil
+    open var MaxDeceleration : Acceleration? = nil
+    open var TripFuelEfficiency : FuelEfficiency? = nil
+    open var StartFuelLevel : FuelLevel? = nil
+    open var EndFuelLevel : FuelLevel? = nil
+    open var IdlingCount : Int? = nil
+    open var HarshAccelCount : Int? = nil
+    open var HarshDecelCount : Int? = nil
+    open dynamic var Id : String? = nil
+    open dynamic var CreatedOn : String? = nil
+    open dynamic var LastModified : String? = nil
 
-    public required convenience init?(_ map: Map) {
+    public required convenience init?(map: Map) {
         self.init()
     }
     
@@ -46,23 +46,23 @@ public class Trip: Mappable {
         
     }
 
-    public static func primaryKey() -> String? {
+    open static func primaryKey() -> String? {
         return "Id"
     }
     
-    public func json() -> String? {
+    open func json() -> String? {
         
         let dictionary : NSMutableDictionary = NSMutableDictionary()
         
         if self.Name != nil {
-            dictionary.setObject(self.Name!, forKey: "Name")
+            dictionary.setObject(self.Name!, forKey: "Name" as NSCopying)
         }
         
-        let data = try! NSJSONSerialization.dataWithJSONObject(dictionary, options:  NSJSONWritingOptions.PrettyPrinted)
-        return NSString(data: data, encoding: NSUTF8StringEncoding)! as String
+        let data = try! JSONSerialization.data(withJSONObject: dictionary, options:  JSONSerialization.WritingOptions.prettyPrinted)
+        return NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
     }
     
-    public func mapping(map: Map) {
+    open func mapping(map: Map) {
                 
         VehicleId <- map["VehicleId"];
         Name <- map["Name"];

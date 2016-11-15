@@ -9,68 +9,68 @@
 import UIKit
 import ObjectMapper
 
-public class LocationStatus : NSObject {
+open class LocationStatus : NSObject {
     // Status not known
-    public static let Unknown : String = "Unknown"
+    open static let Unknown : String = "Unknown"
     
     // Valid
-    public static let Locked : String = "Locked"
+    open static let Locked : String = "Locked"
     
     // Invalid
-    public static let NotLocked : String = "NotLocked"
+    open static let NotLocked : String = "NotLocked"
     
     // CalAmp Only
     // Position update has a horizontal position accuracy estimate that is less that the Horizontal
     // Position Accuracy Threshold.
-    public static let Predicted : String = "Predicted"
+    open static let Predicted : String = "Predicted"
     
     // CalAmp Only
     // WAAS DGPS is enabled and the position has been differentially corrected
-    public static let DiffCorrected : String = "DiffCorrected"
+    open static let DiffCorrected : String = "DiffCorrected"
     
     // CalAmp Only
     // Current GPS fix is invalid but a previous fix’s value is available.
-    public static let LastKnown : String = "LastKnown"
+    open static let LastKnown : String = "LastKnown"
     
     // CalAmp Only
     // T3 or fewer satellites are seen/used in the GPS fix. (i.e. with 3 satellites or less, an altitude value cannot be calculated)
-    public static let TwoDFix : String = "TwoDFix"
+    open static let TwoDFix : String = "TwoDFix"
     
     // CalAmp Only
     // Message has been logged by the device due to no network (message could not be sent to server from device).
-    public static let Historic : String = "Historic"
+    open static let Historic : String = "Historic"
     
     // CalAmp Only
     // Only after a power-up or reset before a valid time-sync has been obtained.
-    public static let InvalidTime : String = "InvalidTime"
+    open static let InvalidTime : String = "InvalidTime"
     
     // Xirgo Only
     // Communication Failure - Used by Xirgo
-    public static let CommunicationsFailure: String = "CommunicationsFailure"
+    open static let CommunicationsFailure: String = "CommunicationsFailure"
     
     // Xirgo Only
     // GPS is OFF - Used by Xirgo
-    public static let GPSOff : String = "GPSOff"
+    open static let GPSOff : String = "GPSOff"
     
     // Xirgo and CalAmp
     // Current GPS location is invalid and previous state's location is used
-    public static let PreviousValidState : String = "PreviousValidState"
+    open static let PreviousValidState : String = "PreviousValidState"
 }
 
-public class Location: Mappable {
-    public var LocationAddress : Address? = nil
-    public dynamic var Timestamp : String? = nil
-    public dynamic var Lat : Float = 0
-    public dynamic var Lng : Float = 0
-    public dynamic var Radius : Float = 0
+open class Location: Mappable {
+    open var LocationAddress : Address? = nil
+    open dynamic var Timestamp : String? = nil
+    open dynamic var Lat : Float = 0
+    open dynamic var Lng : Float = 0
+    open dynamic var Radius : Float = 0
     
     // LocationStatus
-    public dynamic var Status : String? = nil
-    public dynamic var Dilution : Float = 0
-    public dynamic var Altitude : Float = 0
-    public dynamic var GeoHash : String? = nil
+    open dynamic var Status : String? = nil
+    open dynamic var Dilution : Float = 0
+    open dynamic var Altitude : Float = 0
+    open dynamic var GeoHash : String? = nil
     
-    public required convenience init?(_ map: Map) {
+    public required convenience init?(map: Map) {
         self.init()
     }
     
@@ -78,7 +78,7 @@ public class Location: Mappable {
         
     }
 
-    public func mapping(map: Map) {
+    open func mapping(map: Map) {
         LocationAddress <- map["Address"]
         Timestamp <- map["Timestamp"]
         Lat <- map["Lat"]

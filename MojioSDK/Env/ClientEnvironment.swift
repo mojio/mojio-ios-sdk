@@ -8,40 +8,40 @@
 
 import UIKit
 
-public class MojioRegion : NSObject {
-    public static let Production : String = ""
-    public static let NAProduction : String = "na-production-"
-    public static let EUProduction : String = "eu-production-"
-    public static let Staging : String = "staging-"
-    public static let NAStaging : String = "na-staging-"
-    public static let EUStaging : String = "eu-staging-"
-    public static let Trial : String = "trial-"
-    public static let Develop : String = "develop-"
+open class MojioRegion : NSObject {
+    open static let Production : String = ""
+    open static let NAProduction : String = "na-production-"
+    open static let EUProduction : String = "eu-production-"
+    open static let Staging : String = "staging-"
+    open static let NAStaging : String = "na-staging-"
+    open static let EUStaging : String = "eu-staging-"
+    open static let Trial : String = "trial-"
+    open static let Develop : String = "develop-"
 
     static func getDefaultRegion() -> String {
         return Production
     }
 }
 
-public class ClientEnvironment : NSObject {
+open class ClientEnvironment : NSObject {
     
-    private static let ApiEndpointFormat : String = "https://%@api.moj.io/v2/"
-    private static let ApiV1EndpointFormat : String = "https://%@api.moj.io/v1/"
-    private static let PushApnsEndpointFormat : String = "https://%@push.moj.io/v2/"
-    private static let PushWSEndpointFormat : String = "wss://%@api.moj.io/v2/"
-    private static let MyMojioEndpointFormat : String = "https://%@my.moj.io/"
-    private static let AccountsEndpointFormat : String = "https://%@accounts.moj.io/"
+    fileprivate static let ApiEndpointFormat : String = "https://%@api.moj.io/v2/"
+    fileprivate static let ApiV1EndpointFormat : String = "https://%@api.moj.io/v1/"
+    fileprivate static let PushApnsEndpointFormat : String = "https://%@push.moj.io/v2/"
+    fileprivate static let PushWSEndpointFormat : String = "wss://%@api.moj.io/v2/"
+    fileprivate static let MyMojioEndpointFormat : String = "https://%@my.moj.io/"
+    fileprivate static let AccountsEndpointFormat : String = "https://%@accounts.moj.io/"
     
-    public static let SharedInstance = ClientEnvironment()
+    open static let SharedInstance = ClientEnvironment()
     
-    private var region : String?
+    fileprivate var region : String?
     
-    private var apiEndpoint : String?
-    private var apiV1Endpoint : String?
-    private var pushApnsEndpoint : String?
-    private var pushWSEndpoint : String?
-    private var myMojioEndpoint : String?
-    private var accountsEndpoint : String?
+    fileprivate var apiEndpoint : String?
+    fileprivate var apiV1Endpoint : String?
+    fileprivate var pushApnsEndpoint : String?
+    fileprivate var pushWSEndpoint : String?
+    fileprivate var myMojioEndpoint : String?
+    fileprivate var accountsEndpoint : String?
     
     public override init() {
         super.init()
@@ -51,7 +51,7 @@ public class ClientEnvironment : NSObject {
         }
     }
     
-    public func getRegion() -> String {
+    open func getRegion() -> String {
         if self.region != nil {
             return self.region!
         }
@@ -62,7 +62,7 @@ public class ClientEnvironment : NSObject {
     /**
         Letting an app developer ovveride the default environment. This should be used only for development purposes to test the functionality of the app in different continents
      */
-    public func setRegion (region : String) {
+    open func setRegion (_ region : String) {
         self.region = region
         self.apiEndpoint = String.init(format: ClientEnvironment.ApiEndpointFormat, arguments: [region])
         self.apiV1Endpoint = String.init(format: ClientEnvironment.ApiV1EndpointFormat, arguments: [region])
@@ -72,31 +72,31 @@ public class ClientEnvironment : NSObject {
         self.accountsEndpoint = String.init(format: ClientEnvironment.AccountsEndpointFormat, arguments: [region])
     }
     
-    public func setDefaultRegion () {
+    open func setDefaultRegion () {
         self.setRegion(MojioRegion.getDefaultRegion())
     }
     
-    public func getApiEndpoint () -> String {
+    open func getApiEndpoint () -> String {
         return apiEndpoint!
     }
     
-    public func getV1ApiEndpoint () -> String {
+    open func getV1ApiEndpoint () -> String {
         return apiV1Endpoint!
     }
     
-    public func getPushApnsEndpoint () -> String {
+    open func getPushApnsEndpoint () -> String {
         return pushApnsEndpoint!
     }
     
-    public func getPushWSEndpoint () -> String {
+    open func getPushWSEndpoint () -> String {
         return pushWSEndpoint!
     }
     
-    public func getMyMojioEndpoint () -> String {
+    open func getMyMojioEndpoint () -> String {
         return myMojioEndpoint!
     }
     
-    public func getAccountsEndpoint () -> String {
+    open func getAccountsEndpoint () -> String {
         return accountsEndpoint!
     }
 }

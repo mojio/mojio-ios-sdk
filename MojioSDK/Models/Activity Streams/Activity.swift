@@ -9,30 +9,30 @@
 import Foundation
 import ObjectMapper
 
-public class Activity : BaseActivity {
-    public dynamic var StartTime : String? = nil
-    public dynamic var EndTime : String? = nil
-    public dynamic var Duration : String? = nil
-    public dynamic var Published : String? = nil
-    public dynamic var Updated : String? = nil
+open class Activity : BaseActivity {
+    open dynamic var StartTime : String? = nil
+    open dynamic var EndTime : String? = nil
+    open dynamic var Duration : String? = nil
+    open dynamic var Published : String? = nil
+    open dynamic var Updated : String? = nil
     
-    public dynamic var Context : String? = nil
+    open dynamic var Context : String? = nil
     
-    public dynamic var Location : ActivityLocation? = nil
-    public dynamic var Origin : ActivityLocation? = nil
-    public dynamic var Summary : Dictionary<String,String>? = nil
-    public var Icon : Dictionary<String, AnyObject>? = nil
+    open dynamic var Location : ActivityLocation? = nil
+    open dynamic var Origin : ActivityLocation? = nil
+    open dynamic var Summary : Dictionary<String,String>? = nil
+    open var Icon : Dictionary<String, AnyObject>? = nil
     
     public required override init() {
         super.init()
     }
     
-    public required convenience init?(_ map: Map) {
+    public required convenience init?(map: Map) {
         self.init()
     }
     
-    public override func mapping(map: Map) {
-        super.mapping(map)
+    open override func mapping(map: Map) {
+        super.mapping(map: map)
         Context <- map["Context"]
         Location <- map["Location"]
         Origin <- map["Origin"]

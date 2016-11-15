@@ -9,26 +9,26 @@
 import UIKit
 import ObjectMapper
 
-public class Vin: Mappable {
+open class Vin: Mappable {
     
-    public dynamic var VIN : String? = nil
-    public dynamic var Timestamp : String? = nil
-    public dynamic var Market : String? = nil
-    public var Year : Int = 0
-    public dynamic var Make : String? = nil
-    public dynamic var Model : String? = nil
-    public dynamic var VehicleType : String? = nil
-    public dynamic var BodyType : String? = nil
-    public dynamic var DriveType : String? = nil
-    public dynamic var FuelTankSize : Float = 0
-    public dynamic var EPAFuelEfficiency : Float = 0
-    public var VehicleEngine : Engine? = nil
-    public var VehicleTransmission : Transmission? = nil
-    public var Warranties : [Warranty] = []
-    public var Recalls : [Recall] = []
-    public var ServiceBulletins : [ServiceBulletin] = []
+    open dynamic var VIN : String? = nil
+    open dynamic var Timestamp : String? = nil
+    open dynamic var Market : String? = nil
+    open var Year : Int = 0
+    open dynamic var Make : String? = nil
+    open dynamic var Model : String? = nil
+    open dynamic var VehicleType : String? = nil
+    open dynamic var BodyType : String? = nil
+    open dynamic var DriveType : String? = nil
+    open dynamic var FuelTankSize : Float = 0
+    open dynamic var EPAFuelEfficiency : Float = 0
+    open var VehicleEngine : Engine? = nil
+    open var VehicleTransmission : Transmission? = nil
+    open var Warranties : [Warranty] = []
+    open var Recalls : [Recall] = []
+    open var ServiceBulletins : [ServiceBulletin] = []
     
-    public required convenience init?(_ map: Map) {
+    public required convenience init?(map: Map) {
         self.init();
     }
     
@@ -36,15 +36,15 @@ public class Vin: Mappable {
         
     }
 
-    public static func primaryKey() -> String? {
+    open static func primaryKey() -> String? {
         return "VIN"
     }
         
-    public func WarrantiesArray() -> NSArray {
-        return self.Warranties
+    open func WarrantiesArray() -> NSArray {
+        return self.Warranties as NSArray
     }
     
-    public func mapping(map: Map) {
+    open func mapping(map: Map) {
         
         VIN <- map["VIN"]
         Timestamp <- map["Timestamp"]

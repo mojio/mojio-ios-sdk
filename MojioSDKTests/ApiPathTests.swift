@@ -36,19 +36,19 @@ class ApiPathTests: XCTestCase {
         
         let vehicleNextServicePath : NSString = (RestClient().vehicles("\(vehicleId)").next()).requestUrl!
         
-        XCTAssertTrue(vehiclesPath.isEqualToString("https://na-staging-api.moj.io/v2/vehicles/"), "The path to get all vehicles is not correct")
+        XCTAssertTrue(vehiclesPath.isEqual(to: "https://na-staging-api.moj.io/v2/vehicles/"), "The path to get all vehicles is not correct")
         
-        XCTAssertTrue(vehicleIdPath.isEqualToString("https://na-staging-api.moj.io/v2/vehicles/\(vehicleId)/"), "The path to get a vehicle with vehicle id is incorrect")
+        XCTAssertTrue(vehicleIdPath.isEqual(to: "https://na-staging-api.moj.io/v2/vehicles/\(vehicleId)/"), "The path to get a vehicle with vehicle id is incorrect")
         
-        XCTAssertTrue(vehicleTripsPath.isEqualToString("https://na-staging-api.moj.io/v2/vehicles/\(vehicleId)/trips/"), "The path to get a vehicle's trips is incorrect")
+        XCTAssertTrue(vehicleTripsPath.isEqual(to: "https://na-staging-api.moj.io/v2/vehicles/\(vehicleId)/trips/"), "The path to get a vehicle's trips is incorrect")
         
-        XCTAssertTrue(vehicleVinPath.isEqualToString("https://na-staging-api.moj.io/v2/vehicles/\(vehicleId)/vin/"), "The path to get a vehicle's VIN details incorrect")
+        XCTAssertTrue(vehicleVinPath.isEqual(to: "https://na-staging-api.moj.io/v2/vehicles/\(vehicleId)/vin/"), "The path to get a vehicle's VIN details incorrect")
         
-        XCTAssertTrue(vehicleAddressPath.isEqualToString("https://na-staging-api.moj.io/v2/vehicles/\(vehicleId)/address/"), "The path to get a vehicle address is incorrect")
+        XCTAssertTrue(vehicleAddressPath.isEqual(to: "https://na-staging-api.moj.io/v2/vehicles/\(vehicleId)/address/"), "The path to get a vehicle address is incorrect")
         
-        XCTAssertTrue(vehicleServiceSchedulePath.isEqualToString("https://na-staging-api.moj.io/v2/vehicles/\(vehicleId)/serviceschedule/"), "The path to get a vehicle's service schedule is incorrect")
+        XCTAssertTrue(vehicleServiceSchedulePath.isEqual(to: "https://na-staging-api.moj.io/v2/vehicles/\(vehicleId)/serviceschedule/"), "The path to get a vehicle's service schedule is incorrect")
         
-        XCTAssertTrue(vehicleNextServicePath.isEqualToString("https://na-staging-api.moj.io/v2/vehicles/\(vehicleId)/next/"), "The path to get a vehicle's service schedule is incorrect")
+        XCTAssertTrue(vehicleNextServicePath.isEqual(to: "https://na-staging-api.moj.io/v2/vehicles/\(vehicleId)/next/"), "The path to get a vehicle's service schedule is incorrect")
         
     }
     
@@ -61,15 +61,15 @@ class ApiPathTests: XCTestCase {
         let userMojiosPath : NSString = (RestClient().users("\(userId)").mojios(nil)).requestUrl!
         let userGroupsPath : NSString = (RestClient().users("\(userId)").groups(nil)).requestUrl!
         
-        XCTAssertTrue(usersPath.isEqualToString("https://na-staging-api.moj.io/v2/users/"), "The path to get all users is incorrect")
+        XCTAssertTrue(usersPath.isEqual(to: "https://na-staging-api.moj.io/v2/users/"), "The path to get all users is incorrect")
         
-        XCTAssertTrue(userIdPath.isEqualToString("https://na-staging-api.moj.io/v2/users/\(userId)/"), "The path to get all users is incorrect")
+        XCTAssertTrue(userIdPath.isEqual(to: "https://na-staging-api.moj.io/v2/users/\(userId)/"), "The path to get all users is incorrect")
         
-        XCTAssertTrue(userVehiclesPath.isEqualToString("https://na-staging-api.moj.io/v2/users/\(userId)/vehicles/"), "The path to get all users is incorrect")
+        XCTAssertTrue(userVehiclesPath.isEqual(to: "https://na-staging-api.moj.io/v2/users/\(userId)/vehicles/"), "The path to get all users is incorrect")
         
-        XCTAssertTrue(userMojiosPath.isEqualToString("https://na-staging-api.moj.io/v2/users/\(userId)/mojios/"), "The path to get all users is incorrect")
+        XCTAssertTrue(userMojiosPath.isEqual(to: "https://na-staging-api.moj.io/v2/users/\(userId)/mojios/"), "The path to get all users is incorrect")
         
-        XCTAssertTrue(userGroupsPath.isEqualToString("https://na-staging-api.moj.io/v2/users/\(userId)/groups/"), "The path to get all users is incorrect")
+        XCTAssertTrue(userGroupsPath.isEqual(to: "https://na-staging-api.moj.io/v2/users/\(userId)/groups/"), "The path to get all users is incorrect")
         
     }
     
@@ -79,9 +79,9 @@ class ApiPathTests: XCTestCase {
         let tripsPath : NSString = (RestClient().trips(nil)).requestUrl!
         let tripIdPath : NSString = (RestClient().trips("\(tripId)")).requestUrl!
         
-        XCTAssertTrue(tripsPath.isEqualToString("https://na-staging-api.moj.io/v2/trips/"), "The path to get all trips is incorrect")
+        XCTAssertTrue(tripsPath.isEqual(to: "https://na-staging-api.moj.io/v2/trips/"), "The path to get all trips is incorrect")
         
-        XCTAssertTrue(tripIdPath.isEqualToString("https://na-staging-api.moj.io/v2/trips/\(tripId)/"), "The path to get a trip with id is incorrect")
+        XCTAssertTrue(tripIdPath.isEqual(to: "https://na-staging-api.moj.io/v2/trips/\(tripId)/"), "The path to get a trip with id is incorrect")
     }
     
     func testTagsPaths () {
@@ -90,7 +90,7 @@ class ApiPathTests: XCTestCase {
         
         let tagPath : NSString = (RestClient().trips("\(resourceId)").tags("\(tagId)")).requestUrl!
                 
-        XCTAssertTrue(tagPath.isEqualToString("https://na-staging-api.moj.io/v2/trips/\(resourceId)/tags/\(tagId)/"), "The path to get tags is incorrect")
+        XCTAssertTrue(tagPath.isEqual(to: "https://na-staging-api.moj.io/v2/trips/\(resourceId)/tags/\(tagId)/"), "The path to get tags is incorrect")
         
     }
     
@@ -100,7 +100,7 @@ class ApiPathTests: XCTestCase {
         
         let permissionPath : NSString = (RestClient().trips("\(resourceId)").tags("\(permissionId)")).requestUrl!
         
-        XCTAssertTrue(permissionPath.isEqualToString("https://na-staging-api.moj.io/v2/trips/\(resourceId)/tags/\(permissionId)/"), "The path to get tags is incorrect")
+        XCTAssertTrue(permissionPath.isEqual(to: "https://na-staging-api.moj.io/v2/trips/\(resourceId)/tags/\(permissionId)/"), "The path to get tags is incorrect")
 
     }
     
@@ -110,8 +110,8 @@ class ApiPathTests: XCTestCase {
         let mojiosPath : NSString = (RestClient().mojios(nil)).requestUrl!
         let mojioIdPath : NSString = (RestClient().mojios("\(mojioId)")).requestUrl!
         
-        XCTAssertTrue(mojiosPath.isEqualToString("https://na-staging-api.moj.io/v2/mojios/"), "The path to get all mojios is incorrect")
-        XCTAssertTrue(mojioIdPath.isEqualToString("https://na-staging-api.moj.io/v2/mojios/\(mojioId)/"), "The path to get a mojio is incorrect")
+        XCTAssertTrue(mojiosPath.isEqual(to: "https://na-staging-api.moj.io/v2/mojios/"), "The path to get all mojios is incorrect")
+        XCTAssertTrue(mojioIdPath.isEqual(to: "https://na-staging-api.moj.io/v2/mojios/\(mojioId)/"), "The path to get a mojio is incorrect")
     }
     
     func testImagesPaths () {
@@ -123,9 +123,9 @@ class ApiPathTests: XCTestCase {
         let userImagePath : NSString = (RestClient().users("\(userId)").image()).requestUrl!
         let vehicleImagePath : NSString = (RestClient().vehicles("\(vehicleId)").image()).requestUrl!
         
-        XCTAssertTrue(appImagePath.isEqualToString("https://na-staging-api.moj.io/v2/apps/\(appId)/image/"), "The path to get an app's image is incorrect")
-        XCTAssertTrue(userImagePath.isEqualToString("https://na-staging-api.moj.io/v2/users/\(userId)/image/"), "The path to get an app's image is incorrect")
-        XCTAssertTrue(vehicleImagePath.isEqualToString("https://na-staging-api.moj.io/v2/vehicles/\(vehicleId)/image/"), "The path to get an app's image is incorrect")
+        XCTAssertTrue(appImagePath.isEqual(to: "https://na-staging-api.moj.io/v2/apps/\(appId)/image/"), "The path to get an app's image is incorrect")
+        XCTAssertTrue(userImagePath.isEqual(to: "https://na-staging-api.moj.io/v2/users/\(userId)/image/"), "The path to get an app's image is incorrect")
+        XCTAssertTrue(vehicleImagePath.isEqual(to: "https://na-staging-api.moj.io/v2/vehicles/\(vehicleId)/image/"), "The path to get an app's image is incorrect")
 
     }
     
@@ -135,9 +135,9 @@ class ApiPathTests: XCTestCase {
         let groupIdPath : NSString = (RestClient().groups("\(groupId)")).requestUrl!
         let groupUsersPath : NSString = (RestClient().groups("\(groupId)").users(nil)).requestUrl!
         
-        XCTAssertTrue(groupsPath.isEqualToString("https://na-staging-api.moj.io/v2/groups/"), "The path to get groups is incorrect")
-        XCTAssertTrue(groupIdPath.isEqualToString("https://na-staging-api.moj.io/v2/groups/\(groupId)/"), "The path to get a group is incorrect")
-        XCTAssertTrue(groupUsersPath.isEqualToString("https://na-staging-api.moj.io/v2/groups/\(groupId)/users/"), "The path to get groups is incorrect")
+        XCTAssertTrue(groupsPath.isEqual(to: "https://na-staging-api.moj.io/v2/groups/"), "The path to get groups is incorrect")
+        XCTAssertTrue(groupIdPath.isEqual(to: "https://na-staging-api.moj.io/v2/groups/\(groupId)/"), "The path to get a group is incorrect")
+        XCTAssertTrue(groupUsersPath.isEqual(to: "https://na-staging-api.moj.io/v2/groups/\(groupId)/users/"), "The path to get groups is incorrect")
 
     }
     
@@ -147,9 +147,9 @@ class ApiPathTests: XCTestCase {
         let appIdPath : NSString = (RestClient().apps("\(appId)")).requestUrl!
         let appSecretPath : NSString = (RestClient().apps("\(appId)").secret()).requestUrl!
         
-        XCTAssertTrue(appsPath.isEqualToString("https://na-staging-api.moj.io/v2/apps/"), "The path to get the apps is incorrect")
-        XCTAssertTrue(appIdPath.isEqualToString("https://na-staging-api.moj.io/v2/apps/\(appId)/"), "The path to get an app is incorrect")
-        XCTAssertTrue(appSecretPath.isEqualToString("https://na-staging-api.moj.io/v2/apps/\(appId)/secret/"), "The path to get an app's secret is incorrect")
+        XCTAssertTrue(appsPath.isEqual(to: "https://na-staging-api.moj.io/v2/apps/"), "The path to get the apps is incorrect")
+        XCTAssertTrue(appIdPath.isEqual(to: "https://na-staging-api.moj.io/v2/apps/\(appId)/"), "The path to get an app is incorrect")
+        XCTAssertTrue(appSecretPath.isEqual(to: "https://na-staging-api.moj.io/v2/apps/\(appId)/secret/"), "The path to get an app's secret is incorrect")
 
     }
     

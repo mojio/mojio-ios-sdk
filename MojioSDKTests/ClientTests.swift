@@ -14,25 +14,25 @@ import OHHTTPStubs
 
 class ClientTests: XCTestCase {
     
-    private let PATH_APPS : String = "apps/"
-    private let PATH_SECRET : String = "secret/"
-    private let PATH_GROUPS : String = "groups/"
-    private let PATH_USERS : String = "users/"
-    private let PATH_ME : String = "me/"
-    private let PATH_HISTORY : String = "history/"
-    private let PATH_STATES : String = "states/"
-    private let PATH_LOCATIONS : String = "locations/"
-    private let PATH_IMAGE : String = "image/"
-    private let PATH_MOJIOS : String = "mojios/"
-    private let PATH_PERMISSION : String = "permission/"
-    private let PATH_PERMISSIONS : String = "permissions/"
-    private let PATH_TAGS : String = "tags/"
-    private let PATH_TRIPS : String = "trips/"
-    private let PATH_VEHICLES : String = "vehicles/"
-    private let PATH_ADDRESS : String = "address/"
-    private let PATH_VIN : String = "vin/"
-    private let PATH_SERVICE_SCHEDULE = "serviceschedule/"
-    private let PATH_NEXT : String = "next/"
+    fileprivate let PATH_APPS : String = "apps/"
+    fileprivate let PATH_SECRET : String = "secret/"
+    fileprivate let PATH_GROUPS : String = "groups/"
+    fileprivate let PATH_USERS : String = "users/"
+    fileprivate let PATH_ME : String = "me/"
+    fileprivate let PATH_HISTORY : String = "history/"
+    fileprivate let PATH_STATES : String = "states/"
+    fileprivate let PATH_LOCATIONS : String = "locations/"
+    fileprivate let PATH_IMAGE : String = "image/"
+    fileprivate let PATH_MOJIOS : String = "mojios/"
+    fileprivate let PATH_PERMISSION : String = "permission/"
+    fileprivate let PATH_PERMISSIONS : String = "permissions/"
+    fileprivate let PATH_TAGS : String = "tags/"
+    fileprivate let PATH_TRIPS : String = "trips/"
+    fileprivate let PATH_VEHICLES : String = "vehicles/"
+    fileprivate let PATH_ADDRESS : String = "address/"
+    fileprivate let PATH_VIN : String = "vin/"
+    fileprivate let PATH_SERVICE_SCHEDULE = "serviceschedule/"
+    fileprivate let PATH_NEXT : String = "next/"
     
     override func setUp() {
         super.setUp()
@@ -125,14 +125,14 @@ class ClientTests: XCTestCase {
         self.executeRestRequest("VehicleData.txt", message: "Failed to delete vehicle", requestType: "DELETE")
     }
     
-    func executeRestRequest (fileName : String, message : String, requestType : String) {
+    func executeRestRequest (_ fileName : String, message : String, requestType : String) {
         
         stub(isHost("na-staging-api.moj.io")) { _ in
-            let stubPath = OHPathForFile (fileName, self.dynamicType)
+            let stubPath = OHPathForFile (fileName, type(of: self))
             return fixture(stubPath!, headers : ["Content-Type" : "application/json"])
         }
         
-        let expectation = self.expectationWithDescription("Response arrived")
+        let expectation = self.expectation(description: "Response arrived")
         
         if requestType == "GET" {
             RestClient().get().vehicles(nil).query("1", skip: "2", filter: "vehicleId=vehicleId", select: "", orderby: "").run({ response in
@@ -164,22 +164,22 @@ class ClientTests: XCTestCase {
             })
         }
 
-        self.waitForExpectationsWithTimeout(5, handler: nil)
+        self.waitForExpectations(timeout: 5, handler: nil)
     }
     
-    func toDict (fileName : String) -> NSDictionary? {
+    func toDict (_ fileName : String) -> NSDictionary? {
         
-        let path = NSBundle(forClass: ClientTests.self).pathForResource(fileName, ofType: "txt")
-        let text = try! NSString (contentsOfFile: path!, encoding: NSUTF8StringEncoding)
-        let data = text.dataUsingEncoding(NSUTF8StringEncoding)
-        let dict = try! NSJSONSerialization.JSONObjectWithData(data!, options: []) as? [String : AnyObject]
+        let path = Bundle(for: ClientTests.self).path(forResource: fileName, ofType: "txt")
+        let text = try! NSString (contentsOfFile: path!, encoding: String.Encoding.utf8.rawValue)
+        let data = text.data(using: String.Encoding.utf8.rawValue)
+        let dict = try! JSONSerialization.jsonObject(with: data!, options: []) as? [String : AnyObject]
         
-        return dict
+        return dict as NSDictionary?
     }
     
-    func toArray (client : RestClient, fileName : String) -> NSMutableArray? {
+    func toArray (_ client : RestClient, fileName : String) -> NSMutableArray? {
         if let responseDict = toDict(fileName) {
-            if let dataArray : NSArray = responseDict.objectForKey("Data") as? NSArray {
+            if let dataArray : NSArray = responseDict.object(forKey: "Data") as? NSArray {
                 let array : NSMutableArray = []
                 for  obj in dataArray {
                     array.addObject(client.parseDict(obj as! NSDictionary)!)

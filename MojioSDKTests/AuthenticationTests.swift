@@ -71,7 +71,7 @@ class AuthenticationTests: XCTestCase {
     
     func performLogin () {
         
-        let urlRequest : NSURLRequest = NSURLRequest(URL: NSURL(string: "sdkdev://io.moj#access_token=9be67364-3f78-4539-ae64-5861c4dd3584&token_type=bearer&expires_in=43200")!)
+        let urlRequest : URLRequest = URLRequest(url: URL(string: "sdkdev://io.moj#access_token=9be67364-3f78-4539-ae64-5861c4dd3584&token_type=bearer&expires_in=43200")!)
         
         self.authClient.loginCompletion = { (authToken) in
             XCTAssert(true, "Login successful")
@@ -81,7 +81,7 @@ class AuthenticationTests: XCTestCase {
     
     func testPerformanceExample() {
         // This is an example of a performance test case.
-        self.measureBlock {
+        self.measure {
             // Put the code you want to measure the time of here.
         }
     }

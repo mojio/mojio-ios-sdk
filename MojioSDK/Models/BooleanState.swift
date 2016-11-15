@@ -9,12 +9,12 @@
 import UIKit
 import ObjectMapper
 
-public class BooleanState: Mappable {
+open class BooleanState: Mappable {
     
-    public dynamic var Timestamp : String? = nil
-    public dynamic var Value : Bool = false
+    open dynamic var Timestamp : String? = nil
+    open dynamic var Value : Bool = false
     
-    public required convenience init?(_ map: Map) {
+    public required convenience init?(map: Map) {
         self.init()
     }
     
@@ -22,7 +22,7 @@ public class BooleanState: Mappable {
         
     }
     
-    public func mapping(map: Map) {
+    open func mapping(map: Map) {
         Timestamp <- map["Timestamp"]
         Value <- map["Value"]
     }

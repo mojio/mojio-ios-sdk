@@ -9,29 +9,29 @@
 import UIKit
 import ObjectMapper
 
-public class HarshEventEventTypes : NSObject {
-    public static let Acceleration : String = "Acceleration"
-    public static let Deceleration : String = "Deceleration"
-    public static let Turning : String = "Turning"
-    public static let Upward : String = "Upward"
-    public static let Downward : String = "Downward"
-    public static let Accident : String = "Accident"
-    public static let PostAccident : String = "PostAccident"
+open class HarshEventEventTypes : NSObject {
+    open static let Acceleration : String = "Acceleration"
+    open static let Deceleration : String = "Deceleration"
+    open static let Turning : String = "Turning"
+    open static let Upward : String = "Upward"
+    open static let Downward : String = "Downward"
+    open static let Accident : String = "Accident"
+    open static let PostAccident : String = "PostAccident"
 }
 
-public class HarshEventTurnTypes : NSObject {
-    public static let Left : String = "Left"
-    public static let Right : String = "Right"
+open class HarshEventTurnTypes : NSObject {
+    open static let Left : String = "Left"
+    open static let Right : String = "Right"
 }
 
-public class HarshEvent: Mappable {
+open class HarshEvent: Mappable {
     
-    public dynamic var Timestamp : String? = nil
-    public dynamic var Value : Bool = false
-    public dynamic var EventType : String? = nil
-    public dynamic var TurnType : String? = nil
+    open dynamic var Timestamp : String? = nil
+    open dynamic var Value : Bool = false
+    open dynamic var EventType : String? = nil
+    open dynamic var TurnType : String? = nil
     
-    public required convenience init?(_ map: Map) {
+    public required convenience init?(map: Map) {
         self.init()
     }
     
@@ -39,7 +39,7 @@ public class HarshEvent: Mappable {
         
     }
 
-    public func mapping(map: Map) {
+    open func mapping(map: Map) {
         Timestamp <- map["Timestamp"];
         Value <- map["Value"];
         EventType <- map["EventType"];

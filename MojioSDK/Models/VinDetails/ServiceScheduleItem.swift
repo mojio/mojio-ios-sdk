@@ -9,22 +9,22 @@
 import UIKit
 import ObjectMapper
 
-public class ServiceScheduleItem: Mappable {
+open class ServiceScheduleItem: Mappable {
     
-    public dynamic var TransNotes: String? = nil
-    public dynamic var ScheduleName: String? = nil
-    public dynamic var ScheduleDescription: String? = nil
-    public dynamic var MaintenanceCategory: String? = nil
-    public dynamic var MaintenanceName: String? = nil
-    public dynamic var MaintenanceNotes: String? = nil
-    public var Intervals : [ServiceInterval] = []
-    public var Events : [ServiceEvent] = []
+    open dynamic var TransNotes: String? = nil
+    open dynamic var ScheduleName: String? = nil
+    open dynamic var ScheduleDescription: String? = nil
+    open dynamic var MaintenanceCategory: String? = nil
+    open dynamic var MaintenanceName: String? = nil
+    open dynamic var MaintenanceNotes: String? = nil
+    open var Intervals : [ServiceInterval] = []
+    open var Events : [ServiceEvent] = []
     
-    public required convenience init?(_ map: Map) {
+    public required convenience init?(map: Map) {
         self.init()
     }
 
-    public func mapping(map: Map) {
+    open func mapping(map: Map) {
         
         TransNotes <- map["TransNotes"]
         ScheduleName <- map["ScheduleName"]

@@ -9,14 +9,14 @@
 import UIKit
 import ObjectMapper
 
-public class Transmission: Mappable {
+open class Transmission: Mappable {
     
-    public dynamic var Name : String? = nil
-    public dynamic var Type : String? = nil
-    public dynamic var DetailType : String? = nil
-    public dynamic var Gears : String? = nil
+    open dynamic var Name : String? = nil
+    open dynamic var TransmissionType : String? = nil
+    open dynamic var DetailType : String? = nil
+    open dynamic var Gears : String? = nil
 
-    public required convenience init?(_ map: Map) {
+    public required convenience init?(map: Map) {
         self.init();
     }
     
@@ -24,9 +24,9 @@ public class Transmission: Mappable {
         
     }
 
-    public func mapping(map: Map) {
+    open func mapping(map: Map) {
         Name <- map["Name"]
-        Type <- map["Type"]
+        TransmissionType <- map["Type"]
         DetailType <- map["DetailType"]
         Gears <- map["Gears"]
     }

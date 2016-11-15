@@ -10,25 +10,25 @@ import UIKit
 import ObjectMapper
 
 // Units in DistanceUnits
-public class Distance: DeviceMeasurement {
+open class Distance: DeviceMeasurement {
     
-    public required convenience init?(_ map: Map) {
+    public required convenience init?(map: Map) {
         self.init()
     }
     
-    public func jsonDict() -> NSDictionary {
+    open func jsonDict() -> NSDictionary {
         var dictionary : [String:AnyObject] = [:]
         
         if let baseUnit = self.BaseUnit {
-            dictionary["BaseUnit"] = baseUnit
-            dictionary["BaseValue"] = self.BaseValue
+            dictionary["BaseUnit"] = baseUnit as AnyObject?
+            dictionary["BaseValue"] = self.BaseValue as AnyObject?
         }
         
         if let unit = self.Unit {
-            dictionary["Unit"] = unit
-            dictionary["Value"] = self.Value
+            dictionary["Unit"] = unit as AnyObject?
+            dictionary["Value"] = self.Value as AnyObject?
         }
 
-        return dictionary
+        return dictionary as NSDictionary
     }
 }

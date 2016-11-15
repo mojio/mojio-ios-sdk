@@ -10,9 +10,9 @@ import UIKit
 import ObjectMapper
 
 // Units in RPMUnits
-public class RPM: DeviceMeasurement {
+open class RPM: DeviceMeasurement {
     
-    public required convenience init?(_ map: Map) {
+    public required convenience init?(map: Map) {
         self.init()
     }
 }

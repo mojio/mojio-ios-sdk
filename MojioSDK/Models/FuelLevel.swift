@@ -11,16 +11,16 @@ import ObjectMapper
 
 
 // Units are in PercentageUnits
-public class FuelLevel: DeviceMeasurement {
+open class FuelLevel: DeviceMeasurement {
     
-    public dynamic var RiskSeverity : String? = nil
+    open dynamic var RiskSeverity : String? = nil
     
-    public required convenience init?(_ map: Map) {
+    public required convenience init?(map: Map) {
         self.init()
     }
     
-    public override func mapping(map: Map) {
-        super.mapping(map)
+    open override func mapping(map: Map) {
+        super.mapping(map: map)
 
         RiskSeverity <- map["RiskSeverity"]
     }

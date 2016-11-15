@@ -10,9 +10,9 @@ import UIKit
 import ObjectMapper
 
 // Units in AccelerometerUnits
-public class ProperAcceleration: DeviceMeasurement {
+open class ProperAcceleration: DeviceMeasurement {
     
-    public required convenience init?(_ map: Map) {
+    public required convenience init?(map: Map) {
         self.init()
     }
 }

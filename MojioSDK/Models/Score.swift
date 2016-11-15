@@ -9,20 +9,20 @@
 import UIKit
 import ObjectMapper
 
-public class ScoreMethods {
-    public static let ZScore : String = "ZScore"
-    public static let MinMaxScore : String = "MinMaxScore"
+open class ScoreMethods {
+    open static let ZScore : String = "ZScore"
+    open static let MinMaxScore : String = "MinMaxScore"
 }
 
-public class Score: Mappable {
+open class Score: Mappable {
     
     // ScoreMethods
-    public dynamic var ScoringMethod : String? = nil
-    public dynamic var Value : Float = 0
-    public dynamic var Percentile : Float = 0
-    public dynamic var Average : Float = 0
+    open dynamic var ScoringMethod : String? = nil
+    open dynamic var Value : Float = 0
+    open dynamic var Percentile : Float = 0
+    open dynamic var Average : Float = 0
     
-    public required convenience init?(_ map: Map) {
+    public required convenience init?(map: Map) {
         self.init()
     }
     
@@ -30,7 +30,7 @@ public class Score: Mappable {
         
     }
 
-    public func mapping(map: Map) {
+    open func mapping(map: Map) {
         ScoringMethod <- map["ScoringMethod"]
         Value <- map["Value"]
         Percentile <- map["Percentile"]

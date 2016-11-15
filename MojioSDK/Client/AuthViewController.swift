@@ -9,17 +9,17 @@
 import UIKit
 
 public protocol AuthControllerDelegate {
-    func authControllerLoadURLRequest (request : NSURLRequest);
+    func authControllerLoadURLRequest (_ request : URLRequest);
 }
 
-public class AuthViewController: UIViewController, UIWebViewDelegate {
+open class AuthViewController: UIViewController, UIWebViewDelegate {
     
-    public var loginURL : NSURL!
-    public var delegate : AuthControllerDelegate?
+    open var loginURL : URL!
+    open var delegate : AuthControllerDelegate?
 
-    @IBOutlet public var webview: UIWebView?
+    @IBOutlet open var webview: UIWebView?
     
-    public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+    public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil);
     }
     
@@ -27,22 +27,22 @@ public class AuthViewController: UIViewController, UIWebViewDelegate {
         super.init(coder: aDecoder);
     }
     
-    public override func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
 
-        let request : NSURLRequest = NSURLRequest(URL: self.loginURL);
+        let request : URLRequest = URLRequest(url: self.loginURL);
         self.webview?.loadRequest(request);        
     }
     
     //MARK: webview delegate methods
     
-    public func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+    open func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
         self.delegate?.authControllerLoadURLRequest(request);
         return true;
     }
 
     
-    public override func didReceiveMemoryWarning() {
+    open override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }

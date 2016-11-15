@@ -9,12 +9,12 @@
 import UIKit
 import ObjectMapper
 
-public class Image: Mappable {
-    public dynamic var Src : String? = nil
-    public dynamic var Normal : String? = nil
-    public dynamic var Thumbnail : String? = nil
+open class Image: Mappable {
+    open dynamic var Src : String? = nil
+    open dynamic var Normal : String? = nil
+    open dynamic var Thumbnail : String? = nil
     
-    public required convenience init?(_ map: Map) {
+    public required convenience init?(map: Map) {
         self.init()
     }
     
@@ -22,7 +22,7 @@ public class Image: Mappable {
         
     }
     
-    public func mapping(map: Map) {
+    open func mapping(map: Map) {
         Src <- map["Src"];
         Normal <- map["Normal"];
         Thumbnail <- map["Thumbnail"];

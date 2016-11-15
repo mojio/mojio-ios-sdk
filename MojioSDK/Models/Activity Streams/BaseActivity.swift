@@ -9,20 +9,20 @@
 import Foundation
 import ObjectMapper
 
-public class BaseActivity : NSObject, Mappable {
-    public dynamic var Id : String? = nil
-    public dynamic var Type : String? = nil
-    public dynamic var Href : String? = nil
-    public dynamic var Name : String? = nil
-    public dynamic var NameMap : Dictionary<String, String>? = nil
+open class BaseActivity : NSObject, Mappable {
+    open dynamic var Id : String? = nil
+    open dynamic var ActivityType : String? = nil
+    open dynamic var Href : String? = nil
+    open dynamic var Name : String? = nil
+    open dynamic var NameMap : Dictionary<String, String>? = nil
     
-    public required convenience init?(_ map: Map) {
+    public required convenience init?(map: Map) {
         self.init()
     }
     
-    public func mapping(map: Map) {
+    open func mapping(map: Map) {
         Id <- map["Id"]
-        Type <- map["Type"]
+        ActivityType <- map["Type"]
         Href <- map["Href"]
         Name <- map["Name"]
         NameMap <- map["NameMap"]

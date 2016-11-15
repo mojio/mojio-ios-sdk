@@ -9,23 +9,23 @@
 import UIKit
 import ObjectMapper
 
-public class App: Mappable {
+open class App: Mappable {
     
-    public dynamic var Name : String? = nil
-    public dynamic var Description : String? = nil
-    public var Downloads : Int? = nil
-    public var RedirectUris : [String] = []
-    public var AppImage : Image? = nil
-    public var Tags : [String] = []
-    public dynamic var Id : String? = nil
-    public dynamic var CreatedOn : String? = nil
-    public dynamic var LastModified : String? = nil
+    open dynamic var Name : String? = nil
+    open dynamic var Description : String? = nil
+    open var Downloads : Int? = nil
+    open var RedirectUris : [String] = []
+    open var AppImage : Image? = nil
+    open var Tags : [String] = []
+    open dynamic var Id : String? = nil
+    open dynamic var CreatedOn : String? = nil
+    open dynamic var LastModified : String? = nil
 
-    public required convenience init?(_ map: Map) {
+    public required convenience init?(map: Map) {
         self.init();
     }
     
-    public static func primaryKey() -> String? {
+    open static func primaryKey() -> String? {
         return "Id"
     }
     
@@ -33,29 +33,29 @@ public class App: Mappable {
         
     }
     
-    public func json () -> String? {
+    open func json () -> String? {
         let dictionary : NSMutableDictionary = NSMutableDictionary()
         
         if self.Name != nil {
-            dictionary.setObject(self.Name!, forKey: "Name")
+            dictionary.setObject(self.Name!, forKey: "Name" as NSCopying)
         }
         if self.Description != nil {
-            dictionary.setObject(self.Description!, forKey: "Description")
+            dictionary.setObject(self.Description!, forKey: "Description" as NSCopying)
         }
         if self.RedirectUris.count > 0 {
-            dictionary.setObject(self.RedirectUris, forKey: "RedirectUris")
+            dictionary.setObject(self.RedirectUris, forKey: "RedirectUris" as NSCopying)
         }
         
         if dictionary.count == 0 {
             return nil
         }
         
-        let data = try! NSJSONSerialization.dataWithJSONObject(dictionary, options:  NSJSONWritingOptions.PrettyPrinted)
+        let data = try! JSONSerialization.data(withJSONObject: dictionary, options:  JSONSerialization.WritingOptions.prettyPrinted)
         
-        return NSString(data: data, encoding: NSUTF8StringEncoding)! as String
+        return NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
     }
     
-    public func mapping(map: Map) {
+    open func mapping(map: Map) {
         
         Name <- map["Name"]
         Description <- map["Description"]

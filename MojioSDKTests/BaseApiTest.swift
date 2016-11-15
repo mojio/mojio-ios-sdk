@@ -20,7 +20,7 @@ class BaseApiTest: XCTestCase {
         ClientEnvironment.SharedInstance.setRegion(MojioRegion.NAStaging)
 
         
-        let expectation = self.expectationWithDescription("Login")
+        let expectation = self.expectation(description: "Login")
 
         self.authClient.login("Ford01", password: "Optimus123", completion: {(authToken) in
             
@@ -32,7 +32,7 @@ class BaseApiTest: XCTestCase {
                 expectation.fulfill()
         })
         
-        self.waitForExpectationsWithTimeout(5, handler: nil)
+        self.waitForExpectations(timeout: 5, handler: nil)
     }
     
     override func tearDown() {
@@ -40,12 +40,12 @@ class BaseApiTest: XCTestCase {
         super.tearDown()
     }
     
-    func runTest(testName: String, testFunction: (expectation: XCTestExpectation) -> Void){
+    func runTest(_ testName: String, testFunction: (_ expectation: XCTestExpectation) -> Void){
 
-        let expectation = self.expectationWithDescription(testName)
+        let expectation = self.expectation(description: testName)
 
-        testFunction(expectation: expectation);
+        testFunction(expectation);
         
-        self.waitForExpectationsWithTimeout(20, handler: nil)
+        self.waitForExpectations(timeout: 20, handler: nil)
     }
 }

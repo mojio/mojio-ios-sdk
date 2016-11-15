@@ -10,8 +10,8 @@ import UIKit
 import ObjectMapper
 
 // Units are in AccelerationUnits
-public class Acceleration: DeviceMeasurement {
-    public required convenience init?(_ map: Map) {
+open class Acceleration: DeviceMeasurement {
+    public required convenience init?(map: Map) {
         self.init()
     }
 }

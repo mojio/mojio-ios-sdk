@@ -9,14 +9,14 @@
 import UIKit
 import ObjectMapper
 
-public class IdleState: Mappable {
+open class IdleState: Mappable {
     
-    public dynamic var Timestamp : String? = nil
-    public dynamic var Value : Bool = false
-    public dynamic var StartTime : String? = nil
-    public var Duration : TimePeriod? = nil
+    open dynamic var Timestamp : String? = nil
+    open dynamic var Value : Bool = false
+    open dynamic var StartTime : String? = nil
+    open var Duration : TimePeriod? = nil
     
-    public required convenience init?(_ map: Map) {
+    public required convenience init?(map: Map) {
         self.init()
     }
     
@@ -24,7 +24,7 @@ public class IdleState: Mappable {
         
     }
 
-    public func mapping(map: Map) {
+    open func mapping(map: Map) {
         Timestamp <- map["Timestamp"]
         Value <- map["Value"]
         StartTime <- map["StartTime"]

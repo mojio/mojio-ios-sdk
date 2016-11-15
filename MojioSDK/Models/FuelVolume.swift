@@ -11,9 +11,9 @@ import ObjectMapper
 
 
 // Units in FuelVolumeUnits
-public class FuelVolume: DeviceMeasurement {
+open class FuelVolume: DeviceMeasurement {
 
-    public required convenience init?(_ map: Map) {
+    public required convenience init?(map: Map) {
         self.init()
     }
 }

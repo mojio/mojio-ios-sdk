@@ -9,24 +9,24 @@
 import UIKit
 import ObjectMapper
 
-public class User : Mappable {
+open class User : Mappable {
     
-    public dynamic var FirstName : String? = nil
-    public dynamic var LastName : String? = nil
-    public dynamic var UserName : String? = nil
-    public dynamic var Jurisdiction : String? = nil
-    public var Emails : [Email] = []
-    public var PhoneNumbers : [PhoneNumber] = []
-    public var Img : Image? = nil
-    public var Tags : [String] = []
-    public dynamic var Id : String? = nil
-    public dynamic var CreatedOn : String? = nil
-    public dynamic var LastModified : String? = nil
+    open dynamic var FirstName : String? = nil
+    open dynamic var LastName : String? = nil
+    open dynamic var UserName : String? = nil
+    open dynamic var Jurisdiction : String? = nil
+    open var Emails : [Email] = []
+    open var PhoneNumbers : [PhoneNumber] = []
+    open var Img : Image? = nil
+    open var Tags : [String] = []
+    open dynamic var Id : String? = nil
+    open dynamic var CreatedOn : String? = nil
+    open dynamic var LastModified : String? = nil
     
     /* PUT & POST properties */
-    public dynamic var email : String? = nil
+    open dynamic var email : String? = nil
     
-    public required convenience init?(_ map: Map) {
+    public required convenience init?(map: Map) {
         self.init()
     }
     
@@ -34,42 +34,42 @@ public class User : Mappable {
         
     }
     
-    public static func primaryKey() -> String? {
+    open static func primaryKey() -> String? {
         return "Id"
     }
     
-    public func EmailsArray() -> NSArray {
-        return self.Emails
+    open func EmailsArray() -> NSArray {
+        return self.Emails as NSArray
     }
     
-    public func PhoneNumbersArray() -> NSArray {
-        return self.PhoneNumbers
+    open func PhoneNumbersArray() -> NSArray {
+        return self.PhoneNumbers as NSArray
     }
     
-    public func TagsArray() -> NSArray {
-        return self.Tags
+    open func TagsArray() -> NSArray {
+        return self.Tags as NSArray
     }
 
-    public func jsonDict () -> NSDictionary {
+    open func jsonDict () -> NSDictionary {
         let dictionary : NSMutableDictionary = NSMutableDictionary()
         
         if self.UserName != nil {
-            dictionary.setObject(self.UserName!, forKey: "UserName")
+            dictionary.setObject(self.UserName!, forKey: "UserName" as NSCopying)
         }
         if self.email != nil {
-            dictionary.setObject(self.email!, forKey: "Email")
+            dictionary.setObject(self.email!, forKey: "Email" as NSCopying)
         }
         if self.FirstName != nil {
-            dictionary.setObject(self.FirstName!, forKey: "FirstName")
+            dictionary.setObject(self.FirstName!, forKey: "FirstName" as NSCopying)
         }
         if self.LastName != nil {
-            dictionary.setObject(self.LastName!, forKey: "LastName")
+            dictionary.setObject(self.LastName!, forKey: "LastName" as NSCopying)
         }
         
         return dictionary
     }
     
-    public func mapping(map: Map) {
+    open func mapping(map: Map) {
         
         self.FirstName <- map["FirstName"]
         self.LastName <- map["LastName"]

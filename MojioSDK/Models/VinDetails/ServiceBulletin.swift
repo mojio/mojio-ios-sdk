@@ -9,17 +9,17 @@
 import UIKit
 import ObjectMapper
 
-public class ServiceBulletin: Mappable {
+open class ServiceBulletin: Mappable {
     
-    public dynamic var ItemNumber : String? = nil
-    public dynamic var BulletinNumber : String? = nil
-    public dynamic var ReplacementBulletinNumber : String? = nil
-    public dynamic var DateAdded : String? = nil
-    public dynamic var Component : String? = nil
-    public dynamic var BulletinDate : String? = nil
-    public dynamic var Summary : String? = nil
+    open dynamic var ItemNumber : String? = nil
+    open dynamic var BulletinNumber : String? = nil
+    open dynamic var ReplacementBulletinNumber : String? = nil
+    open dynamic var DateAdded : String? = nil
+    open dynamic var Component : String? = nil
+    open dynamic var BulletinDate : String? = nil
+    open dynamic var Summary : String? = nil
     
-    public required convenience init?(_ map: Map) {
+    public required convenience init?(map: Map) {
         self.init();
     }
     
@@ -27,7 +27,7 @@ public class ServiceBulletin: Mappable {
         
     }
 
-    public func mapping(map: Map) {
+    open func mapping(map: Map) {
         ItemNumber <- map["ItemNumber"]
         BulletinNumber <- map["BulletinNumber"]
         ReplacementBulletinNumber <- map["ReplacementBulletinNumber"]

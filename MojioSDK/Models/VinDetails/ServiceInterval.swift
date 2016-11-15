@@ -9,20 +9,20 @@
 import UIKit
 import ObjectMapper
 
-public class ServiceInterval: Mappable {
+open class ServiceInterval: Mappable {
     
-    public dynamic var OperatingParameter: String? = nil
-    public dynamic var OperatingParameterNotes: String? = nil
-    public dynamic var IntervalType: String? = nil
-    public dynamic var Value: Float = 0
-    public dynamic var Units: String? = nil
-    public dynamic var InitalValue: Float = 0
+    open dynamic var OperatingParameter: String? = nil
+    open dynamic var OperatingParameterNotes: String? = nil
+    open dynamic var IntervalType: String? = nil
+    open dynamic var Value: Float = 0
+    open dynamic var Units: String? = nil
+    open dynamic var InitalValue: Float = 0
 
-    public required convenience init?(_ map: Map) {
+    public required convenience init?(map: Map) {
         self.init()
     }
     
-    public func mapping(map: Map) {
+    open func mapping(map: Map) {
         OperatingParameter <- map["OperatingParameter"]
         OperatingParameterNotes <- map["OperatingParameterNotes"]
         IntervalType <- map["IntervalType"]

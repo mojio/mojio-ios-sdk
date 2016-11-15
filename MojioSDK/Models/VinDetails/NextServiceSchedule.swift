@@ -9,18 +9,18 @@
 import UIKit
 import ObjectMapper
 
-public class NextServiceSchedule: Mappable {
+open class NextServiceSchedule: Mappable {
 
-    public dynamic var TimeStamp : String? = nil
-    public dynamic var Odometer : Float = 0
-    public var AgeInMonths : Int? = nil
-    public dynamic var TimeUnits : String? = nil
-    public dynamic var TimeValue : Float = 0
-    public dynamic var DistanceUnits : String? = nil
-    public dynamic var DistanceValue : Float = 0
-    public var Services : [PlatformServiceSchedule] = []
+    open dynamic var TimeStamp : String? = nil
+    open dynamic var Odometer : Float = 0
+    open var AgeInMonths : Int? = nil
+    open dynamic var TimeUnits : String? = nil
+    open dynamic var TimeValue : Float = 0
+    open dynamic var DistanceUnits : String? = nil
+    open dynamic var DistanceValue : Float = 0
+    open var Services : [PlatformServiceSchedule] = []
     
-    public required convenience init?(_ map: Map) {
+    public required convenience init?(map: Map) {
         self.init();
     }
     
@@ -28,7 +28,7 @@ public class NextServiceSchedule: Mappable {
         
     }
     
-    public func mapping(map: Map) {
+    open func mapping(map: Map) {
         
         TimeStamp <- map["TimeStamp"]
         Odometer <- map["Odometer"]

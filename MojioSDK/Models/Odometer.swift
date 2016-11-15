@@ -10,28 +10,28 @@ import UIKit
 import ObjectMapper
 
 // Units in DistanceUnits
-public class Odometer: DeviceMeasurement {
+open class Odometer: DeviceMeasurement {
     
-    public dynamic var RolloverValue : Float = 0
+    open dynamic var RolloverValue : Float = 0
     
-    public required convenience init?(_ map: Map) {
+    public required convenience init?(map: Map) {
         self.init()
     }
     
-    public func jsonDict () -> NSDictionary {
+    open func jsonDict () -> NSDictionary {
         let dictionary : NSMutableDictionary = NSMutableDictionary()
         
         if self.Unit != nil {
-            dictionary.setObject(self.Unit!, forKey: "Unit")
+            dictionary.setObject(self.Unit!, forKey: "Unit" as NSCopying)
         }
         
-        dictionary.setObject(self.Value, forKey: "Value")
+        dictionary.setObject(self.Value, forKey: "Value" as NSCopying)
         
         return dictionary
     }
     
-    public override func mapping(map: Map) {
-        super.mapping(map)
+    open override func mapping(map: Map) {
+        super.mapping(map: map)
 
         RolloverValue <- map["RolloverValue"]
     }

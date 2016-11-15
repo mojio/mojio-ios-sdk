@@ -9,16 +9,16 @@
 import UIKit
 import ObjectMapper
 
-public class Group: Mappable {
-    public dynamic var Name : String? = nil
-    public dynamic var Description : String? = nil
-    public var Users : [User] = []
-    public var Tags : [String] = []
-    public dynamic var Id : String? = nil
-    public dynamic var CreatedOn : String? = nil
-    public dynamic var LastModified : String? = nil
+open class Group: Mappable {
+    open dynamic var Name : String? = nil
+    open dynamic var Description : String? = nil
+    open var Users : [User] = []
+    open var Tags : [String] = []
+    open dynamic var Id : String? = nil
+    open dynamic var CreatedOn : String? = nil
+    open dynamic var LastModified : String? = nil
     
-    public required convenience init?(_ map: Map) {
+    public required convenience init?(map: Map) {
         self.init()
     }
     
@@ -26,29 +26,29 @@ public class Group: Mappable {
         
     }
 
-    public static func primaryKey() -> String? {
+    open static func primaryKey() -> String? {
         return "Id"
     }
     
-    public func json () -> String? {
+    open func json () -> String? {
         let dictionary : NSMutableDictionary = NSMutableDictionary()
         
         if self.Name != nil {
-            dictionary.setObject(self.Name!, forKey: "Name")
+            dictionary.setObject(self.Name!, forKey: "Name" as NSCopying)
         }
         if self.Description != nil {
-            dictionary.setObject(self.Description!, forKey: "Description")
+            dictionary.setObject(self.Description!, forKey: "Description" as NSCopying)
         }
         if self.Users.count > 0 {
-            dictionary.setObject(self.Users, forKey: "Users")
+            dictionary.setObject(self.Users, forKey: "Users" as NSCopying)
         }
         
-        let data = try! NSJSONSerialization.dataWithJSONObject(dictionary, options:  NSJSONWritingOptions.PrettyPrinted)
-        return NSString(data: data, encoding: NSUTF8StringEncoding)! as String
+        let data = try! JSONSerialization.data(withJSONObject: dictionary, options:  JSONSerialization.WritingOptions.prettyPrinted)
+        return NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
 
     }
     
-    public func mapping(map: Map) {
+    open func mapping(map: Map) {
         
         var users = Array<User>()
         users <- map["Users"]

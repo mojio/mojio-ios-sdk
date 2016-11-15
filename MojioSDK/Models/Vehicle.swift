@@ -9,68 +9,68 @@
 import UIKit
 import ObjectMapper
 
-public class Vehicle: Mappable {
+open class Vehicle: Mappable {
     
-    public dynamic var Name : String? = nil
-    public dynamic var LicensePlate : String? = nil
-    public dynamic var VIN : String? = nil
-    public dynamic var DetectedVIN : String? = nil
-    public dynamic var OverrideVIN : String? = nil
-    public dynamic var CurrentTrip : String? = nil
-    public dynamic var MojioId : String? = nil
-    public var VehicleImage : Image? = nil
-    public var MilStatus : Bool = false
-    public dynamic var LastContactTime : String? = nil
-    public var DiagnosticCodes : [DiagnosticCode] = []
-    public var VehicleAccelerometer : Accelerometer? = nil
-    public var VehicleAcceleration : Acceleration? = nil
-    public var Deceleration : Acceleration? = nil
-    public var VehicleSpeed : Speed? = nil
-    public var VehicleOdometer : Odometer? = nil
-    public var VehicleRPM : RPM? = nil
-    public var VehicleFuelEfficiency : FuelEfficiency? = nil
+    open dynamic var Name : String? = nil
+    open dynamic var LicensePlate : String? = nil
+    open dynamic var VIN : String? = nil
+    open dynamic var DetectedVIN : String? = nil
+    open dynamic var OverrideVIN : String? = nil
+    open dynamic var CurrentTrip : String? = nil
+    open dynamic var MojioId : String? = nil
+    open var VehicleImage : Image? = nil
+    open var MilStatus : Bool = false
+    open dynamic var LastContactTime : String? = nil
+    open var DiagnosticCodes : [DiagnosticCode] = []
+    open var VehicleAccelerometer : Accelerometer? = nil
+    open var VehicleAcceleration : Acceleration? = nil
+    open var Deceleration : Acceleration? = nil
+    open var VehicleSpeed : Speed? = nil
+    open var VehicleOdometer : Odometer? = nil
+    open var VehicleRPM : RPM? = nil
+    open var VehicleFuelEfficiency : FuelEfficiency? = nil
     
     // FuelEfficiencyCalculationMethod
-    public dynamic var FuelEfficiencyCalculationMethod : String? = nil
-    public var VehicleFuelLevel : FuelLevel? = nil
-    public var VehicleFuelVolume : FuelVolume? = nil
+    open dynamic var FuelEfficiencyCalculationMethod : String? = nil
+    open var VehicleFuelLevel : FuelLevel? = nil
+    open var VehicleFuelVolume : FuelVolume? = nil
     
     // FuelType
-    public dynamic var FuelType : String? = nil
-    public dynamic var GatewayTime : String? = nil
-    public var VehicleHarshEventState : HarshEvent? = nil
-    public var VehicleIdleState : IdleState? = nil
-    public var VehicleIgnitionState : BooleanState? = nil
-    public var VehicleBattery : Battery? = nil
-    public var VehicleHeading : Heading? = nil
-    public var VehicleLocation : Location? = nil
-    public var VehicleAccidentState : BooleanState? = nil
-    public var VehicleVinDetails : VinDetails? = nil
-    public var VehicleTowState : BooleanState? = nil
-    public var VehicleParkedState : BooleanState? = nil
-    public var Tags : [String] = []
-    public var OwnerGroups : [String] = []
-    public dynamic var Id : String? = nil
-    public dynamic var CreatedOn : String? = nil
-    public dynamic var LastModified : String? = nil
+    open dynamic var FuelType : String? = nil
+    open dynamic var GatewayTime : String? = nil
+    open var VehicleHarshEventState : HarshEvent? = nil
+    open var VehicleIdleState : IdleState? = nil
+    open var VehicleIgnitionState : BooleanState? = nil
+    open var VehicleBattery : Battery? = nil
+    open var VehicleHeading : Heading? = nil
+    open var VehicleLocation : Location? = nil
+    open var VehicleAccidentState : BooleanState? = nil
+    open var VehicleVinDetails : VinDetails? = nil
+    open var VehicleTowState : BooleanState? = nil
+    open var VehicleParkedState : BooleanState? = nil
+    open var Tags : [String] = []
+    open var OwnerGroups : [String] = []
+    open dynamic var Id : String? = nil
+    open dynamic var CreatedOn : String? = nil
+    open dynamic var LastModified : String? = nil
     
-    public var Deleted : Bool = false
+    open var Deleted : Bool = false
     
-    public required convenience init?(_ map: Map) {
+    public required convenience init?(map: Map) {
         self.init()
     }
     
     public required init() {}
     
-    public static func primaryKey() -> String? {
+    open static func primaryKey() -> String? {
         return "Id"
     }
     
-    public func jsonVINDict () -> NSDictionary {
+    open func jsonVINDict () -> NSDictionary {
         let dictionary : NSMutableDictionary = NSMutableDictionary()
 
         if self.VIN != nil {
-            dictionary.setObject(self.VIN!, forKey: "VIN")
+            dictionary.setObject(self.VIN!, forKey: "VIN" as NSCopying)
         }
 
         if let detectedVin = self.DetectedVIN {
@@ -83,25 +83,25 @@ public class Vehicle: Mappable {
         return dictionary
     }
     
-    public func jsonDict () -> NSDictionary {
+    open func jsonDict () -> NSDictionary {
         let dictionary : NSMutableDictionary = NSMutableDictionary()
         
         if self.Name != nil {
-            dictionary.setObject(self.Name!, forKey: "Name")
+            dictionary.setObject(self.Name!, forKey: "Name" as NSCopying)
         }
         if self.LicensePlate != nil {
-            dictionary.setObject(self.LicensePlate!, forKey: "LicensePlate")
+            dictionary.setObject(self.LicensePlate!, forKey: "LicensePlate" as NSCopying)
         }
 
         if self.VehicleOdometer != nil {
             let odo = self.VehicleOdometer!.jsonDict()
-            dictionary.setObject(odo, forKey: "Odometer")
+            dictionary.setObject(odo, forKey: "Odometer" as NSCopying)
         }
         
         return dictionary
     }
     
-    public func mapping(map: Map) {
+    open func mapping(map: Map) {
         
         Name <- map["Name"]
         LicensePlate <- map["LicensePlate"]

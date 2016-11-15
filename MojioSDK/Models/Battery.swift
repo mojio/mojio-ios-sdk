@@ -10,21 +10,21 @@ import UIKit
 import ObjectMapper
 
 // Units in BatteryVoltageUnits
-public class Battery : DeviceMeasurement {
+open class Battery : DeviceMeasurement {
     
-    public dynamic var Connected : Bool = false
+    open dynamic var Connected : Bool = false
     
     // RiskSeverity
-    public dynamic var RiskSeverity : String? = nil
-    public var LowVoltageDuration : TimePeriod? = nil
-    public var HighVoltageDuration : TimePeriod? = nil
+    open dynamic var RiskSeverity : String? = nil
+    open var LowVoltageDuration : TimePeriod? = nil
+    open var HighVoltageDuration : TimePeriod? = nil
     
-    public required convenience init?(_ map: Map) {
+    public required convenience init?(map: Map) {
         self.init()
     }
     
-    public override func mapping(map: Map) {
-        super.mapping(map)
+    open override func mapping(map: Map) {
+        super.mapping(map: map)
 
         Connected <- map["Connected"]
         RiskSeverity <- map["RiskSeverity"]

@@ -6,7 +6,7 @@
 //
 //
 
-public struct MojioError : ErrorType {
+public struct MojioError : Error {
     public var dictionary : NSDictionary?
     public var message : String?
     public var code : String?
@@ -19,7 +19,7 @@ public struct MojioError : ErrorType {
     }
 }
 
-public struct AuthDisplayError : ErrorType {
+public struct AuthDisplayError : Error {
     public var message1 : String?
     public var message2 : String?
     public var message3 : String?

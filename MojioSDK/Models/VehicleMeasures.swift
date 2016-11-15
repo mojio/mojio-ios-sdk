@@ -9,50 +9,50 @@
 import UIKit
 import ObjectMapper
 
-public class VehicleMeasures: Mappable {
+open class VehicleMeasures: Mappable {
     
-    public var VehicleAcceleration : Acceleration? = nil
-    public var VehicleAccelerometer : Accelerometer? = nil
-    public var AccidentState : BooleanState? = nil
-    public var VehicleBattery : Battery? = nil
-    public dynamic var CurrentTrip : String? = nil
-    public var Deceleration : Acceleration? = nil
-    public var DiagnosticCodes : [DiagnosticCode] = []
-    public var VehicleFuelEfficiency : FuelEfficiency? = nil
+    open var VehicleAcceleration : Acceleration? = nil
+    open var VehicleAccelerometer : Accelerometer? = nil
+    open var AccidentState : BooleanState? = nil
+    open var VehicleBattery : Battery? = nil
+    open dynamic var CurrentTrip : String? = nil
+    open var Deceleration : Acceleration? = nil
+    open var DiagnosticCodes : [DiagnosticCode] = []
+    open var VehicleFuelEfficiency : FuelEfficiency? = nil
     
     // FuelEfficiencyCalculationMethod
-    public dynamic var FuelEfficiencyCalculationMethod : String? = nil// ['Query', 'EngineFuelRate', 'MassAirFlow', 'Calculated', 'None'],
-    public var VehicleFuelLevel : FuelLevel? = nil
-    public var VehicleFuelVolume : FuelVolume? = nil
+    open dynamic var FuelEfficiencyCalculationMethod : String? = nil// ['Query', 'EngineFuelRate', 'MassAirFlow', 'Calculated', 'None'],
+    open var VehicleFuelLevel : FuelLevel? = nil
+    open var VehicleFuelVolume : FuelVolume? = nil
 
     // FuelType
-    public dynamic var FuelType : String? = nil
-    public dynamic var GatewayTime : String? = nil
-    public var HarshEventState : HarshEvent? = nil
-    public var VehicleHeading : Heading? = nil
-    public var VehicleIdleState : IdleState? = nil
-    public var IgnitionState : BooleanState? = nil
-    public var VehicleLocation : Location? = nil
-    public var MilStatus : Bool? = nil
-    public dynamic var MojioId : String? = nil
-    public var ParkedState : BooleanState? = nil
-    public var VehicleRPM : RPM? = nil
-    public var VehicleSpeed : Speed? = nil
-    public var TowState : BooleanState? = nil
-    public var VIN : String? = nil
-    public var VehicleVinDetails : VinDetails? = nil
-    public var VirtualOdometer : Odometer? = nil
-    public var VehicleOdometer : Odometer? = nil
-    public dynamic var Time : String? = nil
-    public var DisturbanceState : BooleanState? = nil
+    open dynamic var FuelType : String? = nil
+    open dynamic var GatewayTime : String? = nil
+    open var HarshEventState : HarshEvent? = nil
+    open var VehicleHeading : Heading? = nil
+    open var VehicleIdleState : IdleState? = nil
+    open var IgnitionState : BooleanState? = nil
+    open var VehicleLocation : Location? = nil
+    open var MilStatus : Bool? = nil
+    open dynamic var MojioId : String? = nil
+    open var ParkedState : BooleanState? = nil
+    open var VehicleRPM : RPM? = nil
+    open var VehicleSpeed : Speed? = nil
+    open var TowState : BooleanState? = nil
+    open var VIN : String? = nil
+    open var VehicleVinDetails : VinDetails? = nil
+    open var VirtualOdometer : Odometer? = nil
+    open var VehicleOdometer : Odometer? = nil
+    open dynamic var Time : String? = nil
+    open var DisturbanceState : BooleanState? = nil
     
-    public required convenience init?(_ map: Map) {
+    public required convenience init?(map: Map) {
         self.init()
     }
     
     public required init() {}
 
-    public func mapping(map: Map) {
+    open func mapping(map: Map) {
         VehicleAcceleration <- map["Acceleration"]
         VehicleAccelerometer <- map["Accelerometer"]
         AccidentState <- map["AccidentState"]

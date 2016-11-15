@@ -9,22 +9,22 @@
 import UIKit
 import ObjectMapper
 
-public class DiagnosticCode: Mappable {
+open class DiagnosticCode: Mappable {
     
-    public dynamic var Ignored : Bool = false
-    public dynamic var Code : String? = nil
-    public dynamic var Description : String? = nil
-    public dynamic var Timestamp : String? = nil
+    open dynamic var Ignored : Bool = false
+    open dynamic var Code : String? = nil
+    open dynamic var Description : String? = nil
+    open dynamic var Timestamp : String? = nil
     
     // RiskSeverity
-    public dynamic var Severity : String? = nil
-    public dynamic var Instructions : String? = nil
+    open dynamic var Severity : String? = nil
+    open dynamic var Instructions : String? = nil
     
     // Type
-    public dynamic var StateType : String? = nil
-    public dynamic var Type : String? = nil
+    open dynamic var StateType : String? = nil
+    open dynamic var DiagnosticCodeType : String? = nil
     
-    public required convenience init?(_ map: Map) {
+    public required convenience init?(map: Map) {
         self.init()
     }
     
@@ -32,14 +32,14 @@ public class DiagnosticCode: Mappable {
         
     }
     
-    public func jsonIgnoredDict () -> NSDictionary {
+    open func jsonIgnoredDict () -> NSDictionary {
         let dictionary : NSMutableDictionary = NSMutableDictionary()
         
-        dictionary.setObject(self.Ignored, forKey: "Ignored")
+        dictionary.setObject(self.Ignored, forKey: "Ignored" as NSCopying)
         return dictionary
     }
     
-    public func mapping(map: Map) {
+    open func mapping(map: Map) {
         Ignored <- map["Ignored"];
         Code <- map["Code"];
         Description <- map["Description"];
@@ -47,7 +47,7 @@ public class DiagnosticCode: Mappable {
         Severity <- map["Severity"];
         Instructions <- map["Instructions"];
         StateType <- map["StateType"];
-        Type <- map["Type"];
+        DiagnosticCodeType <- map["Type"];
     }
 
 }

@@ -10,23 +10,23 @@ import Foundation
 import ObjectMapper
 
 // Base Device Measurement
-public class DeviceMeasurement: Mappable {
+open class DeviceMeasurement: Mappable {
 
-    public dynamic var BaseUnit : String? = nil
-    public dynamic var BaseValue : Float = 0
+    open dynamic var BaseUnit : String? = nil
+    open dynamic var BaseValue : Float = 0
     
-    public dynamic var Unit : String? = nil
-    public dynamic var Value : Float = 0
+    open dynamic var Unit : String? = nil
+    open dynamic var Value : Float = 0
     
-    public dynamic var Timestamp : String? = nil
+    open dynamic var Timestamp : String? = nil
     
-    public required convenience init?(_ map: Map) {
+    public required convenience init?(map: Map) {
         self.init()
     }
     
     public required init() {}
     
-    public func mapping(map: Map) {
+    open func mapping(map: Map) {
         BaseUnit <- map["BaseUnit"]
         BaseValue <- map["BaseValue"]
         Unit <- map["Unit"]

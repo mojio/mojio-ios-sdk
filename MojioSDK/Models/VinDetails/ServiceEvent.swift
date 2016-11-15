@@ -9,16 +9,16 @@
 import UIKit
 import ObjectMapper
 
-public class ServiceEvent: Mappable {
+open class ServiceEvent: Mappable {
     
-    public dynamic var ComputerCode: String? = nil
-    public dynamic var Event: String? = nil
+    open dynamic var ComputerCode: String? = nil
+    open dynamic var Event: String? = nil
     
-    public required convenience init?(_ map: Map) {
+    public required convenience init?(map: Map) {
         self.init()
     }
     
-    public func mapping(map: Map) {
+    open func mapping(map: Map) {
         ComputerCode <- map["ComputerCode"]
         Event <- map["Event"]
     }

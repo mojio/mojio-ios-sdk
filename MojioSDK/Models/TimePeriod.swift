@@ -10,9 +10,9 @@ import UIKit
 import ObjectMapper
 
 // Units in TimePeriodUnits
-public class TimePeriod: DeviceMeasurement {
+open class TimePeriod: DeviceMeasurement {
     
-    public required convenience init?(_ map: Map) {
+    public required convenience init?(map: Map) {
         self.init()
     }
 }

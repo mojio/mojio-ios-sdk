@@ -11,12 +11,11 @@ import SwiftWebSocket
 import SwiftyJSON
 
 
-public class WSClient : RestClient {
+open class WSClient : RestClient {
     
-    public func watch(next: ((AnyObject) -> Void), completion: (() -> Void), failure: ((ErrorType) -> Void), file: String = #file) -> WebSocket {
-        
-        
-        let request = NSMutableURLRequest(URL: NSURL(string:super.pushUrl!)!)
+    open func watch(_ next: @escaping ((Any) -> Void), completion: @escaping (() -> Void), failure: @escaping ((Error) -> Void), file: String = #file) -> WebSocket {
+
+        var request = URLRequest(url: URL(string:super.pushUrl!)!)
         if let accessToken : String = super.accessToken() {
             request.addValue("Bearer " + accessToken, forHTTPHeaderField: "Authorization")
 
@@ -39,10 +38,10 @@ public class WSClient : RestClient {
         
         ws.event.message = { message in
             if let text = message as? String {
-                if let data = text.dataUsingEncoding(NSUTF8StringEncoding) {
-                    if let dict = try! NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions()) as? NSDictionary {
+                if let data = text.data(using: String.Encoding.utf8) {
+                    if let dict = try! JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions()) as? [String : Any] {
                         if let obj = super.parseDict(dict) {
-                            next(obj)
+                            next(obj as Any)
                         }
                     }
                 }
