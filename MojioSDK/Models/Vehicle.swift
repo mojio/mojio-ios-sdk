@@ -27,6 +27,7 @@ public class Vehicle: Mappable {
     public var Deceleration : Acceleration? = nil
     public var VehicleSpeed : Speed? = nil
     public var VehicleOdometer : Odometer? = nil
+    public var VirtualOdometer : Odometer? = nil
     public var VehicleRPM : RPM? = nil
     public var VehicleFuelEfficiency : FuelEfficiency? = nil
     
@@ -119,6 +120,7 @@ public class Vehicle: Mappable {
         Deceleration <- map["Deceleration"]
         VehicleSpeed <- map["Speed"]
         VehicleOdometer <- map["Odometer"]
+        VirtualOdometer <- map["VirtualOdometer"]
         VehicleRPM <- map["RPM"]
         VehicleFuelEfficiency <- map["FuelEfficiency"]
         FuelEfficiencyCalculationMethod <- map["FuelEfficiencyCalculationMethod"]
