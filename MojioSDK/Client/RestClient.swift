@@ -44,6 +44,7 @@ public class RestClientEndpoints : NSObject {
     public static let Aggregates : String = "aggregates/"
     public static let Statistics : String = "statistics/"
     public static let DiagnosticCodes : String = "diagnosticcodes/"
+    public static let Polyline : String = "polyline/"
     
     // Storage
     // Parameters: Type, Id, Key
@@ -338,6 +339,13 @@ public class RestClient: NSObject {
         
         self.requestEntity = RestClientEndpoints.DiagnosticCodes
         self.requestUrl = self.requestUrl! + self.requestEntity! + (code != nil ? code! + "/" : "")
+        
+        return self
+    }
+    
+    public func polyline() -> Self {
+        self.requestEntity = RestClientEndpoints.Polyline
+        self.requestUrl = self.requestUrl! + self.requestEntity!
         
         return self
     }
@@ -642,6 +650,10 @@ public class RestClient: NSObject {
 
         case RestClientEndpoints.Statistics:
             let model = Mapper<VehicleStatistics>().map(dict)
+            return model!
+            
+        case RestClientEndpoints.Polyline:
+            let model = Mapper<TripPolyline>().map(dict)
             return model!
             
         default:
