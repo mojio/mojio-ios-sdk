@@ -2,20 +2,20 @@ PODS:
   - Alamofire (3.5.0)
   - KeychainSwift (3.0.16)
   - ObjectMapper (1.5.0)
-  - OHHTTPStubs (5.2.1):
-    - OHHTTPStubs/Default (= 5.2.1)
-  - OHHTTPStubs/Core (5.2.1)
-  - OHHTTPStubs/Default (5.2.1):
+  - OHHTTPStubs (5.2.2):
+    - OHHTTPStubs/Default (= 5.2.2)
+  - OHHTTPStubs/Core (5.2.2)
+  - OHHTTPStubs/Default (5.2.2):
     - OHHTTPStubs/Core
     - OHHTTPStubs/JSON
     - OHHTTPStubs/NSURLSession
     - OHHTTPStubs/OHPathHelpers
-  - OHHTTPStubs/JSON (5.2.1):
+  - OHHTTPStubs/JSON (5.2.2):
     - OHHTTPStubs/Core
-  - OHHTTPStubs/NSURLSession (5.2.1):
+  - OHHTTPStubs/NSURLSession (5.2.2):
     - OHHTTPStubs/Core
-  - OHHTTPStubs/OHPathHelpers (5.2.1)
-  - OHHTTPStubs/Swift (5.2.1):
+  - OHHTTPStubs/OHPathHelpers (5.2.2)
+  - OHHTTPStubs/Swift (5.2.2):
     - OHHTTPStubs/Core
   - SwiftWebSocket (2.6.4)
   - SwiftyJSON (2.3.2)
@@ -43,10 +43,10 @@ SPEC CHECKSUMS:
   Alamofire: b70a7352335f8ea5babd0a923eb7e8eacc67b877
   KeychainSwift: a5bb85cd498ce2217b55e055ec59e9268d83384c
   ObjectMapper: 386645adca9d9d23b95eda43090b09d66444cf14
-  OHHTTPStubs: 3a42f25c00563b71355ac73112ba2324e9e6cef4
+  OHHTTPStubs: 34d9d0994e64fcf8552dbfade5ce82ada913ee31
   SwiftWebSocket: fdb5b4393cede304d44befbaeb0c8ef14c28d3bb
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
 PODFILE CHECKSUM: 83c6fead4560d0f78473b41ec26a0f0166fc7e10
 
-COCOAPODS: 1.1.0.rc.3
+COCOAPODS: 1.1.1
