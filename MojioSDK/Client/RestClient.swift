@@ -67,7 +67,9 @@ public class RestClient: NSObject {
     private dynamic var nextUrl : String? = nil
     
     private var sinceBeforeFormatter = NSDateFormatter()
-    private static let SinceBeforeDateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+    private static let SinceBeforeDateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+    private static let SinceBeforeTimezone = NSTimeZone(abbreviation: "UTC");
+
     
     public override init() {
         self.requestUrl = ClientEnvironment.SharedInstance.getApiEndpoint()
@@ -75,6 +77,7 @@ public class RestClient: NSObject {
         self.pushUrl = ClientEnvironment.SharedInstance.getPushWSEndpoint()
 
         self.sinceBeforeFormatter.dateFormat = RestClient.SinceBeforeDateFormat
+        self.sinceBeforeFormatter.timeZone = RestClient.SinceBeforeTimezone
 
         // Set Auth Token as the header
     }
@@ -156,9 +159,9 @@ public class RestClient: NSObject {
         return self
     }
     
-    public func states() -> Self {
+    public func states(time: NSDate? = nil) -> Self {
         self.requestEntity = RestClientEndpoints.States
-        self.requestUrl = self.requestUrl! + self.requestEntity!
+        self.requestUrl = self.requestUrl! + self.requestEntity! + (time != nil ? self.sinceBeforeFormatter.stringFromDate(time!) + "/" : "")
         
         return self
     }
