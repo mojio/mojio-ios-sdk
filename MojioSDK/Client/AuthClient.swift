@@ -145,6 +145,10 @@ public class AuthClient: NSObject, AuthControllerDelegate {
     public var loginCompletion: ((authToken: AuthToken) -> Void)? = nil
     public var loginFailure: ((response: AnyObject?) -> Void)? = nil
     public var authController: AuthViewController?
+    
+    // Default to global concurrent queue with default priority
+    public static var defaultDispatchQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
+    private var dispatchQueue = AuthClient.defaultDispatchQueue
         
     public init(clientId : String, clientSecretKey : String, clientRedirectURI : String) {
         self.clientId = clientId
@@ -153,6 +157,10 @@ public class AuthClient: NSObject, AuthControllerDelegate {
         
         // TODO: make this accounts endpoint
         self.loginURL = NSURL(string: AuthClient.getAuthorizeUrl(self.clientRedirectURL, clientId: self.clientId))
+    }
+    
+    public func dispatch(queue: dispatch_queue_t) {
+        self.dispatchQueue = queue
     }
     
     public func loginViewController(completion : ((authToken: AuthToken) -> Void)?, failure: ((response: AnyObject?) -> Void)?) {
@@ -275,7 +283,7 @@ public class AuthClient: NSObject, AuthControllerDelegate {
         // The token endpoint is used for the resource owner flow
         let loginEndpoint = AuthClient.getTokenUrl()
         
-        Alamofire.request(.POST, loginEndpoint, parameters: ["grant_type" : "password", "password" : password, "username" : username, "client_id" : self.clientId, "client_secret" : self.clientSecretKey], encoding: .URL, headers: ["Accept" : "application/json", "Authorization" : self.generateBasicAuthHeader()]).responseJSON{ response in
+        Alamofire.request(.POST, loginEndpoint, parameters: ["grant_type" : "password", "password" : password, "username" : username, "client_id" : self.clientId, "client_secret" : self.clientSecretKey], encoding: .URL, headers: ["Accept" : "application/json", "Authorization" : self.generateBasicAuthHeader()]).responseJSON(queue: self.dispatchQueue, options: .AllowFragments, completionHandler: { response in
             
             if response.response?.statusCode == 200 {
                 
@@ -304,7 +312,7 @@ public class AuthClient: NSObject, AuthControllerDelegate {
             else {
                 failure(response: response.result.value as? NSDictionary)
             }
-        }
+        })
     }
     
     public func refreshAuthToken(completion: (authToken: AuthToken) -> Void, failure : (response: NSDictionary?) -> Void) {
@@ -317,7 +325,7 @@ public class AuthClient: NSObject, AuthControllerDelegate {
             return
         }
         
-        Alamofire.request(.POST, authorizeEndpoint, parameters: ["grant_type" : "refresh_token", "refresh_token" : refreshToken, "client_id" : self.clientId, "client_secret" : self.clientSecretKey, "redirect_uri" : self.clientRedirectURL], encoding: ParameterEncoding.URL).responseJSON(completionHandler: {response in
+        Alamofire.request(.POST, authorizeEndpoint, parameters: ["grant_type" : "refresh_token", "refresh_token" : refreshToken, "client_id" : self.clientId, "client_secret" : self.clientSecretKey, "redirect_uri" : self.clientRedirectURL], encoding: ParameterEncoding.URL).responseJSON(queue: self.dispatchQueue, options: .AllowFragments, completionHandler: {response in
             
             dispatch_async(dispatch_get_main_queue(), {
                 if response.response?.statusCode == 200 {
@@ -364,7 +372,7 @@ public class AuthClient: NSObject, AuthControllerDelegate {
         let headers = ["Authorization" : self.generateBasicAuthHeader(), "Content-Type" : "application/json", "Accept" : "application/json"]
 
         // Step 1: Create an account for the user
-        Alamofire.request(.POST, registerEndpoint, parameters: ["PhoneNumber" : mobile, "Email" : email, "Password" : password, "ConfirmPassword" : password], encoding: .JSON, headers: headers).responseJSON { response in
+        Alamofire.request(.POST, registerEndpoint, parameters: ["PhoneNumber" : mobile, "Email" : email, "Password" : password, "ConfirmPassword" : password], encoding: .JSON, headers: headers).responseJSON(queue: self.dispatchQueue, options: .AllowFragments, completionHandler: {response in
 
             if response.response?.statusCode == 200 {
                 
@@ -381,7 +389,7 @@ public class AuthClient: NSObject, AuthControllerDelegate {
             else {
                 failure(response: response.result.value as? NSDictionary)
             }
-        }
+        })
     }
     
     // Verify Phone
@@ -389,7 +397,7 @@ public class AuthClient: NSObject, AuthControllerDelegate {
         
         let verifyEndpoint = AuthClient.getTokenUrl()
         
-        Alamofire.request(.POST, verifyEndpoint, parameters: ["client_id" : self.clientId, "client_secret" : self.clientSecretKey, "grant_type" : "phone", "phone_number" : mobile, "pin" : pin], encoding: .URL, headers: ["Accept" : "application/json", "Authorization" : self.generateBasicAuthHeader()]).responseJSON { response in
+        Alamofire.request(.POST, verifyEndpoint, parameters: ["client_id" : self.clientId, "client_secret" : self.clientSecretKey, "grant_type" : "phone", "phone_number" : mobile, "pin" : pin], encoding: .URL, headers: ["Accept" : "application/json", "Authorization" : self.generateBasicAuthHeader()]).responseJSON(queue: self.dispatchQueue, options: .AllowFragments, completionHandler: {response in
             
             if response.response?.statusCode == 200 {
                 
@@ -418,7 +426,7 @@ public class AuthClient: NSObject, AuthControllerDelegate {
             else {
                 failure(response: response.result.value as? NSDictionary)
             }
-        }
+        })
     }
     
     // Resend Verification Pin
@@ -428,7 +436,7 @@ public class AuthClient: NSObject, AuthControllerDelegate {
         
         // ["PhoneNumber" : mobile]
         
-        Alamofire.request(.POST, verifyEndpoint, parameters: ["PhoneNumber" : mobile, "grant_type" : "phone"], encoding: .JSON, headers: ["Accept" : "application/json", "Authorization" : self.generateBasicAuthHeader()]).responseJSON { response in
+        Alamofire.request(.POST, verifyEndpoint, parameters: ["PhoneNumber" : mobile, "grant_type" : "phone"], encoding: .JSON, headers: ["Accept" : "application/json", "Authorization" : self.generateBasicAuthHeader()]).responseJSON(queue: self.dispatchQueue, options: .AllowFragments, completionHandler: {response in
             
             if response.response?.statusCode == 200 {
                 completion?()
@@ -436,7 +444,7 @@ public class AuthClient: NSObject, AuthControllerDelegate {
             else {
                 failure?()
             }
-        }
+        })
     }
     
     // Forgot/Reset Password
@@ -444,7 +452,7 @@ public class AuthClient: NSObject, AuthControllerDelegate {
         
         let forgotEndpoint = ClientEnvironment.SharedInstance.getAccountsEndpoint() + AccountClientEndpoints.Forgot
         
-        Alamofire.request(.POST, forgotEndpoint, parameters: ["UserNameEmailOrPhone" : emailOrPhoneNumber], encoding: .JSON, headers: ["Accept" : "application/json", "Authorization" : self.generateBasicAuthHeader()]).responseJSON(completionHandler: { response in
+        Alamofire.request(.POST, forgotEndpoint, parameters: ["UserNameEmailOrPhone" : emailOrPhoneNumber], encoding: .JSON, headers: ["Accept" : "application/json", "Authorization" : self.generateBasicAuthHeader()]).responseJSON(queue: self.dispatchQueue, options: .AllowFragments, completionHandler: {response in
 
             if response.response?.statusCode == 200 {
                 completion(response: response.result.value as? NSDictionary)
@@ -459,7 +467,7 @@ public class AuthClient: NSObject, AuthControllerDelegate {
         
         let resetEndpoint = ClientEnvironment.SharedInstance.getAccountsEndpoint() + AccountClientEndpoints.Reset
 
-        Alamofire.request(.POST, resetEndpoint, parameters: ["ResetToken" : resetToken, "Password" : password, "ConfirmPassword" : password], encoding: .JSON, headers: ["Accept" : "application/json", "Authorization" : self.generateBasicAuthHeader()]).responseJSON(completionHandler: { response in
+        Alamofire.request(.POST, resetEndpoint, parameters: ["ResetToken" : resetToken, "Password" : password, "ConfirmPassword" : password], encoding: .JSON, headers: ["Accept" : "application/json", "Authorization" : self.generateBasicAuthHeader()]).responseJSON(queue: self.dispatchQueue, options: .AllowFragments, completionHandler: {response in
 
             if response.response?.statusCode == 200 {
                 completion(response: response.result.value as? NSDictionary)
