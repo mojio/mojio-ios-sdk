@@ -69,7 +69,10 @@ public class RestClient: NSObject {
     private var sinceBeforeFormatter = NSDateFormatter()
     private static let SinceBeforeDateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
     private static let SinceBeforeTimezone = NSTimeZone(abbreviation: "UTC");
-
+    
+    // Default to global concurrent queue with default priority
+    public static var defaultDispatchQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
+    private var dispatchQueue = RestClient.defaultDispatchQueue
     
     public override init() {
         self.requestUrl = ClientEnvironment.SharedInstance.getApiEndpoint()
@@ -398,6 +401,10 @@ public class RestClient: NSObject {
         return self
     }
     
+    public func dispatch(queue: dispatch_queue_t) {
+        self.dispatchQueue = queue
+    }
+    
     /*
      Don't need this helper function given default values in the other query function
      public func query(top : String?, skip : String?, filter : String?, select : String?, orderby : String?) -> Self {
@@ -413,9 +420,9 @@ public class RestClient: NSObject {
             headers["Authorization"] = "Bearer " + accessToken
         }
 
-        let request = Alamofire.request(self.requestMethod!, self.requestUrl!, parameters: self.requestParams, encoding: .URL, headers: headers).responseJSON { response in
+        let request = Alamofire.request(self.requestMethod!, self.requestUrl!, parameters: self.requestParams, encoding: .URL, headers: headers).responseJSON(queue: self.dispatchQueue, options: .AllowFragments, completionHandler: {response in
             self.handleResponse(response, completion: completion, failure: failure)
-        }
+        })
         
         #if DEBUG
             print(request.debugDescription)
@@ -448,7 +455,7 @@ public class RestClient: NSObject {
             print(request.debugDescription)
         #endif
         
-        request.responseJSON(completionHandler: { response in
+        request.responseJSON(queue: self.dispatchQueue, options: .AllowFragments, completionHandler: {response in
             self.handleResponse(response, completion: completion, failure: failure)
         })
     }
@@ -475,7 +482,7 @@ public class RestClient: NSObject {
             print(request.debugDescription)
         #endif
         
-        request.responseJSON(completionHandler: { response in
+        request.responseJSON(queue: self.dispatchQueue, options: .AllowFragments, completionHandler: { response in
             self.handleResponse(response, completion: completion, failure: failure)
         })
     }
@@ -489,9 +496,9 @@ public class RestClient: NSObject {
             headers["Authorization"] = "Bearer " + accessToken
         }
         
-        Alamofire.request(self.requestMethod!, self.requestUrl!, parameters: parameters, encoding: .URL, headers: headers).responseJSON { response in
+        Alamofire.request(self.requestMethod!, self.requestUrl!, parameters: parameters, encoding: .URL, headers: headers).responseJSON(queue: self.dispatchQueue, options: .AllowFragments, completionHandler: { response in
             self.handleResponse(response, completion: completion, failure: failure)
-        }
+        })
     }
     
     func handleResponse(response: Response<AnyObject, NSError>, completion: (response :AnyObject) -> Void, failure: (error:AnyObject?) -> Void){
