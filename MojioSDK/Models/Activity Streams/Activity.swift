@@ -19,7 +19,6 @@ public class Activity : BaseActivity {
     public dynamic var Context : String? = nil
     
     public dynamic var Location : ActivityLocation? = nil
-    public dynamic var Origin : ActivityLocation? = nil
     public dynamic var Summary : Dictionary<String,String>? = nil
     public var Icon : Dictionary<String, AnyObject>? = nil
     
@@ -35,7 +34,6 @@ public class Activity : BaseActivity {
         super.mapping(map)
         Context <- map["Context"]
         Location <- map["Location"]
-        Origin <- map["Origin"]
         StartTime <- map["StartTime"]
         EndTime <- map["EndTime"]
         Duration <- map["Duration"]
