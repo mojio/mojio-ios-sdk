@@ -561,9 +561,9 @@ public class RestClient: NSObject {
         else {
             if let responseDict = response.result.value as? NSDictionary {
                 failure (error: responseDict)
-            }
-                
-            else {
+            } else if let responseError = response.result.error {
+                failure (error: responseError.userInfo)
+            } else {
                 failure(error: "Could not complete request")
             }
         }
