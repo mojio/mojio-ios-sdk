@@ -353,9 +353,7 @@ public class AuthClient: NSObject, AuthControllerDelegate {
                     }
                 }
                 else {
-                    // TODO: Return error?
-                    // var resultObj = String.init(data: response.data!, encoding: NSUTF8StringEncoding)
-                    failure(response: nil)
+                    failure(response: response.result.error?.userInfo)
                 }
             })
         })
