@@ -367,7 +367,14 @@ public class AuthClient: NSObject, AuthControllerDelegate {
                     }
                 }
                 else {
-                    failure(response: response.result.error?.userInfo)
+                    if let dictionary = response.result.value as? NSDictionary {
+                        failure(response: dictionary)
+                    } else if let error = response.result.error {
+                        failure(response: error.userInfo)
+                    } else {
+                        failure(response: nil)
+                    }
+
                 }
             })
         })
@@ -403,7 +410,13 @@ public class AuthClient: NSObject, AuthControllerDelegate {
                 
             }
             else {
-                failure(response: response.result.value as? NSDictionary)
+                if let dictionary = response.result.value as? NSDictionary {
+                    failure(response: dictionary)
+                } else if let error = response.result.error {
+                    failure(response: error.userInfo)
+                } else {
+                    failure(response: nil)
+                }
             }
         })
         
@@ -446,7 +459,13 @@ public class AuthClient: NSObject, AuthControllerDelegate {
                 }
             }
             else {
-                failure(response: response.result.value as? NSDictionary)
+                if let dictionary = response.result.value as? NSDictionary {
+                    failure(response: dictionary)
+                } else if let error = response.result.error {
+                    failure(response: error.userInfo)
+                } else {
+                    failure(response: nil)
+                }
             }
         })
         
@@ -490,7 +509,13 @@ public class AuthClient: NSObject, AuthControllerDelegate {
                 completion(response: response.result.value as? NSDictionary)
             }
             else {
-                failure(response: response.result.value as? NSDictionary)
+                if let dictionary = response.result.value as? NSDictionary {
+                    failure(response: dictionary)
+                } else if let error = response.result.error {
+                    failure(response: error.userInfo)
+                } else {
+                    failure(response: nil)
+                }
             }
         })
         
@@ -511,7 +536,13 @@ public class AuthClient: NSObject, AuthControllerDelegate {
                 completion(response: response.result.value as? NSDictionary)
             }
             else {
-                failure(response: response.result.value as? NSDictionary)
+                if let dictionary = response.result.value as? NSDictionary {
+                    failure(response: dictionary)
+                } else if let error = response.result.error {
+                    failure(response: error.userInfo)
+                } else {
+                    failure(response: nil)
+                }
             }
         })
         
