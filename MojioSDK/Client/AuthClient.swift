@@ -314,7 +314,13 @@ public class AuthClient: NSObject, AuthControllerDelegate {
                 }
             }
             else {
-                failure(response: response.result.value as? NSDictionary)
+                if let dictionary = response.result.value as? NSDictionary {
+                    failure(response: dictionary)
+                } else if let error = response.result.error {
+                    failure(response: error.userInfo)
+                } else {
+                    failure(response: nil)
+                }
             }
         })
         
