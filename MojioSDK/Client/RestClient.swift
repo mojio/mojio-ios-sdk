@@ -460,7 +460,7 @@ public class RestClient: NSObject {
         // Before every request, make sure access token exists
         self.requestHeaders.update(["Content-Type" : "application/json", "Accept" : "application/json"])
         
-        if let accessToken : String = self.accessToken()! {
+        if let accessToken = self.accessToken() {
             self.requestHeaders["Authorization"] = "Bearer " + accessToken
         }
         
@@ -491,7 +491,7 @@ public class RestClient: NSObject {
         // Before every request, make sure access token exists
         self.requestHeaders.update(["Content-Type" : "application/json", "Accept" : "application/json"])
         
-        if let accessToken : String = self.accessToken()! {
+        if let accessToken = self.accessToken() {
             self.requestHeaders["Authorization"] = "Bearer " + accessToken
         }
         
@@ -516,7 +516,7 @@ public class RestClient: NSObject {
     public func runEncodeUrl(parameters: [String:AnyObject], completion: (response : AnyObject) -> Void, failure: (error : AnyObject?) -> Void) {
         
         // Before every request, make sure access token exists
-        if let accessToken : String = self.accessToken()! {
+        if let accessToken = self.accessToken() {
             self.requestHeaders["Authorization"] = "Bearer " + accessToken
         }
         
