@@ -14,6 +14,30 @@ import KeychainSwift
 
 public class NextDone {}
 
+public class ClientHeaders: NSObject {
+    public static let defaultRequestHeaders: [String:String] = {
+        // Accept-Language HTTP Header; see https://tools.ietf.org/html/rfc7231#section-5.3.5
+        let acceptLanguage = NSLocale.preferredLanguages().prefix(6).enumerate().map { index, languageCode in
+            let quality = 1.0 - (Double(index) * 0.1)
+            
+            // Use language-region and language only combinations
+            let languageSplit = languageCode.componentsSeparatedByString("-")
+            if let language = languageSplit.first {
+                return "\(languageCode),\(language);q=\(quality)"
+            }
+            else if languageSplit.count > 0 {
+                return "\(languageCode);q=\(quality)"
+            }
+            else {
+                return ""
+            }
+            
+            }.joinWithSeparator(", ")
+        
+        return ["Accept-Language": acceptLanguage]
+    }()
+}
+
 public class RestClientEndpoints : NSObject {
     public static let Apps : String = "apps/"
     public static let Secret : String = "secret/"
@@ -63,6 +87,8 @@ public class RestClient: NSObject {
     public dynamic var requestEntity : String?
     public dynamic var requestEntityId: String?
     
+    public dynamic var requestHeaders: [String:String] = ClientHeaders.defaultRequestHeaders
+
     private dynamic var doNext : Bool = false
     private dynamic var nextUrl : String? = nil
     
@@ -414,13 +440,13 @@ public class RestClient: NSObject {
     public func run(completion: (response : AnyObject) -> Void, failure: (error : AnyObject?) -> Void) {
         
         // Before every request, make sure access token exists
-        var headers : [String:String] = ["Content-Type" : "application/json", "Accept" : "application/json"]
+        self.requestHeaders.update(["Content-Type" : "application/json", "Accept" : "application/json"])
         
         if let accessToken : String = self.accessToken() {
-            headers["Authorization"] = "Bearer " + accessToken
+            self.requestHeaders["Authorization"] = "Bearer " + accessToken
         }
 
-        let request = Alamofire.request(self.requestMethod!, self.requestUrl!, parameters: self.requestParams, encoding: .URL, headers: headers).responseJSON(queue: self.dispatchQueue, options: .AllowFragments, completionHandler: {response in
+        let request = Alamofire.request(self.requestMethod!, self.requestUrl!, parameters: self.requestParams, encoding: .URL, headers: self.requestHeaders).responseJSON(queue: self.dispatchQueue, options: .AllowFragments, completionHandler: {response in
             self.handleResponse(response, completion: completion, failure: failure)
         })
         
@@ -432,10 +458,10 @@ public class RestClient: NSObject {
     public func runStringBody(string: String, completion: (response : AnyObject) -> Void, failure: (error : AnyObject?) -> Void) {
         
         // Before every request, make sure access token exists
-        var headers : [String:String] = ["Content-Type" : "application/json", "Accept" : "application/json"]
+        self.requestHeaders.update(["Content-Type" : "application/json", "Accept" : "application/json"])
         
         if let accessToken : String = self.accessToken()! {
-            headers["Authorization"] = "Bearer " + accessToken
+            self.requestHeaders["Authorization"] = "Bearer " + accessToken
         }
         
         // Pass parameter or customer encoder is n
@@ -449,7 +475,7 @@ public class RestClient: NSObject {
             mutableRequest.HTTPBody = quotedString.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
             return (mutableRequest, nil)
             
-        }), headers: headers)
+        }), headers: self.requestHeaders)
         
         #if DEBUG
             print(request.debugDescription)
@@ -463,10 +489,10 @@ public class RestClient: NSObject {
     public func runEncodeJSON(jsonObject: AnyObject, completion: (response : AnyObject) -> Void, failure: (error : AnyObject?) -> Void) {
         
         // Before every request, make sure access token exists
-        var headers : [String:String] = ["Content-Type" : "application/json", "Accept" : "application/json"]
+        self.requestHeaders.update(["Content-Type" : "application/json", "Accept" : "application/json"])
         
         if let accessToken : String = self.accessToken()! {
-            headers["Authorization"] = "Bearer " + accessToken
+            self.requestHeaders["Authorization"] = "Bearer " + accessToken
         }
         
         // Pass parameter or customer encoder is n
@@ -476,7 +502,7 @@ public class RestClient: NSObject {
             let mutableURLRequest = convertible.URLRequest.mutableCopy() as! NSMutableURLRequest
             mutableURLRequest.HTTPBody = try! NSJSONSerialization.dataWithJSONObject(jsonObject, options: NSJSONWritingOptions())
             return (mutableURLRequest, nil)
-        }), headers: headers)
+        }), headers: self.requestHeaders)
         
         #if DEBUG
             print(request.debugDescription)
@@ -490,15 +516,17 @@ public class RestClient: NSObject {
     public func runEncodeUrl(parameters: [String:AnyObject], completion: (response : AnyObject) -> Void, failure: (error : AnyObject?) -> Void) {
         
         // Before every request, make sure access token exists
-        var headers : [String:String] = [:]
-        
         if let accessToken : String = self.accessToken()! {
-            headers["Authorization"] = "Bearer " + accessToken
+            self.requestHeaders["Authorization"] = "Bearer " + accessToken
         }
         
-        Alamofire.request(self.requestMethod!, self.requestUrl!, parameters: parameters, encoding: .URL, headers: headers).responseJSON(queue: self.dispatchQueue, options: .AllowFragments, completionHandler: { response in
+        let request = Alamofire.request(self.requestMethod!, self.requestUrl!, parameters: parameters, encoding: .URL, headers: self.requestHeaders).responseJSON(queue: self.dispatchQueue, options: .AllowFragments, completionHandler: { response in
             self.handleResponse(response, completion: completion, failure: failure)
         })
+        
+        #if DEBUG
+            debugPrint(request)
+        #endif
     }
     
     func handleResponse(response: Response<AnyObject, NSError>, completion: (response :AnyObject) -> Void, failure: (error:AnyObject?) -> Void){

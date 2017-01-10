@@ -146,6 +146,8 @@ public class AuthClient: NSObject, AuthControllerDelegate {
     public var loginFailure: ((response: AnyObject?) -> Void)? = nil
     public var authController: AuthViewController?
     
+    public dynamic var requestHeaders: [String:String] = ClientHeaders.defaultRequestHeaders
+    
     // Default to global concurrent queue with default priority
     public static var defaultDispatchQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
     private var dispatchQueue = AuthClient.defaultDispatchQueue
@@ -283,7 +285,9 @@ public class AuthClient: NSObject, AuthControllerDelegate {
         // The token endpoint is used for the resource owner flow
         let loginEndpoint = AuthClient.getTokenUrl()
         
-        Alamofire.request(.POST, loginEndpoint, parameters: ["grant_type" : "password", "password" : password, "username" : username, "client_id" : self.clientId, "client_secret" : self.clientSecretKey], encoding: .URL, headers: ["Accept" : "application/json", "Authorization" : self.generateBasicAuthHeader()]).responseJSON(queue: self.dispatchQueue, options: .AllowFragments, completionHandler: { response in
+        self.requestHeaders.update(["Accept" : "application/json", "Authorization" : self.generateBasicAuthHeader()])
+        
+        let request = Alamofire.request(.POST, loginEndpoint, parameters: ["grant_type" : "password", "password" : password, "username" : username, "client_id" : self.clientId, "client_secret" : self.clientSecretKey], encoding: .URL, headers: self.requestHeaders).responseJSON(queue: self.dispatchQueue, options: .AllowFragments, completionHandler: { response in
             
             if response.response?.statusCode == 200 {
                 
@@ -313,6 +317,10 @@ public class AuthClient: NSObject, AuthControllerDelegate {
                 failure(response: response.result.value as? NSDictionary)
             }
         })
+        
+        #if DEBUG
+            debugPrint(request)
+        #endif
     }
     
     public func refreshAuthToken(completion: (authToken: AuthToken) -> Void, failure : (response: NSDictionary?) -> Void) {
@@ -325,7 +333,7 @@ public class AuthClient: NSObject, AuthControllerDelegate {
             return
         }
         
-        Alamofire.request(.POST, authorizeEndpoint, parameters: ["grant_type" : "refresh_token", "refresh_token" : refreshToken, "client_id" : self.clientId, "client_secret" : self.clientSecretKey, "redirect_uri" : self.clientRedirectURL], encoding: ParameterEncoding.URL).responseJSON(queue: self.dispatchQueue, options: .AllowFragments, completionHandler: {response in
+        let request = Alamofire.request(.POST, authorizeEndpoint, parameters: ["grant_type" : "refresh_token", "refresh_token" : refreshToken, "client_id" : self.clientId, "client_secret" : self.clientSecretKey, "redirect_uri" : self.clientRedirectURL], encoding: ParameterEncoding.URL).responseJSON(queue: self.dispatchQueue, options: .AllowFragments, completionHandler: {response in
             
             dispatch_async(dispatch_get_main_queue(), {
                 if response.response?.statusCode == 200 {
@@ -357,6 +365,10 @@ public class AuthClient: NSObject, AuthControllerDelegate {
                 }
             })
         })
+        
+        #if DEBUG
+            debugPrint(request)
+        #endif
     }
     
     public func logout() {
@@ -367,10 +379,10 @@ public class AuthClient: NSObject, AuthControllerDelegate {
     public func register(mobile: String, email: String, password: String, completion: (authToken: AuthToken) -> Void, failure: (response : NSDictionary?) -> Void) {
         
         let registerEndpoint = ClientEnvironment.SharedInstance.getAccountsEndpoint() + AccountClientEndpoints.Register
-        let headers = ["Authorization" : self.generateBasicAuthHeader(), "Content-Type" : "application/json", "Accept" : "application/json"]
+        self.requestHeaders.update(["Authorization" : self.generateBasicAuthHeader(), "Content-Type" : "application/json", "Accept" : "application/json"])
 
         // Step 1: Create an account for the user
-        Alamofire.request(.POST, registerEndpoint, parameters: ["PhoneNumber" : mobile, "Email" : email, "Password" : password, "ConfirmPassword" : password], encoding: .JSON, headers: headers).responseJSON(queue: self.dispatchQueue, options: .AllowFragments, completionHandler: {response in
+        let request = Alamofire.request(.POST, registerEndpoint, parameters: ["PhoneNumber" : mobile, "Email" : email, "Password" : password, "ConfirmPassword" : password], encoding: .JSON, headers: self.requestHeaders).responseJSON(queue: self.dispatchQueue, options: .AllowFragments, completionHandler: {response in
 
             if response.response?.statusCode == 200 {
                 
@@ -388,6 +400,10 @@ public class AuthClient: NSObject, AuthControllerDelegate {
                 failure(response: response.result.value as? NSDictionary)
             }
         })
+        
+        #if DEBUG
+            debugPrint(request)
+        #endif
     }
     
     // Verify Phone
@@ -395,7 +411,9 @@ public class AuthClient: NSObject, AuthControllerDelegate {
         
         let verifyEndpoint = AuthClient.getTokenUrl()
         
-        Alamofire.request(.POST, verifyEndpoint, parameters: ["client_id" : self.clientId, "client_secret" : self.clientSecretKey, "grant_type" : "phone", "phone_number" : mobile, "pin" : pin], encoding: .URL, headers: ["Accept" : "application/json", "Authorization" : self.generateBasicAuthHeader()]).responseJSON(queue: self.dispatchQueue, options: .AllowFragments, completionHandler: {response in
+        self.requestHeaders.update(["Accept" : "application/json", "Authorization" : self.generateBasicAuthHeader()])
+        
+        let request = Alamofire.request(.POST, verifyEndpoint, parameters: ["client_id" : self.clientId, "client_secret" : self.clientSecretKey, "grant_type" : "phone", "phone_number" : mobile, "pin" : pin], encoding: .URL, headers: self.requestHeaders).responseJSON(queue: self.dispatchQueue, options: .AllowFragments, completionHandler: {response in
             
             if response.response?.statusCode == 200 {
                 
@@ -425,6 +443,10 @@ public class AuthClient: NSObject, AuthControllerDelegate {
                 failure(response: response.result.value as? NSDictionary)
             }
         })
+        
+        #if DEBUG
+            debugPrint(request)
+        #endif
     }
     
     // Resend Verification Pin
@@ -432,9 +454,9 @@ public class AuthClient: NSObject, AuthControllerDelegate {
         
         let verifyEndpoint = ClientEnvironment.SharedInstance.getAccountsEndpoint() + AccountClientEndpoints.ResendPin
         
-        // ["PhoneNumber" : mobile]
+        self.requestHeaders.update(["Accept" : "application/json", "Authorization" : self.generateBasicAuthHeader()])
         
-        Alamofire.request(.POST, verifyEndpoint, parameters: ["PhoneNumber" : mobile, "grant_type" : "phone"], encoding: .JSON, headers: ["Accept" : "application/json", "Authorization" : self.generateBasicAuthHeader()]).responseJSON(queue: self.dispatchQueue, options: .AllowFragments, completionHandler: {response in
+        let request = Alamofire.request(.POST, verifyEndpoint, parameters: ["PhoneNumber" : mobile, "grant_type" : "phone"], encoding: .JSON, headers: self.requestHeaders).responseJSON(queue: self.dispatchQueue, options: .AllowFragments, completionHandler: {response in
             
             if response.response?.statusCode == 200 {
                 completion?()
@@ -443,6 +465,10 @@ public class AuthClient: NSObject, AuthControllerDelegate {
                 failure?()
             }
         })
+        
+        #if DEBUG
+            debugPrint(request)
+        #endif
     }
     
     // Forgot/Reset Password
@@ -450,7 +476,9 @@ public class AuthClient: NSObject, AuthControllerDelegate {
         
         let forgotEndpoint = ClientEnvironment.SharedInstance.getAccountsEndpoint() + AccountClientEndpoints.Forgot
         
-        Alamofire.request(.POST, forgotEndpoint, parameters: ["UserNameEmailOrPhone" : emailOrPhoneNumber], encoding: .JSON, headers: ["Accept" : "application/json", "Authorization" : self.generateBasicAuthHeader()]).responseJSON(queue: self.dispatchQueue, options: .AllowFragments, completionHandler: {response in
+        self.requestHeaders.update(["Accept" : "application/json", "Authorization" : self.generateBasicAuthHeader()])
+        
+        let request = Alamofire.request(.POST, forgotEndpoint, parameters: ["UserNameEmailOrPhone" : emailOrPhoneNumber], encoding: .JSON, headers: self.requestHeaders).responseJSON(queue: self.dispatchQueue, options: .AllowFragments, completionHandler: {response in
 
             if response.response?.statusCode == 200 {
                 completion(response: response.result.value as? NSDictionary)
@@ -459,13 +487,19 @@ public class AuthClient: NSObject, AuthControllerDelegate {
                 failure(response: response.result.value as? NSDictionary)
             }
         })
+        
+        #if DEBUG
+            debugPrint(request)
+        #endif
     }
     
     public func resetPassword(resetToken : String, password : String, completion : (response : NSDictionary?) -> Void, failure : (response : NSDictionary?) -> Void) {
         
         let resetEndpoint = ClientEnvironment.SharedInstance.getAccountsEndpoint() + AccountClientEndpoints.Reset
+        
+        self.requestHeaders.update(["Accept" : "application/json", "Authorization" : self.generateBasicAuthHeader()])
 
-        Alamofire.request(.POST, resetEndpoint, parameters: ["ResetToken" : resetToken, "Password" : password, "ConfirmPassword" : password], encoding: .JSON, headers: ["Accept" : "application/json", "Authorization" : self.generateBasicAuthHeader()]).responseJSON(queue: self.dispatchQueue, options: .AllowFragments, completionHandler: {response in
+        let request = Alamofire.request(.POST, resetEndpoint, parameters: ["ResetToken" : resetToken, "Password" : password, "ConfirmPassword" : password], encoding: .JSON, headers: self.requestHeaders).responseJSON(queue: self.dispatchQueue, options: .AllowFragments, completionHandler: {response in
 
             if response.response?.statusCode == 200 {
                 completion(response: response.result.value as? NSDictionary)
@@ -474,6 +508,10 @@ public class AuthClient: NSObject, AuthControllerDelegate {
                 failure(response: response.result.value as? NSDictionary)
             }
         })
+        
+        #if DEBUG
+            debugPrint(request)
+        #endif
     }
     
     public func getAuthToken() -> AuthToken {
