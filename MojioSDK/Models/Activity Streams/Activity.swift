@@ -17,6 +17,7 @@ public class Activity : BaseActivity {
     public dynamic var Updated : String? = nil
     
     public dynamic var Context : String? = nil
+    public dynamic var Content : String? = nil
     
     public dynamic var Location : ActivityLocation? = nil
     public dynamic var Summary : Dictionary<String,String>? = nil
@@ -41,5 +42,6 @@ public class Activity : BaseActivity {
         Updated <- map["Updated"]
         Summary <- map["SummaryMap"]
         Icon <- map["Icon"]
+        Content <- map["Content"]
     }
 }
