@@ -23,7 +23,9 @@ public class Mojio: Mappable {
     public dynamic var CreatedOn : String? = nil
     public dynamic var LastModified : String? = nil
     public dynamic var Deleted : Bool = false
-
+    public dynamic var MSISDN: String? = nil
+    public dynamic var ICCID: String? = nil
+    
     public required convenience init?(_ map: Map) {
         self.init()
     }
@@ -66,5 +68,7 @@ public class Mojio: Mappable {
         LastModified <- map["LastModified"]
         Tags <- map["Tags"]
         Deleted <- map["Deleted"]
+        MSISDN <- map["MSISDN"]
+        ICCID <- map["ICCID"]
     }
 }
