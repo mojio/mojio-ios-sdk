@@ -20,6 +20,8 @@ public class Activity : BaseActivity {
     public dynamic var Content : String? = nil
     
     public dynamic var Location : ActivityLocation? = nil
+    public dynamic var AttributedTo: BaseActivity? = nil
+    
     public dynamic var Summary : Dictionary<String,String>? = nil
     public var Icon : Dictionary<String, AnyObject>? = nil
     
@@ -43,5 +45,6 @@ public class Activity : BaseActivity {
         Summary <- map["SummaryMap"]
         Icon <- map["Icon"]
         Content <- map["Content"]
+        AttributedTo <- map["AttributedTo"]
     }
 }
