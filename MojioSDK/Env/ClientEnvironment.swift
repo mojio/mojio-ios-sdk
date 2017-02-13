@@ -31,6 +31,7 @@ public class ClientEnvironment : NSObject {
     private static let PushWSEndpointFormat : String = "wss://%@api.moj.io/v2/"
     private static let MyMojioEndpointFormat : String = "https://%@my.moj.io/"
     private static let AccountsEndpointFormat : String = "https://%@accounts.moj.io/"
+    private static let MotionEndpointFormat : String = "https://%@api.moj.io/motion/"
     
     public static let SharedInstance = ClientEnvironment()
     
@@ -42,6 +43,7 @@ public class ClientEnvironment : NSObject {
     private var pushWSEndpoint : String?
     private var myMojioEndpoint : String?
     private var accountsEndpoint : String?
+    private var motionEndpoint : String?
     
     public override init() {
         super.init()
@@ -70,6 +72,7 @@ public class ClientEnvironment : NSObject {
         self.pushWSEndpoint = String.init(format: ClientEnvironment.PushWSEndpointFormat, arguments: [region])
         self.myMojioEndpoint = String.init(format: ClientEnvironment.MyMojioEndpointFormat, arguments: [region])
         self.accountsEndpoint = String.init(format: ClientEnvironment.AccountsEndpointFormat, arguments: [region])
+        self.motionEndpoint = String.init(format: ClientEnvironment.MotionEndpointFormat, arguments: [region])
     }
     
     public func setDefaultRegion () {
@@ -98,5 +101,9 @@ public class ClientEnvironment : NSObject {
     
     public func getAccountsEndpoint () -> String {
         return accountsEndpoint!
+    }
+    
+    public func getMotionEndpoint () -> String {
+        return motionEndpoint!
     }
 }

@@ -55,6 +55,7 @@ public class RestClientEndpoints : NSObject {
     public static let Emails : String = "emails/"
     public static let Tags : String = "tags/"
     public static let Trips : String = "trips/"
+    public static let TripSummary : String = "tripsummary/"
     public static let Vehicles : String = "vehicles/"
     public static let Address : String = "address/"
     public static let Vin : String = "vin/"
@@ -83,6 +84,7 @@ public class RestClient: NSObject {
     public dynamic var pushUrl : String?
     public dynamic var requestUrl : String?
     public dynamic var requestV1Url : String?
+    public dynamic var requestMotionUrl : String?
     public dynamic var requestParams : [String:AnyObject] = [:]
     public dynamic var requestEntity : String?
     public dynamic var requestEntityId: String?
@@ -103,6 +105,7 @@ public class RestClient: NSObject {
     public override init() {
         self.requestUrl = ClientEnvironment.SharedInstance.getApiEndpoint()
         self.requestV1Url = ClientEnvironment.SharedInstance.getV1ApiEndpoint();
+        self.requestMotionUrl = ClientEnvironment.SharedInstance.getMotionEndpoint()
         self.pushUrl = ClientEnvironment.SharedInstance.getPushWSEndpoint()
 
         self.sinceBeforeFormatter.dateFormat = RestClient.SinceBeforeDateFormat
@@ -271,6 +274,13 @@ public class RestClient: NSObject {
         return self
     }
     
+    public func tripsExport() -> Self {
+        self.requestEntity = RestClientEndpoints.TripSummary
+        self.requestUrl = self.requestMotionUrl! + self.requestEntity!
+        
+        return self
+    }
+    
     public func vehicles(vehicleId : String?) -> Self {
         self.requestEntity = RestClientEndpoints.Vehicles
         self.requestEntityId = vehicleId
@@ -382,7 +392,7 @@ public class RestClient: NSObject {
         return self
     }
     
-    public func query(top : String? = nil, skip : String? = nil, filter : String? = nil, select : String? = nil, orderby : String? = nil, count : String? = nil, since: NSDate? = nil, before: NSDate? = nil, fields: [String]? = nil) -> Self {
+    public func query(top : String? = nil, skip : String? = nil, filter : String? = nil, select : String? = nil, orderby : String? = nil, count : String? = nil, since: NSDate? = nil, before: NSDate? = nil, fields: [String]? = nil, metric: String? = nil) -> Self {
         
         var requestParams : [String:AnyObject] = [:]
         
@@ -422,6 +432,9 @@ public class RestClient: NSObject {
             requestParams["fields"] = fields.joinWithSeparator(",")
         }
         
+        if let metric = metric {
+            requestParams["metric"] = metric
+        }
         
         self.requestParams.update(requestParams)
         return self
