@@ -14,7 +14,7 @@ public class Warranty: Mappable {
     public dynamic var Name : String? = nil
     public dynamic var Type : String? = nil
     public dynamic var Months : String? = nil
-    public dynamic var Km : String? = nil
+    public dynamic var Km : Float = 0
     
     public required convenience init?(_ map: Map) {
         self.init();
