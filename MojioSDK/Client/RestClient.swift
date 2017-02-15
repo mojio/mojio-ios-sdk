@@ -271,12 +271,22 @@ public class RestClient: NSObject {
         return self
     }
     
-    public func vehicles(vehicleId : String?) -> Self {
+    public func vehicles(vehicleId: String?) -> Self {
         self.requestEntity = RestClientEndpoints.Vehicles
         self.requestEntityId = vehicleId
         self.requestUrl = self.requestUrl! + self.requestEntity! + (vehicleId != nil ? vehicleId! + "/" : "")
         self.pushUrl = self.pushUrl! + self.requestEntity! + (vehicleId != nil ? vehicleId! + "/" : "")
 
+        return self
+    }
+    
+    public func vehicles(vehicleId: String, mergeVehicleId: String) -> Self {
+        self.requestEntity = RestClientEndpoints.Vehicles
+        self.requestEntityId = vehicleId
+        self.requestParams["actual"] = mergeVehicleId
+        self.requestUrl = self.requestUrl! + self.requestEntity! + vehicleId + "/"
+        self.pushUrl = self.pushUrl! + self.requestEntity! + vehicleId + "/"
+        
         return self
     }
 
