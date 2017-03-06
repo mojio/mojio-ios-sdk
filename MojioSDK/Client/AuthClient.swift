@@ -12,13 +12,13 @@ import Alamofire
 import SwiftyJSON
 
 // OAuth 2.0 Object - RFC 6749
-public class AuthToken  {
+public class AuthToken : NSObject {
     public dynamic var accessToken : String? = nil
     public dynamic var expiry : String? = nil
     public dynamic var refreshToken : String? = nil
     public dynamic var uniqueId : String? = nil
     
-    init() {
+    override init() {
 
     }
     
