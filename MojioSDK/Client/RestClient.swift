@@ -477,12 +477,10 @@ public class RestClient: NSObject {
         // Pass parameter or customer encoder is n
         let request = Alamofire.request(self.requestMethod!, self.requestUrl!, parameters: [:], encoding: .Custom({(convertible, params) in
             
-            // Add string to body
+            // Add string to body as a JSON quoted string
             let mutableRequest = convertible.URLRequest.mutableCopy() as! NSMutableURLRequest
-            
-            let quoteEscaped = (string as NSString).stringByReplacingOccurrencesOfString("\\\"", withString: "\\ \\ \"")
-            let quotedString = String.init(format: "\"%@\"", quoteEscaped)
-            mutableRequest.HTTPBody = quotedString.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
+
+            mutableRequest.HTTPBody = string.JSONString().dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
             return (mutableRequest, nil)
             
         }), headers: self.requestHeaders)
@@ -719,5 +717,18 @@ public extension Dictionary {
         for (key, value) in updateDict {
             self.updateValue(value, forKey:key)
         }
+    }
+}
+
+internal extension String {
+    func JSONString() -> String {
+        return "\"" + self
+            .stringByReplacingOccurrencesOfString("\"", withString: "\\\"", options: .CaseInsensitiveSearch)
+            .stringByReplacingOccurrencesOfString("/", withString: "\\/", options: .CaseInsensitiveSearch)
+            .stringByReplacingOccurrencesOfString("\n", withString: "\\n", options: .CaseInsensitiveSearch)
+            .stringByReplacingOccurrencesOfString("\u{8}", withString: "\\b", options: .CaseInsensitiveSearch)
+            .stringByReplacingOccurrencesOfString("\u{12}", withString: "\\f", options: .CaseInsensitiveSearch)
+            .stringByReplacingOccurrencesOfString("\r", withString: "\\r", options: .CaseInsensitiveSearch)
+            .stringByReplacingOccurrencesOfString("\t", withString: "\\t", options: .CaseInsensitiveSearch) + "\""
     }
 }
