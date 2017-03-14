@@ -53,15 +53,25 @@ public class GeofenceRegion : Mappable {
     }
 }
 
+public class GeofenceNotificationTypes : NSObject {
+    public static let OnEnter : String = "OnEnter"
+    public static let OnExit : String = "OnExit"
+    public static let Always : String = "Always"
+    public static let Never : String = "Never"
+}
+
 public class Geofence: Mappable {
     
     public dynamic var Id : String? = nil
     public dynamic var Name: String? = nil
     public dynamic var Description: String? = nil
     public var Region: GeofenceRegion? = nil
-    public var Tags : [String] = []
-    public dynamic var CreatedOn : String? = nil
-    public dynamic var LastModified : String? = nil
+    public dynamic var NotificationSetting: String? = nil
+    public dynamic var Enabled: Bool = false
+    public var VehicleIds: [String] = []
+    public var Tags: [String] = []
+    public dynamic var CreatedOn: String? = nil
+    public dynamic var LastModified: String? = nil
     
     public required convenience init?(_ map: Map) {
         self.init()
@@ -94,6 +104,13 @@ public class Geofence: Mappable {
             dictionary["Region"] = region.jsonDict()
         }
         
+        if let notificationSetting = self.NotificationSetting {
+            dictionary["NotificationSetting"] = notificationSetting
+        }
+        
+        dictionary["Enabled"] = self.Enabled
+        dictionary["VehicleIds"] = self.VehicleIds
+        
         return dictionary
     }
     
@@ -102,6 +119,9 @@ public class Geofence: Mappable {
         Name <- map["Name"]
         Description <- map["Description"]
         Region <- map["Region"]
+        NotificationSetting <- map["NotificationSetting"]
+        Enabled <- map["Enabled"]
+        VehicleIds <- map["VehicleIds"]
         CreatedOn <- map["CreatedOn"]
         LastModified <- map["LastModified"]
         Tags <- map["Tags"]
