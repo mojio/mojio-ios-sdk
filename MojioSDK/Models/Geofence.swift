@@ -53,6 +53,13 @@ public class GeofenceRegion : Mappable {
     }
 }
 
+public class GeofenceNotificationTypes : NSObject {
+    public static let OnEnter : String = "OnEnter"
+    public static let OnExit : String = "OnExit"
+    public static let Always : String = "Always"
+    public static let Never : String = "Never"
+}
+
 public class Geofence: Mappable {
     
     public dynamic var Id : String? = nil
