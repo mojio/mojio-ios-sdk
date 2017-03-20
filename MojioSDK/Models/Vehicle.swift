@@ -16,6 +16,7 @@ public class Vehicle: Mappable {
     public dynamic var VIN : String? = nil
     public dynamic var DetectedVIN : String? = nil
     public dynamic var OverrideVIN : String? = nil
+    public var CompatDetails: CompatibilityDetails? = nil
     public dynamic var CurrentTrip : String? = nil
     public dynamic var MojioId : String? = nil
     public var VehicleImage : Image? = nil
@@ -109,6 +110,7 @@ public class Vehicle: Mappable {
         VIN <- map["VIN"]
         DetectedVIN <- map["DetectedVIN"]
         OverrideVIN <- map["OverrideVIN"]
+        CompatDetails <- map["CompatDetails"]
         CurrentTrip <- map["CurrentTrip"]
         MojioId <- map["MojioId"]
         VehicleImage <- map["Image"]
