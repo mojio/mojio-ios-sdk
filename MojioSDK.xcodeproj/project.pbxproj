@@ -84,6 +84,7 @@
 		BC879BAB1CBF044700F9177B /* VehicleStateData.txt in Resources */ = {isa = PBXBuildFile; fileRef = BC879B9D1CBF044700F9177B /* VehicleStateData.txt */; };
 		BC879BAC1CBF044700F9177B /* VinData.txt in Resources */ = {isa = PBXBuildFile; fileRef = BC879B9E1CBF044700F9177B /* VinData.txt */; };
 		BC8ECA501D226690009C6164 /* WifiRadio.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC8ECA4F1D226690009C6164 /* WifiRadio.swift */; };
+		BC92329B1E7FC52900BD4038 /* CompatibilityDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC92329A1E7FC52900BD4038 /* CompatibilityDetails.swift */; };
 		BCC2EFB41CBED4E6004D2759 /* MojioSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = BCC2EFB31CBED4E6004D2759 /* MojioSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BCC2EFBB1CBED4E6004D2759 /* MojioSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCC2EFB11CBED4E6004D2759 /* MojioSDK.framework */; };
 		BCC2EFCF1CBEF6DB004D2759 /* MojioSDKUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC2EFCE1CBEF6DB004D2759 /* MojioSDKUITests.swift */; };
@@ -203,6 +204,7 @@
 		BC879B9D1CBF044700F9177B /* VehicleStateData.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VehicleStateData.txt; sourceTree = "<group>"; };
 		BC879B9E1CBF044700F9177B /* VinData.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VinData.txt; sourceTree = "<group>"; };
 		BC8ECA4F1D226690009C6164 /* WifiRadio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WifiRadio.swift; path = Models/WifiRadio.swift; sourceTree = "<group>"; };
+		BC92329A1E7FC52900BD4038 /* CompatibilityDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CompatibilityDetails.swift; path = Models/CompatibilityDetails.swift; sourceTree = "<group>"; };
 		BCC2EFB11CBED4E6004D2759 /* MojioSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MojioSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCC2EFB31CBED4E6004D2759 /* MojioSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MojioSDK.h; sourceTree = "<group>"; };
 		BCC2EFB51CBED4E6004D2759 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -467,6 +469,7 @@
 				887014781DA833CA00EFEC6D /* VehicleStatistics.swift */,
 				BC879B2E1CBEFFB000F9177B /* VinDetails */,
 				BC8ECA4F1D226690009C6164 /* WifiRadio.swift */,
+				BC92329A1E7FC52900BD4038 /* CompatibilityDetails.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -778,6 +781,7 @@
 				BC72D7A81CC5615600D9740B /* AuthClient.swift in Sources */,
 				BC879B791CBEFFDD00F9177B /* Trip.swift in Sources */,
 				BC5F7F031CC58D4000FAB205 /* Units.swift in Sources */,
+				BC92329B1E7FC52900BD4038 /* CompatibilityDetails.swift in Sources */,
 				BC879B411CBEFFC000F9177B /* VinDetails.swift in Sources */,
 				BC717D9B1DA6EFA20052317C /* ServiceInterval.swift in Sources */,
 				BC879B681CBEFFDD00F9177B /* Email.swift in Sources */,
