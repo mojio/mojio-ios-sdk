@@ -12,7 +12,7 @@ public struct MojioError : Error {
     public var code : String?
     
     public init(code : String?, message : String? = nil, dictionary : NSDictionary? = nil) {
-        print("ERROR :", code , " " , message)
+        debugPrint("ERROR :", code ?? "" , " " , message ?? "")
         self.message = message
         self.code = code
         self.dictionary = dictionary
