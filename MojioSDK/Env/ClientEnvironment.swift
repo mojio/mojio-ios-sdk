@@ -9,6 +9,7 @@
 import UIKit
 
 open class MojioRegion : NSObject {
+
     open static let Production : String = ""
     open static let NAProduction : String = "na-production-"
     open static let EUProduction : String = "eu-production-"
@@ -17,6 +18,7 @@ open class MojioRegion : NSObject {
     open static let EUStaging : String = "eu-staging-"
     open static let Trial : String = "trial-"
     open static let Develop : String = "develop-"
+    open static let Load : String = "load-"
 
     static func getDefaultRegion() -> String {
         return Production

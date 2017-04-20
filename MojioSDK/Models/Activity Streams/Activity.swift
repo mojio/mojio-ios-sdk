@@ -18,8 +18,9 @@ open class Activity : BaseActivity {
     
     open dynamic var Context : String? = nil
     
+    open dynamic var Content : String? = nil
     open dynamic var Location : ActivityLocation? = nil
-    open dynamic var Origin : ActivityLocation? = nil
+    open dynamic var AttributedTo: BaseActivity? = nil
     open dynamic var Summary : Dictionary<String,String>? = nil
     open var Icon : Dictionary<String, AnyObject>? = nil
     
@@ -35,7 +36,6 @@ open class Activity : BaseActivity {
         super.mapping(map: map)
         Context <- map["Context"]
         Location <- map["Location"]
-        Origin <- map["Origin"]
         StartTime <- map["StartTime"]
         EndTime <- map["EndTime"]
         Duration <- map["Duration"]
@@ -43,5 +43,7 @@ open class Activity : BaseActivity {
         Updated <- map["Updated"]
         Summary <- map["SummaryMap"]
         Icon <- map["Icon"]
+        Content <- map["Content"]
+        AttributedTo <- map["AttributedTo"]
     }
 }

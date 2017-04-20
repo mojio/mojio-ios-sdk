@@ -16,6 +16,7 @@ open class Vehicle: Mappable {
     open dynamic var VIN : String? = nil
     open dynamic var DetectedVIN : String? = nil
     open dynamic var OverrideVIN : String? = nil
+    open var CompatDetails: CompatibilityDetails? = nil
     open dynamic var CurrentTrip : String? = nil
     open dynamic var MojioId : String? = nil
     open var VehicleImage : Image? = nil
@@ -27,6 +28,7 @@ open class Vehicle: Mappable {
     open var Deceleration : Acceleration? = nil
     open var VehicleSpeed : Speed? = nil
     open var VehicleOdometer : Odometer? = nil
+    open var VirtualOdometer : Odometer? = nil
     open var VehicleRPM : RPM? = nil
     open var VehicleFuelEfficiency : FuelEfficiency? = nil
     
@@ -108,6 +110,7 @@ open class Vehicle: Mappable {
         VIN <- map["VIN"]
         DetectedVIN <- map["DetectedVIN"]
         OverrideVIN <- map["OverrideVIN"]
+        CompatDetails <- map["CompatDetails"]
         CurrentTrip <- map["CurrentTrip"]
         MojioId <- map["MojioId"]
         VehicleImage <- map["Image"]
@@ -119,6 +122,7 @@ open class Vehicle: Mappable {
         Deceleration <- map["Deceleration"]
         VehicleSpeed <- map["Speed"]
         VehicleOdometer <- map["Odometer"]
+        VirtualOdometer <- map["VirtualOdometer"]
         VehicleRPM <- map["RPM"]
         VehicleFuelEfficiency <- map["FuelEfficiency"]
         FuelEfficiencyCalculationMethod <- map["FuelEfficiencyCalculationMethod"]

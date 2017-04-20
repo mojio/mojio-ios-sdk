@@ -12,7 +12,7 @@ import ObjectMapper
 open class Warranty: Mappable {
     
     open dynamic var Name : String? = nil
-    open dynamic var WarrantyType : String? = nil
+    open dynamic var `Type` : String? = nil
     open dynamic var Months : String? = nil
     open dynamic var Km : String? = nil
     
@@ -26,7 +26,7 @@ open class Warranty: Mappable {
 
     open func mapping(map: Map) {
         Name <- map["Name"]
-        WarrantyType <- map["Type"]
+        Type <- map["Type"]
         Months <- map["Months"]
         Km <- map["Km"]
     }
