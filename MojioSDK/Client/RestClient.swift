@@ -476,7 +476,7 @@ open class RestClient: NSObject {
         return self.query(top, skip : skip, filter : filter, select : select, orderby : orderby, since: nil, before: nil, fields: nil)
     }*/
     
-    open func run(_ completion: @escaping (_ response: Any) -> Void, failure: @escaping (_ error: Any?) -> Void) {
+    open func run(completion: @escaping (_ response: Any) -> Void, failure: @escaping (_ error: Any?) -> Void) {
         
         let request = Alamofire.request(self.requestUrl!, method: self.requestMethod, parameters: self.requestParams, encoding: URLEncoding(destination: .methodDependent), headers: self.defaultHeaders).responseJSON { response in
             self.handleResponse(response, completion: completion, failure: failure)
