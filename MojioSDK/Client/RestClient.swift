@@ -14,36 +14,61 @@ import KeychainSwift
 
 open class NextDone {}
 
+open class ClientHeaders: NSObject {
+    open static let defaultRequestHeaders: [String:String] = {
+        // Accept-Language HTTP Header; see https://tools.ietf.org/html/rfc7231#section-5.3.5
+        let acceptLanguage = NSLocale.preferredLanguages.prefix(6).enumerated().map { index, languageCode in
+            let quality = 1.0 - (Double(index) * 0.1)
+            
+            // Use language-region and language only combinations
+            let languageSplit = languageCode.components(separatedBy: "-")
+            if let language = languageSplit.first {
+                return "\(languageCode),\(language);q=\(quality)"
+            }
+            else if languageSplit.count > 0 {
+                return "\(languageCode);q=\(quality)"
+            }
+            else {
+                return ""
+            }
+            
+            }.joined(separator: ", ")
+        
+        return ["Accept-Language": acceptLanguage]
+    }()
+}
+
 open class RestClientEndpoints : NSObject {
-    open static let Apps : String = "apps/"
-    open static let Secret : String = "secret/"
-    open static let Groups : String = "groups/"
-    open static let Users : String = "users/"
-    open static let Me : String = "me/"
-    open static let History : String = "history/"
-    open static let States : String = "states/"
-    open static let Locations : String = "locations/"
-    open static let Image : String = "image/"
-    open static let Mojios : String = "mojios/"
-    open static let Permission : String = "permission/"
-    open static let Permissions : String = "permissions/"
-    open static let PhoneNumbers : String = "phonenumbers/"
-    open static let Emails : String = "emails/"
-    open static let Tags : String = "tags/"
-    open static let Trips : String = "trips/"
-    open static let Vehicles : String = "vehicles/"
-    open static let Address : String = "address/"
-    open static let Vin : String = "vin/"
-    open static let ServiceSchedule : String = "serviceschedule/"
-    open static let Next : String = "next/"
-    open static let Activities : String = "activities/"
-    open static let NotificationSettings : String = "activities/settings/"
-    open static let WifiRadio : String = "wifiradio/"
-    open static let Transactions : String = "transactions/"
-    open static let Geofences : String = "geofences/"
-    open static let Aggregates : String = "aggregates/"
-    open static let Statistics : String = "statistics/"
-    open static let DiagnosticCodes : String = "diagnosticcodes/"
+    public static let Apps : String = "apps/"
+    public static let Secret : String = "secret/"
+    public static let Groups : String = "groups/"
+    public static let Users : String = "users/"
+    public static let Me : String = "me/"
+    public static let History : String = "history/"
+    public static let States : String = "states/"
+    public static let Locations : String = "locations/"
+    public static let Image : String = "image/"
+    public static let Mojios : String = "mojios/"
+    public static let Permission : String = "permission/"
+    public static let Permissions : String = "permissions/"
+    public static let PhoneNumbers : String = "phonenumbers/"
+    public static let Emails : String = "emails/"
+    public static let Tags : String = "tags/"
+    public static let Trips : String = "trips/"
+    public static let Vehicles : String = "vehicles/"
+    public static let Address : String = "address/"
+    public static let Vin : String = "vin/"
+    public static let ServiceSchedule : String = "serviceschedule/"
+    public static let Next : String = "next/"
+    public static let Activities : String = "activities/"
+    public static let NotificationSettings : String = "activities/settings/"
+    public static let WifiRadio : String = "wifiradio/"
+    public static let Transactions : String = "transactions/"
+    public static let Geofences : String = "geofences/"
+    public static let Aggregates : String = "aggregates/"
+    public static let Statistics : String = "statistics/"
+    public static let DiagnosticCodes : String = "diagnosticcodes/"
+    public static let Polyline : String = "polyline/"
     
     // Storage
     // Parameters: Type, Id, Key
@@ -61,12 +86,15 @@ open class RestClient: NSObject {
     open dynamic var requestParams : [String:AnyObject] = [:]
     open dynamic var requestEntity : String?
     open dynamic var requestEntityId: String?
+    // Default to global concurrent queue with default priority
+    open static var defaultDispatchQueue = DispatchQueue.global()
     
     fileprivate dynamic var doNext : Bool = false
     fileprivate dynamic var nextUrl : String? = nil
-    
     fileprivate var sinceBeforeFormatter = DateFormatter()
-    fileprivate static let SinceBeforeDateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+    fileprivate static let SinceBeforeDateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+    fileprivate static let SinceBeforeTimezone = TimeZone(abbreviation: "UTC");
+    fileprivate var dispatchQueue = RestClient.defaultDispatchQueue
     
     public override init() {
         self.requestUrl = ClientEnvironment.SharedInstance.getApiEndpoint()
@@ -74,8 +102,7 @@ open class RestClient: NSObject {
         self.pushUrl = ClientEnvironment.SharedInstance.getPushWSEndpoint()
 
         self.sinceBeforeFormatter.dateFormat = RestClient.SinceBeforeDateFormat
-
-        // Set Auth Token as the header
+        self.sinceBeforeFormatter.timeZone = RestClient.SinceBeforeTimezone
     }
     
     public convenience init(clientEnvironment : ClientEnvironment) {
@@ -183,9 +210,16 @@ open class RestClient: NSObject {
         return self
     }
     
-    open func states() -> Self {
+    open func states(time: Date? = nil) -> Self {
         self.requestEntity = RestClientEndpoints.States
-        self.requestUrl = self.requestUrl! + self.requestEntity!
+        
+        var suffix = ""
+        
+        if let time = time {
+            suffix = self.sinceBeforeFormatter.string(from: time)
+        }
+        
+        self.requestUrl = self.requestUrl! + self.requestEntity! + suffix
         
         return self
     }
@@ -266,12 +300,22 @@ open class RestClient: NSObject {
         return self
     }
     
-    open func vehicles(_ vehicleId : String?) -> Self {
+    open func vehicles(vehicleId : String?) -> Self {
         self.requestEntity = RestClientEndpoints.Vehicles
         self.requestEntityId = vehicleId
         self.appendRequestUrlEntityId()
         self.appendPushUrlEntityId()
 
+        return self
+    }
+    
+    public func vehicles(vehicleId: String, mergeVehicleId: String) -> Self {
+        self.requestEntity = RestClientEndpoints.Vehicles
+        self.requestEntityId = vehicleId
+        self.requestParams["actual"] = mergeVehicleId as AnyObject?
+        self.requestUrl = self.requestUrl! + self.requestEntity! + vehicleId + "/"
+        self.pushUrl = self.pushUrl! + self.requestEntity! + vehicleId + "/"
+        
         return self
     }
 
@@ -370,7 +414,14 @@ open class RestClient: NSObject {
         return self
     }
     
-    open func query(_ top : String? = nil, skip : String? = nil, filter : String? = nil, select : String? = nil, orderby : String? = nil, count : String? = nil, since: Date? = nil, before: Date? = nil, fields: [String]? = nil) -> Self {
+    public func polyline() -> Self {
+        self.requestEntity = RestClientEndpoints.Polyline
+        self.requestUrl = self.requestUrl! + self.requestEntity!
+        
+        return self
+    }
+
+    open func query(top : String? = nil, skip : String? = nil, filter : String? = nil, select : String? = nil, orderby : String? = nil, count : String? = nil, since: Date? = nil, before: Date? = nil, fields: [String]? = nil) -> Self {
         
         var requestParams : [String:AnyObject] = [:]
         
@@ -415,22 +466,19 @@ open class RestClient: NSObject {
         return self
     }
     
+    public func dispatch(queue: DispatchQueue) {
+        self.dispatchQueue = queue
+    }
+    
     /*
      Don't need this helper function given default values in the other query function
      public func query(top : String?, skip : String?, filter : String?, select : String?, orderby : String?) -> Self {
         return self.query(top, skip : skip, filter : filter, select : select, orderby : orderby, since: nil, before: nil, fields: nil)
     }*/
     
-    open func run(_ completion: @escaping (_ response: Any) -> Void, failure: @escaping (_ error: Any?) -> Void) {
+    open func run(completion: @escaping (_ response: Any) -> Void, failure: @escaping (_ error: Any?) -> Void) {
         
-        // Before every request, make sure access token exists
-        var headers : [String:String] = ["Content-Type" : "application/json", "Accept" : "application/json"]
-        
-        if let accessToken : String = self.accessToken() {
-            headers["Authorization"] = "Bearer " + accessToken
-        }
-
-        let request = Alamofire.request(self.requestUrl!, method: self.requestMethod, parameters: self.requestParams, encoding: URLEncoding(destination: .methodDependent), headers: headers).responseJSON { response in
+        let request = Alamofire.request(self.requestUrl!, method: self.requestMethod, parameters: self.requestParams, encoding: URLEncoding(destination: .methodDependent), headers: self.defaultHeaders).responseJSON { response in
             self.handleResponse(response, completion: completion, failure: failure)
         }
         
@@ -439,7 +487,7 @@ open class RestClient: NSObject {
         #endif
     }
     
-    private class CustomStringEncoding: ParameterEncoding {
+    fileprivate class CustomStringEncoding: ParameterEncoding {
         
         private let customString: String
         
@@ -457,46 +505,39 @@ open class RestClient: NSObject {
         }
     }
     
-    open func runStringBody(_ string: String, completion: @escaping (_ response: Any) -> Void, failure: @escaping (_ error: Any?) -> Void) {
+    fileprivate var defaultHeaders: [String: String] {
+        var headers = ClientHeaders.defaultRequestHeaders
+        
+        headers.update(["Content-Type" : "application/json", "Accept" : "application/json"])
         
         // Before every request, make sure access token exists
-        var headers : [String:String] = ["Content-Type" : "application/json", "Accept" : "application/json"]
-        
         if let accessToken : String = self.accessToken() {
             headers["Authorization"] = "Bearer " + accessToken
         }
         
-        // Pass parameter or customer encoder is n
-        let request = Alamofire.request(self.requestUrl!, method: self.requestMethod, parameters: [:], encoding: CustomStringEncoding(customString: string), headers: headers)
-        
-        #if DEBUG
-            print(request.debugDescription)
-        #endif
-        
-        request.responseJSON(completionHandler: { response in
-            self.handleResponse(response, completion: completion, failure: failure)
-        })
+        return headers
     }
     
-    open func runEncodeJSON(_ jsonObject: AnyObject, completion: @escaping (_ response : Any) -> Void, failure: @escaping (_ error : Any?) -> Void) {
+    open func runStringBody(string: String, completion: @escaping (_ response: Any) -> Void, failure: @escaping (_ error: Any?) -> Void) {
         
-        // Before every request, make sure access token exists
-        var headers : [String:String] = ["Content-Type" : "application/json", "Accept" : "application/json"]
-        
-        if let accessToken : String = self.accessToken() {
-            headers["Authorization"] = "Bearer " + accessToken
+        let request = Alamofire.request(self.requestUrl!, method: self.requestMethod, parameters: [:], encoding: CustomStringEncoding(customString: string), headers: self.defaultHeaders).responseJSON { response in
+            self.handleResponse(response, completion: completion, failure: failure)
         }
-        
-        // Pass parameter or customer encoder is n
-        let request = Alamofire.request(self.requestUrl!, method: self.requestMethod, parameters: [:], encoding: JSONEncoding.default, headers: headers)
         
         #if DEBUG
             print(request.debugDescription)
         #endif
+    }
+    
+    open func runEncodeJSON(jsonObject: AnyObject, completion: @escaping (_ response : Any) -> Void, failure: @escaping (_ error : Any?) -> Void) {
         
-        request.responseJSON(completionHandler: { response in
+        let request = Alamofire.request(self.requestUrl!, method: self.requestMethod, parameters: [:], encoding: JSONEncoding.default, headers: self.defaultHeaders).responseJSON { response in
             self.handleResponse(response, completion: completion, failure: failure)
-        })
+        }
+
+        #if DEBUG
+            print(request.debugDescription)
+        #endif
     }
     
     open func runEncodeUrl(_ parameters: [String:AnyObject], completion: @escaping (_ response: Any) -> Void, failure: @escaping (_ error: Any?) -> Void) {
@@ -508,9 +549,13 @@ open class RestClient: NSObject {
             headers["Authorization"] = "Bearer " + accessToken
         }
         
-        Alamofire.request(self.requestUrl!, method: self.requestMethod, parameters: parameters, encoding: URLEncoding(destination: .methodDependent), headers: headers).responseJSON { response in
+        let request = Alamofire.request(self.requestUrl!, method: self.requestMethod, parameters: parameters, encoding: URLEncoding(destination: .methodDependent), headers: headers).responseJSON { response in
             self.handleResponse(response, completion: completion, failure: failure)
         }
+        
+        #if DEBUG
+            debugPrint(request)
+        #endif
     }
     
     func handleResponse(_ response: DataResponse<Any>, completion: @escaping (_ response :Any) -> Void, failure: @escaping (_ error: Any?) -> Void){
@@ -544,7 +589,7 @@ open class RestClient: NSObject {
                                         self.nextUrl = decoded
                                         self.requestUrl = decoded
                                         self.requestParams = [:]
-                                        self.run(completion, failure:  failure)
+                                        self.run(completion: completion, failure:  failure)
                                         return
                                     }
                                 }
@@ -578,9 +623,11 @@ open class RestClient: NSObject {
             if let responseDict = response.result.value as? NSDictionary {
                 failure (responseDict)
             }
-                
+            /*else if let responseError = response.result.error {
+                failure (responseError.userInfo)
+            }*/
             else {
-                failure("Could not complete request" as AnyObject?)
+                failure("Could not complete request")
             }
         }
     }
@@ -678,6 +725,10 @@ open class RestClient: NSObject {
             let model = Mapper<VehicleStatistics>().map(JSON: dict)
             return model!
             
+        case RestClientEndpoints.Polyline:
+            let model = Mapper<TripPolyline>().map(JSON: dict)
+            return model!
+            
         default:
                 return nil
         }
@@ -695,3 +746,18 @@ public extension Dictionary {
         }
     }
 }
+/*
+internal extension String {
+    
+    func JSONString() -> String {
+        return "\"" + self
+            .stringByReplacingOccurrencesOfString("\"", withString: "\\\"", options: .CaseInsensitiveSearch)
+            .stringByReplacingOccurrencesOfString("/", withString: "\\/", options: .CaseInsensitiveSearch)
+            .stringByReplacingOccurrencesOfString("\n", withString: "\\n", options: .CaseInsensitiveSearch)
+            .stringByReplacingOccurrencesOfString("\u{8}", withString: "\\b", options: .CaseInsensitiveSearch)
+            .stringByReplacingOccurrencesOfString("\u{12}", withString: "\\f", options: .CaseInsensitiveSearch)
+            .stringByReplacingOccurrencesOfString("\r", withString: "\\r", options: .CaseInsensitiveSearch)
+            .stringByReplacingOccurrencesOfString("\t", withString: "\\t", options: .CaseInsensitiveSearch) + "\""
+    }
+}
+*/

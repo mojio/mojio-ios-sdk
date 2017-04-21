@@ -13,15 +13,25 @@ import SwiftyJSON
 
 open class WSClient : RestClient {
     
+    // Default to global concurrent queue with default priority
+    public static var wsDefaultDispatchQueue = DispatchQueue.global()
+    private var wsDispatchQueue = WSClient.wsDefaultDispatchQueue
+    
+    public override func dispatch(queue: DispatchQueue) {
+        self.wsDispatchQueue = queue
+    }
+    
     open func watch(_ next: @escaping ((Any) -> Void), completion: @escaping (() -> Void), failure: @escaping ((Error) -> Void), file: String = #file) -> WebSocket {
-
+    
         var request = URLRequest(url: URL(string:super.pushUrl!)!)
+        
         if let accessToken : String = super.accessToken() {
             request.addValue("Bearer " + accessToken, forHTTPHeaderField: "Authorization")
-
         }
         
         let ws = WebSocket(request: request)
+        
+        ws.eventQueue = self.wsDispatchQueue
         
         ws.event.close = { code, reason, clean in
             print("WEBSOCKET: CLOSED - \(file)")

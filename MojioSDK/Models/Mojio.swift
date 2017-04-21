@@ -9,6 +9,7 @@
 import UIKit
 import ObjectMapper
 
+
 open class Mojio: Mappable {
     open dynamic var Id : String? = nil
     open dynamic var Name : String? = nil
@@ -23,7 +24,9 @@ open class Mojio: Mappable {
     open dynamic var CreatedOn : String? = nil
     open dynamic var LastModified : String? = nil
     open dynamic var Deleted : Bool = false
-
+    open dynamic var MSISDN: String? = nil
+    open dynamic var ICCID: String? = nil
+    
     public required convenience init?(map: Map) {
         self.init()
     }
@@ -50,7 +53,6 @@ open class Mojio: Mappable {
         return NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
         
     }
-
     
     open func mapping(map: Map) {
         Id <- map["Id"]
@@ -66,5 +68,7 @@ open class Mojio: Mappable {
         LastModified <- map["LastModified"]
         Tags <- map["Tags"]
         Deleted <- map["Deleted"]
+        MSISDN <- map["MSISDN"]
+        ICCID <- map["ICCID"]
     }
 }

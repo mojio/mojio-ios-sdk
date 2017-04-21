@@ -12,18 +12,19 @@ import Alamofire
 import SwiftyJSON
 
 // OAuth 2.0 Object - RFC 6749
-open class AuthToken  {
+
+open class AuthToken: NSObject  {
     open dynamic var accessToken : String? = nil
     open dynamic var expiry : String? = nil
     open dynamic var refreshToken : String? = nil
     open dynamic var uniqueId : String? = nil
     
-    init() {
-
+    override init() {
+        
     }
     
     init(accessToken: String?, expiry: String?, refreshToken: String?, uniqueId: String) {
-
+        
         self.accessToken = accessToken
         self.expiry = expiry
         self.refreshToken = refreshToken
@@ -121,7 +122,7 @@ open class ForgotPasswordErrors : NSObject {
 open class ResetPasswordErrors : NSObject {
     // Reset link invalid (or expired)
     open static let InvalidResetLink : String = "InvalidResetLink"
-
+    
     // Password Required
     open static let PasswordRequired : String = "PasswordRequired"
     
@@ -135,7 +136,7 @@ open class ResetPasswordErrors : NSObject {
 }
 
 open class AuthClient: NSObject, AuthControllerDelegate {
-
+    
     open var clientId: String
     open var clientRedirectURL: String
     open var clientSecretKey: String
@@ -145,7 +146,13 @@ open class AuthClient: NSObject, AuthControllerDelegate {
     open var loginCompletion: ((_ authToken: AuthToken) -> Void)? = nil
     open var loginFailure: ((_ response: AnyObject?) -> Void)? = nil
     open var authController: AuthViewController?
-        
+    
+    public dynamic var requestHeaders: [String:String] = ClientHeaders.defaultRequestHeaders
+    
+    // Default to global concurrent queue with default priority
+    public static var defaultDispatchQueue = DispatchQueue.global()
+    private var dispatchQueue = AuthClient.defaultDispatchQueue
+    
     public init(clientId : String, clientSecretKey : String, clientRedirectURI : String) {
         self.clientId = clientId
         self.clientRedirectURL = clientRedirectURI
@@ -153,6 +160,10 @@ open class AuthClient: NSObject, AuthControllerDelegate {
         
         // TODO: make this accounts endpoint
         self.loginURL = URL(string: AuthClient.getAuthorizeUrl(self.clientRedirectURL, clientId: self.clientId))
+    }
+    
+    public func dispatch(queue: DispatchQueue) {
+        self.dispatchQueue = queue
     }
     
     open func loginViewController(_ completion : ((_ authToken: AuthToken) -> Void)?, failure: ((_ response: AnyObject?) -> Void)?) {
@@ -222,17 +233,17 @@ open class AuthClient: NSObject, AuthControllerDelegate {
         
         return true
     }
-
+    
     // Returns on main thread when complete - refreshes if needed
-    open func isUserLoggedInRefresh(_ completion: @escaping (_ authToken: AuthToken) -> Void, failure : @escaping (_ response: NSDictionary?) -> Void) {
-
+    open func isUserLoggedInRefresh(_ completion: @escaping (_ authToken: AuthToken) -> Void, failure : @escaping (_ response: [String: AnyObject]?) -> Void) {
+        
         let authToken = self.getAuthToken()
         
         if authToken.accessToken == nil || authToken.expiry == nil || authToken.uniqueId == nil {
             DispatchQueue.main.async(execute: {failure(nil)})
             return
         }
-
+        
         // Check to see if the environment endpoint in the keychain is the same as the current endpoint
         // If they are different, return false right away
         if ClientEnvironment.SharedInstance.getRegion() != authToken.uniqueId {
@@ -276,7 +287,9 @@ open class AuthClient: NSObject, AuthControllerDelegate {
         // The token endpoint is used for the resource owner flow
         let loginEndpoint = AuthClient.getTokenUrl()
         
-        Alamofire.request(loginEndpoint, method: .post, parameters: ["grant_type" : "password", "password" : password, "username" : username, "client_id" : self.clientId, "client_secret" : self.clientSecretKey], encoding: URLEncoding(destination: .methodDependent), headers: ["Accept" : "application/json", "Authorization" : self.generateBasicAuthHeader()]).responseJSON{response in
+        self.requestHeaders.update(["Accept" : "application/json", "Authorization" : self.generateBasicAuthHeader()])
+        
+        let request = Alamofire.request(loginEndpoint, method: .post, parameters: ["grant_type" : "password", "password" : password, "username" : username, "client_id" : self.clientId, "client_secret" : self.clientSecretKey], encoding: URLEncoding(destination: .methodDependent), headers: ["Accept" : "application/json", "Authorization" : self.generateBasicAuthHeader()]).responseJSON { response in
             
             if response.response?.statusCode == 200 {
                 
@@ -300,52 +313,82 @@ open class AuthClient: NSObject, AuthControllerDelegate {
                 }
             }
             else {
-                failure(response.result.value as? NSDictionary)
+                if let dictionary = response.result.value as? NSDictionary {
+                    failure(dictionary)
+                }
+                    /*else if let error = response.result.error {
+                     failure(response: error.userInfo)
+                     }*/
+                else {
+                    failure(nil)
+                }
             }
         }
+        
+        #if DEBUG
+            debugPrint(request)
+        #endif
     }
     
-    open func refreshAuthToken(_ completion: @escaping (_ authToken: AuthToken) -> Void, failure : @escaping (_ response: NSDictionary?) -> Void) {
+    open func refreshAuthToken(_ completion: @escaping (_ authToken: AuthToken) -> Void, failure : @escaping (_ response: [String: AnyObject]?) -> Void) {
         let keychain = KeychainSwift()
         
         let authorizeEndpoint = AuthClient.getTokenUrl()
-
+        
         guard let refreshToken : String = keychain.get(KeychainKeys.RefreshToken) else {
             DispatchQueue.main.async(execute: {failure(nil)})
             return
         }
         
-        Alamofire.request(authorizeEndpoint, method: .post, parameters: ["grant_type" : "refresh_token", "refresh_token" : refreshToken, "client_id" : self.clientId, "client_secret" : self.clientSecretKey, "redirect_uri" : self.clientRedirectURL], encoding: URLEncoding(destination: .methodDependent)).responseJSON(completionHandler: {response in
-            
-            DispatchQueue.main.async(execute: {
-                if response.response?.statusCode == 200 {
-                    
-                    guard let responseJSON : [String : AnyObject] = response.result.value as? [String : AnyObject] else {
-                        failure(nil)
-                        return
-                    }
-                    
-                    if let expiry : Double = responseJSON["expires_in"] as? Double {
-                        let authToken: AuthToken = AuthToken(accessToken: (responseJSON["access_token"] as? String), expiry: String(NSDate.init(timeIntervalSinceNow: expiry).timeIntervalSince1970), refreshToken: (responseJSON["refresh_token"] as? String), uniqueId: ClientEnvironment.SharedInstance.getRegion())
+        let request = Alamofire.request(authorizeEndpoint,
+                                        method: .post,
+                                        parameters: ["grant_type" : "refresh_token",
+                                                     "refresh_token" : refreshToken,
+                                                     "client_id" : self.clientId,
+                                                     "client_secret" : self.clientSecretKey,
+                                                     "redirect_uri" : self.clientRedirectURL],
+                                        encoding: URLEncoding(destination: .methodDependent))
+            .responseJSON { response in
+                
+                DispatchQueue.main.async(execute: {
+                    if response.response?.statusCode == 200 {
                         
-                        if authToken.isValid() {
-                            completion(authToken)
+                        guard let responseJSON : [String : AnyObject] = response.result.value as? [String : AnyObject] else {
+                            failure(nil)
+                            return
+                        }
+                        
+                        if let expiry : Double = responseJSON["expires_in"] as? Double {
+                            let authToken: AuthToken = AuthToken(accessToken: (responseJSON["access_token"] as? String), expiry: String(NSDate.init(timeIntervalSinceNow: expiry).timeIntervalSince1970), refreshToken: (responseJSON["refresh_token"] as? String), uniqueId: ClientEnvironment.SharedInstance.getRegion())
+                            
+                            if authToken.isValid() {
+                                completion(authToken)
+                            }
+                            else {
+                                failure(nil)
+                            }
                         }
                         else {
                             failure(nil)
                         }
                     }
                     else {
-                        failure(nil)
+                        if let dictionary = response.result.value as? [String: AnyObject] {
+                            failure(dictionary)
+                        }
+                            /*else if let error = response.result.error {
+                             failure(error.userInfo)
+                             }*/
+                        else {
+                            failure(nil)
+                        }
                     }
-                }
-                else {
-                    // TODO: Return error?
-                    // var resultObj = String.init(data: response.data!, encoding: NSUTF8StringEncoding)
-                    failure(nil)
-                }
-            })
-        })
+                })
+        }
+        
+        #if DEBUG
+            debugPrint(request)
+        #endif
     }
     
     open func logout() {
@@ -356,11 +399,11 @@ open class AuthClient: NSObject, AuthControllerDelegate {
     open func register(_ mobile: String, email: String, password: String, completion: @escaping (_ authToken: AuthToken) -> Void, failure: @escaping (_ response : NSDictionary?) -> Void) {
         
         let registerEndpoint = ClientEnvironment.SharedInstance.getAccountsEndpoint() + AccountClientEndpoints.Register
-        let headers = ["Authorization" : self.generateBasicAuthHeader(), "Content-Type" : "application/json", "Accept" : "application/json"]
-
+        self.requestHeaders.update(["Authorization" : self.generateBasicAuthHeader(), "Content-Type" : "application/json", "Accept" : "application/json"])
+        
         // Step 1: Create an account for the user
-        Alamofire.request(registerEndpoint, method: .post, parameters: ["PhoneNumber" : mobile, "Email" : email, "Password" : password, "ConfirmPassword" : password], encoding: JSONEncoding.default, headers: headers).responseJSON { response in
-
+        let request = Alamofire.request(registerEndpoint, method: .post, parameters: ["PhoneNumber" : mobile, "Email" : email, "Password" : password, "ConfirmPassword" : password], encoding: JSONEncoding.default, headers: self.requestHeaders).responseJSON { response in
+            
             if response.response?.statusCode == 200 {
                 
                 // Step 2: If account creation was successful, log the user in
@@ -368,23 +411,37 @@ open class AuthClient: NSObject, AuthControllerDelegate {
                     
                     completion(authToken)
                     
-                    }, failure: {response in
-                        failure(response)
+                }, failure: {response in
+                    failure(response)
                 })
                 
             }
             else {
-                failure(response.result.value as? NSDictionary)
+                if let dictionary = response.result.value as? NSDictionary {
+                    failure(dictionary)
+                }
+                    /*else if let error = response.result.error {
+                     failure(error.userInfo)
+                     }*/
+                else {
+                    failure(nil)
+                }
             }
         }
+        
+        #if DEBUG
+            debugPrint(request)
+        #endif
     }
     
     // Verify Phone
-    open func verifyMobilePhone(_ mobile: String, pin: String, completion: @escaping (_ authToken: AuthToken) -> Void, failure : @escaping (_ response: NSDictionary?) -> Void) {
+    open func verifyMobilePhone(_ mobile: String, pin: String, completion: @escaping (_ authToken: AuthToken) -> Void, failure : @escaping (_ response: [String: AnyObject]?) -> Void) {
         
         let verifyEndpoint = AuthClient.getTokenUrl()
         
-        Alamofire.request(verifyEndpoint, method: .post, parameters: ["client_id" : self.clientId, "client_secret" : self.clientSecretKey, "grant_type" : "phone", "phone_number" : mobile, "pin" : pin], encoding: URLEncoding(destination: .methodDependent), headers: ["Accept" : "application/json", "Authorization" : self.generateBasicAuthHeader()]).responseJSON { response in
+        self.requestHeaders.update(["Accept" : "application/json", "Authorization" : self.generateBasicAuthHeader()])
+        
+        let request = Alamofire.request(verifyEndpoint, method: .post, parameters: ["client_id" : self.clientId, "client_secret" : self.clientSecretKey, "grant_type" : "phone", "phone_number" : mobile, "pin" : pin], encoding: URLEncoding(destination: .methodDependent), headers: ["Accept" : "application/json", "Authorization" : self.generateBasicAuthHeader()]).responseJSON { response in
             
             if response.response?.statusCode == 200 {
                 
@@ -408,9 +465,21 @@ open class AuthClient: NSObject, AuthControllerDelegate {
                 }
             }
             else {
-                failure(response.result.value as? NSDictionary)
+                if let dictionary = response.result.value as? [String: AnyObject] {
+                    failure(dictionary)
+                }
+                    /*else if let error = response.result.error {
+                     failure(error.userInfo)
+                     }*/
+                else {
+                    failure(nil)
+                }
             }
         }
+        
+        #if DEBUG
+            debugPrint(request)
+        #endif
     }
     
     // Resend Verification Pin
@@ -418,9 +487,9 @@ open class AuthClient: NSObject, AuthControllerDelegate {
         
         let verifyEndpoint = ClientEnvironment.SharedInstance.getAccountsEndpoint() + AccountClientEndpoints.ResendPin
         
-        // ["PhoneNumber" : mobile]
+        self.requestHeaders.update(["Accept" : "application/json", "Authorization" : self.generateBasicAuthHeader()])
         
-        Alamofire.request(verifyEndpoint, method: .post, parameters: ["PhoneNumber" : mobile, "grant_type" : "phone"], encoding: JSONEncoding.default, headers: ["Accept" : "application/json", "Authorization" : self.generateBasicAuthHeader()]).responseJSON { response in
+        let request = Alamofire.request(verifyEndpoint, method: .post, parameters: ["PhoneNumber" : mobile, "grant_type" : "phone"], encoding: JSONEncoding.default, headers: ["Accept" : "application/json", "Authorization" : self.generateBasicAuthHeader()]).responseJSON { response in
             
             if response.response?.statusCode == 200 {
                 completion?()
@@ -429,37 +498,78 @@ open class AuthClient: NSObject, AuthControllerDelegate {
                 failure?()
             }
         }
+        
+        #if DEBUG
+            debugPrint(request)
+        #endif
     }
     
     // Forgot/Reset Password
-    open func forgotPassword(_ emailOrPhoneNumber : String, completion : @escaping (_ response : NSDictionary?) -> Void, failure : @escaping (_ response : NSDictionary?) -> Void) {
+    open func forgotPassword(_ emailOrPhoneNumber : String, completion : @escaping (_ response : [String: AnyObject]?) -> Void, failure : @escaping (_ response : [String: AnyObject]?) -> Void) {
         
         let forgotEndpoint = ClientEnvironment.SharedInstance.getAccountsEndpoint() + AccountClientEndpoints.Forgot
         
-        Alamofire.request(forgotEndpoint, method: .post, parameters: ["UserNameEmailOrPhone" : emailOrPhoneNumber], encoding: JSONEncoding.default, headers: ["Accept" : "application/json", "Authorization" : self.generateBasicAuthHeader()]).responseJSON(completionHandler: { response in
-
-            if response.response?.statusCode == 200 {
-                completion(response.result.value as? NSDictionary)
-            }
-            else {
-                failure(response.result.value as? NSDictionary)
-            }
-        })
+        self.requestHeaders.update(["Accept" : "application/json", "Authorization" : self.generateBasicAuthHeader()])
+        
+        let request = Alamofire.request(forgotEndpoint,
+                                        method: .post,
+                                        parameters: ["UserNameEmailOrPhone" : emailOrPhoneNumber],
+                                        encoding: JSONEncoding.default,
+                                        headers: ["Accept" : "application/json", "Authorization" : self.generateBasicAuthHeader()])
+            .responseJSON { response in
+                
+                if response.response?.statusCode == 200 {
+                    completion(response.result.value as? [String: AnyObject])
+                } else {
+                    if let dictionary = response.result.value as? [String: AnyObject] {
+                        failure(dictionary)
+                    }
+                        /*else if let error = response.result.error {
+                         failure(error.userInfo)
+                         }*/
+                    else {
+                        failure(nil)
+                    }
+                }
+        }
+        
+        #if DEBUG
+            debugPrint(request)
+        #endif
     }
     
-    open func resetPassword(_ resetToken : String, password : String, completion : @escaping (_ response : NSDictionary?) -> Void, failure : @escaping (_ response : NSDictionary?) -> Void) {
+    open func resetPassword(_ resetToken : String, password : String, completion : @escaping (_ response : [String: AnyObject]?) -> Void, failure : @escaping (_ response : [String: AnyObject]?) -> Void) {
         
         let resetEndpoint = ClientEnvironment.SharedInstance.getAccountsEndpoint() + AccountClientEndpoints.Reset
-
-        Alamofire.request(resetEndpoint, method: .post, parameters: ["ResetToken" : resetToken, "Password" : password, "ConfirmPassword" : password], encoding: JSONEncoding.default, headers: ["Accept" : "application/json", "Authorization" : self.generateBasicAuthHeader()]).responseJSON(completionHandler: { response in
-
-            if response.response?.statusCode == 200 {
-                completion(response.result.value as? NSDictionary)
-            }
-            else {
-                failure(response.result.value as? NSDictionary)
-            }
-        })
+        
+        self.requestHeaders.update(["Accept" : "application/json", "Authorization" : self.generateBasicAuthHeader()])
+        
+        let request = Alamofire.request(resetEndpoint,
+                                        method: .post,
+                                        parameters: ["ResetToken" : resetToken, "Password" : password, "ConfirmPassword" : password],
+                                        encoding: JSONEncoding.default,
+                                        headers: ["Accept" : "application/json", "Authorization" : self.generateBasicAuthHeader()])
+            .responseJSON { response in
+                
+                if response.response?.statusCode == 200 {
+                    completion(response.result.value as? [String: AnyObject])
+                }
+                else {
+                    if let dictionary = response.result.value as? [String: AnyObject] {
+                        failure(dictionary)
+                    }
+                        /*else if let error = response.result.error {
+                         failure(error.userInfo)
+                         }*/
+                    else {
+                        failure(nil)
+                    }
+                }
+        }
+        
+        #if DEBUG
+            debugPrint(request)
+        #endif
     }
     
     open func getAuthToken() -> AuthToken {

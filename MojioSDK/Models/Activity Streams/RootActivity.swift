@@ -15,6 +15,7 @@ open class RootActivity : Activity {
     open dynamic var Target : Activity? = nil
     open dynamic var Result : Activity? = nil
     open dynamic var Object : Activity? = nil
+    open dynamic var Origin : Activity? = nil
 
     public required convenience init?(map: Map) {
         self.init()
@@ -27,5 +28,6 @@ open class RootActivity : Activity {
         Target <- map["Target"]
         Result <- map["Result"]
         Object <- map["Object"]
+        Origin <- map["Origin"]
     }
 }
