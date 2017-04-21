@@ -300,7 +300,7 @@ open class RestClient: NSObject {
         return self
     }
     
-    open func vehicles(vehicleId : String?) -> Self {
+    open func vehicles(_ vehicleId : String?) -> Self {
         self.requestEntity = RestClientEndpoints.Vehicles
         self.requestEntityId = vehicleId
         self.appendRequestUrlEntityId()
@@ -309,7 +309,7 @@ open class RestClient: NSObject {
         return self
     }
     
-    public func vehicles(vehicleId: String, mergeVehicleId: String) -> Self {
+    public func vehicles(_ vehicleId: String, mergeVehicleId: String) -> Self {
         self.requestEntity = RestClientEndpoints.Vehicles
         self.requestEntityId = vehicleId
         self.requestParams["actual"] = mergeVehicleId as AnyObject?
