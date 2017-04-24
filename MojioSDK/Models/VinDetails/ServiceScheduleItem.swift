@@ -1,31 +1,39 @@
-//
-//  ServiceScheduleItem.swift
-//  Pods
-//
-//  Created by Ashish Agarwal on 2016-10-04.
-//
-//
+/******************************************************************************
+ * Moj.io Inc. CONFIDENTIAL
+ * 2017 Copyright Moj.io Inc.
+ * All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains, the property of
+ * Moj.io Inc. and its suppliers, if any.  The intellectual and technical
+ * concepts contained herein are proprietary to Moj.io Inc. and its suppliers
+ * and may be covered by Patents, pending patents, and are protected by trade
+ * secret or copyright law.
+ *
+ * Dissemination of this information or reproduction of this material is strictly
+ * forbidden unless prior written permission is obtained from Moj.io Inc.
+ *******************************************************************************/
 
 import UIKit
 import ObjectMapper
 
-open class ServiceScheduleItem: Mappable {
+public struct ServiceScheduleItem: Mappable {
     
-    open dynamic var TransNotes: String? = nil
-    open dynamic var ScheduleName: String? = nil
-    open dynamic var ScheduleDescription: String? = nil
-    open dynamic var MaintenanceCategory: String? = nil
-    open dynamic var MaintenanceName: String? = nil
-    open dynamic var MaintenanceNotes: String? = nil
-    open var Intervals : [ServiceInterval] = []
-    open var Events : [ServiceEvent] = []
+    public var TransNotes: String? = nil
+    public var ScheduleName: String? = nil
+    public var ScheduleDescription: String? = nil
+    public var MaintenanceCategory: String? = nil
+    public var MaintenanceName: String? = nil
+    public var MaintenanceNotes: String? = nil
+    public var Intervals: [ServiceInterval] = []
+    public var Events: [ServiceEvent] = []
     
-    public required convenience init?(map: Map) {
+    public init() {}
+    
+    public init?(map: Map) {
         self.init()
     }
 
-    open func mapping(map: Map) {
-        
+    public mutating func mapping(map: Map) {
         TransNotes <- map["TransNotes"]
         ScheduleName <- map["ScheduleName"]
         ScheduleDescription <- map["ScheduleDescription"]

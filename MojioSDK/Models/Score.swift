@@ -1,36 +1,41 @@
-//
-//  Score.swift
-//  MojioSDK
-//
-//  Created by Ashish Agarwal on 2016-02-11.
-//  Copyright © 2016 Mojio. All rights reserved.
-//
+/******************************************************************************
+ * Moj.io Inc. CONFIDENTIAL
+ * 2017 Copyright Moj.io Inc.
+ * All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains, the property of
+ * Moj.io Inc. and its suppliers, if any.  The intellectual and technical
+ * concepts contained herein are proprietary to Moj.io Inc. and its suppliers
+ * and may be covered by Patents, pending patents, and are protected by trade
+ * secret or copyright law.
+ *
+ * Dissemination of this information or reproduction of this material is strictly
+ * forbidden unless prior written permission is obtained from Moj.io Inc.
+ *******************************************************************************/
 
 import UIKit
 import ObjectMapper
 
-open class ScoreMethods {
-    open static let ZScore : String = "ZScore"
-    open static let MinMaxScore : String = "MinMaxScore"
+public enum ScoreMethods: String {
+    case zScore = "ZScore"
+    case minMaxScore = "MinMaxScore"
 }
 
-open class Score: Mappable {
+public struct Score: Mappable {
     
     // ScoreMethods
-    open dynamic var ScoringMethod : String? = nil
-    open dynamic var Value : Float = 0
-    open dynamic var Percentile : Float = 0
-    open dynamic var Average : Float = 0
+    public var ScoringMethod: String? = nil
+    public var Value: Double = 0
+    public var Percentile: Double = 0
+    public var Average: Double = 0
     
-    public required convenience init?(map: Map) {
+    public init() {}
+    
+    public init?(map: Map) {
         self.init()
     }
-    
-    public required init() {
-        
-    }
 
-    open func mapping(map: Map) {
+    public mutating func mapping(map: Map) {
         ScoringMethod <- map["ScoringMethod"]
         Value <- map["Value"]
         Percentile <- map["Percentile"]

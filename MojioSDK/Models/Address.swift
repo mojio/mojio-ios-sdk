@@ -1,37 +1,42 @@
-//
-//  Address.swift
-//  MojioSDK
-//
-//  Created by Ashish Agarwal on 2016-02-11.
-//  Copyright © 2016 Mojio. All rights reserved.
-//
+/******************************************************************************
+ * Moj.io Inc. CONFIDENTIAL
+ * 2017 Copyright Moj.io Inc.
+ * All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains, the property of
+ * Moj.io Inc. and its suppliers, if any.  The intellectual and technical
+ * concepts contained herein are proprietary to Moj.io Inc. and its suppliers
+ * and may be covered by Patents, pending patents, and are protected by trade
+ * secret or copyright law.
+ *
+ * Dissemination of this information or reproduction of this material is strictly
+ * forbidden unless prior written permission is obtained from Moj.io Inc.
+ *******************************************************************************/
 
 import UIKit
 import ObjectMapper
 
-open class Address: Mappable {
+public struct Address: Mappable {
     
-    open dynamic var HouseNumber : String? = nil
-    open dynamic var Road : String? = nil
-    open dynamic var Neighbourhood : String? = nil
-    open dynamic var Suburb : String? = nil
-    open dynamic var City : String? = nil
-    open dynamic var County : String? = nil
-    open dynamic var State : String? = nil
-    open dynamic var PostCode : String? = nil
-    open dynamic var Country : String? = nil
-    open dynamic var CountryCode : String? = nil
-    open dynamic var FormattedAddress : String? = nil
+    public var HouseNumber: String? = nil
+    public var Road: String? = nil
+    public var Neighbourhood: String? = nil
+    public var Suburb: String? = nil
+    public var City: String? = nil
+    public var County: String? = nil
+    public var State: String? = nil
+    public var PostCode: String? = nil
+    public var Country: String? = nil
+    public var CountryCode: String? = nil
+    public var FormattedAddress: String? = nil
     
-    public required convenience init?(map: Map) {
+    public init() {}
+    
+    public init?(map: Map) {
         self.init()
     }
     
-    public required init() {
-        
-    }
-    
-    open func mapping(map: Map) {
+    public mutating func mapping(map: Map) {
         HouseNumber <- map["HouseNumber"]
         Road <- map["Road"]
         Neighbourhood <- map["Neighbourhood"]
@@ -44,5 +49,4 @@ open class Address: Mappable {
         CountryCode <- map["CountryCode"]
         FormattedAddress <- map["FormattedAddress"]
     }
-
 }

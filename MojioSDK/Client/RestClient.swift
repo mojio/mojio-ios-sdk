@@ -1,10 +1,17 @@
-//
-//  RestClient.swift
-//  MojioSDK
-//
-//  Created by Ashish Agarwal on 2016-02-08.
-//  Copyright © 2016 Ashish. All rights reserved.
-//
+/******************************************************************************
+ * Moj.io Inc. CONFIDENTIAL
+ * 2017 Copyright Moj.io Inc.
+ * All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains, the property of
+ * Moj.io Inc. and its suppliers, if any.  The intellectual and technical
+ * concepts contained herein are proprietary to Moj.io Inc. and its suppliers
+ * and may be covered by Patents, pending patents, and are protected by trade
+ * secret or copyright law.
+ *
+ * Dissemination of this information or reproduction of this material is strictly
+ * forbidden unless prior written permission is obtained from Moj.io Inc.
+ *******************************************************************************/
 
 import UIKit
 import Alamofire
@@ -14,7 +21,7 @@ import KeychainSwift
 
 open class NextDone {}
 
-open class ClientHeaders: NSObject {
+open class ClientHeaders {
     open static let defaultRequestHeaders: [String:String] = {
         // Accept-Language HTTP Header; see https://tools.ietf.org/html/rfc7231#section-5.3.5
         let acceptLanguage = NSLocale.preferredLanguages.prefix(6).enumerated().map { index, languageCode in
@@ -38,65 +45,66 @@ open class ClientHeaders: NSObject {
     }()
 }
 
-open class RestClientEndpoints : NSObject {
-    public static let Apps : String = "apps/"
-    public static let Secret : String = "secret/"
-    public static let Groups : String = "groups/"
-    public static let Users : String = "users/"
-    public static let Me : String = "me/"
-    public static let History : String = "history/"
-    public static let States : String = "states/"
-    public static let Locations : String = "locations/"
-    public static let Image : String = "image/"
-    public static let Mojios : String = "mojios/"
-    public static let Permission : String = "permission/"
-    public static let Permissions : String = "permissions/"
-    public static let PhoneNumbers : String = "phonenumbers/"
-    public static let Emails : String = "emails/"
-    public static let Tags : String = "tags/"
-    public static let Trips : String = "trips/"
-    public static let Vehicles : String = "vehicles/"
-    public static let Address : String = "address/"
-    public static let Vin : String = "vin/"
-    public static let ServiceSchedule : String = "serviceschedule/"
-    public static let Next : String = "next/"
-    public static let Activities : String = "activities/"
-    public static let NotificationSettings : String = "activities/settings/"
-    public static let WifiRadio : String = "wifiradio/"
-    public static let Transactions : String = "transactions/"
-    public static let Geofences : String = "geofences/"
-    public static let Aggregates : String = "aggregates/"
-    public static let Statistics : String = "statistics/"
-    public static let DiagnosticCodes : String = "diagnosticcodes/"
-    public static let Polyline : String = "polyline/"
+public enum RestClientEndpoint: String {
+    case base = "/"
+    case apps = "apps/"
+    case secret = "secret/"
+    case groups = "groups/"
+    case users = "users/"
+    case me = "me/"
+    case history = "history/"
+    case states = "states/"
+    case locations = "locations/"
+    case image = "image/"
+    case mojios = "mojios/"
+    case permission = "permission/"
+    case permissions = "permissions/"
+    case phoneNumbers = "phonenumbers/"
+    case emails = "emails/"
+    case tags = "tags/"
+    case trips = "trips/"
+    case vehicles = "vehicles/"
+    case address = "address/"
+    case vin = "vin/"
+    case serviceSchedule = "serviceschedule/"
+    case next = "next/"
+    case activities = "activities/"
+    case notificationSettings = "activities/settings/"
+    case wifiRadio = "wifiradio/"
+    case transactions = "transactions/"
+    case geofences = "geofences/"
+    case aggregates = "aggregates/"
+    case statistics = "statistics/"
+    case diagnosticCodes = "diagnosticcodes/"
+    case polyline = "polyline/"
     
     // Storage
     // Parameters: Type, Id, Key
     // e.g. trips/{id}/store/{key}
-    open static let Storage : String = "%@%@/store/%@"
+    case storage = "%@%@/store/%@"
 }
 
-open class RestClient: NSObject {
+open class RestClient {
     
-    fileprivate var requestMethod : Alamofire.HTTPMethod = .get
+    fileprivate var requestMethod: Alamofire.HTTPMethod = .get
 
-    open dynamic var pushUrl : String?
-    open dynamic var requestUrl : String?
-    open dynamic var requestV1Url : String?
-    open dynamic var requestParams : [String:AnyObject] = [:]
-    open dynamic var requestEntity : String?
-    open dynamic var requestEntityId: String?
+    open var pushUrl: String?
+    open var requestUrl: String?
+    open var requestV1Url: String?
+    open var requestParams: [String:AnyObject] = [:]
+    open var requestEntity: RestClientEndpoint = .base
+    open var requestEntityId: String?
     // Default to global concurrent queue with default priority
     open static var defaultDispatchQueue = DispatchQueue.global()
     
-    fileprivate dynamic var doNext : Bool = false
-    fileprivate dynamic var nextUrl : String? = nil
+    fileprivate var doNext: Bool = false
+    fileprivate var nextUrl: String? = nil
     fileprivate var sinceBeforeFormatter = DateFormatter()
     fileprivate static let SinceBeforeDateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
     fileprivate static let SinceBeforeTimezone = TimeZone(abbreviation: "UTC");
     fileprivate var dispatchQueue = RestClient.defaultDispatchQueue
     
-    public override init() {
+    public init() {
         self.requestUrl = ClientEnvironment.SharedInstance.getApiEndpoint()
         self.requestV1Url = ClientEnvironment.SharedInstance.getV1ApiEndpoint();
         self.pushUrl = ClientEnvironment.SharedInstance.getPushWSEndpoint()
@@ -105,7 +113,7 @@ open class RestClient: NSObject {
         self.sinceBeforeFormatter.timeZone = RestClient.SinceBeforeTimezone
     }
     
-    public convenience init(clientEnvironment : ClientEnvironment) {
+    public convenience init(clientEnvironment: ClientEnvironment) {
         self.init()
         self.requestUrl = clientEnvironment.getApiEndpoint()
         self.requestV1Url = clientEnvironment.getV1ApiEndpoint()
@@ -139,10 +147,10 @@ open class RestClient: NSObject {
     
     private func appendRequestUrlEntityId() {
         if let entityId = self.requestEntityId {
-            self.requestUrl = self.requestUrl! + self.requestEntity! + entityId + "/"
+            self.requestUrl = self.requestUrl! + self.requestEntity.rawValue + entityId + "/"
         }
         else {
-            self.requestUrl = self.requestUrl! + self.requestEntity!
+            self.requestUrl = self.requestUrl! + self.requestEntity.rawValue
         }
     }
     
@@ -157,15 +165,15 @@ open class RestClient: NSObject {
     
     private func appendPushUrlEntityId() {
         if let entityId = self.requestEntityId {
-            self.pushUrl = self.pushUrl! + self.requestEntity! + entityId + "/"
+            self.pushUrl = self.pushUrl! + self.requestEntity.rawValue + entityId + "/"
         }
         else {
-            self.pushUrl = self.pushUrl! + self.requestEntity!
+            self.pushUrl = self.pushUrl! + self.requestEntity.rawValue
         }
     }
     
-    open func apps(_ appId : String?) -> Self {
-        self.requestEntity = RestClientEndpoints.Apps
+    open func apps(_ appId: String?) -> Self {
+        self.requestEntity = .apps
         self.requestEntityId = appId
         self.appendRequestUrlEntityId()
         
@@ -173,22 +181,22 @@ open class RestClient: NSObject {
     }
     
     open func secret() -> Self {
-        self.requestEntity = RestClientEndpoints.Secret
-        self.requestUrl = self.requestUrl! + self.requestEntity!
+        self.requestEntity = .secret
+        self.requestUrl = self.requestUrl! + self.requestEntity.rawValue
 
         return self
     }
     
-    open func groups(_ groupId : String?) -> Self {
-        self.requestEntity = RestClientEndpoints.Groups
+    open func groups(_ groupId: String?) -> Self {
+        self.requestEntity = .groups
         self.requestEntityId = groupId
         self.appendRequestUrlEntityId()
 
         return self
     }
     
-    open func users(_ userId : String?) -> Self {
-        self.requestEntity = RestClientEndpoints.Users
+    open func users(_ userId: String?) -> Self {
+        self.requestEntity = .users
         self.requestEntityId = userId
         self.appendRequestUrlEntityId()
         self.appendPushUrlEntityId()
@@ -197,21 +205,21 @@ open class RestClient: NSObject {
     }
     
     open func me() -> Self {
-        self.requestEntity = RestClientEndpoints.Me
-        self.requestUrl = self.requestUrl! + self.requestEntity!
+        self.requestEntity = .me
+        self.requestUrl = self.requestUrl! + self.requestEntity.rawValue
         
         return self
     }
     
     open func history() -> Self {
-        self.requestEntity = RestClientEndpoints.History
-        self.requestUrl = self.requestUrl! + self.requestEntity!
+        self.requestEntity = .history
+        self.requestUrl = self.requestUrl! + self.requestEntity.rawValue
         
         return self
     }
     
     open func states(time: Date? = nil) -> Self {
-        self.requestEntity = RestClientEndpoints.States
+        self.requestEntity = .states
         
         var suffix = ""
         
@@ -219,27 +227,27 @@ open class RestClient: NSObject {
             suffix = self.sinceBeforeFormatter.string(from: time)
         }
         
-        self.requestUrl = self.requestUrl! + self.requestEntity! + suffix
+        self.requestUrl = self.requestUrl! + self.requestEntity.rawValue + suffix
         
         return self
     }
     
     open func locations() -> Self {
-        self.requestEntity = RestClientEndpoints.Locations
-        self.requestUrl = self.requestUrl! + self.requestEntity!
+        self.requestEntity = .locations
+        self.requestUrl = self.requestUrl! + self.requestEntity.rawValue
 
         return self
     }
     
     open func image() -> Self {
-        self.requestEntity = RestClientEndpoints.Image
-        self.requestUrl = self.requestUrl! + self.requestEntity!
+        self.requestEntity = .image
+        self.requestUrl = self.requestUrl! + self.requestEntity.rawValue
 
         return self
     }
     
-    open func mojios(_ mojioId : String?) -> Self {
-        self.requestEntity = RestClientEndpoints.Mojios
+    open func mojios(_ mojioId: String?) -> Self {
+        self.requestEntity = .mojios
         self.requestEntityId = mojioId
         self.appendRequestUrlEntityId()
         self.appendPushUrlEntityId()
@@ -247,10 +255,10 @@ open class RestClient: NSObject {
         return self
     }
     
-    open func phonenumbers (_ phonenumber : String?, sendVerification : Bool?) -> Self {
-        self.requestEntity = RestClientEndpoints.PhoneNumbers
+    open func phonenumbers (_ phonenumber: String?, sendVerification: Bool?) -> Self {
+        self.requestEntity = .phoneNumbers
         
-        var phone : String? = phonenumber
+        var phone: String? = phonenumber
         
         if phone != nil && sendVerification == true {
             phone = phone! + "?sendVerification=true"
@@ -262,8 +270,8 @@ open class RestClient: NSObject {
         return self
     }
     
-    open func emails (_ email : String?) -> Self {
-        self.requestEntity = RestClientEndpoints.Emails
+    open func emails (_ email: String?) -> Self {
+        self.requestEntity = .emails
         self.requestEntityId = email
         self.appendRequestUrlEntityId()
         
@@ -271,28 +279,28 @@ open class RestClient: NSObject {
     }
     
     open func permission() -> Self {
-        self.requestEntity = RestClientEndpoints.Permission
-        self.requestUrl = self.requestUrl! + self.requestEntity!
+        self.requestEntity = .permission
+        self.requestUrl = self.requestUrl! + self.requestEntity.rawValue
 
         return self
     }
     
     open func permissions() -> Self {
-        self.requestEntity = RestClientEndpoints.Permissions
-        self.requestUrl = self.requestUrl! + self.requestEntity!
+        self.requestEntity = .permissions
+        self.requestUrl = self.requestUrl! + self.requestEntity.rawValue
 
         return self
     }
     
-    open func tags(_ tagId : String) -> Self {
-        self.requestEntity = RestClientEndpoints.Tags
-        self.requestUrl = self.requestUrl! + self.requestEntity! + tagId + "/"
+    open func tags(_ tagId: String) -> Self {
+        self.requestEntity = .tags
+        self.requestUrl = self.requestUrl! + self.requestEntity.rawValue + tagId + "/"
 
         return self
     }
     
-    open func trips(_ tripId : String?) -> Self {
-        self.requestEntity = RestClientEndpoints.Trips
+    open func trips(_ tripId: String?) -> Self {
+        self.requestEntity = .trips
         self.requestEntityId = tripId
         self.appendRequestUrlEntityId()
         self.appendPushUrlEntityId()
@@ -300,8 +308,8 @@ open class RestClient: NSObject {
         return self
     }
     
-    open func vehicles(_ vehicleId : String?) -> Self {
-        self.requestEntity = RestClientEndpoints.Vehicles
+    open func vehicles(_ vehicleId: String?) -> Self {
+        self.requestEntity = .vehicles
         self.requestEntityId = vehicleId
         self.appendRequestUrlEntityId()
         self.appendPushUrlEntityId()
@@ -310,71 +318,74 @@ open class RestClient: NSObject {
     }
     
     public func vehicles(_ vehicleId: String, mergeVehicleId: String) -> Self {
-        self.requestEntity = RestClientEndpoints.Vehicles
+        self.requestEntity = .vehicles
         self.requestEntityId = vehicleId
         self.requestParams["actual"] = mergeVehicleId as AnyObject?
-        self.requestUrl = self.requestUrl! + self.requestEntity! + vehicleId + "/"
-        self.pushUrl = self.pushUrl! + self.requestEntity! + vehicleId + "/"
+        self.requestUrl = self.requestUrl! + self.requestEntity.rawValue + vehicleId + "/"
+        self.pushUrl = self.pushUrl! + self.requestEntity.rawValue + vehicleId + "/"
         
         return self
     }
 
     open func notificationSettings() -> Self {
-        self.requestEntity = RestClientEndpoints.NotificationSettings
-        self.requestUrl = self.requestUrl! + RestClientEndpoints.NotificationSettings
+        self.requestEntity = .notificationSettings
+        self.requestUrl = self.requestUrl! + self.requestEntity.rawValue
         return self
     }
     
     open func address() -> Self {
-        self.requestEntity = RestClientEndpoints.Address
-        self.requestUrl = self.requestUrl! + self.requestEntity!
+        self.requestEntity = .address
+        self.requestUrl = self.requestUrl! + self.requestEntity.rawValue
 
         return self
     }
     
     open func vin() -> Self {
-        self.requestEntity = RestClientEndpoints.Vin
-        self.requestUrl = self.requestUrl! + self.requestEntity!
+        self.requestEntity = .vin
+        self.requestUrl = self.requestUrl! + self.requestEntity.rawValue
 
         return self
     }
     
     open func serviceSchedule() -> Self {
-        self.requestEntity = RestClientEndpoints.ServiceSchedule
-        self.requestUrl = self.requestUrl! + self.requestEntity!
+        self.requestEntity = .serviceSchedule
+        self.requestUrl = self.requestUrl! + self.requestEntity.rawValue
 
         return self
     }
     
     open func next() -> Self {
-        self.requestEntity = RestClientEndpoints.Next
-        self.requestUrl = self.requestUrl! + self.requestEntity!
+        self.requestEntity = .next
+        self.requestUrl = self.requestUrl! + self.requestEntity.rawValue
 
         return self
     }
     
     open func storage(_ key: String) -> Self {
 
-        self.requestUrl = self.requestV1Url! + String.init(format: RestClientEndpoints.Storage, self.requestEntity!, self.requestEntityId! , key)
+        if let requestEntityId = self.requestEntityId {
+            self.requestUrl = self.requestV1Url! + String.init(format: RestClientEndpoint.storage.rawValue, self.requestEntity.rawValue, requestEntityId, key)
+        }
+
         return self
     }
     
     open func activities() -> Self {
-        self.requestEntity = RestClientEndpoints.Activities
-        self.requestUrl = self.requestUrl! + self.requestEntity!
-        self.pushUrl = self.pushUrl! + self.requestEntity! + "/"
+        self.requestEntity = .activities
+        self.requestUrl = self.requestUrl! + self.requestEntity.rawValue
+        self.pushUrl = self.pushUrl! + self.requestEntity.rawValue + "/"
         return self
     }
     
     open func wifiRadio() -> Self {
-        self.requestEntity = RestClientEndpoints.WifiRadio
-        self.requestUrl = self.requestUrl! + self.requestEntity!
+        self.requestEntity = .wifiRadio
+        self.requestUrl = self.requestUrl! + self.requestEntity.rawValue
         
         return self
     }
     
     open func transactions(_ transactionId: String?) -> Self {
-        self.requestEntity = RestClientEndpoints.Transactions
+        self.requestEntity = .transactions
         self.requestEntityId = transactionId
         self.appendRequestUrlEntityId()
         self.appendPushUrlEntityId()
@@ -383,7 +394,7 @@ open class RestClient: NSObject {
     }
     
     open func geofences(_ geofenceId: String?) -> Self {
-        self.requestEntity = RestClientEndpoints.Geofences
+        self.requestEntity = .geofences
         self.requestEntityId = geofenceId
         self.appendRequestUrlEntityId()
         self.appendPushUrlEntityId()
@@ -393,37 +404,37 @@ open class RestClient: NSObject {
     
     open func aggregates(ofType type: String?) -> Self {
         
-        self.requestEntity = RestClientEndpoints.Aggregates
+        self.requestEntity = .aggregates
         self.appendRequestUrlEntity(entity: type)
         
         return self
     }
     
     open func statistics() -> Self {
-        self.requestEntity = RestClientEndpoints.Statistics
-        self.requestUrl = self.requestUrl! + self.requestEntity!
+        self.requestEntity = .statistics
+        self.requestUrl = self.requestUrl! + self.requestEntity.rawValue
         
         return self
     }
 
     open func diagnosticCodes(_ code: String?) -> Self {
         
-        self.requestEntity = RestClientEndpoints.DiagnosticCodes
+        self.requestEntity = .diagnosticCodes
         self.appendRequestUrlEntity(entity: code)
         
         return self
     }
     
     public func polyline() -> Self {
-        self.requestEntity = RestClientEndpoints.Polyline
-        self.requestUrl = self.requestUrl! + self.requestEntity!
+        self.requestEntity = .polyline
+        self.requestUrl = self.requestUrl! + self.requestEntity.rawValue
         
         return self
     }
 
-    open func query(top : String? = nil, skip : String? = nil, filter : String? = nil, select : String? = nil, orderby : String? = nil, count : String? = nil, since: Date? = nil, before: Date? = nil, fields: [String]? = nil) -> Self {
+    open func query(top: String? = nil, skip: String? = nil, filter: String? = nil, select: String? = nil, orderby: String? = nil, count: String? = nil, since: Date? = nil, before: Date? = nil, fields: [String]? = nil) -> Self {
         
-        var requestParams : [String:AnyObject] = [:]
+        var requestParams: [String:AnyObject] = [:]
         
         if let top = top {
             requestParams["top"] = top as AnyObject?
@@ -472,8 +483,8 @@ open class RestClient: NSObject {
     
     /*
      Don't need this helper function given default values in the other query function
-     public func query(top : String?, skip : String?, filter : String?, select : String?, orderby : String?) -> Self {
-        return self.query(top, skip : skip, filter : filter, select : select, orderby : orderby, since: nil, before: nil, fields: nil)
+     public func query(top: String?, skip: String?, filter: String?, select: String?, orderby: String?) -> Self {
+        return self.query(top, skip: skip, filter: filter, select: select, orderby: orderby, since: nil, before: nil, fields: nil)
     }*/
     
     open func run(completion: @escaping (_ response: Any) -> Void, failure: @escaping (_ error: Any?) -> Void) {
@@ -508,10 +519,10 @@ open class RestClient: NSObject {
     fileprivate var defaultHeaders: [String: String] {
         var headers = ClientHeaders.defaultRequestHeaders
         
-        headers.update(["Content-Type" : "application/json", "Accept" : "application/json"])
+        headers.update(["Content-Type": "application/json", "Accept": "application/json"])
         
         // Before every request, make sure access token exists
-        if let accessToken : String = self.accessToken() {
+        if let accessToken: String = self.accessToken() {
             headers["Authorization"] = "Bearer " + accessToken
         }
         
@@ -529,7 +540,7 @@ open class RestClient: NSObject {
         #endif
     }
     
-    open func runEncodeJSON(jsonObject: AnyObject, completion: @escaping (_ response : Any) -> Void, failure: @escaping (_ error : Any?) -> Void) {
+    open func runEncodeJSON(jsonObject: AnyObject, completion: @escaping (_ response: Any) -> Void, failure: @escaping (_ error: Any?) -> Void) {
         
         let request = Alamofire.request(self.requestUrl!, method: self.requestMethod, parameters: [:], encoding: JSONEncoding.default, headers: self.defaultHeaders).responseJSON { response in
             self.handleResponse(response, completion: completion, failure: failure)
@@ -543,9 +554,9 @@ open class RestClient: NSObject {
     open func runEncodeUrl(_ parameters: [String:AnyObject], completion: @escaping (_ response: Any) -> Void, failure: @escaping (_ error: Any?) -> Void) {
         
         // Before every request, make sure access token exists
-        var headers : [String:String] = [:]
+        var headers: [String:String] = [:]
         
-        if let accessToken : String = self.accessToken() {
+        if let accessToken: String = self.accessToken() {
             headers["Authorization"] = "Bearer " + accessToken
         }
         
@@ -562,19 +573,19 @@ open class RestClient: NSObject {
         if response.response?.statusCode == 200 || response.response?.statusCode == 201 {
             if let responseDict = response.result.value as? [String: Any] {
                 if let dataArray = responseDict["Data"] as? [Any] {
-                    let array : NSMutableArray = []
+                    let array: NSMutableArray = []
                     for  obj in dataArray {
                         if
-                            let dict = obj as? [String : Any],
+                            let dict = obj as? [String: Any],
                             let model = self.parseDict(dict) {
                             
                             array.add(model)
                         }
                     }
-                    var comp : AnyObject = array
+                    var comp: Any = array
                     if let _ = requestParams["includeCount"] {
                         if let count = responseDict["TotalCount"] as? Int {
-                            comp = Result(data: array, count: count)
+                            comp = Result(TotalCount: count, Data: array)
                         }
                     }
                     
@@ -603,7 +614,7 @@ open class RestClient: NSObject {
                         completion (obj)
                     }
                     else {
-                        if let message : String = responseDict["Message"] as? String {
+                        if let message: String = responseDict["Message"] as? String {
                             completion (message)
                         }
                         else {
@@ -632,100 +643,100 @@ open class RestClient: NSObject {
         }
     }
     
-    open func parseDict(_ dict : [String: Any]) -> Any? {
-        switch self.requestEntity! {
+    open func parseDict(_ dict: [String: Any]) -> Any? {
+        switch self.requestEntity {
             
-        case RestClientEndpoints.Apps:
+        case .apps:
             let model = Mapper<App>().map(JSON: dict)
             return model!
             
-        case RestClientEndpoints.Secret:
+        case .secret:
             return nil
             
-        case RestClientEndpoints.Groups:
+        case .groups:
             let model = Mapper<Group>().map(JSON: dict)
             return model!
             
-        case RestClientEndpoints.Users:
+        case .users:
             let model = Mapper<User>().map(JSON: dict)
             return model!
             
-        case RestClientEndpoints.Me:
+        case .me:
             let model = Mapper<User>().map(JSON: dict)
             return model!
             
-        case RestClientEndpoints.History:
+        case .history:
             return nil
             
-        case RestClientEndpoints.States:
+        case .states:
             let model = Mapper<VehicleMeasures>().map(JSON: dict)
             return model!
             
-        case RestClientEndpoints.Locations:
+        case .locations:
             let model = Mapper<Location>().map(JSON: dict)
             return model!
 
-        case RestClientEndpoints.Image:
+        case .image:
             let model = Mapper<Image>().map(JSON: dict)
             return model!
 
-        case RestClientEndpoints.Mojios:
+        case .mojios:
             let model = Mapper<Mojio>().map(JSON: dict)
             return model!
             
-        case RestClientEndpoints.Trips:
+        case .trips:
             let model = Mapper<Trip>().map(JSON: dict)
             return model!
 
-        case RestClientEndpoints.Vehicles:
+        case .vehicles:
             let model = Mapper<Vehicle>().map(JSON: dict)
             return model!
             
-        case RestClientEndpoints.Address:
+        case .address:
             let model = Mapper<Address>().map(JSON: dict)
             return model!
             
-        case RestClientEndpoints.Vin:
+        case .vin:
             let model = Mapper<Vin>().map(JSON: dict)
             return model!
             
-        case RestClientEndpoints.ServiceSchedule:
+        case .serviceSchedule:
             let model = Mapper<ServiceSchedule>().map(JSON: dict)
             return model!
             
-        case RestClientEndpoints.Next:
+        case .next:
             let model = Mapper<NextServiceSchedule>().map(JSON: dict)
             return model!
 
-        case RestClientEndpoints.Activities:
+        case .activities:
             let model = Mapper<RootActivity>().map(JSON: dict)
             return model!
             
-        case RestClientEndpoints.NotificationSettings:
+        case .notificationSettings:
             let model = Mapper<NotificationsSettings>().map(JSON: dict)
             return model!
             
-        case RestClientEndpoints.WifiRadio:
+        case .wifiRadio:
             // Returns Transaction Id
             return dict["TransactionId"]
             
-        case RestClientEndpoints.Transactions:
+        case .transactions:
             // Returns Transaction State
             return dict["State"]
             
-        case RestClientEndpoints.Geofences:
+        case .geofences:
             let model = Mapper<Geofence>().map(JSON: dict)
             return model!
 
-        case RestClientEndpoints.Aggregates:
+        case .aggregates:
             let model = Mapper<AggregationData>().map(JSON: dict)
             return model!
 
-        case RestClientEndpoints.Statistics:
+        case .statistics:
             let model = Mapper<VehicleStatistics>().map(JSON: dict)
             return model!
             
-        case RestClientEndpoints.Polyline:
+        case .polyline:
             let model = Mapper<TripPolyline>().map(JSON: dict)
             return model!
             
@@ -746,18 +757,3 @@ public extension Dictionary {
         }
     }
 }
-/*
-internal extension String {
-    
-    func JSONString() -> String {
-        return "\"" + self
-            .stringByReplacingOccurrencesOfString("\"", withString: "\\\"", options: .CaseInsensitiveSearch)
-            .stringByReplacingOccurrencesOfString("/", withString: "\\/", options: .CaseInsensitiveSearch)
-            .stringByReplacingOccurrencesOfString("\n", withString: "\\n", options: .CaseInsensitiveSearch)
-            .stringByReplacingOccurrencesOfString("\u{8}", withString: "\\b", options: .CaseInsensitiveSearch)
-            .stringByReplacingOccurrencesOfString("\u{12}", withString: "\\f", options: .CaseInsensitiveSearch)
-            .stringByReplacingOccurrencesOfString("\r", withString: "\\r", options: .CaseInsensitiveSearch)
-            .stringByReplacingOccurrencesOfString("\t", withString: "\\t", options: .CaseInsensitiveSearch) + "\""
-    }
-}
-*/

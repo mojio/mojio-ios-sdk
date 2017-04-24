@@ -1,34 +1,50 @@
-//
-//  Distance.swift
-//  Pods
-//
-//  Created by Ashish Agarwal on 2016-06-28.
-//
-//
+/******************************************************************************
+ * Moj.io Inc. CONFIDENTIAL
+ * 2017 Copyright Moj.io Inc.
+ * All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains, the property of
+ * Moj.io Inc. and its suppliers, if any.  The intellectual and technical
+ * concepts contained herein are proprietary to Moj.io Inc. and its suppliers
+ * and may be covered by Patents, pending patents, and are protected by trade
+ * secret or copyright law.
+ *
+ * Dissemination of this information or reproduction of this material is strictly
+ * forbidden unless prior written permission is obtained from Moj.io Inc.
+ *******************************************************************************/
 
 import UIKit
 import ObjectMapper
 
 // Units in DistanceUnits
-open class Distance: DeviceMeasurement {
+public struct Distance: DeviceMeasurement {
     
-    public required convenience init?(map: Map) {
+    // DeviceMeasurement
+    public var BaseUnit: String? = nil
+    public var BaseValue: Double = 0
+    public var Unit: String? = nil
+    public var Value: Double = 0
+    public var Timestamp: String?  = nil
+    
+    public init() {}
+    
+    public init?(map: Map) {
         self.init()
     }
     
-    open func jsonDict() -> NSDictionary {
-        var dictionary : [String:AnyObject] = [:]
+    public func jsonDict() -> [String:Any] {
+        var map: [String:Any] = [:]
         
         if let baseUnit = self.BaseUnit {
-            dictionary["BaseUnit"] = baseUnit as AnyObject?
-            dictionary["BaseValue"] = self.BaseValue as AnyObject?
+            map["BaseUnit"] = baseUnit as AnyObject?
+            map["BaseValue"] = self.BaseValue as AnyObject?
         }
         
         if let unit = self.Unit {
-            dictionary["Unit"] = unit as AnyObject?
-            dictionary["Value"] = self.Value as AnyObject?
+            map["Unit"] = unit as AnyObject?
+            map["Value"] = self.Value as AnyObject?
         }
 
-        return dictionary as NSDictionary
+        return map
     }
 }

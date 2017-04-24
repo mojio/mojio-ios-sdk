@@ -1,31 +1,38 @@
-//
-//  KeychainManager.swift
-//  MojioSDK
-//
-//  Created by Ashish Agarwal on 2016-03-10.
-//  Copyright © 2016 Mojio. All rights reserved.
-//
+/******************************************************************************
+ * Moj.io Inc. CONFIDENTIAL
+ * 2017 Copyright Moj.io Inc.
+ * All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains, the property of
+ * Moj.io Inc. and its suppliers, if any.  The intellectual and technical
+ * concepts contained herein are proprietary to Moj.io Inc. and its suppliers
+ * and may be covered by Patents, pending patents, and are protected by trade
+ * secret or copyright law.
+ *
+ * Dissemination of this information or reproduction of this material is strictly
+ * forbidden unless prior written permission is obtained from Moj.io Inc.
+ *******************************************************************************/
 
 import UIKit
 import KeychainSwift
 
-open class KeychainKeys : NSObject {
-    open static let AccessToken: String = "MojioSDKAccessToken"
-    open static let RefreshToken: String = "MojioSDKRefreshToken"
-    open static let AccessTokenExpiry: String = "MojioSDKAccessTokenExpiry"
-    open static let UniqueId: String = "MojioSDKUniqueId"
+public enum KeychainKey: String {
+    case accessToken = "MojioSDKAccessToken"
+    case refreshToken = "MojioSDKRefreshToken"
+    case accessTokenExpiry = "MojioSDKAccessTokenExpiry"
+    case uniqueId = "MojioSDKUniqueId"
 }
 
-open class KeychainManager: NSObject {
+open class KeychainManager {
     
     open func getAuthToken() -> AuthToken {
-        let authToken = AuthToken.init()
+        var authToken = AuthToken.init()
         let keychain = KeychainSwift()
 
-        authToken.accessToken = keychain.get(KeychainKeys.AccessToken)
-        authToken.refreshToken = keychain.get(KeychainKeys.RefreshToken)
-        authToken.expiry = keychain.get(KeychainKeys.AccessTokenExpiry)
-        authToken.uniqueId = keychain.get(KeychainKeys.UniqueId)
+        authToken.accessToken = keychain.get(KeychainKey.accessToken.rawValue)
+        authToken.refreshToken = keychain.get(KeychainKey.refreshToken.rawValue)
+        authToken.expiry = keychain.get(KeychainKey.accessTokenExpiry.rawValue)
+        authToken.uniqueId = keychain.get(KeychainKey.uniqueId.rawValue)
         
         return authToken
     }
@@ -38,27 +45,27 @@ open class KeychainManager: NSObject {
         let keychain = KeychainSwift()
         
         if let accessToken: String = authToken.accessToken {
-            keychain.set(accessToken, forKey: KeychainKeys.AccessToken)
+            keychain.set(accessToken, forKey: KeychainKey.accessToken.rawValue)
         }
 
         if let refreshToken: String = authToken.refreshToken {
-            keychain.set(refreshToken, forKey : KeychainKeys.RefreshToken)
+            keychain.set(refreshToken, forKey: KeychainKey.refreshToken.rawValue)
         }
         
         if let expiry: String = authToken.expiry {
-            keychain.set(expiry as String, forKey: KeychainKeys.AccessTokenExpiry)
+            keychain.set(expiry as String, forKey: KeychainKey.accessTokenExpiry.rawValue)
         }
 
         if let uniqueId: String = authToken.uniqueId {
-            keychain.set(uniqueId, forKey: KeychainKeys.UniqueId)
+            keychain.set(uniqueId, forKey: KeychainKey.uniqueId.rawValue)
         }
     }
     
     open func deleteTokenFromKeychain() {
         let keychain = KeychainSwift()
-        keychain.delete(KeychainKeys.AccessToken)
-        keychain.delete(KeychainKeys.RefreshToken)
-        keychain.delete(KeychainKeys.AccessTokenExpiry)
-        keychain.delete(KeychainKeys.UniqueId)
+        keychain.delete(KeychainKey.accessToken.rawValue)
+        keychain.delete(KeychainKey.refreshToken.rawValue)
+        keychain.delete(KeychainKey.accessTokenExpiry.rawValue)
+        keychain.delete(KeychainKey.uniqueId.rawValue)
     }    
 }

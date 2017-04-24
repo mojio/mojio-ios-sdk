@@ -1,34 +1,39 @@
-//
-//  Engine.swift
-//  MojioSDK
-//
-//  Created by Ashish Agarwal on 2016-02-26.
-//  Copyright © 2016 Mojio. All rights reserved.
-//
+/******************************************************************************
+ * Moj.io Inc. CONFIDENTIAL
+ * 2017 Copyright Moj.io Inc.
+ * All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains, the property of
+ * Moj.io Inc. and its suppliers, if any.  The intellectual and technical
+ * concepts contained herein are proprietary to Moj.io Inc. and its suppliers
+ * and may be covered by Patents, pending patents, and are protected by trade
+ * secret or copyright law.
+ *
+ * Dissemination of this information or reproduction of this material is strictly
+ * forbidden unless prior written permission is obtained from Moj.io Inc.
+ *******************************************************************************/
 
 import UIKit
 import ObjectMapper
 
-open class Engine: Mappable {
+public struct Engine: Mappable {
     
-    open dynamic var Name : String? = nil
-    open dynamic var Cylinders : String? = nil
-    open dynamic var Displacement : Float = 0
-    open dynamic var FuelInduction : String? = nil
-    open dynamic var FuelQuality : String? = nil
-    open dynamic var FuelType : String? = nil
-    open dynamic var MaxHp : String? = nil
-    open dynamic var MaxHpAt : String? = nil
+    public var Name: String? = nil
+    public var Cylinders: String? = nil
+    public var Displacement: Double = 0
+    public var FuelInduction: String? = nil
+    public var FuelQuality: String? = nil
+    public var FuelType: String? = nil
+    public var MaxHp: String? = nil
+    public var MaxHpAt: String? = nil
 
-    public required convenience init?(map: Map) {
-        self.init();
-    }
+    public init() {}
     
-    public required init() {
-        
+    public init?(map: Map) {
+        self.init()
     }
 
-    open func mapping(map: Map) {
+    public mutating func mapping(map: Map) {
         Name <- map["Name"]
         Cylinders <- map["Cylinders"]
         Displacement <- map["Displacement"]

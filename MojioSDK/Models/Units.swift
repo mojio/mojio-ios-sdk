@@ -1,116 +1,123 @@
-//
-//  Units.swift
-//  MojioSDK
-//
-//  Created by Suresh Venkatraman on 4/18/16.
-//  Copyright © 2016 Mojio. All rights reserved.
-//
+/******************************************************************************
+ * Moj.io Inc. CONFIDENTIAL
+ * 2017 Copyright Moj.io Inc.
+ * All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains, the property of
+ * Moj.io Inc. and its suppliers, if any.  The intellectual and technical
+ * concepts contained herein are proprietary to Moj.io Inc. and its suppliers
+ * and may be covered by Patents, pending patents, and are protected by trade
+ * secret or copyright law.
+ *
+ * Dissemination of this information or reproduction of this material is strictly
+ * forbidden unless prior written permission is obtained from Moj.io Inc.
+ *******************************************************************************/
 
 import Foundation
 
 // Risk Severity
-open class RiskSeverity : NSObject {
-    open static let Unknown : String = "Unknown"
-    open static let Low : String = "Low"
-    open static let Medium : String = "Medium"
-    open static let High : String = "High"
-    open static let None : String = "None"
+public enum RiskSeverity: String {
+    case unknown = "Unknown"
+    case low = "Low"
+    case medium = "Medium"
+    case high = "High"
+    case none = "None"
 }
 
 // Distance
-open class DistanceUnits : NSObject {
-    open static let Meters : String = "Meters"
-    open static let Miles : String = "Miles"
-    open static let Kilometers : String = "Kilometers"
-    open static let NauticalMiles : String = "NauticalMiles"
-    open static let CentiMeter : String = "CentiMeter"
-    open static let MilliMeter : String = "MilliMeter"
+public enum DistanceUnit: String {
+    case meters = "Meters"
+    case miles = "Miles"
+    case kilometers = "Kilometers"
+    case nauticalMiles = "NauticalMiles"
+    case centiMeter = "CentiMeter"
+    case milliMeter = "MilliMeter"
 }
 
 // Time
-open class TimePeriodUnits : NSObject {
-    open static let Ticks : String = "Ticks"
-    open static let Milliseconds : String = "Milliseconds"
-    open static let Seconds : String = "Seconds"
-    open static let Minutes : String = "Minutes"
-    open static let Hours : String = "Hours"
-    open static let Days : String = "Days"
-    open static let Weeks : String = "Weeks"
-    open static let Months : String = "Months"
-    open static let Years : String = "Years"
+public enum TimePeriodUnit: String {
+    case ticks = "Ticks"
+    case milliseconds = "Milliseconds"
+    case seconds = "Seconds"
+    case minutes = "Minutes"
+    case hours = "Hours"
+    case days = "Days"
+    case weeks = "Weeks"
+    case months = "Months"
+    case years = "Years"
 }
 
 // Speed
-open class SpeedUnits {
-    open static let KilometersPerHour : String = "KilometersPerHour"
-    open static let MilesPerHour : String = "MilesPerHour"
+public enum SpeedUnit: String {
+    case kilometersPerHour = "KilometersPerHour"
+    case milesPerHour = "MilesPerHour"
 }
 
 // Acceleration
-open class AccelerationUnits : NSObject {
-    open static let MetersPerSecondPerSecond : String = "MetersPerSecondPerSecond"
-    open static let KilometersPerHourPerSecond : String  = "KilometersPerHourPerSecond"
-    open static let MilesPerHourPerSecond : String = "MilesPerHourPerSecond"
+public enum AccelerationUnit: String {
+    case metersPerSecondPerSecond = "MetersPerSecondPerSecond"
+    case kilometersPerHourPerSecond  = "KilometersPerHourPerSecond"
+    case milesPerHourPerSecond = "MilesPerHourPerSecond"
 }
 
 // Percent
-open class PercentageUnits : NSObject {
-    open static let Percentage : String = "Percentage"
+public enum PercentageUnit: String {
+    case percentage = "Percentage"
 }
 
 // RPM
-open class RPMUnits {
-    open static let RevolutionsPerMinute : String = "RevolutionsPerMinute"
+public enum RPMUnit: String {
+    case revolutionsPerMinute = "RevolutionsPerMinute"
 }
 
 // Accelerometer
-open class AccelerometerUnits: NSObject  {
-    open static let MilliGUnits : String = "MilliGUnits"
-    open static let NewtonsPerKilogram : String = "NewtonsPerKilogram"
-    open static let XirgoUnit : String = "XirgoUnit"
-    open static let MetersPerSecondPerSecond : String = "MetersPerSecondPerSecond"
-    open static let CentimetersPerSecondPerSecond : String = "CentimetersPerSecondPerSecond"
-    open static let GUnits : String = "GUnits"
+public enum AccelerometerUnit: String  {
+    case milliGUnits = "MilliGUnits"
+    case newtonsPerKilogram = "NewtonsPerKilogram"
+    case xirgoUnit = "XirgoUnit"
+    case metersPerSecondPerSecond = "MetersPerSecondPerSecond"
+    case centimetersPerSecondPerSecond = "CentimetersPerSecondPerSecond"
+    case gUnits = "GUnits"
 }
 
 // Battery
-open class BatteryVoltageUnits : NSObject {
-    open static let MilliVolts : String = "MilliVolts"
-    open static let Volts : String = "Volts"
+public enum BatteryVoltageUnit: String {
+    case milliVolts = "MilliVolts"
+    case volts = "Volts"
 }
 
 // Fuel
-open class FuelType : NSObject {
-    open static let Query : String = "Query"
-    open static let Gasoline : String = "Gasoline"
-    open static let Diesel : String = "Diesel"
-    open static let Electric : String = "Electric"
+public enum FuelType: String {
+    case query = "Query"
+    case gasoline = "Gasoline"
+    case diesel = "Diesel"
+    case electric = "Electric"
 }
 
-open class FuelCapacityUnits : NSObject {
-    open static let Gallons : String = "Gallons"
-    open static let Liters : String = "Liters"
+public enum FuelCapacityUnit: String {
+    case gallons = "Gallons"
+    case liters = "Liters"
 }
 
-open class FuelEfficiencyUnits : NSObject {
-    open static let MilesPerGallon : String = "MilesPerGallon"
-    open static let KilometerPerLiter : String = "KilometerPerLiter"
-    open static let LitersPerHundredKilometers : String = "LitersPerHundredKilometers"
+public enum FuelEfficiencyUnit: String {
+    case milesPerGallon = "MilesPerGallon"
+    case kilometerPerLiter = "KilometerPerLiter"
+    case litersPerHundredKilometers = "LitersPerHundredKilometers"
 }
 
-open class FuelEfficiencyCalculationMethod : NSObject {
-    open static let Query : String = "Query"
-    open static let EngineFuelRate : String = "EngineFuelRate"
-    open static let MassAirFlow : String = "MassAirFlow"
-    open static let Calculated : String = "Calculated"
-    open static let None : String = "None"
+public enum FuelEfficiencyCalculationMethod: String {
+    case query = "Query"
+    case engineFuelRate = "EngineFuelRate"
+    case massAirFlow = "MassAirFlow"
+    case calculated = "Calculated"
+    case none = "None"
 }
 
-open class FuelVolumeUnits : NSObject {
-    open static let Gallon        : String = "Gallon"
-    open static let Liter         : String = "Liter"
-    open static let Gill          : String = "Gill"
-    open static let Pint          : String = "Pint"
-    open static let Quart         : String = "Quart"
-    open static let Milliliter    : String = "Milliliter"
+public enum FuelVolumeUnit: String {
+    case gallon = "Gallon"
+    case liter = "Liter"
+    case gill = "Gill"
+    case pint = "Pint"
+    case quart = "Quart"
+    case milliliter = "Milliliter"
 }

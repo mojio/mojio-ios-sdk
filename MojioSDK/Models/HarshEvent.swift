@@ -1,49 +1,54 @@
-//
-//  HarshEvent.swift
-//  MojioSDK
-//
-//  Created by Suresh Venkatraman on 9/21/16.
-//  Copyright © 2016 Mojio. All rights reserved.
-//
+/******************************************************************************
+ * Moj.io Inc. CONFIDENTIAL
+ * 2017 Copyright Moj.io Inc.
+ * All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains, the property of
+ * Moj.io Inc. and its suppliers, if any.  The intellectual and technical
+ * concepts contained herein are proprietary to Moj.io Inc. and its suppliers
+ * and may be covered by Patents, pending patents, and are protected by trade
+ * secret or copyright law.
+ *
+ * Dissemination of this information or reproduction of this material is strictly
+ * forbidden unless prior written permission is obtained from Moj.io Inc.
+ *******************************************************************************/
 
 import UIKit
 import ObjectMapper
 
-open class HarshEventEventTypes : NSObject {
-    open static let Acceleration : String = "Acceleration"
-    open static let Deceleration : String = "Deceleration"
-    open static let Turning : String = "Turning"
-    open static let Upward : String = "Upward"
-    open static let Downward : String = "Downward"
-    open static let Accident : String = "Accident"
-    open static let PostAccident : String = "PostAccident"
+public enum HarshEventEventType: String {
+    case acceleration = "Acceleration"
+    case deceleration = "Deceleration"
+    case turning = "Turning"
+    case upward = "Upward"
+    case downward = "Downward"
+    case accident = "Accident"
+    case postAccident = "PostAccident"
 }
 
-open class HarshEventTurnTypes : NSObject {
-    open static let Left : String = "Left"
-    open static let Right : String = "Right"
+public enum HarshEventTurnType: String {
+    case left = "Left"
+    case right = "Right"
 }
 
-open class HarshEvent: Mappable {
+public struct HarshEvent: Mappable {
     
-    open dynamic var Timestamp : String? = nil
-    open dynamic var Value : Bool = false
-    open dynamic var EventType : String? = nil
-    open dynamic var TurnType : String? = nil
+    public var Timestamp: String? = nil
+    public var Value: Bool = false
+    public var EventType: String? = nil
+    public var TurnType: String? = nil
     
-    public required convenience init?(map: Map) {
+    public init() {}
+    
+    public init?(map: Map) {
         self.init()
     }
-    
-    public required init() {
-        
-    }
 
-    open func mapping(map: Map) {
-        Timestamp <- map["Timestamp"];
-        Value <- map["Value"];
-        EventType <- map["EventType"];
-        TurnType <- map["TurnType"];
+    public mutating func mapping(map: Map) {
+        Timestamp <- map["Timestamp"]
+        Value <- map["Value"]
+        EventType <- map["EventType"]
+        TurnType <- map["TurnType"]
     }
     
 }

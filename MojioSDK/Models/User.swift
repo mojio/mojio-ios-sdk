@@ -1,76 +1,83 @@
-//
-//  User.swift
-//  MojioSDK
-//
-//  Created by Ashish Agarwal on 2016-02-10.
-//  Copyright © 2016 Mojio. All rights reserved.
-//
+/******************************************************************************
+ * Moj.io Inc. CONFIDENTIAL
+ * 2017 Copyright Moj.io Inc.
+ * All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains, the property of
+ * Moj.io Inc. and its suppliers, if any.  The intellectual and technical
+ * concepts contained herein are proprietary to Moj.io Inc. and its suppliers
+ * and may be covered by Patents, pending patents, and are protected by trade
+ * secret or copyright law.
+ *
+ * Dissemination of this information or reproduction of this material is strictly
+ * forbidden unless prior written permission is obtained from Moj.io Inc.
+ *******************************************************************************/
 
 import UIKit
 import ObjectMapper
 
-open class User : Mappable {
+public struct User: Mappable, PrimaryKey {
     
-    open dynamic var FirstName : String? = nil
-    open dynamic var LastName : String? = nil
-    open dynamic var UserName : String? = nil
-    open dynamic var Jurisdiction : String? = nil
-    open var Emails : [Email] = []
-    open var PhoneNumbers : [PhoneNumber] = []
-    open var Img : Image? = nil
-    open var Tags : [String] = []
-    open dynamic var Id : String? = nil
-    open dynamic var CreatedOn : String? = nil
-    open dynamic var LastModified : String? = nil
+    public var FirstName: String? = nil
+    public var LastName: String? = nil
+    public var UserName: String? = nil
+    public var Jurisdiction: String? = nil
+    public var Emails: [Email] = []
+    public var PhoneNumbers: [PhoneNumber] = []
+    public var Img: Image? = nil
+    public var Tags: [String] = []
+    public var Id: String? = nil
+    public var CreatedOn: String? = nil
+    public var LastModified: String? = nil
     
     /* PUT & POST properties */
-    open dynamic var email : String? = nil
+    public var email: String? = nil
     
-    public required convenience init?(map: Map) {
-        self.init()
-    }
-    
-    public required init() {
-        
-    }
-    
-    open static func primaryKey() -> String? {
+    public static var primaryKey: String {
         return "Id"
     }
+
+    public init() {}
     
-    open func EmailsArray() -> NSArray {
+    public init?(map: Map) {
+        self.init()
+    }
+
+    public func EmailsArray() -> NSArray {
         return self.Emails as NSArray
     }
     
-    open func PhoneNumbersArray() -> NSArray {
+    public func PhoneNumbersArray() -> NSArray {
         return self.PhoneNumbers as NSArray
     }
     
-    open func TagsArray() -> NSArray {
+    public func TagsArray() -> NSArray {
         return self.Tags as NSArray
     }
 
-    open func jsonDict () -> NSDictionary {
-        let dictionary : NSMutableDictionary = NSMutableDictionary()
+    public func jsonDict() -> [String: Any] {
+        var map: [String: Any] = [:]
         
-        if self.UserName != nil {
-            dictionary.setObject(self.UserName!, forKey: "UserName" as NSCopying)
+        if let userName = self.UserName {
+            map["UserName"] = userName
         }
-        if self.email != nil {
-            dictionary.setObject(self.email!, forKey: "Email" as NSCopying)
+
+        if let email = self.email {
+            map["Email"] = email
         }
-        if self.FirstName != nil {
-            dictionary.setObject(self.FirstName!, forKey: "FirstName" as NSCopying)
+
+        if let firstName = self.FirstName {
+            map["FirstName"] = firstName
         }
-        if self.LastName != nil {
-            dictionary.setObject(self.LastName!, forKey: "LastName" as NSCopying)
+
+        if let lastName = self.LastName {
+            map["LastName"] = lastName
         }
         
-        return dictionary
+        return map
     }
     
-    open func mapping(map: Map) {
-        
+    public mutating func mapping(map: Map) {
         self.FirstName <- map["FirstName"]
         self.LastName <- map["LastName"]
         self.UserName <- map["UserName"]

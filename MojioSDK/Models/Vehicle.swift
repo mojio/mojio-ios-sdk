@@ -1,75 +1,81 @@
-//
-//  Vehicle.swift
-//  MojioSDK
-//
-//  Created by Ashish Agarwal on 2016-02-11.
-//  Copyright © 2016 Mojio. All rights reserved.
-//
+/******************************************************************************
+ * Moj.io Inc. CONFIDENTIAL
+ * 2017 Copyright Moj.io Inc.
+ * All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains, the property of
+ * Moj.io Inc. and its suppliers, if any.  The intellectual and technical
+ * concepts contained herein are proprietary to Moj.io Inc. and its suppliers
+ * and may be covered by Patents, pending patents, and are protected by trade
+ * secret or copyright law.
+ *
+ * Dissemination of this information or reproduction of this material is strictly
+ * forbidden unless prior written permission is obtained from Moj.io Inc.
+ *******************************************************************************/
 
 import UIKit
 import ObjectMapper
 
-open class Vehicle: Mappable {
+public struct Vehicle: Mappable, PrimaryKey {
     
-    open dynamic var Name : String? = nil
-    open dynamic var LicensePlate : String? = nil
-    open dynamic var VIN : String? = nil
-    open dynamic var DetectedVIN : String? = nil
-    open dynamic var OverrideVIN : String? = nil
-    open var CompatDetails: CompatibilityDetails? = nil
-    open dynamic var CurrentTrip : String? = nil
-    open dynamic var MojioId : String? = nil
-    open var VehicleImage : Image? = nil
-    open var MilStatus : Bool = false
-    open dynamic var LastContactTime : String? = nil
-    open var DiagnosticCodes : [DiagnosticCode] = []
-    open var VehicleAccelerometer : Accelerometer? = nil
-    open var VehicleAcceleration : Acceleration? = nil
-    open var Deceleration : Acceleration? = nil
-    open var VehicleSpeed : Speed? = nil
-    open var VehicleOdometer : Odometer? = nil
-    open var VirtualOdometer : Odometer? = nil
-    open var VehicleRPM : RPM? = nil
-    open var VehicleFuelEfficiency : FuelEfficiency? = nil
+    public var Name: String? = nil
+    public var LicensePlate: String? = nil
+    public var VIN: String? = nil
+    public var DetectedVIN: String? = nil
+    public var OverrideVIN: String? = nil
+    public var CompatDetails: CompatibilityDetails? = nil
+    public var CurrentTrip: String? = nil
+    public var MojioId: String? = nil
+    public var VehicleImage: Image? = nil
+    public var MilStatus: Bool = false
+    public var LastContactTime: String? = nil
+    public var DiagnosticCodes: [DiagnosticCode] = []
+    public var VehicleAccelerometer: Accelerometer? = nil
+    public var VehicleAcceleration: Acceleration? = nil
+    public var Deceleration: Acceleration? = nil
+    public var VehicleSpeed: Speed? = nil
+    public var VehicleOdometer: Odometer? = nil
+    public var VirtualOdometer: Odometer? = nil
+    public var VehicleRPM: RPM? = nil
+    public var VehicleFuelEfficiency: FuelEfficiency? = nil
     
     // FuelEfficiencyCalculationMethod
-    open dynamic var FuelEfficiencyCalculationMethod : String? = nil
-    open var VehicleFuelLevel : FuelLevel? = nil
-    open var VehicleFuelVolume : FuelVolume? = nil
+    public var FuelEfficiencyCalculationMethod: String? = nil
+    public var VehicleFuelLevel: FuelLevel? = nil
+    public var VehicleFuelVolume: FuelVolume? = nil
     
     // FuelType
-    open dynamic var FuelType : String? = nil
-    open dynamic var GatewayTime : String? = nil
-    open var VehicleHarshEventState : HarshEvent? = nil
-    open var VehicleIdleState : IdleState? = nil
-    open var VehicleIgnitionState : BooleanState? = nil
-    open var VehicleBattery : Battery? = nil
-    open var VehicleHeading : Heading? = nil
-    open var VehicleLocation : Location? = nil
-    open var VehicleAccidentState : BooleanState? = nil
-    open var VehicleVinDetails : VinDetails? = nil
-    open var VehicleTowState : BooleanState? = nil
-    open var VehicleParkedState : BooleanState? = nil
-    open var Tags : [String] = []
-    open var OwnerGroups : [String] = []
-    open dynamic var Id : String? = nil
-    open dynamic var CreatedOn : String? = nil
-    open dynamic var LastModified : String? = nil
+    public var FuelType: String? = nil
+    public var GatewayTime: String? = nil
+    public var VehicleHarshEventState: HarshEvent? = nil
+    public var VehicleIdleState: IdleState? = nil
+    public var VehicleIgnitionState: BooleanState? = nil
+    public var VehicleBattery: Battery? = nil
+    public var VehicleHeading: Heading? = nil
+    public var VehicleLocation: Location? = nil
+    public var VehicleAccidentState: BooleanState? = nil
+    public var VehicleVinDetails: VinDetails? = nil
+    public var VehicleTowState: BooleanState? = nil
+    public var VehicleParkedState: BooleanState? = nil
+    public var Tags: [String] = []
+    public var OwnerGroups: [String] = []
+    public var Id: String? = nil
+    public var CreatedOn: String? = nil
+    public var LastModified: String? = nil
+    public var Deleted: Bool = false
     
-    open var Deleted : Bool = false
-    
-    public required convenience init?(map: Map) {
-        self.init()
-    }
-    
-    public required init() {}
-    
-    open static func primaryKey() -> String? {
+    public static var primaryKey: String {
         return "Id"
     }
     
-    open func jsonVINDict () -> NSDictionary {
-        let dictionary : NSMutableDictionary = NSMutableDictionary()
+    public init() {}
+    
+    public init?(map: Map) {
+        self.init()
+    }
+    
+    public func jsonVINDict () -> NSDictionary {
+        let dictionary: NSMutableDictionary = NSMutableDictionary()
 
         if self.VIN != nil {
             dictionary.setObject(self.VIN!, forKey: "VIN" as NSCopying)
@@ -85,8 +91,8 @@ open class Vehicle: Mappable {
         return dictionary
     }
     
-    open func jsonDict () -> NSDictionary {
-        let dictionary : NSMutableDictionary = NSMutableDictionary()
+    public func jsonDict () -> NSDictionary {
+        let dictionary: NSMutableDictionary = NSMutableDictionary()
         
         if self.Name != nil {
             dictionary.setObject(self.Name!, forKey: "Name" as NSCopying)
@@ -103,7 +109,7 @@ open class Vehicle: Mappable {
         return dictionary
     }
     
-    open func mapping(map: Map) {
+    public mutating func mapping(map: Map) {
         
         Name <- map["Name"]
         LicensePlate <- map["LicensePlate"]
@@ -134,7 +140,7 @@ open class Vehicle: Mappable {
         VehicleIdleState <- map["IdleState"]
         VehicleIgnitionState <- map["IgnitionState"]
         VehicleBattery <- map["Battery"]
-        VehicleHeading <- map["Heading"];
+        VehicleHeading <- map["Heading"]
         VehicleLocation <- map["Location"]
         VehicleAccidentState <- map["AccidentState"]
         VehicleVinDetails <- map["VinDetails"]

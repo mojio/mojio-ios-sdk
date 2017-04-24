@@ -1,30 +1,35 @@
-//
-//  Image.swift
-//  MojioSDK
-//
-//  Created by Ashish Agarwal on 2016-02-10.
-//  Copyright © 2016 Mojio. All rights reserved.
-//
+/******************************************************************************
+ * Moj.io Inc. CONFIDENTIAL
+ * 2017 Copyright Moj.io Inc.
+ * All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains, the property of
+ * Moj.io Inc. and its suppliers, if any.  The intellectual and technical
+ * concepts contained herein are proprietary to Moj.io Inc. and its suppliers
+ * and may be covered by Patents, pending patents, and are protected by trade
+ * secret or copyright law.
+ *
+ * Dissemination of this information or reproduction of this material is strictly
+ * forbidden unless prior written permission is obtained from Moj.io Inc.
+ *******************************************************************************/
 
 import UIKit
 import ObjectMapper
 
-open class Image: Mappable {
-    open dynamic var Src : String? = nil
-    open dynamic var Normal : String? = nil
-    open dynamic var Thumbnail : String? = nil
+public struct Image: Mappable {
+    public var Src: String? = nil
+    public var Normal: String? = nil
+    public var Thumbnail: String? = nil
     
-    public required convenience init?(map: Map) {
+    public init() {}
+    
+    public init?(map: Map) {
         self.init()
     }
     
-    public required init() {
-        
-    }
-    
-    open func mapping(map: Map) {
-        Src <- map["Src"];
-        Normal <- map["Normal"];
-        Thumbnail <- map["Thumbnail"];
+    public mutating func mapping(map: Map) {
+        Src <- map["Src"]
+        Normal <- map["Normal"]
+        Thumbnail <- map["Thumbnail"]
     }
 }

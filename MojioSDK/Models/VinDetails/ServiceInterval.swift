@@ -1,28 +1,37 @@
-//
-//  ServiceInterval.swift
-//  Pods
-//
-//  Created by Ashish Agarwal on 2016-10-04.
-//
-//
+/******************************************************************************
+ * Moj.io Inc. CONFIDENTIAL
+ * 2017 Copyright Moj.io Inc.
+ * All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains, the property of
+ * Moj.io Inc. and its suppliers, if any.  The intellectual and technical
+ * concepts contained herein are proprietary to Moj.io Inc. and its suppliers
+ * and may be covered by Patents, pending patents, and are protected by trade
+ * secret or copyright law.
+ *
+ * Dissemination of this information or reproduction of this material is strictly
+ * forbidden unless prior written permission is obtained from Moj.io Inc.
+ *******************************************************************************/
 
 import UIKit
 import ObjectMapper
 
-open class ServiceInterval: Mappable {
+public struct ServiceInterval: Mappable {
     
-    open dynamic var OperatingParameter: String? = nil
-    open dynamic var OperatingParameterNotes: String? = nil
-    open dynamic var IntervalType: String? = nil
-    open dynamic var Value: Float = 0
-    open dynamic var Units: String? = nil
-    open dynamic var InitalValue: Float = 0
+    public var OperatingParameter: String? = nil
+    public var OperatingParameterNotes: String? = nil
+    public var IntervalType: String? = nil
+    public var Value: Double = 0
+    public var Units: String? = nil
+    public var InitalValue: Double = 0
 
-    public required convenience init?(map: Map) {
+    public init() {}
+    
+    public init?(map: Map) {
         self.init()
     }
     
-    open func mapping(map: Map) {
+    public mutating func mapping(map: Map) {
         OperatingParameter <- map["OperatingParameter"]
         OperatingParameterNotes <- map["OperatingParameterNotes"]
         IntervalType <- map["IntervalType"]
@@ -30,6 +39,4 @@ open class ServiceInterval: Mappable {
         Units <- map["Units"]
         InitalValue <- map["InitalValue"]
     }
-
-
 }

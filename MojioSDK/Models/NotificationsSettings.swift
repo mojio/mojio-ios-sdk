@@ -1,85 +1,89 @@
-//
-//  NotificationsSettings.swift
-//  Pods
-//
-//  Created by Narayan Sainaney on 2016-06-30.
-//
-//
+/******************************************************************************
+ * Moj.io Inc. CONFIDENTIAL
+ * 2017 Copyright Moj.io Inc.
+ * All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains, the property of
+ * Moj.io Inc. and its suppliers, if any.  The intellectual and technical
+ * concepts contained herein are proprietary to Moj.io Inc. and its suppliers
+ * and may be covered by Patents, pending patents, and are protected by trade
+ * secret or copyright law.
+ *
+ * Dissemination of this information or reproduction of this material is strictly
+ * forbidden unless prior written permission is obtained from Moj.io Inc.
+ *******************************************************************************/
 
 import Foundation
 import ObjectMapper
 
-open class SettingsGeofence : Mappable {
+public struct SettingsGeofence: Mappable, PrimaryKey {
     
-    open dynamic var Id : String? = nil
-    open dynamic var EnableEnterActivity: Bool = false
-    open dynamic var EnableExitActivity: Bool = false
+    public var Id: String? = nil
+    public var EnableEnterActivity: Bool = false
+    public var EnableExitActivity: Bool = false
     
-    public required convenience init?(map: Map) {
-        self.init()
-    }
-    
-    public required init() {
-        
-    }
-
-    open static func primaryKey() -> String? {
+    public static var primaryKey: String {
         return "Id"
     }
     
-    open func mapping(map: Map) {
+    public init() {}
+    
+    public init?(map: Map) {
+        self.init()
+    }
+    
+    public mutating func mapping(map: Map) {
         Id <- map["Id"]
         EnableEnterActivity <- map["EnableEnterActivity"]
         EnableExitActivity <- map["EnableExitActivity"]
     }
 }
 
-open class NotificationsSettings :  Mappable {
+public struct NotificationsSettings:  Mappable {
     
-    open var SpeedThreshold : Speed? = nil
-    open dynamic var EnableTripCompletedActivity : Bool = false
-    open dynamic var EnableTripStartActivity : Bool = false
-    open dynamic var EnableLowFuelActivity : Bool = false
-    open dynamic var EnableLowBatteryActivity : Bool = false
-    open dynamic var EnableSpeedActivity : Bool = false
-    open dynamic var EnableDtcActivity : Bool = false
-    open dynamic var EnableCheckEngineActivity : Bool = false
-    open dynamic var EnableTowActivity : Bool = false
-    open dynamic var EnableMaintenanceActivity : Bool = false
-    open dynamic var EnableRecallActivity : Bool = false
-    open dynamic var EnableServiceBulletinActivity : Bool = false
-    open dynamic var EnableDisturbanceActivity : Bool = false
-    open dynamic var EnableAccidentActivity : Bool = false
-    open dynamic var EnableDeviceUnpluggedActivity : Bool = false
+    public var SpeedThreshold: Speed? = nil
+    public var EnableTripCompletedActivity: Bool = false
+    public var EnableTripStartActivity: Bool = false
+    public var EnableLowFuelActivity: Bool = false
+    public var EnableLowBatteryActivity: Bool = false
+    public var EnableSpeedActivity: Bool = false
+    public var EnableDtcActivity: Bool = false
+    public var EnableCheckEngineActivity: Bool = false
+    public var EnableTowActivity: Bool = false
+    public var EnableMaintenanceActivity: Bool = false
+    public var EnableRecallActivity: Bool = false
+    public var EnableServiceBulletinActivity: Bool = false
+    public var EnableDisturbanceActivity: Bool = false
+    public var EnableAccidentActivity: Bool = false
+    public var EnableDeviceUnpluggedActivity: Bool = false
 
-    open dynamic var EnableGeofenceActivity : Bool = false
-    open  var Geofences : [SettingsGeofence] = []
+    public var EnableGeofenceActivity: Bool = false
+    public var Geofences: [SettingsGeofence] = []
     
-    public required convenience init?(map: Map) {
+    public init() {}
+    
+    public init?(map: Map) {
         self.init()
     }
     
-    public required init() {
-        
-    }
-    
-    open func jsonDict () -> [String: Any] {
-        var dictionary = self.toJSON()
+    public func jsonDict () -> [String: Any] {
+        var map = self.toJSON()
         
         if let threshold = self.SpeedThreshold {
-            dictionary["SpeedThreshold"] = threshold.jsonDict()
+            map["SpeedThreshold"] = threshold.jsonDict()
         }
         
         var geofences: [[String: Any]] = []
         for geofence in self.Geofences {
             geofences.append(geofence.toJSON())
         }
-        dictionary["Geofences"] = geofences
+
+        map["Geofences"] = geofences
         
-        return dictionary
+        return map
     }
     
-    open func mapping(map: Map) {        
+    public mutating func mapping(map: Map) {
         SpeedThreshold <- map["SpeedThreshold"]
         EnableTripStartActivity <- map["EnableTripStartActivity"]
         EnableTripCompletedActivity <- map["EnableTripCompletedActivity"]
@@ -98,6 +102,5 @@ open class NotificationsSettings :  Mappable {
         
         EnableGeofenceActivity <- map["EnableGeofenceActivity"]
         Geofences <- map["Geofences"]
-        
     }
 }
