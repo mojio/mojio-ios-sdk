@@ -1,62 +1,70 @@
-//
-//  App.swift
-//  MojioSDK
-//
-//  Created by Ashish Agarwal on 2016-02-25.
-//  Copyright © 2016 Mojio. All rights reserved.
-//
+/******************************************************************************
+ * Moj.io Inc. CONFIDENTIAL
+ * 2017 Copyright Moj.io Inc.
+ * All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains, the property of
+ * Moj.io Inc. and its suppliers, if any.  The intellectual and technical
+ * concepts contained herein are proprietary to Moj.io Inc. and its suppliers
+ * and may be covered by Patents, pending patents, and are protected by trade
+ * secret or copyright law.
+ *
+ * Dissemination of this information or reproduction of this material is strictly
+ * forbidden unless prior written permission is obtained from Moj.io Inc.
+ *******************************************************************************/
 
 import UIKit
 import ObjectMapper
 
-open class App: Mappable {
+public struct App: Mappable, PrimaryKey {
     
-    open dynamic var Name : String? = nil
-    open dynamic var Description : String? = nil
-    open var Downloads : Int? = nil
-    open var RedirectUris : [String] = []
-    open var AppImage : Image? = nil
-    open var Tags : [String] = []
-    open dynamic var Id : String? = nil
-    open dynamic var CreatedOn : String? = nil
-    open dynamic var LastModified : String? = nil
-
-    public required convenience init?(map: Map) {
-        self.init();
-    }
+    public var Name: String? = nil
+    public var Description: String? = nil
+    public var Downloads: Int? = nil
+    public var RedirectUris: [String] = []
+    public var AppImage: Image? = nil
+    public var Tags: [String] = []
+    public var Id: String? = nil
+    public var CreatedOn: String? = nil
+    public var LastModified: String? = nil
     
-    open static func primaryKey() -> String? {
+    public var createdOn: Date? = nil
+    public var lastModified: Date? = nil
+    
+    public static var primaryKey: String {
         return "Id"
     }
+
+    public init() {}
     
-    public required init() {
-        
+    public init?(map: Map) {
+        self.init()
     }
     
-    open func json () -> String? {
-        let dictionary : NSMutableDictionary = NSMutableDictionary()
+    public func json () -> String? {
+        var map: [String: Any] = [:]
         
-        if self.Name != nil {
-            dictionary.setObject(self.Name!, forKey: "Name" as NSCopying)
+        if let name = self.Name {
+            map["Name"] = name
         }
-        if self.Description != nil {
-            dictionary.setObject(self.Description!, forKey: "Description" as NSCopying)
+
+        if let desc = self.Description {
+            map["Description"] = desc
         }
+
         if self.RedirectUris.count > 0 {
-            dictionary.setObject(self.RedirectUris, forKey: "RedirectUris" as NSCopying)
+            map["RedirectUris"] = self.RedirectUris
         }
         
-        if dictionary.count == 0 {
+        if map.count == 0 {
             return nil
         }
         
-        let data = try! JSONSerialization.data(withJSONObject: dictionary, options:  JSONSerialization.WritingOptions.prettyPrinted)
-        
-        return NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
+        let data = try! JSONSerialization.data(withJSONObject: map, options:  JSONSerialization.WritingOptions.prettyPrinted)
+        return String(data: data, encoding: String.Encoding.utf8)
     }
     
-    open func mapping(map: Map) {
-        
+    public mutating func mapping(map: Map) {        
         Name <- map["Name"]
         Description <- map["Description"]
         Downloads <- map["Downloads"]
@@ -66,7 +74,8 @@ open class App: Mappable {
         Id <- map["Id"]
         CreatedOn <- map["CreatedOn"]
         LastModified <- map["LastModified"]
-
+        
+        createdOn = self.CreatedOn?.toDate
+        lastModified = self.LastModified?.toDate
     }
-
 }

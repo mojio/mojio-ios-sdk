@@ -1,31 +1,40 @@
-//
-//  ActivityLink.swift
-//  MojioSDK
-//
-//  Created by Narayan Sainaney on 2016-06-27.
-//  Copyright © 2016 Mojio. All rights reserved.
-//
+/******************************************************************************
+ * Moj.io Inc. CONFIDENTIAL
+ * 2017 Copyright Moj.io Inc.
+ * All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains, the property of
+ * Moj.io Inc. and its suppliers, if any.  The intellectual and technical
+ * concepts contained herein are proprietary to Moj.io Inc. and its suppliers
+ * and may be covered by Patents, pending patents, and are protected by trade
+ * secret or copyright law.
+ *
+ * Dissemination of this information or reproduction of this material is strictly
+ * forbidden unless prior written permission is obtained from Moj.io Inc.
+ *******************************************************************************/
 
 import Foundation
 import ObjectMapper
 
-open class BaseActivity : NSObject, Mappable {
-    open dynamic var Id : String? = nil
-    open dynamic var ActivityType : String? = nil
-    open dynamic var Href : String? = nil
-    open dynamic var Name : String? = nil
-    open dynamic var NameMap : Dictionary<String, String>? = nil
-    
-    public required convenience init?(map: Map) {
-        self.init()
+public protocol BaseActivityLocation: Mappable, PrimaryKey {
+    var Id: String? {get set}
+    var ActivityType: String? {get set}
+    var Href: String? {get set}
+    var Name: String? {get set}
+    var NameMap: Dictionary<String, String>? {get set}
+}
+
+extension BaseActivityLocation {
+
+    public mutating func mapping(map: Map) {
+        self.baseActivityLocationMapping(map: map)
     }
     
-    open func mapping(map: Map) {
+    public mutating func baseActivityLocationMapping(map: Map) {
         Id <- map["Id"]
         ActivityType <- map["Type"]
         Href <- map["Href"]
         Name <- map["Name"]
         NameMap <- map["NameMap"]
     }
-
 }

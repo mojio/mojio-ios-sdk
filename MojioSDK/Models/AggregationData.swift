@@ -1,44 +1,57 @@
-//
-//  AggregationData.swift
-//  MojioSDK
-//
-//  Created by Oleksii Lubianyi on 10/3/16.
-//  Copyright © 2016 Mojio. All rights reserved.
-//
+/******************************************************************************
+ * Moj.io Inc. CONFIDENTIAL
+ * 2017 Copyright Moj.io Inc.
+ * All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains, the property of
+ * Moj.io Inc. and its suppliers, if any.  The intellectual and technical
+ * concepts contained herein are proprietary to Moj.io Inc. and its suppliers
+ * and may be covered by Patents, pending patents, and are protected by trade
+ * secret or copyright law.
+ *
+ * Dissemination of this information or reproduction of this material is strictly
+ * forbidden unless prior written permission is obtained from Moj.io Inc.
+ *******************************************************************************/
 
 import Foundation
 import ObjectMapper
 
-open class AggregationDataMeasurementType: NSObject {
-    
-    open static let MeasureBattery : String = "battery"
+public enum AggregationDataMeasurementType: String {
+    case measureBattery = "battery"
 }
 
-open class AggregationData: Mappable {
-
-    open dynamic var Total        : Float = 0
-    open dynamic var Average      : Float = 0
-    open dynamic var Max          : Float = 0
-    open dynamic var Min          : Float = 0
-    open dynamic var Units        : String?
-    open dynamic var Date         : String?
-    open dynamic var EndDate      : String?
-    open dynamic var Count        : Int = 0
-    open dynamic var TripCount    : Int = 0
+public struct AggregationData: Mappable {
+    public var Total        : Double = 0
+    public var Average      : Double = 0
+    public var Max          : Double = 0
+    public var Min          : Double = 0
+    public var Units        : String?
+    public var Date         : String?
+    public var EndDate      : String?
+    public var Count        : Int = 0
+    public var TripCount    : Int = 0
     
-    public required convenience init?(map: Map) {
+    public var date: Date? = nil
+    public var endDate: Date? = nil
+    
+    public init() {}
+    
+    public init?(map: Map) {
         self.init()
     }
     
-    open func mapping(map: Map) {
-        Total       <- map["Total"]
-        Average     <- map["Average"]
-        Max         <- map["Max"]
-        Min         <- map["Min"]
-        Units       <- map["Units"]
-        Date        <- map["Date"]
-        EndDate     <- map["EndDate"]
-        Count       <- map["Count"]
-        TripCount   <- map["TripCount"]
+    public mutating func mapping(map: Map) {
+        Total <- map["Total"]
+        Average <- map["Average"]
+        Max <- map["Max"]
+        Min <- map["Min"]
+        Units <- map["Units"]
+        Date <- map["Date"]
+        EndDate <- map["EndDate"]
+        Count <- map["Count"]
+        TripCount <- map["TripCount"]
+        
+        date = self.Date?.toDate
+        endDate = self.EndDate?.toDate
     }
 }

@@ -1,17 +1,24 @@
-//
-//  WSClient.swift
-//  Pods
-//
-//  Created by Narayan Sainaney on 2016-06-03.
-//
-//
+/******************************************************************************
+ * Moj.io Inc. CONFIDENTIAL
+ * 2017 Copyright Moj.io Inc.
+ * All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains, the property of
+ * Moj.io Inc. and its suppliers, if any.  The intellectual and technical
+ * concepts contained herein are proprietary to Moj.io Inc. and its suppliers
+ * and may be covered by Patents, pending patents, and are protected by trade
+ * secret or copyright law.
+ *
+ * Dissemination of this information or reproduction of this material is strictly
+ * forbidden unless prior written permission is obtained from Moj.io Inc.
+ *******************************************************************************/
 
 import Foundation
 import SwiftWebSocket
 import SwiftyJSON
 
 
-open class WSClient : RestClient {
+open class WSClient: RestClient {
     
     // Default to global concurrent queue with default priority
     public static var wsDefaultDispatchQueue = DispatchQueue.global()
@@ -25,7 +32,7 @@ open class WSClient : RestClient {
     
         var request = URLRequest(url: URL(string:super.pushUrl!)!)
         
-        if let accessToken : String = super.accessToken() {
+        if let accessToken: String = super.accessToken() {
             request.addValue("Bearer " + accessToken, forHTTPHeaderField: "Authorization")
         }
         
@@ -39,7 +46,7 @@ open class WSClient : RestClient {
         }
         
         ws.event.error = { error in
-            print("WEBSOCKET ERROR:  - \(file) : \(error)")
+            print("WEBSOCKET ERROR:  - \(file): \(error)")
             failure(MojioError(code: "WebSocketError", message: "Error received \(error)"))
         }
         ws.event.open = {
@@ -49,7 +56,7 @@ open class WSClient : RestClient {
         ws.event.message = { message in
             if let text = message as? String {
                 if let data = text.data(using: String.Encoding.utf8) {
-                    if let dict = try! JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions()) as? [String : Any] {
+                    if let dict = try! JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions()) as? [String: Any] {
                         if let obj = super.parseDict(dict) {
                             next(obj as Any)
                         }

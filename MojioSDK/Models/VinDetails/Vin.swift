@@ -1,51 +1,53 @@
-//
-//  VIN.swift
-//  MojioSDK
-//
-//  Created by Ashish Agarwal on 2016-02-26.
-//  Copyright © 2016 Mojio. All rights reserved.
-//
+/******************************************************************************
+ * Moj.io Inc. CONFIDENTIAL
+ * 2017 Copyright Moj.io Inc.
+ * All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains, the property of
+ * Moj.io Inc. and its suppliers, if any.  The intellectual and technical
+ * concepts contained herein are proprietary to Moj.io Inc. and its suppliers
+ * and may be covered by Patents, pending patents, and are protected by trade
+ * secret or copyright law.
+ *
+ * Dissemination of this information or reproduction of this material is strictly
+ * forbidden unless prior written permission is obtained from Moj.io Inc.
+ *******************************************************************************/
 
 import UIKit
 import ObjectMapper
 
-open class Vin: Mappable {
+public struct Vin: Mappable, PrimaryKey {
     
-    open dynamic var VIN : String? = nil
-    open dynamic var Timestamp : String? = nil
-    open dynamic var Market : String? = nil
-    open var Year : Int = 0
-    open dynamic var Make : String? = nil
-    open dynamic var Model : String? = nil
-    open dynamic var VehicleType : String? = nil
-    open dynamic var BodyType : String? = nil
-    open dynamic var DriveType : String? = nil
-    open dynamic var FuelTankSize : Float = 0
-    open dynamic var EPAFuelEfficiency : Float = 0
-    open var VehicleEngine : Engine? = nil
-    open var VehicleTransmission : Transmission? = nil
-    open var Warranties : [Warranty] = []
-    open var Recalls : [Recall] = []
-    open var ServiceBulletins : [ServiceBulletin] = []
+    public var VIN: String? = nil
+    public var Timestamp: String? = nil
+    public var Market: String? = nil
+    public var Year: Int = 0
+    public var Make: String? = nil
+    public var Model: String? = nil
+    public var VehicleType: String? = nil
+    public var BodyType: String? = nil
+    public var DriveType: String? = nil
+    public var FuelTankSize: Double = 0
+    public var EPAFuelEfficiency: Double = 0
+    public var VehicleEngine: Engine? = nil
+    public var VehicleTransmission: Transmission? = nil
+    public var Warranties: [Warranty] = []
+    public var Recalls: [Recall] = []
+    public var ServiceBulletins: [ServiceBulletin] = []
     
-    public required convenience init?(map: Map) {
-        self.init();
-    }
-    
-    public required init() {
-        
-    }
+    public var timestamp: Date? = nil
 
-    open static func primaryKey() -> String? {
+    public static var primaryKey: String {
         return "VIN"
     }
-        
-    open func WarrantiesArray() -> NSArray {
-        return self.Warranties as NSArray
+    
+    public init() {}
+    
+    public init?(map: Map) {
+        self.init()
     }
     
-    open func mapping(map: Map) {
-        
+    public mutating func mapping(map: Map) {
         VIN <- map["VIN"]
         Timestamp <- map["Timestamp"]
         Market <- map["Market"]
@@ -62,6 +64,7 @@ open class Vin: Mappable {
         Warranties <- map["Warranties"]
         Recalls <- map["Recalls"]
         ServiceBulletins <- map["ServiceBulletins"]
-
+        
+        timestamp = self.Timestamp?.toDate
     }
 }

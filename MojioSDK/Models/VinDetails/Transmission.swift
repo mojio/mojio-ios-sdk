@@ -1,34 +1,38 @@
-//
-//  Transmission.swift
-//  MojioSDK
-//
-//  Created by Ashish Agarwal on 2016-02-26.
-//  Copyright © 2016 Mojio. All rights reserved.
-//
+/******************************************************************************
+ * Moj.io Inc. CONFIDENTIAL
+ * 2017 Copyright Moj.io Inc.
+ * All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains, the property of
+ * Moj.io Inc. and its suppliers, if any.  The intellectual and technical
+ * concepts contained herein are proprietary to Moj.io Inc. and its suppliers
+ * and may be covered by Patents, pending patents, and are protected by trade
+ * secret or copyright law.
+ *
+ * Dissemination of this information or reproduction of this material is strictly
+ * forbidden unless prior written permission is obtained from Moj.io Inc.
+ *******************************************************************************/
 
 import UIKit
 import ObjectMapper
 
-open class Transmission: Mappable {
+public struct Transmission: Mappable {
     
-    open dynamic var Name : String? = nil
-    open dynamic var TransmissionType : String? = nil
-    open dynamic var DetailType : String? = nil
-    open dynamic var Gears : String? = nil
+    public var Name: String? = nil
+    public var `Type`: String? = nil
+    public var DetailType: String? = nil
+    public var Gears: String? = nil
 
-    public required convenience init?(map: Map) {
-        self.init();
+    public init() {}
+    
+    public init?(map: Map) {
+        self.init()
     }
     
-    public required init() {
-        
-    }
-
-    open func mapping(map: Map) {
+    public mutating func mapping(map: Map) {
         Name <- map["Name"]
-        TransmissionType <- map["Type"]
+        Type <- map["Type"]
         DetailType <- map["DetailType"]
         Gears <- map["Gears"]
     }
-
 }

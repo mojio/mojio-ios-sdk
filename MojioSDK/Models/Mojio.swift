@@ -1,60 +1,72 @@
-//
-//  Mojio.swift
-//  MojioSDK
-//
-//  Created by Ashish Agarwal on 2016-02-10.
-//  Copyright © 2016 Mojio. All rights reserved.
-//
+/******************************************************************************
+ * Moj.io Inc. CONFIDENTIAL
+ * 2017 Copyright Moj.io Inc.
+ * All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains, the property of
+ * Moj.io Inc. and its suppliers, if any.  The intellectual and technical
+ * concepts contained herein are proprietary to Moj.io Inc. and its suppliers
+ * and may be covered by Patents, pending patents, and are protected by trade
+ * secret or copyright law.
+ *
+ * Dissemination of this information or reproduction of this material is strictly
+ * forbidden unless prior written permission is obtained from Moj.io Inc.
+ *******************************************************************************/
 
 import UIKit
 import ObjectMapper
 
 
-open class Mojio: Mappable {
-    open dynamic var Id : String? = nil
-    open dynamic var Name : String? = nil
-    open dynamic var IMEI : String? = nil
-    open dynamic var LastContactTime : String? = nil
-    open dynamic var GatewayTime : String? = nil
-    open dynamic var VehicleId : String? = nil
-    open var MojioLocation : Location? = nil
-    open var Tags : [String] = []
-    open var Wifi : WifiRadio? = nil
-    open var ConnectedState : BooleanState? = nil
-    open dynamic var CreatedOn : String? = nil
-    open dynamic var LastModified : String? = nil
-    open dynamic var Deleted : Bool = false
-    open dynamic var MSISDN: String? = nil
-    open dynamic var ICCID: String? = nil
+public struct Mojio: Mappable, PrimaryKey {
+    public var Id: String? = nil
+    public var Name: String? = nil
+    public var IMEI: String? = nil
+    public var LastContactTime: String? = nil
+    public var GatewayTime: String? = nil
+    public var VehicleId: String? = nil
+    public var MojioLocation: Location? = nil
+    public var Tags: [String] = []
+    public var Wifi: WifiRadio? = nil
+    public var ConnectedState: BooleanState? = nil
+    public var CreatedOn: String? = nil
+    public var LastModified: String? = nil
+    public var Deleted: Bool = false
+    public var MSISDN: String? = nil
+    public var ICCID: String? = nil
     
-    public required convenience init?(map: Map) {
-        self.init()
-    }
+    // Date Values
+    public var lastContactTime: Date? = nil
+    public var gatewayTime: Date? = nil
+    public var createdOn: Date? = nil
+    public var lastModified: Date? = nil
     
-    public required init() {
-        
-    }
-
-    open static func primaryKey() -> String? {
+    public static var primaryKey: String {
         return "Id"
     }
     
-    open func json () -> String? {
-        let dictionary : NSMutableDictionary = NSMutableDictionary()
+    public init() {}
+    
+    public init?(map: Map) {
+        self.init()
+    }
+    
+    public func json () -> String? {
+        var map: [String: Any] = [:]
         
-        if self.Name != nil {
-            dictionary.setObject(self.Name!, forKey: "Name" as NSCopying)
+        if let name = self.Name {
+            map["Name"] = name
         }
-        if self.IMEI != nil {
-            dictionary.setObject(self.IMEI!, forKey: "IMEI" as NSCopying)
+
+        if let imei = self.IMEI {
+            map["IMEI"] = imei
         }
         
-        let data = try! JSONSerialization.data(withJSONObject: dictionary, options:  JSONSerialization.WritingOptions.prettyPrinted)
-        return NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
+        let data = try! JSONSerialization.data(withJSONObject: map, options:  JSONSerialization.WritingOptions.prettyPrinted)
+        return String(data: data, encoding: String.Encoding.utf8)
         
     }
     
-    open func mapping(map: Map) {
+    public mutating func mapping(map: Map) {
         Id <- map["Id"]
         Name <- map["Name"]
         IMEI <- map["IMEI"]
@@ -70,5 +82,11 @@ open class Mojio: Mappable {
         Deleted <- map["Deleted"]
         MSISDN <- map["MSISDN"]
         ICCID <- map["ICCID"]
+        
+        // Date Values
+        lastContactTime = self.LastContactTime?.toDate
+        gatewayTime = self.GatewayTime?.toDate
+        createdOn = self.CreatedOn?.toDate
+        lastModified = self.LastModified?.toDate
     }
 }

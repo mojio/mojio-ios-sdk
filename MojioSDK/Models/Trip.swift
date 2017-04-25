@@ -1,94 +1,110 @@
-//
-//  Trip.swift
-//  MojioSDK
-//
-//  Created by Ashish Agarwal on 2016-02-10.
-//  Copyright © 2016 Mojio. All rights reserved.
-//
+/******************************************************************************
+ * Moj.io Inc. CONFIDENTIAL
+ * 2017 Copyright Moj.io Inc.
+ * All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains, the property of
+ * Moj.io Inc. and its suppliers, if any.  The intellectual and technical
+ * concepts contained herein are proprietary to Moj.io Inc. and its suppliers
+ * and may be covered by Patents, pending patents, and are protected by trade
+ * secret or copyright law.
+ *
+ * Dissemination of this information or reproduction of this material is strictly
+ * forbidden unless prior written permission is obtained from Moj.io Inc.
+ *******************************************************************************/
 
 import UIKit
 import Foundation
 import ObjectMapper
 
-open class Trip: Mappable {
-    open dynamic var VehicleId : String? = nil
-    open dynamic var Name : String? = nil
-    open var Tags : [String] = []
-    open dynamic var MojioId : String? = nil
-    open dynamic var Completed : Bool = false
-    open dynamic var TripDuration : String? = nil
-    open var TripDistance : Distance? = nil
-    open dynamic var StartTimestamp : String? = nil
-    open dynamic var EndTimestamp : String? = nil
-    open var StartOdometer : Odometer? = nil
-    open var EndOdometer : Odometer? = nil
-    open var StartLocation : Location? = nil
-    open var EndLocation : Location? = nil
-    open var MaxSpeed : Speed? = nil
-    open var MaxRPM : RPM? = nil
-    open var MaxAcceleration : Acceleration? = nil
-    open var MaxDeceleration : Acceleration? = nil
-    open var TripFuelEfficiency : FuelEfficiency? = nil
-    open var StartFuelLevel : FuelLevel? = nil
-    open var EndFuelLevel : FuelLevel? = nil
-    open var IdlingCount : Int? = nil
-    open var HarshAccelCount : Int? = nil
-    open var HarshDecelCount : Int? = nil
-    open dynamic var Id : String? = nil
-    open dynamic var CreatedOn : String? = nil
-    open dynamic var LastModified : String? = nil
+public struct Trip: Mappable, PrimaryKey {
+    public var VehicleId: String? = nil
+    public var Name: String? = nil
+    public var Tags: [String] = []
+    public var MojioId: String? = nil
+    public var Completed: Bool = false
+    public var TripDuration: String? = nil
+    public var TripDistance: Distance? = nil
+    public var StartTimestamp: String? = nil
+    public var EndTimestamp: String? = nil
+    public var StartOdometer: Odometer? = nil
+    public var EndOdometer: Odometer? = nil
+    public var StartLocation: Location? = nil
+    public var EndLocation: Location? = nil
+    public var MaxSpeed: Speed? = nil
+    public var MaxRPM: RPM? = nil
+    public var MaxAcceleration: Acceleration? = nil
+    public var MaxDeceleration: Acceleration? = nil
+    public var TripFuelEfficiency: FuelEfficiency? = nil
+    public var StartFuelLevel: FuelLevel? = nil
+    public var EndFuelLevel: FuelLevel? = nil
+    public var IdlingCount: Int? = nil
+    public var HarshAccelCount: Int? = nil
+    public var HarshDecelCount: Int? = nil
+    public var Id: String? = nil
+    public var CreatedOn: String? = nil
+    public var LastModified: String? = nil
+    
+    // Date Values
+    public var startTimestamp: Date? = nil
+    public var endTimestamp: Date? = nil
+    public var createdOn: Date? = nil
+    public var lastModified: Date? = nil
+    
+    public static var primaryKey: String {
+        return "Id"
+    }
 
-    public required convenience init?(map: Map) {
+    public init() {}
+    
+    public init?(map: Map) {
         self.init()
     }
     
-    public required init() {
+    public func json() -> String? {
         
-    }
-
-    open static func primaryKey() -> String? {
-        return "Id"
-    }
-    
-    open func json() -> String? {
+        var map: [String: Any] = [:]
         
-        let dictionary : NSMutableDictionary = NSMutableDictionary()
-        
-        if self.Name != nil {
-            dictionary.setObject(self.Name!, forKey: "Name" as NSCopying)
+        if let name = self.Name {
+            map["Name"] = name
         }
         
-        let data = try! JSONSerialization.data(withJSONObject: dictionary, options:  JSONSerialization.WritingOptions.prettyPrinted)
-        return NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
+        let data = try! JSONSerialization.data(withJSONObject: map, options:  JSONSerialization.WritingOptions.prettyPrinted)
+        return String(data: data, encoding: String.Encoding.utf8)
     }
     
-    open func mapping(map: Map) {
-                
-        VehicleId <- map["VehicleId"];
-        Name <- map["Name"];
-        MojioId <- map["MojioId"];
-        Completed <- map["Completed"];
-        TripDuration <- map["Duration"];
+    public mutating func mapping(map: Map) {
+        VehicleId <- map["VehicleId"]
+        Name <- map["Name"]
+        MojioId <- map["MojioId"]
+        Completed <- map["Completed"]
+        TripDuration <- map["Duration"]
         TripDistance <- map["Distance"]
-        StartTimestamp <- map["StartTimestamp"];
-        EndTimestamp <- map["EndTimestamp"];
-        StartOdometer <- map["StartOdometer"];
-        EndOdometer <- map["EndOdometer"];
-        StartLocation <- map["StartLocation"];
-        EndLocation <- map["EndLocation"];
-        MaxSpeed <- map["MaxSpeed"];
-        MaxRPM <- map["MaxRPM"];
-        MaxAcceleration <- map["MaxAcceleration"];
-        MaxDeceleration <- map["MaxDeceleration"];
-        TripFuelEfficiency <- map["FuelEfficiency"];
-        StartFuelLevel <- map["StartFuelLevel"];
-        EndFuelLevel <- map["EndFuelLevel"];
-        IdlingCount <- map["IdlingCount"];
-        HarshAccelCount <- map["HarshAcclCount"];
-        HarshDecelCount <- map["HarshDecelCount"];
-        Id <- map["Id"];
-        CreatedOn <- map["CreatedOn"];
-        LastModified <- map["LastModified"];
+        StartTimestamp <- map["StartTimestamp"]
+        EndTimestamp <- map["EndTimestamp"]
+        StartOdometer <- map["StartOdometer"]
+        EndOdometer <- map["EndOdometer"]
+        StartLocation <- map["StartLocation"]
+        EndLocation <- map["EndLocation"]
+        MaxSpeed <- map["MaxSpeed"]
+        MaxRPM <- map["MaxRPM"]
+        MaxAcceleration <- map["MaxAcceleration"]
+        MaxDeceleration <- map["MaxDeceleration"]
+        TripFuelEfficiency <- map["FuelEfficiency"]
+        StartFuelLevel <- map["StartFuelLevel"]
+        EndFuelLevel <- map["EndFuelLevel"]
+        IdlingCount <- map["IdlingCount"]
+        HarshAccelCount <- map["HarshAcclCount"]
+        HarshDecelCount <- map["HarshDecelCount"]
+        Id <- map["Id"]
+        CreatedOn <- map["CreatedOn"]
+        LastModified <- map["LastModified"]
         Tags <- map["Tags"]
+        
+        // Date Values
+        startTimestamp = self.StartTimestamp?.toDate
+        endTimestamp = self.EndTimestamp?.toDate
+        createdOn = self.CreatedOn?.toDate
+        lastModified = self.LastModified?.toDate
     }
 }

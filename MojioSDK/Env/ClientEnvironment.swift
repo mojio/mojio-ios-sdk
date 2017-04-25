@@ -1,61 +1,69 @@
-//
-//  ClientEnvironment.swift
-//  MojioSDK
-//
-//  Created by Ashish Agarwal on 2016-02-21.
-//  Copyright © 2016 Mojio. All rights reserved.
-//
+/******************************************************************************
+ * Moj.io Inc. CONFIDENTIAL
+ * 2017 Copyright Moj.io Inc.
+ * All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains, the property of
+ * Moj.io Inc. and its suppliers, if any.  The intellectual and technical
+ * concepts contained herein are proprietary to Moj.io Inc. and its suppliers
+ * and may be covered by Patents, pending patents, and are protected by trade
+ * secret or copyright law.
+ *
+ * Dissemination of this information or reproduction of this material is strictly
+ * forbidden unless prior written permission is obtained from Moj.io Inc.
+ *******************************************************************************/
 
 import UIKit
 
-open class MojioRegion : NSObject {
+public enum MojioRegion: String {
 
-    open static let Production : String = ""
-    open static let NAProduction : String = "na-production-"
-    open static let EUProduction : String = "eu-production-"
-    open static let Staging : String = "staging-"
-    open static let NAStaging : String = "na-staging-"
-    open static let EUStaging : String = "eu-staging-"
-    open static let Trial : String = "trial-"
-    open static let Develop : String = "develop-"
-    open static let Load : String = "load-"
+    case production = ""
+    case naProduction = "na-production-"
+    case euProduction = "eu-production-"
+    case staging = "staging-"
+    case naStaging = "na-staging-"
+    case euStaging = "eu-staging-"
+    case trial = "trial-"
+    case develop = "develop-"
+    case load = "load-"
 
-    static func getDefaultRegion() -> String {
-        return Production
+    static func getDefaultRegion() -> MojioRegion {
+        return .production
     }
 }
 
-open class ClientEnvironment : NSObject {
+open class ClientEnvironment {
     
-    fileprivate static let ApiEndpointFormat : String = "https://%@api.moj.io/v2/"
-    fileprivate static let ApiV1EndpointFormat : String = "https://%@api.moj.io/v1/"
-    fileprivate static let PushApnsEndpointFormat : String = "https://%@push.moj.io/v2/"
-    fileprivate static let PushWSEndpointFormat : String = "wss://%@api.moj.io/v2/"
-    fileprivate static let MyMojioEndpointFormat : String = "https://%@my.moj.io/"
-    fileprivate static let AccountsEndpointFormat : String = "https://%@accounts.moj.io/"
+    private enum EndPointFormat: String {
+        case apiEndpoint = "https://%@api.moj.io/v2/"
+        case apiV1Endpoint = "https://%@api.moj.io/v1/"
+        case pushApnsEndpoint = "https://%@push.moj.io/v2/"
+        case pushWSEndpoint = "wss://%@api.moj.io/v2/"
+        case myMojioEndpoint = "https://%@my.moj.io/"
+        case accountsEndpoint = "https://%@accounts.moj.io/"
+    }
     
     open static let SharedInstance = ClientEnvironment()
     
-    fileprivate var region : String?
+    fileprivate var region: MojioRegion? = nil
     
-    fileprivate var apiEndpoint : String?
-    fileprivate var apiV1Endpoint : String?
-    fileprivate var pushApnsEndpoint : String?
-    fileprivate var pushWSEndpoint : String?
-    fileprivate var myMojioEndpoint : String?
-    fileprivate var accountsEndpoint : String?
+    fileprivate var apiEndpoint: String?
+    fileprivate var apiV1Endpoint: String?
+    fileprivate var pushApnsEndpoint: String?
+    fileprivate var pushWSEndpoint: String?
+    fileprivate var myMojioEndpoint: String?
+    fileprivate var accountsEndpoint: String?
     
-    public override init() {
-        super.init()
-
-        if self.region == nil {
+    public init() {
+        guard let _ = self.region else {
             self.setDefaultRegion()
+            return
         }
     }
     
-    open func getRegion() -> String {
-        if self.region != nil {
-            return self.region!
+    open func getRegion() -> MojioRegion {
+        if let region = self.region {
+            return region
         }
 
         return MojioRegion.getDefaultRegion()
@@ -64,18 +72,35 @@ open class ClientEnvironment : NSObject {
     /**
         Letting an app developer ovveride the default environment. This should be used only for development purposes to test the functionality of the app in different continents
      */
-    open func setRegion (_ region : String) {
+    open func setRegion (region: MojioRegion) {
         self.region = region
-        self.apiEndpoint = String.init(format: ClientEnvironment.ApiEndpointFormat, arguments: [region])
-        self.apiV1Endpoint = String.init(format: ClientEnvironment.ApiV1EndpointFormat, arguments: [region])
-        self.pushApnsEndpoint = String.init(format: ClientEnvironment.PushApnsEndpointFormat, arguments: [region])
-        self.pushWSEndpoint = String.init(format: ClientEnvironment.PushWSEndpointFormat, arguments: [region])
-        self.myMojioEndpoint = String.init(format: ClientEnvironment.MyMojioEndpointFormat, arguments: [region])
-        self.accountsEndpoint = String.init(format: ClientEnvironment.AccountsEndpointFormat, arguments: [region])
+        self.apiEndpoint = String.init(
+            format: ClientEnvironment.EndPointFormat.apiEndpoint.rawValue,
+            arguments: [region.rawValue])
+
+        self.apiV1Endpoint = String.init(
+            format: ClientEnvironment.EndPointFormat.apiV1Endpoint.rawValue,
+            arguments: [region.rawValue])
+        
+        self.pushApnsEndpoint = String.init(
+            format: ClientEnvironment.EndPointFormat.pushApnsEndpoint.rawValue,
+            arguments: [region.rawValue])
+        
+        self.pushWSEndpoint = String.init(
+            format: ClientEnvironment.EndPointFormat.pushWSEndpoint.rawValue,
+            arguments: [region.rawValue])
+        
+        self.myMojioEndpoint = String.init(
+            format: ClientEnvironment.EndPointFormat.myMojioEndpoint.rawValue,
+            arguments: [region.rawValue])
+        
+        self.accountsEndpoint = String.init(
+            format: ClientEnvironment.EndPointFormat.accountsEndpoint.rawValue,
+            arguments: [region.rawValue])
     }
     
     open func setDefaultRegion () {
-        self.setRegion(MojioRegion.getDefaultRegion())
+        self.setRegion(region: MojioRegion.getDefaultRegion())
     }
     
     open func getApiEndpoint () -> String {

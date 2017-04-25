@@ -1,30 +1,48 @@
-//
-//  Battery.swift
-//  MojioSDK
-//
-//  Created by Ashish Agarwal on 2016-02-11.
-//  Copyright © 2016 Mojio. All rights reserved.
-//
+/******************************************************************************
+ * Moj.io Inc. CONFIDENTIAL
+ * 2017 Copyright Moj.io Inc.
+ * All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains, the property of
+ * Moj.io Inc. and its suppliers, if any.  The intellectual and technical
+ * concepts contained herein are proprietary to Moj.io Inc. and its suppliers
+ * and may be covered by Patents, pending patents, and are protected by trade
+ * secret or copyright law.
+ *
+ * Dissemination of this information or reproduction of this material is strictly
+ * forbidden unless prior written permission is obtained from Moj.io Inc.
+ *******************************************************************************/
 
 import UIKit
 import ObjectMapper
 
 // Units in BatteryVoltageUnits
-open class Battery : DeviceMeasurement {
+public struct Battery: DeviceMeasurement {
+
+    // DeviceMeasurement
+    public var BaseUnit: String? = nil
+    public var BaseValue: Double = 0
+    public var Unit: String? = nil
+    public var Value: Double = 0
+    public var Timestamp: String?  = nil
     
-    open dynamic var Connected : Bool = false
+    public var timeStamp: Date? = nil
+    
+    public var Connected: Bool = false
     
     // RiskSeverity
-    open dynamic var RiskSeverity : String? = nil
-    open var LowVoltageDuration : TimePeriod? = nil
-    open var HighVoltageDuration : TimePeriod? = nil
+    public var RiskSeverity: String? = nil
+    public var LowVoltageDuration: TimePeriod? = nil
+    public var HighVoltageDuration: TimePeriod? = nil
     
-    public required convenience init?(map: Map) {
+    public init() {}
+    
+    public init?(map: Map) {
         self.init()
     }
     
-    open override func mapping(map: Map) {
-        super.mapping(map: map)
+    public mutating func mapping(map: Map) {
+        self.measureMapping(map: map)
 
         Connected <- map["Connected"]
         RiskSeverity <- map["RiskSeverity"]

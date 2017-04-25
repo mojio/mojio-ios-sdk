@@ -1,45 +1,54 @@
-//
-//  AuthClient.swift
-//  MojioSDK
-//
-//  Created by Ashish Agarwal on 2016-02-05.
-//  Copyright © 2016 Ashish. All rights reserved.
-//
+/******************************************************************************
+ * Moj.io Inc. CONFIDENTIAL
+ * 2017 Copyright Moj.io Inc.
+ * All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains, the property of
+ * Moj.io Inc. and its suppliers, if any.  The intellectual and technical
+ * concepts contained herein are proprietary to Moj.io Inc. and its suppliers
+ * and may be covered by Patents, pending patents, and are protected by trade
+ * secret or copyright law.
+ *
+ * Dissemination of this information or reproduction of this material is strictly
+ * forbidden unless prior written permission is obtained from Moj.io Inc.
+ *******************************************************************************/
 
 import UIKit
 import KeychainSwift
 import Alamofire
 import SwiftyJSON
+import ObjectMapper
 
 // OAuth 2.0 Object - RFC 6749
 
-open class AuthToken: NSObject  {
-    open dynamic var accessToken : String? = nil
-    open dynamic var expiry : String? = nil
-    open dynamic var refreshToken : String? = nil
-    open dynamic var uniqueId : String? = nil
+public struct AuthToken: Mappable  {
+    public var accessToken: String? = nil
+    public var expiry: String? = nil
+    public var refreshToken: String? = nil
+    public var uniqueId: String? = nil
     
-    override init() {
-        
-    }
+    init() {}
     
     init(accessToken: String?, expiry: String?, refreshToken: String?, uniqueId: String) {
-        
         self.accessToken = accessToken
         self.expiry = expiry
         self.refreshToken = refreshToken
         self.uniqueId = uniqueId
     }
     
-    open func expiryTimestamp() -> Double? {
-        if let timestamp : Double = Double.init(self.expiry!) {
+    public init?(map: Map) {
+        self.init()
+    }
+    
+    public func expiryTimestamp() -> Double? {
+        if let timestamp: Double = Double.init(self.expiry!) {
             return timestamp
         }
         
         return nil
     }
     
-    open func expiryDate() -> Date? {
+    public func expiryDate() -> Date? {
         if let expiry = self.expiryTimestamp() {
             return Date(timeIntervalSince1970: expiry)
         }
@@ -47,17 +56,17 @@ open class AuthToken: NSObject  {
         return nil
     }
     
-    open func isValid() -> Bool {
+    public func isValid() -> Bool {
         if self.accessToken == nil || self.expiry == nil || self.uniqueId == nil {
             return false
         }
         
         // Check if the token is expired
-        guard let timestamp : Double = self.expiryTimestamp() else {
+        guard let timestamp: Double = self.expiryTimestamp() else {
             return false
         }
         
-        let currentTime : Double = Date().timeIntervalSince1970
+        let currentTime: Double = Date().timeIntervalSince1970
         
         // Check for expiry
         if currentTime > timestamp {
@@ -66,76 +75,83 @@ open class AuthToken: NSObject  {
         
         return true
     }
+    
+    public mutating func mapping(map: Map) {
+        accessToken <- map["accessToken"]
+        expiry <- map["expiry"]
+        refreshToken <- map["refreshToken"]
+        uniqueId <- map["uniqueId"]
+    }
 }
 
-open class AuthClientEndpoints : NSObject {
-    open static let Authorize : String = "oauth2/authorize"
-    open static let Token : String = "oauth2/token"
-    open static let Next : String = "oauth2/next/"
+public enum AuthClientEndpoint: String {
+    case authorize = "oauth2/authorize"
+    case token = "oauth2/token"
+    case next = "oauth2/next/"
 }
 
-open class AccountClientEndpoints : NSObject {
-    open static let Register : String = "account/register"
-    open static let Forgot : String = "account/forgot-password"
-    open static let Reset : String = "account/reset-password"
-    open static let ResendPin : String = "account/signin/phone"
+public enum AccountClientEndpoint: String {
+    case register = "account/register"
+    case forgot = "account/forgot-password"
+    case reset = "account/reset-password"
+    case resendPin = "account/signin/phone"
 }
 
-open class RegisterErrors : NSObject {
+public enum RegisterError: String {
     // Phone Number Error
-    open static let PhoneNumberMessage : String = "PhoneNumberMessage"
+    case phoneNumberMessage = "PhoneNumberMessage"
     
     // Email Error
-    open static let EmailErrorMessage : String = "EmailErrorMessage"
+    case emailErrorMessage = "EmailErrorMessage"
     
     // Password Error
-    open static let PasswordRequired : String = "PasswordRequired"
+    case passwordRequired = "PasswordRequired"
     
     // Confirmation Password Required
-    open static let ConfirmationPasswordRequired : String = "ConfirmationPasswordRequired"
+    case confirmationPasswordRequired = "ConfirmationPasswordRequired"
     
     // Password does not match Confirmation Password
-    open static let PasswordsDoNotMatch : String = "PasswordsDoNotMatch"
+    case passwordsDoNotMatch = "PasswordsDoNotMatch"
 }
 
 
-open class ForgotPasswordErrors : NSObject {
+public enum ForgotPasswordError: String {
     // User not found
-    open static let NoUserFoundByIdentifier : String = "NoUserFoundByIdentifier"
+    case noUserFoundByIdentifier = "NoUserFoundByIdentifier"
     
     // Maximum hourly reset limit reached
-    open static let ResetAlreadySent : String = "ResetAlreadySent"
+    case resetAlreadySent = "ResetAlreadySent"
     
     // Error sending SMS
-    open static let TextSendError : String = "TextSendError"
+    case textSendError = "TextSendError"
     
     // Invalid email address
-    open static let InvalidEmailContactMojio : String = "InvalidEmailContactMojio"
+    case invalidEmailContactMojio = "InvalidEmailContactMojio"
     
     // Email address was rejected
-    open static let IRejectedEmailContactMojio : String = "IRejectedEmailContactMojio"
+    case rejectedEmailContactMojio = "IRejectedEmailContactMojio"
     
     // Invalid phone number
-    open static let InvalidPhoneContactMojio : String = "InvalidPhoneContactMojio"
+    case invalidPhoneContactMojio = "InvalidPhoneContactMojio"
 }
 
-open class ResetPasswordErrors : NSObject {
+public enum ResetPasswordError: String {
     // Reset link invalid (or expired)
-    open static let InvalidResetLink : String = "InvalidResetLink"
+    case invalidResetLink = "InvalidResetLink"
     
     // Password Required
-    open static let PasswordRequired : String = "PasswordRequired"
+    case passwordRequired = "PasswordRequired"
     
     // Confirmation Password Required
-    open static let ConfirmationPasswordRequired : String = "ConfirmationPasswordRequired"
+    case confirmationPasswordRequired = "ConfirmationPasswordRequired"
     
     // Password does not match Confirmation Password
-    open static let PasswordsDoNotMatch : String = "PasswordsDoNotMatch"
+    case passwordsDoNotMatch = "PasswordsDoNotMatch"
     
     // TODO: Handle Password Too Short/Too Long???
 }
 
-open class AuthClient: NSObject, AuthControllerDelegate {
+open class AuthClient: AuthControllerDelegate {
     
     open var clientId: String
     open var clientRedirectURL: String
@@ -153,7 +169,7 @@ open class AuthClient: NSObject, AuthControllerDelegate {
     public static var defaultDispatchQueue = DispatchQueue.global()
     private var dispatchQueue = AuthClient.defaultDispatchQueue
     
-    public init(clientId : String, clientSecretKey : String, clientRedirectURI : String) {
+    public init(clientId: String, clientSecretKey: String, clientRedirectURI: String) {
         self.clientId = clientId
         self.clientRedirectURL = clientRedirectURI
         self.clientSecretKey = clientSecretKey
@@ -166,12 +182,12 @@ open class AuthClient: NSObject, AuthControllerDelegate {
         self.dispatchQueue = queue
     }
     
-    open func loginViewController(_ completion : ((_ authToken: AuthToken) -> Void)?, failure: ((_ response: AnyObject?) -> Void)?) {
+    open func loginViewController(_ completion: ((_ authToken: AuthToken) -> Void)?, failure: ((_ response: AnyObject?) -> Void)?) {
         URLCache.shared.removeAllCachedResponses();
         
         self.loginCompletion = completion;
         self.loginFailure = failure
-        self.authController = AuthViewController(nibName : "AuthViewController", bundle: nil);
+        self.authController = AuthViewController(nibName: "AuthViewController", bundle: nil);
         self.authController?.delegate = self;
         
         self.authController?.loginURL = self.loginURL
@@ -179,9 +195,9 @@ open class AuthClient: NSObject, AuthControllerDelegate {
     }
     
     open func authControllerLoadURLRequest(_ request: URLRequest) {
-        let url : URL = request.url!;
-        let urlComponents : URLComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)!
-        let authToken : AuthToken = AuthToken()
+        let url: URL = request.url!;
+        let urlComponents: URLComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)!
+        var authToken: AuthToken = AuthToken()
         
         if let queryItems = urlComponents.queryItems {
             for queryItem in queryItems {
@@ -190,7 +206,7 @@ open class AuthClient: NSObject, AuthControllerDelegate {
                 }
                 else if queryItem.name == "expires_in" {
                     if queryItem.value != nil {
-                        if let expiry : Double = Double(queryItem.value!) {
+                        if let expiry: Double = Double(queryItem.value!) {
                             authToken.expiry = String(Date.init(timeIntervalSinceNow: expiry).timeIntervalSince1970)
                         }
                     }
@@ -215,16 +231,16 @@ open class AuthClient: NSObject, AuthControllerDelegate {
         }
         
         // Check to see if the environment endpoint in the keychain is the same as the current endpoint
-        if ClientEnvironment.SharedInstance.getRegion() != authToken.uniqueId {
+        if ClientEnvironment.SharedInstance.getRegion().rawValue != authToken.uniqueId {
             return false
         }
         
         // Check if the token is expired
-        guard let timestamp : Double = authToken.expiryTimestamp() else {
+        guard let timestamp: Double = authToken.expiryTimestamp() else {
             return false
         }
         
-        let currentTime : Double = Date().timeIntervalSince1970
+        let currentTime: Double = Date().timeIntervalSince1970
         
         // Check for expiry
         if currentTime > timestamp {
@@ -235,7 +251,7 @@ open class AuthClient: NSObject, AuthControllerDelegate {
     }
     
     // Returns on main thread when complete - refreshes if needed
-    open func isUserLoggedInRefresh(_ completion: @escaping (_ authToken: AuthToken) -> Void, failure : @escaping (_ response: [String: AnyObject]?) -> Void) {
+    open func isUserLoggedInRefresh(_ completion: @escaping (_ authToken: AuthToken) -> Void, failure: @escaping (_ response: [String: AnyObject]?) -> Void) {
         
         let authToken = self.getAuthToken()
         
@@ -246,7 +262,7 @@ open class AuthClient: NSObject, AuthControllerDelegate {
         
         // Check to see if the environment endpoint in the keychain is the same as the current endpoint
         // If they are different, return false right away
-        if ClientEnvironment.SharedInstance.getRegion() != authToken.uniqueId {
+        if ClientEnvironment.SharedInstance.getRegion().rawValue != authToken.uniqueId {
             DispatchQueue.main.async(execute: {failure(nil)})
             return
         }
@@ -258,12 +274,12 @@ open class AuthClient: NSObject, AuthControllerDelegate {
         else {
             // Check if the token is expired
             DispatchQueue.main.async(execute: {
-                guard let timestamp : Double = authToken.expiryTimestamp() else {
+                guard let timestamp: Double = authToken.expiryTimestamp() else {
                     failure(nil)
                     return
                 }
                 
-                let currentTime : Double = Date().timeIntervalSince1970
+                let currentTime: Double = Date().timeIntervalSince1970
                 
                 // Check for expiry
                 if currentTime > timestamp {
@@ -282,24 +298,24 @@ open class AuthClient: NSObject, AuthControllerDelegate {
     }
     
     // Login
-    open func login(_ username: String, password: String, completion: @escaping (_ authToken: AuthToken) -> Void, failure : @escaping (_ response: NSDictionary?) -> Void) {
+    open func login(_ username: String, password: String, completion: @escaping (_ authToken: AuthToken) -> Void, failure: @escaping (_ response: NSDictionary?) -> Void) {
         
         // The token endpoint is used for the resource owner flow
         let loginEndpoint = AuthClient.getTokenUrl()
         
-        self.requestHeaders.update(["Accept" : "application/json", "Authorization" : self.generateBasicAuthHeader()])
+        self.requestHeaders.update(["Accept": "application/json", "Authorization": self.generateBasicAuthHeader()])
         
-        let request = Alamofire.request(loginEndpoint, method: .post, parameters: ["grant_type" : "password", "password" : password, "username" : username, "client_id" : self.clientId, "client_secret" : self.clientSecretKey], encoding: URLEncoding(destination: .methodDependent), headers: ["Accept" : "application/json", "Authorization" : self.generateBasicAuthHeader()]).responseJSON { response in
+        let request = Alamofire.request(loginEndpoint, method: .post, parameters: ["grant_type": "password", "password": password, "username": username, "client_id": self.clientId, "client_secret": self.clientSecretKey], encoding: URLEncoding(destination: .methodDependent), headers: ["Accept": "application/json", "Authorization": self.generateBasicAuthHeader()]).responseJSON { response in
             
             if response.response?.statusCode == 200 {
                 
-                guard let responseJSON : [String : AnyObject] = response.result.value as? [String : AnyObject] else {
+                guard let responseJSON: [String: AnyObject] = response.result.value as? [String: AnyObject] else {
                     failure(nil)
                     return
                 }
                 
-                if let expiry : Double = responseJSON["expires_in"] as? Double {
-                    let authToken = AuthToken(accessToken: (responseJSON["access_token"] as? String), expiry: String(NSDate.init(timeIntervalSinceNow: expiry).timeIntervalSince1970), refreshToken: (responseJSON["refresh_token"] as? String), uniqueId: ClientEnvironment.SharedInstance.getRegion())
+                if let expiry: Double = responseJSON["expires_in"] as? Double {
+                    let authToken = AuthToken(accessToken: (responseJSON["access_token"] as? String), expiry: String(Date.init(timeIntervalSinceNow: expiry).timeIntervalSince1970), refreshToken: (responseJSON["refresh_token"] as? String), uniqueId: ClientEnvironment.SharedInstance.getRegion().rawValue)
                     
                     if authToken.isValid() {
                         completion(authToken)
@@ -330,36 +346,36 @@ open class AuthClient: NSObject, AuthControllerDelegate {
         #endif
     }
     
-    open func refreshAuthToken(_ completion: @escaping (_ authToken: AuthToken) -> Void, failure : @escaping (_ response: [String: AnyObject]?) -> Void) {
+    open func refreshAuthToken(_ completion: @escaping (_ authToken: AuthToken) -> Void, failure: @escaping (_ response: [String: AnyObject]?) -> Void) {
         let keychain = KeychainSwift()
         
         let authorizeEndpoint = AuthClient.getTokenUrl()
         
-        guard let refreshToken : String = keychain.get(KeychainKeys.RefreshToken) else {
+        guard let refreshToken: String = keychain.get(KeychainKey.refreshToken.rawValue) else {
             DispatchQueue.main.async(execute: {failure(nil)})
             return
         }
         
         let request = Alamofire.request(authorizeEndpoint,
                                         method: .post,
-                                        parameters: ["grant_type" : "refresh_token",
-                                                     "refresh_token" : refreshToken,
-                                                     "client_id" : self.clientId,
-                                                     "client_secret" : self.clientSecretKey,
-                                                     "redirect_uri" : self.clientRedirectURL],
+                                        parameters: ["grant_type": "refresh_token",
+                                                     "refresh_token": refreshToken,
+                                                     "client_id": self.clientId,
+                                                     "client_secret": self.clientSecretKey,
+                                                     "redirect_uri": self.clientRedirectURL],
                                         encoding: URLEncoding(destination: .methodDependent))
             .responseJSON { response in
                 
                 DispatchQueue.main.async(execute: {
                     if response.response?.statusCode == 200 {
                         
-                        guard let responseJSON : [String : AnyObject] = response.result.value as? [String : AnyObject] else {
+                        guard let responseJSON: [String: AnyObject] = response.result.value as? [String: AnyObject] else {
                             failure(nil)
                             return
                         }
                         
-                        if let expiry : Double = responseJSON["expires_in"] as? Double {
-                            let authToken: AuthToken = AuthToken(accessToken: (responseJSON["access_token"] as? String), expiry: String(NSDate.init(timeIntervalSinceNow: expiry).timeIntervalSince1970), refreshToken: (responseJSON["refresh_token"] as? String), uniqueId: ClientEnvironment.SharedInstance.getRegion())
+                        if let expiry: Double = responseJSON["expires_in"] as? Double {
+                            let authToken: AuthToken = AuthToken(accessToken: (responseJSON["access_token"] as? String), expiry: String(Date.init(timeIntervalSinceNow: expiry).timeIntervalSince1970), refreshToken: (responseJSON["refresh_token"] as? String), uniqueId: ClientEnvironment.SharedInstance.getRegion().rawValue)
                             
                             if authToken.isValid() {
                                 completion(authToken)
@@ -396,13 +412,13 @@ open class AuthClient: NSObject, AuthControllerDelegate {
     }
     
     // Register
-    open func register(_ mobile: String, email: String, password: String, completion: @escaping (_ authToken: AuthToken) -> Void, failure: @escaping (_ response : NSDictionary?) -> Void) {
+    open func register(_ mobile: String, email: String, password: String, completion: @escaping (_ authToken: AuthToken) -> Void, failure: @escaping (_ response: NSDictionary?) -> Void) {
         
-        let registerEndpoint = ClientEnvironment.SharedInstance.getAccountsEndpoint() + AccountClientEndpoints.Register
-        self.requestHeaders.update(["Authorization" : self.generateBasicAuthHeader(), "Content-Type" : "application/json", "Accept" : "application/json"])
+        let registerEndpoint = ClientEnvironment.SharedInstance.getAccountsEndpoint() + AccountClientEndpoint.register.rawValue
+        self.requestHeaders.update(["Authorization": self.generateBasicAuthHeader(), "Content-Type": "application/json", "Accept": "application/json"])
         
         // Step 1: Create an account for the user
-        let request = Alamofire.request(registerEndpoint, method: .post, parameters: ["PhoneNumber" : mobile, "Email" : email, "Password" : password, "ConfirmPassword" : password], encoding: JSONEncoding.default, headers: self.requestHeaders).responseJSON { response in
+        let request = Alamofire.request(registerEndpoint, method: .post, parameters: ["PhoneNumber": mobile, "Email": email, "Password": password, "ConfirmPassword": password], encoding: JSONEncoding.default, headers: self.requestHeaders).responseJSON { response in
             
             if response.response?.statusCode == 200 {
                 
@@ -435,23 +451,23 @@ open class AuthClient: NSObject, AuthControllerDelegate {
     }
     
     // Verify Phone
-    open func verifyMobilePhone(_ mobile: String, pin: String, completion: @escaping (_ authToken: AuthToken) -> Void, failure : @escaping (_ response: [String: AnyObject]?) -> Void) {
+    open func verifyMobilePhone(_ mobile: String, pin: String, completion: @escaping (_ authToken: AuthToken) -> Void, failure: @escaping (_ response: [String: AnyObject]?) -> Void) {
         
         let verifyEndpoint = AuthClient.getTokenUrl()
         
-        self.requestHeaders.update(["Accept" : "application/json", "Authorization" : self.generateBasicAuthHeader()])
+        self.requestHeaders.update(["Accept": "application/json", "Authorization": self.generateBasicAuthHeader()])
         
-        let request = Alamofire.request(verifyEndpoint, method: .post, parameters: ["client_id" : self.clientId, "client_secret" : self.clientSecretKey, "grant_type" : "phone", "phone_number" : mobile, "pin" : pin], encoding: URLEncoding(destination: .methodDependent), headers: ["Accept" : "application/json", "Authorization" : self.generateBasicAuthHeader()]).responseJSON { response in
+        let request = Alamofire.request(verifyEndpoint, method: .post, parameters: ["client_id": self.clientId, "client_secret": self.clientSecretKey, "grant_type": "phone", "phone_number": mobile, "pin": pin], encoding: URLEncoding(destination: .methodDependent), headers: ["Accept": "application/json", "Authorization": self.generateBasicAuthHeader()]).responseJSON { response in
             
             if response.response?.statusCode == 200 {
                 
-                guard let responseJSON : [String : AnyObject] = response.result.value as? [String : AnyObject] else {
+                guard let responseJSON: [String: AnyObject] = response.result.value as? [String: AnyObject] else {
                     failure(nil)
                     return
                 }
                 
-                if let expiry : Double = responseJSON["expires_in"] as? Double {
-                    let authToken: AuthToken = AuthToken(accessToken: (responseJSON["access_token"] as! String), expiry: String(NSDate.init(timeIntervalSinceNow: expiry).timeIntervalSince1970), refreshToken: (responseJSON["refresh_token"] as! String), uniqueId: ClientEnvironment.SharedInstance.getRegion())
+                if let expiry: Double = responseJSON["expires_in"] as? Double {
+                    let authToken: AuthToken = AuthToken(accessToken: (responseJSON["access_token"] as! String), expiry: String(Date.init(timeIntervalSinceNow: expiry).timeIntervalSince1970), refreshToken: (responseJSON["refresh_token"] as! String), uniqueId: ClientEnvironment.SharedInstance.getRegion().rawValue)
                     
                     if authToken.isValid() {
                         completion(authToken)
@@ -483,13 +499,13 @@ open class AuthClient: NSObject, AuthControllerDelegate {
     }
     
     // Resend Verification Pin
-    open func resendPhonePin(_ mobile : String, completion : (() -> Void)?, failure : (() -> Void)?) {
+    open func resendPhonePin(_ mobile: String, completion: (() -> Void)?, failure: (() -> Void)?) {
         
-        let verifyEndpoint = ClientEnvironment.SharedInstance.getAccountsEndpoint() + AccountClientEndpoints.ResendPin
+        let verifyEndpoint = ClientEnvironment.SharedInstance.getAccountsEndpoint() + AccountClientEndpoint.resendPin.rawValue
         
-        self.requestHeaders.update(["Accept" : "application/json", "Authorization" : self.generateBasicAuthHeader()])
+        self.requestHeaders.update(["Accept": "application/json", "Authorization": self.generateBasicAuthHeader()])
         
-        let request = Alamofire.request(verifyEndpoint, method: .post, parameters: ["PhoneNumber" : mobile, "grant_type" : "phone"], encoding: JSONEncoding.default, headers: ["Accept" : "application/json", "Authorization" : self.generateBasicAuthHeader()]).responseJSON { response in
+        let request = Alamofire.request(verifyEndpoint, method: .post, parameters: ["PhoneNumber": mobile, "grant_type": "phone"], encoding: JSONEncoding.default, headers: ["Accept": "application/json", "Authorization": self.generateBasicAuthHeader()]).responseJSON { response in
             
             if response.response?.statusCode == 200 {
                 completion?()
@@ -505,17 +521,17 @@ open class AuthClient: NSObject, AuthControllerDelegate {
     }
     
     // Forgot/Reset Password
-    open func forgotPassword(_ emailOrPhoneNumber : String, completion : @escaping (_ response : [String: AnyObject]?) -> Void, failure : @escaping (_ response : [String: AnyObject]?) -> Void) {
+    open func forgotPassword(_ emailOrPhoneNumber: String, completion: @escaping (_ response: [String: AnyObject]?) -> Void, failure: @escaping (_ response: [String: AnyObject]?) -> Void) {
         
-        let forgotEndpoint = ClientEnvironment.SharedInstance.getAccountsEndpoint() + AccountClientEndpoints.Forgot
+        let forgotEndpoint = ClientEnvironment.SharedInstance.getAccountsEndpoint() + AccountClientEndpoint.forgot.rawValue
         
-        self.requestHeaders.update(["Accept" : "application/json", "Authorization" : self.generateBasicAuthHeader()])
+        self.requestHeaders.update(["Accept": "application/json", "Authorization": self.generateBasicAuthHeader()])
         
         let request = Alamofire.request(forgotEndpoint,
                                         method: .post,
-                                        parameters: ["UserNameEmailOrPhone" : emailOrPhoneNumber],
+                                        parameters: ["UserNameEmailOrPhone": emailOrPhoneNumber],
                                         encoding: JSONEncoding.default,
-                                        headers: ["Accept" : "application/json", "Authorization" : self.generateBasicAuthHeader()])
+                                        headers: ["Accept": "application/json", "Authorization": self.generateBasicAuthHeader()])
             .responseJSON { response in
                 
                 if response.response?.statusCode == 200 {
@@ -538,17 +554,17 @@ open class AuthClient: NSObject, AuthControllerDelegate {
         #endif
     }
     
-    open func resetPassword(_ resetToken : String, password : String, completion : @escaping (_ response : [String: AnyObject]?) -> Void, failure : @escaping (_ response : [String: AnyObject]?) -> Void) {
+    open func resetPassword(_ resetToken: String, password: String, completion: @escaping (_ response: [String: AnyObject]?) -> Void, failure: @escaping (_ response: [String: AnyObject]?) -> Void) {
         
-        let resetEndpoint = ClientEnvironment.SharedInstance.getAccountsEndpoint() + AccountClientEndpoints.Reset
+        let resetEndpoint = ClientEnvironment.SharedInstance.getAccountsEndpoint() + AccountClientEndpoint.reset.rawValue
         
-        self.requestHeaders.update(["Accept" : "application/json", "Authorization" : self.generateBasicAuthHeader()])
+        self.requestHeaders.update(["Accept": "application/json", "Authorization": self.generateBasicAuthHeader()])
         
         let request = Alamofire.request(resetEndpoint,
                                         method: .post,
-                                        parameters: ["ResetToken" : resetToken, "Password" : password, "ConfirmPassword" : password],
+                                        parameters: ["ResetToken": resetToken, "Password": password, "ConfirmPassword": password],
                                         encoding: JSONEncoding.default,
-                                        headers: ["Accept" : "application/json", "Authorization" : self.generateBasicAuthHeader()])
+                                        headers: ["Accept": "application/json", "Authorization": self.generateBasicAuthHeader()])
             .responseJSON { response in
                 
                 if response.response?.statusCode == 200 {
@@ -581,18 +597,28 @@ open class AuthClient: NSObject, AuthControllerDelegate {
     }
     
     open static func getTokenUrl() -> String {
-        return ClientEnvironment.SharedInstance.getAccountsEndpoint() + AuthClientEndpoints.Token
+        return ClientEnvironment.SharedInstance.getAccountsEndpoint() + AuthClientEndpoint.token.rawValue
     }
     
-    open static func getTokenUrl(_ redirectUri : String, clientId : String) -> String {
-        return String(format: "%@%@?response_type=token&redirect_uri=%@&client_id=%@&scope=full", ClientEnvironment.SharedInstance.getAccountsEndpoint(), AuthClientEndpoints.Token, redirectUri.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!, clientId.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!)
+    open static func getTokenUrl(_ redirectUri: String, clientId: String) -> String {
+        return String(
+            format: "%@%@?response_type=token&redirect_uri=%@&client_id=%@&scope=full",
+            ClientEnvironment.SharedInstance.getAccountsEndpoint(),
+            AuthClientEndpoint.token.rawValue,
+            redirectUri.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!,
+            clientId.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!)
     }
     
     open static func getAuthorizeUrl() -> String {
-        return ClientEnvironment.SharedInstance.getAccountsEndpoint() + AuthClientEndpoints.Authorize
+        return ClientEnvironment.SharedInstance.getAccountsEndpoint() + AuthClientEndpoint.authorize.rawValue
     }
     
-    open static func getAuthorizeUrl(_ redirectUri : String, clientId : String) -> String {
-        return String(format: "%@%@?response_type=token&redirect_uri=%@&client_id=%@&scope=full", ClientEnvironment.SharedInstance.getAccountsEndpoint(), AuthClientEndpoints.Authorize, redirectUri.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!, clientId.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!)
+    open static func getAuthorizeUrl(_ redirectUri: String, clientId: String) -> String {
+        return String(
+            format: "%@%@?response_type=token&redirect_uri=%@&client_id=%@&scope=full",
+            ClientEnvironment.SharedInstance.getAccountsEndpoint(),
+            AuthClientEndpoint.authorize.rawValue,
+            redirectUri.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!,
+            clientId.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!)
     }
 }

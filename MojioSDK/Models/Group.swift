@@ -1,74 +1,72 @@
-//
-//  Group.swift
-//  MojioSDK
-//
-//  Created by Ashish Agarwal on 2016-02-10.
-//  Copyright © 2016 Mojio. All rights reserved.
-//
+/******************************************************************************
+ * Moj.io Inc. CONFIDENTIAL
+ * 2017 Copyright Moj.io Inc.
+ * All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains, the property of
+ * Moj.io Inc. and its suppliers, if any.  The intellectual and technical
+ * concepts contained herein are proprietary to Moj.io Inc. and its suppliers
+ * and may be covered by Patents, pending patents, and are protected by trade
+ * secret or copyright law.
+ *
+ * Dissemination of this information or reproduction of this material is strictly
+ * forbidden unless prior written permission is obtained from Moj.io Inc.
+ *******************************************************************************/
 
 import UIKit
 import ObjectMapper
 
-open class Group: Mappable {
-    open dynamic var Name : String? = nil
-    open dynamic var Description : String? = nil
-    open var Users : [User] = []
-    open var Tags : [String] = []
-    open dynamic var Id : String? = nil
-    open dynamic var CreatedOn : String? = nil
-    open dynamic var LastModified : String? = nil
+public struct Group: Mappable, PrimaryKey {
+    public var Name: String? = nil
+    public var Description: String? = nil
+    public var Users: [User] = []
+    public var Tags: [String] = []
+    public var Id: String? = nil
+    public var CreatedOn: String? = nil
+    public var LastModified: String? = nil
     
-    public required convenience init?(map: Map) {
-        self.init()
-    }
+    public var createdOn: Date? = nil
+    public var lastModified: Date? = nil
     
-    public required init() {
-        
-    }
-
-    open static func primaryKey() -> String? {
+    public static var primaryKey: String {
         return "Id"
     }
     
-    open func json () -> String? {
-        let dictionary : NSMutableDictionary = NSMutableDictionary()
-        
-        if self.Name != nil {
-            dictionary.setObject(self.Name!, forKey: "Name" as NSCopying)
-        }
-        if self.Description != nil {
-            dictionary.setObject(self.Description!, forKey: "Description" as NSCopying)
-        }
-        if self.Users.count > 0 {
-            dictionary.setObject(self.Users, forKey: "Users" as NSCopying)
-        }
-        
-        let data = try! JSONSerialization.data(withJSONObject: dictionary, options:  JSONSerialization.WritingOptions.prettyPrinted)
-        return NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
-
+    public init() {}
+    
+    public init?(map: Map) {
+        self.init()
     }
     
-    open func mapping(map: Map) {
+    public func json () -> String? {
+        var map: [String: Any] = [:]
         
-        var users = Array<User>()
-        users <- map["Users"]
-        
-        for user in users {
-            self.Users.append(user)
+        if let name = self.Name {
+            map["Name"] = name
         }
-        
-        var tags = Array<String>()
-        tags <- map["Tags"]
-        
-        for tag in tags {
-            self.Tags.append(tag)
-        }
-        
-        Name <- map["Name"];
-        Description <- map["Description"];
-        Id <- map["Id"];
-        CreatedOn <- map["CreatedOn"];
-        LastModified <- map["LastModified"];
-    }
 
+        if let desc = self.Description {
+            map["Description"] = desc
+        }
+
+        if self.Users.count > 0 {
+            map["Users"] = self.Users
+        }
+        
+        let data = try! JSONSerialization.data(withJSONObject: map, options:  JSONSerialization.WritingOptions.prettyPrinted)
+        return String(data: data, encoding: String.Encoding.utf8)
+    }
+    
+    public mutating func mapping(map: Map) {
+        Users <- map["Users"]
+        Tags <- map["Tags"]
+        Name <- map["Name"]
+        Description <- map["Description"]
+        Id <- map["Id"]
+        CreatedOn <- map["CreatedOn"]
+        LastModified <- map["LastModified"]
+        
+        createdOn = self.CreatedOn?.toDate
+        lastModified = self.LastModified?.toDate
+    }
 }

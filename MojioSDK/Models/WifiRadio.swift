@@ -1,46 +1,53 @@
-//
-//  WifiRadio.swift
-//  Pods
-//
-//  Created by Ashish Agarwal on 2016-06-27.
-//
-//
+/******************************************************************************
+ * Moj.io Inc. CONFIDENTIAL
+ * 2017 Copyright Moj.io Inc.
+ * All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains, the property of
+ * Moj.io Inc. and its suppliers, if any.  The intellectual and technical
+ * concepts contained herein are proprietary to Moj.io Inc. and its suppliers
+ * and may be covered by Patents, pending patents, and are protected by trade
+ * secret or copyright law.
+ *
+ * Dissemination of this information or reproduction of this material is strictly
+ * forbidden unless prior written permission is obtained from Moj.io Inc.
+ *******************************************************************************/
 
 import UIKit
 import ObjectMapper
 
-open class TransactionState: NSObject {
-    open static let Pending = "Pending"
-    open static let Success = "Success"
-    open static let Failure = "Failure"
+public enum TransactionState: String {
+    case pending = "Pending"
+    case success = "Success"
+    case failure = "Failure"
 }
 
-open class WifiRadioStatus: NSObject {
-    open static let Connected = "Connected"
-    open static let Roaming = "Roaming"
-    open static let Disconnected = "Disconnected"
+public enum WifiRadioStatus: String {
+    case connected = "Connected"
+    case roaming = "Roaming"
+    case disconnected = "Disconnected"
 }
 
-open class WifiRadio: Mappable  {
+public struct WifiRadio: Mappable  {
     
-    open dynamic var TimeStamp : String? = nil
-    open dynamic var SSID : String? = nil
-    open dynamic var Password : String? = nil
-    open dynamic var AllowRoaming : String? = nil
-    open dynamic var Status : String? = nil
-    open dynamic var Strength : String? = nil
+    public var TimeStamp: String? = nil
+    public var SSID: String? = nil
+    public var Password: String? = nil
+    public var AllowRoaming: String? = nil
+    public var Status: String? = nil
+    public var Strength: String? = nil
+    
+    public var timestamp: Date? = nil
 
-    public required convenience init?(map: Map) {
+    public init() {}
+    
+    public init?(map: Map) {
         self.init()
-    }
-   
-    public required init() {
-        
     }
 
     // Time to live in seconds for the update request
-    open func jsonDict(_ timeToLive: Int? = nil, fields: [String]? = nil) -> NSDictionary {
-        let dictionary : NSMutableDictionary = NSMutableDictionary()
+    public func jsonDict(_ timeToLive: Int? = nil, fields: [String]? = nil) -> [String: Any] {
+        var map: [String: Any] = [:]
         
         // Default to use all fields
         var updateFields: Set<String> = ["SSID", "Password", "Status"]
@@ -49,15 +56,15 @@ open class WifiRadio: Mappable  {
         }
 
         if let ssid = self.SSID , updateFields.contains("SSID") {
-            dictionary.setObject(ssid, forKey: "SSID" as NSCopying)
+            map["SSID"] = ssid
         }
 
         if let password = self.Password , updateFields.contains("Password") {
-            dictionary.setObject(password, forKey: "Password" as NSCopying)
+            map["Password"] = password
         }
 
-        if let status = self.Status , updateFields.contains("Status") {
-            dictionary.setObject(status, forKey: "Status" as NSCopying)
+        if let status = self.Status, updateFields.contains("Status") {
+            map["Status"] = status
         }
 
         if let timeToLive: Int = timeToLive , timeToLive > 0 {
@@ -90,20 +97,21 @@ open class WifiRadio: Mappable  {
             }
             
             if timespan.characters.count > 0 {
-                dictionary.setObject(timespan, forKey: "TimeToLive" as NSCopying)
+                map["TimeToLive"] = timespan
             }
         }
         
-        return dictionary
+        return map
     }
 
-    open func mapping(map : Map) {
+    public mutating func mapping(map: Map) {
         TimeStamp <- map["TimeStamp"]
         SSID <- map["SSID"]
         Password <- map["Password"]
         AllowRoaming <- map["AllowRoaming"]
         Status <- map["Status"]
         Strength <- map["Strength"]
+        
+        timestamp = self.TimeStamp?.toDate
     }
-
 }

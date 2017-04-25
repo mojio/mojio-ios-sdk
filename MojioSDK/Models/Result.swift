@@ -1,22 +1,23 @@
-//
-//  Result.swift
-//  Pods
-//
-//  Created by Narayan Sainaney on 2016-06-30.
-//
-//
+/******************************************************************************
+ * Moj.io Inc. CONFIDENTIAL
+ * 2017 Copyright Moj.io Inc.
+ * All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains, the property of
+ * Moj.io Inc. and its suppliers, if any.  The intellectual and technical
+ * concepts contained herein are proprietary to Moj.io Inc. and its suppliers
+ * and may be covered by Patents, pending patents, and are protected by trade
+ * secret or copyright law.
+ *
+ * Dissemination of this information or reproduction of this material is strictly
+ * forbidden unless prior written permission is obtained from Moj.io Inc.
+ *******************************************************************************/
 
 
 import Foundation
 import ObjectMapper
 
-open class Result {
-    open var TotalCount : Int? = nil
-    open var Data : NSArray? = nil
-    
-    public init(data: NSArray?, count :Int? = nil) {
-        self.Data = data
-        self.TotalCount = count
-    }
-    
+public struct Result {
+    public var TotalCount: Int? = nil
+    public var Data: NSArray? = nil
 }

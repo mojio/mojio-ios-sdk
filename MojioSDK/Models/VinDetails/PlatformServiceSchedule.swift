@@ -1,41 +1,44 @@
-//
-//  PlatformServiceSchedule.swift
-//  MojioSDK
-//
-//  Created by Ashish Agarwal on 2016-02-26.
-//  Copyright © 2016 Mojio. All rights reserved.
-//
+/******************************************************************************
+ * Moj.io Inc. CONFIDENTIAL
+ * 2017 Copyright Moj.io Inc.
+ * All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains, the property of
+ * Moj.io Inc. and its suppliers, if any.  The intellectual and technical
+ * concepts contained herein are proprietary to Moj.io Inc. and its suppliers
+ * and may be covered by Patents, pending patents, and are protected by trade
+ * secret or copyright law.
+ *
+ * Dissemination of this information or reproduction of this material is strictly
+ * forbidden unless prior written permission is obtained from Moj.io Inc.
+ *******************************************************************************/
 
 import UIKit
 import ObjectMapper
 
-open class PlatformServiceSchedule: Mappable {
+public struct PlatformServiceSchedule: Mappable {
     
-    open dynamic var InitialValue : Float = 0
-    open dynamic var IntervalType : String? = nil
-    open dynamic var MaintenanceCategory : String? = nil
-    open dynamic var MaintenanceName : String? = nil
-    open dynamic var MaintenanceNotes : String? = nil
-    open dynamic var OperatingParameter : String? = nil
-    open dynamic var OperatingParameterNotes : String? = nil
-    open dynamic var ScheduleDescription : String? = nil
-    open dynamic var ScheduleName : String? = nil
-    open dynamic var ServiceEvent : String? = nil
-    open dynamic var TransNotes : String? = nil
-    open dynamic var Units : String? = nil
-    open dynamic var Value : Float = 0
-
+    public var InitialValue: Double = 0
+    public var IntervalType: String? = nil
+    public var MaintenanceCategory: String? = nil
+    public var MaintenanceName: String? = nil
+    public var MaintenanceNotes: String? = nil
+    public var OperatingParameter: String? = nil
+    public var OperatingParameterNotes: String? = nil
+    public var ScheduleDescription: String? = nil
+    public var ScheduleName: String? = nil
+    public var ServiceEvent: String? = nil
+    public var TransNotes: String? = nil
+    public var Units: String? = nil
+    public var Value: Double = 0
     
-    public required convenience init?(map: Map) {
-        self.init();
-    }
+    public init() {}
     
-    public required init() {
-        
+    public init?(map: Map) {
+        self.init()
     }
 
-    open func mapping(map: Map) {
-
+    public mutating func mapping(map: Map) {
         InitialValue <- map["InitialValue"]
         IntervalType <- map["IntervalType"]
         MaintenanceCategory <- map["MaintenanceCategory"]
@@ -49,7 +52,5 @@ open class PlatformServiceSchedule: Mappable {
         TransNotes <- map["TransNotes"]
         Units <- map["Units"]
         Value <- map["Value"]
-
     }
-
 }

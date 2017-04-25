@@ -159,40 +159,40 @@ open class JSONSerializer {
             else if let array = value as? [Int?] {
                 handledValue += "["
                 for (index, value) in array.enumerated() {
-                    handledValue += value != nil ? String(value!) : "null"
-                    handledValue += (index < array.count-1 ? ", " : "")
+                    handledValue += value != nil ? String(value!): "null"
+                    handledValue += (index < array.count-1 ? ", ": "")
                 }
                 handledValue += "]"
             }
             else if let array = value as? [Double?] {
                 handledValue += "["
                 for (index, value) in array.enumerated() {
-                    handledValue += value != nil ? String(value!) : "null"
-                    handledValue += (index < array.count-1 ? ", " : "")
+                    handledValue += value != nil ? String(value!): "null"
+                    handledValue += (index < array.count-1 ? ", ": "")
                 }
                 handledValue += "]"
             }
             else if let array = value as? [Float?] {
                 handledValue += "["
                 for (index, value) in array.enumerated() {
-                    handledValue += value != nil ? String(value!) : "null"
-                    handledValue += (index < array.count-1 ? ", " : "")
+                    handledValue += value != nil ? String(value!): "null"
+                    handledValue += (index < array.count-1 ? ", ": "")
                 }
                 handledValue += "]"
             }
             else if let array = value as? [Bool?] {
                 handledValue += "["
                 for (index, value) in array.enumerated() {
-                    handledValue += value != nil ? String(value!) : "null"
-                    handledValue += (index < array.count-1 ? ", " : "")
+                    handledValue += value != nil ? String(value!): "null"
+                    handledValue += (index < array.count-1 ? ", ": "")
                 }
                 handledValue += "]"
             }
             else if let array = value as? [String?] {
                 handledValue += "["
                 for (index, value) in array.enumerated() {
-                    handledValue += value != nil ? "\"\(value!)\"" : "null"
-                    handledValue += (index < array.count-1 ? ", " : "")
+                    handledValue += value != nil ? "\"\(value!)\"": "null"
+                    handledValue += (index < array.count-1 ? ", ": "")
                 }
                 handledValue += "]"
             }
@@ -200,7 +200,7 @@ open class JSONSerializer {
                 handledValue += "["
                 for (index, value) in array.enumerated() {
                     handledValue += "\"\(value)\""
-                    handledValue += (index < array.count-1 ? ", " : "")
+                    handledValue += (index < array.count-1 ? ", ": "")
                 }
                 handledValue += "]"
             }
@@ -216,7 +216,7 @@ open class JSONSerializer {
                     else {
                         handledValue += "\(value)"
                     }
-                    handledValue += (index < array.count-1 ? ", " : "")
+                    handledValue += (index < array.count-1 ? ", ": "")
                 }
                 handledValue += "]"
             }
@@ -236,14 +236,14 @@ open class JSONSerializer {
                 }
             }
             else {
-                handledValue = String(describing: value) != "nil" ? "\"\(value)\"" : "null"
+                handledValue = String(describing: value) != "nil" ? "\"\(value)\"": "null"
             }
             
             if !skip {
                 
                 // if optional propertyName is populated we'll use it
                 if let propertyName = propertyName {
-                    json += "\"\(propertyName)\": \(handledValue)" + (index < size-1 ? ", " : "")
+                    json += "\"\(propertyName)\": \(handledValue)" + (index < size-1 ? ", ": "")
                 }
                     // if not then we have a member an array
                 else {
@@ -253,11 +253,11 @@ open class JSONSerializer {
                         first = false
                     }
                     // if it's not the last we need a comma. if it is the last we need to close ]
-                    json += "\(handledValue)" + (index < size-1 ? ", " : "]")
+                    json += "\(handledValue)" + (index < size-1 ? ", ": "]")
                 }
                 
             } else {
-                json = "\(handledValue)" + (index < size-1 ? ", " : "")
+                json = "\(handledValue)" + (index < size-1 ? ", ": "")
             }
             
             index += 1
@@ -271,7 +271,7 @@ open class JSONSerializer {
             let jsonData = json.data(using: String.Encoding.utf8)!
             let jsonObject = try! JSONSerialization.jsonObject(with: jsonData, options: [])
             let prettyJsonData = try! JSONSerialization.data(withJSONObject: jsonObject, options: .prettyPrinted)
-            json = NSString(data: prettyJsonData, encoding: String.Encoding.utf8.rawValue)! as String
+            json = String(data: prettyJsonData, encoding: String.Encoding.utf8)! as String
         }
         
         return json

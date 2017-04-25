@@ -1,51 +1,56 @@
-//
-//  Geofence.swift
-//  MojioSDK
-//
-//  Created by Suresh Venkatraman on 7/22/16.
-//  Copyright © 2016 Mojio. All rights reserved.
-//
+/******************************************************************************
+ * Moj.io Inc. CONFIDENTIAL
+ * 2017 Copyright Moj.io Inc.
+ * All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains, the property of
+ * Moj.io Inc. and its suppliers, if any.  The intellectual and technical
+ * concepts contained herein are proprietary to Moj.io Inc. and its suppliers
+ * and may be covered by Patents, pending patents, and are protected by trade
+ * secret or copyright law.
+ *
+ * Dissemination of this information or reproduction of this material is strictly
+ * forbidden unless prior written permission is obtained from Moj.io Inc.
+ *******************************************************************************/
 
 import Foundation
 import ObjectMapper
 
-open class GeofenceRegionType : NSObject {
-    open static let Circle = "Circle"
+public enum GeofenceRegionType: String {
+    case circle = "Circle"
 }
 
-open class GeofenceRegion : Mappable {
+public struct GeofenceRegion: Mappable {
 
-    open dynamic var GeofenceType: String? = nil
-    open dynamic var Lat: Double = 0
-    open dynamic var Lng: Double = 0
-    open var Radius: Distance? = nil
+    public var GeofenceType: String? = nil
+    public var Lat: Double = 0
+    public var Lng: Double = 0
+    public var Radius: Distance? = nil
     
-    public required convenience init?(map: Map) {
+    public init() {}
+    
+    public init?(map: Map) {
         self.init()
     }
     
-    public required init() {
-        
-    }
-
-    open func jsonDict() -> NSDictionary {
-        var dictionary : [String:AnyObject] = [:]
+    public func jsonDict() -> [String: Any] {
+        var map: [String:Any] = [:]
         
         if let id = self.GeofenceType {
-            dictionary["Type"] = id as AnyObject?
+            map["Type"] = id as AnyObject?
         }
         
-        dictionary["Lat"] = self.Lat as AnyObject?
-        dictionary["Lng"] = self.Lng as AnyObject?
+        map["Lat"] = self.Lat as AnyObject?
+        map["Lng"] = self.Lng as AnyObject?
         
         if let radius = self.Radius {
-            dictionary["Radius"] = radius.jsonDict()
+            map["Radius"] = radius.jsonDict()
         }
         
-        return dictionary as NSDictionary
+        return map
     }
     
-    open func mapping(map: Map) {
+    public mutating func mapping(map: Map) {
         GeofenceType <- map["Type"]
         Lat <- map["Lat"]
         Lng <- map["Lng"]
@@ -53,69 +58,69 @@ open class GeofenceRegion : Mappable {
     }
 }
 
-public class GeofenceNotificationTypes : NSObject {
-    public static let OnEnter : String = "OnEnter"
-    public static let OnExit : String = "OnExit"
-    public static let Always : String = "Always"
-    public static let Never : String = "Never"
+public enum GeofenceNotificationType: String {
+    case onEnter = "OnEnter"
+    case onExit = "OnExit"
+    case always = "Always"
+    case never = "Never"
 }
 
-open class Geofence: Mappable {
+public struct Geofence: Mappable, PrimaryKey {
     
-    open dynamic var Id : String? = nil
-    open dynamic var Name: String? = nil
-    open dynamic var Description: String? = nil
-    open var Region: GeofenceRegion? = nil
-    open dynamic var NotificationSetting: String? = nil
-    open dynamic var Enabled: Bool = false
-    open var VehicleIds: [String] = []
-    open var Tags : [String] = []
-    open dynamic var CreatedOn : String? = nil
-    open dynamic var LastModified : String? = nil
+    public var Id: String? = nil
+    public var Name: String? = nil
+    public var Description: String? = nil
+    public var Region: GeofenceRegion? = nil
+    public var NotificationSetting: String? = nil
+    public var Enabled: Bool = false
+    public var VehicleIds: [String] = []
+    public var Tags: [String] = []
+    public var CreatedOn: String? = nil
+    public var LastModified: String? = nil
+    
+    public var createdOn: Date? = nil
+    public var lastModified: Date? = nil
 
-    
-    public required convenience init?(map: Map) {
-        self.init()
-    }
-    
-    public required init() {
-        
-    }
-
-    open static func primaryKey() -> String? {
+    public static var primaryKey: String {
         return "Id"
     }
     
-    open func jsonDict() -> NSDictionary {
-        var dictionary : [String:AnyObject] = [:]
+    public init() {}
+    
+    public init?(map: Map) {
+        self.init()
+    }
+    
+    public func jsonDict() -> [String: Any] {
+        var map: [String: Any] = [:]
         
         if let id = self.Id {
-            dictionary["Id"] = id as AnyObject?
+            map["Id"] = id as AnyObject?
         }
         
         if let name = self.Name {
-            dictionary["Name"] = name as AnyObject?
+            map["Name"] = name as AnyObject?
         }
 
         if let description = self.Description {
-            dictionary["Description"] = description as AnyObject?
+            map["Description"] = description as AnyObject?
         }
         
         if let region = self.Region {
-            dictionary["Region"] = region.jsonDict()
+            map["Region"] = region.jsonDict()
         }
         
         if let notificationSetting = self.NotificationSetting {
-            dictionary["NotificationSetting"] = notificationSetting as AnyObject?
+            map["NotificationSetting"] = notificationSetting as AnyObject?
         }
         
-        dictionary["Enabled"] = self.Enabled as AnyObject?
-        dictionary["VehicleIds"] = self.VehicleIds as AnyObject?
+        map["Enabled"] = self.Enabled as AnyObject?
+        map["VehicleIds"] = self.VehicleIds as AnyObject?
         
-        return dictionary as NSDictionary
+        return map
     }
     
-    open func mapping(map: Map) {
+    public mutating func mapping(map: Map) {
         Id <- map["Id"]
         Name <- map["Name"]
         Description <- map["Description"]
@@ -126,5 +131,8 @@ open class Geofence: Mappable {
         CreatedOn <- map["CreatedOn"]
         LastModified <- map["LastModified"]
         Tags <- map["Tags"]
+        
+        createdOn = self.CreatedOn?.toDate
+        lastModified = self.LastModified?.toDate
     }
 }

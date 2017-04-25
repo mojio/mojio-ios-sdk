@@ -1,53 +1,58 @@
-//
-//  DiagnosticCode.swift
-//  MojioSDK
-//
-//  Created by Ashish Agarwal on 2016-02-11.
-//  Copyright © 2016 Mojio. All rights reserved.
-//
+/******************************************************************************
+ * Moj.io Inc. CONFIDENTIAL
+ * 2017 Copyright Moj.io Inc.
+ * All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains, the property of
+ * Moj.io Inc. and its suppliers, if any.  The intellectual and technical
+ * concepts contained herein are proprietary to Moj.io Inc. and its suppliers
+ * and may be covered by Patents, pending patents, and are protected by trade
+ * secret or copyright law.
+ *
+ * Dissemination of this information or reproduction of this material is strictly
+ * forbidden unless prior written permission is obtained from Moj.io Inc.
+ *******************************************************************************/
 
 import UIKit
 import ObjectMapper
 
-open class DiagnosticCode: Mappable {
+public struct DiagnosticCode: Mappable {
     
-    open dynamic var Ignored : Bool = false
-    open dynamic var Code : String? = nil
-    open dynamic var Description : String? = nil
-    open dynamic var Timestamp : String? = nil
+    public var Ignored: Bool = false
+    public var Code: String? = nil
+    public var Description: String? = nil
+    public var Timestamp: String? = nil
     
     // RiskSeverity
-    open dynamic var Severity : String? = nil
-    open dynamic var Instructions : String? = nil
+    public var Severity: String? = nil
+    public var Instructions: String? = nil
     
     // Type
-    open dynamic var StateType : String? = nil
-    open dynamic var DiagnosticCodeType : String? = nil
+    public var StateType: String? = nil
+    public var DiagnosticCodeType: String? = nil
     
-    public required convenience init?(map: Map) {
+    public var timeStamp: Date? = nil
+    
+    public init() {}
+    
+    public init?(map: Map) {
         self.init()
     }
     
-    public required init() {
-        
+    public func jsonIgnoredDict () -> [String: Any] {
+        return ["Ignored": self.Ignored]
     }
     
-    open func jsonIgnoredDict () -> NSDictionary {
-        let dictionary : NSMutableDictionary = NSMutableDictionary()
+    public mutating func mapping(map: Map) {
+        Ignored <- map["Ignored"]
+        Code <- map["Code"]
+        Description <- map["Description"]
+        Timestamp <- map["Timestamp"]
+        Severity <- map["Severity"]
+        Instructions <- map["Instructions"]
+        StateType <- map["StateType"]
+        DiagnosticCodeType <- map["Type"]
         
-        dictionary.setObject(self.Ignored, forKey: "Ignored" as NSCopying)
-        return dictionary
+        timeStamp = self.Timestamp?.toDate
     }
-    
-    open func mapping(map: Map) {
-        Ignored <- map["Ignored"];
-        Code <- map["Code"];
-        Description <- map["Description"];
-        Timestamp <- map["Timestamp"];
-        Severity <- map["Severity"];
-        Instructions <- map["Instructions"];
-        StateType <- map["StateType"];
-        DiagnosticCodeType <- map["Type"];
-    }
-
 }

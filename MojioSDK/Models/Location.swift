@@ -1,84 +1,92 @@
-//
-//  Location.swift
-//  MojioSDK
-//
-//  Created by Ashish Agarwal on 2016-02-11.
-//  Copyright © 2016 Mojio. All rights reserved.
-//
+/******************************************************************************
+ * Moj.io Inc. CONFIDENTIAL
+ * 2017 Copyright Moj.io Inc.
+ * All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains, the property of
+ * Moj.io Inc. and its suppliers, if any.  The intellectual and technical
+ * concepts contained herein are proprietary to Moj.io Inc. and its suppliers
+ * and may be covered by Patents, pending patents, and are protected by trade
+ * secret or copyright law.
+ *
+ * Dissemination of this information or reproduction of this material is strictly
+ * forbidden unless prior written permission is obtained from Moj.io Inc.
+ *******************************************************************************/
 
 import UIKit
 import ObjectMapper
 
-open class LocationStatus : NSObject {
+enum LocationStatus: String {
     // Status not known
-    open static let Unknown : String = "Unknown"
+    case unknown = "Unknown"
     
     // Valid
-    open static let Locked : String = "Locked"
+    case locked = "Locked"
     
     // Invalid
-    open static let NotLocked : String = "NotLocked"
+    case notLocked = "NotLocked"
     
     // CalAmp Only
     // Position update has a horizontal position accuracy estimate that is less that the Horizontal
     // Position Accuracy Threshold.
-    open static let Predicted : String = "Predicted"
+    case predicted = "Predicted"
     
     // CalAmp Only
     // WAAS DGPS is enabled and the position has been differentially corrected
-    open static let DiffCorrected : String = "DiffCorrected"
+    case diffCorrected = "DiffCorrected"
     
     // CalAmp Only
     // Current GPS fix is invalid but a previous fix’s value is available.
-    open static let LastKnown : String = "LastKnown"
+    case lastKnown = "LastKnown"
     
     // CalAmp Only
     // T3 or fewer satellites are seen/used in the GPS fix. (i.e. with 3 satellites or less, an altitude value cannot be calculated)
-    open static let TwoDFix : String = "TwoDFix"
+    case twoDFix = "TwoDFix"
     
     // CalAmp Only
     // Message has been logged by the device due to no network (message could not be sent to server from device).
-    open static let Historic : String = "Historic"
+    case historic = "Historic"
     
     // CalAmp Only
     // Only after a power-up or reset before a valid time-sync has been obtained.
-    open static let InvalidTime : String = "InvalidTime"
+    case invalidTime = "InvalidTime"
     
     // Xirgo Only
     // Communication Failure - Used by Xirgo
-    open static let CommunicationsFailure: String = "CommunicationsFailure"
+    case communicationsFailure = "CommunicationsFailure"
     
     // Xirgo Only
     // GPS is OFF - Used by Xirgo
-    open static let GPSOff : String = "GPSOff"
+    case gpsOff = "GPSOff"
     
     // Xirgo and CalAmp
     // Current GPS location is invalid and previous state's location is used
-    open static let PreviousValidState : String = "PreviousValidState"
+    case previousValidState = "PreviousValidState"
 }
 
-open class Location: Mappable {
-    open var LocationAddress : Address? = nil
-    open dynamic var Timestamp : String? = nil
-    open dynamic var Lat : Float = 0
-    open dynamic var Lng : Float = 0
-    open dynamic var Radius : Float = 0
+public struct Location: Mappable {
+    public var LocationAddress: Address? = nil
+    public var Timestamp: String? = nil
+    public var Lat: Double = 0
+    public var Lng: Double = 0
+    public var Radius: Double = 0
     
     // LocationStatus
-    open dynamic var Status : String? = nil
-    open dynamic var Dilution : Float = 0
-    open dynamic var Altitude : Float = 0
-    open dynamic var GeoHash : String? = nil
+    public var Status: String? = nil
+    public var Dilution: Double = 0
+    public var Altitude: Double = 0
+    public var GeoHash: String? = nil
     
-    public required convenience init?(map: Map) {
+    // Date Values
+    public var timestamp: Date? = nil
+    
+    public init() {}
+    
+    public init?(map: Map) {
         self.init()
     }
-    
-    public required init() {
-        
-    }
 
-    open func mapping(map: Map) {
+    public mutating func mapping(map: Map) {
         LocationAddress <- map["Address"]
         Timestamp <- map["Timestamp"]
         Lat <- map["Lat"]
@@ -87,6 +95,8 @@ open class Location: Mappable {
         Dilution <- map["Dilution"]
         Altitude <- map["Altitude"]
         GeoHash <- map["GeoHash"]
+        
+        // Date Values
+        timestamp = self.Timestamp?.toDate
     }
-
 }

@@ -1,46 +1,65 @@
-//
-//  Heading.swift
-//  MojioSDK
-//
-//  Created by Ashish Agarwal on 2016-02-11.
-//  Copyright © 2016 Mojio. All rights reserved.
-//
+/******************************************************************************
+ * Moj.io Inc. CONFIDENTIAL
+ * 2017 Copyright Moj.io Inc.
+ * All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains, the property of
+ * Moj.io Inc. and its suppliers, if any.  The intellectual and technical
+ * concepts contained herein are proprietary to Moj.io Inc. and its suppliers
+ * and may be covered by Patents, pending patents, and are protected by trade
+ * secret or copyright law.
+ *
+ * Dissemination of this information or reproduction of this material is strictly
+ * forbidden unless prior written permission is obtained from Moj.io Inc.
+ *******************************************************************************/
 
 import UIKit
 import ObjectMapper
 
-open class HeadingUnits : NSObject {
-    open static let Degree : String = "Degree"
+public enum HeadingUnit: String {
+    case degree = "Degree"
 }
 
-open class Heading: Mappable {
+public struct Heading: DeviceMeasurement {
     
-    open dynamic var BaseUnit : String? = nil
-    open dynamic var Direction : String? = nil
-    open dynamic var LeftTurn : Bool = false
-    open dynamic var Timestamp : String? = nil
-    open dynamic var BaseValue : Float = 0
+    // DeviceMeasurement
+    public var BaseUnit: String? = nil
+    public var BaseValue: Double = 0
+    public var Unit: String? = nil
+    public var Value: Double = 0
+    public var Timestamp: String?  = nil
     
-    // HeadingUnits
-    open dynamic var Unit : String? = nil
-    open dynamic var Value : Float = 0
+    public var timeStamp: Date? = nil
     
-    public required convenience init?(map: Map) {
+    public var Direction: String? = nil
+    public var LeftTurn: Bool = false
+
+    public var baseHeadingUnit: HeadingUnit? {
+        if let unit = self.BaseUnit {
+            return HeadingUnit(rawValue: unit)
+        }
+        
+        return nil
+    }
+    
+    public var headingUnit: HeadingUnit? {
+        if let unit = self.Unit {
+            return HeadingUnit(rawValue: unit)
+        }
+        
+        return nil
+    }
+    
+    public init() {}
+    
+    public init?(map: Map) {
         self.init()
     }
-    
-    public required init() {
-        
-    }
 
-    open func mapping(map: Map) {
-        BaseUnit <- map["BaseUnit"]
+    public mutating func mapping(map: Map) {
+        self.measureMapping(map: map)
+
         Direction <- map["Direction"]
         LeftTurn <- map["LeftTurn"]
-        Timestamp <- map["Timestamp"]
-        BaseValue <- map["BaseValue"]
-        Unit <- map["Unit"]
-        Value <- map["Value"]
     }
-
 }

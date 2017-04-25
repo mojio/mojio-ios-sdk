@@ -1,48 +1,58 @@
-//
-//  Recall.swift
-//  MojioSDK
-//
-//  Created by Ashish Agarwal on 2016-02-26.
-//  Copyright © 2016 Mojio. All rights reserved.
-//
+/******************************************************************************
+ * Moj.io Inc. CONFIDENTIAL
+ * 2017 Copyright Moj.io Inc.
+ * All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains, the property of
+ * Moj.io Inc. and its suppliers, if any.  The intellectual and technical
+ * concepts contained herein are proprietary to Moj.io Inc. and its suppliers
+ * and may be covered by Patents, pending patents, and are protected by trade
+ * secret or copyright law.
+ *
+ * Dissemination of this information or reproduction of this material is strictly
+ * forbidden unless prior written permission is obtained from Moj.io Inc.
+ *******************************************************************************/
 
 import UIKit
 import ObjectMapper
 
-open class Recall: Mappable {
+public struct Recall: Mappable {
     
-    open dynamic var Title : String? = nil
-    open dynamic var NHTSACampaignNumber : String? = nil
-    open dynamic var MFRCampaignNumber : String? = nil
-    open dynamic var ComponentDescription : String? = nil
-    open dynamic var ReportManufacturer : String? = nil
-    open dynamic var ManufacturingStartDate : String? = nil
-    open dynamic var ManufacturingEndDate : String? = nil
-    open dynamic var RecallTypeCode : String? = nil
-    open dynamic var PotentialUnitsAffected : String? = nil
-    open dynamic var OwnerNotificationDate : String? = nil
-    open dynamic var RecallInitiator : String? = nil
-    open dynamic var ProductManufacturer : String? = nil
-    open dynamic var ReportReceivedDate : String? = nil
-    open dynamic var RecordCreationDate : String? = nil
-    open dynamic var RegulationPartNumber : String? = nil
-    open dynamic var FMVVSNumber : String? = nil
-    open dynamic var DefectSummary : String? = nil
-    open dynamic var ConsequenceSummary : String? = nil
-    open dynamic var CorrectiveAction : String? = nil
-    open dynamic var Notes : String? = nil
-    open dynamic var RecalledComponentId : String? = nil
+    public var Title: String? = nil
+    public var NHTSACampaignNumber: String? = nil
+    public var MFRCampaignNumber: String? = nil
+    public var ComponentDescription: String? = nil
+    public var ReportManufacturer: String? = nil
+    public var ManufacturingStartDate: String? = nil
+    public var ManufacturingEndDate: String? = nil
+    public var RecallTypeCode: String? = nil
+    public var PotentialUnitsAffected: String? = nil
+    public var OwnerNotificationDate: String? = nil
+    public var RecallInitiator: String? = nil
+    public var ProductManufacturer: String? = nil
+    public var ReportReceivedDate: String? = nil
+    public var RecordCreationDate: String? = nil
+    public var RegulationPartNumber: String? = nil
+    public var FMVVSNumber: String? = nil
+    public var DefectSummary: String? = nil
+    public var ConsequenceSummary: String? = nil
+    public var CorrectiveAction: String? = nil
+    public var Notes: String? = nil
+    public var RecalledComponentId: String? = nil
     
-    public required convenience init?(map: Map) {
-        self.init();
+    public var manufacturingStartDate: Date? = nil
+    public var manufacturingEndDate: Date? = nil
+    public var ownerNotificationDate: Date? = nil
+    public var reportReceivedDate: Date? = nil
+    public var recordCreationDate: Date? = nil
+    
+    public init() {}
+    
+    public init?(map: Map) {
+        self.init()
     }
     
-    public required init() {
-        
-    }
-
-    open func mapping(map: Map) {
-        
+    public mutating func mapping(map: Map) {
         Title <- map["Title"]
         NHTSACampaignNumber <- map["NHTSACampaignNumber"]
         MFRCampaignNumber <- map["MFRCampaignNumber"]
@@ -65,6 +75,10 @@ open class Recall: Mappable {
         Notes <- map["Notes"]
         RecalledComponentId <- map["RecalledComponentId"]
         
+        manufacturingStartDate = self.ManufacturingStartDate?.toDate
+        manufacturingEndDate = self.ManufacturingEndDate?.toDate
+        ownerNotificationDate = self.OwnerNotificationDate?.toDate
+        reportReceivedDate = self.ReportReceivedDate?.toDate
+        recordCreationDate = self.RecordCreationDate?.toDate
     }
-
 }

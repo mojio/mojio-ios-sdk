@@ -1,58 +1,67 @@
-//
-//  VehicleMeasures.swift
-//  MojioSDK
-//
-//  Created by Ashish Agarwal on 2016-03-04.
-//  Copyright © 2016 Mojio. All rights reserved.
-//
+/******************************************************************************
+ * Moj.io Inc. CONFIDENTIAL
+ * 2017 Copyright Moj.io Inc.
+ * All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains, the property of
+ * Moj.io Inc. and its suppliers, if any.  The intellectual and technical
+ * concepts contained herein are proprietary to Moj.io Inc. and its suppliers
+ * and may be covered by Patents, pending patents, and are protected by trade
+ * secret or copyright law.
+ *
+ * Dissemination of this information or reproduction of this material is strictly
+ * forbidden unless prior written permission is obtained from Moj.io Inc.
+ *******************************************************************************/
 
 import UIKit
 import ObjectMapper
 
-open class VehicleMeasures: Mappable {
+public struct VehicleMeasures: Mappable {
     
-    open var VehicleAcceleration : Acceleration? = nil
-    open var VehicleAccelerometer : Accelerometer? = nil
-    open var AccidentState : BooleanState? = nil
-    open var VehicleBattery : Battery? = nil
-    open dynamic var CurrentTrip : String? = nil
-    open var Deceleration : Acceleration? = nil
-    open var DiagnosticCodes : [DiagnosticCode] = []
-    open var VehicleFuelEfficiency : FuelEfficiency? = nil
+    public var VehicleAcceleration: Acceleration? = nil
+    public var VehicleAccelerometer: Accelerometer? = nil
+    public var AccidentState: BooleanState? = nil
+    public var VehicleBattery: Battery? = nil
+    public var CurrentTrip: String? = nil
+    public var Deceleration: Acceleration? = nil
+    public var DiagnosticCodes: [DiagnosticCode] = []
+    public var VehicleFuelEfficiency: FuelEfficiency? = nil
     
     // FuelEfficiencyCalculationMethod
-    open dynamic var FuelEfficiencyCalculationMethod : String? = nil// ['Query', 'EngineFuelRate', 'MassAirFlow', 'Calculated', 'None'],
-    open var VehicleFuelLevel : FuelLevel? = nil
-    open var VehicleFuelVolume : FuelVolume? = nil
+    public var FuelEfficiencyCalculationMethod: String? = nil
+    public var VehicleFuelLevel: FuelLevel? = nil
+    public var VehicleFuelVolume: FuelVolume? = nil
 
     // FuelType
-    open dynamic var FuelType : String? = nil
-    open dynamic var GatewayTime : String? = nil
-    open var HarshEventState : HarshEvent? = nil
-    open var VehicleHeading : Heading? = nil
-    open var VehicleIdleState : IdleState? = nil
-    open var IgnitionState : BooleanState? = nil
-    open var VehicleLocation : Location? = nil
-    open var MilStatus : Bool? = nil
-    open dynamic var MojioId : String? = nil
-    open var ParkedState : BooleanState? = nil
-    open var VehicleRPM : RPM? = nil
-    open var VehicleSpeed : Speed? = nil
-    open var TowState : BooleanState? = nil
-    open var VIN : String? = nil
-    open var VehicleVinDetails : VinDetails? = nil
-    open var VirtualOdometer : Odometer? = nil
-    open var VehicleOdometer : Odometer? = nil
-    open dynamic var Time : String? = nil
-    open var DisturbanceState : BooleanState? = nil
+    public var FuelType: String? = nil
+    public var GatewayTime: String? = nil
+    public var HarshEventState: HarshEvent? = nil
+    public var VehicleHeading: Heading? = nil
+    public var VehicleIdleState: IdleState? = nil
+    public var IgnitionState: BooleanState? = nil
+    public var VehicleLocation: Location? = nil
+    public var MilStatus: Bool? = nil
+    public var MojioId: String? = nil
+    public var ParkedState: BooleanState? = nil
+    public var VehicleRPM: RPM? = nil
+    public var VehicleSpeed: Speed? = nil
+    public var TowState: BooleanState? = nil
+    public var VIN: String? = nil
+    public var VehicleVinDetails: VinDetails? = nil
+    public var VirtualOdometer: Odometer? = nil
+    public var VehicleOdometer: Odometer? = nil
+    public var Time: String? = nil
+    public var DisturbanceState: BooleanState? = nil
     
-    public required convenience init?(map: Map) {
+    public var time: Date? = nil
+    
+    public init() {}
+    
+    public init?(map: Map) {
         self.init()
     }
-    
-    public required init() {}
 
-    open func mapping(map: Map) {
+    public mutating func mapping(map: Map) {
         VehicleAcceleration <- map["Acceleration"]
         VehicleAccelerometer <- map["Accelerometer"]
         AccidentState <- map["AccidentState"]
@@ -82,5 +91,7 @@ open class VehicleMeasures: Mappable {
         VirtualOdometer <- map["VirtualOdometer"]
         VehicleOdometer <- map["Odometer"]
         Time <- map["Time"]
+
+        time = self.Time?.toDate
     }
 }
