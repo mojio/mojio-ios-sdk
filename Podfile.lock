@@ -17,6 +17,7 @@ PODS:
   - OHHTTPStubs/OHPathHelpers (6.0.0)
   - OHHTTPStubs/Swift (6.0.0):
     - OHHTTPStubs/Default
+  - SwiftDate (4.1.1)
   - SwiftWebSocket (2.6.5)
   - SwiftyJSON (3.1.4)
 
@@ -26,6 +27,7 @@ DEPENDENCIES:
   - ObjectMapper
   - OHHTTPStubs
   - OHHTTPStubs/Swift
+  - SwiftDate
   - SwiftWebSocket
   - SwiftyJSON
 
@@ -34,9 +36,10 @@ SPEC CHECKSUMS:
   KeychainSwift: 213db04dfe7244988e61f77c72a2afb2f775954a
   ObjectMapper: 042708195cc46c20871cbcbec0453826398273fd
   OHHTTPStubs: 752f9b11fd810a15162d50f11c06ff94f8e012eb
+  SwiftDate: ae615078806a322183e5f64e02e80ca8d939bf48
   SwiftWebSocket: 1ef8a0efb023544643bdf480c1ec4a62b204f293
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
 
-PODFILE CHECKSUM: 18cb9aded621a31eeb2deb1c15ac5684e9113da6
+PODFILE CHECKSUM: 594fc5b317661511d0e82bdc314f81158d8b6c2b
 
 COCOAPODS: 1.2.0

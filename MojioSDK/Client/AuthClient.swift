@@ -315,7 +315,7 @@ open class AuthClient: AuthControllerDelegate {
                 }
                 
                 if let expiry: Double = responseJSON["expires_in"] as? Double {
-                    let authToken = AuthToken(accessToken: (responseJSON["access_token"] as? String), expiry: String(NSDate.init(timeIntervalSinceNow: expiry).timeIntervalSince1970), refreshToken: (responseJSON["refresh_token"] as? String), uniqueId: ClientEnvironment.SharedInstance.getRegion().rawValue)
+                    let authToken = AuthToken(accessToken: (responseJSON["access_token"] as? String), expiry: String(Date.init(timeIntervalSinceNow: expiry).timeIntervalSince1970), refreshToken: (responseJSON["refresh_token"] as? String), uniqueId: ClientEnvironment.SharedInstance.getRegion().rawValue)
                     
                     if authToken.isValid() {
                         completion(authToken)
@@ -375,7 +375,7 @@ open class AuthClient: AuthControllerDelegate {
                         }
                         
                         if let expiry: Double = responseJSON["expires_in"] as? Double {
-                            let authToken: AuthToken = AuthToken(accessToken: (responseJSON["access_token"] as? String), expiry: String(NSDate.init(timeIntervalSinceNow: expiry).timeIntervalSince1970), refreshToken: (responseJSON["refresh_token"] as? String), uniqueId: ClientEnvironment.SharedInstance.getRegion().rawValue)
+                            let authToken: AuthToken = AuthToken(accessToken: (responseJSON["access_token"] as? String), expiry: String(Date.init(timeIntervalSinceNow: expiry).timeIntervalSince1970), refreshToken: (responseJSON["refresh_token"] as? String), uniqueId: ClientEnvironment.SharedInstance.getRegion().rawValue)
                             
                             if authToken.isValid() {
                                 completion(authToken)
@@ -467,7 +467,7 @@ open class AuthClient: AuthControllerDelegate {
                 }
                 
                 if let expiry: Double = responseJSON["expires_in"] as? Double {
-                    let authToken: AuthToken = AuthToken(accessToken: (responseJSON["access_token"] as! String), expiry: String(NSDate.init(timeIntervalSinceNow: expiry).timeIntervalSince1970), refreshToken: (responseJSON["refresh_token"] as! String), uniqueId: ClientEnvironment.SharedInstance.getRegion().rawValue)
+                    let authToken: AuthToken = AuthToken(accessToken: (responseJSON["access_token"] as! String), expiry: String(Date.init(timeIntervalSinceNow: expiry).timeIntervalSince1970), refreshToken: (responseJSON["refresh_token"] as! String), uniqueId: ClientEnvironment.SharedInstance.getRegion().rawValue)
                     
                     if authToken.isValid() {
                         completion(authToken)

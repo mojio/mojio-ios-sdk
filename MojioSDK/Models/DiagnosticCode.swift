@@ -31,6 +31,8 @@ public struct DiagnosticCode: Mappable {
     public var StateType: String? = nil
     public var DiagnosticCodeType: String? = nil
     
+    public var timeStamp: Date? = nil
+    
     public init() {}
     
     public init?(map: Map) {
@@ -50,5 +52,7 @@ public struct DiagnosticCode: Mappable {
         Instructions <- map["Instructions"]
         StateType <- map["StateType"]
         DiagnosticCodeType <- map["Type"]
+        
+        timeStamp = self.Timestamp?.toDate
     }
 }

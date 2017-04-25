@@ -34,6 +34,8 @@ public struct VinDetails: Mappable {
     public var Message: String? = nil
     public var Success: Bool? = nil
     
+    public var timestamp: Date? = nil
+    
     public init() {}
     
     public init?(map: Map) {
@@ -56,5 +58,7 @@ public struct VinDetails: Mappable {
         Transmission <- map["Transmission"]
         Message <- map["Message"]
         Success <- map["Success"]
+        
+        timestamp = self.Timestamp?.toDate
     }
 }

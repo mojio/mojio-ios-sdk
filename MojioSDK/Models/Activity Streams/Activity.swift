@@ -30,6 +30,12 @@ public protocol BaseActivity: BaseActivityLocation {
     var AttributedTo: BaseActivity? {get set}
     var Summary: Dictionary<String,String>? {get set}
     var Icon: Dictionary<String, AnyObject>? {get set}
+    
+    // Date/Time
+    var startTime: Date? {get set}
+    var endTime: Date? {get set}
+    var published: Date? {get set}
+    var updated: Date? {get set}
 }
 
 extension BaseActivity {
@@ -52,6 +58,11 @@ extension BaseActivity {
         Icon <- map["Icon"]
         Content <- map["Content"]
         AttributedTo <- map["AttributedTo"]
+        
+        startTime = self.StartTime?.toDate
+        endTime = self.EndTime?.toDate
+        published = self.Published?.toDate
+        updated = self.Updated?.toDate
     }
 }
 
@@ -78,6 +89,15 @@ public struct Activity: BaseActivity {
     public var AttributedTo: BaseActivity? = nil
     public var Summary: Dictionary<String,String>? = nil
     public var Icon: Dictionary<String, AnyObject>? = nil
+    
+    public var startTime: Date? = nil
+    public var endTime: Date? = nil
+    public var published: Date? = nil
+    public var updated: Date? = nil
+    
+    public static var primaryKey: String {
+        return "Id"
+    }
     
     public init() {}
     

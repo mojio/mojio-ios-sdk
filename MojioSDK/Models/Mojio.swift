@@ -34,6 +34,12 @@ public struct Mojio: Mappable, PrimaryKey {
     public var MSISDN: String? = nil
     public var ICCID: String? = nil
     
+    // Date Values
+    public var lastContactTime: Date? = nil
+    public var gatewayTime: Date? = nil
+    public var createdOn: Date? = nil
+    public var lastModified: Date? = nil
+    
     public static var primaryKey: String {
         return "Id"
     }
@@ -56,7 +62,7 @@ public struct Mojio: Mappable, PrimaryKey {
         }
         
         let data = try! JSONSerialization.data(withJSONObject: map, options:  JSONSerialization.WritingOptions.prettyPrinted)
-        return NSString(data: data, encoding: String.Encoding.utf8.rawValue) as? String
+        return String(data: data, encoding: String.Encoding.utf8)
         
     }
     
@@ -76,5 +82,11 @@ public struct Mojio: Mappable, PrimaryKey {
         Deleted <- map["Deleted"]
         MSISDN <- map["MSISDN"]
         ICCID <- map["ICCID"]
+        
+        // Date Values
+        lastContactTime = self.LastContactTime?.toDate
+        gatewayTime = self.GatewayTime?.toDate
+        createdOn = self.CreatedOn?.toDate
+        lastModified = self.LastModified?.toDate
     }
 }

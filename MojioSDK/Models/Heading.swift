@@ -29,6 +29,8 @@ public struct Heading: DeviceMeasurement {
     public var Value: Double = 0
     public var Timestamp: String?  = nil
     
+    public var timeStamp: Date? = nil
+    
     public var Direction: String? = nil
     public var LeftTurn: Bool = false
 
@@ -55,14 +57,9 @@ public struct Heading: DeviceMeasurement {
     }
 
     public mutating func mapping(map: Map) {
+        self.measureMapping(map: map)
+
         Direction <- map["Direction"]
         LeftTurn <- map["LeftTurn"]
-        Timestamp <- map["Timestamp"]
-
-        BaseUnit <- map["BaseUnit"]
-        BaseValue <- map["BaseValue"]
-
-        Unit <- map["Unit"]
-        Value <- map["Value"]
     }
 }

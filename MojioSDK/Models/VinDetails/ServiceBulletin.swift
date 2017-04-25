@@ -26,6 +26,9 @@ public struct ServiceBulletin: Mappable {
     public var BulletinDate: String? = nil
     public var Summary: String? = nil
     
+    public var dateAdded: Date? = nil
+    public var bulletinDate: Date? = nil
+    
     public init() {}
     
     public init?(map: Map) {
@@ -40,5 +43,8 @@ public struct ServiceBulletin: Mappable {
         Component <- map["Component"]
         BulletinDate <- map["BulletinDate"]
         Summary <- map["Summary"]
+        
+        dateAdded = self.DateAdded?.toDate
+        bulletinDate = self.BulletinDate?.toDate
     }
 }

@@ -21,6 +21,8 @@ public struct BooleanState: Mappable {
     public var Timestamp: String? = nil
     public var Value: Bool = false
     
+    public var timeStamp: Date? = nil
+    
     public init() {}
     
     public init?(map: Map) {
@@ -30,5 +32,7 @@ public struct BooleanState: Mappable {
     public mutating func mapping(map: Map) {
         Timestamp <- map["Timestamp"]
         Value <- map["Value"]
+        
+        timeStamp = self.Timestamp?.toDate
     }
 }

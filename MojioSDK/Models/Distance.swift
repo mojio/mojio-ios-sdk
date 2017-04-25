@@ -26,6 +26,8 @@ public struct Distance: DeviceMeasurement {
     public var Value: Double = 0
     public var Timestamp: String?  = nil
     
+    public var timeStamp: Date? = nil
+    
     public init() {}
     
     public init?(map: Map) {

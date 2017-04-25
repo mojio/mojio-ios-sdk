@@ -34,6 +34,8 @@ public struct Vin: Mappable, PrimaryKey {
     public var Warranties: [Warranty] = []
     public var Recalls: [Recall] = []
     public var ServiceBulletins: [ServiceBulletin] = []
+    
+    public var timestamp: Date? = nil
 
     public static var primaryKey: String {
         return "VIN"
@@ -62,5 +64,7 @@ public struct Vin: Mappable, PrimaryKey {
         Warranties <- map["Warranties"]
         Recalls <- map["Recalls"]
         ServiceBulletins <- map["ServiceBulletins"]
+        
+        timestamp = self.Timestamp?.toDate
     }
 }

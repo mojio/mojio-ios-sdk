@@ -23,6 +23,8 @@ public struct IdleState: Mappable {
     public var StartTime: String? = nil
     public var Duration: TimePeriod? = nil
     
+    public var timestamp: Date? = nil
+    
     public init() {}
     
     public init?(map: Map) {
@@ -34,5 +36,7 @@ public struct IdleState: Mappable {
         Value <- map["Value"]
         StartTime <- map["StartTime"]
         Duration <- map["Duration"]
+        
+        timestamp = self.Timestamp?.toDate
     }
 }

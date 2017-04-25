@@ -31,6 +31,9 @@ public struct AggregationData: Mappable {
     public var Count        : Int = 0
     public var TripCount    : Int = 0
     
+    public var date: Date? = nil
+    public var endDate: Date? = nil
+    
     public init() {}
     
     public init?(map: Map) {
@@ -38,14 +41,17 @@ public struct AggregationData: Mappable {
     }
     
     public mutating func mapping(map: Map) {
-        Total       <- map["Total"]
-        Average     <- map["Average"]
-        Max         <- map["Max"]
-        Min         <- map["Min"]
-        Units       <- map["Units"]
-        Date        <- map["Date"]
-        EndDate     <- map["EndDate"]
-        Count       <- map["Count"]
-        TripCount   <- map["TripCount"]
+        Total <- map["Total"]
+        Average <- map["Average"]
+        Max <- map["Max"]
+        Min <- map["Min"]
+        Units <- map["Units"]
+        Date <- map["Date"]
+        EndDate <- map["EndDate"]
+        Count <- map["Count"]
+        TripCount <- map["TripCount"]
+        
+        date = self.Date?.toDate
+        endDate = self.EndDate?.toDate
     }
 }

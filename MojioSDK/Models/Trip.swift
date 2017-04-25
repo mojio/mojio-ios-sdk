@@ -45,6 +45,12 @@ public struct Trip: Mappable, PrimaryKey {
     public var CreatedOn: String? = nil
     public var LastModified: String? = nil
     
+    // Date Values
+    public var startTimestamp: Date? = nil
+    public var endTimestamp: Date? = nil
+    public var createdOn: Date? = nil
+    public var lastModified: Date? = nil
+    
     public static var primaryKey: String {
         return "Id"
     }
@@ -64,7 +70,7 @@ public struct Trip: Mappable, PrimaryKey {
         }
         
         let data = try! JSONSerialization.data(withJSONObject: map, options:  JSONSerialization.WritingOptions.prettyPrinted)
-        return NSString(data: data, encoding: String.Encoding.utf8.rawValue) as? String
+        return String(data: data, encoding: String.Encoding.utf8)
     }
     
     public mutating func mapping(map: Map) {
@@ -94,5 +100,11 @@ public struct Trip: Mappable, PrimaryKey {
         CreatedOn <- map["CreatedOn"]
         LastModified <- map["LastModified"]
         Tags <- map["Tags"]
+        
+        // Date Values
+        startTimestamp = self.StartTimestamp?.toDate
+        endTimestamp = self.EndTimestamp?.toDate
+        createdOn = self.CreatedOn?.toDate
+        lastModified = self.LastModified?.toDate
     }
 }

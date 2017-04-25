@@ -39,6 +39,11 @@ public struct RootActivity: BaseActivity {
     public var AttributedTo: BaseActivity? = nil
     public var Summary: Dictionary<String,String>? = nil
     public var Icon: Dictionary<String, AnyObject>? = nil
+    
+    public var startTime: Date? = nil
+    public var endTime: Date? = nil
+    public var published: Date? = nil
+    public var updated: Date? = nil
 
     // Root Values
     public var Actor: Activity? = nil
@@ -46,6 +51,10 @@ public struct RootActivity: BaseActivity {
     public var Result: Activity? = nil
     public var Object: Activity? = nil
     public var Origin: Activity? = nil
+    
+    public static var primaryKey: String {
+        return "Id"
+    }
 
     public init() {}
     

@@ -27,6 +27,8 @@ public struct FuelLevel: DeviceMeasurement {
     public var Value: Double = 0
     public var Timestamp: String?  = nil
     
+    public var timeStamp: Date? = nil
+    
     public var RiskSeverity: String? = nil
     
     public init() {}

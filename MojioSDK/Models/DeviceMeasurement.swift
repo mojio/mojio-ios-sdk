@@ -15,6 +15,27 @@
 
 import Foundation
 import ObjectMapper
+import SwiftDate
+
+internal extension String {
+    // Date conversion
+    internal var toDate: Date? {
+        
+        if let date =  DateInRegion.init(string: self, format: .iso8601(options: .withFullDate), fromRegion: Region.GMT()) {
+            return date.absoluteDate
+        }
+        
+        if let date = DateInRegion.init(string: self, format: .iso8601(options: .withInternetDateTimeExtended), fromRegion: Region.GMT()) {
+            return date.absoluteDate
+        }
+        
+        if let date = DateInRegion.init(string: self, format: .iso8601(options: .withInternetDateTime), fromRegion: Region.GMT()) {
+            return date.absoluteDate
+        }
+        
+        return nil
+    }
+}
 
 public protocol PrimaryKey {
     static var primaryKey: String {get}
@@ -28,7 +49,7 @@ public protocol DeviceMeasurement: Mappable {
     var Value: Double {get set}
     var Timestamp: String? {get set}
     
-    init()
+    var timeStamp: Date? {get set}
 }
 
 extension DeviceMeasurement {
@@ -42,5 +63,7 @@ extension DeviceMeasurement {
         Unit <- map["Unit"]
         Value <- map["Value"]
         Timestamp <- map["Timestamp"]
+        
+        timeStamp = self.Timestamp?.toDate
     }
 }

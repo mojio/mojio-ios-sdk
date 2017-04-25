@@ -53,6 +53,8 @@ public struct VehicleMeasures: Mappable {
     public var Time: String? = nil
     public var DisturbanceState: BooleanState? = nil
     
+    public var time: Date? = nil
+    
     public init() {}
     
     public init?(map: Map) {
@@ -89,5 +91,7 @@ public struct VehicleMeasures: Mappable {
         VirtualOdometer <- map["VirtualOdometer"]
         VehicleOdometer <- map["Odometer"]
         Time <- map["Time"]
+
+        time = self.Time?.toDate
     }
 }

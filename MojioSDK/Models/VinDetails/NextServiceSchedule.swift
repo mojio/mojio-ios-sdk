@@ -27,6 +27,8 @@ public struct NextServiceSchedule: Mappable {
     public var DistanceValue: Double = 0
     public var Services: [PlatformServiceSchedule] = []
     
+    public var timeStamp: Date? = nil
+    
     public init() {}
     
     public init?(map: Map) {
@@ -42,5 +44,7 @@ public struct NextServiceSchedule: Mappable {
         DistanceUnits <- map["DistanceUnits"]
         DistanceValue <- map["DistanceValue"]
         Services <- map["Items"]
+        
+        timeStamp = self.TimeStamp?.toDate
     }
 }

@@ -37,6 +37,8 @@ public struct HarshEvent: Mappable {
     public var Value: Bool = false
     public var EventType: String? = nil
     public var TurnType: String? = nil
+
+    public var timestamp: Date? = nil
     
     public init() {}
     
@@ -49,6 +51,8 @@ public struct HarshEvent: Mappable {
         Value <- map["Value"]
         EventType <- map["EventType"]
         TurnType <- map["TurnType"]
+        
+        timestamp = self.Timestamp?.toDate
     }
     
 }

@@ -64,6 +64,12 @@ public struct Vehicle: Mappable, PrimaryKey {
     public var LastModified: String? = nil
     public var Deleted: Bool = false
     
+    // Date Values
+    public var lastContactTime: Date? = nil
+    public var gatewayTime: Date? = nil
+    public var createdOn: Date? = nil
+    public var lastModified: Date? = nil
+    
     public static var primaryKey: String {
         return "Id"
     }
@@ -153,5 +159,10 @@ public struct Vehicle: Mappable, PrimaryKey {
         LastModified <- map["LastModified"]
         Deleted <- map["Deleted"]
     
+        // Date Values
+        lastContactTime = self.LastContactTime?.toDate
+        gatewayTime = self.GatewayTime?.toDate
+        createdOn = self.CreatedOn?.toDate
+        lastModified = self.LastModified?.toDate
     }
 }

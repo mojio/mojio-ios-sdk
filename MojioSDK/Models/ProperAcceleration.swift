@@ -26,6 +26,8 @@ public struct ProperAcceleration: DeviceMeasurement {
     public var Value: Double = 0
     public var Timestamp: String?  = nil
     
+    public var timeStamp: Date?
+    
     public init() {}
     
     public init?(map: Map) {

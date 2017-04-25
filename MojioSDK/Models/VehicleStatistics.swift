@@ -24,6 +24,8 @@ public struct VehicleStatistics: Mappable {
     public var CurrentRange: Distance? = nil
     public var LastFillUpDate: String? = nil
     
+    public var lastFillUpDate: Date? = nil
+    
     public init() {}
     
     public init?(map: Map) {
@@ -37,5 +39,7 @@ public struct VehicleStatistics: Mappable {
         TotalRange <- map["TotalRange"]
         CurrentRange <- map["CurrentRange"]
         LastFillUpDate <- map["LastFillUpDate"]
+        
+        lastFillUpDate = self.LastFillUpDate?.toDate
     }
 }

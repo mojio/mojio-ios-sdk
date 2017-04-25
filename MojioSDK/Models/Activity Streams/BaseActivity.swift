@@ -16,7 +16,7 @@
 import Foundation
 import ObjectMapper
 
-public protocol BaseActivityLocation: Mappable {
+public protocol BaseActivityLocation: Mappable, PrimaryKey {
     var Id: String? {get set}
     var ActivityType: String? {get set}
     var Href: String? {get set}

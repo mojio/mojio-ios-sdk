@@ -36,6 +36,8 @@ public struct WifiRadio: Mappable  {
     public var AllowRoaming: String? = nil
     public var Status: String? = nil
     public var Strength: String? = nil
+    
+    public var timestamp: Date? = nil
 
     public init() {}
     
@@ -109,6 +111,7 @@ public struct WifiRadio: Mappable  {
         AllowRoaming <- map["AllowRoaming"]
         Status <- map["Status"]
         Strength <- map["Strength"]
+        
+        timestamp = self.TimeStamp?.toDate
     }
-
 }

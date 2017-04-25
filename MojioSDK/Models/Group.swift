@@ -25,6 +25,9 @@ public struct Group: Mappable, PrimaryKey {
     public var CreatedOn: String? = nil
     public var LastModified: String? = nil
     
+    public var createdOn: Date? = nil
+    public var lastModified: Date? = nil
+    
     public static var primaryKey: String {
         return "Id"
     }
@@ -51,7 +54,7 @@ public struct Group: Mappable, PrimaryKey {
         }
         
         let data = try! JSONSerialization.data(withJSONObject: map, options:  JSONSerialization.WritingOptions.prettyPrinted)
-        return NSString(data: data, encoding: String.Encoding.utf8.rawValue) as? String
+        return String(data: data, encoding: String.Encoding.utf8)
     }
     
     public mutating func mapping(map: Map) {
@@ -62,5 +65,8 @@ public struct Group: Mappable, PrimaryKey {
         Id <- map["Id"]
         CreatedOn <- map["CreatedOn"]
         LastModified <- map["LastModified"]
+        
+        createdOn = self.CreatedOn?.toDate
+        lastModified = self.LastModified?.toDate
     }
 }

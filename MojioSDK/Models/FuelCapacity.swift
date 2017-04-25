@@ -18,13 +18,15 @@ import ObjectMapper
 
 // Units in FuelCapacityUnits
 public struct FuelCapacity: DeviceMeasurement {
-    
+
     // DeviceMeasurement
     public var BaseUnit: String? = nil
     public var BaseValue: Double = 0
     public var Unit: String? = nil
     public var Value: Double = 0
     public var Timestamp: String?  = nil
+    
+    public var timeStamp: Date? = nil
     
     public init() {}
     

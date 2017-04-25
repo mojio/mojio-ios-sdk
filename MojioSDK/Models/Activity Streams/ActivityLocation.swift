@@ -30,6 +30,10 @@ public struct ActivityLocation: BaseActivityLocation {
     public var Altitude: Double = 0
     public var Radius: Double = 0
     
+    public static var primaryKey: String {
+        return "Id"
+    }
+    
     public init() {}
     
     public init?(map: Map) {

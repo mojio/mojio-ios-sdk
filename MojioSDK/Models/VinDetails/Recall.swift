@@ -40,6 +40,12 @@ public struct Recall: Mappable {
     public var Notes: String? = nil
     public var RecalledComponentId: String? = nil
     
+    public var manufacturingStartDate: Date? = nil
+    public var manufacturingEndDate: Date? = nil
+    public var ownerNotificationDate: Date? = nil
+    public var reportReceivedDate: Date? = nil
+    public var recordCreationDate: Date? = nil
+    
     public init() {}
     
     public init?(map: Map) {
@@ -68,5 +74,11 @@ public struct Recall: Mappable {
         CorrectiveAction <- map["CorrectiveAction"]
         Notes <- map["Notes"]
         RecalledComponentId <- map["RecalledComponentId"]
+        
+        manufacturingStartDate = self.ManufacturingStartDate?.toDate
+        manufacturingEndDate = self.ManufacturingEndDate?.toDate
+        ownerNotificationDate = self.OwnerNotificationDate?.toDate
+        reportReceivedDate = self.ReportReceivedDate?.toDate
+        recordCreationDate = self.RecordCreationDate?.toDate
     }
 }

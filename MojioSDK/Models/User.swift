@@ -30,6 +30,9 @@ public struct User: Mappable, PrimaryKey {
     public var CreatedOn: String? = nil
     public var LastModified: String? = nil
     
+    public var createdOn: Date? = nil
+    public var lastModified: Date? = nil
+    
     /* PUT & POST properties */
     public var email: String? = nil
     
@@ -89,5 +92,8 @@ public struct User: Mappable, PrimaryKey {
         self.Id <- map["Id"]
         self.CreatedOn <- map["CreatedOn"]
         self.LastModified <- map["LastModified"]
+        
+        createdOn = self.CreatedOn?.toDate
+        lastModified = self.LastModified?.toDate
     }
 }

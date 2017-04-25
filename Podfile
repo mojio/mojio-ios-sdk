@@ -15,7 +15,7 @@ target 'MojioSDK' do
     pod 'OHHTTPStubs'
     pod 'OHHTTPStubs/Swift'
     pod 'SwiftWebSocket'
-
+    pod 'SwiftDate'
 end
 
 target 'MojioSDKTests' do

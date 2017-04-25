@@ -25,6 +25,10 @@ public struct TripPolyline: Mappable {
     public var LastModified: String? = nil
     public var Deleted: Bool = false
     
+    // Date Values
+    public var createdOn: Date? = nil
+    public var lastModified: Date? = nil
+    
     public init() {}
     
     public init?(map: Map) {
@@ -37,5 +41,8 @@ public struct TripPolyline: Mappable {
         CreatedOn <- map["CreatedOn"]
         LastModified <- map["LastModified"]
         Deleted <- map["Deleted"]
+        
+        createdOn = self.CreatedOn?.toDate
+        lastModified = self.LastModified?.toDate
     }
 }
