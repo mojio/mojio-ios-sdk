@@ -36,19 +36,21 @@ public struct Odometer: DeviceMeasurement {
         self.init()
     }
     
-    public func jsonDict () -> NSDictionary {
-        let dictionary: NSMutableDictionary = NSMutableDictionary()
+    public func jsonDict () -> [String: Any] {
         
-        if self.Unit != nil {
-            dictionary.setObject(self.Unit!, forKey: "Unit" as NSCopying)
+        var dictionary = [String: Any]()
+        
+        if let unit = self.Unit {
+            dictionary["Unit"] = unit
         }
         
-        dictionary.setObject(self.Value, forKey: "Value" as NSCopying)
+        dictionary["Value"] = self.Value
         
         return dictionary
     }
     
     public mutating func mapping(map: Map) {
+        
         self.measureMapping(map: map)
 
         RolloverValue <- map["RolloverValue"]

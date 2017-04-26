@@ -80,11 +80,12 @@ public struct Vehicle: Mappable, PrimaryKey {
         self.init()
     }
     
-    public func jsonVINDict () -> NSDictionary {
-        let dictionary: NSMutableDictionary = NSMutableDictionary()
+    public func jsonVINDict () -> [String: Any] {
+        
+        var dictionary = [String: Any]()
 
-        if self.VIN != nil {
-            dictionary.setObject(self.VIN!, forKey: "VIN" as NSCopying)
+        if let VIN = self.VIN {
+            dictionary["VIN"] = VIN
         }
 
         if let detectedVin = self.DetectedVIN {
@@ -94,22 +95,24 @@ public struct Vehicle: Mappable, PrimaryKey {
         if let overrideVIN = self.OverrideVIN {
             dictionary["OverrideVIN"] = overrideVIN
         }
+        
         return dictionary
     }
     
-    public func jsonDict () -> NSDictionary {
-        let dictionary: NSMutableDictionary = NSMutableDictionary()
+    public func jsonDict () -> [String: Any] {
         
-        if self.Name != nil {
-            dictionary.setObject(self.Name!, forKey: "Name" as NSCopying)
+        var dictionary = [String: Any]()
+        
+        if let name = self.Name {
+            dictionary["Name"] = name
         }
-        if self.LicensePlate != nil {
-            dictionary.setObject(self.LicensePlate!, forKey: "LicensePlate" as NSCopying)
+        
+        if let licensePlate = self.LicensePlate {
+            dictionary["LicensePlate"] = licensePlate
         }
 
-        if self.VehicleOdometer != nil {
-            let odo = self.VehicleOdometer!.jsonDict()
-            dictionary.setObject(odo, forKey: "Odometer" as NSCopying)
+        if let vehicleOdometer = self.VehicleOdometer {
+            dictionary["Odometer"] = vehicleOdometer.jsonDict()
         }
         
         return dictionary

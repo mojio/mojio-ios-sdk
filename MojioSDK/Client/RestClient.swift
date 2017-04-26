@@ -540,9 +540,9 @@ open class RestClient {
         #endif
     }
     
-    open func runEncodeJSON(jsonObject: AnyObject, completion: @escaping (_ response: Any) -> Void, failure: @escaping (_ error: Any?) -> Void) {
+    open func runEncodeJSON(jsonObject: [String: Any], completion: @escaping (_ response: Any) -> Void, failure: @escaping (_ error: Any?) -> Void) {
         
-        let request = Alamofire.request(self.requestUrl!, method: self.requestMethod, parameters: [:], encoding: JSONEncoding.default, headers: self.defaultHeaders).responseJSON { response in
+        let request = Alamofire.request(self.requestUrl!, method: self.requestMethod, parameters: jsonObject, encoding: JSONEncoding.default, headers: self.defaultHeaders).responseJSON { response in
             self.handleResponse(response, completion: completion, failure: failure)
         }
 
@@ -551,7 +551,7 @@ open class RestClient {
         #endif
     }
     
-    open func runEncodeUrl(_ parameters: [String:AnyObject], completion: @escaping (_ response: Any) -> Void, failure: @escaping (_ error: Any?) -> Void) {
+    open func runEncodeUrl(_ parameters: [String: Any], completion: @escaping (_ response: Any) -> Void, failure: @escaping (_ error: Any?) -> Void) {
         
         // Before every request, make sure access token exists
         var headers: [String:String] = [:]
@@ -573,23 +573,26 @@ open class RestClient {
         if response.response?.statusCode == 200 || response.response?.statusCode == 201 {
             if let responseDict = response.result.value as? [String: Any] {
                 if let dataArray = responseDict["Data"] as? [Any] {
-                    let array: NSMutableArray = []
-                    for  obj in dataArray {
+                    
+                    var array = [Any]()
+                    
+                    for obj in dataArray {
                         if
                             let dict = obj as? [String: Any],
                             let model = self.parseDict(dict) {
                             
-                            array.add(model)
-                        }
-                    }
-                    var comp: Any = array
-                    if let _ = requestParams["includeCount"] {
-                        if let count = responseDict["TotalCount"] as? Int {
-                            comp = Result(TotalCount: count, Data: array)
+                            array.append(model)
                         }
                     }
                     
-                    completion(comp)
+                    if
+                        let _ = requestParams["includeCount"],
+                        let count = responseDict["TotalCount"] as? Int {
+                        
+                        completion(Result(TotalCount: count, Data: array))
+                    } else {
+                        completion(array)
+                    }
 
                     if (self.doNext) {
                         if let links = responseDict["Links"] as? [String: Any] {

@@ -16,7 +16,7 @@
 import UIKit
 import ObjectMapper
 
-enum LocationStatus: String {
+public enum LocationStatus: String {
     // Status not known
     case unknown = "Unknown"
     
