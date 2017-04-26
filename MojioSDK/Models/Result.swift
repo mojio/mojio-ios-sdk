@@ -18,6 +18,6 @@ import Foundation
 import ObjectMapper
 
 public struct Result {
-    public var TotalCount: Int? = nil
-    public var Data: NSArray? = nil
+    public var TotalCount: Int?
+    public var Data: [Any]?
 }

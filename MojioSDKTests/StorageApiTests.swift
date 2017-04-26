@@ -27,7 +27,7 @@ class StorageApiTests: BaseApiTest {
             let value : String = "testValue"
             // Get Me
             RestClient(clientEnvironment: ClientEnvironment.SharedInstance).get().me()
-                .run({response in
+                .run(completion: {response in
                     
                     // Write some data into Me
                     if let userId = response.Id {

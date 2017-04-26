@@ -72,7 +72,7 @@ open class ClientEnvironment {
     /**
         Letting an app developer ovveride the default environment. This should be used only for development purposes to test the functionality of the app in different continents
      */
-    open func setRegion (region: MojioRegion) {
+    open func setRegion (_ region: MojioRegion) {
         self.region = region
         self.apiEndpoint = String.init(
             format: ClientEnvironment.EndPointFormat.apiEndpoint.rawValue,
@@ -100,7 +100,7 @@ open class ClientEnvironment {
     }
     
     open func setDefaultRegion () {
-        self.setRegion(region: MojioRegion.getDefaultRegion())
+        self.setRegion(MojioRegion.getDefaultRegion())
     }
     
     open func getApiEndpoint () -> String {

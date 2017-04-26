@@ -28,8 +28,8 @@ public protocol BaseActivity: BaseActivityLocation {
     var Content: String? {get set}
     var Location: ActivityLocation? {get set}
     var AttributedTo: BaseActivity? {get set}
-    var Summary: Dictionary<String,String>? {get set}
-    var Icon: Dictionary<String, AnyObject>? {get set}
+    var Summary: Dictionary<String, String>? {get set}
+    var Icon: Dictionary<String, Any>? {get set}
     
     // Date/Time
     var startTime: Date? {get set}
@@ -87,8 +87,8 @@ public struct Activity: BaseActivity {
     public var Content: String? = nil
     public var Location: ActivityLocation? = nil
     public var AttributedTo: BaseActivity? = nil
-    public var Summary: Dictionary<String,String>? = nil
-    public var Icon: Dictionary<String, AnyObject>? = nil
+    public var Summary: Dictionary<String, String>? = nil
+    public var Icon: Dictionary<String, Any>? = nil
     
     public var startTime: Date? = nil
     public var endTime: Date? = nil

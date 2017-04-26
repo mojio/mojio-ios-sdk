@@ -46,20 +46,9 @@ public struct User: Mappable, PrimaryKey {
         self.init()
     }
 
-    public func EmailsArray() -> NSArray {
-        return self.Emails as NSArray
-    }
-    
-    public func PhoneNumbersArray() -> NSArray {
-        return self.PhoneNumbers as NSArray
-    }
-    
-    public func TagsArray() -> NSArray {
-        return self.Tags as NSArray
-    }
-
     public func jsonDict() -> [String: Any] {
-        var map: [String: Any] = [:]
+        
+        var map = [String: Any]()
         
         if let userName = self.UserName {
             map["UserName"] = userName

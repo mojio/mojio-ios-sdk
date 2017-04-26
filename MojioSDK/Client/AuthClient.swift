@@ -160,7 +160,7 @@ open class AuthClient: AuthControllerDelegate {
     // TODO: Move controller to a consumer role
     open var loginURL: URL!
     open var loginCompletion: ((_ authToken: AuthToken) -> Void)? = nil
-    open var loginFailure: ((_ response: AnyObject?) -> Void)? = nil
+    open var loginFailure: ((_ response: Any?) -> Void)? = nil
     open var authController: AuthViewController?
     
     public dynamic var requestHeaders: [String:String] = ClientHeaders.defaultRequestHeaders
@@ -182,7 +182,7 @@ open class AuthClient: AuthControllerDelegate {
         self.dispatchQueue = queue
     }
     
-    open func loginViewController(_ completion: ((_ authToken: AuthToken) -> Void)?, failure: ((_ response: AnyObject?) -> Void)?) {
+    open func loginViewController(_ completion: ((_ authToken: AuthToken) -> Void)?, failure: ((_ response: Any?) -> Void)?) {
         URLCache.shared.removeAllCachedResponses();
         
         self.loginCompletion = completion;
@@ -251,7 +251,7 @@ open class AuthClient: AuthControllerDelegate {
     }
     
     // Returns on main thread when complete - refreshes if needed
-    open func isUserLoggedInRefresh(_ completion: @escaping (_ authToken: AuthToken) -> Void, failure: @escaping (_ response: [String: AnyObject]?) -> Void) {
+    open func isUserLoggedInRefresh(_ completion: @escaping (_ authToken: AuthToken) -> Void, failure: @escaping (_ response: [String: Any]?) -> Void) {
         
         let authToken = self.getAuthToken()
         
@@ -298,7 +298,7 @@ open class AuthClient: AuthControllerDelegate {
     }
     
     // Login
-    open func login(_ username: String, password: String, completion: @escaping (_ authToken: AuthToken) -> Void, failure: @escaping (_ response: NSDictionary?) -> Void) {
+    open func login(_ username: String, password: String, completion: @escaping (_ authToken: AuthToken) -> Void, failure: @escaping (_ response: [String: Any]?) -> Void) {
         
         // The token endpoint is used for the resource owner flow
         let loginEndpoint = AuthClient.getTokenUrl()
@@ -309,7 +309,7 @@ open class AuthClient: AuthControllerDelegate {
             
             if response.response?.statusCode == 200 {
                 
-                guard let responseJSON: [String: AnyObject] = response.result.value as? [String: AnyObject] else {
+                guard let responseJSON = response.result.value as? [String: Any] else {
                     failure(nil)
                     return
                 }
@@ -329,7 +329,7 @@ open class AuthClient: AuthControllerDelegate {
                 }
             }
             else {
-                if let dictionary = response.result.value as? NSDictionary {
+                if let dictionary = response.result.value as? [String: Any] {
                     failure(dictionary)
                 }
                     /*else if let error = response.result.error {
@@ -346,7 +346,7 @@ open class AuthClient: AuthControllerDelegate {
         #endif
     }
     
-    open func refreshAuthToken(_ completion: @escaping (_ authToken: AuthToken) -> Void, failure: @escaping (_ response: [String: AnyObject]?) -> Void) {
+    open func refreshAuthToken(_ completion: @escaping (_ authToken: AuthToken) -> Void, failure: @escaping (_ response: [String: Any]?) -> Void) {
         let keychain = KeychainSwift()
         
         let authorizeEndpoint = AuthClient.getTokenUrl()
@@ -369,7 +369,7 @@ open class AuthClient: AuthControllerDelegate {
                 DispatchQueue.main.async(execute: {
                     if response.response?.statusCode == 200 {
                         
-                        guard let responseJSON: [String: AnyObject] = response.result.value as? [String: AnyObject] else {
+                        guard let responseJSON = response.result.value as? [String: Any] else {
                             failure(nil)
                             return
                         }
@@ -389,7 +389,7 @@ open class AuthClient: AuthControllerDelegate {
                         }
                     }
                     else {
-                        if let dictionary = response.result.value as? [String: AnyObject] {
+                        if let dictionary = response.result.value as? [String: Any] {
                             failure(dictionary)
                         }
                             /*else if let error = response.result.error {
@@ -412,7 +412,7 @@ open class AuthClient: AuthControllerDelegate {
     }
     
     // Register
-    open func register(_ mobile: String, email: String, password: String, completion: @escaping (_ authToken: AuthToken) -> Void, failure: @escaping (_ response: NSDictionary?) -> Void) {
+    open func register(_ mobile: String, email: String, password: String, completion: @escaping (_ authToken: AuthToken) -> Void, failure: @escaping (_ response: [String: Any]?) -> Void) {
         
         let registerEndpoint = ClientEnvironment.SharedInstance.getAccountsEndpoint() + AccountClientEndpoint.register.rawValue
         self.requestHeaders.update(["Authorization": self.generateBasicAuthHeader(), "Content-Type": "application/json", "Accept": "application/json"])
@@ -433,7 +433,7 @@ open class AuthClient: AuthControllerDelegate {
                 
             }
             else {
-                if let dictionary = response.result.value as? NSDictionary {
+                if let dictionary = response.result.value as? [String: Any] {
                     failure(dictionary)
                 }
                     /*else if let error = response.result.error {
@@ -451,7 +451,7 @@ open class AuthClient: AuthControllerDelegate {
     }
     
     // Verify Phone
-    open func verifyMobilePhone(_ mobile: String, pin: String, completion: @escaping (_ authToken: AuthToken) -> Void, failure: @escaping (_ response: [String: AnyObject]?) -> Void) {
+    open func verifyMobilePhone(_ mobile: String, pin: String, completion: @escaping (_ authToken: AuthToken) -> Void, failure: @escaping (_ response: [String: Any]?) -> Void) {
         
         let verifyEndpoint = AuthClient.getTokenUrl()
         
@@ -461,7 +461,7 @@ open class AuthClient: AuthControllerDelegate {
             
             if response.response?.statusCode == 200 {
                 
-                guard let responseJSON: [String: AnyObject] = response.result.value as? [String: AnyObject] else {
+                guard let responseJSON = response.result.value as? [String: Any] else {
                     failure(nil)
                     return
                 }
@@ -481,7 +481,7 @@ open class AuthClient: AuthControllerDelegate {
                 }
             }
             else {
-                if let dictionary = response.result.value as? [String: AnyObject] {
+                if let dictionary = response.result.value as? [String: Any] {
                     failure(dictionary)
                 }
                     /*else if let error = response.result.error {
@@ -521,7 +521,7 @@ open class AuthClient: AuthControllerDelegate {
     }
     
     // Forgot/Reset Password
-    open func forgotPassword(_ emailOrPhoneNumber: String, completion: @escaping (_ response: [String: AnyObject]?) -> Void, failure: @escaping (_ response: [String: AnyObject]?) -> Void) {
+    open func forgotPassword(_ emailOrPhoneNumber: String, completion: @escaping (_ response: [String: Any]?) -> Void, failure: @escaping (_ response: [String: Any]?) -> Void) {
         
         let forgotEndpoint = ClientEnvironment.SharedInstance.getAccountsEndpoint() + AccountClientEndpoint.forgot.rawValue
         
@@ -535,9 +535,9 @@ open class AuthClient: AuthControllerDelegate {
             .responseJSON { response in
                 
                 if response.response?.statusCode == 200 {
-                    completion(response.result.value as? [String: AnyObject])
+                    completion(response.result.value as? [String: Any])
                 } else {
-                    if let dictionary = response.result.value as? [String: AnyObject] {
+                    if let dictionary = response.result.value as? [String: Any] {
                         failure(dictionary)
                     }
                         /*else if let error = response.result.error {
@@ -554,7 +554,7 @@ open class AuthClient: AuthControllerDelegate {
         #endif
     }
     
-    open func resetPassword(_ resetToken: String, password: String, completion: @escaping (_ response: [String: AnyObject]?) -> Void, failure: @escaping (_ response: [String: AnyObject]?) -> Void) {
+    open func resetPassword(_ resetToken: String, password: String, completion: @escaping (_ response: [String: Any]?) -> Void, failure: @escaping (_ response: [String: Any]?) -> Void) {
         
         let resetEndpoint = ClientEnvironment.SharedInstance.getAccountsEndpoint() + AccountClientEndpoint.reset.rawValue
         
@@ -568,10 +568,10 @@ open class AuthClient: AuthControllerDelegate {
             .responseJSON { response in
                 
                 if response.response?.statusCode == 200 {
-                    completion(response.result.value as? [String: AnyObject])
+                    completion(response.result.value as? [String: Any])
                 }
                 else {
-                    if let dictionary = response.result.value as? [String: AnyObject] {
+                    if let dictionary = response.result.value as? [String: Any] {
                         failure(dictionary)
                     }
                         /*else if let error = response.result.error {
