@@ -37,10 +37,6 @@ internal extension String {
     }
 }
 
-public protocol PrimaryKey {
-    static var primaryKey: String {get}
-}
-
 // Base Device Measurement
 public protocol DeviceMeasurement: Mappable {
     var BaseUnit: String? {get set}

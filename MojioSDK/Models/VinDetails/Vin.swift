@@ -37,8 +37,8 @@ public struct Vin: Mappable, PrimaryKey {
     
     public var timestamp: Date? = nil
 
-    public static var primaryKey: String {
-        return "VIN"
+    public var Id: String? {
+        return self.VIN
     }
     
     public init() {}
