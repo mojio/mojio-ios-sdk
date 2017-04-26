@@ -36,10 +36,6 @@ public struct User: Mappable, PrimaryKey {
     /* PUT & POST properties */
     public var email: String? = nil
     
-    public static var primaryKey: String {
-        return "Id"
-    }
-
     public init() {}
     
     public init?(map: Map) {

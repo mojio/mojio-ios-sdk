@@ -13,36 +13,28 @@
  * forbidden unless prior written permission is obtained from Moj.io Inc.
  *******************************************************************************/
 
-import UIKit
-import CoreLocation
+import Foundation
 import ObjectMapper
 
-public struct TripPolyline: Mappable, PrimaryKey {
-    
-    public var Id: String? = nil
-    public var TripPolyline: String? = nil
-    public var CreatedOn: String? = nil
-    public var LastModified: String? = nil
-    public var Deleted: Bool = false
-    
-    // Date Values
-    public var createdOn: Date? = nil
-    public var lastModified: Date? = nil
-    
-    public init() {}
-    
-    public init?(map: Map) {
-        self.init()
+public protocol BaseActivityLocation: Mappable, PrimaryKey {
+    var Id: String? {get set}
+    var ActivityType: String? {get set}
+    var Href: String? {get set}
+    var Name: String? {get set}
+    var NameMap: Dictionary<String, String>? {get set}
+}
+
+extension BaseActivityLocation {
+
+    public mutating func mapping(map: Map) {
+        self.baseActivityLocationMapping(map: map)
     }
     
-    public mutating func mapping(map: Map) {
+    public mutating func baseActivityLocationMapping(map: Map) {
         Id <- map["Id"]
-        TripPolyline <- map["Polyline"]
-        CreatedOn <- map["CreatedOn"]
-        LastModified <- map["LastModified"]
-        Deleted <- map["Deleted"]
-        
-        createdOn = self.CreatedOn?.toDate
-        lastModified = self.LastModified?.toDate
+        ActivityType <- map["Type"]
+        Href <- map["Href"]
+        Name <- map["Name"]
+        NameMap <- map["NameMap"]
     }
 }

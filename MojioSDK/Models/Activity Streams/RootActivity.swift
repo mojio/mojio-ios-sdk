@@ -52,10 +52,6 @@ public struct RootActivity: BaseActivity {
     public var Object: Activity? = nil
     public var Origin: Activity? = nil
     
-    public static var primaryKey: String {
-        return "Id"
-    }
-
     public init() {}
     
     public init?(map: Map) {

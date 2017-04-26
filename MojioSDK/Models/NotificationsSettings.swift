@@ -22,10 +22,6 @@ public struct SettingsGeofence: Mappable, PrimaryKey {
     public var EnableEnterActivity: Bool = false
     public var EnableExitActivity: Bool = false
     
-    public static var primaryKey: String {
-        return "Id"
-    }
-    
     public init() {}
     
     public init?(map: Map) {

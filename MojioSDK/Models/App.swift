@@ -31,10 +31,6 @@ public struct App: Mappable, PrimaryKey {
     public var createdOn: Date? = nil
     public var lastModified: Date? = nil
     
-    public static var primaryKey: String {
-        return "Id"
-    }
-
     public init() {}
     
     public init?(map: Map) {
