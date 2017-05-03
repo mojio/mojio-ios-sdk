@@ -154,7 +154,7 @@ open class RestClient {
         }
     }
     
-    private func appendRequestUrlEntity(entity: String?) {
+    private func appendRequestUrlEntity(_ entity: String?) {
         if let entity = entity {
             self.requestUrl = self.requestUrl! + entity + "/"
         }
@@ -405,7 +405,8 @@ open class RestClient {
     open func aggregates(ofType type: String?) -> Self {
         
         self.requestEntity = .aggregates
-        self.appendRequestUrlEntity(entity: type)
+        self.appendRequestUrlEntity(self.requestEntity.rawValue)
+        self.appendRequestUrlEntity(type)
         
         return self
     }
@@ -420,7 +421,8 @@ open class RestClient {
     open func diagnosticCodes(_ code: String?) -> Self {
         
         self.requestEntity = .diagnosticCodes
-        self.appendRequestUrlEntity(entity: code)
+        self.appendRequestUrlEntity(self.requestEntity.rawValue)
+        self.appendRequestUrlEntity(code)
         
         return self
     }
