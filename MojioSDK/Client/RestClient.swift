@@ -145,7 +145,7 @@ open class RestClient {
         return self
     }
     
-    private func appendRequestUrlEntityId() {
+    fileprivate func appendRequestUrlEntityId() {
         if let entityId = self.requestEntityId {
             self.requestUrl = self.requestUrl! + self.requestEntity.rawValue + entityId + "/"
         }
@@ -154,7 +154,7 @@ open class RestClient {
         }
     }
     
-    private func appendRequestUrlEntity(_ entity: String?) {
+    fileprivate func appendRequestUrlEntity(_ entity: String?) {
         if let entity = entity {
             self.requestUrl = self.requestUrl! + entity + "/"
         }
@@ -163,7 +163,7 @@ open class RestClient {
         }
     }
     
-    private func appendPushUrlEntityId() {
+    fileprivate func appendPushUrlEntityId() {
         if let entityId = self.requestEntityId {
             self.pushUrl = self.pushUrl! + self.requestEntity.rawValue + entityId + "/"
         }
