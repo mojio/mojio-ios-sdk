@@ -145,7 +145,7 @@ open class RestClient {
         return self
     }
     
-    private func appendRequestUrlEntityId() {
+    fileprivate func appendRequestUrlEntityId() {
         if let entityId = self.requestEntityId {
             self.requestUrl = self.requestUrl! + self.requestEntity.rawValue + entityId + "/"
         }
@@ -154,7 +154,7 @@ open class RestClient {
         }
     }
     
-    private func appendRequestUrlEntity(entity: String?) {
+    fileprivate func appendRequestUrlEntity(_ entity: String?) {
         if let entity = entity {
             self.requestUrl = self.requestUrl! + entity + "/"
         }
@@ -163,7 +163,7 @@ open class RestClient {
         }
     }
     
-    private func appendPushUrlEntityId() {
+    fileprivate func appendPushUrlEntityId() {
         if let entityId = self.requestEntityId {
             self.pushUrl = self.pushUrl! + self.requestEntity.rawValue + entityId + "/"
         }
@@ -405,7 +405,8 @@ open class RestClient {
     open func aggregates(ofType type: String?) -> Self {
         
         self.requestEntity = .aggregates
-        self.appendRequestUrlEntity(entity: type)
+        self.appendRequestUrlEntity(self.requestEntity.rawValue)
+        self.appendRequestUrlEntity(type)
         
         return self
     }
@@ -420,7 +421,8 @@ open class RestClient {
     open func diagnosticCodes(_ code: String?) -> Self {
         
         self.requestEntity = .diagnosticCodes
-        self.appendRequestUrlEntity(entity: code)
+        self.appendRequestUrlEntity(self.requestEntity.rawValue)
+        self.appendRequestUrlEntity(code)
         
         return self
     }
