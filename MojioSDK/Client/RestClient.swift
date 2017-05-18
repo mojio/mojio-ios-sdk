@@ -652,74 +652,58 @@ open class RestClient {
         switch self.requestEntity {
             
         case .apps:
-            let model = Mapper<App>().map(JSON: dict)
-            return model!
+            return Mapper<App>().map(JSON: dict)
             
         case .secret:
             return nil
             
         case .groups:
-            let model = Mapper<Group>().map(JSON: dict)
-            return model!
+            return Mapper<Group>().map(JSON: dict)
             
         case .users:
-            let model = Mapper<User>().map(JSON: dict)
-            return model!
+            return Mapper<User>().map(JSON: dict)
             
         case .me:
-            let model = Mapper<User>().map(JSON: dict)
-            return model!
+            return Mapper<User>().map(JSON: dict)
             
         case .history:
             return nil
             
         case .states:
-            let model = Mapper<VehicleMeasures>().map(JSON: dict)
-            return model!
+            return Mapper<VehicleMeasures>().map(JSON: dict)
             
         case .locations:
-            let model = Mapper<Location>().map(JSON: dict)
-            return model!
+            return Mapper<Location>().map(JSON: dict)
 
         case .image:
-            let model = Mapper<Image>().map(JSON: dict)
-            return model!
+            return Mapper<Image>().map(JSON: dict)
 
         case .mojios:
-            let model = Mapper<Mojio>().map(JSON: dict)
-            return model!
+            return Mapper<Mojio>().map(JSON: dict)
             
         case .trips:
-            let model = Mapper<Trip>().map(JSON: dict)
-            return model!
+            return Mapper<Trip>().map(JSON: dict)
 
         case .vehicles:
-            let model = Mapper<Vehicle>().map(JSON: dict)
-            return model!
+            return Mapper<Vehicle>().map(JSON: dict)
             
         case .address:
-            let model = Mapper<Address>().map(JSON: dict)
-            return model!
+            return Mapper<Address>().map(JSON: dict)
             
         case .vin:
-            let model = Mapper<Vin>().map(JSON: dict)
-            return model!
+            return Mapper<Vin>().map(JSON: dict)
             
         case .serviceSchedule:
-            let model = Mapper<ServiceSchedule>().map(JSON: dict)
-            return model!
+            return Mapper<ServiceSchedule>().map(JSON: dict)
             
         case .next:
-            let model = Mapper<NextServiceSchedule>().map(JSON: dict)
-            return model!
+            return Mapper<NextServiceSchedule>().map(JSON: dict)
 
         case .activities:
-            let model = Mapper<RootActivity>().map(JSON: dict)
-            return model!
+            return Mapper<RootActivity>().map(JSON: dict)
             
         case .notificationSettings:
-            let model = Mapper<NotificationsSettings>().map(JSON: dict)
-            return model!
+            return Mapper<NotificationsSettings>().map(JSON: dict)
             
         case .wifiRadio:
             // Returns Transaction Id
@@ -730,23 +714,19 @@ open class RestClient {
             return dict["State"]
             
         case .geofences:
-            let model = Mapper<Geofence>().map(JSON: dict)
-            return model!
+            return Mapper<Geofence>().map(JSON: dict)
 
         case .aggregates:
-            let model = Mapper<AggregationData>().map(JSON: dict)
-            return model!
+            return Mapper<AggregationData>().map(JSON: dict)
 
         case .statistics:
-            let model = Mapper<VehicleStatistics>().map(JSON: dict)
-            return model!
+            return Mapper<VehicleStatistics>().map(JSON: dict)
             
         case .polyline:
-            let model = Mapper<TripPolyline>().map(JSON: dict)
-            return model!
+            return Mapper<TripPolyline>().map(JSON: dict)
             
         default:
-                return nil
+            return nil
         }
     }
     
