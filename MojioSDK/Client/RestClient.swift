@@ -145,27 +145,27 @@ open class RestClient {
         return self
     }
     
-    fileprivate func appendRequestUrlEntityId() {
+    fileprivate func appendRequestUrlEntityId(asFinal: Bool = false) {
         if let entityId = self.requestEntityId {
-            self.requestUrl = self.requestUrl! + self.requestEntity.rawValue + entityId + "/"
+            self.requestUrl = self.requestUrl! + self.requestEntity.rawValue + entityId + (asFinal ? "" : "/")
         }
         else {
             self.requestUrl = self.requestUrl! + self.requestEntity.rawValue
         }
     }
     
-    fileprivate func appendRequestUrlEntity(_ entity: String?) {
+    fileprivate func appendRequestUrlEntity(_ entity: String?, asFinal: Bool = false) {
         if let entity = entity {
-            self.requestUrl = self.requestUrl! + entity + "/"
+            self.requestUrl = self.requestUrl! + entity + (asFinal ? "" : "/")
         }
         else {
             self.requestUrl = self.requestUrl!
         }
     }
     
-    fileprivate func appendPushUrlEntityId() {
+    fileprivate func appendPushUrlEntityId(asFinal: Bool = false) {
         if let entityId = self.requestEntityId {
-            self.pushUrl = self.pushUrl! + self.requestEntity.rawValue + entityId + "/"
+            self.pushUrl = self.pushUrl! + self.requestEntity.rawValue + entityId + (asFinal ? "" : "/")
         }
         else {
             self.pushUrl = self.pushUrl! + self.requestEntity.rawValue
@@ -255,7 +255,7 @@ open class RestClient {
         return self
     }
     
-    open func phonenumbers (_ phonenumber: String?, sendVerification: Bool?) -> Self {
+    open func phonenumbers(_ phonenumber: String?, sendVerification: Bool?) -> Self {
         self.requestEntity = .phoneNumbers
         
         var phone: String? = phonenumber
@@ -265,7 +265,7 @@ open class RestClient {
         }
         
         self.requestEntityId = phone
-        self.appendRequestUrlEntityId()
+        self.appendRequestUrlEntityId(asFinal: true)
 
         return self
     }
