@@ -49,7 +49,7 @@ public struct Group: Mappable, PrimaryKey {
             map["Users"] = self.Users
         }
         
-        let data = try! JSONSerialization.data(withJSONObject: map, options:  JSONSerialization.WritingOptions.prettyPrinted)
+        let data = try! JSONSerialization.data(withJSONObject: map)
         return String(data: data, encoding: String.Encoding.utf8)
     }
     
