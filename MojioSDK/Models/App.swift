@@ -56,7 +56,7 @@ public struct App: Mappable, PrimaryKey {
             return nil
         }
         
-        let data = try! JSONSerialization.data(withJSONObject: map, options:  JSONSerialization.WritingOptions.prettyPrinted)
+        let data = try! JSONSerialization.data(withJSONObject: map)
         return String(data: data, encoding: String.Encoding.utf8)
     }
     
