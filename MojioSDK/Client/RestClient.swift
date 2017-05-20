@@ -510,9 +510,7 @@ open class RestClient {
         
         func encode(_ urlRequest: URLRequestConvertible, with parameters: Parameters?) throws -> URLRequest {
             var urlRequest = urlRequest.urlRequest
-            let quoteEscaped = self.customString.replacingOccurrences(of: "\\\"", with: "\\ \\ \"")
-            let quotedString = String.init(format: "\"%@\"", quoteEscaped)
-            urlRequest?.httpBody = quotedString.data(using: .utf8, allowLossyConversion: false)
+            urlRequest?.httpBody = self.customString.asJSONEncodedString().data(using: .utf8, allowLossyConversion: false)
             
             return urlRequest!
         }
@@ -740,5 +738,18 @@ public extension Dictionary {
         for (key, value) in updateDict {
             self.updateValue(value, forKey:key)
         }
+    }
+}
+
+internal extension String {
+    func asJSONEncodedString() -> String {
+        return "\"" + self
+            .replacingOccurrences(of: "\"", with: "\\\"", options: .caseInsensitive)
+            .replacingOccurrences(of: "/", with: "\\/", options: .caseInsensitive)
+            .replacingOccurrences(of: "\n", with: "\\n", options: .caseInsensitive)
+            .replacingOccurrences(of: "\u{8}", with: "\\b", options: .caseInsensitive)
+            .replacingOccurrences(of: "\u{12}", with: "\\f", options: .caseInsensitive)
+            .replacingOccurrences(of: "\r", with: "\\r", options: .caseInsensitive)
+            .replacingOccurrences(of: "\t", with: "\\t", options: .caseInsensitive) + "\""
     }
 }
