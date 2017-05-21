@@ -255,39 +255,41 @@ open class AuthClient: AuthControllerDelegate {
         
         let authToken = self.getAuthToken()
         
-        if authToken.accessToken == nil || authToken.expiry == nil || authToken.uniqueId == nil {
-            DispatchQueue.main.async(execute: {failure(nil)})
-            return
+        guard
+            let _ = authToken.accessToken,
+            let _ = authToken.expiry,
+            let uniqueId = authToken.uniqueId else {
+                
+                failure(nil)
+                return
         }
         
         // Check to see if the environment endpoint in the keychain is the same as the current endpoint
         // If they are different, return false right away
-        if ClientEnvironment.SharedInstance.getRegion().rawValue != authToken.uniqueId {
-            DispatchQueue.main.async(execute: {failure(nil)})
+        if ClientEnvironment.SharedInstance.getRegion().rawValue != uniqueId {
+            failure(nil)
             return
         }
         
         // Always attempt to refresh
-        if authToken.refreshToken != nil {
+        if let _ = authToken.refreshToken {
             self.refreshAuthToken(completion, failure: failure)
         }
         else {
             // Check if the token is expired
-            DispatchQueue.main.async(execute: {
-                guard let timestamp: Double = authToken.expiryTimestamp() else {
-                    failure(nil)
-                    return
-                }
-                
-                let currentTime: Double = Date().timeIntervalSince1970
-                
-                // Check for expiry
-                if currentTime > timestamp {
-                    failure(nil)
-                }
-                
-                completion(authToken)
-            })
+            guard let timestamp = authToken.expiryTimestamp() else {
+                failure(nil)
+                return
+            }
+            
+            let currentTime = Date().timeIntervalSince1970
+            
+            // Check for expiry
+            if currentTime > timestamp {
+                failure(nil)
+            }
+            
+            completion(authToken)
         }
     }
     
@@ -305,7 +307,7 @@ open class AuthClient: AuthControllerDelegate {
         
         self.requestHeaders.update(["Accept": "application/json", "Authorization": self.generateBasicAuthHeader()])
         
-        let request = Alamofire.request(loginEndpoint, method: .post, parameters: ["grant_type": "password", "password": password, "username": username, "client_id": self.clientId, "client_secret": self.clientSecretKey], encoding: URLEncoding(destination: .methodDependent), headers: ["Accept": "application/json", "Authorization": self.generateBasicAuthHeader()]).responseJSON { response in
+        let request = Alamofire.request(loginEndpoint, method: .post, parameters: ["grant_type": "password", "password": password, "username": username, "client_id": self.clientId, "client_secret": self.clientSecretKey], encoding: URLEncoding(destination: .methodDependent), headers: ["Accept": "application/json", "Authorization": self.generateBasicAuthHeader()]).responseJSON(queue: self.dispatchQueue, options: .allowFragments) {response in
             
             if response.response?.statusCode == 200 {
                 
@@ -352,7 +354,7 @@ open class AuthClient: AuthControllerDelegate {
         let authorizeEndpoint = AuthClient.getTokenUrl()
         
         guard let refreshToken: String = keychain.get(KeychainKey.refreshToken.rawValue) else {
-            DispatchQueue.main.async(execute: {failure(nil)})
+            failure(nil)
             return
         }
         
@@ -364,42 +366,40 @@ open class AuthClient: AuthControllerDelegate {
                                                      "client_secret": self.clientSecretKey,
                                                      "redirect_uri": self.clientRedirectURL],
                                         encoding: URLEncoding(destination: .methodDependent))
-            .responseJSON { response in
+            .responseJSON(queue: self.dispatchQueue, options: .allowFragments) {response in
                 
-                DispatchQueue.main.async(execute: {
-                    if response.response?.statusCode == 200 {
+                if response.response?.statusCode == 200 {
+                    
+                    guard let responseJSON = response.result.value as? [String: Any] else {
+                        failure(nil)
+                        return
+                    }
+                    
+                    if let expiry: Double = responseJSON["expires_in"] as? Double {
+                        let authToken: AuthToken = AuthToken(accessToken: (responseJSON["access_token"] as? String), expiry: String(Date.init(timeIntervalSinceNow: expiry).timeIntervalSince1970), refreshToken: (responseJSON["refresh_token"] as? String), uniqueId: ClientEnvironment.SharedInstance.getRegion().rawValue)
                         
-                        guard let responseJSON = response.result.value as? [String: Any] else {
-                            failure(nil)
-                            return
-                        }
-                        
-                        if let expiry: Double = responseJSON["expires_in"] as? Double {
-                            let authToken: AuthToken = AuthToken(accessToken: (responseJSON["access_token"] as? String), expiry: String(Date.init(timeIntervalSinceNow: expiry).timeIntervalSince1970), refreshToken: (responseJSON["refresh_token"] as? String), uniqueId: ClientEnvironment.SharedInstance.getRegion().rawValue)
-                            
-                            if authToken.isValid() {
-                                completion(authToken)
-                            }
-                            else {
-                                failure(nil)
-                            }
+                        if authToken.isValid() {
+                            completion(authToken)
                         }
                         else {
                             failure(nil)
                         }
                     }
                     else {
-                        if let dictionary = response.result.value as? [String: Any] {
-                            failure(dictionary)
-                        }
-                            /*else if let error = response.result.error {
-                             failure(error.userInfo)
-                             }*/
-                        else {
-                            failure(nil)
-                        }
+                        failure(nil)
                     }
-                })
+                }
+                else {
+                    if let dictionary = response.result.value as? [String: Any] {
+                        failure(dictionary)
+                    }
+                        /*else if let error = response.result.error {
+                         failure(error.userInfo)
+                         }*/
+                    else {
+                        failure(nil)
+                    }
+                }
         }
         
         #if DEBUG
@@ -418,7 +418,7 @@ open class AuthClient: AuthControllerDelegate {
         self.requestHeaders.update(["Authorization": self.generateBasicAuthHeader(), "Content-Type": "application/json", "Accept": "application/json"])
         
         // Step 1: Create an account for the user
-        let request = Alamofire.request(registerEndpoint, method: .post, parameters: ["PhoneNumber": mobile, "Email": email, "Password": password, "ConfirmPassword": password], encoding: JSONEncoding.default, headers: self.requestHeaders).responseJSON { response in
+        let request = Alamofire.request(registerEndpoint, method: .post, parameters: ["PhoneNumber": mobile, "Email": email, "Password": password, "ConfirmPassword": password], encoding: JSONEncoding.default, headers: self.requestHeaders).responseJSON(queue: self.dispatchQueue, options: .allowFragments) {response in
             
             if response.response?.statusCode == 200 {
                 
@@ -457,7 +457,7 @@ open class AuthClient: AuthControllerDelegate {
         
         self.requestHeaders.update(["Accept": "application/json", "Authorization": self.generateBasicAuthHeader()])
         
-        let request = Alamofire.request(verifyEndpoint, method: .post, parameters: ["client_id": self.clientId, "client_secret": self.clientSecretKey, "grant_type": "phone", "phone_number": mobile, "pin": pin], encoding: URLEncoding(destination: .methodDependent), headers: ["Accept": "application/json", "Authorization": self.generateBasicAuthHeader()]).responseJSON { response in
+        let request = Alamofire.request(verifyEndpoint, method: .post, parameters: ["client_id": self.clientId, "client_secret": self.clientSecretKey, "grant_type": "phone", "phone_number": mobile, "pin": pin], encoding: URLEncoding(destination: .methodDependent), headers: ["Accept": "application/json", "Authorization": self.generateBasicAuthHeader()]).responseJSON(queue: self.dispatchQueue, options: .allowFragments) {response in
             
             if response.response?.statusCode == 200 {
                 
@@ -505,7 +505,7 @@ open class AuthClient: AuthControllerDelegate {
         
         self.requestHeaders.update(["Accept": "application/json", "Authorization": self.generateBasicAuthHeader()])
         
-        let request = Alamofire.request(verifyEndpoint, method: .post, parameters: ["PhoneNumber": mobile, "grant_type": "phone"], encoding: JSONEncoding.default, headers: ["Accept": "application/json", "Authorization": self.generateBasicAuthHeader()]).responseJSON { response in
+        let request = Alamofire.request(verifyEndpoint, method: .post, parameters: ["PhoneNumber": mobile, "grant_type": "phone"], encoding: JSONEncoding.default, headers: ["Accept": "application/json", "Authorization": self.generateBasicAuthHeader()]).responseJSON(queue: self.dispatchQueue, options: .allowFragments) {response in
             
             if response.response?.statusCode == 200 {
                 completion?()
@@ -532,7 +532,7 @@ open class AuthClient: AuthControllerDelegate {
                                         parameters: ["UserNameEmailOrPhone": emailOrPhoneNumber],
                                         encoding: JSONEncoding.default,
                                         headers: ["Accept": "application/json", "Authorization": self.generateBasicAuthHeader()])
-            .responseJSON { response in
+            .responseJSON(queue: self.dispatchQueue, options: .allowFragments) {response in
                 
                 if response.response?.statusCode == 200 {
                     completion(response.result.value as? [String: Any])
@@ -565,7 +565,7 @@ open class AuthClient: AuthControllerDelegate {
                                         parameters: ["ResetToken": resetToken, "Password": password, "ConfirmPassword": password],
                                         encoding: JSONEncoding.default,
                                         headers: ["Accept": "application/json", "Authorization": self.generateBasicAuthHeader()])
-            .responseJSON { response in
+            .responseJSON(queue: self.dispatchQueue, options: .allowFragments) {response in
                 
                 if response.response?.statusCode == 200 {
                     completion(response.result.value as? [String: Any])
