@@ -421,8 +421,8 @@ open class RestClient {
     open func diagnosticCodes(_ code: String?) -> Self {
         
         self.requestEntity = .diagnosticCodes
-        self.appendRequestUrlEntity(self.requestEntity.rawValue)
-        self.appendRequestUrlEntity(code)
+        self.appendRequestUrlEntity(self.requestEntity.rawValue, asFinal: true)
+        self.appendRequestUrlEntity(code, asFinal: true)
         
         return self
     }
