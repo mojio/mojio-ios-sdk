@@ -35,6 +35,9 @@ public struct Trip: Mappable, PrimaryKey {
     public var MaxRPM: RPM? = nil
     public var MaxAcceleration: Acceleration? = nil
     public var MaxDeceleration: Acceleration? = nil
+    public var Polyline: String? = nil
+    public var HarshEvents: [HarshEvent] = []
+    public var IdleEvents: [IdleEvent] = []
     public var TripFuelEfficiency: FuelEfficiency? = nil
     public var StartFuelLevel: FuelLevel? = nil
     public var EndFuelLevel: FuelLevel? = nil
@@ -86,6 +89,9 @@ public struct Trip: Mappable, PrimaryKey {
         MaxRPM <- map["MaxRPM"]
         MaxAcceleration <- map["MaxAcceleration"]
         MaxDeceleration <- map["MaxDeceleration"]
+        Polyline <- map["Polyline"]
+        HarshEvents <- map["HarshEvents"]
+        IdleEvents <- map["IdleEvents"]
         TripFuelEfficiency <- map["FuelEfficiency"]
         StartFuelLevel <- map["StartFuelLevel"]
         EndFuelLevel <- map["EndFuelLevel"]

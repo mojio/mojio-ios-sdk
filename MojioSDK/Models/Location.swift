@@ -77,6 +77,9 @@ public struct Location: Mappable {
     public var Altitude: Double = 0
     public var GeoHash: String? = nil
     
+    // Heading
+    public var LocationHeading: Heading? = nil
+    
     // Date Values
     public var timestamp: Date? = nil
     
@@ -95,6 +98,7 @@ public struct Location: Mappable {
         Dilution <- map["Dilution"]
         Altitude <- map["Altitude"]
         GeoHash <- map["GeoHash"]
+        LocationHeading <- map["Heading"]
         
         // Date Values
         timestamp = self.Timestamp?.toDate

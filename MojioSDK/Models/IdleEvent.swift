@@ -16,10 +16,10 @@
 import UIKit
 import ObjectMapper
 
-public struct Image: Mappable {
-    public var Src: String? = nil
-    public var Normal: String? = nil
-    public var Thumbnail: String? = nil
+public struct IdleEvent: Mappable {
+    
+    public var EventState: IdleState? = nil
+    public var EventLocation: Location? = nil
     
     public init() {}
     
@@ -28,8 +28,7 @@ public struct Image: Mappable {
     }
     
     public mutating func mapping(map: Map) {
-        Src <- map["Src"]
-        Normal <- map["Normal"]
-        Thumbnail <- map["Thumbnail"]
+        EventState <- map["IdleState"]
+        EventLocation <- map["Location"]
     }
 }

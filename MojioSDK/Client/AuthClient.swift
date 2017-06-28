@@ -307,7 +307,7 @@ open class AuthClient: AuthControllerDelegate {
         
         self.requestHeaders.update(["Accept": "application/json", "Authorization": self.generateBasicAuthHeader()])
         
-        let request = Alamofire.request(loginEndpoint, method: .post, parameters: ["grant_type": "password", "password": password, "username": username, "client_id": self.clientId, "client_secret": self.clientSecretKey], encoding: URLEncoding(destination: .methodDependent), headers: ["Accept": "application/json", "Authorization": self.generateBasicAuthHeader()]).responseJSON(queue: self.dispatchQueue, options: .allowFragments) {response in
+        let request = Alamofire.request(loginEndpoint, method: .post, parameters: ["grant_type": "password", "password": password, "username": username, "client_id": self.clientId, "client_secret": self.clientSecretKey], encoding: URLEncoding(destination: .methodDependent), headers: self.self.requestHeaders).responseJSON(queue: self.dispatchQueue, options: .allowFragments) {response in
             
             if response.response?.statusCode == 200 {
                 

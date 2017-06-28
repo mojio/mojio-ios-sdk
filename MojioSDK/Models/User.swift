@@ -24,7 +24,6 @@ public struct User: Mappable, PrimaryKey {
     public var Jurisdiction: String? = nil
     public var Emails: [Email] = []
     public var PhoneNumbers: [PhoneNumber] = []
-    public var Img: Image? = nil
     public var Tags: [String] = []
     public var Id: String? = nil
     public var CreatedOn: String? = nil
@@ -72,7 +71,6 @@ public struct User: Mappable, PrimaryKey {
         self.Jurisdiction <- map["Jurisdiction"]
         self.Emails <- map["Emails"]
         self.PhoneNumbers <- map["PhoneNumbers"]
-        self.Img <- map["Image"]
         self.Tags <- map["Tags"]
         self.Id <- map["Id"]
         self.CreatedOn <- map["CreatedOn"]
