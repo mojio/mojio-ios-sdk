@@ -22,7 +22,6 @@ public struct App: Mappable, PrimaryKey {
     public var Description: String? = nil
     public var Downloads: Int? = nil
     public var RedirectUris: [String] = []
-    public var AppImage: Image? = nil
     public var Tags: [String] = []
     public var Id: String? = nil
     public var CreatedOn: String? = nil
@@ -65,7 +64,6 @@ public struct App: Mappable, PrimaryKey {
         Description <- map["Description"]
         Downloads <- map["Downloads"]
         RedirectUris <- map["RedirectUris"]
-        AppImage <- map["Image"]
         Tags <- map["Tags"]
         Id <- map["Id"]
         CreatedOn <- map["CreatedOn"]

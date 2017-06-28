@@ -26,7 +26,6 @@ public struct Vehicle: Mappable, PrimaryKey {
     public var CompatDetails: CompatibilityDetails? = nil
     public var CurrentTrip: String? = nil
     public var MojioId: String? = nil
-    public var VehicleImage: Image? = nil
     public var MilStatus: Bool = false
     public var LastContactTime: String? = nil
     public var DiagnosticCodes: [DiagnosticCode] = []
@@ -47,7 +46,7 @@ public struct Vehicle: Mappable, PrimaryKey {
     // FuelType
     public var FuelType: String? = nil
     public var GatewayTime: String? = nil
-    public var VehicleHarshEventState: HarshEvent? = nil
+    public var VehicleHarshEventState: HarshEventState? = nil
     public var VehicleIdleState: IdleState? = nil
     public var VehicleIgnitionState: BooleanState? = nil
     public var VehicleBattery: Battery? = nil
@@ -124,7 +123,6 @@ public struct Vehicle: Mappable, PrimaryKey {
         CompatDetails <- map["CompatDetails"]
         CurrentTrip <- map["CurrentTrip"]
         MojioId <- map["MojioId"]
-        VehicleImage <- map["Image"]
         MilStatus <- map["MilStatus"]
         DiagnosticCodes <- map ["DiagnosticCodes"]
         LastContactTime <- map["LastContactTime"]

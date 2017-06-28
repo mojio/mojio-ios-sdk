@@ -16,29 +16,10 @@
 import UIKit
 import ObjectMapper
 
-public enum HarshEventEventType: String {
-    case acceleration = "Acceleration"
-    case deceleration = "Deceleration"
-    case turning = "Turning"
-    case upward = "Upward"
-    case downward = "Downward"
-    case accident = "Accident"
-    case postAccident = "PostAccident"
-}
-
-public enum HarshEventTurnType: String {
-    case left = "Left"
-    case right = "Right"
-}
-
 public struct HarshEvent: Mappable {
     
-    public var Timestamp: String? = nil
-    public var Value: Bool = false
-    public var EventType: String? = nil
-    public var TurnType: String? = nil
-
-    public var timestamp: Date? = nil
+    public var EventState: HarshEventState? = nil
+    public var EventLocation: Location? = nil
     
     public init() {}
     
@@ -47,12 +28,7 @@ public struct HarshEvent: Mappable {
     }
 
     public mutating func mapping(map: Map) {
-        Timestamp <- map["Timestamp"]
-        Value <- map["Value"]
-        EventType <- map["EventType"]
-        TurnType <- map["TurnType"]
-        
-        timestamp = self.Timestamp?.toDate
+        EventState <- map["HarshEventState"]
+        EventLocation <- map["Location"]
     }
-    
 }

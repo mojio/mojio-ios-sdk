@@ -53,9 +53,7 @@ public enum RestClientEndpoint: String {
     case users = "users/"
     case me = "me/"
     case history = "history/"
-    case states = "states/"
     case locations = "locations/"
-    case image = "image/"
     case mojios = "mojios/"
     case permission = "permission/"
     case permissions = "permissions/"
@@ -218,31 +216,10 @@ open class RestClient {
         return self
     }
     
-    open func states(time: Date? = nil) -> Self {
-        self.requestEntity = .states
-        
-        var suffix = ""
-        
-        if let time = time {
-            suffix = self.sinceBeforeFormatter.string(from: time)
-        }
-        
-        self.requestUrl = self.requestUrl! + self.requestEntity.rawValue + suffix
-        
-        return self
-    }
-    
     open func locations() -> Self {
         self.requestEntity = .locations
         self.requestUrl = self.requestUrl! + self.requestEntity.rawValue
-
-        return self
-    }
-    
-    open func image() -> Self {
-        self.requestEntity = .image
-        self.requestUrl = self.requestUrl! + self.requestEntity.rawValue
-
+        
         return self
     }
     
@@ -667,14 +644,8 @@ open class RestClient {
         case .history:
             return nil
             
-        case .states:
-            return Mapper<VehicleMeasures>().map(JSON: dict)
-            
         case .locations:
             return Mapper<Location>().map(JSON: dict)
-
-        case .image:
-            return Mapper<Image>().map(JSON: dict)
 
         case .mojios:
             return Mapper<Mojio>().map(JSON: dict)
