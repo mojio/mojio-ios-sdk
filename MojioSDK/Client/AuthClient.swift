@@ -167,15 +167,19 @@ open class AuthClient: AuthControllerDelegate {
     
     // Default to global concurrent queue with default priority
     public static var defaultDispatchQueue = DispatchQueue.global()
-    private var dispatchQueue = AuthClient.defaultDispatchQueue
+    fileprivate var dispatchQueue = AuthClient.defaultDispatchQueue
     
-    public init(clientId: String, clientSecretKey: String, clientRedirectURI: String) {
+    fileprivate var clientEnvironment: ClientEnvironment
+    
+    public init(clientEnvironment: ClientEnvironment, clientId: String, clientSecretKey: String, clientRedirectURI: String) {
+        self.clientEnvironment = clientEnvironment
+        
         self.clientId = clientId
         self.clientRedirectURL = clientRedirectURI
         self.clientSecretKey = clientSecretKey
         
         // TODO: make this accounts endpoint
-        self.loginURL = URL(string: AuthClient.getAuthorizeUrl(self.clientRedirectURL, clientId: self.clientId))
+        self.loginURL = URL(string: self.getAuthorizeUrl(self.clientRedirectURL, clientId: self.clientId))
     }
     
     public func dispatch(queue: DispatchQueue) {
@@ -231,7 +235,7 @@ open class AuthClient: AuthControllerDelegate {
         }
         
         // Check to see if the environment endpoint in the keychain is the same as the current endpoint
-        if ClientEnvironment.SharedInstance.getRegion().rawValue != authToken.uniqueId {
+        if self.clientEnvironment.getRegion().regionType.rawValue != authToken.uniqueId {
             return false
         }
         
@@ -266,7 +270,7 @@ open class AuthClient: AuthControllerDelegate {
         
         // Check to see if the environment endpoint in the keychain is the same as the current endpoint
         // If they are different, return false right away
-        if ClientEnvironment.SharedInstance.getRegion().rawValue != uniqueId {
+        if self.clientEnvironment.getRegion().regionType.rawValue != uniqueId {
             failure(nil)
             return
         }
@@ -303,7 +307,7 @@ open class AuthClient: AuthControllerDelegate {
     open func login(_ username: String, password: String, completion: @escaping (_ authToken: AuthToken) -> Void, failure: @escaping (_ response: [String: Any]?) -> Void) {
         
         // The token endpoint is used for the resource owner flow
-        let loginEndpoint = AuthClient.getTokenUrl()
+        let loginEndpoint = self.getTokenUrl()
         
         self.requestHeaders.update(["Accept": "application/json", "Authorization": self.generateBasicAuthHeader()])
         
@@ -317,7 +321,7 @@ open class AuthClient: AuthControllerDelegate {
                 }
                 
                 if let expiry: Double = responseJSON["expires_in"] as? Double {
-                    let authToken = AuthToken(accessToken: (responseJSON["access_token"] as? String), expiry: String(Date.init(timeIntervalSinceNow: expiry).timeIntervalSince1970), refreshToken: (responseJSON["refresh_token"] as? String), uniqueId: ClientEnvironment.SharedInstance.getRegion().rawValue)
+                    let authToken = AuthToken(accessToken: (responseJSON["access_token"] as? String), expiry: String(Date.init(timeIntervalSinceNow: expiry).timeIntervalSince1970), refreshToken: (responseJSON["refresh_token"] as? String), uniqueId: self.clientEnvironment.getRegion().regionType.rawValue)
                     
                     if authToken.isValid() {
                         completion(authToken)
@@ -351,7 +355,7 @@ open class AuthClient: AuthControllerDelegate {
     open func refreshAuthToken(_ completion: @escaping (_ authToken: AuthToken) -> Void, failure: @escaping (_ response: [String: Any]?) -> Void) {
         let keychain = KeychainSwift()
         
-        let authorizeEndpoint = AuthClient.getTokenUrl()
+        let authorizeEndpoint = self.getTokenUrl()
         
         guard let refreshToken: String = keychain.get(KeychainKey.refreshToken.rawValue) else {
             failure(nil)
@@ -376,7 +380,7 @@ open class AuthClient: AuthControllerDelegate {
                     }
                     
                     if let expiry: Double = responseJSON["expires_in"] as? Double {
-                        let authToken: AuthToken = AuthToken(accessToken: (responseJSON["access_token"] as? String), expiry: String(Date.init(timeIntervalSinceNow: expiry).timeIntervalSince1970), refreshToken: (responseJSON["refresh_token"] as? String), uniqueId: ClientEnvironment.SharedInstance.getRegion().rawValue)
+                        let authToken: AuthToken = AuthToken(accessToken: (responseJSON["access_token"] as? String), expiry: String(Date.init(timeIntervalSinceNow: expiry).timeIntervalSince1970), refreshToken: (responseJSON["refresh_token"] as? String), uniqueId: self.clientEnvironment.getRegion().regionType.rawValue)
                         
                         if authToken.isValid() {
                             completion(authToken)
@@ -414,7 +418,7 @@ open class AuthClient: AuthControllerDelegate {
     // Register
     open func register(_ mobile: String, email: String, password: String, completion: @escaping (_ authToken: AuthToken) -> Void, failure: @escaping (_ response: [String: Any]?) -> Void) {
         
-        let registerEndpoint = ClientEnvironment.SharedInstance.getAccountsEndpoint() + AccountClientEndpoint.register.rawValue
+        let registerEndpoint = self.clientEnvironment.getAccountsEndpoint() + AccountClientEndpoint.register.rawValue
         self.requestHeaders.update(["Authorization": self.generateBasicAuthHeader(), "Content-Type": "application/json", "Accept": "application/json"])
         
         // Step 1: Create an account for the user
@@ -453,7 +457,7 @@ open class AuthClient: AuthControllerDelegate {
     // Verify Phone
     open func verifyMobilePhone(_ mobile: String, pin: String, completion: @escaping (_ authToken: AuthToken) -> Void, failure: @escaping (_ response: [String: Any]?) -> Void) {
         
-        let verifyEndpoint = AuthClient.getTokenUrl()
+        let verifyEndpoint = self.getTokenUrl()
         
         self.requestHeaders.update(["Accept": "application/json", "Authorization": self.generateBasicAuthHeader()])
         
@@ -467,7 +471,7 @@ open class AuthClient: AuthControllerDelegate {
                 }
                 
                 if let expiry: Double = responseJSON["expires_in"] as? Double {
-                    let authToken: AuthToken = AuthToken(accessToken: (responseJSON["access_token"] as! String), expiry: String(Date.init(timeIntervalSinceNow: expiry).timeIntervalSince1970), refreshToken: (responseJSON["refresh_token"] as! String), uniqueId: ClientEnvironment.SharedInstance.getRegion().rawValue)
+                    let authToken: AuthToken = AuthToken(accessToken: (responseJSON["access_token"] as! String), expiry: String(Date.init(timeIntervalSinceNow: expiry).timeIntervalSince1970), refreshToken: (responseJSON["refresh_token"] as! String), uniqueId: self.clientEnvironment.getRegion().regionType.rawValue)
                     
                     if authToken.isValid() {
                         completion(authToken)
@@ -501,7 +505,7 @@ open class AuthClient: AuthControllerDelegate {
     // Resend Verification Pin
     open func resendPhonePin(_ mobile: String, completion: (() -> Void)?, failure: (() -> Void)?) {
         
-        let verifyEndpoint = ClientEnvironment.SharedInstance.getAccountsEndpoint() + AccountClientEndpoint.resendPin.rawValue
+        let verifyEndpoint = self.clientEnvironment.getAccountsEndpoint() + AccountClientEndpoint.resendPin.rawValue
         
         self.requestHeaders.update(["Accept": "application/json", "Authorization": self.generateBasicAuthHeader()])
         
@@ -523,7 +527,7 @@ open class AuthClient: AuthControllerDelegate {
     // Forgot/Reset Password
     open func forgotPassword(_ emailOrPhoneNumber: String, completion: @escaping (_ response: [String: Any]?) -> Void, failure: @escaping (_ response: [String: Any]?) -> Void) {
         
-        let forgotEndpoint = ClientEnvironment.SharedInstance.getAccountsEndpoint() + AccountClientEndpoint.forgot.rawValue
+        let forgotEndpoint = self.clientEnvironment.getAccountsEndpoint() + AccountClientEndpoint.forgot.rawValue
         
         self.requestHeaders.update(["Accept": "application/json", "Authorization": self.generateBasicAuthHeader()])
         
@@ -556,7 +560,7 @@ open class AuthClient: AuthControllerDelegate {
     
     open func resetPassword(_ resetToken: String, password: String, completion: @escaping (_ response: [String: Any]?) -> Void, failure: @escaping (_ response: [String: Any]?) -> Void) {
         
-        let resetEndpoint = ClientEnvironment.SharedInstance.getAccountsEndpoint() + AccountClientEndpoint.reset.rawValue
+        let resetEndpoint = self.clientEnvironment.getAccountsEndpoint() + AccountClientEndpoint.reset.rawValue
         
         self.requestHeaders.update(["Accept": "application/json", "Authorization": self.generateBasicAuthHeader()])
         
@@ -596,27 +600,27 @@ open class AuthClient: AuthControllerDelegate {
         KeychainManager().saveAuthToken(authToken)
     }
     
-    open static func getTokenUrl() -> String {
-        return ClientEnvironment.SharedInstance.getAccountsEndpoint() + AuthClientEndpoint.token.rawValue
+    open func getTokenUrl() -> String {
+        return self.clientEnvironment.getAccountsEndpoint() + AuthClientEndpoint.token.rawValue
     }
     
-    open static func getTokenUrl(_ redirectUri: String, clientId: String) -> String {
+    open func getTokenUrl(_ redirectUri: String, clientId: String) -> String {
         return String(
             format: "%@%@?response_type=token&redirect_uri=%@&client_id=%@&scope=full",
-            ClientEnvironment.SharedInstance.getAccountsEndpoint(),
+            self.clientEnvironment.getAccountsEndpoint(),
             AuthClientEndpoint.token.rawValue,
             redirectUri.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!,
             clientId.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!)
     }
     
-    open static func getAuthorizeUrl() -> String {
-        return ClientEnvironment.SharedInstance.getAccountsEndpoint() + AuthClientEndpoint.authorize.rawValue
+    open func getAuthorizeUrl() -> String {
+        return self.clientEnvironment.getAccountsEndpoint() + AuthClientEndpoint.authorize.rawValue
     }
     
-    open static func getAuthorizeUrl(_ redirectUri: String, clientId: String) -> String {
+    open func getAuthorizeUrl(_ redirectUri: String, clientId: String) -> String {
         return String(
             format: "%@%@?response_type=token&redirect_uri=%@&client_id=%@&scope=full",
-            ClientEnvironment.SharedInstance.getAccountsEndpoint(),
+            self.clientEnvironment.getAccountsEndpoint(),
             AuthClientEndpoint.authorize.rawValue,
             redirectUri.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!,
             clientId.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!)

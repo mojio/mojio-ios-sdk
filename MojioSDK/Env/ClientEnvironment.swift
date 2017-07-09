@@ -15,24 +15,53 @@
 
 import UIKit
 
-public enum MojioRegion: String {
+public protocol MojioRegionPrefix {
+    var regionPrefix: String {get}
+}
 
-    case production = ""
-    case naProduction = "na-production-"
-    case euProduction = "eu-production-"
-    case staging = "staging-"
-    case naStaging = "na-staging-"
-    case euStaging = "eu-staging-"
-    case trial = "trial-"
-    case develop = "develop-"
-    case load = "load-"
+open class MojioRegion: MojioRegionPrefix {
 
-    static func getDefaultRegion() -> MojioRegion {
+    public enum RegionType: String {
+        case production = ""
+        case staging = "staging-"
+        case trial = "trial-"
+        case develop = "develop-"
+        case load = "load-"
+    }
+    
+    open private(set) var regionType: RegionType = MojioRegion.getDefaultRegionType()
+    
+    public init() {}
+    
+    public init(_ regionType: RegionType? = nil) {
+        if let regionType = regionType {
+            self.regionType = regionType
+        }
+    }
+
+    open class func getDefaultRegionType() -> RegionType {
         return .production
+    }
+    
+    open var regionPrefix: String {
+        return ""
+    }
+    
+    open var description: String {
+        return self.regionPrefix + self.regionType.rawValue
     }
 }
 
-open class ClientEnvironment {
+public enum IdentityEndpointType {
+    case accounts
+    case identity
+}
+
+public protocol IdentityEndpoint {
+    var identityEndpointType: IdentityEndpointType {get}
+}
+
+open class ClientEnvironment: IdentityEndpoint {
     
     private enum EndPointFormat: String {
         case apiEndpoint = "https://%@api.moj.io/v2/"
@@ -41,11 +70,10 @@ open class ClientEnvironment {
         case pushWSEndpoint = "wss://%@api.moj.io/v2/"
         case myMojioEndpoint = "https://%@my.moj.io/"
         case accountsEndpoint = "https://%@accounts.moj.io/"
+        case identityEndpoint = "https://%@identity.moj.io/"
     }
     
-    open static let SharedInstance = ClientEnvironment()
-    
-    fileprivate var region: MojioRegion? = nil
+    fileprivate var region: MojioRegion = MojioRegion()
     
     fileprivate var apiEndpoint: String?
     fileprivate var apiV1Endpoint: String?
@@ -53,20 +81,14 @@ open class ClientEnvironment {
     fileprivate var pushWSEndpoint: String?
     fileprivate var myMojioEndpoint: String?
     fileprivate var accountsEndpoint: String?
+    fileprivate var identityEndpoint: String?
     
     public init() {
-        guard let _ = self.region else {
-            self.setDefaultRegion()
-            return
-        }
+        self.updateEndPoints()
     }
     
     open func getRegion() -> MojioRegion {
-        if let region = self.region {
-            return region
-        }
-
-        return MojioRegion.getDefaultRegion()
+        return self.region
     }
     
     /**
@@ -74,56 +96,73 @@ open class ClientEnvironment {
      */
     open func setRegion (_ region: MojioRegion) {
         self.region = region
+        self.updateEndPoints()
+    }
+    
+    private func updateEndPoints() {
         self.apiEndpoint = String.init(
             format: ClientEnvironment.EndPointFormat.apiEndpoint.rawValue,
-            arguments: [region.rawValue])
-
+            arguments: [self.region.description])
+        
         self.apiV1Endpoint = String.init(
             format: ClientEnvironment.EndPointFormat.apiV1Endpoint.rawValue,
-            arguments: [region.rawValue])
+            arguments: [self.region.description])
         
         self.pushApnsEndpoint = String.init(
             format: ClientEnvironment.EndPointFormat.pushApnsEndpoint.rawValue,
-            arguments: [region.rawValue])
+            arguments: [self.region.description])
         
         self.pushWSEndpoint = String.init(
             format: ClientEnvironment.EndPointFormat.pushWSEndpoint.rawValue,
-            arguments: [region.rawValue])
+            arguments: [self.region.description])
         
         self.myMojioEndpoint = String.init(
             format: ClientEnvironment.EndPointFormat.myMojioEndpoint.rawValue,
-            arguments: [region.rawValue])
+            arguments: [self.region.description])
         
         self.accountsEndpoint = String.init(
             format: ClientEnvironment.EndPointFormat.accountsEndpoint.rawValue,
-            arguments: [region.rawValue])
+            arguments: [self.region.description])
+        
+        self.identityEndpoint = String.init(
+            format: ClientEnvironment.EndPointFormat.identityEndpoint.rawValue,
+            arguments: [self.region.description])
     }
     
     open func setDefaultRegion () {
-        self.setRegion(MojioRegion.getDefaultRegion())
+        self.setRegion(MojioRegion())
     }
     
     open func getApiEndpoint () -> String {
-        return apiEndpoint!
+        return self.apiEndpoint!
     }
     
     open func getV1ApiEndpoint () -> String {
-        return apiV1Endpoint!
+        return self.apiV1Endpoint!
     }
     
     open func getPushApnsEndpoint () -> String {
-        return pushApnsEndpoint!
+        return self.pushApnsEndpoint!
     }
     
     open func getPushWSEndpoint () -> String {
-        return pushWSEndpoint!
+        return self.pushWSEndpoint!
     }
     
     open func getMyMojioEndpoint () -> String {
-        return myMojioEndpoint!
+        return self.myMojioEndpoint!
     }
     
     open func getAccountsEndpoint () -> String {
-        return accountsEndpoint!
+        if self.identityEndpointType == .identity {
+            return self.identityEndpoint!
+        }
+        else {
+            return self.accountsEndpoint!
+        }
+    }
+    
+    open var identityEndpointType: IdentityEndpointType {
+        return .accounts
     }
 }

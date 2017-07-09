@@ -102,20 +102,17 @@ open class RestClient {
     fileprivate static let SinceBeforeTimezone = TimeZone(abbreviation: "UTC");
     fileprivate var dispatchQueue = RestClient.defaultDispatchQueue
     
-    public init() {
-        self.requestUrl = ClientEnvironment.SharedInstance.getApiEndpoint()
-        self.requestV1Url = ClientEnvironment.SharedInstance.getV1ApiEndpoint();
-        self.pushUrl = ClientEnvironment.SharedInstance.getPushWSEndpoint()
-
-        self.sinceBeforeFormatter.dateFormat = RestClient.SinceBeforeDateFormat
-        self.sinceBeforeFormatter.timeZone = RestClient.SinceBeforeTimezone
-    }
-    
-    public convenience init(clientEnvironment: ClientEnvironment) {
-        self.init()
+    public init(clientEnvironment: ClientEnvironment) {
         self.requestUrl = clientEnvironment.getApiEndpoint()
         self.requestV1Url = clientEnvironment.getV1ApiEndpoint()
         self.pushUrl = clientEnvironment.getPushWSEndpoint()
+        
+        self.initDateFormatters()
+    }
+    
+    private func initDateFormatters() {
+        self.sinceBeforeFormatter.dateFormat = RestClient.SinceBeforeDateFormat
+        self.sinceBeforeFormatter.timeZone = RestClient.SinceBeforeTimezone
     }
     
     open func get() -> Self {

@@ -17,7 +17,7 @@ PODS:
   - OHHTTPStubs/OHPathHelpers (6.0.0)
   - OHHTTPStubs/Swift (6.0.0):
     - OHHTTPStubs/Default
-  - SwiftDate (4.1.2)
+  - SwiftDate (4.1.6)
   - SwiftWebSocket (2.6.5)
   - SwiftyJSON (3.1.4)
 
@@ -36,7 +36,7 @@ SPEC CHECKSUMS:
   KeychainSwift: 213db04dfe7244988e61f77c72a2afb2f775954a
   ObjectMapper: 65abcfd9a61cf7396cbd14a4fb22fddfcc46577e
   OHHTTPStubs: 752f9b11fd810a15162d50f11c06ff94f8e012eb
-  SwiftDate: 2dfdebd4f67ae71c9c3e2413ee3c56947f302858
+  SwiftDate: 6bae71add23ce9f16ec2be3a521b21000da5804b
   SwiftWebSocket: 1ef8a0efb023544643bdf480c1ec4a62b204f293
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
 
