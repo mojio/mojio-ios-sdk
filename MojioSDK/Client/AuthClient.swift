@@ -182,8 +182,12 @@ open class AuthClient: AuthControllerDelegate {
         self.loginURL = URL(string: self.getAuthorizeUrl(self.clientRedirectURL, clientId: self.clientId))
     }
     
-    public func dispatch(queue: DispatchQueue) {
+    open func dispatch(queue: DispatchQueue) {
         self.dispatchQueue = queue
+    }
+    
+    open func resetRequestHeaders() {
+        self.requestHeaders = ClientHeaders.defaultRequestHeaders
     }
     
     open func loginViewController(_ completion: ((_ authToken: AuthToken) -> Void)?, failure: ((_ response: Any?) -> Void)?) {
@@ -427,6 +431,7 @@ open class AuthClient: AuthControllerDelegate {
             if response.response?.statusCode == 200 {
                 
                 // Step 2: If account creation was successful, log the user in
+                self.resetRequestHeaders()
                 self.login(email, password: password, completion: {authToken in
                     
                     completion(authToken)
