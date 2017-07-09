@@ -309,7 +309,7 @@ open class AuthClient: AuthControllerDelegate {
         // The token endpoint is used for the resource owner flow
         let loginEndpoint = self.getTokenUrl()
         
-        self.requestHeaders.update(["Accept": "application/json", "Authorization": self.generateBasicAuthHeader()])
+        self.requestHeaders.update(["Authorization": self.generateBasicAuthHeader()])
         
         let request = Alamofire.request(loginEndpoint, method: .post, parameters: ["grant_type": "password", "password": password, "username": username, "client_id": self.clientId, "client_secret": self.clientSecretKey], encoding: URLEncoding(destination: .methodDependent), headers: self.self.requestHeaders).responseJSON(queue: self.dispatchQueue, options: .allowFragments) {response in
             
