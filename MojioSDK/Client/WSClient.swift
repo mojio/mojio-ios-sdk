@@ -16,13 +16,24 @@
 import Foundation
 import SwiftWebSocket
 import SwiftyJSON
-
+import Alamofire
 
 open class WSClient: RestClient {
     
     // Default to global concurrent queue with default priority
     public static var wsDefaultDispatchQueue = DispatchQueue.global()
     private var wsDispatchQueue = WSClient.wsDefaultDispatchQueue
+    
+    private var publicKeys: [SecKey]? = nil
+    
+    private override init(clientEnvironment: ClientEnvironment, sessionManager: SessionManager = SessionManager.default) {
+        super.init(clientEnvironment: clientEnvironment, sessionManager: sessionManager)
+    }
+    
+    public init(clientEnvironment: ClientEnvironment, sessionManager: SessionManager = SessionManager.default, publicKeys: [SecKey]? = nil) {
+        super.init(clientEnvironment: clientEnvironment, sessionManager: sessionManager)
+        self.publicKeys = publicKeys
+    }
     
     public override func dispatch(queue: DispatchQueue) {
         self.wsDispatchQueue = queue
@@ -37,6 +48,10 @@ open class WSClient: RestClient {
         }
         
         let ws = WebSocket(request: request)
+        
+        if let publicKeys = self.publicKeys, publicKeys.count > 0 {
+            ws.pinnedPublicKeys = publicKeys
+        }
         
         ws.eventQueue = self.wsDispatchQueue
         

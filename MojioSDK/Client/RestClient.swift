@@ -102,10 +102,13 @@ open class RestClient {
     fileprivate static let SinceBeforeTimezone = TimeZone(abbreviation: "UTC");
     fileprivate var dispatchQueue = RestClient.defaultDispatchQueue
     
-    public init(clientEnvironment: ClientEnvironment) {
+    internal let sessionManager: SessionManager
+    
+    public init(clientEnvironment: ClientEnvironment, sessionManager: SessionManager = SessionManager.default) {
         self.requestUrl = clientEnvironment.getApiEndpoint()
         self.requestV1Url = clientEnvironment.getV1ApiEndpoint()
         self.pushUrl = clientEnvironment.getPushWSEndpoint()
+        self.sessionManager = sessionManager
         
         self.initDateFormatters()
     }
@@ -465,7 +468,7 @@ open class RestClient {
     
     open func run(completion: @escaping (_ response: Any) -> Void, failure: @escaping (_ error: Any?) -> Void) {
         
-        let request = Alamofire.request(self.requestUrl!, method: self.requestMethod, parameters: self.requestParams, encoding: URLEncoding(destination: .methodDependent), headers: self.defaultHeaders).responseJSON(queue: self.dispatchQueue, options: .allowFragments) {response in
+        let request = self.sessionManager.request(self.requestUrl!, method: self.requestMethod, parameters: self.requestParams, encoding: URLEncoding(destination: .methodDependent), headers: self.defaultHeaders).responseJSON(queue: self.dispatchQueue, options: .allowFragments) {response in
             self.handleResponse(response, completion: completion, failure: failure)
         }
         
@@ -505,7 +508,7 @@ open class RestClient {
     
     open func runStringBody(string: String, completion: @escaping (_ response: Any) -> Void, failure: @escaping (_ error: Any?) -> Void) {
         
-        let request = Alamofire.request(self.requestUrl!, method: self.requestMethod, parameters: [:], encoding: CustomStringEncoding(customString: string), headers: self.defaultHeaders).responseJSON(queue: self.dispatchQueue, options: .allowFragments) {response in
+        let request = self.sessionManager.request(self.requestUrl!, method: self.requestMethod, parameters: [:], encoding: CustomStringEncoding(customString: string), headers: self.defaultHeaders).responseJSON(queue: self.dispatchQueue, options: .allowFragments) {response in
             self.handleResponse(response, completion: completion, failure: failure)
         }
         
@@ -516,7 +519,7 @@ open class RestClient {
     
     open func runEncodeJSON(jsonObject: [String: Any], completion: @escaping (_ response: Any) -> Void, failure: @escaping (_ error: Any?) -> Void) {
         
-        let request = Alamofire.request(self.requestUrl!, method: self.requestMethod, parameters: jsonObject, encoding: JSONEncoding.default, headers: self.defaultHeaders).responseJSON(queue: self.dispatchQueue, options: .allowFragments) {response in
+        let request = self.sessionManager.request(self.requestUrl!, method: self.requestMethod, parameters: jsonObject, encoding: JSONEncoding.default, headers: self.defaultHeaders).responseJSON(queue: self.dispatchQueue, options: .allowFragments) {response in
             self.handleResponse(response, completion: completion, failure: failure)
         }
 
@@ -534,7 +537,7 @@ open class RestClient {
             headers["Authorization"] = "Bearer " + accessToken
         }
         
-        let request = Alamofire.request(self.requestUrl!, method: self.requestMethod, parameters: parameters, encoding: URLEncoding(destination: .methodDependent), headers: headers).responseJSON(queue: self.dispatchQueue, options: .allowFragments) {response in
+        let request = self.sessionManager.request(self.requestUrl!, method: self.requestMethod, parameters: parameters, encoding: URLEncoding(destination: .methodDependent), headers: headers).responseJSON(queue: self.dispatchQueue, options: .allowFragments) {response in
             self.handleResponse(response, completion: completion, failure: failure)
         }
         

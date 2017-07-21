@@ -61,7 +61,35 @@ public protocol IdentityEndpoint {
     var identityEndpointType: IdentityEndpointType {get}
 }
 
+public enum MojioEndpoint {
+    case api
+    case push
+    case wsPush
+    case myMojio
+    case accounts
+    case identity
+}
+
 open class ClientEnvironment: IdentityEndpoint {
+    
+    private static let endpointDomainFormats: [MojioEndpoint: String] = [
+        .api: "%@api.moj.io",
+        .push: "%@push.moj.io",
+        .wsPush: "%@api.moj.io",
+        .myMojio: "%@my.moj.io",
+        .accounts: "%@accounts.moj.io",
+        .identity: "%@identity.moj.io",
+        ]
+    
+    open func domainFromMojioEndpoint(_ endpoint: MojioEndpoint) -> String {
+        if let endpointFormat = ClientEnvironment.endpointDomainFormats[endpoint] {
+            return String(
+                format: endpointFormat,
+                arguments: [self.region.description])
+        }
+        
+        return ""
+    }
     
     private enum EndPointFormat: String {
         case apiEndpoint = "https://%@api.moj.io/v2/"
@@ -100,31 +128,31 @@ open class ClientEnvironment: IdentityEndpoint {
     }
     
     private func updateEndPoints() {
-        self.apiEndpoint = String.init(
+        self.apiEndpoint = String(
             format: ClientEnvironment.EndPointFormat.apiEndpoint.rawValue,
             arguments: [self.region.description])
         
-        self.apiV1Endpoint = String.init(
+        self.apiV1Endpoint = String(
             format: ClientEnvironment.EndPointFormat.apiV1Endpoint.rawValue,
             arguments: [self.region.description])
         
-        self.pushApnsEndpoint = String.init(
+        self.pushApnsEndpoint = String(
             format: ClientEnvironment.EndPointFormat.pushApnsEndpoint.rawValue,
             arguments: [self.region.description])
         
-        self.pushWSEndpoint = String.init(
+        self.pushWSEndpoint = String(
             format: ClientEnvironment.EndPointFormat.pushWSEndpoint.rawValue,
             arguments: [self.region.description])
         
-        self.myMojioEndpoint = String.init(
+        self.myMojioEndpoint = String(
             format: ClientEnvironment.EndPointFormat.myMojioEndpoint.rawValue,
             arguments: [self.region.description])
         
-        self.accountsEndpoint = String.init(
+        self.accountsEndpoint = String(
             format: ClientEnvironment.EndPointFormat.accountsEndpoint.rawValue,
             arguments: [self.region.description])
         
-        self.identityEndpoint = String.init(
+        self.identityEndpoint = String(
             format: ClientEnvironment.EndPointFormat.identityEndpoint.rawValue,
             arguments: [self.region.description])
     }

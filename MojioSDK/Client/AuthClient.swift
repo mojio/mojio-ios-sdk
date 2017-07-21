@@ -170,9 +170,11 @@ open class AuthClient: AuthControllerDelegate {
     fileprivate var dispatchQueue = AuthClient.defaultDispatchQueue
     
     fileprivate var clientEnvironment: ClientEnvironment
+    internal let sessionManager: SessionManager
     
-    public init(clientEnvironment: ClientEnvironment, clientId: String, clientSecretKey: String, clientRedirectURI: String) {
+    public init(clientEnvironment: ClientEnvironment, clientId: String, clientSecretKey: String, clientRedirectURI: String, sessionManager: SessionManager = SessionManager.default) {
         self.clientEnvironment = clientEnvironment
+        self.sessionManager = sessionManager
         
         self.clientId = clientId
         self.clientRedirectURL = clientRedirectURI
@@ -315,7 +317,7 @@ open class AuthClient: AuthControllerDelegate {
         
         self.requestHeaders.update(["Authorization": self.generateBasicAuthHeader()])
         
-        let request = Alamofire.request(loginEndpoint, method: .post, parameters: ["grant_type": "password", "password": password, "username": username, "client_id": self.clientId, "client_secret": self.clientSecretKey], encoding: URLEncoding(destination: .methodDependent), headers: self.self.requestHeaders).responseJSON(queue: self.dispatchQueue, options: .allowFragments) {response in
+        let request = self.sessionManager.request(loginEndpoint, method: .post, parameters: ["grant_type": "password", "password": password, "username": username, "client_id": self.clientId, "client_secret": self.clientSecretKey], encoding: URLEncoding(destination: .methodDependent), headers: self.self.requestHeaders).responseJSON(queue: self.dispatchQueue, options: .allowFragments) {response in
             
             if response.response?.statusCode == 200 {
                 
@@ -366,7 +368,7 @@ open class AuthClient: AuthControllerDelegate {
             return
         }
         
-        let request = Alamofire.request(authorizeEndpoint,
+        let request = self.sessionManager.request(authorizeEndpoint,
                                         method: .post,
                                         parameters: ["grant_type": "refresh_token",
                                                      "refresh_token": refreshToken,
@@ -426,7 +428,7 @@ open class AuthClient: AuthControllerDelegate {
         self.requestHeaders.update(["Authorization": self.generateBasicAuthHeader(), "Content-Type": "application/json", "Accept": "application/json"])
         
         // Step 1: Create an account for the user
-        let request = Alamofire.request(registerEndpoint, method: .post, parameters: ["PhoneNumber": mobile, "Email": email, "Password": password, "ConfirmPassword": password], encoding: JSONEncoding.default, headers: self.requestHeaders).responseJSON(queue: self.dispatchQueue, options: .allowFragments) {response in
+        let request = self.sessionManager.request(registerEndpoint, method: .post, parameters: ["PhoneNumber": mobile, "Email": email, "Password": password, "ConfirmPassword": password], encoding: JSONEncoding.default, headers: self.requestHeaders).responseJSON(queue: self.dispatchQueue, options: .allowFragments) {response in
             
             if response.response?.statusCode == 200 {
                 
@@ -466,7 +468,7 @@ open class AuthClient: AuthControllerDelegate {
         
         self.requestHeaders.update(["Accept": "application/json", "Authorization": self.generateBasicAuthHeader()])
         
-        let request = Alamofire.request(verifyEndpoint, method: .post, parameters: ["client_id": self.clientId, "client_secret": self.clientSecretKey, "grant_type": "phone", "phone_number": mobile, "pin": pin], encoding: URLEncoding(destination: .methodDependent), headers: ["Accept": "application/json", "Authorization": self.generateBasicAuthHeader()]).responseJSON(queue: self.dispatchQueue, options: .allowFragments) {response in
+        let request = self.sessionManager.request(verifyEndpoint, method: .post, parameters: ["client_id": self.clientId, "client_secret": self.clientSecretKey, "grant_type": "phone", "phone_number": mobile, "pin": pin], encoding: URLEncoding(destination: .methodDependent), headers: ["Accept": "application/json", "Authorization": self.generateBasicAuthHeader()]).responseJSON(queue: self.dispatchQueue, options: .allowFragments) {response in
             
             if response.response?.statusCode == 200 {
                 
@@ -514,7 +516,7 @@ open class AuthClient: AuthControllerDelegate {
         
         self.requestHeaders.update(["Accept": "application/json", "Authorization": self.generateBasicAuthHeader()])
         
-        let request = Alamofire.request(verifyEndpoint, method: .post, parameters: ["PhoneNumber": mobile, "grant_type": "phone"], encoding: JSONEncoding.default, headers: ["Accept": "application/json", "Authorization": self.generateBasicAuthHeader()]).responseJSON(queue: self.dispatchQueue, options: .allowFragments) {response in
+        let request = self.sessionManager.request(verifyEndpoint, method: .post, parameters: ["PhoneNumber": mobile, "grant_type": "phone"], encoding: JSONEncoding.default, headers: ["Accept": "application/json", "Authorization": self.generateBasicAuthHeader()]).responseJSON(queue: self.dispatchQueue, options: .allowFragments) {response in
             
             if response.response?.statusCode == 200 {
                 completion?()
@@ -536,7 +538,7 @@ open class AuthClient: AuthControllerDelegate {
         
         self.requestHeaders.update(["Accept": "application/json", "Authorization": self.generateBasicAuthHeader()])
         
-        let request = Alamofire.request(forgotEndpoint,
+        let request = self.sessionManager.request(forgotEndpoint,
                                         method: .post,
                                         parameters: ["UserNameEmailOrPhone": emailOrPhoneNumber],
                                         encoding: JSONEncoding.default,
@@ -569,7 +571,7 @@ open class AuthClient: AuthControllerDelegate {
         
         self.requestHeaders.update(["Accept": "application/json", "Authorization": self.generateBasicAuthHeader()])
         
-        let request = Alamofire.request(resetEndpoint,
+        let request = self.sessionManager.request(resetEndpoint,
                                         method: .post,
                                         parameters: ["ResetToken": resetToken, "Password": password, "ConfirmPassword": password],
                                         encoding: JSONEncoding.default,

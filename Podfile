@@ -14,7 +14,7 @@ target 'MojioSDK' do
     pod 'KeychainSwift'
     pod 'OHHTTPStubs'
     pod 'OHHTTPStubs/Swift'
-    pod 'SwiftWebSocket'
+    pod 'SwiftWebSocket', :git => 'https://github.com/mojio/SwiftWebSocket', :branch => 'master'
     pod 'SwiftDate'
 end
 
