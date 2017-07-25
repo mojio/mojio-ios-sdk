@@ -9,10 +9,10 @@
 import UIKit
 
 public class MojioRegion : NSObject {
-    public static let Production : String = ""
+    public static let Production : String = "can-"
     public static let NAProduction : String = "na-production-"
     public static let EUProduction : String = "eu-production-"
-    public static let Staging : String = "staging-"
+    public static let Staging : String = "can-staging-"
     public static let NAStaging : String = "na-staging-"
     public static let EUStaging : String = "eu-staging-"
     public static let Trial : String = "trial-"
