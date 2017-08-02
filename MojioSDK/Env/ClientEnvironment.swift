@@ -29,17 +29,17 @@ open class MojioRegion: MojioRegionPrefix {
         case load = "load-"
     }
     
-    open private(set) var regionType: RegionType = MojioRegion.getDefaultRegionType()
+    open private(set) var regionType: RegionType = .production
     
-    public init() {}
+    public init() {
+        self.regionType = self.defaultRegionType
+    }
     
-    public init(_ regionType: RegionType? = nil) {
-        if let regionType = regionType {
-            self.regionType = regionType
-        }
+    public init(_ regionType: RegionType) {
+        self.regionType = regionType
     }
 
-    open class func getDefaultRegionType() -> RegionType {
+    open var defaultRegionType: RegionType {
         return .production
     }
     
