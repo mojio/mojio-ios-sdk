@@ -57,7 +57,10 @@ extension BaseActivity {
         Summary <- map["SummaryMap"]
         Icon <- map["Icon"]
         Content <- map["Content"]
-        AttributedTo <- map["AttributedTo"]
+        
+        var attributedToValue: Activity?
+        attributedToValue <- map["AttributedTo"]
+        AttributedTo = attributedToValue
         
         startTime = self.StartTime?.toDate
         endTime = self.EndTime?.toDate
