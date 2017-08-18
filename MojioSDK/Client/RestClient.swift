@@ -693,6 +693,9 @@ open class RestClient {
             
         case .polyline:
             return Mapper<TripPolyline>().map(JSON: dict)
+        
+        case .diagnosticCodes:
+            return Mapper<DiagnosticCode>().map(JSON: dict)
             
         default:
             return nil
