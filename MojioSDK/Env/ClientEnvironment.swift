@@ -35,12 +35,12 @@ public enum MojioRegion: String {
 open class ClientEnvironment {
     
     private enum EndPointFormat: String {
-        case apiEndpoint = "https://%@api.moj.io/v2/"
-        case apiV1Endpoint = "https://%@api.moj.io/v1/"
-        case pushApnsEndpoint = "https://%@push.moj.io/v2/"
-        case pushWSEndpoint = "wss://%@api.moj.io/v2/"
+        case apiEndpoint = "https://%@eu-api-stagingslot.moj.io/v2/"
+        case apiV1Endpoint = "https://%@eu-api-stagingslot.moj.io/v1/"
+        case pushApnsEndpoint = "https://%@eu-push-stagingslot.moj.io/v2/"
+        case pushWSEndpoint = "wss://%@eu-api-stagingslot.moj.io/v2/"
         case myMojioEndpoint = "https://%@my.moj.io/"
-        case accountsEndpoint = "https://%@accounts.moj.io/"
+        case accountsEndpoint = "https://%@identity-stagingslot.moj.io/"
     }
     
     open static let SharedInstance = ClientEnvironment()
