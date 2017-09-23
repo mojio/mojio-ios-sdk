@@ -23,6 +23,7 @@ open class MojioRegion: MojioRegionPrefix {
 
     public enum RegionType: String {
         case production = ""
+        case preProd = "preprod-"
         case staging = "staging-"
         case trial = "trial-"
         case develop = "develop-"
@@ -52,32 +53,21 @@ open class MojioRegion: MojioRegionPrefix {
     }
 }
 
-public enum IdentityEndpointType {
-    case accounts
-    case identity
-}
-
-public protocol IdentityEndpoint {
-    var identityEndpointType: IdentityEndpointType {get}
-}
-
 public enum MojioEndpoint {
     case api
     case push
     case wsPush
     case myMojio
-    case accounts
     case identity
 }
 
-open class ClientEnvironment: IdentityEndpoint {
+open class ClientEnvironment {
     
     private static let endpointDomainFormats: [MojioEndpoint: String] = [
         .api: "%@api.moj.io",
         .push: "%@push.moj.io",
         .wsPush: "%@api.moj.io",
         .myMojio: "%@my.moj.io",
-        .accounts: "%@accounts.moj.io",
         .identity: "%@identity.moj.io",
         ]
     
@@ -97,7 +87,6 @@ open class ClientEnvironment: IdentityEndpoint {
         case pushApnsEndpoint = "https://%@push.moj.io/v2/"
         case pushWSEndpoint = "wss://%@api.moj.io/v2/"
         case myMojioEndpoint = "https://%@my.moj.io/"
-        case accountsEndpoint = "https://%@accounts.moj.io/"
         case identityEndpoint = "https://%@identity.moj.io/"
     }
     
@@ -108,7 +97,6 @@ open class ClientEnvironment: IdentityEndpoint {
     fileprivate var pushApnsEndpoint: String?
     fileprivate var pushWSEndpoint: String?
     fileprivate var myMojioEndpoint: String?
-    fileprivate var accountsEndpoint: String?
     fileprivate var identityEndpoint: String?
     
     public init() {
@@ -148,10 +136,6 @@ open class ClientEnvironment: IdentityEndpoint {
             format: ClientEnvironment.EndPointFormat.myMojioEndpoint.rawValue,
             arguments: [self.region.description])
         
-        self.accountsEndpoint = String(
-            format: ClientEnvironment.EndPointFormat.accountsEndpoint.rawValue,
-            arguments: [self.region.description])
-        
         self.identityEndpoint = String(
             format: ClientEnvironment.EndPointFormat.identityEndpoint.rawValue,
             arguments: [self.region.description])
@@ -181,16 +165,7 @@ open class ClientEnvironment: IdentityEndpoint {
         return self.myMojioEndpoint!
     }
     
-    open func getAccountsEndpoint () -> String {
-        if self.identityEndpointType == .identity {
-            return self.identityEndpoint!
-        }
-        else {
-            return self.accountsEndpoint!
-        }
-    }
-    
-    open var identityEndpointType: IdentityEndpointType {
-        return .accounts
+    open func getIdentityEndpoint () -> String {
+        return self.identityEndpoint!
     }
 }

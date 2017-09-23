@@ -424,7 +424,7 @@ open class AuthClient: AuthControllerDelegate {
     // Register
     open func register(_ mobile: String, email: String, password: String, completion: @escaping (_ authToken: AuthToken) -> Void, failure: @escaping (_ response: [String: Any]?) -> Void) {
         
-        let registerEndpoint = self.clientEnvironment.getAccountsEndpoint() + AccountClientEndpoint.register.rawValue
+        let registerEndpoint = self.clientEnvironment.getIdentityEndpoint() + AccountClientEndpoint.register.rawValue
         self.requestHeaders.update(["Authorization": self.generateBasicAuthHeader(), "Content-Type": "application/json", "Accept": "application/json"])
         
         // Step 1: Create an account for the user
@@ -512,7 +512,7 @@ open class AuthClient: AuthControllerDelegate {
     // Resend Verification Pin
     open func resendPhonePin(_ mobile: String, completion: (() -> Void)?, failure: (() -> Void)?) {
         
-        let verifyEndpoint = self.clientEnvironment.getAccountsEndpoint() + AccountClientEndpoint.resendPin.rawValue
+        let verifyEndpoint = self.clientEnvironment.getIdentityEndpoint() + AccountClientEndpoint.resendPin.rawValue
         
         self.requestHeaders.update(["Accept": "application/json", "Authorization": self.generateBasicAuthHeader()])
         
@@ -534,7 +534,7 @@ open class AuthClient: AuthControllerDelegate {
     // Forgot/Reset Password
     open func forgotPassword(_ emailOrPhoneNumber: String, completion: @escaping (_ response: [String: Any]?) -> Void, failure: @escaping (_ response: [String: Any]?) -> Void) {
         
-        let forgotEndpoint = self.clientEnvironment.getAccountsEndpoint() + AccountClientEndpoint.forgot.rawValue
+        let forgotEndpoint = self.clientEnvironment.getIdentityEndpoint() + AccountClientEndpoint.forgot.rawValue
         
         self.requestHeaders.update(["Accept": "application/json", "Authorization": self.generateBasicAuthHeader()])
         
@@ -567,7 +567,7 @@ open class AuthClient: AuthControllerDelegate {
     
     open func resetPassword(_ resetToken: String, password: String, completion: @escaping (_ response: [String: Any]?) -> Void, failure: @escaping (_ response: [String: Any]?) -> Void) {
         
-        let resetEndpoint = self.clientEnvironment.getAccountsEndpoint() + AccountClientEndpoint.reset.rawValue
+        let resetEndpoint = self.clientEnvironment.getIdentityEndpoint() + AccountClientEndpoint.reset.rawValue
         
         self.requestHeaders.update(["Accept": "application/json", "Authorization": self.generateBasicAuthHeader()])
         
@@ -608,26 +608,26 @@ open class AuthClient: AuthControllerDelegate {
     }
     
     open func getTokenUrl() -> String {
-        return self.clientEnvironment.getAccountsEndpoint() + AuthClientEndpoint.token.rawValue
+        return self.clientEnvironment.getIdentityEndpoint() + AuthClientEndpoint.token.rawValue
     }
     
     open func getTokenUrl(_ redirectUri: String, clientId: String) -> String {
         return String(
             format: "%@%@?response_type=token&redirect_uri=%@&client_id=%@&scope=full",
-            self.clientEnvironment.getAccountsEndpoint(),
+            self.clientEnvironment.getIdentityEndpoint(),
             AuthClientEndpoint.token.rawValue,
             redirectUri.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!,
             clientId.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!)
     }
     
     open func getAuthorizeUrl() -> String {
-        return self.clientEnvironment.getAccountsEndpoint() + AuthClientEndpoint.authorize.rawValue
+        return self.clientEnvironment.getIdentityEndpoint() + AuthClientEndpoint.authorize.rawValue
     }
     
     open func getAuthorizeUrl(_ redirectUri: String, clientId: String) -> String {
         return String(
             format: "%@%@?response_type=token&redirect_uri=%@&client_id=%@&scope=full",
-            self.clientEnvironment.getAccountsEndpoint(),
+            self.clientEnvironment.getIdentityEndpoint(),
             AuthClientEndpoint.authorize.rawValue,
             redirectUri.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!,
             clientId.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!)
