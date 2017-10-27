@@ -39,7 +39,7 @@ open class WSClient: RestClient {
         self.wsDispatchQueue = queue
     }
     
-    open func watch(_ next: @escaping ((Any) -> Void), completion: @escaping (() -> Void), failure: @escaping ((Error) -> Void), file: String = #file) -> WebSocket {
+    open func watch(next: @escaping ((Any) -> Void), completion: @escaping (() -> Void), failure: @escaping ((Error) -> Void), file: String = #file) -> WebSocket {
     
         var request = URLRequest(url: URL(string:super.pushUrl!)!)
         
