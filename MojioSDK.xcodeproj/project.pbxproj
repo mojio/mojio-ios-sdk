@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2E82F8FEFEE27D11AE979D0A /* Pods_MojioSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CE4E88E0F9CE3D14249D2FA /* Pods_MojioSDK.framework */; };
 		644017541DA2AC9A00DAA73D /* AggregationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644017531DA2AC9A00DAA73D /* AggregationData.swift */; };
 		644214DE1D9E6500005A86C5 /* FuelVolume.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644214DD1D9E6500005A86C5 /* FuelVolume.swift */; };
-		6B7344AEFEDC6731687DB2A3 /* Pods_MojioSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D8CC37B8959C27E426C51E2 /* Pods_MojioSDK.framework */; };
 		75F77F0E1D19F504000CC2B4 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 75F77F0D1D19F504000CC2B4 /* libz.tbd */; };
 		8808C2351EB1483A00A41A8B /* PrimaryKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8808C2341EB1483A00A41A8B /* PrimaryKey.swift */; };
 		884FCE5F1EB13ECD00DDCE3F /* BaseActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884FCE5E1EB13ECD00DDCE3F /* BaseActivity.swift */; };
@@ -93,12 +93,12 @@
 		BCF2DE4A1D454B8D00EDD376 /* Geofence.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF2DE491D454B8D00EDD376 /* Geofence.swift */; };
 		BCFCEB041F019FF20096C9B4 /* HarshEventState.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCFCEB031F019FF20096C9B4 /* HarshEventState.swift */; };
 		BCFCEB061F01A2C70096C9B4 /* IdleEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCFCEB051F01A2C70096C9B4 /* IdleEvent.swift */; };
-		C67BB6D6DAEBC839F3C0B254 /* Pods_MojioSDKTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE3EF4E93105809182D24A75 /* Pods_MojioSDKTests.framework */; };
 		E0312C751CF7782F00B46AA8 /* BaseApiTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0312C741CF7782F00B46AA8 /* BaseApiTest.swift */; };
 		E0312C771CF78EA600B46AA8 /* StorageApiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0312C761CF78EA600B46AA8 /* StorageApiTests.swift */; };
 		E06C95691D25CA2A006AECBB /* NotificationsSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06C95671D25CA2A006AECBB /* NotificationsSettings.swift */; };
 		E06C956A1D25CA2A006AECBB /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06C95681D25CA2A006AECBB /* Result.swift */; };
 		E0E63D351D21E4B900DDF336 /* VehicleActivityData.txt in Resources */ = {isa = PBXBuildFile; fileRef = E0E63D341D21E4B900DDF336 /* VehicleActivityData.txt */; };
+		EB372C2DECD8C1637BCA06F1 /* Pods_MojioSDKTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBAF0C01310507EED8A3D6D9 /* Pods_MojioSDKTests.framework */; };
 		F9623AAE1D935D74005C10F2 /* IdleState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9623AAD1D935D74005C10F2 /* IdleState.swift */; };
 		F9E9FDAE1D93122A00DCB690 /* HarshEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E9FDAD1D93122A00DCB690 /* HarshEvent.swift */; };
 /* End PBXBuildFile section */
@@ -121,16 +121,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		12DB7395EEC25B945C6073A8 /* Pods-MojioSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MojioSDK.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MojioSDK/Pods-MojioSDK.debug.xcconfig"; sourceTree = "<group>"; };
-		2D8CC37B8959C27E426C51E2 /* Pods_MojioSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MojioSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5129D3ED3B56C9F0B8D93690 /* Pods-MojioSDKTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MojioSDKTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MojioSDKTests/Pods-MojioSDKTests.debug.xcconfig"; sourceTree = "<group>"; };
+		4CE4E88E0F9CE3D14249D2FA /* Pods_MojioSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MojioSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		59E539DEA8E8B62537B43CD3 /* Pods-MojioSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MojioSDK.release.xcconfig"; path = "Pods/Target Support Files/Pods-MojioSDK/Pods-MojioSDK.release.xcconfig"; sourceTree = "<group>"; };
 		644017531DA2AC9A00DAA73D /* AggregationData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AggregationData.swift; path = Models/AggregationData.swift; sourceTree = "<group>"; };
 		644214DD1D9E6500005A86C5 /* FuelVolume.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FuelVolume.swift; path = Models/FuelVolume.swift; sourceTree = "<group>"; };
+		6887F284F437D8D86EFE4650 /* Pods-MojioSDKTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MojioSDKTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MojioSDKTests/Pods-MojioSDKTests.debug.xcconfig"; sourceTree = "<group>"; };
+		70B0B506C6778BBF19558CFB /* Pods-MojioSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MojioSDK.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MojioSDK/Pods-MojioSDK.debug.xcconfig"; sourceTree = "<group>"; };
 		75F77F0D1D19F504000CC2B4 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		8808C2341EB1483A00A41A8B /* PrimaryKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PrimaryKey.swift; path = Models/PrimaryKey.swift; sourceTree = "<group>"; };
 		884FCE5E1EB13ECD00DDCE3F /* BaseActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseActivity.swift; path = "Models/Activity Streams/BaseActivity.swift"; sourceTree = "<group>"; };
 		887014781DA833CA00EFEC6D /* VehicleStatistics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VehicleStatistics.swift; path = Models/VehicleStatistics.swift; sourceTree = "<group>"; };
-		8B04A6C16725DB2223B32D46 /* Pods-MojioSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MojioSDK.release.xcconfig"; path = "Pods/Target Support Files/Pods-MojioSDK/Pods-MojioSDK.release.xcconfig"; sourceTree = "<group>"; };
 		BC31E3CD1D419E80001649A7 /* Distance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Distance.swift; path = Models/Distance.swift; sourceTree = "<group>"; };
 		BC31E3CF1D419F5D001649A7 /* Activity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Activity.swift; path = "Models/Activity Streams/Activity.swift"; sourceTree = "<group>"; };
 		BC31E3D01D419F5D001649A7 /* ActivityLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActivityLocation.swift; path = "Models/Activity Streams/ActivityLocation.swift"; sourceTree = "<group>"; };
@@ -220,13 +220,13 @@
 		BCF2DE491D454B8D00EDD376 /* Geofence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Geofence.swift; path = Models/Geofence.swift; sourceTree = "<group>"; };
 		BCFCEB031F019FF20096C9B4 /* HarshEventState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HarshEventState.swift; path = Models/HarshEventState.swift; sourceTree = "<group>"; };
 		BCFCEB051F01A2C70096C9B4 /* IdleEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IdleEvent.swift; path = Models/IdleEvent.swift; sourceTree = "<group>"; };
+		DBAF0C01310507EED8A3D6D9 /* Pods_MojioSDKTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MojioSDKTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0312C741CF7782F00B46AA8 /* BaseApiTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseApiTest.swift; sourceTree = "<group>"; };
 		E0312C761CF78EA600B46AA8 /* StorageApiTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageApiTests.swift; sourceTree = "<group>"; };
+		E03E34685E591006FF92A1BE /* Pods-MojioSDKTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MojioSDKTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MojioSDKTests/Pods-MojioSDKTests.release.xcconfig"; sourceTree = "<group>"; };
 		E06C95671D25CA2A006AECBB /* NotificationsSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotificationsSettings.swift; path = Models/NotificationsSettings.swift; sourceTree = "<group>"; };
 		E06C95681D25CA2A006AECBB /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Result.swift; path = Models/Result.swift; sourceTree = "<group>"; };
 		E0E63D341D21E4B900DDF336 /* VehicleActivityData.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VehicleActivityData.txt; sourceTree = "<group>"; };
-		EE3EF4E93105809182D24A75 /* Pods_MojioSDKTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MojioSDKTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F687FCD3CDD1EFCBD22CB91E /* Pods-MojioSDKTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MojioSDKTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MojioSDKTests/Pods-MojioSDKTests.release.xcconfig"; sourceTree = "<group>"; };
 		F9623AAD1D935D74005C10F2 /* IdleState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IdleState.swift; path = Models/IdleState.swift; sourceTree = "<group>"; };
 		F9E9FDAD1D93122A00DCB690 /* HarshEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HarshEvent.swift; path = Models/HarshEvent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -237,7 +237,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				75F77F0E1D19F504000CC2B4 /* libz.tbd in Frameworks */,
-				6B7344AEFEDC6731687DB2A3 /* Pods_MojioSDK.framework in Frameworks */,
+				2E82F8FEFEE27D11AE979D0A /* Pods_MojioSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -246,7 +246,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BCC2EFBB1CBED4E6004D2759 /* MojioSDK.framework in Frameworks */,
-				C67BB6D6DAEBC839F3C0B254 /* Pods_MojioSDKTests.framework in Frameworks */,
+				EB372C2DECD8C1637BCA06F1 /* Pods_MojioSDKTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -268,8 +268,8 @@
 				BCC2EFBE1CBED4E6004D2759 /* MojioSDKTests */,
 				BCC2EFCD1CBEF6DB004D2759 /* MojioSDKUITests */,
 				755785421C6BE403000D65B3 /* Products */,
-				E237B93C3A63C45BF68CDBF8 /* Pods */,
 				A7800C0AAB5ADDABE55DC5EE /* Frameworks */,
+				9A47F1E3C2E7AD1A3AB97493 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -283,12 +283,23 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		9A47F1E3C2E7AD1A3AB97493 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				70B0B506C6778BBF19558CFB /* Pods-MojioSDK.debug.xcconfig */,
+				59E539DEA8E8B62537B43CD3 /* Pods-MojioSDK.release.xcconfig */,
+				6887F284F437D8D86EFE4650 /* Pods-MojioSDKTests.debug.xcconfig */,
+				E03E34685E591006FF92A1BE /* Pods-MojioSDKTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		A7800C0AAB5ADDABE55DC5EE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				75F77F0D1D19F504000CC2B4 /* libz.tbd */,
-				2D8CC37B8959C27E426C51E2 /* Pods_MojioSDK.framework */,
-				EE3EF4E93105809182D24A75 /* Pods_MojioSDKTests.framework */,
+				4CE4E88E0F9CE3D14249D2FA /* Pods_MojioSDK.framework */,
+				DBAF0C01310507EED8A3D6D9 /* Pods_MojioSDKTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -491,17 +502,6 @@
 			name = ActivityStreams;
 			sourceTree = "<group>";
 		};
-		E237B93C3A63C45BF68CDBF8 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				12DB7395EEC25B945C6073A8 /* Pods-MojioSDK.debug.xcconfig */,
-				8B04A6C16725DB2223B32D46 /* Pods-MojioSDK.release.xcconfig */,
-				5129D3ED3B56C9F0B8D93690 /* Pods-MojioSDKTests.debug.xcconfig */,
-				F687FCD3CDD1EFCBD22CB91E /* Pods-MojioSDKTests.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -521,12 +521,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BCC2EFC21CBED4E6004D2759 /* Build configuration list for PBXNativeTarget "MojioSDK" */;
 			buildPhases = (
-				0FE48DDCC0926422FE72F1F3 /* [CP] Check Pods Manifest.lock */,
+				B6DE2CF00DCD4E7B68EC593F /* [CP] Check Pods Manifest.lock */,
 				BCC2EFAC1CBED4E6004D2759 /* Sources */,
 				BCC2EFAD1CBED4E6004D2759 /* Frameworks */,
 				BCC2EFAE1CBED4E6004D2759 /* Headers */,
 				BCC2EFAF1CBED4E6004D2759 /* Resources */,
-				51FAF6A8CAF1286DD2744BFF /* [CP] Copy Pods Resources */,
+				98BFD3FEBEF0232245A5B433 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -541,13 +541,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BCC2EFC51CBED4E6004D2759 /* Build configuration list for PBXNativeTarget "MojioSDKTests" */;
 			buildPhases = (
-				6C6720131D485085EB56859E /* [CP] Check Pods Manifest.lock */,
+				48ABB01711B4EFD2BE454D0F /* [CP] Check Pods Manifest.lock */,
 				BCC2EFB61CBED4E6004D2759 /* Sources */,
 				BCC2EFB71CBED4E6004D2759 /* Frameworks */,
 				BCC2EFB81CBED4E6004D2759 /* Resources */,
-				90D67027F460B7772E3CAF99 /* [CP] Embed Pods Frameworks */,
-				7A905710DE82B9FA4B6842BC /* [CP] Copy Pods Resources */,
-				3500E81221335B57C2E599D2 /* Embed Pods Frameworks */,
+				A31C3D40D73EE7768A8D5E6D /* [CP] Embed Pods Frameworks */,
+				84D71973933D9BF8FB9307A3 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -590,15 +589,15 @@
 					BCC2EFB01CBED4E6004D2759 = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = R8N6N647SF;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0900;
 					};
 					BCC2EFB91CBED4E6004D2759 = {
 						CreatedOnToolsVersion = 7.3;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0900;
 					};
 					BCC2EFCB1CBEF6DB004D2759 = {
 						CreatedOnToolsVersion = 7.3;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0900;
 					};
 				};
 			};
@@ -660,67 +659,25 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0FE48DDCC0926422FE72F1F3 /* [CP] Check Pods Manifest.lock */ = {
+		48ABB01711B4EFD2BE454D0F /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MojioSDKTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		3500E81221335B57C2E599D2 /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MojioSDKTests/Pods-MojioSDKTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		51FAF6A8CAF1286DD2744BFF /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MojioSDK/Pods-MojioSDK-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		6C6720131D485085EB56859E /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		7A905710DE82B9FA4B6842BC /* [CP] Copy Pods Resources */ = {
+		84D71973933D9BF8FB9307A3 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -735,19 +692,67 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MojioSDKTests/Pods-MojioSDKTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		90D67027F460B7772E3CAF99 /* [CP] Embed Pods Frameworks */ = {
+		98BFD3FEBEF0232245A5B433 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "[CP] Embed Pods Frameworks";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MojioSDK/Pods-MojioSDK-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A31C3D40D73EE7768A8D5E6D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-MojioSDKTests/Pods-MojioSDKTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/OHHTTPStubs/OHHTTPStubs.framework",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/KeychainSwift/KeychainSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftDate/SwiftDate.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftWebSocket/SwiftWebSocket.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OHHTTPStubs.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftDate.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftWebSocket.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MojioSDKTests/Pods-MojioSDKTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B6DE2CF00DCD4E7B68EC593F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MojioSDK-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -959,7 +964,7 @@
 		};
 		BCC2EFC31CBED4E6004D2759 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 12DB7395EEC25B945C6073A8 /* Pods-MojioSDK.debug.xcconfig */;
+			baseConfigurationReference = 70B0B506C6778BBF19558CFB /* Pods-MojioSDK.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ENABLE_MODULES = YES;
@@ -980,7 +985,8 @@
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -988,7 +994,7 @@
 		};
 		BCC2EFC41CBED4E6004D2759 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8B04A6C16725DB2223B32D46 /* Pods-MojioSDK.release.xcconfig */;
+			baseConfigurationReference = 59E539DEA8E8B62537B43CD3 /* Pods-MojioSDK.release.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ENABLE_MODULES = YES;
@@ -1008,7 +1014,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -1016,7 +1023,7 @@
 		};
 		BCC2EFC61CBED4E6004D2759 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5129D3ED3B56C9F0B8D93690 /* Pods-MojioSDKTests.debug.xcconfig */;
+			baseConfigurationReference = 6887F284F437D8D86EFE4650 /* Pods-MojioSDKTests.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1026,13 +1033,14 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.moj.mobile.ios.SDK.MojioSDKTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
 		BCC2EFC71CBED4E6004D2759 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F687FCD3CDD1EFCBD22CB91E /* Pods-MojioSDKTests.release.xcconfig */;
+			baseConfigurationReference = E03E34685E591006FF92A1BE /* Pods-MojioSDKTests.release.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
@@ -1042,7 +1050,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.moj.mobile.ios.SDK.MojioSDKTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -1057,7 +1066,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = io.moj.mobile.ios.SDK.MojioSDKUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -1072,7 +1082,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = io.moj.mobile.ios.SDK.MojioSDKUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};

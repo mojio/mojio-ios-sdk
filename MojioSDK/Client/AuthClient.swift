@@ -163,7 +163,7 @@ open class AuthClient: AuthControllerDelegate {
     open var loginFailure: ((_ response: Any?) -> Void)? = nil
     open var authController: AuthViewController?
     
-    public dynamic var requestHeaders: [String:String] = ClientHeaders.defaultRequestHeaders
+    open var requestHeaders: [String:String] = ClientHeaders.defaultRequestHeaders
     
     // Default to global concurrent queue with default priority
     public static var defaultDispatchQueue = DispatchQueue.global()
@@ -317,7 +317,7 @@ open class AuthClient: AuthControllerDelegate {
         
         self.requestHeaders.update(["Authorization": self.generateBasicAuthHeader()])
         
-        let request = self.sessionManager.request(loginEndpoint, method: .post, parameters: ["grant_type": "password", "password": password, "username": username, "client_id": self.clientId, "client_secret": self.clientSecretKey], encoding: URLEncoding(destination: .methodDependent), headers: self.self.requestHeaders).responseJSON(queue: self.dispatchQueue, options: .allowFragments) {response in
+        let request = self.sessionManager.request(loginEndpoint, method: .post, parameters: ["grant_type": "password", "password": password, "username": username, "client_id": self.clientId, "client_secret": self.clientSecretKey], encoding: URLEncoding(destination: .methodDependent), headers: self.requestHeaders).responseJSON(queue: self.dispatchQueue, options: .allowFragments) {response in
             
             if response.response?.statusCode == 200 {
                 
