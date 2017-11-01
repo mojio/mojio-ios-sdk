@@ -18,8 +18,6 @@ import XCTest
 import KeychainSwift
 
 class KeychainManagerTests: XCTestCase {
-    var sampleAuthToken: AuthToken!
-
     func testSaveAuthToken() {
         let authToken = AuthToken(accessToken: "accessToken", expiry: "extipationDate", refreshToken: "refreshToken", uniqueId: "uniqueId")
         let keychain: KeychainStorageProvider = KeychainStorageProviderMock()

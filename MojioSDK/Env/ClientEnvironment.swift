@@ -30,16 +30,6 @@ open class MojioRegion: MojioRegionPrefix {
         case load = "load-"
     }
     
-    open private(set) var regionType: RegionType = .production
-    
-    public init() {
-        self.regionType = self.defaultRegionType
-    }
-    
-    public init(_ regionType: RegionType) {
-        self.regionType = regionType
-    }
-
     open var defaultRegionType: RegionType {
         return .production
     }
@@ -50,6 +40,16 @@ open class MojioRegion: MojioRegionPrefix {
     
     open var description: String {
         return self.regionPrefix + self.regionType.rawValue
+    }
+
+    open private(set) var regionType: RegionType = .production
+    
+    public init() {
+        self.regionType = self.defaultRegionType
+    }
+    
+    public init(_ regionType: RegionType) {
+        self.regionType = regionType
     }
 }
 
