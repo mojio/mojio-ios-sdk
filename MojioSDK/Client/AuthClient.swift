@@ -29,7 +29,7 @@ public struct AuthToken: Mappable  {
     
     init() {}
     
-    init(accessToken: String?, expiry: String?, refreshToken: String?, uniqueId: String) {
+    init(accessToken: String?, expiry: String?, refreshToken: String?, uniqueId: String?) {
         self.accessToken = accessToken
         self.expiry = expiry
         self.refreshToken = refreshToken

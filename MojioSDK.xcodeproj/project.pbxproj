@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		111EC3E9AD3450EA6FEB01DB /* Pods_MojioSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99F172CDA9C69F9BF12B704A /* Pods_MojioSDK.framework */; };
+		2ED946EE1FA9D5E400132568 /* KeychainManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED946ED1FA9D5E400132568 /* KeychainManagerTests.swift */; };
+		2ED946F01FA9ED8E00132568 /* KeychainStorageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED946EF1FA9ED8E00132568 /* KeychainStorageProvider.swift */; };
 		3A3FD51CBD5297AEE896CBD9 /* Pods_MojioSDKTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 188FAF605C15F9919D241723 /* Pods_MojioSDKTests.framework */; };
 		644017541DA2AC9A00DAA73D /* AggregationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644017531DA2AC9A00DAA73D /* AggregationData.swift */; };
 		644214DE1D9E6500005A86C5 /* FuelVolume.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644214DD1D9E6500005A86C5 /* FuelVolume.swift */; };
@@ -111,6 +113,8 @@
 		150F25FC9D1405ACC72E5EF0 /* Pods-MojioSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MojioSDK.release.xcconfig"; path = "Pods/Target Support Files/Pods-MojioSDK/Pods-MojioSDK.release.xcconfig"; sourceTree = "<group>"; };
 		15FF163D69D1506CC1DE689D /* Pods_MojioSDKTests2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MojioSDKTests2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		188FAF605C15F9919D241723 /* Pods_MojioSDKTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MojioSDKTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2ED946ED1FA9D5E400132568 /* KeychainManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManagerTests.swift; sourceTree = "<group>"; };
+		2ED946EF1FA9ED8E00132568 /* KeychainStorageProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainStorageProvider.swift; sourceTree = "<group>"; };
 		644017531DA2AC9A00DAA73D /* AggregationData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AggregationData.swift; sourceTree = "<group>"; };
 		644214DD1D9E6500005A86C5 /* FuelVolume.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FuelVolume.swift; sourceTree = "<group>"; };
 		6DF2E7C31752EFE452CAEE01 /* Pods-MojioSDKTests2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MojioSDKTests2.release.xcconfig"; path = "Pods/Target Support Files/Pods-MojioSDKTests2/Pods-MojioSDKTests2.release.xcconfig"; sourceTree = "<group>"; };
@@ -235,6 +239,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2ED946EC1FA9D5B700132568 /* Env */ = {
+			isa = PBXGroup;
+			children = (
+				2ED946ED1FA9D5E400132568 /* KeychainManagerTests.swift */,
+			);
+			path = Env;
+			sourceTree = "<group>";
+		};
 		755785381C6BE403000D65B3 = {
 			isa = PBXGroup;
 			children = (
@@ -283,6 +295,7 @@
 			children = (
 				BC879B8C1CBF000A00F9177B /* ClientEnvironment.swift */,
 				BC879B8D1CBF000A00F9177B /* KeychainManager.swift */,
+				2ED946EF1FA9ED8E00132568 /* KeychainStorageProvider.swift */,
 			);
 			path = Env;
 			sourceTree = "<group>";
@@ -370,6 +383,7 @@
 		BCC2EFBE1CBED4E6004D2759 /* MojioSDKTests */ = {
 			isa = PBXGroup;
 			children = (
+				2ED946EC1FA9D5B700132568 /* Env */,
 				BC879BB51CBF0C1000F9177B /* Sources */,
 				BC879BB41CBF0C0A00F9177B /* Data */,
 				BCC2EFC11CBED4E6004D2759 /* Info.plist */,
@@ -715,6 +729,7 @@
 				BC879B6B1CBEFFDD00F9177B /* FuelLevel.swift in Sources */,
 				BC72D7A81CC5615600D9740B /* AuthClient.swift in Sources */,
 				BCFCEB061F01A2C70096C9B4 /* IdleEvent.swift in Sources */,
+				2ED946F01FA9ED8E00132568 /* KeychainStorageProvider.swift in Sources */,
 				BC879B791CBEFFDD00F9177B /* Trip.swift in Sources */,
 				BC5F7F031CC58D4000FAB205 /* Units.swift in Sources */,
 				BC92329B1E7FC52900BD4038 /* CompatibilityDetails.swift in Sources */,
@@ -762,6 +777,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2ED946EE1FA9D5E400132568 /* KeychainManagerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

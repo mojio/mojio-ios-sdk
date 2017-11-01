@@ -25,16 +25,19 @@ public enum KeychainKey: String {
 
 open class KeychainManager {
     
+    let keychain: KeychainStorageProvider
+    
+    init(keychain: KeychainStorageProvider = KeychainSwift()) {
+        self.keychain = keychain
+    }
+    
     open func getAuthToken() -> AuthToken {
-        var authToken = AuthToken.init()
-        let keychain = KeychainSwift()
-
-        authToken.accessToken = keychain.get(KeychainKey.accessToken.rawValue)
-        authToken.refreshToken = keychain.get(KeychainKey.refreshToken.rawValue)
-        authToken.expiry = keychain.get(KeychainKey.accessTokenExpiry.rawValue)
-        authToken.uniqueId = keychain.get(KeychainKey.uniqueId.rawValue)
-        
-        return authToken
+        return AuthToken(
+            accessToken: self.keychain.get(by: KeychainKey.accessToken.rawValue),
+            expiry: self.keychain.get(by: KeychainKey.accessTokenExpiry.rawValue),
+            refreshToken: self.keychain.get(by: KeychainKey.refreshToken.rawValue),
+            uniqueId: self.keychain.get(by: KeychainKey.uniqueId.rawValue)
+        )
     }
     
     open func saveAuthToken(_ authToken: AuthToken) -> Void {
@@ -42,30 +45,28 @@ open class KeychainManager {
         // Need to delete the tokens from the keychain before saving. This is because overriding does not work with the keychain
         self.deleteTokenFromKeychain()
         
-        let keychain = KeychainSwift()
         
-        if let accessToken: String = authToken.accessToken {
-            keychain.set(accessToken, forKey: KeychainKey.accessToken.rawValue)
+        if let accessToken = authToken.accessToken {
+            self.keychain.set(value: accessToken, for: KeychainKey.accessToken.rawValue)
         }
 
-        if let refreshToken: String = authToken.refreshToken {
-            keychain.set(refreshToken, forKey: KeychainKey.refreshToken.rawValue)
+        if let refreshToken = authToken.refreshToken {
+            self.keychain.set(value: refreshToken, for: KeychainKey.refreshToken.rawValue)
         }
         
-        if let expiry: String = authToken.expiry {
-            keychain.set(expiry as String, forKey: KeychainKey.accessTokenExpiry.rawValue)
+        if let expiry = authToken.expiry {
+            self.keychain.set(value: expiry, for: KeychainKey.accessTokenExpiry.rawValue)
         }
 
-        if let uniqueId: String = authToken.uniqueId {
-            keychain.set(uniqueId, forKey: KeychainKey.uniqueId.rawValue)
+        if let uniqueId = authToken.uniqueId {
+            self.keychain.set(value: uniqueId, for: KeychainKey.uniqueId.rawValue)
         }
     }
     
     open func deleteTokenFromKeychain() {
-        let keychain = KeychainSwift()
-        keychain.delete(KeychainKey.accessToken.rawValue)
-        keychain.delete(KeychainKey.refreshToken.rawValue)
-        keychain.delete(KeychainKey.accessTokenExpiry.rawValue)
-        keychain.delete(KeychainKey.uniqueId.rawValue)
+        self.keychain.delete(by: KeychainKey.accessToken.rawValue)
+        self.keychain.delete(by: KeychainKey.refreshToken.rawValue)
+        self.keychain.delete(by: KeychainKey.accessTokenExpiry.rawValue)
+        self.keychain.delete(by: KeychainKey.uniqueId.rawValue)
     }    
 }
