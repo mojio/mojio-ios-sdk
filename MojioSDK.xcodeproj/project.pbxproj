@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		111EC3E9AD3450EA6FEB01DB /* Pods_MojioSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99F172CDA9C69F9BF12B704A /* Pods_MojioSDK.framework */; };
+		3A3FD51CBD5297AEE896CBD9 /* Pods_MojioSDKTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 188FAF605C15F9919D241723 /* Pods_MojioSDKTests.framework */; };
 		644017541DA2AC9A00DAA73D /* AggregationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644017531DA2AC9A00DAA73D /* AggregationData.swift */; };
 		644214DE1D9E6500005A86C5 /* FuelVolume.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644214DD1D9E6500005A86C5 /* FuelVolume.swift */; };
 		75F77F0E1D19F504000CC2B4 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 75F77F0D1D19F504000CC2B4 /* libz.tbd */; };
@@ -67,10 +69,7 @@
 		BC879B8A1CBEFFFF00F9177B /* JsonSerializerSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = BC879B881CBEFFFF00F9177B /* JsonSerializerSwift.h */; };
 		BC879B8F1CBF000A00F9177B /* ClientEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B8C1CBF000A00F9177B /* ClientEnvironment.swift */; };
 		BC879B901CBF000A00F9177B /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B8D1CBF000A00F9177B /* KeychainManager.swift */; };
-		BC879B9F1CBF044700F9177B /* ApiPathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B911CBF044700F9177B /* ApiPathTests.swift */; };
 		BC879BA01CBF044700F9177B /* AppData.txt in Resources */ = {isa = PBXBuildFile; fileRef = BC879B921CBF044700F9177B /* AppData.txt */; };
-		BC879BA11CBF044700F9177B /* AuthenticationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B931CBF044700F9177B /* AuthenticationTests.swift */; };
-		BC879BA21CBF044700F9177B /* ClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B941CBF044700F9177B /* ClientTests.swift */; };
 		BC879BA31CBF044700F9177B /* GroupData.txt in Resources */ = {isa = PBXBuildFile; fileRef = BC879B951CBF044700F9177B /* GroupData.txt */; };
 		BC879BA41CBF044700F9177B /* MojioData.txt in Resources */ = {isa = PBXBuildFile; fileRef = BC879B961CBF044700F9177B /* MojioData.txt */; };
 		BC879BA51CBF044700F9177B /* NextServiceData.txt in Resources */ = {isa = PBXBuildFile; fileRef = BC879B971CBF044700F9177B /* NextServiceData.txt */; };
@@ -86,31 +85,19 @@
 		BC94271B1F01E17D00B7424A /* TripPolyline.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC94271A1F01E17D00B7424A /* TripPolyline.swift */; };
 		BCC2EFB41CBED4E6004D2759 /* MojioSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = BCC2EFB31CBED4E6004D2759 /* MojioSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BCC2EFBB1CBED4E6004D2759 /* MojioSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCC2EFB11CBED4E6004D2759 /* MojioSDK.framework */; };
-		BCC2EFCF1CBEF6DB004D2759 /* MojioSDKUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC2EFCE1CBEF6DB004D2759 /* MojioSDKUITests.swift */; };
 		BCC8A49E1D19EAAD00E14E2B /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC8A49C1D19EAAD00E14E2B /* Error.swift */; };
 		BCC8A4A01D19EABF00E14E2B /* WSClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC8A49F1D19EABF00E14E2B /* WSClient.swift */; };
 		BCF2DE4A1D454B8D00EDD376 /* Geofence.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF2DE491D454B8D00EDD376 /* Geofence.swift */; };
 		BCFCEB041F019FF20096C9B4 /* HarshEventState.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCFCEB031F019FF20096C9B4 /* HarshEventState.swift */; };
 		BCFCEB061F01A2C70096C9B4 /* IdleEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCFCEB051F01A2C70096C9B4 /* IdleEvent.swift */; };
-		C19EBD3F65F3EEBA87A1EFFE /* Pods_MojioSDKTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 399EDB25E62730CC6E1D7522 /* Pods_MojioSDKTests.framework */; };
-		E0312C751CF7782F00B46AA8 /* BaseApiTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0312C741CF7782F00B46AA8 /* BaseApiTest.swift */; };
-		E0312C771CF78EA600B46AA8 /* StorageApiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0312C761CF78EA600B46AA8 /* StorageApiTests.swift */; };
 		E06C95691D25CA2A006AECBB /* NotificationsSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06C95671D25CA2A006AECBB /* NotificationsSettings.swift */; };
 		E06C956A1D25CA2A006AECBB /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06C95681D25CA2A006AECBB /* Result.swift */; };
 		E0E63D351D21E4B900DDF336 /* VehicleActivityData.txt in Resources */ = {isa = PBXBuildFile; fileRef = E0E63D341D21E4B900DDF336 /* VehicleActivityData.txt */; };
 		F9623AAE1D935D74005C10F2 /* IdleState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9623AAD1D935D74005C10F2 /* IdleState.swift */; };
 		F9E9FDAE1D93122A00DCB690 /* HarshEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E9FDAD1D93122A00DCB690 /* HarshEvent.swift */; };
-		FC011FC93CA855589CC98D7D /* Pods_MojioSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56F4CFFA68DF0C9EB79F666C /* Pods_MojioSDK.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		BC879BB61CBF0D6500F9177B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 755785391C6BE403000D65B3 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = BCC2EFB01CBED4E6004D2759;
-			remoteInfo = MojioSDK;
-		};
 		BCC2EFBC1CBED4E6004D2759 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 755785391C6BE403000D65B3 /* Project object */;
@@ -121,16 +108,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		30248F4614B0FA8CB896DF7A /* Pods-MojioSDKTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MojioSDKTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MojioSDKTests/Pods-MojioSDKTests.release.xcconfig"; sourceTree = "<group>"; };
-		399EDB25E62730CC6E1D7522 /* Pods_MojioSDKTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MojioSDKTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		4AB51FA8DEE78377984229BE /* Pods-MojioSDKTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MojioSDKTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MojioSDKTests/Pods-MojioSDKTests.debug.xcconfig"; sourceTree = "<group>"; };
-		56F4CFFA68DF0C9EB79F666C /* Pods_MojioSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MojioSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		150F25FC9D1405ACC72E5EF0 /* Pods-MojioSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MojioSDK.release.xcconfig"; path = "Pods/Target Support Files/Pods-MojioSDK/Pods-MojioSDK.release.xcconfig"; sourceTree = "<group>"; };
+		15FF163D69D1506CC1DE689D /* Pods_MojioSDKTests2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MojioSDKTests2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		188FAF605C15F9919D241723 /* Pods_MojioSDKTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MojioSDKTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		644017531DA2AC9A00DAA73D /* AggregationData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AggregationData.swift; path = Models/AggregationData.swift; sourceTree = "<group>"; };
 		644214DD1D9E6500005A86C5 /* FuelVolume.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FuelVolume.swift; path = Models/FuelVolume.swift; sourceTree = "<group>"; };
+		6DF2E7C31752EFE452CAEE01 /* Pods-MojioSDKTests2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MojioSDKTests2.release.xcconfig"; path = "Pods/Target Support Files/Pods-MojioSDKTests2/Pods-MojioSDKTests2.release.xcconfig"; sourceTree = "<group>"; };
 		75F77F0D1D19F504000CC2B4 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		8808C2341EB1483A00A41A8B /* PrimaryKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PrimaryKey.swift; path = Models/PrimaryKey.swift; sourceTree = "<group>"; };
 		884FCE5E1EB13ECD00DDCE3F /* BaseActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseActivity.swift; path = "Models/Activity Streams/BaseActivity.swift"; sourceTree = "<group>"; };
 		887014781DA833CA00EFEC6D /* VehicleStatistics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VehicleStatistics.swift; path = Models/VehicleStatistics.swift; sourceTree = "<group>"; };
+		99F172CDA9C69F9BF12B704A /* Pods_MojioSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MojioSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A5FF66B407C9163641EB6DEF /* Pods-MojioSDKTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MojioSDKTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MojioSDKTests/Pods-MojioSDKTests.release.xcconfig"; sourceTree = "<group>"; };
 		BC31E3CD1D419E80001649A7 /* Distance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Distance.swift; path = Models/Distance.swift; sourceTree = "<group>"; };
 		BC31E3CF1D419F5D001649A7 /* Activity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Activity.swift; path = "Models/Activity Streams/Activity.swift"; sourceTree = "<group>"; };
 		BC31E3D01D419F5D001649A7 /* ActivityLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActivityLocation.swift; path = "Models/Activity Streams/ActivityLocation.swift"; sourceTree = "<group>"; };
@@ -145,11 +134,6 @@
 		BC72D7A51CC5615600D9740B /* AuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthViewController.swift; path = Client/AuthViewController.swift; sourceTree = "<group>"; };
 		BC72D7A61CC5615600D9740B /* AuthViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AuthViewController.xib; path = Client/AuthViewController.xib; sourceTree = "<group>"; };
 		BC72D7A71CC5615600D9740B /* RestClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RestClient.swift; path = Client/RestClient.swift; sourceTree = "<group>"; };
-		BC7372B31CC05BBE00871E3E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = MojioSDKClient/Info.plist; sourceTree = "<group>"; };
-		BC7372B51CC05C6A00871E3E /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = MojioSDKClient/AppDelegate.swift; sourceTree = "<group>"; };
-		BC7372B61CC05C6A00871E3E /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = MojioSDKClient/ViewController.swift; sourceTree = "<group>"; };
-		BC7372BB1CC05D9E00871E3E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = MojioSDKClient/Assets.xcassets; sourceTree = "<group>"; };
-		BC7372BC1CC05D9E00871E3E /* Base.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Base.lproj; path = MojioSDKClient/Base.lproj; sourceTree = "<group>"; };
 		BC879B2F1CBEFFC000F9177B /* Engine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Engine.swift; path = Models/VinDetails/Engine.swift; sourceTree = "<group>"; };
 		BC879B301CBEFFC000F9177B /* NextServiceSchedule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NextServiceSchedule.swift; path = Models/VinDetails/NextServiceSchedule.swift; sourceTree = "<group>"; };
 		BC879B311CBEFFC000F9177B /* PlatformServiceSchedule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlatformServiceSchedule.swift; path = Models/VinDetails/PlatformServiceSchedule.swift; sourceTree = "<group>"; };
@@ -212,23 +196,21 @@
 		BCC2EFB51CBED4E6004D2759 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BCC2EFBA1CBED4E6004D2759 /* MojioSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MojioSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCC2EFC11CBED4E6004D2759 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BCC2EFCC1CBEF6DB004D2759 /* MojioSDKUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MojioSDKUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		BCC2EFCE1CBEF6DB004D2759 /* MojioSDKUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MojioSDKUITests.swift; sourceTree = "<group>"; };
-		BCC2EFD01CBEF6DB004D2759 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BCC8A49C1D19EAAD00E14E2B /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Error.swift; path = Models/Error.swift; sourceTree = "<group>"; };
 		BCC8A49F1D19EABF00E14E2B /* WSClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WSClient.swift; path = Client/WSClient.swift; sourceTree = "<group>"; };
 		BCF2DE491D454B8D00EDD376 /* Geofence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Geofence.swift; path = Models/Geofence.swift; sourceTree = "<group>"; };
 		BCFCEB031F019FF20096C9B4 /* HarshEventState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HarshEventState.swift; path = Models/HarshEventState.swift; sourceTree = "<group>"; };
 		BCFCEB051F01A2C70096C9B4 /* IdleEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IdleEvent.swift; path = Models/IdleEvent.swift; sourceTree = "<group>"; };
-		BD621C7E904703B82D19D7E9 /* Pods-MojioSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MojioSDK.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MojioSDK/Pods-MojioSDK.debug.xcconfig"; sourceTree = "<group>"; };
+		D4D6F7769C35C2486E30AC0F /* Pods-MojioSDKTests2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MojioSDKTests2.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MojioSDKTests2/Pods-MojioSDKTests2.debug.xcconfig"; sourceTree = "<group>"; };
+		DE62C4BFFDFEC393BE28C17A /* Pods-MojioSDKTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MojioSDKTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MojioSDKTests/Pods-MojioSDKTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E0312C741CF7782F00B46AA8 /* BaseApiTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseApiTest.swift; sourceTree = "<group>"; };
 		E0312C761CF78EA600B46AA8 /* StorageApiTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageApiTests.swift; sourceTree = "<group>"; };
 		E06C95671D25CA2A006AECBB /* NotificationsSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotificationsSettings.swift; path = Models/NotificationsSettings.swift; sourceTree = "<group>"; };
 		E06C95681D25CA2A006AECBB /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Result.swift; path = Models/Result.swift; sourceTree = "<group>"; };
 		E0E63D341D21E4B900DDF336 /* VehicleActivityData.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VehicleActivityData.txt; sourceTree = "<group>"; };
-		EF7A9E1C6C8F7481CFA12CC7 /* Pods-MojioSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MojioSDK.release.xcconfig"; path = "Pods/Target Support Files/Pods-MojioSDK/Pods-MojioSDK.release.xcconfig"; sourceTree = "<group>"; };
 		F9623AAD1D935D74005C10F2 /* IdleState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IdleState.swift; path = Models/IdleState.swift; sourceTree = "<group>"; };
 		F9E9FDAD1D93122A00DCB690 /* HarshEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HarshEvent.swift; path = Models/HarshEvent.swift; sourceTree = "<group>"; };
+		FFF8A4C690D0895A4D10A904 /* Pods-MojioSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MojioSDK.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MojioSDK/Pods-MojioSDK.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -237,7 +219,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				75F77F0E1D19F504000CC2B4 /* libz.tbd in Frameworks */,
-				FC011FC93CA855589CC98D7D /* Pods_MojioSDK.framework in Frameworks */,
+				111EC3E9AD3450EA6FEB01DB /* Pods_MojioSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -246,41 +228,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				BCC2EFBB1CBED4E6004D2759 /* MojioSDK.framework in Frameworks */,
-				C19EBD3F65F3EEBA87A1EFFE /* Pods_MojioSDKTests.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		BCC2EFC91CBEF6DB004D2759 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				3A3FD51CBD5297AEE896CBD9 /* Pods_MojioSDKTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		700EF7403E0D2C37CDDDF819 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				BD621C7E904703B82D19D7E9 /* Pods-MojioSDK.debug.xcconfig */,
-				EF7A9E1C6C8F7481CFA12CC7 /* Pods-MojioSDK.release.xcconfig */,
-				4AB51FA8DEE78377984229BE /* Pods-MojioSDKTests.debug.xcconfig */,
-				30248F4614B0FA8CB896DF7A /* Pods-MojioSDKTests.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		755785381C6BE403000D65B3 = {
 			isa = PBXGroup;
 			children = (
 				BCC2EFB21CBED4E6004D2759 /* MojioSDK */,
-				BCC2EFD81CBEF6F7004D2759 /* MojioSDKTestClient */,
 				BCC2EFBE1CBED4E6004D2759 /* MojioSDKTests */,
-				BCC2EFCD1CBEF6DB004D2759 /* MojioSDKUITests */,
 				755785421C6BE403000D65B3 /* Products */,
 				A7800C0AAB5ADDABE55DC5EE /* Frameworks */,
-				700EF7403E0D2C37CDDDF819 /* Pods */,
+				E740F257DF43595AE6A06564 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -289,7 +251,6 @@
 			children = (
 				BCC2EFB11CBED4E6004D2759 /* MojioSDK.framework */,
 				BCC2EFBA1CBED4E6004D2759 /* MojioSDKTests.xctest */,
-				BCC2EFCC1CBEF6DB004D2759 /* MojioSDKUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -298,8 +259,9 @@
 			isa = PBXGroup;
 			children = (
 				75F77F0D1D19F504000CC2B4 /* libz.tbd */,
-				56F4CFFA68DF0C9EB79F666C /* Pods_MojioSDK.framework */,
-				399EDB25E62730CC6E1D7522 /* Pods_MojioSDKTests.framework */,
+				99F172CDA9C69F9BF12B704A /* Pods_MojioSDK.framework */,
+				188FAF605C15F9919D241723 /* Pods_MojioSDKTests.framework */,
+				15FF163D69D1506CC1DE689D /* Pods_MojioSDKTests2.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -416,27 +378,6 @@
 			path = MojioSDKTests;
 			sourceTree = SOURCE_ROOT;
 		};
-		BCC2EFCD1CBEF6DB004D2759 /* MojioSDKUITests */ = {
-			isa = PBXGroup;
-			children = (
-				BCC2EFCE1CBEF6DB004D2759 /* MojioSDKUITests.swift */,
-				BCC2EFD01CBEF6DB004D2759 /* Info.plist */,
-			);
-			path = MojioSDKUITests;
-			sourceTree = "<group>";
-		};
-		BCC2EFD81CBEF6F7004D2759 /* MojioSDKTestClient */ = {
-			isa = PBXGroup;
-			children = (
-				BC7372BB1CC05D9E00871E3E /* Assets.xcassets */,
-				BC7372BC1CC05D9E00871E3E /* Base.lproj */,
-				BC7372B51CC05C6A00871E3E /* AppDelegate.swift */,
-				BC7372B61CC05C6A00871E3E /* ViewController.swift */,
-				BC7372B31CC05BBE00871E3E /* Info.plist */,
-			);
-			name = MojioSDKTestClient;
-			sourceTree = "<group>";
-		};
 		BCC2EFD91CBEF74A004D2759 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -502,6 +443,19 @@
 			name = ActivityStreams;
 			sourceTree = "<group>";
 		};
+		E740F257DF43595AE6A06564 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				FFF8A4C690D0895A4D10A904 /* Pods-MojioSDK.debug.xcconfig */,
+				150F25FC9D1405ACC72E5EF0 /* Pods-MojioSDK.release.xcconfig */,
+				DE62C4BFFDFEC393BE28C17A /* Pods-MojioSDKTests.debug.xcconfig */,
+				A5FF66B407C9163641EB6DEF /* Pods-MojioSDKTests.release.xcconfig */,
+				D4D6F7769C35C2486E30AC0F /* Pods-MojioSDKTests2.debug.xcconfig */,
+				6DF2E7C31752EFE452CAEE01 /* Pods-MojioSDKTests2.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -521,12 +475,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BCC2EFC21CBED4E6004D2759 /* Build configuration list for PBXNativeTarget "MojioSDK" */;
 			buildPhases = (
-				0C383B2E70BCD89B00258553 /* [CP] Check Pods Manifest.lock */,
+				50FFDE671998939CEF683AFB /* [CP] Check Pods Manifest.lock */,
 				BCC2EFAC1CBED4E6004D2759 /* Sources */,
 				BCC2EFAD1CBED4E6004D2759 /* Frameworks */,
 				BCC2EFAE1CBED4E6004D2759 /* Headers */,
 				BCC2EFAF1CBED4E6004D2759 /* Resources */,
-				B07DE02131C5318867E08B11 /* [CP] Copy Pods Resources */,
+				AEEEC770A145A20667DBE5AD /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -541,12 +495,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BCC2EFC51CBED4E6004D2759 /* Build configuration list for PBXNativeTarget "MojioSDKTests" */;
 			buildPhases = (
-				F57831BD93CCC353EA154766 /* [CP] Check Pods Manifest.lock */,
+				CA7416AD9DE464FCC5D2CF40 /* [CP] Check Pods Manifest.lock */,
 				BCC2EFB61CBED4E6004D2759 /* Sources */,
 				BCC2EFB71CBED4E6004D2759 /* Frameworks */,
 				BCC2EFB81CBED4E6004D2759 /* Resources */,
-				7BB6656573D8F868466170C3 /* [CP] Embed Pods Frameworks */,
-				16D580AF459512DF0F54C072 /* [CP] Copy Pods Resources */,
+				E4ABDAD92C1640286C485E94 /* [CP] Embed Pods Frameworks */,
+				732EA731409DFBB427015A9A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -558,44 +512,21 @@
 			productReference = BCC2EFBA1CBED4E6004D2759 /* MojioSDKTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		BCC2EFCB1CBEF6DB004D2759 /* MojioSDKUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = BCC2EFD31CBEF6DB004D2759 /* Build configuration list for PBXNativeTarget "MojioSDKUITests" */;
-			buildPhases = (
-				BCC2EFC81CBEF6DB004D2759 /* Sources */,
-				BCC2EFC91CBEF6DB004D2759 /* Frameworks */,
-				BCC2EFCA1CBEF6DB004D2759 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				BC879BB71CBF0D6500F9177B /* PBXTargetDependency */,
-			);
-			name = MojioSDKUITests;
-			productName = MojioSDKUITests;
-			productReference = BCC2EFCC1CBEF6DB004D2759 /* MojioSDKUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		755785391C6BE403000D65B3 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0820;
+				LastSwiftUpdateCheck = 0900;
+				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = Mojio;
 				TargetAttributes = {
 					BCC2EFB01CBED4E6004D2759 = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = R8N6N647SF;
 						LastSwiftMigration = 0900;
 					};
 					BCC2EFB91CBED4E6004D2759 = {
-						CreatedOnToolsVersion = 7.3;
-						LastSwiftMigration = 0900;
-					};
-					BCC2EFCB1CBEF6DB004D2759 = {
 						CreatedOnToolsVersion = 7.3;
 						LastSwiftMigration = 0900;
 					};
@@ -616,7 +547,6 @@
 			targets = (
 				BCC2EFB01CBED4E6004D2759 /* MojioSDK */,
 				BCC2EFB91CBED4E6004D2759 /* MojioSDKTests */,
-				BCC2EFCB1CBEF6DB004D2759 /* MojioSDKUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -649,17 +579,10 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		BCC2EFCA1CBEF6DB004D2759 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0C383B2E70BCD89B00258553 /* [CP] Check Pods Manifest.lock */ = {
+		50FFDE671998939CEF683AFB /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -677,7 +600,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		16D580AF459512DF0F54C072 /* [CP] Copy Pods Resources */ = {
+		732EA731409DFBB427015A9A /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -692,7 +615,40 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MojioSDKTests/Pods-MojioSDKTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		7BB6656573D8F868466170C3 /* [CP] Embed Pods Frameworks */ = {
+		AEEEC770A145A20667DBE5AD /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MojioSDK/Pods-MojioSDK-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CA7416AD9DE464FCC5D2CF40 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MojioSDKTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E4ABDAD92C1640286C485E94 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -720,39 +676,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MojioSDKTests/Pods-MojioSDKTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B07DE02131C5318867E08B11 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MojioSDK/Pods-MojioSDK-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F57831BD93CCC353EA154766 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-MojioSDKTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -838,30 +761,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E0312C771CF78EA600B46AA8 /* StorageApiTests.swift in Sources */,
-				BC879BA11CBF044700F9177B /* AuthenticationTests.swift in Sources */,
-				E0312C751CF7782F00B46AA8 /* BaseApiTest.swift in Sources */,
-				BC879BA21CBF044700F9177B /* ClientTests.swift in Sources */,
-				BC879B9F1CBF044700F9177B /* ApiPathTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		BCC2EFC81CBEF6DB004D2759 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				BCC2EFCF1CBEF6DB004D2759 /* MojioSDKUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		BC879BB71CBF0D6500F9177B /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = BCC2EFB01CBED4E6004D2759 /* MojioSDK */;
-			targetProxy = BC879BB61CBF0D6500F9177B /* PBXContainerItemProxy */;
-		};
 		BCC2EFBD1CBED4E6004D2759 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = BCC2EFB01CBED4E6004D2759 /* MojioSDK */;
@@ -878,19 +783,24 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Ashish Agarwal (RS5GWME5JL)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ashish Agarwal (RS5GWME5JL)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -912,7 +822,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "e94ed3c1-4212-41cc-b43d-4f7ddb18b401";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -927,19 +836,24 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: moj.io Inc. (R8N6N647SF)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: moj.io Inc. (R8N6N647SF)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -954,7 +868,6 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "b70cc9bd-e0b9-4dc8-a97e-47977711a001";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -964,14 +877,13 @@
 		};
 		BCC2EFC31CBED4E6004D2759 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BD621C7E904703B82D19D7E9 /* Pods-MojioSDK.debug.xcconfig */;
+			baseConfigurationReference = FFF8A4C690D0895A4D10A904 /* Pods-MojioSDK.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -982,7 +894,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.moj.mobile.ios.sdk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
@@ -994,14 +905,13 @@
 		};
 		BCC2EFC41CBED4E6004D2759 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EF7A9E1C6C8F7481CFA12CC7 /* Pods-MojioSDK.release.xcconfig */;
+			baseConfigurationReference = 150F25FC9D1405ACC72E5EF0 /* Pods-MojioSDK.release.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -1012,7 +922,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.moj.mobile.ios.sdk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.0;
@@ -1023,15 +932,13 @@
 		};
 		BCC2EFC61CBED4E6004D2759 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4AB51FA8DEE78377984229BE /* Pods-MojioSDKTests.debug.xcconfig */;
+			baseConfigurationReference = DE62C4BFFDFEC393BE28C17A /* Pods-MojioSDKTests.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = MojioSDKTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = io.moj.mobile.ios.SDK.MojioSDKTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.0;
@@ -1040,48 +947,14 @@
 		};
 		BCC2EFC71CBED4E6004D2759 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 30248F4614B0FA8CB896DF7A /* Pods-MojioSDKTests.release.xcconfig */;
+			baseConfigurationReference = A5FF66B407C9163641EB6DEF /* Pods-MojioSDKTests.release.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = MojioSDKTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = io.moj.mobile.ios.SDK.MojioSDKTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 4.0;
-			};
-			name = Release;
-		};
-		BCC2EFD41CBEF6DB004D2759 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				INFOPLIST_FILE = MojioSDKUITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = io.moj.mobile.ios.SDK.MojioSDKUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 4.0;
-			};
-			name = Debug;
-		};
-		BCC2EFD51CBEF6DB004D2759 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				INFOPLIST_FILE = MojioSDKUITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = io.moj.mobile.ios.SDK.MojioSDKUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.0;
 			};
@@ -1113,15 +986,6 @@
 			buildConfigurations = (
 				BCC2EFC61CBED4E6004D2759 /* Debug */,
 				BCC2EFC71CBED4E6004D2759 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		BCC2EFD31CBEF6DB004D2759 /* Build configuration list for PBXNativeTarget "MojioSDKUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				BCC2EFD41CBEF6DB004D2759 /* Debug */,
-				BCC2EFD51CBEF6DB004D2759 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
