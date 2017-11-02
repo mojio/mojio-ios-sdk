@@ -312,7 +312,19 @@ open class AuthClient: AuthControllerDelegate {
         
         self.requestHeaders.update(["Authorization": self.generateBasicAuthHeader()])
         
-        let request = self.sessionManager.request(loginEndpoint, method: .post, parameters: ["grant_type": "password", "password": password, "username": username, "client_id": self.clientId, "client_secret": self.clientSecretKey], encoding: URLEncoding(destination: .methodDependent), headers: self.requestHeaders).responseJSON(queue: self.dispatchQueue, options: .allowFragments) {response in
+        let request = self.sessionManager.request(
+            loginEndpoint,
+            method: .post,
+            parameters: [
+                "grant_type": "password",
+                "password": password,
+                "username": username,
+                "client_id": self.clientId,
+                "client_secret": self.clientSecretKey,
+                "scope": "full offline_access"
+            ],
+            encoding: URLEncoding(destination: .methodDependent),
+            headers: self.self.requestHeaders).responseJSON(queue: self.dispatchQueue, options: .allowFragments) {response in
             
             if response.response?.statusCode == 200 {
                 
