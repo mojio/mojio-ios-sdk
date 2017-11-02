@@ -13,29 +13,24 @@
  * forbidden unless prior written permission is obtained from Moj.io Inc.
  *******************************************************************************/
 
-import KeychainSwift
+@testable import MojioSDK
 
-public protocol KeychainStorageProvider {
-    func get(by key: String) -> String?
-    func set(value: String, for key: String)
-    func delete(by key: String)
-    func clear()
-}
-
-extension KeychainSwift: KeychainStorageProvider {
-    public func get(by key: String) -> String? {
-        return self.get(key)
+class KeychainStorageProviderMock: KeychainStorageProvider {
+    private var storage = [String: String]()
+    
+    func get(by key: String) -> String? {
+        return storage[key]
     }
     
-    public func set(value: String, for key: String) {
-        _ = self.set(value, forKey: key)
+    func set(value: String, for key: String) {
+        storage[key] = value
     }
     
-    public func clear() {
-        let _: Bool = self.clear()
+    func delete(by key: String) {
+        storage[key] = nil
     }
     
-    public func delete(by key: String) {
-        _ = self.delete(key)
+    func clear() {
+        storage = [:]
     }
 }

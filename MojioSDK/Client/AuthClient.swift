@@ -41,19 +41,11 @@ public struct AuthToken: Mappable  {
     }
     
     public func expiryTimestamp() -> Double? {
-        if let timestamp: Double = Double.init(self.expiry!) {
-            return timestamp
-        }
-        
-        return nil
+        return self.expiry.flatMap { Double($0) }
     }
     
     public func expiryDate() -> Date? {
-        if let expiry = self.expiryTimestamp() {
-            return Date(timeIntervalSince1970: expiry)
-        }
-        
-        return nil
+        return self.expiryTimestamp().flatMap { Date(timeIntervalSince1970: $0) }
     }
     
     public func isValid() -> Bool {
@@ -172,13 +164,16 @@ open class AuthClient: AuthControllerDelegate {
     fileprivate var clientEnvironment: ClientEnvironment
     internal let sessionManager: SessionManager
     
-    public init(clientEnvironment: ClientEnvironment, clientId: String, clientSecretKey: String, clientRedirectURI: String, sessionManager: SessionManager = SessionManager.default) {
+    private var keychainManager: KeychainManager
+    
+    public init(clientEnvironment: ClientEnvironment, clientId: String, clientSecretKey: String, clientRedirectURI: String, sessionManager: SessionManager = SessionManager.default, keychainManager: KeychainManager = KeychainManager()) {
         self.clientEnvironment = clientEnvironment
         self.sessionManager = sessionManager
         
         self.clientId = clientId
         self.clientRedirectURL = clientRedirectURI
         self.clientSecretKey = clientSecretKey
+        self.keychainManager = keychainManager
         
         // TODO: make this accounts endpoint
         self.loginURL = URL(string: self.getAuthorizeUrl(self.clientRedirectURL, clientId: self.clientId))
@@ -418,7 +413,7 @@ open class AuthClient: AuthControllerDelegate {
     }
     
     open func logout() {
-        KeychainManager().deleteTokenFromKeychain()
+        keychainManager.deleteTokenFromKeychain()
     }
     
     // Register
@@ -600,11 +595,11 @@ open class AuthClient: AuthControllerDelegate {
     }
     
     open func getAuthToken() -> AuthToken {
-        return KeychainManager().getAuthToken()
+        return keychainManager.getAuthToken()
     }
     
     open func saveAuthToken(_ authToken: AuthToken) -> Void {
-        KeychainManager().saveAuthToken(authToken)
+        keychainManager.saveAuthToken(authToken)
     }
     
     open func getTokenUrl() -> String {

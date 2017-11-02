@@ -93,10 +93,4 @@ class ClientEnvironmentTests: XCTestCase {
         XCTAssertEqual(myMojioEndpoint, "https://eu-develop-my.moj.io/")
         XCTAssertEqual(identityEndpoint, "https://eu-develop-identity.moj.io/")
     }
-    
-    class MojioRegionStub: MojioRegion {
-        override var regionPrefix: String {
-            return "eu-"
-        }
-    }
 }

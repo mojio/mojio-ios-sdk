@@ -13,29 +13,18 @@
  * forbidden unless prior written permission is obtained from Moj.io Inc.
  *******************************************************************************/
 
-import KeychainSwift
+@testable import MojioSDK
 
-public protocol KeychainStorageProvider {
-    func get(by key: String) -> String?
-    func set(value: String, for key: String)
-    func delete(by key: String)
-    func clear()
-}
+class MojioRegionStub: MojioRegion {
+    private let prefix: String
+    
+    init(_ regionType: RegionType, prefix: String = "eu-") {
+        self.prefix = prefix
 
-extension KeychainSwift: KeychainStorageProvider {
-    public func get(by key: String) -> String? {
-        return self.get(key)
+        super.init(regionType)
     }
     
-    public func set(value: String, for key: String) {
-        _ = self.set(value, forKey: key)
-    }
-    
-    public func clear() {
-        let _: Bool = self.clear()
-    }
-    
-    public func delete(by key: String) {
-        _ = self.delete(key)
+    override var regionPrefix: String {
+        return self.prefix
     }
 }

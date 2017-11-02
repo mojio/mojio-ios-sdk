@@ -27,7 +27,7 @@ open class KeychainManager {
     
     let keychain: KeychainStorageProvider
     
-    init(keychain: KeychainStorageProvider = KeychainSwift()) {
+    public init(keychain: KeychainStorageProvider = KeychainSwift()) {
         self.keychain = keychain
     }
     

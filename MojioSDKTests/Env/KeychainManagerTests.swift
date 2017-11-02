@@ -57,24 +57,4 @@ class KeychainManagerTests: XCTestCase {
         XCTAssertNil(keychain.get(by: KeychainKey.refreshToken.rawValue))
         XCTAssertNil(keychain.get(by: KeychainKey.uniqueId.rawValue))
     }
-    
-    class KeychainStorageProviderMock: KeychainStorageProvider {
-        private var storage = [String: String]()
-
-        func get(by key: String) -> String? {
-            return storage[key]
-        }
-        
-        func set(value: String, for key: String) {
-            storage[key] = value
-        }
-        
-        func delete(by key: String) {
-            storage[key] = nil
-        }
-        
-        func clear() {
-            storage = [:]
-        }
-    }
 }
