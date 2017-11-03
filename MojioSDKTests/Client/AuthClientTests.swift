@@ -568,4 +568,160 @@ class AuthClientTests: XCTestCase {
         XCTAssertTrue(requestFailure)
 
     }
+    
+    func testAuthClientShouldCallCompletionBlockIfUserRegistrationWasSuccessful() {
+        let env = ClientEnvironment()
+        let accessToken = "long-access-token-string"
+        let refreshToken = "refresh-token-string"
+        let responseJson: [String: Any] = [
+            "access_token": accessToken,
+            "refresh_token": refreshToken,
+            "expires_in": 3600
+        ]
+        
+        stub(condition:
+            isHost(env.domainFromMojioEndpoint(.identity)) &&
+            isPath("/" + AccountClientEndpoint.register.rawValue)
+        ) { request in
+            return OHHTTPStubsResponse(jsonObject: [], statusCode: 200, headers: nil)
+        }
+        
+        stub(condition:
+            isHost(env.domainFromMojioEndpoint(.identity)) &&
+            isPath("/" + AuthClientEndpoint.token.rawValue)
+        ) { _ in
+            return OHHTTPStubsResponse(jsonObject: responseJson, statusCode: 200, headers: nil)
+        }
+
+        var authTokenFromResponse: AuthToken? = nil
+        let client = AuthClient(clientEnvironment: ClientEnvironment(), clientId: "", clientSecretKey: "", clientRedirectURI: "")
+        
+        let responseExpectation = expectation(description: "a response should contain an auth token")
+        client.register("+380505987220", email: "test@example.com", password: "strong-password", completion: { authToken in
+            authTokenFromResponse = authToken
+            responseExpectation.fulfill()
+        }) { _ in
+            responseExpectation.fulfill()
+        }
+        
+        wait(for: [responseExpectation], timeout: 1)
+        
+        XCTAssertEqual(authTokenFromResponse?.accessToken, accessToken)
+        XCTAssertEqual(authTokenFromResponse?.refreshToken, refreshToken)
+    }
+    
+    func testAuthClientShouldCallFailureBlockWhenLoginAfterRegisterWasFailed() {
+        let env = ClientEnvironment()
+
+        stub(condition:
+            isHost(env.domainFromMojioEndpoint(.identity)) &&
+            isPath("/" + AccountClientEndpoint.register.rawValue)
+        ) { request in
+            return OHHTTPStubsResponse(jsonObject: [], statusCode: 200, headers: nil)
+        }
+        
+        stub(condition:
+            isHost(env.domainFromMojioEndpoint(.identity)) &&
+            isPath("/" + AuthClientEndpoint.token.rawValue)
+        ) { _ in
+            return OHHTTPStubsResponse(error: Errors.responseError)
+        }
+        
+        var responseFailed = false
+        let client = AuthClient(clientEnvironment: ClientEnvironment(), clientId: "", clientSecretKey: "", clientRedirectURI: "")
+        
+        let responseExpectation = expectation(description: "a response should fail")
+        client.register("+380505987220", email: "test@example.com", password: "strong-password", completion: { authToken in
+            responseExpectation.fulfill()
+        }) { _ in
+            responseFailed = true
+            responseExpectation.fulfill()
+        }
+        
+        wait(for: [responseExpectation], timeout: 1)
+        
+        XCTAssertTrue(responseFailed)
+    }
+    
+    func testAuthClientShouldCallFailureBlockAfterRegistrationWasFailed() {
+        let env = ClientEnvironment()
+        
+        stub(condition:
+            isHost(env.domainFromMojioEndpoint(.identity)) &&
+            isPath("/" + AccountClientEndpoint.register.rawValue)
+        ) { request in
+            return OHHTTPStubsResponse(error: Errors.responseError)
+        }
+        
+        var responseFailed = false
+        let client = AuthClient(clientEnvironment: ClientEnvironment(), clientId: "", clientSecretKey: "", clientRedirectURI: "")
+        
+        let responseExpectation = expectation(description: "a response should fail")
+        client.register("+380505987220", email: "test@example.com", password: "strong-password", completion: { authToken in
+            responseExpectation.fulfill()
+        }) { _ in
+            responseFailed = true
+            responseExpectation.fulfill()
+        }
+        
+        wait(for: [responseExpectation], timeout: 1)
+        
+        XCTAssertTrue(responseFailed)
+    }
+    
+    func testAuthClientShouldCallFailureBlockIfKeychainHasNoToken() {
+        let client = AuthClient(clientEnvironment: ClientEnvironment(), clientId: "", clientSecretKey: "", clientRedirectURI: "")
+        
+        var responseFailed = false
+        let responseExpectation = expectation(description: "token refresh failed")
+        client.refreshAuthToken({ token in
+            responseExpectation.fulfill()
+        }) { _ in
+            responseFailed = true
+            responseExpectation.fulfill()
+        }
+        wait(for: [responseExpectation], timeout: 1)
+        
+        XCTAssertTrue(responseFailed)
+    }
+    
+    func testAuthClientShouldCallCompletionBlockAfterRefreshAuthTokenWasSuccessful() {
+        let keychainStorageProvider = KeychainStorageProviderMock()
+        let keychainManager = KeychainManager(keychain: keychainStorageProvider)
+        let sampleAuthToken = AuthToken(accessToken: "old-access-token", expiry: "4800", refreshToken: "old-refresh-token", uniqueId: "old-id")
+        keychainManager.saveAuthToken(sampleAuthToken)
+        
+        let env = ClientEnvironment()
+        let accessToken = "long-access-token-string"
+        let refreshToken = "refresh-token-string"
+        let expireTimestamp: TimeInterval = 3600
+        let responseJson: [String: Any] = [
+            "access_token": accessToken,
+            "refresh_token": refreshToken,
+            "expires_in": expireTimestamp
+        ]
+
+        stub(condition:
+            isHost(env.domainFromMojioEndpoint(.identity)) &&
+            isPath("/" + AuthClientEndpoint.token.rawValue)
+        ) { _ in
+            return OHHTTPStubsResponse(jsonObject: responseJson, statusCode: 200, headers: nil)
+        }
+
+        let client = AuthClient(clientEnvironment: ClientEnvironment(), clientId: "", clientSecretKey: "", clientRedirectURI: "", keychainManager: keychainManager)
+        var tokenFromResponse: AuthToken? = nil
+        let responseExpectation = expectation(description: "token refresh was successful")
+        client.refreshAuthToken({ token in
+            tokenFromResponse = token
+            responseExpectation.fulfill()
+        }) { _ in
+            responseExpectation.fulfill()
+        }
+        
+        wait(for: [responseExpectation], timeout: 1)
+        
+        XCTAssertNotNil(tokenFromResponse)
+        XCTAssertEqual(tokenFromResponse?.accessToken, accessToken)
+        XCTAssertEqual(tokenFromResponse?.refreshToken, refreshToken)
+    }
 }

@@ -366,11 +366,9 @@ open class AuthClient: AuthControllerDelegate {
     }
     
     open func refreshAuthToken(_ completion: @escaping (_ authToken: AuthToken) -> Void, failure: @escaping (_ response: [String: Any]?) -> Void) {
-        let keychain = KeychainSwift()
-        
         let authorizeEndpoint = self.getTokenUrl()
         
-        guard let refreshToken: String = keychain.get(KeychainKey.refreshToken.rawValue) else {
+        guard let refreshToken: String = self.keychainManager.getAuthToken().refreshToken else {
             failure(nil)
             return
         }
@@ -407,15 +405,7 @@ open class AuthClient: AuthControllerDelegate {
                     }
                 }
                 else {
-                    if let dictionary = response.result.value as? [String: Any] {
-                        failure(dictionary)
-                    }
-                        /*else if let error = response.result.error {
-                         failure(error.userInfo)
-                         }*/
-                    else {
-                        failure(nil)
-                    }
+                    failure(response.result.value as? [String: Any])
                 }
         }
         
@@ -451,15 +441,7 @@ open class AuthClient: AuthControllerDelegate {
                 
             }
             else {
-                if let dictionary = response.result.value as? [String: Any] {
-                    failure(dictionary)
-                }
-                    /*else if let error = response.result.error {
-                     failure(error.userInfo)
-                     }*/
-                else {
-                    failure(nil)
-                }
+                failure(response.result.value as? [String: Any])
             }
         }
         
@@ -555,17 +537,9 @@ open class AuthClient: AuthControllerDelegate {
                 if response.response?.statusCode == 200 {
                     completion(response.result.value as? [String: Any])
                 } else {
-                    if let dictionary = response.result.value as? [String: Any] {
-                        failure(dictionary)
-                    }
-                        /*else if let error = response.result.error {
-                         failure(error.userInfo)
-                         }*/
-                    else {
-                        failure(nil)
-                    }
+                    failure(response.result.value as? [String: Any])
                 }
-        }
+            }
         
         #if DEBUG
             debugPrint(request)
@@ -589,17 +563,9 @@ open class AuthClient: AuthControllerDelegate {
                     completion(response.result.value as? [String: Any])
                 }
                 else {
-                    if let dictionary = response.result.value as? [String: Any] {
-                        failure(dictionary)
-                    }
-                        /*else if let error = response.result.error {
-                         failure(error.userInfo)
-                         }*/
-                    else {
-                        failure(nil)
-                    }
+                    failure(response.result.value as? [String: Any])
                 }
-        }
+            }
         
         #if DEBUG
             debugPrint(request)
