@@ -22,27 +22,29 @@ import KeychainSwift
 open class NextDone {}
 
 open class ClientHeaders {
-    open static let defaultRequestHeaders: [String:String] = {
+    private let languages: [String]
+    private let languageWeights = [1.0, 0.9, 0.8, 0.7, 0.6, 0.5]
+    
+    public init(languages: [String] = NSLocale.preferredLanguages) {
+        self.languages = languages
+    }
+    open var defaultRequestHeaders: [String: String] {
         // Accept-Language HTTP Header; see https://tools.ietf.org/html/rfc7231#section-5.3.5
-        let acceptLanguage = NSLocale.preferredLanguages.prefix(6).enumerated().map { index, languageCode in
-            let quality = 1.0 - (Double(index) * 0.1)
-            
-            // Use language-region and language only combinations
-            let languageSplit = languageCode.components(separatedBy: "-")
-            if let language = languageSplit.first {
-                return "\(languageCode),\(language);q=\(quality)"
+        let acceptLanguage = self.languages
+            .prefix(self.languageWeights.count)
+            .enumerated()
+            .map { (arg) -> String in
+                let (index, language) = arg
+                if index == 0 {
+                    return language
+                } else {
+                    return "\(language);q=\(languageWeights[index])"
+                }
             }
-            else if languageSplit.count > 0 {
-                return "\(languageCode);q=\(quality)"
-            }
-            else {
-                return ""
-            }
-            
-            }.joined(separator: ", ")
+            .joined(separator: ", ")
         
-        return ["Accept-Language": acceptLanguage]
-    }()
+        return ["Accept-Language": languages.count > 0 ? acceptLanguage : "en"]
+    }
 }
 
 public enum RestClientEndpoint: String {
@@ -494,7 +496,7 @@ open class RestClient {
     }
     
     fileprivate var defaultHeaders: [String: String] {
-        var headers = ClientHeaders.defaultRequestHeaders
+        var headers = ClientHeaders().defaultRequestHeaders
         
         headers.update(["Content-Type": "application/json", "Accept": "application/json"])
         
