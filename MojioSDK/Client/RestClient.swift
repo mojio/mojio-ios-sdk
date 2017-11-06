@@ -172,7 +172,7 @@ open class RestClient {
         }
     }
     
-    open func apps(_ appId: String?) -> Self {
+    open func apps(_ appId: String? = nil) -> Self {
         self.requestEntity = .apps
         self.requestEntityId = appId
         self.appendRequestUrlEntityId()
@@ -187,7 +187,7 @@ open class RestClient {
         return self
     }
     
-    open func groups(_ groupId: String?) -> Self {
+    open func groups(_ groupId: String? = nil) -> Self {
         self.requestEntity = .groups
         self.requestEntityId = groupId
         self.appendRequestUrlEntityId()
@@ -195,7 +195,7 @@ open class RestClient {
         return self
     }
     
-    open func users(_ userId: String?) -> Self {
+    open func users(_ userId: String? = nil) -> Self {
         self.requestEntity = .users
         self.requestEntityId = userId
         self.appendRequestUrlEntityId()
@@ -225,7 +225,7 @@ open class RestClient {
         return self
     }
     
-    open func mojios(_ mojioId: String?) -> Self {
+    open func mojios(_ mojioId: String? = nil) -> Self {
         self.requestEntity = .mojios
         self.requestEntityId = mojioId
         self.appendRequestUrlEntityId()
@@ -234,22 +234,15 @@ open class RestClient {
         return self
     }
     
-    open func phonenumbers(_ phonenumber: String?, sendVerification: Bool?) -> Self {
+    open func phonenumbers(_ phonenumber: String? = nil, sendVerification: Bool = false) -> Self {
         self.requestEntity = .phoneNumbers
-        
-        var phone: String? = phonenumber
-        
-        if phone != nil && sendVerification == true {
-            phone = phone! + "?sendVerification=true"
-        }
-        
-        self.requestEntityId = phone
+        self.requestEntityId = phonenumber.flatMap { $0 + (sendVerification ? "?sendVerification=true" : "") }
         self.appendRequestUrlEntityId(asFinal: true)
 
         return self
     }
     
-    open func emails (_ email: String?) -> Self {
+    open func emails (_ email: String? = nil) -> Self {
         self.requestEntity = .emails
         self.requestEntityId = email
         self.appendRequestUrlEntityId()
