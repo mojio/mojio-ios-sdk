@@ -329,7 +329,7 @@ open class AuthClient: AuthControllerDelegate {
             if response.response?.statusCode == 200 {
                 
                 guard let responseJSON = response.result.value as? [String: Any] else {
-                    failure(nil)
+                    failure(Errors.wrongResponseFormat)
                     return
                 }
                 
@@ -386,7 +386,7 @@ open class AuthClient: AuthControllerDelegate {
                 if response.response?.statusCode == 200 {
                     
                     guard let responseJSON = response.result.value as? [String: Any] else {
-                        failure(nil)
+                        failure(Errors.wrongResponseFormat)
                         return
                     }
                     
@@ -397,11 +397,11 @@ open class AuthClient: AuthControllerDelegate {
                             completion(authToken)
                         }
                         else {
-                            failure(nil)
+                            failure(Errors.invalidAuthToken)
                         }
                     }
                     else {
-                        failure(nil)
+                        failure(Errors.expiryFieldIsMissing)
                     }
                 }
                 else {
@@ -604,5 +604,17 @@ open class AuthClient: AuthControllerDelegate {
             AuthClientEndpoint.authorize.rawValue,
             redirectUri.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!,
             clientId.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!)
+    }
+    
+    struct Errors {
+        static var wrongResponseFormat: [String: Any] {
+            return ["Error": "WrongResponseFormat"];
+        }
+        static var invalidAuthToken: [String: Any] {
+            return ["Error": "InvalidAuthToken"];
+        }
+        static var expiryFieldIsMissing: [String: Any] {
+            return ["Error": "ExpiryFieldIsMissing"];
+        }
     }
 }

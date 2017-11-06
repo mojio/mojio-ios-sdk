@@ -185,6 +185,57 @@ class AuthClientTests: XCTestCase {
         XCTAssertTrue(isUserLoggedIn)
     }
     
+    func testIsUserLoggedShouldReturnFalseIfAuthTokenIsEmpty() {
+        let client = AuthClient(clientEnvironment: ClientEnvironment(), clientId: "client-id", clientSecretKey: "secret-key", clientRedirectURI: "redirect-url")
+        
+        let loggedIn = client.isUserLoggedIn()
+        
+        XCTAssertFalse(loggedIn)
+    }
+    
+    func testIsUserLoggedInShouldReturnFalseIfAuthTokenRegionNotEqualToClientEnvRegion() {
+        let regionType = MojioRegion.RegionType.develop
+        let storage = KeychainStorageProviderMock()
+        let keychainManager = KeychainManager(keychain: storage)
+        let expiryTimestamp = String(Date().timeIntervalSince1970 + 3600)
+        let sampleToken = AuthToken(accessToken: "access_token", expiry: expiryTimestamp, refreshToken: "refresh_token", uniqueId: regionType.rawValue)
+        keychainManager.saveAuthToken(sampleToken)
+
+        let client = AuthClient(clientEnvironment: ClientEnvironment(), clientId: "client-id", clientSecretKey: "secret-key", clientRedirectURI: "redirect-url", keychainManager: keychainManager)
+        
+        let loggedIn = client.isUserLoggedIn()
+        
+        XCTAssertFalse(loggedIn)
+    }
+    
+    func testIsUserLoggedInShouldReturnFalseIfExpiryPropertyIsInvalid() {
+        let regionType = MojioRegion.RegionType.production
+        let storage = KeychainStorageProviderMock()
+        let keychainManager = KeychainManager(keychain: storage)
+        let sampleToken = AuthToken(accessToken: "access_token", expiry: "invalid", refreshToken: "refresh_token", uniqueId: regionType.rawValue)
+        keychainManager.saveAuthToken(sampleToken)
+        
+        let client = AuthClient(clientEnvironment: ClientEnvironment(), clientId: "client-id", clientSecretKey: "secret-key", clientRedirectURI: "redirect-url", keychainManager: keychainManager)
+        
+        let loggedIn = client.isUserLoggedIn()
+        
+        XCTAssertFalse(loggedIn)
+    }
+    
+    func testIsUserLoggedInShouldReturnFalseIfUserTokenIsExpired() {
+        let regionType = MojioRegion.RegionType.production
+        let storage = KeychainStorageProviderMock()
+        let keychainManager = KeychainManager(keychain: storage)
+        let sampleToken = AuthToken(accessToken: "access_token", expiry: String(Date().timeIntervalSince1970 - 3600), refreshToken: "refresh_token", uniqueId: regionType.rawValue)
+        keychainManager.saveAuthToken(sampleToken)
+        
+        let client = AuthClient(clientEnvironment: ClientEnvironment(), clientId: "client-id", clientSecretKey: "secret-key", clientRedirectURI: "redirect-url", keychainManager: keychainManager)
+        
+        let loggedIn = client.isUserLoggedIn()
+        
+        XCTAssertFalse(loggedIn)
+    }
+    
     func testLogout() {
         let storage = KeychainStorageProviderMock()
         let keychainManager = KeychainManager(keychain: storage)
@@ -724,4 +775,137 @@ class AuthClientTests: XCTestCase {
         XCTAssertEqual(tokenFromResponse?.accessToken, accessToken)
         XCTAssertEqual(tokenFromResponse?.refreshToken, refreshToken)
     }
+    
+    func testAuthClientShouldCallFAilureBlockIfJsonIsNotDictionary() {
+        let keychainStorageProvider = KeychainStorageProviderMock()
+        let keychainManager = KeychainManager(keychain: keychainStorageProvider)
+        let sampleAuthToken = AuthToken(accessToken: "old-access-token", expiry: "4800", refreshToken: "old-refresh-token", uniqueId: "old-id")
+        keychainManager.saveAuthToken(sampleAuthToken)
+
+        let env = ClientEnvironment()
+        
+        stub(condition:
+            isHost(env.domainFromMojioEndpoint(.identity)) &&
+            isPath("/" + AuthClientEndpoint.token.rawValue)
+        ) { _ in
+            return OHHTTPStubsResponse(jsonObject: [], statusCode: 200, headers: nil)
+        }
+        
+        let client = AuthClient(clientEnvironment: ClientEnvironment(), clientId: "", clientSecretKey: "", clientRedirectURI: "", keychainManager: keychainManager)
+        var responseFailed = false
+        var responseResult: [String: Any]? = nil
+        let responseExpectation = expectation(description: "token refresh failed")
+        client.refreshAuthToken({ token in
+            responseExpectation.fulfill()
+        }) { response in
+            responseFailed = true
+            responseResult = response
+            responseExpectation.fulfill()
+        }
+        
+        wait(for: [responseExpectation], timeout: 1)
+        
+        XCTAssertTrue(responseFailed)
+        XCTAssertEqual(responseResult?["Error"] as? String, "WrongResponseFormat")
+    }
+    
+    func testAuthClientRefreshTokenShouldCallFailureBlockIfAuthTokenIsInvalid() {
+        let keychainStorageProvider = KeychainStorageProviderMock()
+        let keychainManager = KeychainManager(keychain: keychainStorageProvider)
+        let sampleAuthToken = AuthToken(accessToken: "old-access-token", expiry: "4800", refreshToken: "old-refresh-token", uniqueId: "old-id")
+        keychainManager.saveAuthToken(sampleAuthToken)
+        
+        let env = ClientEnvironment()
+        let accessToken = "long-access-token-string"
+        let refreshToken = "refresh-token-string"
+        let expireTimestamp: TimeInterval = -Date().timeIntervalSince1970
+        let responseJson: [String: Any] = [
+            "access_token": accessToken,
+            "refresh_token": refreshToken,
+            "expires_in": expireTimestamp
+        ]
+
+        stub(condition:
+            isHost(env.domainFromMojioEndpoint(.identity)) &&
+            isPath("/" + AuthClientEndpoint.token.rawValue)
+        ) { _ in
+            return OHHTTPStubsResponse(jsonObject: responseJson, statusCode: 200, headers: nil)
+        }
+        
+        let client = AuthClient(clientEnvironment: ClientEnvironment(), clientId: "", clientSecretKey: "", clientRedirectURI: "", keychainManager: keychainManager)
+        var responseResult: [String: Any]? = nil
+        let responseExpectation = expectation(description: "token refresh failed")
+        client.refreshAuthToken({ token in
+            responseExpectation.fulfill()
+        }) { response in
+            responseResult = response
+            responseExpectation.fulfill()
+        }
+        
+        wait(for: [responseExpectation], timeout: 1)
+        
+        XCTAssertEqual(responseResult?["Error"] as? String, "InvalidAuthToken")
+    }
+    
+    func testAuthClientShiuldCallFailureBlockIfStatusCodeIsNot200() {
+        let keychainStorageProvider = KeychainStorageProviderMock()
+        let keychainManager = KeychainManager(keychain: keychainStorageProvider)
+        let sampleAuthToken = AuthToken(accessToken: "old-access-token", expiry: "4800", refreshToken: "old-refresh-token", uniqueId: "old-id")
+        keychainManager.saveAuthToken(sampleAuthToken)
+        
+        let env = ClientEnvironment()
+        
+        stub(condition:
+            isHost(env.domainFromMojioEndpoint(.identity)) &&
+            isPath("/" + AuthClientEndpoint.token.rawValue)
+        ) { _ in
+            return OHHTTPStubsResponse(jsonObject: ["Error": "StatusCodeIsNot200"], statusCode: 404, headers: nil)
+        }
+        
+        let client = AuthClient(clientEnvironment: ClientEnvironment(), clientId: "", clientSecretKey: "", clientRedirectURI: "", keychainManager: keychainManager)
+        var responseResult: [String: Any]? = nil
+        let responseExpectation = expectation(description: "token refresh failed")
+        client.refreshAuthToken({ token in
+            responseExpectation.fulfill()
+        }) { response in
+            responseResult = response
+            responseExpectation.fulfill()
+        }
+        
+        wait(for: [responseExpectation], timeout: 1)
+        
+        XCTAssertEqual(responseResult?["Error"] as? String, "StatusCodeIsNot200")
+
+    }
+    
+    func testAuthClientShouldCallFailureBlockIfExpiryFieldIsMissing() {
+        let keychainStorageProvider = KeychainStorageProviderMock()
+        let keychainManager = KeychainManager(keychain: keychainStorageProvider)
+        let sampleAuthToken = AuthToken(accessToken: "old-access-token", expiry: "4800", refreshToken: "old-refresh-token", uniqueId: "old-id")
+        keychainManager.saveAuthToken(sampleAuthToken)
+        
+        let env = ClientEnvironment()
+        
+        stub(condition:
+            isHost(env.domainFromMojioEndpoint(.identity)) &&
+                isPath("/" + AuthClientEndpoint.token.rawValue)
+        ) { _ in
+            return OHHTTPStubsResponse(jsonObject: ["refresh_token": "*", "access_token": "*"], statusCode: 200, headers: nil)
+        }
+        
+        let client = AuthClient(clientEnvironment: ClientEnvironment(), clientId: "", clientSecretKey: "", clientRedirectURI: "", keychainManager: keychainManager)
+        var responseResult: [String: Any]? = nil
+        let responseExpectation = expectation(description: "token refresh failed")
+        client.refreshAuthToken({ token in
+            responseExpectation.fulfill()
+        }) { response in
+            responseResult = response
+            responseExpectation.fulfill()
+        }
+        
+        wait(for: [responseExpectation], timeout: 1)
+        
+        XCTAssertEqual(responseResult?["Error"] as? String, "ExpiryFieldIsMissing")
+    }
+
 }
