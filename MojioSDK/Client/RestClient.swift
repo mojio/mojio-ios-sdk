@@ -271,7 +271,7 @@ open class RestClient {
         return self
     }
     
-    open func trips(_ tripId: String?) -> Self {
+    open func trips(_ tripId: String? = nil) -> Self {
         self.requestEntity = .trips
         self.requestEntityId = tripId
         self.appendRequestUrlEntityId()
@@ -280,7 +280,7 @@ open class RestClient {
         return self
     }
     
-    open func vehicles(_ vehicleId: String?) -> Self {
+    open func vehicles(_ vehicleId: String? = nil) -> Self {
         self.requestEntity = .vehicles
         self.requestEntityId = vehicleId
         self.appendRequestUrlEntityId()
@@ -336,7 +336,7 @@ open class RestClient {
     open func storage(_ key: String) -> Self {
 
         if let requestEntityId = self.requestEntityId {
-            self.requestUrl = self.requestV1Url! + String.init(format: RestClientEndpoint.storage.rawValue, self.requestEntity.rawValue, requestEntityId, key)
+            self.requestUrl = self.requestV1Url! + String(format: RestClientEndpoint.storage.rawValue, self.requestEntity.rawValue, requestEntityId, key)
         }
 
         return self
@@ -345,7 +345,7 @@ open class RestClient {
     open func activities() -> Self {
         self.requestEntity = .activities
         self.requestUrl = self.requestUrl! + self.requestEntity.rawValue
-        self.pushUrl = self.pushUrl! + self.requestEntity.rawValue + "/"
+        self.pushUrl = self.pushUrl! + self.requestEntity.rawValue
         return self
     }
     
@@ -356,7 +356,7 @@ open class RestClient {
         return self
     }
     
-    open func transactions(_ transactionId: String?) -> Self {
+    open func transactions(_ transactionId: String? = nil) -> Self {
         self.requestEntity = .transactions
         self.requestEntityId = transactionId
         self.appendRequestUrlEntityId()
@@ -365,7 +365,7 @@ open class RestClient {
         return self
     }
     
-    open func geofences(_ geofenceId: String?) -> Self {
+    open func geofences(_ geofenceId: String? = nil) -> Self {
         self.requestEntity = .geofences
         self.requestEntityId = geofenceId
         self.appendRequestUrlEntityId()
@@ -374,10 +374,10 @@ open class RestClient {
         return self
     }
     
-    open func aggregates(ofType type: String?) -> Self {
+    open func aggregates(ofType type: String? = nil) -> Self {
         
         self.requestEntity = .aggregates
-        self.appendRequestUrlEntity(self.requestEntity.rawValue)
+        self.appendRequestUrlEntity(self.requestEntity.rawValue, asFinal: true)
         self.appendRequestUrlEntity(type)
         
         return self
@@ -390,7 +390,7 @@ open class RestClient {
         return self
     }
 
-    open func diagnosticCodes(_ code: String?) -> Self {
+    open func diagnosticCodes(_ code: String? = nil) -> Self {
         
         self.requestEntity = .diagnosticCodes
         self.appendRequestUrlEntity(self.requestEntity.rawValue, asFinal: true)
