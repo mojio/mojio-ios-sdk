@@ -105,12 +105,15 @@ open class RestClient {
     fileprivate var dispatchQueue = RestClient.defaultDispatchQueue
     
     internal let sessionManager: SessionManager
-    
-    public init(clientEnvironment: ClientEnvironment, sessionManager: SessionManager = SessionManager.default) {
+    private var keychainManager: KeychainManager
+
+    public init(clientEnvironment: ClientEnvironment, sessionManager: SessionManager = SessionManager.default, keychainManager: KeychainManager = KeychainManager()) {
         self.requestUrl = clientEnvironment.getApiEndpoint()
         self.requestV1Url = clientEnvironment.getV1ApiEndpoint()
         self.pushUrl = clientEnvironment.getPushWSEndpoint()
         self.sessionManager = sessionManager
+        self.keychainManager = keychainManager
+
         
         self.initDateFormatters()
     }
@@ -698,7 +701,7 @@ open class RestClient {
     }
     
     func accessToken() -> String? {
-        return KeychainManager().getAuthToken().accessToken
+        return self.keychainManager.getAuthToken().accessToken
     }    
 }
 

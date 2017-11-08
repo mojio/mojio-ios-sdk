@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		111EC3E9AD3450EA6FEB01DB /* Pods_MojioSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99F172CDA9C69F9BF12B704A /* Pods_MojioSDK.framework */; };
 		2E29D8751FB1F3AA00BBEB16 /* RestClientHandleResponseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E29D8741FB1F3AA00BBEB16 /* RestClientHandleResponseTests.swift */; };
+		2E8BC6671FB343FB00A165C3 /* AccelerometerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8BC6661FB343FB00A165C3 /* AccelerometerTests.swift */; };
+		2E8BC6691FB3441500A165C3 /* AccelerationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8BC6681FB3441500A165C3 /* AccelerationTests.swift */; };
 		2E95B1071FB08D84006A3E1E /* ClientHeadersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E95B1061FB08D84006A3E1E /* ClientHeadersTests.swift */; };
 		2E95B1091FB0AD77006A3E1E /* RestClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E95B1081FB0AD77006A3E1E /* RestClientTests.swift */; };
 		2EBD23B51FAB206200399D63 /* KeychainStorageProviderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBD23B41FAB206200399D63 /* KeychainStorageProviderMock.swift */; };
@@ -122,6 +124,8 @@
 		15FF163D69D1506CC1DE689D /* Pods_MojioSDKTests2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MojioSDKTests2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		188FAF605C15F9919D241723 /* Pods_MojioSDKTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MojioSDKTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E29D8741FB1F3AA00BBEB16 /* RestClientHandleResponseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestClientHandleResponseTests.swift; sourceTree = "<group>"; };
+		2E8BC6661FB343FB00A165C3 /* AccelerometerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccelerometerTests.swift; sourceTree = "<group>"; };
+		2E8BC6681FB3441500A165C3 /* AccelerationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccelerationTests.swift; sourceTree = "<group>"; };
 		2E95B1061FB08D84006A3E1E /* ClientHeadersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientHeadersTests.swift; sourceTree = "<group>"; };
 		2E95B1081FB0AD77006A3E1E /* RestClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestClientTests.swift; sourceTree = "<group>"; };
 		2EBD23B41FAB206200399D63 /* KeychainStorageProviderMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainStorageProviderMock.swift; sourceTree = "<group>"; };
@@ -255,6 +259,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2E791CA21FB3421B0074F9C8 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				2E8BC6661FB343FB00A165C3 /* AccelerometerTests.swift */,
+				2E8BC6681FB3441500A165C3 /* AccelerationTests.swift */,
+			);
+			name = Models;
+			path = MojioSDKTests/Models;
+			sourceTree = SOURCE_ROOT;
+		};
 		2EBD23B21FAB1FFB00399D63 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
@@ -429,6 +443,7 @@
 		BCC2EFBE1CBED4E6004D2759 /* MojioSDKTests */ = {
 			isa = PBXGroup;
 			children = (
+				2E791CA21FB3421B0074F9C8 /* Models */,
 				2EBD23B21FAB1FFB00399D63 /* Utility */,
 				2ED946F31FAA205800132568 /* Client */,
 				2ED946EC1FA9D5B700132568 /* Env */,
@@ -825,6 +840,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E8BC6691FB3441500A165C3 /* AccelerationTests.swift in Sources */,
 				2E29D8751FB1F3AA00BBEB16 /* RestClientHandleResponseTests.swift in Sources */,
 				2E95B1091FB0AD77006A3E1E /* RestClientTests.swift in Sources */,
 				2E95B1071FB08D84006A3E1E /* ClientHeadersTests.swift in Sources */,
@@ -832,6 +848,7 @@
 				2ED946F51FAA207700132568 /* AuthClientTests.swift in Sources */,
 				2EBD23B51FAB206200399D63 /* KeychainStorageProviderMock.swift in Sources */,
 				2ED946F21FA9FCFD00132568 /* ClientEnvironmentTests.swift in Sources */,
+				2E8BC6671FB343FB00A165C3 /* AccelerometerTests.swift in Sources */,
 				2EBD23B91FAB66BB00399D63 /* Errors.swift in Sources */,
 				2ED946EE1FA9D5E400132568 /* KeychainManagerTests.swift in Sources */,
 			);

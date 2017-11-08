@@ -26,7 +26,7 @@ open class WSClient: RestClient {
     
     private var publicKeys: [SecKey]? = nil
     
-    private override init(clientEnvironment: ClientEnvironment, sessionManager: SessionManager = SessionManager.default) {
+    private override init(clientEnvironment: ClientEnvironment, sessionManager: SessionManager = SessionManager.default, keychainManager: KeychainManager = KeychainManager()) {
         super.init(clientEnvironment: clientEnvironment, sessionManager: sessionManager)
     }
     

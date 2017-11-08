@@ -393,23 +393,16 @@ class RestClientTests: XCTestCase {
         XCTAssertEqual(fields!, sampleFields)
     }
     
-//    func testRunRequest() {
-//        stub(condition:
-//            isHost(ClientEnvironment().domainFromMojioEndpoint(.api)) && isPath("/v2")
-//        ) { _ in
-//            return OHHTTPStubsResponse(jsonObject: ["Data": ["1"]], statusCode: 200, headers: nil)
-//        }
-//
-//        var responseResult: Any? = nil
-//        let requestExpectation = expectation(description: "")
-//        
-//        self.client.run(completion: { result in
-//            responseResult = result
-//            requestExpectation.fulfill()
-//        }) { result in
-//            responseResult = result
-//        }
-//        
-//        wait(for: [requestExpectation], timeout: 1)
-//    }
+    
+    func testRestClientShouldReturnAccessToken() {
+        let sampleToken = "sample-token"
+        let provider = KeychainStorageProviderMock()
+        let keychain = KeychainManager(keychain: provider)
+        keychain.saveAuthToken(AuthToken(accessToken: sampleToken, expiry: "3600", refreshToken: "refresh-token", uniqueId: ""))
+        let client = RestClient(clientEnvironment: ClientEnvironment(), keychainManager: keychain)
+        
+        let token = client.accessToken()
+        
+        XCTAssertEqual(sampleToken, token)
+    }
 }

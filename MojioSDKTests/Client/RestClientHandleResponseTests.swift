@@ -97,7 +97,7 @@ class RestClientHandleResponseTests: XCTestCase {
         XCTAssertEqual(responseResult, "Success")
     }
 
-    func testHAndleResponseShouldCallCompletionBlockWithBool() {
+    func testHandleResponseShouldCallCompletionBlockWithBool() {
         let result = Alamofire.Result<Any>.success(true)
         let response = DataResponse(request: nil, response: self.response, data: nil, result: result)
         
@@ -115,5 +115,111 @@ class RestClientHandleResponseTests: XCTestCase {
         
         XCTAssertNotNil(responseResult)
         XCTAssertEqual(responseResult, true)
+    }
+    
+    func testHandleResponseShouldCallCompletionBlockWithResult() {
+        let json: [String: Any] = [
+            "Data": [
+                ["Id": "111111111"],
+                ["Id": "222222222"]
+            ],
+            "TotalCount": 2
+        ]
+        let result = Alamofire.Result<Any>.success(json)
+        let response = DataResponse(request: nil, response: self.response, data: nil, result: result)
+        
+        var responseResult: MojioSDK.Result? = nil
+        let e = expectation(description: "")
+
+        self.client.requestParams = ["includeCount": "true" as AnyObject]
+        self.client.requestEntity = .users
+        self.client.handleResponse(response, completion: { result in
+            responseResult = result as? MojioSDK.Result
+            e.fulfill()
+        }) { _ in
+            e.fulfill()
+        }
+
+        wait(for: [e], timeout: 1)
+        
+        XCTAssertNotNil(responseResult)
+        XCTAssertEqual(responseResult?.Data?.count, 2)
+    }
+    
+    func testHandleResponseShouldCallCompletionBlockWithArray() {
+        let json: [String: Any] = [
+            "Data": [
+                ["Id": "111111111"],
+                ["Id": "222222222"]
+            ]
+        ]
+        let result = Alamofire.Result<Any>.success(json)
+        let response = DataResponse(request: nil, response: self.response, data: nil, result: result)
+        
+        var responseResult: [User]? = nil
+        let e = expectation(description: "")
+        
+        self.client.requestEntity = .users
+        self.client.handleResponse(response, completion: { result in
+            responseResult = result as? [User]
+            e.fulfill()
+        }) { _ in
+            e.fulfill()
+        }
+        
+        wait(for: [e], timeout: 1)
+        
+        XCTAssertNotNil(responseResult)
+        XCTAssertEqual(responseResult?.count, 2)
+    }
+    
+    func testHandleResponseShouldCallCompletionBlockWithMessage() {
+        let message = "message text"
+        let json: [String: Any] = [
+            "Message": message
+        ]
+        let result = Alamofire.Result<Any>.success(json)
+        let response = DataResponse(request: nil, response: self.response, data: nil, result: result)
+        
+        var responseResult: String? = nil
+        let e = expectation(description: "")
+        
+        self.client.handleResponse(response, completion: { result in
+            responseResult = result as? String
+            e.fulfill()
+        }) { _ in
+            e.fulfill()
+        }
+        
+        wait(for: [e], timeout: 1)
+        
+        XCTAssertNotNil(responseResult)
+        XCTAssertEqual(responseResult, message)
+    }
+    
+    func testHandleResponseShouldCallCompletionBlockWithSingleEntity() {
+        let id = "1111111111"
+        let json: [String: Any] = [
+            "Id": id
+        ]
+        let result = Alamofire.Result<Any>.success(json)
+        let response = DataResponse(request: nil, response: self.response, data: nil, result: result)
+        
+        var responseResult: User? = nil
+        let e = expectation(description: "")
+        
+        self.client.requestEntity = .users
+        self.client.handleResponse(response, completion: { result in
+            responseResult = result as? User
+            e.fulfill()
+        }) { _ in
+            e.fulfill()
+        }
+        
+        wait(for: [e], timeout: 1)
+        
+        XCTAssertNotNil(responseResult)
+        XCTAssertEqual(responseResult?.Id, id)
+        
     }
 }
