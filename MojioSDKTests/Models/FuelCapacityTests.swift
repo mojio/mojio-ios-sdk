@@ -13,24 +13,30 @@
  * forbidden unless prior written permission is obtained from Moj.io Inc.
  *******************************************************************************/
 
-@testable import <#testable namespace#>
+@testable import MojioSDK
+import ObjectMapper
 import XCTest
 
-class <#class name#>: XCTestCase {
-    
-    override func setUp() {
-        super.setUp()
+class FuelCapacityTests: XCTestCase {
+    func testFuelCapacityShouldBeCreatedFromJsonString() {
+        let jsonString = """
+            {
+            "BaseUnit": "MetersPerSecondPerSecond",
+            "BaseValue": 10,
+            "Unit": "MetersPerSecondPerSecond",
+            "Value": 20,
+            "Timestamp": "2017-11-09T07:16:58.072Z"
+            }
+        """
+        let jsonObject = try! JSONSerialization.jsonObject(with: jsonString.data(using: .utf8)!, options: .allowFragments)
         
-        <#code#>
-    }
-    
-    override func tearDown() {
-        <#code#>
+        let model = Mapper<FuelCapacity>().map(JSONObject: jsonObject)
         
-        super.tearDown()
-    }
-    
-    func <#test name#>() {
-        <#code#>
+        XCTAssertNotNil(model)
+        XCTAssertEqual(model?.BaseUnit, "MetersPerSecondPerSecond")
+        XCTAssertEqual(model?.BaseValue, 10)
+        XCTAssertEqual(model?.Unit, "MetersPerSecondPerSecond")
+        XCTAssertEqual(model?.Value, 20)
+        XCTAssertEqual(model?.Timestamp, "2017-11-09T07:16:58.072Z")
     }
 }

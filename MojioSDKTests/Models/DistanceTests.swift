@@ -13,24 +13,50 @@
  * forbidden unless prior written permission is obtained from Moj.io Inc.
  *******************************************************************************/
 
-@testable import <#testable namespace#>
+@testable import MojioSDK
+import ObjectMapper
 import XCTest
 
-class <#class name#>: XCTestCase {
+class DistanceTests: XCTestCase {
     
-    override func setUp() {
-        super.setUp()
+    func testDistanceModelShouldBeCreatedFromJsonString() {
+        let jsonObject = try! JSONSerialization.jsonObject(with: jsonString.data(using: .utf8)!, options: .allowFragments)
+        let model = Mapper<Acceleration>().map(JSONObject: jsonObject)
         
-        <#code#>
+        XCTAssertNotNil(model)
+        XCTAssertEqual(model?.BaseUnit, "MetersPerSecondPerSecond")
+        XCTAssertEqual(model?.BaseValue, 10)
+        XCTAssertEqual(model?.Unit, "MetersPerSecondPerSecond")
+        XCTAssertEqual(model?.Value, 20)
+        XCTAssertEqual(model?.Timestamp, "2017-11-09T07:16:58.072Z")
     }
     
-    override func tearDown() {
-        <#code#>
+    func testJsonDictShouldReturnBaseUnitAndUnit() {
+        var distance = Distance();
+        distance.BaseUnit = "MetersPerSecondPerSecond"
+        distance.BaseValue = 10
+        distance.Unit = "MetersPerSecondPerSecond"
+        distance.Value = 20
         
-        super.tearDown()
+        let dict = distance.jsonDict()
+        
+        XCTAssertEqual(dict["BaseUnit"] as? String, "MetersPerSecondPerSecond")
+        XCTAssertEqual(dict["Unit"] as? String, "MetersPerSecondPerSecond")
+        XCTAssertEqual(dict["BaseValue"] as? Double, 10)
+        XCTAssertEqual(dict["Value"] as? Double, 20)
     }
-    
-    func <#test name#>() {
-        <#code#>
+}
+
+extension DistanceTests {
+    var jsonString: String {
+        return """
+        {
+        "BaseUnit": "MetersPerSecondPerSecond",
+        "BaseValue": 10,
+        "Unit": "MetersPerSecondPerSecond",
+        "Value": 20,
+        "Timestamp": "2017-11-09T07:16:58.072Z"
+        }
+        """
     }
 }

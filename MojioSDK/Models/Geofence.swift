@@ -77,6 +77,8 @@ public struct Geofence: Mappable, PrimaryKey {
     public var Tags: [String] = []
     public var CreatedOn: String? = nil
     public var LastModified: String? = nil
+    public var OwnerId: String? = nil
+    public var Deleted: Bool? = nil
     
     public var createdOn: Date? = nil
     public var lastModified: Date? = nil
@@ -127,6 +129,8 @@ public struct Geofence: Mappable, PrimaryKey {
         CreatedOn <- map["CreatedOn"]
         LastModified <- map["LastModified"]
         Tags <- map["Tags"]
+        Deleted <- map["Deleted"]
+        OwnerId <- map["OwnerId"]
         
         createdOn = self.CreatedOn?.toDate
         lastModified = self.LastModified?.toDate

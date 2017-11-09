@@ -13,24 +13,39 @@
  * forbidden unless prior written permission is obtained from Moj.io Inc.
  *******************************************************************************/
 
-@testable import <#testable namespace#>
+@testable import MojioSDK
+import ObjectMapper
 import XCTest
 
-class <#class name#>: XCTestCase {
+class IdleStateTests: XCTestCase {
     
-    override func setUp() {
-        super.setUp()
+    func testIdleStateModelShouldBeCreatedFromJsonString() {
+        let jsonObject = try! JSONSerialization.jsonObject(with: jsonString.data(using: .utf8)!, options: .allowFragments)
+        let model = Mapper<IdleState>().map(JSONObject: jsonObject)
         
-        <#code#>
+        XCTAssertNotNil(model)
+        XCTAssertEqual(model?.Timestamp, "2017-11-09T07:15:16.084Z")
+        XCTAssertEqual(model?.Value, true)
+        XCTAssertEqual(model?.StartTime, "2017-11-09T07:15:16.084Z")
+        XCTAssertNotNil(model?.Duration)
     }
-    
-    override func tearDown() {
-        <#code#>
-        
-        super.tearDown()
-    }
-    
-    func <#test name#>() {
-        <#code#>
+}
+
+extension IdleStateTests {
+    var jsonString: String {
+        return """
+        {
+        "Timestamp": "2017-11-09T07:15:16.084Z",
+        "Value": true,
+        "StartTime": "2017-11-09T07:15:16.084Z",
+        "Duration": {
+        "BaseUnit": "Ticks",
+        "Timestamp": "2017-11-09T07:15:16.084Z",
+        "BaseValue": 0,
+        "Unit": "Ticks",
+        "Value": 0
+        }
+        }
+        """
     }
 }

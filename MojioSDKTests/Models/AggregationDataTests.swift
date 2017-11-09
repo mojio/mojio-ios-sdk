@@ -12,3 +12,43 @@
  * Dissemination of this information or reproduction of this material is strictly
  * forbidden unless prior written permission is obtained from Moj.io Inc.
  *******************************************************************************/
+
+@testable import MojioSDK
+import ObjectMapper
+import XCTest
+
+class AggregationDataTests: XCTestCase {
+    func testAggregationDataShouldBeCreatedFromJson() {
+        let jsonObject = try! JSONSerialization.jsonObject(with: jsonString.data(using: .utf8)!, options: .allowFragments)
+        let model = Mapper<AggregationData>().map(JSONObject: jsonObject)
+        
+        XCTAssertNotNil(model)
+        XCTAssertEqual(model?.Total, 12)
+        XCTAssertEqual(model?.Average, 15)
+        XCTAssertEqual(model?.Max, 21)
+        XCTAssertEqual(model?.Min, 1)
+        XCTAssertEqual(model?.Units, "MetersPerSecondPerSecond")
+        XCTAssertEqual(model?.Date, "2017-11-09T07:16:58.072Z")
+        XCTAssertEqual(model?.EndDate, "2017-11-09T07:16:58.072Z")
+        XCTAssertEqual(model?.Count, 31)
+        XCTAssertEqual(model?.TripCount, 5)
+    }
+}
+
+extension AggregationDataTests {
+    var jsonString: String {
+        return """
+        {
+        "Total": 12,
+        "Average": 15,
+        "Max": 21,
+        "Min": 1,
+        "Units": "MetersPerSecondPerSecond",
+        "Date": "2017-11-09T07:16:58.072Z",
+        "EndDate": "2017-11-09T07:16:58.072Z",
+        "Count": 31,
+        "TripCount": 5
+        }
+        """
+    }
+}

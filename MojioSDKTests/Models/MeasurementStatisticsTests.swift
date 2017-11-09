@@ -13,24 +13,52 @@
  * forbidden unless prior written permission is obtained from Moj.io Inc.
  *******************************************************************************/
 
-@testable import <#testable namespace#>
+@testable import MojioSDK
+import ObjectMapper
 import XCTest
 
-class <#class name#>: XCTestCase {
-    
-    override func setUp() {
-        super.setUp()
+class MeasurementStatisticsTests: XCTestCase {
+
+    func testMeasurementStatisticsShouldBeCreatedFromJsonString() {
+        let jsonString = """
+        {
+        "NumOfSamples": 1,
+        "Average": 2,
+        "Variance": 3,
+        "StdDev": 4,
+        "IndexOfDispersion": 5,
+        "CoeffOfVariation": 6,
+        "M2": 7,
+        "Min": 8,
+        "Max": 9,
+        "StandardScore": {
+        "ScoringMethod": "string",
+        "Value": 0,
+        "Percentile": 0,
+        "Average": 0
+        },
+        "MinMaxScore": {
+        "ScoringMethod": "string",
+        "Value": 0,
+        "Percentile": 0,
+        "Average": 0
+        }
+        }
+        """
+        let jsonObject = try! JSONSerialization.jsonObject(with: jsonString.data(using: .utf8)!, options: .allowFragments)
+        let model = Mapper<MeasurementStatistics>().map(JSONObject: jsonObject)
         
-        <#code#>
-    }
-    
-    override func tearDown() {
-        <#code#>
-        
-        super.tearDown()
-    }
-    
-    func <#test name#>() {
-        <#code#>
+        XCTAssertNotNil(model)
+        XCTAssertEqual(model?.NumOfSamples, 1.0)
+        XCTAssertEqual(model?.Average, 2.0)
+        XCTAssertEqual(model?.Variance, 3.0)
+        XCTAssertEqual(model?.StdDev, 4.0)
+        XCTAssertEqual(model?.IndexOfDispersion, 5.0)
+        XCTAssertEqual(model?.CoeffOfVariation, 6.0)
+        XCTAssertEqual(model?.M2, 7.0)
+        XCTAssertEqual(model?.Min, 8.0)
+        XCTAssertEqual(model?.Max, 9.0)
+        XCTAssertNotNil(model?.MinMaxScore)
+        XCTAssertNotNil(model?.StandardScore)
     }
 }

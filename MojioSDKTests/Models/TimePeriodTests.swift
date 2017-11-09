@@ -12,3 +12,35 @@
  * Dissemination of this information or reproduction of this material is strictly
  * forbidden unless prior written permission is obtained from Moj.io Inc.
  *******************************************************************************/
+
+@testable import MojioSDK
+import ObjectMapper
+import XCTest
+
+class TimePeriodTests: XCTestCase {
+    func testTimePeriodShouldBeParsedFromJson() {
+        let jsonObject = try! JSONSerialization.jsonObject(with: jsonString.data(using: .utf8)!, options: .allowFragments)
+        let model = Mapper<TimePeriod>().map(JSONObject: jsonObject)
+        
+        XCTAssertNotNil(model)
+        XCTAssertEqual(model?.BaseUnit, "MetersPerSecondPerSecond")
+        XCTAssertEqual(model?.BaseValue, 10)
+        XCTAssertEqual(model?.Unit, "MetersPerSecondPerSecond")
+        XCTAssertEqual(model?.Value, 20)
+        XCTAssertEqual(model?.Timestamp, "2017-11-09T07:16:58.072Z")
+    }
+}
+
+extension TimePeriodTests {
+    var jsonString: String {
+        return """
+        {
+        "BaseUnit": "MetersPerSecondPerSecond",
+        "Timestamp": "2017-11-09T07:16:58.072Z",
+        "BaseValue": 10,
+        "Unit": "MetersPerSecondPerSecond",
+        "Value": 20
+        }
+        """
+    }
+}

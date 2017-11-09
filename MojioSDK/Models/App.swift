@@ -26,6 +26,9 @@ public struct App: Mappable, PrimaryKey {
     public var Id: String? = nil
     public var CreatedOn: String? = nil
     public var LastModified: String? = nil
+    public var OwnerId: String? = nil
+    public var Deleted: Bool? = nil
+    public var Image: Image? = nil
     
     public var createdOn: Date? = nil
     public var lastModified: Date? = nil
@@ -68,6 +71,9 @@ public struct App: Mappable, PrimaryKey {
         Id <- map["Id"]
         CreatedOn <- map["CreatedOn"]
         LastModified <- map["LastModified"]
+        OwnerId <- map["OwnerId"]
+        Deleted <- map["Deleted"]
+        Image <- map["Image"]
         
         createdOn = self.CreatedOn?.toDate
         lastModified = self.LastModified?.toDate

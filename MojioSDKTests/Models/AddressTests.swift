@@ -12,3 +12,47 @@
  * Dissemination of this information or reproduction of this material is strictly
  * forbidden unless prior written permission is obtained from Moj.io Inc.
  *******************************************************************************/
+
+@testable import MojioSDK
+import ObjectMapper
+import XCTest
+
+class AddressTests: XCTestCase {
+    func testAddressShouldBeCreatedFromJsonString() {
+        let jsonObject = try! JSONSerialization.jsonObject(with: jsonString.data(using: .utf8)!, options: .allowFragments)
+        let model = Mapper<Address>().map(JSONObject: jsonObject)
+
+        XCTAssertNotNil(model)
+        XCTAssertEqual(model?.HouseNumber, "string")
+        XCTAssertEqual(model?.Road, "string")
+        XCTAssertEqual(model?.Neighbourhood, "string")
+        XCTAssertEqual(model?.Suburb, "string")
+        XCTAssertEqual(model?.City, "string")
+        XCTAssertEqual(model?.County, "string")
+        XCTAssertEqual(model?.State, "string")
+        XCTAssertEqual(model?.PostCode, "string")
+        XCTAssertEqual(model?.Country, "string")
+        XCTAssertEqual(model?.CountryCode, "string")
+        XCTAssertEqual(model?.FormattedAddress, "string")
+    }
+}
+
+extension AddressTests {
+    var jsonString: String {
+        return """
+        {
+        "HouseNumber": "string",
+        "Road": "string",
+        "Neighbourhood": "string",
+        "Suburb": "string",
+        "City": "string",
+        "County": "string",
+        "State": "string",
+        "PostCode": "string",
+        "Country": "string",
+        "CountryCode": "string",
+        "FormattedAddress": "string"
+        }
+        """
+    }
+}

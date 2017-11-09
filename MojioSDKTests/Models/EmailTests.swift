@@ -13,24 +13,23 @@
  * forbidden unless prior written permission is obtained from Moj.io Inc.
  *******************************************************************************/
 
-@testable import <#testable namespace#>
+@testable import MojioSDK
+import ObjectMapper
 import XCTest
 
-class <#class name#>: XCTestCase {
-    
-    override func setUp() {
-        super.setUp()
+class EmailTests: XCTestCase {
+    func testEmailModelShouldBeCreatedFromJSON() {
+        let jsonString = """
+        {
+        "Verified": true,
+        "Address": "string"
+        }
+        """
+        let jsonObject = try! JSONSerialization.jsonObject(with: jsonString.data(using: .utf8)!, options: .allowFragments)
+        let model = Mapper<Email>().map(JSONObject: jsonObject)
         
-        <#code#>
-    }
-    
-    override func tearDown() {
-        <#code#>
-        
-        super.tearDown()
-    }
-    
-    func <#test name#>() {
-        <#code#>
+        XCTAssertNotNil(model)
+        XCTAssertEqual(model?.Address, "string")
+        XCTAssertEqual(model?.Verified, true)
     }
 }

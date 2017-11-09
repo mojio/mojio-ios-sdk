@@ -13,24 +13,28 @@
  * forbidden unless prior written permission is obtained from Moj.io Inc.
  *******************************************************************************/
 
-@testable import <#testable namespace#>
+@testable import MojioSDK
+import ObjectMapper
 import XCTest
 
-class <#class name#>: XCTestCase {
+class HarshEventStateTests: XCTestCase {
     
-    override func setUp() {
-        super.setUp()
+    func testHarshEvenStateModelShouldBeCreatedFromJsonString() {
+        let jsonString = """
+        {
+        "Timestamp": "2017-11-09T07:15:16.084Z",
+        "Value": true,
+        "EventType": "Acceleration",
+        "TurnType": "Left"
+        }
+        """
+        let jsonObject = try! JSONSerialization.jsonObject(with: jsonString.data(using: .utf8)!, options: .allowFragments)
+        let model = Mapper<HarshEventState>().map(JSONObject: jsonObject)
         
-        <#code#>
-    }
-    
-    override func tearDown() {
-        <#code#>
-        
-        super.tearDown()
-    }
-    
-    func <#test name#>() {
-        <#code#>
+        XCTAssertNotNil(model)
+        XCTAssertEqual(model?.Timestamp, "2017-11-09T07:15:16.084Z")
+        XCTAssertEqual(model?.Value, true)
+        XCTAssertEqual(model?.EventType, "Acceleration")
+        XCTAssertEqual(model?.TurnType, "Left")
     }
 }

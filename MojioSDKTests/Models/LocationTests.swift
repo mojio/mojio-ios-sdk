@@ -13,24 +13,70 @@
  * forbidden unless prior written permission is obtained from Moj.io Inc.
  *******************************************************************************/
 
-@testable import <#testable namespace#>
+@testable import MojioSDK
+import ObjectMapper
 import XCTest
 
-class <#class name#>: XCTestCase {
+class LocationTests: XCTestCase {
     
-    override func setUp() {
-        super.setUp()
+    func testLocationShouldBeCreatedFromJson() {
+        let jsonObject = try! JSONSerialization.jsonObject(with: jsonString.data(using: .utf8)!, options: .allowFragments)
+        let model = Mapper<Location>().map(JSONObject: jsonObject)
         
-        <#code#>
+        XCTAssertNotNil(model)
+        XCTAssertNotNil(model?.LocationAddress)
+        XCTAssertNotNil(model?.LocationHeading)
+        XCTAssertEqual(model?.Timestamp, "2017-11-09T07:16:57.388Z")
+        XCTAssertEqual(model?.Lat, 23.0)
+        XCTAssertEqual(model?.Lng, 51.0)
+        XCTAssertEqual(model?.Status, "Unknown")
+        XCTAssertEqual(model?.Dilution, 30.0)
+        XCTAssertEqual(model?.Altitude, 35.0)
+        XCTAssertEqual(model?.GeoHash, "string")
     }
-    
-    override func tearDown() {
-        <#code#>
-        
-        super.tearDown()
-    }
-    
-    func <#test name#>() {
-        <#code#>
+}
+
+extension LocationTests {
+    var jsonString: String {
+        return """
+        {
+        "Timestamp": "2017-11-09T07:16:57.388Z",
+        "Lat": 23.0,
+        "Lng": 51.0,
+        "Status": "Unknown",
+        "Dilution": 30.0,
+        "Altitude": 35.0,
+        "GeoHash": "string",
+        "Accuracy": {
+        "BaseUnit": "Meters",
+        "Timestamp": "2017-11-09T07:16:57.388Z",
+        "BaseValue": 0,
+        "Unit": "Meters",
+        "Value": 0
+        },
+        "Heading": {
+        "BaseUnit": "Degree",
+        "Direction": "string",
+        "LeftTurn": true,
+        "Timestamp": "2017-11-09T07:16:57.388Z",
+        "BaseValue": 0,
+        "Unit": "Degree",
+        "Value": 0
+        },
+        "Address": {
+        "HouseNumber": "string",
+        "Road": "string",
+        "Neighbourhood": "string",
+        "Suburb": "string",
+        "City": "string",
+        "County": "string",
+        "State": "string",
+        "PostCode": "string",
+        "Country": "string",
+        "CountryCode": "string",
+        "FormattedAddress": "string"
+        }
+        }
+        """
     }
 }

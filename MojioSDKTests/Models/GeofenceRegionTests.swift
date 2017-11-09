@@ -13,24 +13,53 @@
  * forbidden unless prior written permission is obtained from Moj.io Inc.
  *******************************************************************************/
 
-@testable import <#testable namespace#>
+@testable import MojioSDK
+import ObjectMapper
 import XCTest
 
-class <#class name#>: XCTestCase {
+class GeofenceRegionTests: XCTestCase {
+    var model: GeofenceRegion!
     
     override func setUp() {
         super.setUp()
         
-        <#code#>
+        let jsonObject = try! JSONSerialization.jsonObject(with: jsonString.data(using: .utf8)!, options: .allowFragments)
+        model = Mapper<GeofenceRegion>().map(JSONObject: jsonObject)
     }
     
-    override func tearDown() {
-        <#code#>
+    func testGeofenceRegionShouldBeCreatedFromJsonString() {
+        XCTAssertNotNil(model)
+        XCTAssertEqual(model?.GeofenceType, "Circle")
+        XCTAssertEqual(model?.Lat, 24.1)
+        XCTAssertEqual(model?.Lng, 51.2)
+        XCTAssertNotNil(model?.Radius)
+    }
+    
+    func testJsonDictShouldReturnGeofenceInfo() {
+        let dict = model.jsonDict()
         
-        super.tearDown()
+        XCTAssertEqual(dict["Type"] as? String, "Circle")
+        XCTAssertEqual(dict["Lat"] as? Double, 24.1)
+        XCTAssertEqual(dict["Lng"] as? Double, 51.2)
+        XCTAssertNotNil(dict["Radius"])
     }
-    
-    func <#test name#>() {
-        <#code#>
+}
+
+extension GeofenceRegionTests {
+    var jsonString: String {
+        return """
+        {
+            "Type": "Circle",
+            "Lat": 24.1,
+            "Lng": 51.2,
+            "Radius": {
+                "BaseUnit": "Meters",
+                "Timestamp": "2017-11-09T07:16:57.840Z",
+                "BaseValue": 0,
+                "Unit": "Meters",
+                "Value": 0
+            }
+        }
+        """
     }
 }

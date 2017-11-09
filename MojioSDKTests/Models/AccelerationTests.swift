@@ -18,16 +18,16 @@ import XCTest
 import ObjectMapper
 
 class AccelerationTests: XCTestCase {
-    func testDeviceMeasurementModelShouldBeParsedFromJson() {
+    func testAccelerationModelShouldBeParsedFromJson() {
         let jsonObject = try! JSONSerialization.jsonObject(with: jsonString.data(using: .utf8)!, options: .allowFragments)
         let model = Mapper<Acceleration>().map(JSONObject: jsonObject)
 
         XCTAssertNotNil(model)
-        XCTAssertEqual(model?.BaseUnit, "")
+        XCTAssertEqual(model?.BaseUnit, "MetersPerSecondPerSecond")
         XCTAssertEqual(model?.BaseValue, 100)
-        XCTAssertEqual(model?.Unit, "")
+        XCTAssertEqual(model?.Unit, "MetersPerSecondPerSecond")
         XCTAssertEqual(model?.Value, 120)
-        XCTAssertEqual(model?.Timestamp, "")
+        XCTAssertEqual(model?.Timestamp, "2017-11-09T07:16:58.072Z")
     }
 }
 
@@ -35,11 +35,11 @@ extension AccelerationTests {
     var jsonString: String {
         return """
         {
-        "BaseUnit": "",
+        "BaseUnit": "MetersPerSecondPerSecond",
         "BaseValue": 100,
-        "Unit": "",
+        "Unit": "MetersPerSecondPerSecond",
         "Value": 120,
-        "Timestamp": ""
+        "Timestamp": "2017-11-09T07:16:58.072Z"
         }
         """
     }

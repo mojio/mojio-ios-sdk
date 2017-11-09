@@ -847,7 +847,7 @@ class AuthClientTests: XCTestCase {
         XCTAssertEqual(responseResult?["Error"] as? String, "InvalidAuthToken")
     }
     
-    func testAuthClientShiuldCallFailureBlockIfStatusCodeIsNot200() {
+    func testAuthClientShouldCallFailureBlockIfStatusCodeIsNot200() {
         let keychainStorageProvider = KeychainStorageProviderMock()
         let keychainManager = KeychainManager(keychain: keychainStorageProvider)
         let sampleAuthToken = AuthToken(accessToken: "old-access-token", expiry: "4800", refreshToken: "old-refresh-token", uniqueId: "old-id")

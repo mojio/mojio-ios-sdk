@@ -12,3 +12,31 @@
  * Dissemination of this information or reproduction of this material is strictly
  * forbidden unless prior written permission is obtained from Moj.io Inc.
  *******************************************************************************/
+
+@testable import MojioSDK
+import ObjectMapper
+import XCTest
+
+class BooleanStateTests: XCTestCase {
+    func testBooleanStateModelShouldBeParsedFromJsonString() {
+        let jsonObject = try! JSONSerialization.jsonObject(with: jsonString.data(using: .utf8)!, options: .allowFragments)
+        let model = Mapper<BooleanState>().map(JSONObject: jsonObject)
+        
+        XCTAssertNotNil(model)
+        XCTAssertEqual(model?.Timestamp, "2017-11-09T07:16:58.073Z")
+        XCTAssertEqual(model?.Value, true)
+
+    }
+}
+
+extension BooleanStateTests {
+    var jsonString: String {
+        return """
+        {
+        "Timestamp": "2017-11-09T07:16:58.073Z",
+        "Value": true
+        }
+        
+        """
+    }
+}
