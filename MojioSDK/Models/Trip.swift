@@ -110,5 +110,8 @@ public struct Trip: Mappable, PrimaryKey {
         createdOn = self.CreatedOn?.toDate
         lastModified = self.LastModified?.toDate
         duration = TimeInterval.from(self.TripDuration)
+        if let start = startTimestamp, let end = endTimestamp, duration == nil {
+            duration = end.timeIntervalSince(start)
+        }
     }
 }
