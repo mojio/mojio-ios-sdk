@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2278359C1FB60253002D24F9 /* StringExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2278359B1FB60253002D24F9 /* StringExt.swift */; };
+		2278359E1FB60291002D24F9 /* TimeIntervalExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2278359D1FB60291002D24F9 /* TimeIntervalExt.swift */; };
 		644017541DA2AC9A00DAA73D /* AggregationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644017531DA2AC9A00DAA73D /* AggregationData.swift */; };
 		644214DE1D9E6500005A86C5 /* FuelVolume.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644214DD1D9E6500005A86C5 /* FuelVolume.swift */; };
 		6B7344AEFEDC6731687DB2A3 /* Pods_MojioSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D8CC37B8959C27E426C51E2 /* Pods_MojioSDK.framework */; };
@@ -122,6 +124,8 @@
 
 /* Begin PBXFileReference section */
 		12DB7395EEC25B945C6073A8 /* Pods-MojioSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MojioSDK.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MojioSDK/Pods-MojioSDK.debug.xcconfig"; sourceTree = "<group>"; };
+		2278359B1FB60253002D24F9 /* StringExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StringExt.swift; path = Extensions/StringExt.swift; sourceTree = "<group>"; };
+		2278359D1FB60291002D24F9 /* TimeIntervalExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TimeIntervalExt.swift; path = Extensions/TimeIntervalExt.swift; sourceTree = "<group>"; };
 		2D8CC37B8959C27E426C51E2 /* Pods_MojioSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MojioSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5129D3ED3B56C9F0B8D93690 /* Pods-MojioSDKTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MojioSDKTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MojioSDKTests/Pods-MojioSDKTests.debug.xcconfig"; sourceTree = "<group>"; };
 		644017531DA2AC9A00DAA73D /* AggregationData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AggregationData.swift; path = Models/AggregationData.swift; sourceTree = "<group>"; };
@@ -260,6 +264,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2278359A1FB601FF002D24F9 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				2278359B1FB60253002D24F9 /* StringExt.swift */,
+				2278359D1FB60291002D24F9 /* TimeIntervalExt.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
 		755785381C6BE403000D65B3 = {
 			isa = PBXGroup;
 			children = (
@@ -387,6 +400,7 @@
 				BC879B291CBEFF7F00F9177B /* Client */,
 				BC879B2C1CBEFF9000F9177B /* Common */,
 				BC879B2A1CBEFF8500F9177B /* Env */,
+				2278359A1FB601FF002D24F9 /* Extensions */,
 				BCC2EFB51CBED4E6004D2759 /* Info.plist */,
 				BCC2EFD91CBEF74A004D2759 /* Models */,
 				BCC2EFB31CBED4E6004D2759 /* MojioSDK.h */,
@@ -792,6 +806,7 @@
 				BC717D9C1DA6EFA20052317C /* ServiceScheduleItem.swift in Sources */,
 				BC72D7A91CC5615600D9740B /* AuthViewController.swift in Sources */,
 				BC879B601CBEFFDD00F9177B /* Acceleration.swift in Sources */,
+				2278359E1FB60291002D24F9 /* TimeIntervalExt.swift in Sources */,
 				BC72D7AB1CC5615600D9740B /* RestClient.swift in Sources */,
 				BC879B391CBEFFC000F9177B /* Engine.swift in Sources */,
 				BC879B621CBEFFDD00F9177B /* Address.swift in Sources */,
@@ -802,6 +817,7 @@
 				BCC8A49E1D19EAAD00E14E2B /* Error.swift in Sources */,
 				BC879B6A1CBEFFDD00F9177B /* FuelEfficiency.swift in Sources */,
 				BCC8A4A01D19EABF00E14E2B /* WSClient.swift in Sources */,
+				2278359C1FB60253002D24F9 /* StringExt.swift in Sources */,
 				BCF2DE4A1D454B8D00EDD376 /* Geofence.swift in Sources */,
 				E06C956A1D25CA2A006AECBB /* Result.swift in Sources */,
 				BC879B6B1CBEFFDD00F9177B /* FuelLevel.swift in Sources */,
