@@ -53,7 +53,8 @@ public struct Trip: Mappable, PrimaryKey {
     public var endTimestamp: Date? = nil
     public var createdOn: Date? = nil
     public var lastModified: Date? = nil
-    
+    public var duration: TimeInterval? = nil
+
     public init() {}
     
     public init?(map: Map) {
@@ -108,5 +109,6 @@ public struct Trip: Mappable, PrimaryKey {
         endTimestamp = self.EndTimestamp?.toDate
         createdOn = self.CreatedOn?.toDate
         lastModified = self.LastModified?.toDate
+        duration = TimeInterval.from(self.TripDuration)
     }
 }
