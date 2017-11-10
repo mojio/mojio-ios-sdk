@@ -30,12 +30,12 @@ public enum WifiRadioStatus: String {
 
 public struct WifiRadio: Mappable  {
     
-    public var TimeStamp: String? = nil
+    public var Timestamp: String? = nil
     public var SSID: String? = nil
     public var Password: String? = nil
-    public var AllowRoaming: String? = nil
+    public var AllowRoaming: Bool? = nil
     public var Status: String? = nil
-    public var Strength: String? = nil
+    public var Strength: Double? = nil
     
     public var timestamp: Date? = nil
 
@@ -96,7 +96,7 @@ public struct WifiRadio: Mappable  {
                 }
             }
             
-            if timespan.characters.count > 0 {
+            if timespan.count > 0 {
                 map["TimeToLive"] = timespan
             }
         }
@@ -105,13 +105,13 @@ public struct WifiRadio: Mappable  {
     }
 
     public mutating func mapping(map: Map) {
-        TimeStamp <- map["TimeStamp"]
+        Timestamp <- map["Timestamp"]
         SSID <- map["SSID"]
         Password <- map["Password"]
         AllowRoaming <- map["AllowRoaming"]
         Status <- map["Status"]
         Strength <- map["Strength"]
         
-        timestamp = self.TimeStamp?.toDate
+        timestamp = self.Timestamp?.toDate
     }
 }

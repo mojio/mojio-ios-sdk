@@ -22,6 +22,7 @@ public struct Trip: Mappable, PrimaryKey {
     public var Name: String? = nil
     public var Tags: [String] = []
     public var MojioId: String? = nil
+    public var OwnerId: String? = nil
     public var Completed: Bool = false
     public var TripDuration: String? = nil
     public var TripDistance: Distance? = nil
@@ -76,6 +77,7 @@ public struct Trip: Mappable, PrimaryKey {
         VehicleId <- map["VehicleId"]
         Name <- map["Name"]
         MojioId <- map["MojioId"]
+        OwnerId <- map["OwnerId"]
         Completed <- map["Completed"]
         TripDuration <- map["Duration"]
         TripDistance <- map["Distance"]

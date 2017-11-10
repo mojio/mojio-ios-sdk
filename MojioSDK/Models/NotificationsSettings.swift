@@ -52,6 +52,11 @@ public struct NotificationsSettings:  Mappable {
     public var EnableDisturbanceActivity: Bool = false
     public var EnableAccidentActivity: Bool = false
     public var EnableDeviceUnpluggedActivity: Bool = false
+    
+    public var EnableVehicleConnectedActivity: Bool = false
+    public var EnableDeviceUpdatedActivity: Bool = false
+    public var EnableSMSActivity: Bool = false
+    public var EnableVehicleCompatibilityActivity: Bool = false
 
     public var EnableGeofenceActivity: Bool = false
     public var Geofences: [SettingsGeofence] = []
@@ -95,7 +100,12 @@ public struct NotificationsSettings:  Mappable {
         EnableDisturbanceActivity <- map["EnableDisturbanceActivity"]
         EnableAccidentActivity <- map["EnableAccidentActivity"]
         EnableDeviceUnpluggedActivity <- map["EnableDeviceUnpluggedActivity"]
-        
+
+        EnableVehicleConnectedActivity <- map["EnableVehicleConnectedActivity"]
+        EnableDeviceUpdatedActivity <- map["EnableDeviceUpdatedActivity"]
+        EnableSMSActivity <- map["EnableSMSActivity"]
+        EnableVehicleCompatibilityActivity <- map["EnableVehicleCompatibilityActivity"]
+
         EnableGeofenceActivity <- map["EnableGeofenceActivity"]
         Geofences <- map["Geofences"]
     }

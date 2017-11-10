@@ -43,5 +43,4 @@ public struct ServiceScheduleItem: Mappable {
         Intervals <- map["Intervals"]
         Events <- map["Events"]
     }
-
 }

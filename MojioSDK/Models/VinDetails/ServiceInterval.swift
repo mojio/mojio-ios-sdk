@@ -23,7 +23,7 @@ public struct ServiceInterval: Mappable {
     public var IntervalType: String? = nil
     public var Value: Double = 0
     public var Units: String? = nil
-    public var InitalValue: Double = 0
+    public var InitialValue: Double = 0
 
     public init() {}
     
@@ -37,6 +37,6 @@ public struct ServiceInterval: Mappable {
         IntervalType <- map["IntervalType"]
         Value <- map["Value"]
         Units <- map["Units"]
-        InitalValue <- map["InitalValue"]
+        InitialValue <- map["InitialValue"]
     }
 }

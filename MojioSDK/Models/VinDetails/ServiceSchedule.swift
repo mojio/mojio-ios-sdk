@@ -19,6 +19,7 @@ import ObjectMapper
 public struct ServiceSchedule: Mappable {
     
     public var VIN: String? = nil
+    public var IsDefault: Bool? = nil
     public var Items: [ServiceScheduleItem] = []
     
     public init() {}
@@ -29,6 +30,7 @@ public struct ServiceSchedule: Mappable {
     
     public mutating func mapping(map: Map) {
         VIN <- map["VIN"]
+        IsDefault <- map["IsDefault"]
         Items <- map["Items"]
     }
 }

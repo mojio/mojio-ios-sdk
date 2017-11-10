@@ -13,26 +13,27 @@
  * forbidden unless prior written permission is obtained from Moj.io Inc.
  *******************************************************************************/
 
-import UIKit
+@testable import MojioSDK
 import ObjectMapper
+import XCTest
 
-public struct Warranty: Mappable {
-    
-    public var Name: String? = nil
-    public var `Type`: String? = nil
-    public var Months: String? = nil
-    public var Km: Double? = nil
-    
-    public init() {}
-    
-    public init?(map: Map) {
-        self.init()
-    }
-
-    public mutating func mapping(map: Map) {
-        Name <- map["Name"]
-        Type <- map["Type"]
-        Months <- map["Months"]
-        Km <- map["Km"]
+class TransmissionTests: XCTestCase {
+    func testTransmissionModelShouldBeCreatedFromJsonString() {
+        let jsonString = """
+        {
+        "Name": "string",
+        "Type": "string",
+        "DetailType": "string",
+        "Gears": "string"
+        }
+        """
+        let jsonObject = try! JSONSerialization.jsonObject(with: jsonString.data(using: .utf8)!, options: .allowFragments)
+        let model = Mapper<Transmission>().map(JSONObject: jsonObject)
+        
+        XCTAssertNotNil(model)
+        XCTAssertEqual(model?.Name, "string")
+        XCTAssertEqual(model?.Type, "string")
+        XCTAssertEqual(model?.DetailType, "string")
+        XCTAssertEqual(model?.Gears, "string")
     }
 }
