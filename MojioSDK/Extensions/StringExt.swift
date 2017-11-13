@@ -17,29 +17,22 @@ import Foundation
 import ObjectMapper
 import SwiftDate
 
-// Base Device Measurement
-public protocol DeviceMeasurement: Mappable {
-    var BaseUnit: String? {get set}
-    var BaseValue: Double {get set}
-    var Unit: String? {get set}
-    var Value: Double {get set}
-    var Timestamp: String? {get set}
-    
-    var timeStamp: Date? {get set}
-}
-
-extension DeviceMeasurement {
-    public mutating func mapping(map: Map) {
-        self.measureMapping(map: map)
-    }
-    
-    public mutating func measureMapping(map: Map) {
-        BaseUnit <- map["BaseUnit"]
-        BaseValue <- map["BaseValue"]
-        Unit <- map["Unit"]
-        Value <- map["Value"]
-        Timestamp <- map["Timestamp"]
+internal extension String {
+    // Date conversion
+    internal var toDate: Date? {
         
-        timeStamp = self.Timestamp?.toDate
+        if let date =  DateInRegion.init(string: self, format: .iso8601(options: .withFullDate), fromRegion: Region.GMT()) {
+            return date.absoluteDate
+        }
+        
+        if let date = DateInRegion.init(string: self, format: .iso8601(options: .withInternetDateTimeExtended), fromRegion: Region.GMT()) {
+            return date.absoluteDate
+        }
+        
+        if let date = DateInRegion.init(string: self, format: .iso8601(options: .withInternetDateTime), fromRegion: Region.GMT()) {
+            return date.absoluteDate
+        }
+        
+        return nil
     }
 }
