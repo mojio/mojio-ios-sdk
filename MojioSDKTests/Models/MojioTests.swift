@@ -40,6 +40,19 @@ class MojioTests: XCTestCase {
         XCTAssertEqual(model?.MSISDN, "string")
         XCTAssertEqual(model?.ICCID, "string")
     }
+    
+    func testMojioShouldCreateJsonString() {
+        let sampleJson = """
+{"Name":"name","IMEI":"imei"}
+"""
+        var mojio = Mojio()
+        mojio.Name = "name"
+        mojio.IMEI = "imei"
+        
+        let json = mojio.json()
+        
+        XCTAssertEqual(json, sampleJson)
+    }
 }
 
 extension MojioTests {

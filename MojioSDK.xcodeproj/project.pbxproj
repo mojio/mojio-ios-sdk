@@ -47,6 +47,16 @@
 		2EBD23B71FAB28A500399D63 /* MojioRegionStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBD23B61FAB28A500399D63 /* MojioRegionStub.swift */; };
 		2EBD23B91FAB66BB00399D63 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBD23B81FAB66BB00399D63 /* Errors.swift */; };
 		2EBF12BE1FB986FE00F068B2 /* FuelVolume.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF12BD1FB986FE00F068B2 /* FuelVolume.swift */; };
+		2EBF12C11FB9987F00F068B2 /* BaseActivityLocationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF12C01FB9987F00F068B2 /* BaseActivityLocationTests.swift */; };
+		2EBF12C31FB99C7D00F068B2 /* BaseActivityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF12C21FB99C7D00F068B2 /* BaseActivityTests.swift */; };
+		2EBF12C51FB9AF1A00F068B2 /* ActivityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF12C41FB9AF1A00F068B2 /* ActivityTests.swift */; };
+		2EBF12C71FB9C22C00F068B2 /* ActivityLocationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF12C61FB9C22C00F068B2 /* ActivityLocationTests.swift */; };
+		2EBF12C91FB9C3F100F068B2 /* RootActivityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF12C81FB9C3F100F068B2 /* RootActivityTests.swift */; };
+		2EBF12CB1FB9CDF700F068B2 /* WSClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF12CA1FB9CDF700F068B2 /* WSClientTests.swift */; };
+		2EBF12CD1FB9D90D00F068B2 /* WebSocketProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF12CC1FB9D90D00F068B2 /* WebSocketProvider.swift */; };
+		2EBF12CF1FB9DD6F00F068B2 /* WebSocketFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF12CE1FB9DD6F00F068B2 /* WebSocketFactory.swift */; };
+		2EBF12D11FB9E0D700F068B2 /* SwiftWebSocketFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF12D01FB9E0D700F068B2 /* SwiftWebSocketFactory.swift */; };
+		2EBF12D31FB9E70100F068B2 /* SwiftWebSocketProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF12D21FB9E70100F068B2 /* SwiftWebSocketProvider.swift */; };
 		2EC36F4B1FB58A9A006A07B8 /* SettingsGeofenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC36F4A1FB58A9A006A07B8 /* SettingsGeofenceTests.swift */; };
 		2EC36F4D1FB58B89006A07B8 /* NotificationSettingsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC36F4C1FB58B89006A07B8 /* NotificationSettingsTests.swift */; };
 		2EC36F4F1FB59304006A07B8 /* OdometerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC36F4E1FB59304006A07B8 /* OdometerTests.swift */; };
@@ -218,6 +228,16 @@
 		2EBD23B61FAB28A500399D63 /* MojioRegionStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MojioRegionStub.swift; sourceTree = "<group>"; };
 		2EBD23B81FAB66BB00399D63 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		2EBF12BD1FB986FE00F068B2 /* FuelVolume.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FuelVolume.swift; sourceTree = "<group>"; };
+		2EBF12C01FB9987F00F068B2 /* BaseActivityLocationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseActivityLocationTests.swift; sourceTree = "<group>"; };
+		2EBF12C21FB99C7D00F068B2 /* BaseActivityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseActivityTests.swift; sourceTree = "<group>"; };
+		2EBF12C41FB9AF1A00F068B2 /* ActivityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTests.swift; sourceTree = "<group>"; };
+		2EBF12C61FB9C22C00F068B2 /* ActivityLocationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityLocationTests.swift; sourceTree = "<group>"; };
+		2EBF12C81FB9C3F100F068B2 /* RootActivityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootActivityTests.swift; sourceTree = "<group>"; };
+		2EBF12CA1FB9CDF700F068B2 /* WSClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WSClientTests.swift; sourceTree = "<group>"; };
+		2EBF12CC1FB9D90D00F068B2 /* WebSocketProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocketProvider.swift; sourceTree = "<group>"; };
+		2EBF12CE1FB9DD6F00F068B2 /* WebSocketFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocketFactory.swift; sourceTree = "<group>"; };
+		2EBF12D01FB9E0D700F068B2 /* SwiftWebSocketFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftWebSocketFactory.swift; sourceTree = "<group>"; };
+		2EBF12D21FB9E70100F068B2 /* SwiftWebSocketProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftWebSocketProvider.swift; sourceTree = "<group>"; };
 		2EC36F4A1FB58A9A006A07B8 /* SettingsGeofenceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsGeofenceTests.swift; sourceTree = "<group>"; };
 		2EC36F4C1FB58B89006A07B8 /* NotificationSettingsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingsTests.swift; sourceTree = "<group>"; };
 		2EC36F4E1FB59304006A07B8 /* OdometerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OdometerTests.swift; sourceTree = "<group>"; };
@@ -385,6 +405,7 @@
 		2E791CA21FB3421B0074F9C8 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				2EBF12BF1FB9983A00F068B2 /* ActivityStreams */,
 				2EC36F641FB5E975006A07B8 /* VinDetails */,
 				2E8BC6661FB343FB00A165C3 /* AccelerometerTests.swift */,
 				2E8BC6681FB3441500A165C3 /* AccelerationTests.swift */,
@@ -450,6 +471,19 @@
 			path = TestDoubles;
 			sourceTree = "<group>";
 		};
+		2EBF12BF1FB9983A00F068B2 /* ActivityStreams */ = {
+			isa = PBXGroup;
+			children = (
+				2EBF12C01FB9987F00F068B2 /* BaseActivityLocationTests.swift */,
+				2EBF12C21FB99C7D00F068B2 /* BaseActivityTests.swift */,
+				2EBF12C41FB9AF1A00F068B2 /* ActivityTests.swift */,
+				2EBF12C61FB9C22C00F068B2 /* ActivityLocationTests.swift */,
+				2EBF12C81FB9C3F100F068B2 /* RootActivityTests.swift */,
+			);
+			name = ActivityStreams;
+			path = MojioSDKTests/Models/ActivityStreams;
+			sourceTree = SOURCE_ROOT;
+		};
 		2EC36F641FB5E975006A07B8 /* VinDetails */ = {
 			isa = PBXGroup;
 			children = (
@@ -487,6 +521,7 @@
 				2E95B1061FB08D84006A3E1E /* ClientHeadersTests.swift */,
 				2E95B1081FB0AD77006A3E1E /* RestClientTests.swift */,
 				2E29D8741FB1F3AA00BBEB16 /* RestClientHandleResponseTests.swift */,
+				2EBF12CA1FB9CDF700F068B2 /* WSClientTests.swift */,
 			);
 			path = Client;
 			sourceTree = "<group>";
@@ -526,6 +561,10 @@
 			isa = PBXGroup;
 			children = (
 				BCC8A49F1D19EABF00E14E2B /* WSClient.swift */,
+				2EBF12CC1FB9D90D00F068B2 /* WebSocketProvider.swift */,
+				2EBF12CE1FB9DD6F00F068B2 /* WebSocketFactory.swift */,
+				2EBF12D21FB9E70100F068B2 /* SwiftWebSocketProvider.swift */,
+				2EBF12D01FB9E0D700F068B2 /* SwiftWebSocketFactory.swift */,
 				BC72D7A41CC5615600D9740B /* AuthClient.swift */,
 				BC72D7A51CC5615600D9740B /* AuthViewController.swift */,
 				BC72D7A61CC5615600D9740B /* AuthViewController.xib */,
@@ -970,6 +1009,7 @@
 				BC879B621CBEFFDD00F9177B /* Address.swift in Sources */,
 				BC879B401CBEFFC000F9177B /* Vin.swift in Sources */,
 				BC879B6F1CBEFFDD00F9177B /* Location.swift in Sources */,
+				2EBF12CD1FB9D90D00F068B2 /* WebSocketProvider.swift in Sources */,
 				F9E9FDAE1D93122A00DCB690 /* HarshEvent.swift in Sources */,
 				2E5767411FB4536A008F16F6 /* Image.swift in Sources */,
 				BC31E3D31D419F5D001649A7 /* Activity.swift in Sources */,
@@ -993,10 +1033,12 @@
 				2E5767441FB4551A008F16F6 /* ObjectMapper+Codable.swift in Sources */,
 				BC879B711CBEFFDD00F9177B /* Mojio.swift in Sources */,
 				BC31E3D61D419F5D001649A7 /* RootActivity.swift in Sources */,
+				2EBF12D31FB9E70100F068B2 /* SwiftWebSocketProvider.swift in Sources */,
 				2EBF12BE1FB986FE00F068B2 /* FuelVolume.swift in Sources */,
 				BC879B721CBEFFDD00F9177B /* Odometer.swift in Sources */,
 				BC879B631CBEFFDD00F9177B /* App.swift in Sources */,
 				BC94271B1F01E17D00B7424A /* TripPolyline.swift in Sources */,
+				2EBF12CF1FB9DD6F00F068B2 /* WebSocketFactory.swift in Sources */,
 				BC879B661CBEFFDD00F9177B /* DiagnosticCode.swift in Sources */,
 				BC879B3D1CBEFFC000F9177B /* ServiceBulletin.swift in Sources */,
 				BC879B3F1CBEFFC000F9177B /* Transmission.swift in Sources */,
@@ -1018,6 +1060,7 @@
 				F9623AAE1D935D74005C10F2 /* IdleState.swift in Sources */,
 				BC879B731CBEFFDD00F9177B /* PhoneNumber.swift in Sources */,
 				BC879B3E1CBEFFC000F9177B /* ServiceSchedule.swift in Sources */,
+				2EBF12D11FB9E0D700F068B2 /* SwiftWebSocketFactory.swift in Sources */,
 				BC879B6C1CBEFFDD00F9177B /* Group.swift in Sources */,
 				BC879B651CBEFFDD00F9177B /* BooleanState.swift in Sources */,
 				BC879B3A1CBEFFC000F9177B /* NextServiceSchedule.swift in Sources */,
@@ -1035,16 +1078,21 @@
 				2EC36F6E1FB5F788006A07B8 /* ServiceBulletingTests.swift in Sources */,
 				2EC36F7C1FB60333006A07B8 /* VinDetailsTests.swift in Sources */,
 				2E57676A1FB4B517008F16F6 /* IdleStateTests.swift in Sources */,
+				2EBF12C51FB9AF1A00F068B2 /* ActivityTests.swift in Sources */,
 				2EC36F7A1FB6020F006A07B8 /* VinTests.swift in Sources */,
 				2E57673B1FB43CA9008F16F6 /* AddressTests.swift in Sources */,
+				2EBF12C31FB99C7D00F068B2 /* BaseActivityTests.swift in Sources */,
 				2EC36F741FB5FE40006A07B8 /* ServiceScheduleTests.swift in Sources */,
 				2E8BC6691FB3441500A165C3 /* AccelerationTests.swift in Sources */,
 				2E57674A1FB462C2008F16F6 /* BooleanStateTests.swift in Sources */,
+				2EBF12CB1FB9CDF700F068B2 /* WSClientTests.swift in Sources */,
 				2E5767581FB49557008F16F6 /* FuelLevelTests.swift in Sources */,
 				2E5767391FB43B3C008F16F6 /* TimePeriodTests.swift in Sources */,
 				2E5767481FB460E5008F16F6 /* BatteryTests.swift in Sources */,
 				2EC36F6A1FB5EC23006A07B8 /* PlatformServiceScheduleTests.swift in Sources */,
+				2EBF12C71FB9C22C00F068B2 /* ActivityLocationTests.swift in Sources */,
 				2E57675E1FB496E6008F16F6 /* GeofenceRegionTests.swift in Sources */,
+				2EBF12C11FB9987F00F068B2 /* BaseActivityLocationTests.swift in Sources */,
 				2EC36F721FB5FCAE006A07B8 /* ServiceIntervalTests.swift in Sources */,
 				2E5767641FB4AEC6008F16F6 /* HarshEventStateTests.swift in Sources */,
 				2EC36F5B1FB5AFEE006A07B8 /* TripPolylineTests.swift in Sources */,
@@ -1089,6 +1137,7 @@
 				2ED946F21FA9FCFD00132568 /* ClientEnvironmentTests.swift in Sources */,
 				2E8BC6671FB343FB00A165C3 /* AccelerometerTests.swift in Sources */,
 				2EC36F761FB5FF7E006A07B8 /* ServiceScheduleItemTests.swift in Sources */,
+				2EBF12C91FB9C3F100F068B2 /* RootActivityTests.swift in Sources */,
 				2EC36F4D1FB58B89006A07B8 /* NotificationSettingsTests.swift in Sources */,
 				2E57673F1FB44301008F16F6 /* AppTests.swift in Sources */,
 				2EBD23B91FAB66BB00399D63 /* Errors.swift in Sources */,

@@ -25,21 +25,36 @@ open class WSClient: RestClient {
     private var wsDispatchQueue = WSClient.wsDefaultDispatchQueue
     
     private var publicKeys: [SecKey]? = nil
+    private let webSocketFactory: WebSocketFactory
     
-    private override init(clientEnvironment: ClientEnvironment, sessionManager: SessionManager = SessionManager.default, keychainManager: KeychainManager = KeychainManager()) {
+    private override init(
+        clientEnvironment: ClientEnvironment,
+        sessionManager: SessionManager = SessionManager.default,
+        keychainManager: KeychainManager = KeychainManager()
+    ) {
+        self.webSocketFactory = SwiftWebSocketFactory()
+        
         super.init(clientEnvironment: clientEnvironment, sessionManager: sessionManager)
     }
     
-    public init(clientEnvironment: ClientEnvironment, sessionManager: SessionManager = SessionManager.default, publicKeys: [SecKey]? = nil) {
-        super.init(clientEnvironment: clientEnvironment, sessionManager: sessionManager)
+    public init(
+        clientEnvironment: ClientEnvironment,
+        sessionManager: SessionManager = SessionManager.default,
+        keychainManager: KeychainManager = KeychainManager(),
+        publicKeys: [SecKey]? = nil,
+        webSocketFactory: WebSocketFactory = SwiftWebSocketFactory()
+    ) {
         self.publicKeys = publicKeys
+        self.webSocketFactory = webSocketFactory
+
+        super.init(clientEnvironment: clientEnvironment, sessionManager: sessionManager, keychainManager: keychainManager)
     }
     
     public override func dispatch(queue: DispatchQueue) {
         self.wsDispatchQueue = queue
     }
     
-    open func watch(next: @escaping ((Any) -> Void), completion: @escaping (() -> Void), failure: @escaping ((Error) -> Void), file: String = #file) -> WebSocket {
+    open func watch(next: @escaping ((Any) -> Void), completion: @escaping (() -> Void), failure: @escaping ((Error) -> Void), file: String = #file) -> WebSocketProvider {
     
         var request = URLRequest(url: URL(string:super.pushUrl!)!)
         
@@ -47,28 +62,20 @@ open class WSClient: RestClient {
             request.addValue("Bearer " + accessToken, forHTTPHeaderField: "Authorization")
         }
         
-        let ws = WebSocket(request: request)
+        webSocketFactory.callbackQueue = self.wsDispatchQueue
+        webSocketFactory.pinnedPublicKeys = self.publicKeys
         
-        if let publicKeys = self.publicKeys, publicKeys.count > 0 {
-            ws.pinnedPublicKeys = publicKeys
+        var webSocket = webSocketFactory.create(request: request)
+        
+        webSocket.onDisconnect = { error in
+            if let error = error {
+                failure(MojioError(code: "WebSocketError", message: "Error received \(error)"))
+            } else {
+                completion()
+            }
         }
-        
-        ws.eventQueue = self.wsDispatchQueue
-        
-        ws.event.close = { code, reason, clean in
-            print("WEBSOCKET: CLOSED - \(file)")
-            completion()
-        }
-        
-        ws.event.error = { error in
-            print("WEBSOCKET ERROR:  - \(file): \(error)")
-            failure(MojioError(code: "WebSocketError", message: "Error received \(error)"))
-        }
-        ws.event.open = {
-            print("WEBSOCKET: OPENED - \(file)")
-        }
-        
-        ws.event.message = { message in
+
+        webSocket.onMessage = { message in
             if let text = message as? String {
                 if let data = text.data(using: String.Encoding.utf8) {
                     if let dict = try! JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions()) as? [String: Any] {
@@ -79,14 +86,9 @@ open class WSClient: RestClient {
                 }
             }
         }
-        ws.open()
         
-        /*
-         return AnonymousDisposable {
-         request.cancel()
-         }
-         */
+        webSocket.connect()
         
-        return ws
+        return webSocket
     }
 }
