@@ -43,6 +43,10 @@ class SwiftWebSocketWrapper: WebSocketProvider {
         webSocket.close()
     }
     
+    func ping() {
+        webSocket.ping()
+    }
+    
     private func configure() {
         self.webSocket.event.open = {
             self.onConnect()
@@ -58,4 +62,3 @@ class SwiftWebSocketWrapper: WebSocketProvider {
         }
     }
 }
-

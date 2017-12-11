@@ -25,4 +25,5 @@ public protocol WebSocketProvider {
     
     func connect()
     func disconnect()
+    func ping()
 }
