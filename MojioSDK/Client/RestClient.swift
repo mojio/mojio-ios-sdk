@@ -101,7 +101,7 @@ open class RestClient {
     fileprivate var nextUrl: String? = nil
     fileprivate var sinceBeforeFormatter = DateFormatter()
     fileprivate static let SinceBeforeDateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
-    fileprivate static let SinceBeforeTimezone = TimeZone(abbreviation: "UTC");
+    fileprivate static let SinceBeforeTimezone = TimeZone(abbreviation: "UTC")
     fileprivate var dispatchQueue = RestClient.defaultDispatchQueue
     
     internal let sessionManager: SessionManager
@@ -121,6 +121,7 @@ open class RestClient {
     private func initDateFormatters() {
         self.sinceBeforeFormatter.dateFormat = RestClient.SinceBeforeDateFormat
         self.sinceBeforeFormatter.timeZone = RestClient.SinceBeforeTimezone
+        self.sinceBeforeFormatter.locale = Locale(identifier: "en_US_POSIX")
     }
     
     open func get() -> Self {

@@ -276,25 +276,24 @@ open class AuthClient: AuthControllerDelegate {
             return
         }
         
-        // Always attempt to refresh
-        if let _ = authToken.refreshToken {
+        guard let timestamp = authToken.expiryTimestamp() else {
+            failure(nil)
+            return
+        }
+        
+        let currentTime = Date().timeIntervalSince1970
+        let hourInterval : Double = 60 * 60
+        let almostOrAlreadyExpired = currentTime > (timestamp - hourInterval)
+        
+        // Attempt to refresh when almost (1 hour left) or already expired
+        if let _ = authToken.refreshToken, almostOrAlreadyExpired {
             self.refreshAuthToken(completion, failure: failure)
         }
-        else {
-            // Check if the token is expired
-            guard let timestamp = authToken.expiryTimestamp() else {
-                failure(nil)
-                return
-            }
-            
-            let currentTime = Date().timeIntervalSince1970
-            
-            // Check for expiry
-            if currentTime > timestamp {
-                failure(nil)
-            }
-            
+        else if !almostOrAlreadyExpired {
             completion(authToken)
+        }
+        else {
+            failure(nil)
         }
     }
     

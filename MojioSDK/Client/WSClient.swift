@@ -57,6 +57,7 @@ open class WSClient: RestClient {
     open func watch(next: @escaping ((Any) -> Void), completion: @escaping (() -> Void), failure: @escaping ((Error) -> Void), file: String = #file) -> WebSocketProvider {
     
         var request = URLRequest(url: URL(string:super.pushUrl!)!)
+        request.allHTTPHeaderFields = ClientHeaders().defaultRequestHeaders
         
         if let accessToken: String = super.accessToken() {
             request.addValue("Bearer " + accessToken, forHTTPHeaderField: "Authorization")
