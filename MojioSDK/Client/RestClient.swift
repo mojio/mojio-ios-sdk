@@ -86,6 +86,8 @@ public enum RestClientEndpoint: String {
 
 open class RestClient {
     
+    static let RestClientResponseStatusCodeKey = "statusCode"
+    
     fileprivate var requestMethod: Alamofire.HTTPMethod = .get
 
     open var pushUrl: String?
@@ -610,15 +612,14 @@ open class RestClient {
             }
         }
         else {
-            if let responseDict = response.result.value as? NSDictionary {
-                failure (responseDict)
+            var errorInfo : [String : Any] = [RestClient.RestClientResponseStatusCodeKey : response.response?.statusCode ?? 0]
+            if let responseDict = response.result.value as? Dictionary<String,Any> {
+                errorInfo.update(responseDict)
             }
-            /*else if let responseError = response.result.error {
-                failure (responseError.userInfo)
-            }*/
-            else {
-                failure("Could not complete request")
+            else if let responseError = response.result.error as NSError? {
+                errorInfo.update(responseError.userInfo)
             }
+            failure (errorInfo)
         }
     }
     
