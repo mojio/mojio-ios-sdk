@@ -86,7 +86,7 @@ public enum RestClientEndpoint: String {
 
 open class RestClient {
     
-    static let RestClientResponseStatusCodeKey = "statusCode"
+    open static let RestClientResponseStatusCodeKey = "statusCode"
     
     fileprivate var requestMethod: Alamofire.HTTPMethod = .get
 
