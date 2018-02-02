@@ -32,7 +32,11 @@ internal extension String {
         if let date = DateInRegion.init(string: self, format: .iso8601(options: .withInternetDateTime), fromRegion: Region.GMT()) {
             return date.absoluteDate
         }
-        
+
+        if let date = DateInRegion.init(string: self, format: .rss(alt: false), fromRegion: Region.GMT()) {
+            return date.absoluteDate
+        }
+
         return nil
     }
 }
