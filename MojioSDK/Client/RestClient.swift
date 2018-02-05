@@ -466,8 +466,10 @@ open class RestClient {
      public func query(top: String?, skip: String?, filter: String?, select: String?, orderby: String?) -> Self {
         return self.query(top, skip: skip, filter: filter, select: select, orderby: orderby, since: nil, before: nil, fields: nil)
     }*/
-    
     open func run(completion: @escaping (_ response: Any) -> Void, failure: @escaping (_ error: Any?) -> Void) {
+        self.run(completion: {response, headers in completion(response)}, failure: failure)
+    }
+    open func run(completion: @escaping (_ response: Any, _ headers: [String : Any?]) -> Void, failure: @escaping (_ error: Any?) -> Void) {
         
         let request = self.sessionManager.request(self.requestUrl!, method: self.requestMethod, parameters: self.requestParams, encoding: URLEncoding(destination: .methodDependent), headers: self.defaultHeaders).responseJSON(queue: self.dispatchQueue, options: .allowFragments) {response in
             self.handleResponse(response, completion: completion, failure: failure)
@@ -508,6 +510,9 @@ open class RestClient {
     }
     
     open func runStringBody(string: String, completion: @escaping (_ response: Any) -> Void, failure: @escaping (_ error: Any?) -> Void) {
+        self.runStringBody(string: string, completion: {response, headers in completion(response)}, failure: failure)
+    }
+    open func runStringBody(string: String, completion: @escaping (_ response: Any, _ headers: [String : Any?]) -> Void, failure: @escaping (_ error: Any?) -> Void) {
         
         let request = self.sessionManager.request(self.requestUrl!, method: self.requestMethod, parameters: [:], encoding: CustomStringEncoding(customString: string), headers: self.defaultHeaders).responseJSON(queue: self.dispatchQueue, options: .allowFragments) {response in
             self.handleResponse(response, completion: completion, failure: failure)
@@ -519,6 +524,9 @@ open class RestClient {
     }
     
     open func runEncodeJSON(jsonObject: [String: Any], completion: @escaping (_ response: Any) -> Void, failure: @escaping (_ error: Any?) -> Void) {
+        self.runEncodeJSON(jsonObject: jsonObject, completion: {response, headers in completion(response)}, failure: failure)
+    }
+    open func runEncodeJSON(jsonObject: [String: Any], completion: @escaping (_ response: Any, _ headers: [String : Any?]) -> Void, failure: @escaping (_ error: Any?) -> Void) {
         
         let request = self.sessionManager.request(self.requestUrl!, method: self.requestMethod, parameters: jsonObject, encoding: JSONEncoding.default, headers: self.defaultHeaders).responseJSON(queue: self.dispatchQueue, options: .allowFragments) {response in
             self.handleResponse(response, completion: completion, failure: failure)
@@ -530,6 +538,9 @@ open class RestClient {
     }
     
     open func runEncodeUrl(_ parameters: [String: Any], completion: @escaping (_ response: Any) -> Void, failure: @escaping (_ error: Any?) -> Void) {
+        self.runEncodeUrl(parameters, completion: {response, headers in completion(response) }, failure: failure)
+    }
+    open func runEncodeUrl(_ parameters: [String: Any], completion: @escaping (_ response: Any, _ headers: [String : Any?]) -> Void, failure: @escaping (_ error: Any?) -> Void) {
         
         // Before every request, make sure access token exists
         var headers: [String:String] = [:]
@@ -547,8 +558,12 @@ open class RestClient {
         #endif
     }
     
-    func handleResponse(_ response: DataResponse<Any>, completion: @escaping (_ response :Any) -> Void, failure: @escaping (_ error: Any?) -> Void){
+    func handleResponse(_ response: DataResponse<Any>, completion: @escaping (_ response: Any, _ headers: [String : Any?]) -> Void, failure: @escaping (_ error: Any?) -> Void){
         if response.response?.statusCode == 200 || response.response?.statusCode == 201 {
+            let headers: [String : Any?] = [
+                "ResponseDate" : (response.response?.allHeaderFields["Date"] as? String)?.toDate,
+                "LocalDate" : Date()
+            ]
             if let responseDict = response.result.value as? [String: Any] {
                 if let dataArray = responseDict["Data"] as? [Any] {
                     
@@ -567,9 +582,9 @@ open class RestClient {
                         let _ = requestParams["includeCount"],
                         let count = responseDict["TotalCount"] as? Int {
                         
-                        completion(Result(TotalCount: count, Data: array))
+                        completion(Result(TotalCount: count, Data: array), headers)
                     } else {
-                        completion(array)
+                        completion(array, headers)
                     }
 
                     if (self.doNext) {
@@ -587,28 +602,28 @@ open class RestClient {
                                 }
                             }
                         }
-                        completion(NextDone())
+                        completion(NextDone(), headers)
                     }
                 }
                 else {
                     if let obj = self.parseDict(responseDict) {
-                        completion (obj)
+                        completion (obj, headers)
                     }
                     else {
                         if let message: String = responseDict["Message"] as? String {
-                            completion (message)
+                            completion (message, headers)
                         }
                         else {
-                            completion ("")
+                            completion ("", headers)
                         }
                     }
                     
                 }
             } else if let responseString = response.result.value as? String {
-                completion(responseString);
+                completion(responseString, headers);
             }
             else {
-                completion(true)
+                completion(true, headers)
             }
         }
         else {
