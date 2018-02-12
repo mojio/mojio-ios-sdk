@@ -50,6 +50,7 @@ public struct NotificationsSettings:  Mappable {
     public var EnableRecallActivity: Bool = false
     public var EnableServiceBulletinActivity: Bool = false
     public var EnableDisturbanceActivity: Bool = false
+    public var DisturbanceThreshold: DisturbanceThreshold? = nil
     public var EnableAccidentActivity: Bool = false
     public var EnableDeviceUnpluggedActivity: Bool = false
     
@@ -57,7 +58,7 @@ public struct NotificationsSettings:  Mappable {
     public var EnableDeviceUpdatedActivity: Bool = false
     public var EnableSMSActivity: Bool = false
     public var EnableVehicleCompatibilityActivity: Bool = false
-
+    
     public var EnableGeofenceActivity: Bool = false
     public var Geofences: [SettingsGeofence] = []
     
@@ -78,7 +79,7 @@ public struct NotificationsSettings:  Mappable {
         for geofence in self.Geofences {
             geofences.append(geofence.toJSON())
         }
-
+        
         map["Geofences"] = geofences
         
         return map
@@ -98,15 +99,27 @@ public struct NotificationsSettings:  Mappable {
         EnableRecallActivity <- map["EnableRecallActivity"]
         EnableServiceBulletinActivity <- map["EnableServiceBulletinActivity"]
         EnableDisturbanceActivity <- map["EnableDisturbanceActivity"]
+        DisturbanceThreshold <- (map["DisturbanceThreshold"], EnumTransform())
         EnableAccidentActivity <- map["EnableAccidentActivity"]
         EnableDeviceUnpluggedActivity <- map["EnableDeviceUnpluggedActivity"]
-
+        
         EnableVehicleConnectedActivity <- map["EnableVehicleConnectedActivity"]
         EnableDeviceUpdatedActivity <- map["EnableDeviceUpdatedActivity"]
         EnableSMSActivity <- map["EnableSMSActivity"]
         EnableVehicleCompatibilityActivity <- map["EnableVehicleCompatibilityActivity"]
-
+        
         EnableGeofenceActivity <- map["EnableGeofenceActivity"]
         Geofences <- map["Geofences"]
     }
 }
+
+public enum DisturbanceThreshold: String {
+    case low = "Low"
+    case medium = "Medium"
+    case high = "High"
+    
+    public static var all: [DisturbanceThreshold] {
+        return [.low, .medium, .high]
+    }
+}
+
