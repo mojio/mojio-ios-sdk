@@ -240,14 +240,17 @@ open class RestClient {
         return self
     }
     
-    open func phonenumbers(_ phonenumber: String? = nil, sendVerification: Bool = false) -> Self {
+    open func phonenumbers(_ phonenumber: String? = nil, sendVerification: Bool = false, pin: String? = nil) -> Self {
         self.requestEntity = .phoneNumbers
-        self.requestEntityId = phonenumber.flatMap { $0 + (sendVerification ? "?sendVerification=true" : "") }
+        let verificationParam = sendVerification ? "sendVerification=true" : nil
+        let pinParam = pin.flatMap { "pin=\($0)" }
+        let query = [verificationParam, pinParam].flatMap { $0 }.joined(separator: "&")
+        self.requestEntityId = [phonenumber, (query.isEmpty ? nil : query)].flatMap { $0 }.joined(separator: "?")
         self.appendRequestUrlEntityId(asFinal: true)
-
+        
         return self
     }
-    
+
     open func emails (_ email: String? = nil) -> Self {
         self.requestEntity = .emails
         self.requestEntityId = email
