@@ -22,3 +22,5 @@ profile
 DerivedData
 .idea/
 *.swp
+Carthage/
+Cartfile.resolved

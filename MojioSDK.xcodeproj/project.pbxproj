@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		111EC3E9AD3450EA6FEB01DB /* Pods_MojioSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99F172CDA9C69F9BF12B704A /* Pods_MojioSDK.framework */; };
 		2278359C1FB60253002D24F9 /* StringExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2278359B1FB60253002D24F9 /* StringExt.swift */; };
 		2278359E1FB60291002D24F9 /* TimeIntervalExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2278359D1FB60291002D24F9 /* TimeIntervalExt.swift */; };
 		2E29D8751FB1F3AA00BBEB16 /* RestClientHandleResponseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E29D8741FB1F3AA00BBEB16 /* RestClientHandleResponseTests.swift */; };
@@ -87,7 +86,6 @@
 		2ED946F01FA9ED8E00132568 /* KeychainStorageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED946EF1FA9ED8E00132568 /* KeychainStorageProvider.swift */; };
 		2ED946F21FA9FCFD00132568 /* ClientEnvironmentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED946F11FA9FCFD00132568 /* ClientEnvironmentTests.swift */; };
 		2ED946F51FAA207700132568 /* AuthClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED946F41FAA207700132568 /* AuthClientTests.swift */; };
-		3A3FD51CBD5297AEE896CBD9 /* Pods_MojioSDKTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 188FAF605C15F9919D241723 /* Pods_MojioSDKTests.framework */; };
 		644214DE1D9E6500005A86C5 /* AggregationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644214DD1D9E6500005A86C5 /* AggregationData.swift */; };
 		75F77F0E1D19F504000CC2B4 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 75F77F0D1D19F504000CC2B4 /* libz.tbd */; };
 		8808C2351EB1483A00A41A8B /* PrimaryKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8808C2341EB1483A00A41A8B /* PrimaryKey.swift */; };
@@ -168,6 +166,13 @@
 		BCF2DE4A1D454B8D00EDD376 /* Geofence.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF2DE491D454B8D00EDD376 /* Geofence.swift */; };
 		BCFCEB041F019FF20096C9B4 /* HarshEventState.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCFCEB031F019FF20096C9B4 /* HarshEventState.swift */; };
 		BCFCEB061F01A2C70096C9B4 /* IdleEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCFCEB051F01A2C70096C9B4 /* IdleEvent.swift */; };
+		DABF1738207D733B005B72FA /* SwiftWebSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DABF1731207D733A005B72FA /* SwiftWebSocket.framework */; };
+		DABF1739207D733B005B72FA /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DABF1732207D733A005B72FA /* SwiftyJSON.framework */; };
+		DABF173A207D733B005B72FA /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DABF1733207D733A005B72FA /* Alamofire.framework */; };
+		DABF173B207D733B005B72FA /* ObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DABF1734207D733A005B72FA /* ObjectMapper.framework */; };
+		DABF173C207D733B005B72FA /* KeychainSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DABF1735207D733A005B72FA /* KeychainSwift.framework */; };
+		DABF173D207D733B005B72FA /* SwiftDate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DABF1736207D733A005B72FA /* SwiftDate.framework */; };
+		DABF173E207D733B005B72FA /* OHHTTPStubs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DABF1737207D733A005B72FA /* OHHTTPStubs.framework */; };
 		E06C95691D25CA2A006AECBB /* NotificationsSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06C95671D25CA2A006AECBB /* NotificationsSettings.swift */; };
 		E06C956A1D25CA2A006AECBB /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06C95681D25CA2A006AECBB /* Result.swift */; };
 		E0E63D351D21E4B900DDF336 /* VehicleActivityData.txt in Resources */ = {isa = PBXBuildFile; fileRef = E0E63D341D21E4B900DDF336 /* VehicleActivityData.txt */; };
@@ -186,9 +191,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		150F25FC9D1405ACC72E5EF0 /* Pods-MojioSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MojioSDK.release.xcconfig"; path = "Pods/Target Support Files/Pods-MojioSDK/Pods-MojioSDK.release.xcconfig"; sourceTree = "<group>"; };
-		15FF163D69D1506CC1DE689D /* Pods_MojioSDKTests2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MojioSDKTests2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		188FAF605C15F9919D241723 /* Pods_MojioSDKTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MojioSDKTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2278359B1FB60253002D24F9 /* StringExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExt.swift; sourceTree = "<group>"; };
 		2278359D1FB60291002D24F9 /* TimeIntervalExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalExt.swift; sourceTree = "<group>"; };
 		2E29D8741FB1F3AA00BBEB16 /* RestClientHandleResponseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestClientHandleResponseTests.swift; sourceTree = "<group>"; };
@@ -270,13 +272,10 @@
 		2ED946F41FAA207700132568 /* AuthClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthClientTests.swift; sourceTree = "<group>"; };
 		644017531DA2AC9A00DAA73D /* AggregationData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AggregationData.swift; sourceTree = "<group>"; };
 		644214DD1D9E6500005A86C5 /* AggregationData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AggregationData.swift; sourceTree = "<group>"; };
-		6DF2E7C31752EFE452CAEE01 /* Pods-MojioSDKTests2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MojioSDKTests2.release.xcconfig"; path = "Pods/Target Support Files/Pods-MojioSDKTests2/Pods-MojioSDKTests2.release.xcconfig"; sourceTree = "<group>"; };
 		75F77F0D1D19F504000CC2B4 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		8808C2341EB1483A00A41A8B /* PrimaryKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimaryKey.swift; sourceTree = "<group>"; };
 		884FCE5E1EB13ECD00DDCE3F /* BaseActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseActivity.swift; sourceTree = "<group>"; };
 		887014781DA833CA00EFEC6D /* VehicleStatistics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VehicleStatistics.swift; sourceTree = "<group>"; };
-		99F172CDA9C69F9BF12B704A /* Pods_MojioSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MojioSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A5FF66B407C9163641EB6DEF /* Pods-MojioSDKTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MojioSDKTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MojioSDKTests/Pods-MojioSDKTests.release.xcconfig"; sourceTree = "<group>"; };
 		BC31E3CD1D419E80001649A7 /* Distance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Distance.swift; sourceTree = "<group>"; };
 		BC31E3CF1D419F5D001649A7 /* Activity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
 		BC31E3D01D419F5D001649A7 /* ActivityLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityLocation.swift; sourceTree = "<group>"; };
@@ -358,8 +357,14 @@
 		BCF2DE491D454B8D00EDD376 /* Geofence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Geofence.swift; sourceTree = "<group>"; };
 		BCFCEB031F019FF20096C9B4 /* HarshEventState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HarshEventState.swift; sourceTree = "<group>"; };
 		BCFCEB051F01A2C70096C9B4 /* IdleEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdleEvent.swift; sourceTree = "<group>"; };
-		D4D6F7769C35C2486E30AC0F /* Pods-MojioSDKTests2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MojioSDKTests2.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MojioSDKTests2/Pods-MojioSDKTests2.debug.xcconfig"; sourceTree = "<group>"; };
-		DE62C4BFFDFEC393BE28C17A /* Pods-MojioSDKTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MojioSDKTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MojioSDKTests/Pods-MojioSDKTests.debug.xcconfig"; sourceTree = "<group>"; };
+		DABF172F207D71C4005B72FA /* iOS */ = {isa = PBXFileReference; lastKnownFileType = folder; name = iOS; path = Carthage/Build/iOS; sourceTree = "<group>"; };
+		DABF1731207D733A005B72FA /* SwiftWebSocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftWebSocket.framework; path = Carthage/Build/iOS/SwiftWebSocket.framework; sourceTree = "<group>"; };
+		DABF1732207D733A005B72FA /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
+		DABF1733207D733A005B72FA /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
+		DABF1734207D733A005B72FA /* ObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectMapper.framework; path = Carthage/Build/iOS/ObjectMapper.framework; sourceTree = "<group>"; };
+		DABF1735207D733A005B72FA /* KeychainSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KeychainSwift.framework; path = Carthage/Build/iOS/KeychainSwift.framework; sourceTree = "<group>"; };
+		DABF1736207D733A005B72FA /* SwiftDate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftDate.framework; path = Carthage/Build/iOS/SwiftDate.framework; sourceTree = "<group>"; };
+		DABF1737207D733A005B72FA /* OHHTTPStubs.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OHHTTPStubs.framework; path = Carthage/Build/iOS/OHHTTPStubs.framework; sourceTree = "<group>"; };
 		E0312C741CF7782F00B46AA8 /* BaseApiTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseApiTest.swift; sourceTree = "<group>"; };
 		E0312C761CF78EA600B46AA8 /* StorageApiTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageApiTests.swift; sourceTree = "<group>"; };
 		E06C95671D25CA2A006AECBB /* NotificationsSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsSettings.swift; sourceTree = "<group>"; };
@@ -367,7 +372,6 @@
 		E0E63D341D21E4B900DDF336 /* VehicleActivityData.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VehicleActivityData.txt; sourceTree = "<group>"; };
 		F9623AAD1D935D74005C10F2 /* IdleState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdleState.swift; sourceTree = "<group>"; };
 		F9E9FDAD1D93122A00DCB690 /* HarshEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HarshEvent.swift; sourceTree = "<group>"; };
-		FFF8A4C690D0895A4D10A904 /* Pods-MojioSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MojioSDK.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MojioSDK/Pods-MojioSDK.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -375,8 +379,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DABF1738207D733B005B72FA /* SwiftWebSocket.framework in Frameworks */,
+				DABF1739207D733B005B72FA /* SwiftyJSON.framework in Frameworks */,
+				DABF173A207D733B005B72FA /* Alamofire.framework in Frameworks */,
+				DABF173B207D733B005B72FA /* ObjectMapper.framework in Frameworks */,
+				DABF173C207D733B005B72FA /* KeychainSwift.framework in Frameworks */,
+				DABF173D207D733B005B72FA /* SwiftDate.framework in Frameworks */,
+				DABF173E207D733B005B72FA /* OHHTTPStubs.framework in Frameworks */,
 				75F77F0E1D19F504000CC2B4 /* libz.tbd in Frameworks */,
-				111EC3E9AD3450EA6FEB01DB /* Pods_MojioSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -385,7 +395,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				BCC2EFBB1CBED4E6004D2759 /* MojioSDK.framework in Frameworks */,
-				3A3FD51CBD5297AEE896CBD9 /* Pods_MojioSDKTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -533,7 +542,6 @@
 				BCC2EFBE1CBED4E6004D2759 /* MojioSDKTests */,
 				755785421C6BE403000D65B3 /* Products */,
 				A7800C0AAB5ADDABE55DC5EE /* Frameworks */,
-				E740F257DF43595AE6A06564 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -549,10 +557,15 @@
 		A7800C0AAB5ADDABE55DC5EE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DABF1733207D733A005B72FA /* Alamofire.framework */,
+				DABF1735207D733A005B72FA /* KeychainSwift.framework */,
+				DABF1734207D733A005B72FA /* ObjectMapper.framework */,
+				DABF1737207D733A005B72FA /* OHHTTPStubs.framework */,
+				DABF1736207D733A005B72FA /* SwiftDate.framework */,
+				DABF1731207D733A005B72FA /* SwiftWebSocket.framework */,
+				DABF1732207D733A005B72FA /* SwiftyJSON.framework */,
+				DABF172F207D71C4005B72FA /* iOS */,
 				75F77F0D1D19F504000CC2B4 /* libz.tbd */,
-				99F172CDA9C69F9BF12B704A /* Pods_MojioSDK.framework */,
-				188FAF605C15F9919D241723 /* Pods_MojioSDKTests.framework */,
-				15FF163D69D1506CC1DE689D /* Pods_MojioSDKTests2.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -747,19 +760,6 @@
 			path = "Activity Streams";
 			sourceTree = "<group>";
 		};
-		E740F257DF43595AE6A06564 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				FFF8A4C690D0895A4D10A904 /* Pods-MojioSDK.debug.xcconfig */,
-				150F25FC9D1405ACC72E5EF0 /* Pods-MojioSDK.release.xcconfig */,
-				DE62C4BFFDFEC393BE28C17A /* Pods-MojioSDKTests.debug.xcconfig */,
-				A5FF66B407C9163641EB6DEF /* Pods-MojioSDKTests.release.xcconfig */,
-				D4D6F7769C35C2486E30AC0F /* Pods-MojioSDKTests2.debug.xcconfig */,
-				6DF2E7C31752EFE452CAEE01 /* Pods-MojioSDKTests2.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -779,12 +779,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BCC2EFC21CBED4E6004D2759 /* Build configuration list for PBXNativeTarget "MojioSDK" */;
 			buildPhases = (
-				50FFDE671998939CEF683AFB /* [CP] Check Pods Manifest.lock */,
 				BCC2EFAC1CBED4E6004D2759 /* Sources */,
 				BCC2EFAD1CBED4E6004D2759 /* Frameworks */,
 				BCC2EFAE1CBED4E6004D2759 /* Headers */,
 				BCC2EFAF1CBED4E6004D2759 /* Resources */,
-				AEEEC770A145A20667DBE5AD /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -886,24 +884,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		50FFDE671998939CEF683AFB /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-MojioSDK-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 		732EA731409DFBB427015A9A /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -917,21 +897,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MojioSDKTests/Pods-MojioSDKTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		AEEEC770A145A20667DBE5AD /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MojioSDK/Pods-MojioSDK-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		CA7416AD9DE464FCC5D2CF40 /* [CP] Check Pods Manifest.lock */ = {
@@ -1259,7 +1224,6 @@
 		};
 		BCC2EFC31CBED4E6004D2759 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FFF8A4C690D0895A4D10A904 /* Pods-MojioSDK.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ENABLE_MODULES = YES;
@@ -1270,6 +1234,10 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_BITCODE = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = MojioSDK/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1287,7 +1255,6 @@
 		};
 		BCC2EFC41CBED4E6004D2759 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 150F25FC9D1405ACC72E5EF0 /* Pods-MojioSDK.release.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ENABLE_MODULES = YES;
@@ -1298,6 +1265,10 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_BITCODE = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = MojioSDK/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1314,7 +1285,6 @@
 		};
 		BCC2EFC61CBED4E6004D2759 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DE62C4BFFDFEC393BE28C17A /* Pods-MojioSDKTests.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				DEVELOPMENT_TEAM = "";
@@ -1329,7 +1299,6 @@
 		};
 		BCC2EFC71CBED4E6004D2759 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A5FF66B407C9163641EB6DEF /* Pods-MojioSDKTests.release.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				DEVELOPMENT_TEAM = "";

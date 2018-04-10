@@ -23,7 +23,7 @@ public class SwiftWebSocketFactory: WebSocketFactory {
     
     public func create(request: URLRequest) -> WebSocketProvider {
         let webSocket = WebSocket(request: request)
-        webSocket.pinnedPublicKeys = self.pinnedPublicKeys
+        //webSocket.pinnedPublicKeys = self.pinnedPublicKeys
         webSocket.eventQueue = self.callbackQueue
         return SwiftWebSocketWrapper(webSocket: webSocket)
     }
