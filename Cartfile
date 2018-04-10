@@ -1,0 +1,7 @@
+github "Alamofire/Alamofire"
+github "SwiftyJSON/SwiftyJSON"
+github "Hearst-DD/ObjectMapper"
+github "evgenyneu/keychain-swift"
+github "AliSoftware/OHHTTPStubs"
+github "mojio/SwiftWebSocket"
+github "malcommac/SwiftDate"
