@@ -448,7 +448,15 @@ open class AuthClient: AuthControllerDelegate {
                 
             }
             else {
-                failure(response.result.value as? [String: Any])
+                if let responseDict = response.result.value as? [String : Any] {
+                    failure(responseDict)
+                }
+                else if let responseError = response.result.error as NSError? {
+                    failure(responseError.userInfo)
+                }
+                else {
+                    return failure(nil)
+                }
             }
         }
         
