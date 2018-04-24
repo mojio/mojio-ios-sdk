@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
-    spec.name = "MojioSDK"
+    spec.name = "MojioAccounts"
     spec.version = "3.0.0"
-    spec.summary = "Framework for adding Mojio support to your iOS app"
+    spec.summary = "Mojio Accounts Framework"
     spec.homepage = "https://github.com/mojio/mojio-ios-sdk"
     spec.license = {type: 'MIT', file: 'LICENSE'}
     spec.authors = {"Mojio, Inc." => 'support@moj.io'}

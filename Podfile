@@ -17,6 +17,12 @@ def base_pods
     pod 'RxSwift'
 end
 
+target 'Accounts' do
+    project 'MojioSDK.xcodeproj'
+
+    base_pods
+end
+
 target 'Vehicles' do
     project 'MojioSDK.xcodeproj'
 
