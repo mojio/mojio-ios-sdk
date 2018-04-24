@@ -13,21 +13,27 @@
  * forbidden unless prior written permission is obtained from Moj.io Inc.
  *******************************************************************************/
 
-import UIKit
-import ObjectMapper
+import Foundation
 
-public struct Email: Mappable {
-    public var Verified: Bool = false
-    public var Address: String? = nil
+public struct Email: Codable {
+    public let verified: Bool?
+    public let address: String?
     
-    public init() {}
-    
-    public init?(map: Map) {
-        self.init()
+    public enum CodingKeys: String, CodingKey {
+        case verified = "Verified"
+        case address = "Address"
     }
-    
-    public mutating func mapping(map: Map) {
-        self.Verified <- map["Verified"]
-        self.Address <- map["Address"]
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        do {
+            self.verified = try container.decodeIfPresent(Bool.self, forKey: .verified)
+            self.address = try container.decodeIfPresent(String.self, forKey: .address)
+        }
+        catch {
+            debugPrint(error)
+            throw error
+        }
     }
 }

@@ -18,6 +18,9 @@ import ObjectMapper
 import SwiftDate
 
 internal extension String {
+    
+    internal static let empty = String()
+    
     // Date conversion
     internal var toDate: Date? {
         
@@ -37,6 +40,22 @@ internal extension String {
             return date.absoluteDate
         }
 
+        return nil
+    }
+
+    var dateFromIso8601: Date? {
+        if let date : Date = self.date(format: DateFormat.iso8601(options: .withInternetDateTime))?.absoluteDate {
+            return date
+        }
+        
+        if let date : Date = self.date(format: DateFormat.iso8601(options: .withInternetDateTimeExtended))?.absoluteDate {
+            return date
+        }
+        
+        if let date : Date = self.date(format: DateFormat.iso8601(options: [.withFullDate, .withTime]))?.absoluteDate {
+            return date
+        }
+        
         return nil
     }
 }

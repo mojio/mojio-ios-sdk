@@ -75,9 +75,9 @@ class AuthClientTests: XCTestCase {
         let timestamp = String(Date().timeIntervalSince1970 + 3600)
         let authToken = AuthToken(accessToken: "access_token", expiry: timestamp, refreshToken: "refresh_token", uniqueId: "unique_id")
         
-        let isValid = authToken.isValid()
+        let isValid = authToken.isValid
         
-        XCTAssertTrue(isValid)
+        XCTAssertTrue(isValid())
     }
     
     func testAuthTokenIsInvalid() {
@@ -87,13 +87,13 @@ class AuthClientTests: XCTestCase {
         let tokenWithBadExpiryTimestamp = AuthToken(accessToken: "access_token", expiry: "bad timestamp", refreshToken: "refresh_token", uniqueId: "unique_id")
         let expiredToken = AuthToken(accessToken: "access_token", expiry: expiredTimestamp, refreshToken: "refresh_token", uniqueId: "unique_id")
         
-        let firstCaseResult = tokenWithNilProperties.isValid()
-        let secondCaseResult = tokenWithBadExpiryTimestamp.isValid()
-        let thirdCaseResult = expiredToken.isValid()
+        let firstCaseResult = tokenWithNilProperties.isValid
+        let secondCaseResult = tokenWithBadExpiryTimestamp.isValid
+        let thirdCaseResult = expiredToken.isValid
         
-        XCTAssertFalse(firstCaseResult)
-        XCTAssertFalse(secondCaseResult)
-        XCTAssertFalse(thirdCaseResult)
+        XCTAssertFalse(firstCaseResult())
+        XCTAssertFalse(secondCaseResult())
+        XCTAssertFalse(thirdCaseResult())
     }
     
     func testAuthClientShoulSaveAndGetAuthToken() {

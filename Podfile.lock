@@ -17,6 +17,7 @@ PODS:
   - OHHTTPStubs/OHPathHelpers (6.1.0)
   - OHHTTPStubs/Swift (6.1.0):
     - OHHTTPStubs/Default
+  - RxSwift (4.1.2)
   - SwiftDate (4.5.1)
   - SwiftWebSocket (2.7.0)
   - SwiftyJSON (4.1.0)
@@ -27,6 +28,7 @@ DEPENDENCIES:
   - ObjectMapper
   - OHHTTPStubs
   - OHHTTPStubs/Swift
+  - RxSwift
   - SwiftDate
   - SwiftWebSocket (from `https://github.com/mojio/SwiftWebSocket`, commit `d39576a`)
   - SwiftyJSON
@@ -46,10 +48,11 @@ SPEC CHECKSUMS:
   KeychainSwift: bea6bd9f98af7b8d7ca4aa79fe105c00fab532db
   ObjectMapper: 20505058f54e5c3ca69e1d6de9897d152a5369a6
   OHHTTPStubs: 1e21c7d2c084b8153fc53d48400d8919d2d432d0
+  RxSwift: e49536837d9901277638493ea537394d4b55f570
   SwiftDate: 7b56d42a221f582047287deb256b23fc5ed49a60
   SwiftWebSocket: 612c9729fd503cb6b0b8b45390c788686dac306f
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
 
-PODFILE CHECKSUM: 65666c237a5897b8760e34af5dbdffee459741b6
+PODFILE CHECKSUM: 87e321fa44ea740f57ccc97026c4f989e185522e
 
 COCOAPODS: 1.4.0

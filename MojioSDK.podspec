@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
     spec.name = "MojioSDK"
-    spec.version = "2.0.0"
+    spec.version = "3.0.0"
     spec.summary = "Framework for adding Mojio support to your iOS app"
     spec.homepage = "https://github.com/mojio/mojio-ios-sdk"
     spec.license = {type: 'MIT', file: 'LICENSE'}
@@ -20,4 +20,5 @@ Pod::Spec.new do |spec|
     spec.dependency 'OHHTTPStubs/Swift'
     spec.dependency 'SwiftWebSocket'
     spec.dependency 'SwiftDate'
+    spec.dependency 'RxSwift'
 end

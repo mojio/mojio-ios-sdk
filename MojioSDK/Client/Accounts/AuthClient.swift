@@ -19,63 +19,6 @@ import Alamofire
 import SwiftyJSON
 import ObjectMapper
 
-// OAuth 2.0 Object - RFC 6749
-
-public struct AuthToken: Mappable  {
-    public var accessToken: String? = nil
-    public var expiry: String? = nil
-    public var refreshToken: String? = nil
-    public var uniqueId: String? = nil
-    
-    init() {}
-    
-    init(accessToken: String?, expiry: String?, refreshToken: String?, uniqueId: String?) {
-        self.accessToken = accessToken
-        self.expiry = expiry
-        self.refreshToken = refreshToken
-        self.uniqueId = uniqueId
-    }
-    
-    public init?(map: Map) {
-        self.init()
-    }
-    
-    public func expiryTimestamp() -> Double? {
-        return self.expiry.flatMap { Double($0) }
-    }
-    
-    public func expiryDate() -> Date? {
-        return self.expiryTimestamp().flatMap { Date(timeIntervalSince1970: $0) }
-    }
-    
-    public func isValid() -> Bool {
-        if self.accessToken == nil || self.expiry == nil || self.uniqueId == nil {
-            return false
-        }
-        
-        // Check if the token is expired
-        guard let timestamp: Double = self.expiryTimestamp() else {
-            return false
-        }
-        
-        let currentTime: Double = Date().timeIntervalSince1970
-        
-        // Check for expiry
-        if currentTime > timestamp {
-            return false
-        }
-        
-        return true
-    }
-    
-    public mutating func mapping(map: Map) {
-        accessToken <- map["accessToken"]
-        expiry <- map["expiry"]
-        refreshToken <- map["refreshToken"]
-        uniqueId <- map["uniqueId"]
-    }
-}
-
 public enum AuthClientEndpoint: String {
     case authorize = "oauth2/authorize"
     case token = "oauth2/token"
@@ -202,17 +145,17 @@ open class AuthClient: AuthControllerDelegate {
     open func authControllerLoadURLRequest(_ request: URLRequest) {
         let url: URL = request.url!;
         let urlComponents: URLComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)!
-        var authToken: AuthToken = AuthToken()
+        var authToken = AuthToken()
         
         if let queryItems = urlComponents.queryItems {
             for queryItem in queryItems {
-                if queryItem.name == "access_token" {
-                    authToken.accessToken = queryItem.value
+                if let value = queryItem.value, queryItem.name == "access_token" {
+                    authToken.accessToken = value
                 }
                 else if queryItem.name == "expires_in" {
                     if queryItem.value != nil {
                         if let expiry: Double = Double(queryItem.value!) {
-                            authToken.expiry = String(Date.init(timeIntervalSinceNow: expiry).timeIntervalSince1970)
+                            authToken.expiry = Date(timeIntervalSinceNow: expiry)
                         }
                     }
                 }
@@ -229,26 +172,12 @@ open class AuthClient: AuthControllerDelegate {
     
     // Returns immediately
     open func isUserLoggedIn() -> Bool {
-        let authToken = self.getAuthToken()
-        
-        if authToken.accessToken == nil || authToken.expiry == nil || authToken.uniqueId == nil {
+        guard let authToken = self.authToken, authToken.isValid else {
             return false
         }
         
         // Check to see if the environment endpoint in the keychain is the same as the current endpoint
         if self.clientEnvironment.getRegion().regionType.rawValue != authToken.uniqueId {
-            return false
-        }
-        
-        // Check if the token is expired
-        guard let timestamp: Double = authToken.expiryTimestamp() else {
-            return false
-        }
-        
-        let currentTime: Double = Date().timeIntervalSince1970
-        
-        // Check for expiry
-        if currentTime > timestamp {
             return false
         }
         
@@ -258,32 +187,21 @@ open class AuthClient: AuthControllerDelegate {
     // Returns on main thread when complete - refreshes if needed
     open func isUserLoggedInRefresh(_ completion: @escaping (_ authToken: AuthToken) -> Void, failure: @escaping (_ response: [String: Any]?) -> Void) {
         
-        let authToken = self.getAuthToken()
-        
-        guard
-            let _ = authToken.accessToken,
-            let _ = authToken.expiry,
-            let uniqueId = authToken.uniqueId else {
-                
-                failure(nil)
-                return
+        guard let authToken = self.authToken else {
+            failure(nil)
+            return
         }
         
         // Check to see if the environment endpoint in the keychain is the same as the current endpoint
         // If they are different, return false right away
-        if self.clientEnvironment.getRegion().regionType.rawValue != uniqueId {
+        if self.clientEnvironment.getRegion().regionType.rawValue != authToken.uniqueId {
             failure(nil)
             return
         }
-        
-        guard let timestamp = authToken.expiryTimestamp() else {
-            failure(nil)
-            return
-        }
-        
+
         let currentTime = Date().timeIntervalSince1970
         let hourInterval : Double = 60 * 60
-        let almostOrAlreadyExpired = currentTime > (timestamp - hourInterval)
+        let almostOrAlreadyExpired = currentTime > (authToken.expiryTimestamp - hourInterval)
         
         // Attempt to refresh when almost (1 hour left) or already expired
         if let _ = authToken.refreshToken, almostOrAlreadyExpired {
@@ -307,7 +225,7 @@ open class AuthClient: AuthControllerDelegate {
     open func login(_ username: String, password: String, completion: @escaping (_ authToken: AuthToken) -> Void, failure: @escaping (_ response: [String: Any]?) -> Void) {
         
         // The token endpoint is used for the resource owner flow
-        let loginEndpoint = self.getTokenUrl()
+        let loginEndpoint = self.tokenUrl
         
         self.requestHeaders.update(["Authorization": self.generateBasicAuthHeader()])
         
@@ -327,20 +245,23 @@ open class AuthClient: AuthControllerDelegate {
             
             if response.response?.statusCode == 200 {
                 
-                guard let responseJSON = response.result.value as? [String: Any] else {
-                    failure(Errors.wrongResponseFormat)
-                    return
+                guard
+                    let responseJSON = response.result.value as? [String: AnyObject],
+                    let expiry: Double = responseJSON["expires_in"] as? Double,
+                    let accessToken = responseJSON["access_token"] as? String else {
+                        
+                        failure(Errors.wrongResponseFormat)
+                        return
                 }
                 
-                if let expiry: Double = responseJSON["expires_in"] as? Double {
-                    let authToken = AuthToken(accessToken: (responseJSON["access_token"] as? String), expiry: String(Date.init(timeIntervalSinceNow: expiry).timeIntervalSince1970), refreshToken: (responseJSON["refresh_token"] as? String), uniqueId: self.clientEnvironment.getRegion().regionType.rawValue)
-                    
-                    if authToken.isValid() {
-                        completion(authToken)
-                    }
-                    else {
-                        failure(nil)
-                    }
+                let authToken = AuthToken(
+                    accessToken: accessToken,
+                    expiry: Date(timeIntervalSinceNow: expiry),
+                    refreshToken: (responseJSON["refresh_token"] as? String),
+                    uniqueId: self.clientEnvironment.getRegion().regionType.rawValue)
+                
+                if authToken.isValid {
+                    completion(authToken)
                 }
                 else {
                     failure(nil)
@@ -365,9 +286,9 @@ open class AuthClient: AuthControllerDelegate {
     }
     
     open func refreshAuthToken(_ completion: @escaping (_ authToken: AuthToken) -> Void, failure: @escaping (_ response: [String: Any]?) -> Void) {
-        let authorizeEndpoint = self.getTokenUrl()
+        let authorizeEndpoint = self.tokenUrl
         
-        guard let refreshToken: String = self.keychainManager.getAuthToken().refreshToken else {
+        guard let refreshToken = self.keychainManager.authToken?.refreshToken else {
             failure(nil)
             return
         }
@@ -384,23 +305,26 @@ open class AuthClient: AuthControllerDelegate {
                 
                 if response.response?.statusCode == 200 {
                     
-                    guard let responseJSON = response.result.value as? [String: Any] else {
-                        failure(Errors.wrongResponseFormat)
-                        return
+                    guard
+                        let responseJSON = response.result.value as? [String: AnyObject],
+                        let expiry: Double = responseJSON["expires_in"] as? Double,
+                        let accessToken = responseJSON["access_token"] as? String else {
+                            
+                            failure(Errors.wrongResponseFormat)
+                            return
                     }
                     
-                    if let expiry: Double = responseJSON["expires_in"] as? Double {
-                        let authToken: AuthToken = AuthToken(accessToken: (responseJSON["access_token"] as? String), expiry: String(Date.init(timeIntervalSinceNow: expiry).timeIntervalSince1970), refreshToken: (responseJSON["refresh_token"] as? String), uniqueId: self.clientEnvironment.getRegion().regionType.rawValue)
-                        
-                        if authToken.isValid() {
-                            completion(authToken)
-                        }
-                        else {
-                            failure(Errors.invalidAuthToken)
-                        }
+                    let authToken = AuthToken(
+                        accessToken: accessToken,
+                        expiry: Date(timeIntervalSinceNow: expiry),
+                        refreshToken: (responseJSON["refresh_token"] as? String),
+                        uniqueId: self.clientEnvironment.getRegion().regionType.rawValue)
+                    
+                    if authToken.isValid {
+                        completion(authToken)
                     }
                     else {
-                        failure(Errors.expiryFieldIsMissing)
+                        failure(nil)
                     }
                 }
                 else {
@@ -422,7 +346,7 @@ open class AuthClient: AuthControllerDelegate {
     }
     
     open func logout() {
-        keychainManager.deleteTokenFromKeychain()
+        KeychainManager.sharedInstance.authToken = nil
     }
     
     // Register
@@ -468,7 +392,7 @@ open class AuthClient: AuthControllerDelegate {
     // Verify Phone
     open func verifyMobilePhone(_ mobile: String, pin: String, completion: @escaping (_ authToken: AuthToken) -> Void, failure: @escaping (_ response: [String: Any]?) -> Void) {
         
-        let verifyEndpoint = self.getTokenUrl()
+        let verifyEndpoint = self.tokenUrl
         
         self.requestHeaders.update(["Accept": "application/json", "Authorization": self.generateBasicAuthHeader()])
         
@@ -476,20 +400,23 @@ open class AuthClient: AuthControllerDelegate {
             
             if response.response?.statusCode == 200 {
                 
-                guard let responseJSON = response.result.value as? [String: Any] else {
-                    failure(nil)
-                    return
+                guard
+                    let responseJSON = response.result.value as? [String: AnyObject],
+                    let expiry: Double = responseJSON["expires_in"] as? Double,
+                    let accessToken = responseJSON["access_token"] as? String else {
+                        
+                        failure(Errors.wrongResponseFormat)
+                        return
                 }
                 
-                if let expiry: Double = responseJSON["expires_in"] as? Double {
-                    let authToken: AuthToken = AuthToken(accessToken: (responseJSON["access_token"] as! String), expiry: String(Date.init(timeIntervalSinceNow: expiry).timeIntervalSince1970), refreshToken: (responseJSON["refresh_token"] as! String), uniqueId: self.clientEnvironment.getRegion().regionType.rawValue)
-                    
-                    if authToken.isValid() {
-                        completion(authToken)
-                    }
-                    else {
-                        failure(nil)
-                    }
+                let authToken = AuthToken(
+                    accessToken: accessToken,
+                    expiry: Date(timeIntervalSinceNow: expiry),
+                    refreshToken: (responseJSON["refresh_token"] as? String),
+                    uniqueId: self.clientEnvironment.getRegion().regionType.rawValue)
+                
+                if authToken.isValid {
+                    completion(authToken)
                 }
                 else {
                     failure(nil)
@@ -587,15 +514,16 @@ open class AuthClient: AuthControllerDelegate {
         #endif
     }
     
-    open func getAuthToken() -> AuthToken {
-        return keychainManager.getAuthToken()
+    open var authToken: AuthToken? {
+        get {
+            return self.keychainManager.authToken
+        }
+        set {
+            self.keychainManager.authToken = newValue
+        }
     }
     
-    open func saveAuthToken(_ authToken: AuthToken) -> Void {
-        keychainManager.saveAuthToken(authToken)
-    }
-    
-    open func getTokenUrl() -> String {
+    open var tokenUrl: String {
         return self.clientEnvironment.getIdentityEndpoint() + AuthClientEndpoint.token.rawValue
     }
     
@@ -608,7 +536,7 @@ open class AuthClient: AuthControllerDelegate {
             clientId.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!)
     }
     
-    open func getAuthorizeUrl() -> String {
+    open var authorizeUrl: String {
         return self.clientEnvironment.getIdentityEndpoint() + AuthClientEndpoint.authorize.rawValue
     }
     

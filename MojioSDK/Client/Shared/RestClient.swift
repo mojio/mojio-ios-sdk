@@ -47,75 +47,47 @@ open class ClientHeaders {
     }
 }
 
-public enum RestClientEndpoint: String {
+public enum RestEndpoint: String {
     case base = "/"
-    case apps = "apps/"
-    case secret = "secret/"
-    case groups = "groups/"
-    case users = "users/"
-    case me = "me/"
-    case history = "history/"
-    case locations = "locations/"
-    case mojios = "mojios/"
-    case permission = "permission/"
-    case permissions = "permissions/"
-    case phoneNumbers = "phonenumbers/"
-    case emails = "emails/"
-    case tags = "tags/"
-    case trips = "trips/"
-    case vehicles = "vehicles/"
-    case address = "address/"
-    case vin = "vin/"
-    case serviceSchedule = "serviceschedule/"
-    case next = "next/"
-    case activities = "activities/"
-    case notificationSettings = "activities/settings/"
-    case wifiRadio = "wifiradio/"
-    case transactions = "transactions/"
-    case geofences = "geofences/"
-    case aggregates = "aggregates/"
-    case statistics = "statistics/"
-    case diagnosticCodes = "diagnosticcodes/"
-    case polyline = "polyline/"
-    
-    // Storage
-    // Parameters: Type, Id, Key
-    // e.g. trips/{id}/store/{key}
-    case storage = "%@%@/store/%@"
 }
 
 open class RestClient {
     
     open static let RestClientResponseStatusCodeKey = "statusCode"
     
-    fileprivate var requestMethod: Alamofire.HTTPMethod = .get
+    internal var requestMethod: Alamofire.HTTPMethod = .get
 
     open var pushUrl: String?
     open var requestUrl: String?
     open var requestV1Url: String?
     open var requestParams: [String:AnyObject] = [:]
-    open var requestEntity: RestClientEndpoint = .base
+    open var requestEntity: String = RestEndpoint.base.rawValue
     open var requestEntityId: String?
+    
+    internal var doNext: Bool = false
+    internal var nextUrl: String? = nil
+    internal var sinceBeforeFormatter = DateFormatter()
+    internal static let SinceBeforeDateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+    internal static let SinceBeforeTimezone = TimeZone(abbreviation: "UTC")
+
     // Default to global concurrent queue with default priority
     open static var defaultDispatchQueue = DispatchQueue.global()
     
-    fileprivate var doNext: Bool = false
-    fileprivate var nextUrl: String? = nil
-    fileprivate var sinceBeforeFormatter = DateFormatter()
-    fileprivate static let SinceBeforeDateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
-    fileprivate static let SinceBeforeTimezone = TimeZone(abbreviation: "UTC")
-    fileprivate var dispatchQueue = RestClient.defaultDispatchQueue
+    internal var dispatchQueue = RestClient.defaultDispatchQueue
     
     internal let sessionManager: SessionManager
-    private var keychainManager: KeychainManager
+    internal var keychainManager: KeychainManager
 
-    public init(clientEnvironment: ClientEnvironment, sessionManager: SessionManager = SessionManager.default, keychainManager: KeychainManager = KeychainManager()) {
+    public init(
+        clientEnvironment: ClientEnvironment,
+        sessionManager: SessionManager = SessionManager.default,
+        keychainManager: KeychainManager? = nil) {
+
         self.requestUrl = clientEnvironment.getApiEndpoint()
         self.requestV1Url = clientEnvironment.getV1ApiEndpoint()
         self.pushUrl = clientEnvironment.getPushWSEndpoint()
         self.sessionManager = sessionManager
-        self.keychainManager = keychainManager
-
+        self.keychainManager = keychainManager ?? KeychainManager.sharedInstance
         
         self.initDateFormatters()
     }
@@ -151,16 +123,16 @@ open class RestClient {
         return self
     }
     
-    fileprivate func appendRequestUrlEntityId(asFinal: Bool = false) {
+    internal func appendRequestUrlEntityId(asFinal: Bool = false) {
         if let entityId = self.requestEntityId {
-            self.requestUrl = self.requestUrl! + self.requestEntity.rawValue + entityId + (asFinal ? "" : "/")
+            self.requestUrl = self.requestUrl! + self.requestEntity + entityId + (asFinal ? "" : "/")
         }
         else {
-            self.requestUrl = self.requestUrl! + self.requestEntity.rawValue
+            self.requestUrl = self.requestUrl! + self.requestEntity
         }
     }
     
-    fileprivate func appendRequestUrlEntity(_ entity: String?, asFinal: Bool = false) {
+    internal func appendRequestUrlEntity(_ entity: String?, asFinal: Bool = false) {
         if let entity = entity {
             self.requestUrl = self.requestUrl! + entity + (asFinal ? "" : "/")
         }
@@ -169,250 +141,13 @@ open class RestClient {
         }
     }
     
-    fileprivate func appendPushUrlEntityId(asFinal: Bool = false) {
+    internal func appendPushUrlEntityId(asFinal: Bool = false) {
         if let entityId = self.requestEntityId {
-            self.pushUrl = self.pushUrl! + self.requestEntity.rawValue + entityId + (asFinal ? "" : "/")
+            self.pushUrl = self.pushUrl! + self.requestEntity + entityId + (asFinal ? "" : "/")
         }
         else {
-            self.pushUrl = self.pushUrl! + self.requestEntity.rawValue
+            self.pushUrl = self.pushUrl! + self.requestEntity
         }
-    }
-    
-    open func apps(_ appId: String? = nil) -> Self {
-        self.requestEntity = .apps
-        self.requestEntityId = appId
-        self.appendRequestUrlEntityId()
-        
-        return self
-    }
-    
-    open func secret() -> Self {
-        self.requestEntity = .secret
-        self.requestUrl = self.requestUrl! + self.requestEntity.rawValue
-
-        return self
-    }
-    
-    open func groups(_ groupId: String? = nil) -> Self {
-        self.requestEntity = .groups
-        self.requestEntityId = groupId
-        self.appendRequestUrlEntityId()
-
-        return self
-    }
-    
-    open func users(_ userId: String? = nil) -> Self {
-        self.requestEntity = .users
-        self.requestEntityId = userId
-        self.appendRequestUrlEntityId()
-        self.appendPushUrlEntityId()
-        
-        return self
-    }
-    
-    open func me() -> Self {
-        self.requestEntity = .me
-        self.requestUrl = self.requestUrl! + self.requestEntity.rawValue
-        
-        return self
-    }
-    
-    open func history() -> Self {
-        self.requestEntity = .history
-        self.requestUrl = self.requestUrl! + self.requestEntity.rawValue
-        
-        return self
-    }
-    
-    open func locations() -> Self {
-        self.requestEntity = .locations
-        self.requestUrl = self.requestUrl! + self.requestEntity.rawValue
-        
-        return self
-    }
-    
-    open func mojios(_ mojioId: String? = nil) -> Self {
-        self.requestEntity = .mojios
-        self.requestEntityId = mojioId
-        self.appendRequestUrlEntityId()
-        self.appendPushUrlEntityId()
-
-        return self
-    }
-    
-    open func phonenumbers(_ phonenumber: String? = nil, sendVerification: Bool = false, pin: String? = nil) -> Self {
-        self.requestEntity = .phoneNumbers
-        let verificationParam = sendVerification ? "sendVerification=true" : nil
-        let pinParam = pin.flatMap { "pin=\($0)" }
-        let query = [verificationParam, pinParam].flatMap { $0 }.joined(separator: "&")
-        self.requestEntityId = [phonenumber, (query.isEmpty ? nil : query)].flatMap { $0 }.joined(separator: "?")
-        self.appendRequestUrlEntityId(asFinal: true)
-        
-        return self
-    }
-
-    open func emails (_ email: String? = nil) -> Self {
-        self.requestEntity = .emails
-        self.requestEntityId = email
-        self.appendRequestUrlEntityId()
-        
-        return self
-    }
-    
-    open func permission() -> Self {
-        self.requestEntity = .permission
-        self.requestUrl = self.requestUrl! + self.requestEntity.rawValue
-
-        return self
-    }
-    
-    open func permissions() -> Self {
-        self.requestEntity = .permissions
-        self.requestUrl = self.requestUrl! + self.requestEntity.rawValue
-
-        return self
-    }
-    
-    open func tags(_ tagId: String) -> Self {
-        self.requestEntity = .tags
-        self.requestUrl = self.requestUrl! + self.requestEntity.rawValue + tagId + "/"
-
-        return self
-    }
-    
-    open func trips(_ tripId: String? = nil) -> Self {
-        self.requestEntity = .trips
-        self.requestEntityId = tripId
-        self.appendRequestUrlEntityId()
-        self.appendPushUrlEntityId()
-
-        return self
-    }
-    
-    open func vehicles(_ vehicleId: String? = nil) -> Self {
-        self.requestEntity = .vehicles
-        self.requestEntityId = vehicleId
-        self.appendRequestUrlEntityId()
-        self.appendPushUrlEntityId()
-
-        return self
-    }
-    
-    public func vehicles(_ vehicleId: String, mergeVehicleId: String) -> Self {
-        self.requestEntity = .vehicles
-        self.requestEntityId = vehicleId
-        self.requestParams["actual"] = mergeVehicleId as AnyObject?
-        self.requestUrl = self.requestUrl! + self.requestEntity.rawValue + vehicleId + "/"
-        self.pushUrl = self.pushUrl! + self.requestEntity.rawValue + vehicleId + "/"
-        
-        return self
-    }
-
-    open func notificationSettings() -> Self {
-        self.requestEntity = .notificationSettings
-        self.requestUrl = self.requestUrl! + self.requestEntity.rawValue
-        return self
-    }
-    
-    open func address() -> Self {
-        self.requestEntity = .address
-        self.requestUrl = self.requestUrl! + self.requestEntity.rawValue
-
-        return self
-    }
-    
-    open func vin() -> Self {
-        self.requestEntity = .vin
-        self.requestUrl = self.requestUrl! + self.requestEntity.rawValue
-
-        return self
-    }
-    
-    open func serviceSchedule() -> Self {
-        self.requestEntity = .serviceSchedule
-        self.requestUrl = self.requestUrl! + self.requestEntity.rawValue
-
-        return self
-    }
-    
-    open func next() -> Self {
-        self.requestEntity = .next
-        self.requestUrl = self.requestUrl! + self.requestEntity.rawValue
-
-        return self
-    }
-    
-    open func storage(_ key: String) -> Self {
-
-        if let requestEntityId = self.requestEntityId {
-            self.requestUrl = self.requestV1Url! + String(format: RestClientEndpoint.storage.rawValue, self.requestEntity.rawValue, requestEntityId, key)
-        }
-
-        return self
-    }
-    
-    open func activities() -> Self {
-        self.requestEntity = .activities
-        self.requestUrl = self.requestUrl! + self.requestEntity.rawValue
-        self.pushUrl = self.pushUrl! + self.requestEntity.rawValue
-        return self
-    }
-    
-    open func wifiRadio() -> Self {
-        self.requestEntity = .wifiRadio
-        self.requestUrl = self.requestUrl! + self.requestEntity.rawValue
-        
-        return self
-    }
-    
-    open func transactions(_ transactionId: String? = nil) -> Self {
-        self.requestEntity = .transactions
-        self.requestEntityId = transactionId
-        self.appendRequestUrlEntityId()
-        self.appendPushUrlEntityId()
-        
-        return self
-    }
-    
-    open func geofences(_ geofenceId: String? = nil) -> Self {
-        self.requestEntity = .geofences
-        self.requestEntityId = geofenceId
-        self.appendRequestUrlEntityId()
-        self.appendPushUrlEntityId()
-        
-        return self
-    }
-    
-    open func aggregates(ofType type: String? = nil) -> Self {
-        
-        self.requestEntity = .aggregates
-        self.appendRequestUrlEntity(self.requestEntity.rawValue, asFinal: true)
-        self.appendRequestUrlEntity(type)
-        
-        return self
-    }
-    
-    open func statistics() -> Self {
-        self.requestEntity = .statistics
-        self.requestUrl = self.requestUrl! + self.requestEntity.rawValue
-        
-        return self
-    }
-
-    open func diagnosticCodes(_ code: String? = nil) -> Self {
-        
-        self.requestEntity = .diagnosticCodes
-        self.appendRequestUrlEntity(self.requestEntity.rawValue, asFinal: true)
-        self.appendRequestUrlEntity(code, asFinal: true)
-        
-        return self
-    }
-    
-    public func polyline() -> Self {
-        self.requestEntity = .polyline
-        self.requestUrl = self.requestUrl! + self.requestEntity.rawValue
-        
-        return self
     }
 
     open func query(top: String? = nil, skip: String? = nil, filter: String? = nil, select: String? = nil, orderby: String? = nil, count: String? = nil, since: Date? = nil, before: Date? = nil, fields: [String]? = nil) -> Self {
@@ -459,7 +194,7 @@ open class RestClient {
         self.requestParams.update(requestParams)
         return self
     }
-    
+
     public func dispatch(queue: DispatchQueue) {
         self.dispatchQueue = queue
     }
@@ -641,87 +376,16 @@ open class RestClient {
         }
     }
     
-    open func parseDict(_ dict: [String: Any]) -> Any? {
-        switch self.requestEntity {
-            
-        case .apps:
-            return Mapper<App>().map(JSON: dict)
-            
-        case .secret:
-            return nil
-            
-        case .groups:
-            return Mapper<Group>().map(JSON: dict)
-            
-        case .users:
-            return Mapper<User>().map(JSON: dict)
-            
-        case .me:
-            return Mapper<User>().map(JSON: dict)
-            
-        case .history:
-            return nil
-            
-        case .locations:
-            return Mapper<Location>().map(JSON: dict)
-
-        case .mojios:
-            return Mapper<Mojio>().map(JSON: dict)
-            
-        case .trips:
-            return Mapper<Trip>().map(JSON: dict)
-
-        case .vehicles:
-            return Mapper<Vehicle>().map(JSON: dict)
-            
-        case .address:
-            return Mapper<Address>().map(JSON: dict)
-            
-        case .vin:
-            return Mapper<Vin>().map(JSON: dict)
-            
-        case .serviceSchedule:
-            return Mapper<ServiceSchedule>().map(JSON: dict)
-            
-        case .next:
-            return Mapper<NextServiceSchedule>().map(JSON: dict)
-
-        case .activities:
-            return Mapper<RootActivity>().map(JSON: dict)
-            
-        case .notificationSettings:
-            return Mapper<NotificationsSettings>().map(JSON: dict)
-            
-        case .wifiRadio:
-            // Returns Transaction Id
-            return dict["TransactionId"]
-            
-        case .transactions:
-            // Returns Transaction State
-            return dict["State"]
-            
-        case .geofences:
-            return Mapper<Geofence>().map(JSON: dict)
-
-        case .aggregates:
-            return Mapper<AggregationData>().map(JSON: dict)
-
-        case .statistics:
-            return Mapper<VehicleStatistics>().map(JSON: dict)
-            
-        case .polyline:
-            return Mapper<TripPolyline>().map(JSON: dict)
-
-        case .diagnosticCodes:
-            return Mapper<DiagnosticCode>().map(JSON: dict)
-            
-        default:
-            return nil
-        }
+    internal func parseData(_ responseData: Data) -> Codable? {
+        return nil
+    }
+    
+    internal func parseDict(_ dict: [String: Any]) -> Any? {
+        return nil
     }
     
     func accessToken() -> String? {
-        return self.keychainManager.getAuthToken().accessToken
+        return KeychainManager.sharedInstance.authToken?.accessToken
     }    
 }
 

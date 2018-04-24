@@ -18,35 +18,25 @@ import SwiftWebSocket
 import SwiftyJSON
 import Alamofire
 
-open class WSClient: RestClient {
+open class WSPetsClient: PetsClient {
     
     // Default to global concurrent queue with default priority
     public static var wsDefaultDispatchQueue = DispatchQueue.global()
-    private var wsDispatchQueue = WSClient.wsDefaultDispatchQueue
+    private var wsDispatchQueue = WSPetsClient.wsDefaultDispatchQueue
     
     private var publicKeys: [SecKey]? = nil
     private let webSocketFactory: WebSocketFactory
     
-    private override init(
-        clientEnvironment: ClientEnvironment,
-        sessionManager: SessionManager = SessionManager.default,
-        keychainManager: KeychainManager = KeychainManager()
-    ) {
-        self.webSocketFactory = SwiftWebSocketFactory()
-        
-        super.init(clientEnvironment: clientEnvironment, sessionManager: sessionManager)
-    }
-    
     public init(
         clientEnvironment: ClientEnvironment,
         sessionManager: SessionManager = SessionManager.default,
-        keychainManager: KeychainManager = KeychainManager(),
+        keychainManager: KeychainManager? = nil,
         publicKeys: [SecKey]? = nil,
-        webSocketFactory: WebSocketFactory = SwiftWebSocketFactory()
-    ) {
+        webSocketFactory: WebSocketFactory = SwiftWebSocketFactory()) {
+
         self.publicKeys = publicKeys
         self.webSocketFactory = webSocketFactory
-
+        
         super.init(clientEnvironment: clientEnvironment, sessionManager: sessionManager, keychainManager: keychainManager)
     }
     
@@ -55,7 +45,7 @@ open class WSClient: RestClient {
     }
     
     open func watch(next: @escaping ((Any) -> Void), completion: @escaping (() -> Void), failure: @escaping ((Error) -> Void), file: String = #file) -> WebSocketProvider {
-    
+        
         var request = URLRequest(url: URL(string:super.pushUrl!)!)
         request.allHTTPHeaderFields = ClientHeaders().defaultRequestHeaders
         
@@ -75,7 +65,7 @@ open class WSClient: RestClient {
                 completion()
             }
         }
-
+        
         webSocket.onMessage = { message in
             if let text = message as? String {
                 if let data = text.data(using: String.Encoding.utf8) {

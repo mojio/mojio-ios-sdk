@@ -5,9 +5,7 @@ use_frameworks!
 
 workspace 'MojioSDK.xcworkspace'
 
-target 'MojioSDK' do
-    project 'MojioSDK.xcodeproj'
-
+def base_pods
     pod 'Alamofire'
     pod 'SwiftyJSON'
     pod 'ObjectMapper'
@@ -16,9 +14,22 @@ target 'MojioSDK' do
     pod 'OHHTTPStubs/Swift'
     pod 'SwiftWebSocket', :git => 'https://github.com/mojio/SwiftWebSocket', :commit => 'd39576a'
     pod 'SwiftDate'
+    pod 'RxSwift'
 end
 
-target 'MojioSDKTests' do
-    pod 'OHHTTPStubs'
-    pod 'OHHTTPStubs/Swift'
+target 'Vehicles' do
+    project 'MojioSDK.xcodeproj'
+
+    base_pods
 end
+
+target 'Pets' do
+    project 'MojioSDK.xcodeproj'
+
+    base_pods
+end
+
+# target 'Tests' do
+#     pod 'OHHTTPStubs'
+#     pod 'OHHTTPStubs/Swift'
+# end

@@ -13,22 +13,30 @@
  * forbidden unless prior written permission is obtained from Moj.io Inc.
  *******************************************************************************/
 
-import UIKit
-import ObjectMapper
+import Foundation
 
-public struct PhoneNumber: Mappable {
-
-    public var PhoneNumber: String? = nil
-    public var Verified: Bool = false
+struct ResponseArray<T: Codable>: Codable {
+    let data: [T]
+    let results: Int?
+    let totalCount: Int?
+    let links: Links?
     
-    public init() {}
-    
-    public init?(map: Map) {
-        self.init()
+    enum CodingKeys: String, CodingKey {
+        case data = "Data"
+        case results = "Results"
+        case totalCount = "TotalCount"
+        case links = "Links"
     }
+}
+
+struct RangeResponse<E: Codable> {
+    let response: ResponseArray<E>
+    let offset: Int?
+    let limit: Int?
     
-    public mutating func mapping(map: Map) {
-        PhoneNumber <- map["PhoneNumber"]
-        Verified <- map["Verified"]
+    init(response: ResponseArray<E>, offset: Int? = nil, limit: Int? = nil) {
+        self.response = response
+        self.offset = offset
+        self.limit = limit
     }
 }
