@@ -757,7 +757,6 @@
 			isa = PBXGroup;
 			children = (
 				BC879B461CBEFFDD00F9177B /* App.swift */,
-				BC59062C208E566200A098A3 /* AuthToken.swift */,
 				BC590627208E566200A098A3 /* Email.swift */,
 				2E5767401FB4536A008F16F6 /* Image.swift */,
 				BC879B4F1CBEFFDD00F9177B /* Group.swift */,
@@ -770,6 +769,7 @@
 		BC59065C208E7B1200A098A3 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				BC59062C208E566200A098A3 /* AuthToken.swift */,
 				BC879B451CBEFFDD00F9177B /* Address.swift */,
 				BC3C66411DA8196A00179344 /* DeviceMeasurement.swift */,
 				BC879B501CBEFFDD00F9177B /* Heading.swift */,
