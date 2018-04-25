@@ -13,10 +13,9 @@
  * forbidden unless prior written permission is obtained from Moj.io Inc.
  *******************************************************************************/
 
-import UIKit
-import ObjectMapper
+//import UIKit
 
-public struct ServiceScheduleItem: Mappable {
+public struct ServiceScheduleItem: Codable {
     
     public var TransNotes: String? = nil
     public var ScheduleName: String? = nil
@@ -26,21 +25,21 @@ public struct ServiceScheduleItem: Mappable {
     public var MaintenanceNotes: String? = nil
     public var Intervals: [ServiceInterval] = []
     public var Events: [ServiceEvent] = []
-    
-    public init() {}
-    
-    public init?(map: Map) {
-        self.init()
-    }
-
-    public mutating func mapping(map: Map) {
-        TransNotes <- map["TransNotes"]
-        ScheduleName <- map["ScheduleName"]
-        ScheduleDescription <- map["ScheduleDescription"]
-        MaintenanceCategory <- map["MaintenanceCategory"]
-        MaintenanceName <- map["MaintenanceName"]
-        MaintenanceNotes <- map["MaintenanceNotes"]
-        Intervals <- map["Intervals"]
-        Events <- map["Events"]
-    }
 }
+
+//public init() {}
+//
+//public init?(map: Map) {
+//    self.init()
+//}
+//
+//public mutating func mapping(map: Map) {
+//    TransNotes <- map["TransNotes"]
+//    ScheduleName <- map["ScheduleName"]
+//    ScheduleDescription <- map["ScheduleDescription"]
+//    MaintenanceCategory <- map["MaintenanceCategory"]
+//    MaintenanceName <- map["MaintenanceName"]
+//    MaintenanceNotes <- map["MaintenanceNotes"]
+//    Intervals <- map["Intervals"]
+//    Events <- map["Events"]
+//}

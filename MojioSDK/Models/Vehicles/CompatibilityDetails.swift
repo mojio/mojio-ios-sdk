@@ -13,8 +13,8 @@
  * forbidden unless prior written permission is obtained from Moj.io Inc.
  *******************************************************************************/
 
-import UIKit
-import ObjectMapper
+//import UIKit
+//import ObjectMapper
 
 public enum VehicleCompatibilityLevel: String {
     case full = "Full"
@@ -24,21 +24,31 @@ public enum VehicleCompatibilityLevel: String {
     case unknown = "Unknown"
 }
 
-public struct CompatibilityDetails: Mappable {
+public struct CompatibilityDetails: Codable {
     
     public var Level: String? = nil
     public var Changed: Bool = false
     public var LastChecked: String? = nil
-    
-    public init() {}
-    
-    public init?(map: Map) {
-        self.init()
-    }
-    
-    public mutating func mapping(map: Map) {
-        Level <- map["Level"]
-        Changed <- map["Changed"]
-        LastChecked <- map["LastChecked"]
-    }
 }
+
+
+//public init() {}
+
+//public struct CompatibilityDetails: Mappable {
+//
+//    public var Level: String? = nil
+//    public var Changed: Bool = false
+//    public var LastChecked: String? = nil
+//
+//    public init() {}
+//
+//    public init?(map: Map) {
+//        self.init()
+//    }
+//
+//    public mutating func mapping(map: Map) {
+//        Level <- map["Level"]
+//        Changed <- map["Changed"]
+//        LastChecked <- map["LastChecked"]
+//    }
+//}

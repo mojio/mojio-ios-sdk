@@ -13,10 +13,10 @@
  * forbidden unless prior written permission is obtained from Moj.io Inc.
  *******************************************************************************/
 
-import UIKit
-import ObjectMapper
+//import UIKit
+import Foundation
 
-public struct VinDetails: Mappable {
+public struct VinDetails: Codable {
     
     public var Timestamp: String? = nil
     public var Vin: String? = nil
@@ -34,31 +34,38 @@ public struct VinDetails: Mappable {
     public var Message: String? = nil
     public var Success: Bool? = nil
     
-    public var timestamp: Date? = nil
+    //public var timestamp: Date? = nil
+}
+
+extension VinDetails {
     
-    public init() {}
-    
-    public init?(map: Map) {
-        self.init()
-    }
-    
-    public mutating func mapping(map: Map) {
-        Timestamp <- map["Timestamp"]
-        Vin <- map["Vin"]
-        Year <- map["Year"]
-        Make <- map["Make"]
-        Model <- map["Model"]
-        Engine <- map["Engine"]
-        Cylinders <- map["Cylinders"]
-        TotalFuelCapacity <- map["TotalFuelCapacity"]
-        FuelType <- map["FuelType"]
-        CityFuelEfficiency <- map["CityFuelEfficiency"]
-        HighwayFuelEfficiency <- map["HighwayFuelEfficiency"]
-        CombinedFuelEfficiency <- map["CombinedFuelEfficiency"]
-        Transmission <- map["Transmission"]
-        Message <- map["Message"]
-        Success <- map["Success"]
-        
-        timestamp = self.Timestamp?.toDate
+    public var timestamp: Date? {
+        return self.Timestamp?.toDate
     }
 }
+
+//public init() {}
+//
+//public init?(map: Map) {
+//    self.init()
+//}
+//
+//public mutating func mapping(map: Map) {
+//    Timestamp <- map["Timestamp"]
+//    Vin <- map["Vin"]
+//    Year <- map["Year"]
+//    Make <- map["Make"]
+//    Model <- map["Model"]
+//    Engine <- map["Engine"]
+//    Cylinders <- map["Cylinders"]
+//    TotalFuelCapacity <- map["TotalFuelCapacity"]
+//    FuelType <- map["FuelType"]
+//    CityFuelEfficiency <- map["CityFuelEfficiency"]
+//    HighwayFuelEfficiency <- map["HighwayFuelEfficiency"]
+//    CombinedFuelEfficiency <- map["CombinedFuelEfficiency"]
+//    Transmission <- map["Transmission"]
+//    Message <- map["Message"]
+//    Success <- map["Success"]
+//
+//    timestamp = self.Timestamp?.toDate
+//}

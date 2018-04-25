@@ -14,49 +14,54 @@
  *******************************************************************************/
 
 import Foundation
-import ObjectMapper
 
 public enum GeofenceRegionType: String {
     case circle = "Circle"
 }
 
-public struct GeofenceRegion: Mappable {
+public struct GeofenceRegion: Codable {
 
     public var GeofenceType: String? = nil
     public var Lat: Double = 0
     public var Lng: Double = 0
     public var Radius: Distance? = nil
     
-    public init() {}
+//    public func jsonDict() -> [String: Any] {
+//        var map: [String:Any] = [:]
+//
+//        if let id = self.GeofenceType {
+//            map["Type"] = id as AnyObject?
+//        }
+//
+//        map["Lat"] = self.Lat as AnyObject?
+//        map["Lng"] = self.Lng as AnyObject?
+//
+//        if let radius = self.Radius {
+//            map["Radius"] = radius.jsonDict()
+//        }
+//
+//        return map
+//    }
     
-    public init?(map: Map) {
-        self.init()
-    }
-    
-    public func jsonDict() -> [String: Any] {
-        var map: [String:Any] = [:]
-        
-        if let id = self.GeofenceType {
-            map["Type"] = id as AnyObject?
-        }
-        
-        map["Lat"] = self.Lat as AnyObject?
-        map["Lng"] = self.Lng as AnyObject?
-        
-        if let radius = self.Radius {
-            map["Radius"] = radius.jsonDict()
-        }
-        
-        return map
-    }
-    
-    public mutating func mapping(map: Map) {
-        GeofenceType <- map["Type"]
-        Lat <- map["Lat"]
-        Lng <- map["Lng"]
-        Radius <- map["Radius"]
+    private enum CodingKeys: String, CodingKey {
+        case GeofenceType = "Type"
+        case Lat
+        case Lng
+        case Radius
     }
 }
+
+//    public init() {}
+//
+//    public init?(map: Map) {
+//        self.init()
+//    }
+//    public mutating func mapping(map: Map) {
+//        GeofenceType <- map["Type"]
+//        Lat <- map["Lat"]
+//        Lng <- map["Lng"]
+//        Radius <- map["Radius"]
+//    }
 
 public enum GeofenceNotificationType: String {
     case onEnter = "OnEnter"
@@ -65,7 +70,7 @@ public enum GeofenceNotificationType: String {
     case never = "Never"
 }
 
-public struct Geofence: Mappable, PrimaryKey {
+public struct Geofence: Codable, PrimaryKey {
     
     public var Id: String? = nil
     public var Name: String? = nil
@@ -80,59 +85,70 @@ public struct Geofence: Mappable, PrimaryKey {
     public var OwnerId: String? = nil
     public var Deleted: Bool? = nil
     
-    public var createdOn: Date? = nil
-    public var lastModified: Date? = nil
+    //public var createdOn: Date? = nil
+    //public var lastModified: Date? = nil
 
-    public init() {}
+//    public func jsonDict() -> [String: Any] {
+//        var map: [String: Any] = [:]
+//
+//        if let id = self.Id {
+//            map["Id"] = id as AnyObject?
+//        }
+//
+//        if let name = self.Name {
+//            map["Name"] = name as AnyObject?
+//        }
+//
+//        if let description = self.Description {
+//            map["Description"] = description as AnyObject?
+//        }
+//
+//        if let region = self.Region {
+//            map["Region"] = region.jsonDict()
+//        }
+//
+//        if let notificationSetting = self.NotificationSetting {
+//            map["NotificationSetting"] = notificationSetting as AnyObject?
+//        }
+//
+//        map["Enabled"] = self.Enabled as AnyObject?
+//        map["VehicleIds"] = self.VehicleIds as AnyObject?
+//
+//        return map
+//    }
+}
+
+extension Geofence {
     
-    public init?(map: Map) {
-        self.init()
+    public var createdOn: Date? {
+        return self.CreatedOn?.toDate
     }
     
-    public func jsonDict() -> [String: Any] {
-        var map: [String: Any] = [:]
-        
-        if let id = self.Id {
-            map["Id"] = id as AnyObject?
-        }
-        
-        if let name = self.Name {
-            map["Name"] = name as AnyObject?
-        }
-
-        if let description = self.Description {
-            map["Description"] = description as AnyObject?
-        }
-        
-        if let region = self.Region {
-            map["Region"] = region.jsonDict()
-        }
-        
-        if let notificationSetting = self.NotificationSetting {
-            map["NotificationSetting"] = notificationSetting as AnyObject?
-        }
-        
-        map["Enabled"] = self.Enabled as AnyObject?
-        map["VehicleIds"] = self.VehicleIds as AnyObject?
-        
-        return map
-    }
-    
-    public mutating func mapping(map: Map) {
-        Id <- map["Id"]
-        Name <- map["Name"]
-        Description <- map["Description"]
-        Region <- map["Region"]
-        NotificationSetting <- map["NotificationSetting"]
-        Enabled <- map["Enabled"]
-        VehicleIds <- map["VehicleIds"]
-        CreatedOn <- map["CreatedOn"]
-        LastModified <- map["LastModified"]
-        Tags <- map["Tags"]
-        Deleted <- map["Deleted"]
-        OwnerId <- map["OwnerId"]
-        
-        createdOn = self.CreatedOn?.toDate
-        lastModified = self.LastModified?.toDate
+    public var lastModified: Date? {
+        return self.LastModified?.toDate
     }
 }
+
+//public init() {}
+//
+//public init?(map: Map) {
+//    self.init()
+//}
+//
+//public mutating func mapping(map: Map) {
+//    Id <- map["Id"]
+//    Name <- map["Name"]
+//    Description <- map["Description"]
+//    Region <- map["Region"]
+//    NotificationSetting <- map["NotificationSetting"]
+//    Enabled <- map["Enabled"]
+//    VehicleIds <- map["VehicleIds"]
+//    CreatedOn <- map["CreatedOn"]
+//    LastModified <- map["LastModified"]
+//    Tags <- map["Tags"]
+//    Deleted <- map["Deleted"]
+//    OwnerId <- map["OwnerId"]
+//
+//    createdOn = self.CreatedOn?.toDate
+//    lastModified = self.LastModified?.toDate
+//}

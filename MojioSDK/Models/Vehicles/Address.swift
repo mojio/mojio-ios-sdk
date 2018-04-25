@@ -14,9 +14,8 @@
  *******************************************************************************/
 
 import UIKit
-import ObjectMapper
 
-public struct Address: Mappable {
+public struct Address: Codable {
     
     public var HouseNumber: String? = nil
     public var Road: String? = nil
@@ -29,24 +28,4 @@ public struct Address: Mappable {
     public var Country: String? = nil
     public var CountryCode: String? = nil
     public var FormattedAddress: String? = nil
-    
-    public init() {}
-    
-    public init?(map: Map) {
-        self.init()
-    }
-    
-    public mutating func mapping(map: Map) {
-        HouseNumber <- map["HouseNumber"]
-        Road <- map["Road"]
-        Neighbourhood <- map["Neighbourhood"]
-        Suburb <- map["Suburb"]
-        City <- map["City"]
-        County <- map["County"]
-        State <- map["State"]
-        PostCode <- map["PostCode"]
-        Country <- map["Country"]
-        CountryCode <- map["CountryCode"]
-        FormattedAddress <- map["FormattedAddress"]
-    }
 }

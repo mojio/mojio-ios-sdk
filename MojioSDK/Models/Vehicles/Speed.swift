@@ -13,8 +13,7 @@
  * forbidden unless prior written permission is obtained from Moj.io Inc.
  *******************************************************************************/
 
-import UIKit
-import ObjectMapper
+//import UIKit
 
 // Units in SpeedUnits
 public struct Speed: DeviceMeasurement {
@@ -26,23 +25,35 @@ public struct Speed: DeviceMeasurement {
     public var Value: Double = 0
     public var Timestamp: String?  = nil
     
-    public var timeStamp: Date? = nil
+    //public var timeStamp: Date? = nil
     
-    public init() {}
+//    public func jsonDict () -> [String: Any] {
+//        var map: [String: Any] = [:]
+//        
+//        if let unit  = self.Unit {
+//            map["Unit"] = unit
+//        }
+//        
+//        map["Value"] = self.Value
+//        
+//        return map
+//    }
+}
+
+extension Speed {
     
-    public init?(map: Map) {
-        self.init()
+    public init(from decoder: Decoder, with deviceMeasurements: DeviceMeasurements) throws {
+        
+        self.init(BaseUnit: deviceMeasurements.BaseUnit, BaseValue: deviceMeasurements.BaseValue, Unit: deviceMeasurements.Unit, Value: deviceMeasurements.Value, Timestamp: deviceMeasurements.Timestamp)
     }
     
-    public func jsonDict () -> [String: Any] {
-        var map: [String: Any] = [:]
+    public func encode(with encoder: Encoder) throws {
         
-        if let unit  = self.Unit {
-            map["Unit"] = unit
-        }
-        
-        map["Value"] = self.Value
-        
-        return map
     }
 }
+
+//public init() {}
+//
+//public init?(map: Map) {
+//    self.init()
+//}

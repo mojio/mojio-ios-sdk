@@ -13,28 +13,25 @@
  * forbidden unless prior written permission is obtained from Moj.io Inc.
  *******************************************************************************/
 
-import UIKit
-import ObjectMapper
+//import UIKit
 
-public struct Accelerometer: Mappable {
+public struct Accelerometer: Codable {
     
     public var X: ProperAcceleration? = nil
     public var Y: ProperAcceleration? = nil
     public var Z: ProperAcceleration? = nil
     public var Magnitude: ProperAcceleration? = nil
     public var SamplingInterval: TimePeriod? = nil
-    
-    public init() {}
-    
-    public init?(map: Map) {
-        self.init()
-    }
-    
-    public mutating func mapping(map: Map) {
-        X <- map["X"]
-        Y <- map["Y"]
-        Z <- map["Z"]
-        Magnitude <- map["Magnitude"]
-        SamplingInterval <- map["SamplingInterval"]
-    }
 }
+
+//    public init?(map: Map) {
+//        self.init()
+//    }
+//
+//    public mutating func mapping(map: Map) {
+//        X <- map["X"]
+//        Y <- map["Y"]
+//        Z <- map["Z"]
+//        Magnitude <- map["Magnitude"]
+//        SamplingInterval <- map["SamplingInterval"]
+//    }

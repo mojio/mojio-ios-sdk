@@ -13,26 +13,25 @@
  * forbidden unless prior written permission is obtained from Moj.io Inc.
  *******************************************************************************/
 
-import UIKit
-import ObjectMapper
+//import UIKit
 
-public struct Transmission: Mappable {
+public struct Transmission: Codable {
     
     public var Name: String? = nil
     public var `Type`: String? = nil
     public var DetailType: String? = nil
     public var Gears: String? = nil
-
-    public init() {}
-    
-    public init?(map: Map) {
-        self.init()
-    }
-    
-    public mutating func mapping(map: Map) {
-        Name <- map["Name"]
-        Type <- map["Type"]
-        DetailType <- map["DetailType"]
-        Gears <- map["Gears"]
-    }
 }
+
+//public init() {}
+//
+//public init?(map: Map) {
+//    self.init()
+//}
+//
+//public mutating func mapping(map: Map) {
+//    Name <- map["Name"]
+//    Type <- map["Type"]
+//    DetailType <- map["DetailType"]
+//    Gears <- map["Gears"]
+//}

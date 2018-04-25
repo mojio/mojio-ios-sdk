@@ -14,28 +14,27 @@
  *******************************************************************************/
 
 import Foundation
-import ObjectMapper
 
-public struct SettingsGeofence: Mappable, PrimaryKey {
+public struct SettingsGeofence: Codable, PrimaryKey {
     
     public var Id: String? = nil
     public var EnableEnterActivity: Bool = false
     public var EnableExitActivity: Bool = false
-    
-    public init() {}
-    
-    public init?(map: Map) {
-        self.init()
-    }
-    
-    public mutating func mapping(map: Map) {
-        Id <- map["Id"]
-        EnableEnterActivity <- map["EnableEnterActivity"]
-        EnableExitActivity <- map["EnableExitActivity"]
-    }
 }
 
-public struct NotificationsSettings:  Mappable {
+//public init() {}
+//
+//public init?(map: Map) {
+//    self.init()
+//}
+//
+//public mutating func mapping(map: Map) {
+//    Id <- map["Id"]
+//    EnableEnterActivity <- map["EnableEnterActivity"]
+//    EnableExitActivity <- map["EnableExitActivity"]
+//}
+
+public struct NotificationsSettings: Codable {
     
     public var SpeedThreshold: Speed? = nil
     public var EnableTripCompletedActivity: Bool = false
@@ -62,61 +61,68 @@ public struct NotificationsSettings:  Mappable {
     public var EnableGeofenceActivity: Bool = false
     public var Geofences: [SettingsGeofence] = []
     
-    public init() {}
-    
-    public init?(map: Map) {
-        self.init()
-    }
-    
-    public func jsonDict () -> [String: Any] {
-        var map = self.toJSON()
-        
-        if let threshold = self.SpeedThreshold {
-            map["SpeedThreshold"] = threshold.jsonDict()
-        }
-        
-        var geofences: [[String: Any]] = []
-        for geofence in self.Geofences {
-            geofences.append(geofence.toJSON())
-        }
-        
-        map["Geofences"] = geofences
-        
-        return map
-    }
-    
-    public mutating func mapping(map: Map) {
-        SpeedThreshold <- map["SpeedThreshold"]
-        EnableTripStartActivity <- map["EnableTripStartActivity"]
-        EnableTripCompletedActivity <- map["EnableTripCompletedActivity"]
-        EnableLowFuelActivity <- map["EnableLowFuelActivity"]
-        EnableLowBatteryActivity <- map["EnableLowBatteryActivity"]
-        EnableSpeedActivity <- map["EnableSpeedActivity"]
-        EnableDtcActivity <- map["EnableDtcActivity"]
-        EnableCheckEngineActivity <- map["EnableCheckEngineActivity"]
-        EnableTowActivity <- map["EnableTowActivity"]
-        EnableMaintenanceActivity <- map["EnableMaintenanceActivity"]
-        EnableRecallActivity <- map["EnableRecallActivity"]
-        EnableServiceBulletinActivity <- map["EnableServiceBulletinActivity"]
-        EnableDisturbanceActivity <- map["EnableDisturbanceActivity"]
-        DisturbanceThreshold <- (map["DisturbanceThreshold"], EnumTransform())
-        EnableAccidentActivity <- map["EnableAccidentActivity"]
-        EnableDeviceUnpluggedActivity <- map["EnableDeviceUnpluggedActivity"]
-        
-        EnableVehicleConnectedActivity <- map["EnableVehicleConnectedActivity"]
-        EnableDeviceUpdatedActivity <- map["EnableDeviceUpdatedActivity"]
-        EnableSMSActivity <- map["EnableSMSActivity"]
-        EnableVehicleCompatibilityActivity <- map["EnableVehicleCompatibilityActivity"]
-        
-        EnableGeofenceActivity <- map["EnableGeofenceActivity"]
-        Geofences <- map["Geofences"]
-    }
+//    public func jsonDict () -> [String: Any] {
+//        var map = self.toJSON()
+//
+//        if let threshold = self.SpeedThreshold {
+//            map["SpeedThreshold"] = threshold.jsonDict()
+//        }
+//
+//        var geofences: [[String: Any]] = []
+//        for geofence in self.Geofences {
+//            geofences.append(geofence.toJSON())
+//        }
+//
+//        map["Geofences"] = geofences
+//
+//        return map
+//    }
 }
 
-public enum DisturbanceThreshold: String {
+//public init() {}
+//
+//public init?(map: Map) {
+//    self.init()
+//}
+//
+//public mutating func mapping(map: Map) {
+//    SpeedThreshold <- map["SpeedThreshold"]
+//    EnableTripStartActivity <- map["EnableTripStartActivity"]
+//    EnableTripCompletedActivity <- map["EnableTripCompletedActivity"]
+//    EnableLowFuelActivity <- map["EnableLowFuelActivity"]
+//    EnableLowBatteryActivity <- map["EnableLowBatteryActivity"]
+//    EnableSpeedActivity <- map["EnableSpeedActivity"]
+//    EnableDtcActivity <- map["EnableDtcActivity"]
+//    EnableCheckEngineActivity <- map["EnableCheckEngineActivity"]
+//    EnableTowActivity <- map["EnableTowActivity"]
+//    EnableMaintenanceActivity <- map["EnableMaintenanceActivity"]
+//    EnableRecallActivity <- map["EnableRecallActivity"]
+//    EnableServiceBulletinActivity <- map["EnableServiceBulletinActivity"]
+//    EnableDisturbanceActivity <- map["EnableDisturbanceActivity"]
+//    DisturbanceThreshold <- (map["DisturbanceThreshold"], EnumTransform())
+//    EnableAccidentActivity <- map["EnableAccidentActivity"]
+//    EnableDeviceUnpluggedActivity <- map["EnableDeviceUnpluggedActivity"]
+//
+//    EnableVehicleConnectedActivity <- map["EnableVehicleConnectedActivity"]
+//    EnableDeviceUpdatedActivity <- map["EnableDeviceUpdatedActivity"]
+//    EnableSMSActivity <- map["EnableSMSActivity"]
+//    EnableVehicleCompatibilityActivity <- map["EnableVehicleCompatibilityActivity"]
+//
+//    EnableGeofenceActivity <- map["EnableGeofenceActivity"]
+//    Geofences <- map["Geofences"]
+//}
+
+public enum DisturbanceThreshold: String, Codable {
+    
     case low = "Low"
     case medium = "Medium"
     case high = "High"
+    case other
+    
+    public init(from decoder: Decoder) throws {
+        let label = try decoder.singleValueContainer().decode(String.self)
+        self = DisturbanceThreshold(rawValue: label) ?? .other
+    }
     
     public static var all: [DisturbanceThreshold] {
         return [.low, .medium, .high]

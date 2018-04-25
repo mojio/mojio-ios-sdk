@@ -13,10 +13,9 @@
  * forbidden unless prior written permission is obtained from Moj.io Inc.
  *******************************************************************************/
 
-import UIKit
-import ObjectMapper
+//import UIKit
 
-public struct PlatformServiceSchedule: Mappable {
+public struct PlatformServiceSchedule: Codable {
     
     public var InitialValue: Double = 0
     public var IntervalType: String? = nil
@@ -31,26 +30,26 @@ public struct PlatformServiceSchedule: Mappable {
     public var TransNotes: String? = nil
     public var Units: String? = nil
     public var Value: Double = 0
-    
-    public init() {}
-    
-    public init?(map: Map) {
-        self.init()
-    }
-
-    public mutating func mapping(map: Map) {
-        InitialValue <- map["InitialValue"]
-        IntervalType <- map["IntervalType"]
-        MaintenanceCategory <- map["MaintenanceCategory"]
-        MaintenanceName <- map["MaintenanceName"]
-        MaintenanceNotes <- map["MaintenanceNotes"]
-        OperatingParameter <- map["OperatingParameter"]
-        OperatingParameterNotes <- map["OperatingParameterNotes"]
-        ScheduleDescription <- map["ScheduleDescription"]
-        ScheduleName <- map["ScheduleName"]
-        ServiceEvent <- map["ServiceEvent"]
-        TransNotes <- map["TransNotes"]
-        Units <- map["Units"]
-        Value <- map["Value"]
-    }
 }
+
+//public init() {}
+//
+//public init?(map: Map) {
+//    self.init()
+//}
+//
+//public mutating func mapping(map: Map) {
+//    InitialValue <- map["InitialValue"]
+//    IntervalType <- map["IntervalType"]
+//    MaintenanceCategory <- map["MaintenanceCategory"]
+//    MaintenanceName <- map["MaintenanceName"]
+//    MaintenanceNotes <- map["MaintenanceNotes"]
+//    OperatingParameter <- map["OperatingParameter"]
+//    OperatingParameterNotes <- map["OperatingParameterNotes"]
+//    ScheduleDescription <- map["ScheduleDescription"]
+//    ScheduleName <- map["ScheduleName"]
+//    ServiceEvent <- map["ServiceEvent"]
+//    TransNotes <- map["TransNotes"]
+//    Units <- map["Units"]
+//    Value <- map["Value"]
+//}

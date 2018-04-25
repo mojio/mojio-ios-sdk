@@ -13,26 +13,22 @@
  * forbidden unless prior written permission is obtained from Moj.io Inc.
  *******************************************************************************/
 
-import UIKit
-import ObjectMapper
+//import UIKit
+import Foundation
 
-public struct BooleanState: Mappable {
+public struct BooleanState: Codable {
     
     public var Timestamp: String? = nil
     public var Value: Bool = false
     
-    public var timeStamp: Date? = nil
+    //public var timeStamp: Date? = nil
+}
+
+extension BooleanState {
     
-    public init() {}
-    
-    public init?(map: Map) {
-        self.init()
-    }
-    
-    public mutating func mapping(map: Map) {
-        Timestamp <- map["Timestamp"]
-        Value <- map["Value"]
-        
-        timeStamp = self.Timestamp?.toDate
+    public var timeStamp: Date? {
+        return self.Timestamp?.toDate
     }
 }
+
+//public init() {}

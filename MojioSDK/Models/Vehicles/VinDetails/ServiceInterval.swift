@@ -13,10 +13,9 @@
  * forbidden unless prior written permission is obtained from Moj.io Inc.
  *******************************************************************************/
 
-import UIKit
-import ObjectMapper
+//import UIKit
 
-public struct ServiceInterval: Mappable {
+public struct ServiceInterval: Codable {
     
     public var OperatingParameter: String? = nil
     public var OperatingParameterNotes: String? = nil
@@ -24,19 +23,19 @@ public struct ServiceInterval: Mappable {
     public var Value: Double = 0
     public var Units: String? = nil
     public var InitialValue: Double = 0
-
-    public init() {}
-    
-    public init?(map: Map) {
-        self.init()
-    }
-    
-    public mutating func mapping(map: Map) {
-        OperatingParameter <- map["OperatingParameter"]
-        OperatingParameterNotes <- map["OperatingParameterNotes"]
-        IntervalType <- map["IntervalType"]
-        Value <- map["Value"]
-        Units <- map["Units"]
-        InitialValue <- map["InitialValue"]
-    }
 }
+
+//public init() {}
+//
+//public init?(map: Map) {
+//    self.init()
+//}
+//
+//public mutating func mapping(map: Map) {
+//    OperatingParameter <- map["OperatingParameter"]
+//    OperatingParameterNotes <- map["OperatingParameterNotes"]
+//    IntervalType <- map["IntervalType"]
+//    Value <- map["Value"]
+//    Units <- map["Units"]
+//    InitialValue <- map["InitialValue"]
+//}

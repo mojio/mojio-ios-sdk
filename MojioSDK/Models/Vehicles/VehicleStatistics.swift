@@ -13,10 +13,12 @@
  * forbidden unless prior written permission is obtained from Moj.io Inc.
  *******************************************************************************/
 
-import UIKit
-import ObjectMapper
+//import UIKit
 
-public struct VehicleStatistics: Mappable {
+import Foundation
+
+public struct VehicleStatistics: Codable {
+    
     public var EstimatedFuelLevel: FuelLevel? = nil
     public var EstimatedFuelVolume: FuelVolume? = nil
     public var AverageFuelEfficiency: FuelEfficiency? = nil
@@ -24,22 +26,29 @@ public struct VehicleStatistics: Mappable {
     public var CurrentRange: Distance? = nil
     public var LastFillUpDate: String? = nil
     
-    public var lastFillUpDate: Date? = nil
+    //public var lastFillUpDate: Date? = nil
+}
+
+extension VehicleStatistics {
     
-    public init() {}
-    
-    public init?(map: Map) {
-        self.init()
-    }
-    
-    public mutating func mapping(map: Map) {
-        EstimatedFuelLevel <- map["EstimatedFuelLevel"]
-        EstimatedFuelVolume <- map["EstimatedFuelVolume"]
-        AverageFuelEfficiency <- map["AverageFuelEfficiency"]
-        TotalRange <- map["TotalRange"]
-        CurrentRange <- map["CurrentRange"]
-        LastFillUpDate <- map["LastFillUpDate"]
-        
-        lastFillUpDate = self.LastFillUpDate?.toDate
+    public var lastFillUpDate: Date? {
+        return self.LastFillUpDate?.toDate
     }
 }
+
+//public init() {}
+//
+//public init?(map: Map) {
+//    self.init()
+//}
+//
+//public mutating func mapping(map: Map) {
+//    EstimatedFuelLevel <- map["EstimatedFuelLevel"]
+//    EstimatedFuelVolume <- map["EstimatedFuelVolume"]
+//    AverageFuelEfficiency <- map["AverageFuelEfficiency"]
+//    TotalRange <- map["TotalRange"]
+//    CurrentRange <- map["CurrentRange"]
+//    LastFillUpDate <- map["LastFillUpDate"]
+//
+//    lastFillUpDate = self.LastFillUpDate?.toDate
+//}

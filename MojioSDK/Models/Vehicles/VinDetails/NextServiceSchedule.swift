@@ -13,10 +13,10 @@
  * forbidden unless prior written permission is obtained from Moj.io Inc.
  *******************************************************************************/
 
-import UIKit
-import ObjectMapper
+//import UIKit
+import Foundation
 
-public struct NextServiceSchedule: Mappable {
+public struct NextServiceSchedule: Codable {
 
     public var TimeStamp: String? = nil
     public var Odometer: Double = 0
@@ -27,24 +27,43 @@ public struct NextServiceSchedule: Mappable {
     public var DistanceValue: Double = 0
     public var Services: [PlatformServiceSchedule] = []
     
-    public var timeStamp: Date? = nil
+    //public var timeStamp: Date? = nil
     
-    public init() {}
-    
-    public init?(map: Map) {
-        self.init()
-    }
-    
-    public mutating func mapping(map: Map) {
-        TimeStamp <- map["TimeStamp"]
-        Odometer <- map["Odometer"]
-        AgeInMonths <- map["AgeInMonths"]
-        TimeUnits <- map["TimeUnits"]
-        TimeValue <- map["TimeValue"]
-        DistanceUnits <- map["DistanceUnits"]
-        DistanceValue <- map["DistanceValue"]
-        Services <- map["Items"]
-        
-        timeStamp = self.TimeStamp?.toDate
+    private enum CodingKeys: String, CodingKey {
+        case TimeStamp
+        case Odometer
+        case AgeInMonths
+        case TimeUnits
+        case TimeValue
+        case DistanceUnits
+        case DistanceValue
+        case Services = "Items"
     }
 }
+
+extension NextServiceSchedule {
+    
+    public var timeStamp: Date? {
+        return self.TimeStamp?.toDate
+    }
+}
+
+
+//public init() {}
+//
+//public init?(map: Map) {
+//    self.init()
+//}
+//
+//public mutating func mapping(map: Map) {
+//    TimeStamp <- map["TimeStamp"]
+//    Odometer <- map["Odometer"]
+//    AgeInMonths <- map["AgeInMonths"]
+//    TimeUnits <- map["TimeUnits"]
+//    TimeValue <- map["TimeValue"]
+//    DistanceUnits <- map["DistanceUnits"]
+//    DistanceValue <- map["DistanceValue"]
+//    Services <- map["Items"]
+//
+//    timeStamp = self.TimeStamp?.toDate
+//}

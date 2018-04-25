@@ -13,11 +13,12 @@
  * forbidden unless prior written permission is obtained from Moj.io Inc.
  *******************************************************************************/
 
-import UIKit
-import CoreLocation
-import ObjectMapper
+//import UIKit
+//import CoreLocation
 
-public struct TripPolyline: Mappable, PrimaryKey {
+import Foundation
+
+public struct TripPolyline: Codable, PrimaryKey {
     
     public var Id: String? = nil
     public var TripPolyline: String? = nil
@@ -25,24 +26,42 @@ public struct TripPolyline: Mappable, PrimaryKey {
     public var LastModified: String? = nil
     public var Deleted: Bool = false
     
+    private enum CodingKeys: String, CodingKey {
+        case Id
+        case TripPolyline = "Polyline"
+        case CreatedOn
+        case LastModified
+        case Deleted
+    }
     // Date Values
-    public var createdOn: Date? = nil
-    public var lastModified: Date? = nil
+//    public var createdOn: Date? = nil
+//    public var lastModified: Date? = nil
+}
+
+extension TripPolyline {
     
-    public init() {}
-    
-    public init?(map: Map) {
-        self.init()
+    public var createdOn: Date? {
+        return self.CreatedOn?.toDate
     }
     
-    public mutating func mapping(map: Map) {
-        Id <- map["Id"]
-        TripPolyline <- map["Polyline"]
-        CreatedOn <- map["CreatedOn"]
-        LastModified <- map["LastModified"]
-        Deleted <- map["Deleted"]
-        
-        createdOn = self.CreatedOn?.toDate
-        lastModified = self.LastModified?.toDate
+    public var lastModified: Date? {
+        return self.LastModified?.toDate
     }
 }
+
+//public init() {}
+//
+//public init?(map: Map) {
+//    self.init()
+//}
+//
+//public mutating func mapping(map: Map) {
+//    Id <- map["Id"]
+//    TripPolyline <- map["Polyline"]
+//    CreatedOn <- map["CreatedOn"]
+//    LastModified <- map["LastModified"]
+//    Deleted <- map["Deleted"]
+//
+//    createdOn = self.CreatedOn?.toDate
+//    lastModified = self.LastModified?.toDate
+//}

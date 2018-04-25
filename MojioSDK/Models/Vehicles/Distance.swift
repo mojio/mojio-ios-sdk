@@ -13,8 +13,8 @@
  * forbidden unless prior written permission is obtained from Moj.io Inc.
  *******************************************************************************/
 
-import UIKit
-import ObjectMapper
+//import UIKit
+//import ObjectMapper
 
 // Units in DistanceUnits
 public struct Distance: DeviceMeasurement {
@@ -26,27 +26,39 @@ public struct Distance: DeviceMeasurement {
     public var Value: Double = 0
     public var Timestamp: String?  = nil
     
-    public var timeStamp: Date? = nil
+    //public var timeStamp: Date? = nil
     
-    public init() {}
+//    public func jsonDict() -> [String:Any] {
+//        var map: [String:Any] = [:]
+//        
+//        if let baseUnit = self.BaseUnit {
+//            map["BaseUnit"] = baseUnit as AnyObject?
+//            map["BaseValue"] = self.BaseValue as AnyObject?
+//        }
+//        
+//        if let unit = self.Unit {
+//            map["Unit"] = unit as AnyObject?
+//            map["Value"] = self.Value as AnyObject?
+//        }
+//
+//        return map
+//    }
+}
+
+extension Distance {
     
-    public init?(map: Map) {
-        self.init()
+    public init(from decoder: Decoder, with deviceMeasurements: DeviceMeasurements) throws {
+        
+        self.init(BaseUnit: deviceMeasurements.BaseUnit, BaseValue: deviceMeasurements.BaseValue, Unit: deviceMeasurements.Unit, Value: deviceMeasurements.Value, Timestamp: deviceMeasurements.Timestamp)
     }
     
-    public func jsonDict() -> [String:Any] {
-        var map: [String:Any] = [:]
+    public func encode(with encoder: Encoder) throws {
         
-        if let baseUnit = self.BaseUnit {
-            map["BaseUnit"] = baseUnit as AnyObject?
-            map["BaseValue"] = self.BaseValue as AnyObject?
-        }
-        
-        if let unit = self.Unit {
-            map["Unit"] = unit as AnyObject?
-            map["Value"] = self.Value as AnyObject?
-        }
-
-        return map
     }
 }
+
+//public init() {}
+//
+//public init?(map: Map) {
+//    self.init()
+//}

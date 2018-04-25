@@ -13,8 +13,7 @@
  * forbidden unless prior written permission is obtained from Moj.io Inc.
  *******************************************************************************/
 
-import UIKit
-import ObjectMapper
+//import UIKit
 
 // Units in RPMUnits
 public struct RPM: DeviceMeasurement {
@@ -26,11 +25,23 @@ public struct RPM: DeviceMeasurement {
     public var Value: Double = 0
     public var Timestamp: String?  = nil
     
-    public var timeStamp: Date? = nil
+    //public var timeStamp: Date? = nil
+}
+
+extension RPM {
     
-    public init() {}
+    public init(from decoder: Decoder, with deviceMeasurements: DeviceMeasurements) throws {
+        
+        self.init(BaseUnit: deviceMeasurements.BaseUnit, BaseValue: deviceMeasurements.BaseValue, Unit: deviceMeasurements.Unit, Value: deviceMeasurements.Value, Timestamp: deviceMeasurements.Timestamp)
+    }
     
-    public init?(map: Map) {
-        self.init()
+    public func encode(with encoder: Encoder) throws {
+        
     }
 }
+
+//public init() {}
+//
+//public init?(map: Map) {
+//    self.init()
+//}

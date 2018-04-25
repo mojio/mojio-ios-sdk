@@ -14,7 +14,6 @@
  *******************************************************************************/
 
 import UIKit
-import ObjectMapper
 
 public enum LocationStatus: String {
     // Status not known
@@ -64,7 +63,8 @@ public enum LocationStatus: String {
     case previousValidState = "PreviousValidState"
 }
 
-public struct Location: Mappable {
+public struct Location: Codable {
+    
     public var LocationAddress: Address? = nil
     public var Timestamp: String? = nil
     public var Lat: Double = 0
@@ -81,26 +81,45 @@ public struct Location: Mappable {
     public var LocationHeading: Heading? = nil
     
     // Date Values
-    public var timestamp: Date? = nil
+    //public var timestamp: Date? = nil
     
-    public init() {}
-    
-    public init?(map: Map) {
-        self.init()
-    }
-
-    public mutating func mapping(map: Map) {
-        LocationAddress <- map["Address"]
-        Timestamp <- map["Timestamp"]
-        Lat <- map["Lat"]
-        Lng <- map["Lng"]
-        Status <- map["Status"]
-        Dilution <- map["Dilution"]
-        Altitude <- map["Altitude"]
-        GeoHash <- map["GeoHash"]
-        LocationHeading <- map["Heading"]
-        
-        // Date Values
-        timestamp = self.Timestamp?.toDate
+    private enum CodingKeys: String, CodingKey {
+        case LocationAddress = "Address"
+        case Timestamp
+        case Lat
+        case Lng
+        case Status
+        case Dilution
+        case Altitude
+        case GeoHash
+        case LocationHeading = "Heading"
     }
 }
+
+extension Location {
+    
+    public var timestamp: Date? {
+        return self.Timestamp?.toDate
+    }
+}
+
+//public init() {}
+
+//public init?(map: Map) {
+//    self.init()
+//}
+//
+//public mutating func mapping(map: Map) {
+//    LocationAddress <- map["Address"]
+//    Timestamp <- map["Timestamp"]
+//    Lat <- map["Lat"]
+//    Lng <- map["Lng"]
+//    Status <- map["Status"]
+//    Dilution <- map["Dilution"]
+//    Altitude <- map["Altitude"]
+//    GeoHash <- map["GeoHash"]
+//    LocationHeading <- map["Heading"]
+//
+//    // Date Values
+//    timestamp = self.Timestamp?.toDate
+//}

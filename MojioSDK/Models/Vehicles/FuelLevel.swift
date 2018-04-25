@@ -13,9 +13,7 @@
  * forbidden unless prior written permission is obtained from Moj.io Inc.
  *******************************************************************************/
 
-import UIKit
-import ObjectMapper
-
+//import UIKit
 
 // Units are in PercentageUnits
 public struct FuelLevel: DeviceMeasurement {
@@ -27,19 +25,42 @@ public struct FuelLevel: DeviceMeasurement {
     public var Value: Double = 0
     public var Timestamp: String?  = nil
     
-    public var timeStamp: Date? = nil
+    //public var timeStamp: Date? = nil
     
     public var RiskSeverity: String? = nil
     
-    public init() {}
-    
-    public init?(map: Map) {
-        self.init()
-    }
-    
-    public mutating func mapping(map: Map) {
-        self.measureMapping(map: map)
-
-        RiskSeverity <- map["RiskSeverity"]
+    private enum CodingKeys: String, CodingKey {
+        case RiskSeverity
     }
 }
+
+extension FuelLevel {
+    
+    public init(from decoder: Decoder, with deviceMeasurements: DeviceMeasurements) throws {
+        
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        let RiskSeverity = try container.decodeIfPresent(String.self, forKey: .RiskSeverity)
+        
+        self.init(BaseUnit: deviceMeasurements.BaseUnit, BaseValue: deviceMeasurements.BaseValue, Unit: deviceMeasurements.Unit, Value: deviceMeasurements.Value, Timestamp: deviceMeasurements.Timestamp, RiskSeverity: RiskSeverity)
+    }
+    
+    public func encode(with encoder: Encoder) throws {
+        
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        try container.encode(self.RiskSeverity, forKey: .RiskSeverity)
+    }
+}
+
+//public init() {}
+//
+//public init?(map: Map) {
+//    self.init()
+//}
+//
+//public mutating func mapping(map: Map) {
+//    self.measureMapping(map: map)
+//
+//    RiskSeverity <- map["RiskSeverity"]
+//}

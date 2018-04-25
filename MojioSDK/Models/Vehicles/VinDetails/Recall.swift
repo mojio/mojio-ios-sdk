@@ -13,10 +13,10 @@
  * forbidden unless prior written permission is obtained from Moj.io Inc.
  *******************************************************************************/
 
-import UIKit
-import ObjectMapper
+//import UIKit
+import Foundation
 
-public struct Recall: Mappable {
+public struct Recall: Codable {
     
     public var Title: String? = nil
     public var NHTSACampaignNumber: String? = nil
@@ -40,45 +40,68 @@ public struct Recall: Mappable {
     public var Notes: String? = nil
     public var RecalledComponentId: String? = nil
     
-    public var manufacturingStartDate: Date? = nil
-    public var manufacturingEndDate: Date? = nil
-    public var ownerNotificationDate: Date? = nil
-    public var reportReceivedDate: Date? = nil
-    public var recordCreationDate: Date? = nil
+//    public var manufacturingStartDate: Date? = nil
+//    public var manufacturingEndDate: Date? = nil
+//    public var ownerNotificationDate: Date? = nil
+//    public var reportReceivedDate: Date? = nil
+//    public var recordCreationDate: Date? = nil
+}
+
+extension Recall {
     
-    public init() {}
-    
-    public init?(map: Map) {
-        self.init()
+    public var manufacturingStartDate: Date? {
+        return self.ManufacturingStartDate?.toDate
     }
     
-    public mutating func mapping(map: Map) {
-        Title <- map["Title"]
-        NHTSACampaignNumber <- map["NHTSACampaignNumber"]
-        MFRCampaignNumber <- map["MFRCampaignNumber"]
-        ComponentDescription <- map["ComponentDescription"]
-        ReportManufacturer <- map["ReportManufacturer"]
-        ManufacturingStartDate <- map["ManufacturingStartDate"]
-        ManufacturingEndDate <- map["ManufacturingEndDate"]
-        RecallTypeCode <- map["RecallTypeCode"]
-        PotentialUnitsAffected <- map["PotentialUnitsAffected"]
-        OwnerNotificationDate <- map["OwnerNotificationDate"]
-        RecallInitiator <- map["RecallInitiator"]
-        ProductManufacturer <- map["ProductManufacturer"]
-        ReportReceivedDate <- map["ReportReceivedDate"]
-        RecordCreationDate <- map["RecordCreationDate"]
-        RegulationPartNumber <- map["RegulationPartNumber"]
-        FMVVSNumber <- map["FMVVSNumber"]
-        DefectSummary <- map["DefectSummary"]
-        ConsequenceSummary <- map["ConsequenceSummary"]
-        CorrectiveAction <- map["CorrectiveAction"]
-        Notes <- map["Notes"]
-        RecalledComponentId <- map["RecalledComponentId"]
-        
-        manufacturingStartDate = self.ManufacturingStartDate?.toDate
-        manufacturingEndDate = self.ManufacturingEndDate?.toDate
-        ownerNotificationDate = self.OwnerNotificationDate?.toDate
-        reportReceivedDate = self.ReportReceivedDate?.toDate
-        recordCreationDate = self.RecordCreationDate?.toDate
+    public var manufacturingEndDate: Date? {
+        return self.ManufacturingEndDate?.toDate
+    }
+    
+    public var ownerNotificationDate: Date? {
+        return self.OwnerNotificationDate?.toDate
+    }
+    
+    public var reportReceivedDate: Date? {
+        return self.ReportReceivedDate?.toDate
+    }
+    
+    public var recordCreationDate: Date? {
+        return self.RecordCreationDate?.toDate
     }
 }
+
+//public init() {}
+//
+//public init?(map: Map) {
+//    self.init()
+//}
+//
+//public mutating func mapping(map: Map) {
+//    Title <- map["Title"]
+//    NHTSACampaignNumber <- map["NHTSACampaignNumber"]
+//    MFRCampaignNumber <- map["MFRCampaignNumber"]
+//    ComponentDescription <- map["ComponentDescription"]
+//    ReportManufacturer <- map["ReportManufacturer"]
+//    ManufacturingStartDate <- map["ManufacturingStartDate"]
+//    ManufacturingEndDate <- map["ManufacturingEndDate"]
+//    RecallTypeCode <- map["RecallTypeCode"]
+//    PotentialUnitsAffected <- map["PotentialUnitsAffected"]
+//    OwnerNotificationDate <- map["OwnerNotificationDate"]
+//    RecallInitiator <- map["RecallInitiator"]
+//    ProductManufacturer <- map["ProductManufacturer"]
+//    ReportReceivedDate <- map["ReportReceivedDate"]
+//    RecordCreationDate <- map["RecordCreationDate"]
+//    RegulationPartNumber <- map["RegulationPartNumber"]
+//    FMVVSNumber <- map["FMVVSNumber"]
+//    DefectSummary <- map["DefectSummary"]
+//    ConsequenceSummary <- map["ConsequenceSummary"]
+//    CorrectiveAction <- map["CorrectiveAction"]
+//    Notes <- map["Notes"]
+//    RecalledComponentId <- map["RecalledComponentId"]
+//
+//    manufacturingStartDate = self.ManufacturingStartDate?.toDate
+//    manufacturingEndDate = self.ManufacturingEndDate?.toDate
+//    ownerNotificationDate = self.OwnerNotificationDate?.toDate
+//    reportReceivedDate = self.ReportReceivedDate?.toDate
+//    recordCreationDate = self.RecordCreationDate?.toDate
+//}

@@ -13,11 +13,11 @@
  * forbidden unless prior written permission is obtained from Moj.io Inc.
  *******************************************************************************/
 
-import UIKit
-import ObjectMapper
+//import UIKit
+import Foundation
 
-
-public struct Mojio: Mappable, PrimaryKey {
+public struct Mojio: Codable, PrimaryKey {
+    
     public var Id: String? = nil
     public var Name: String? = nil
     public var IMEI: String? = nil
@@ -35,54 +35,89 @@ public struct Mojio: Mappable, PrimaryKey {
     public var ICCID: String? = nil
     
     // Date Values
-    public var lastContactTime: Date? = nil
-    public var gatewayTime: Date? = nil
-    public var createdOn: Date? = nil
-    public var lastModified: Date? = nil
+    //public var lastContactTime: Date? = nil
+    //public var gatewayTime: Date? = nil
+    //public var createdOn: Date? = nil
+    //public var lastModified: Date? = nil
     
-    public init() {}
+//    public func json () -> String? {
+//        var map: [String: Any] = [:]
+//
+//        if let name = self.Name {
+//            map["Name"] = name
+//        }
+//
+//        if let imei = self.IMEI {
+//            map["IMEI"] = imei
+//        }
+//
+//        let data = try! JSONSerialization.data(withJSONObject: map)
+//        return String(data: data, encoding: String.Encoding.utf8)
+//    }
     
-    public init?(map: Map) {
-        self.init()
-    }
-    
-    public func json () -> String? {
-        var map: [String: Any] = [:]
-        
-        if let name = self.Name {
-            map["Name"] = name
-        }
-
-        if let imei = self.IMEI {
-            map["IMEI"] = imei
-        }
-        
-        let data = try! JSONSerialization.data(withJSONObject: map)
-        return String(data: data, encoding: String.Encoding.utf8)
-        
-    }
-    
-    public mutating func mapping(map: Map) {
-        Id <- map["Id"]
-        Name <- map["Name"]
-        IMEI <- map["IMEI"]
-        LastContactTime <- map["LastContactTime"]
-        Wifi <- map["WifiRadio"]
-        GatewayTime <- map["GatewayTime"]
-        VehicleId <- map["VehicleId"]
-        MojioLocation <- map["Location"]
-        ConnectedState <- map["ConnectedState"]
-        CreatedOn <- map["CreatedOn"]
-        LastModified <- map["LastModified"]
-        Tags <- map["Tags"]
-        Deleted <- map["Deleted"]
-        MSISDN <- map["MSISDN"]
-        ICCID <- map["ICCID"]
-        
-        // Date Values
-        lastContactTime = self.LastContactTime?.toDate
-        gatewayTime = self.GatewayTime?.toDate
-        createdOn = self.CreatedOn?.toDate
-        lastModified = self.LastModified?.toDate
+    private enum CodingKeys: String, CodingKey {
+        case Id
+        case Name
+        case IMEI
+        case LastContactTime
+        case Wifi = "WifiRadio"
+        case GatewayTime
+        case VehicleId
+        case MojioLocation = "Location"
+        case ConnectedState
+        case CreatedOn
+        case LastModified
+        case Tags
+        case Deleted
+        case MSISDN
+        case ICCID 
     }
 }
+
+extension Mojio {
+    
+    public var lastContactTime: Date? {
+        return self.LastContactTime?.toDate
+    }
+    
+    public var gatewayTime: Date? {
+        return self.GatewayTime?.toDate
+    }
+    
+    public var createdOn: Date? {
+        return self.CreatedOn?.toDate
+    }
+    
+    public var lastModified: Date? {
+        return self.LastModified?.toDate
+    }
+}
+
+//public init() {}
+//
+//public init?(map: Map) {
+//    self.init()
+//}
+//public mutating func mapping(map: Map) {
+//    Id <- map["Id"]
+//    Name <- map["Name"]
+//    IMEI <- map["IMEI"]
+//    LastContactTime <- map["LastContactTime"]
+//    Wifi <- map["WifiRadio"]
+//    GatewayTime <- map["GatewayTime"]
+//    VehicleId <- map["VehicleId"]
+//    MojioLocation <- map["Location"]
+//    ConnectedState <- map["ConnectedState"]
+//    CreatedOn <- map["CreatedOn"]
+//    LastModified <- map["LastModified"]
+//    Tags <- map["Tags"]
+//    Deleted <- map["Deleted"]
+//    MSISDN <- map["MSISDN"]
+//    ICCID <- map["ICCID"]
+//
+//    // Date Values
+//    lastContactTime = self.LastContactTime?.toDate
+//    gatewayTime = self.GatewayTime?.toDate
+//    createdOn = self.CreatedOn?.toDate
+//    lastModified = self.LastModified?.toDate
+//}

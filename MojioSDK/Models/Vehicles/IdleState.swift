@@ -14,29 +14,35 @@
  *******************************************************************************/
 
 import UIKit
-import ObjectMapper
 
-public struct IdleState: Mappable {
+public struct IdleState: Codable {
     
     public var Timestamp: String? = nil
     public var Value: Bool = false
     public var StartTime: String? = nil
     public var Duration: TimePeriod? = nil
     
-    public var timestamp: Date? = nil
-    
-    public init() {}
-    
-    public init?(map: Map) {
-        self.init()
-    }
+    //public var timestamp: Date? = nil
+}
 
-    public mutating func mapping(map: Map) {
-        Timestamp <- map["Timestamp"]
-        Value <- map["Value"]
-        StartTime <- map["StartTime"]
-        Duration <- map["Duration"]
-        
-        timestamp = self.Timestamp?.toDate
+extension IdleState {
+    
+    public var timestamp: Date? {
+        return self.Timestamp?.toDate
     }
 }
+
+//public init() {}
+//
+//public init?(map: Map) {
+//    self.init()
+//}
+//
+//public mutating func mapping(map: Map) {
+//    Timestamp <- map["Timestamp"]
+//    Value <- map["Value"]
+//    StartTime <- map["StartTime"]
+//    Duration <- map["Duration"]
+//
+//    timestamp = self.Timestamp?.toDate
+//}

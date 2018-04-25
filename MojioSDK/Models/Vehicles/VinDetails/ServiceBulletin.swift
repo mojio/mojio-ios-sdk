@@ -13,10 +13,10 @@
  * forbidden unless prior written permission is obtained from Moj.io Inc.
  *******************************************************************************/
 
-import UIKit
-import ObjectMapper
+//import UIKit
+import Foundation
 
-public struct ServiceBulletin: Mappable {
+public struct ServiceBulletin: Codable {
     
     public var ItemNumber: String? = nil
     public var BulletinNumber: String? = nil
@@ -26,25 +26,36 @@ public struct ServiceBulletin: Mappable {
     public var BulletinDate: String? = nil
     public var Summary: String? = nil
     
-    public var dateAdded: Date? = nil
-    public var bulletinDate: Date? = nil
-    
-    public init() {}
-    
-    public init?(map: Map) {
-        self.init()
-    }
+//    public var dateAdded: Date? = nil
+//    public var bulletinDate: Date? = nil
+}
 
-    public mutating func mapping(map: Map) {
-        ItemNumber <- map["ItemNumber"]
-        BulletinNumber <- map["BulletinNumber"]
-        ReplacementBulletinNumber <- map["ReplacementBulletinNumber"]
-        DateAdded <- map["DateAdded"]
-        Component <- map["Component"]
-        BulletinDate <- map["BulletinDate"]
-        Summary <- map["Summary"]
-        
-        dateAdded = self.DateAdded?.toDate
-        bulletinDate = self.BulletinDate?.toDate
+extension ServiceBulletin {
+    
+    public var dateAdded: Date? {
+        return self.DateAdded?.toDate
+    }
+    
+    public var bulletinDate: Date? {
+        return self.BulletinDate?.toDate
     }
 }
+
+//public init() {}
+//
+//public init?(map: Map) {
+//    self.init()
+//}
+//
+//public mutating func mapping(map: Map) {
+//    ItemNumber <- map["ItemNumber"]
+//    BulletinNumber <- map["BulletinNumber"]
+//    ReplacementBulletinNumber <- map["ReplacementBulletinNumber"]
+//    DateAdded <- map["DateAdded"]
+//    Component <- map["Component"]
+//    BulletinDate <- map["BulletinDate"]
+//    Summary <- map["Summary"]
+//
+//    dateAdded = self.DateAdded?.toDate
+//    bulletinDate = self.BulletinDate?.toDate
+//}

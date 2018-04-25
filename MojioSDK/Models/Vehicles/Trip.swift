@@ -13,11 +13,11 @@
  * forbidden unless prior written permission is obtained from Moj.io Inc.
  *******************************************************************************/
 
-import UIKit
+//import UIKit
 import Foundation
-import ObjectMapper
 
-public struct Trip: Mappable, PrimaryKey {
+public struct Trip: Codable, PrimaryKey {
+    
     public var VehicleId: String? = nil
     public var Name: String? = nil
     public var Tags: [String] = []
@@ -50,70 +50,133 @@ public struct Trip: Mappable, PrimaryKey {
     public var LastModified: String? = nil
     
     // Date Values
-    public var startTimestamp: Date? = nil
-    public var endTimestamp: Date? = nil
-    public var createdOn: Date? = nil
-    public var lastModified: Date? = nil
-    public var duration: TimeInterval? = nil
+//    public var startTimestamp: Date? = nil
+//    public var endTimestamp: Date? = nil
+//    public var createdOn: Date? = nil
+//    public var lastModified: Date? = nil
+//    public var duration: TimeInterval? = nil
 
-    public init() {}
+//    public func json() -> String? {
+//
+//        var map: [String: Any] = [:]
+//
+//        if let name = self.Name {
+//            map["Name"] = name
+//        }
+//
+//        let data = try! JSONSerialization.data(withJSONObject: map)
+//        return String(data: data, encoding: String.Encoding.utf8)
+//    }
     
-    public init?(map: Map) {
-        self.init()
-    }
-    
-    public func json() -> String? {
-        
-        var map: [String: Any] = [:]
-        
-        if let name = self.Name {
-            map["Name"] = name
-        }
-        
-        let data = try! JSONSerialization.data(withJSONObject: map)
-        return String(data: data, encoding: String.Encoding.utf8)
-    }
-    
-    public mutating func mapping(map: Map) {
-        VehicleId <- map["VehicleId"]
-        Name <- map["Name"]
-        MojioId <- map["MojioId"]
-        OwnerId <- map["OwnerId"]
-        Completed <- map["Completed"]
-        TripDuration <- map["Duration"]
-        TripDistance <- map["Distance"]
-        StartTimestamp <- map["StartTimestamp"]
-        EndTimestamp <- map["EndTimestamp"]
-        StartOdometer <- map["StartOdometer"]
-        EndOdometer <- map["EndOdometer"]
-        StartLocation <- map["StartLocation"]
-        EndLocation <- map["EndLocation"]
-        MaxSpeed <- map["MaxSpeed"]
-        MaxRPM <- map["MaxRPM"]
-        MaxAcceleration <- map["MaxAcceleration"]
-        MaxDeceleration <- map["MaxDeceleration"]
-        Polyline <- map["Polyline"]
-        HarshEvents <- map["HarshEvents"]
-        IdleEvents <- map["IdleEvents"]
-        TripFuelEfficiency <- map["FuelEfficiency"]
-        StartFuelLevel <- map["StartFuelLevel"]
-        EndFuelLevel <- map["EndFuelLevel"]
-        IdlingCount <- map["IdlingCount"]
-        HarshAccelCount <- map["HarshAcclCount"]
-        HarshDecelCount <- map["HarshDecelCount"]
-        Id <- map["Id"]
-        CreatedOn <- map["CreatedOn"]
-        LastModified <- map["LastModified"]
-        Tags <- map["Tags"]
-        
-        // Date Values
-        startTimestamp = self.StartTimestamp?.toDate
-        endTimestamp = self.EndTimestamp?.toDate
-        createdOn = self.CreatedOn?.toDate
-        lastModified = self.LastModified?.toDate
-        duration = TimeInterval.from(self.TripDuration)
-        if let start = startTimestamp, let end = endTimestamp, duration == nil {
-            duration = end.timeIntervalSince(start)
-        }
+    private enum CodingKeys: String, CodingKey {
+        case VehicleId
+        case Name
+        case MojioId
+        case OwnerId
+        case Completed
+        case TripDuration = "Duration"
+        case TripDistance = "Distance"
+        case StartTimestamp
+        case EndTimestamp
+        case StartOdometer
+        case EndOdometer
+        case StartLocation
+        case EndLocation
+        case MaxSpeed
+        case MaxRPM
+        case MaxAcceleration
+        case MaxDeceleration
+        case Polyline
+        case HarshEvents
+        case IdleEvents
+        case TripFuelEfficiency = "FuelEfficiency"
+        case StartFuelLevel
+        case EndFuelLevel
+        case IdlingCount
+        case HarshAccelCount = "HarshAcclCount"
+        case HarshDecelCount
+        case Id
+        case CreatedOn
+        case LastModified
+        case Tags
     }
 }
+
+extension Trip {
+    
+    public var startTimestamp: Date? {
+        return self.StartTimestamp?.toDate
+    }
+    
+    public var endTimestamp: Date? {
+        return self.EndTimestamp?.toDate
+    }
+    
+    public var createdOn: Date? {
+        return self.CreatedOn?.toDate
+    }
+    
+    public var lastModified: Date? {
+        return self.LastModified?.toDate
+    }
+    
+    public var duration: TimeInterval? {
+        
+        let tripDuration = TimeInterval.from(self.TripDuration)
+        
+        if let start = startTimestamp, let end = endTimestamp, tripDuration == nil {
+            return end.timeIntervalSince(start)
+        }
+        
+        return tripDuration
+    }
+}
+
+//public init() {}
+//
+//public init?(map: Map) {
+//    self.init()
+//}
+
+//public mutating func mapping(map: Map) {
+//    VehicleId <- map["VehicleId"]
+//    Name <- map["Name"]
+//    MojioId <- map["MojioId"]
+//    OwnerId <- map["OwnerId"]
+//    Completed <- map["Completed"]
+//    TripDuration <- map["Duration"]
+//    TripDistance <- map["Distance"]
+//    StartTimestamp <- map["StartTimestamp"]
+//    EndTimestamp <- map["EndTimestamp"]
+//    StartOdometer <- map["StartOdometer"]
+//    EndOdometer <- map["EndOdometer"]
+//    StartLocation <- map["StartLocation"]
+//    EndLocation <- map["EndLocation"]
+//    MaxSpeed <- map["MaxSpeed"]
+//    MaxRPM <- map["MaxRPM"]
+//    MaxAcceleration <- map["MaxAcceleration"]
+//    MaxDeceleration <- map["MaxDeceleration"]
+//    Polyline <- map["Polyline"]
+//    HarshEvents <- map["HarshEvents"]
+//    IdleEvents <- map["IdleEvents"]
+//    TripFuelEfficiency <- map["FuelEfficiency"]
+//    StartFuelLevel <- map["StartFuelLevel"]
+//    EndFuelLevel <- map["EndFuelLevel"]
+//    IdlingCount <- map["IdlingCount"]
+//    HarshAccelCount <- map["HarshAcclCount"]
+//    HarshDecelCount <- map["HarshDecelCount"]
+//    Id <- map["Id"]
+//    CreatedOn <- map["CreatedOn"]
+//    LastModified <- map["LastModified"]
+//    Tags <- map["Tags"]
+//
+//    // Date Values
+//    startTimestamp = self.StartTimestamp?.toDate
+//    endTimestamp = self.EndTimestamp?.toDate
+//    createdOn = self.CreatedOn?.toDate
+//    lastModified = self.LastModified?.toDate
+//    duration = TimeInterval.from(self.TripDuration)
+//    if let start = startTimestamp, let end = endTimestamp, duration == nil {
+//        duration = end.timeIntervalSince(start)
+//    }
+//}

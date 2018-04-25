@@ -13,10 +13,10 @@
  * forbidden unless prior written permission is obtained from Moj.io Inc.
  *******************************************************************************/
 
-import UIKit
-import ObjectMapper
+//import UIKit
+import Foundation
 
-public struct Vin: Mappable, PrimaryKey {
+public struct Vin: Codable {
     
     public var VIN: String? = nil
     public var Timestamp: String? = nil
@@ -35,36 +35,65 @@ public struct Vin: Mappable, PrimaryKey {
     public var Recalls: [Recall] = []
     public var ServiceBulletins: [ServiceBulletin] = []
     
-    public var timestamp: Date? = nil
+    //public var timestamp: Date? = nil
+    
+    private enum CodingKeys: String, CodingKey {
+        case VIN
+        case Timestamp
+        case Market
+        case Year
+        case Make
+        case Model
+        case VehicleType
+        case BodyType
+        case DriveType
+        case FuelTankSize
+        case EPAFuelEfficiency
+        case VehicleEngine = "Engine"
+        case VehicleTransmission = "Transmission"
+        case Warranties
+        case Recalls
+        case ServiceBulletins
+    }
+}
 
+extension Vin {
+    
+    public var timestamp: Date? {
+        return self.Timestamp?.toDate
+    }
+}
+
+extension Vin: PrimaryKey {
+    
     public var Id: String? {
         return self.VIN
     }
-    
-    public init() {}
-    
-    public init?(map: Map) {
-        self.init()
-    }
-    
-    public mutating func mapping(map: Map) {
-        VIN <- map["VIN"]
-        Timestamp <- map["Timestamp"]
-        Market <- map["Market"]
-        Year <- map["Year"]
-        Make <- map["Make"]
-        Model <- map["Model"]
-        VehicleType <- map["VehicleType"]
-        BodyType <- map["BodyType"]
-        DriveType <- map["DriveType"]
-        FuelTankSize <- map["FuelTankSize"]
-        EPAFuelEfficiency <- map["EPAFuelEfficiency"]
-        VehicleEngine <- map["Engine"]
-        VehicleTransmission <- map["Transmission"]
-        Warranties <- map["Warranties"]
-        Recalls <- map["Recalls"]
-        ServiceBulletins <- map["ServiceBulletins"]
-        
-        timestamp = self.Timestamp?.toDate
-    }
 }
+
+//public init() {}
+//
+//public init?(map: Map) {
+//    self.init()
+//}
+//
+//public mutating func mapping(map: Map) {
+//    VIN <- map["VIN"]
+//    Timestamp <- map["Timestamp"]
+//    Market <- map["Market"]
+//    Year <- map["Year"]
+//    Make <- map["Make"]
+//    Model <- map["Model"]
+//    VehicleType <- map["VehicleType"]
+//    BodyType <- map["BodyType"]
+//    DriveType <- map["DriveType"]
+//    FuelTankSize <- map["FuelTankSize"]
+//    EPAFuelEfficiency <- map["EPAFuelEfficiency"]
+//    VehicleEngine <- map["Engine"]
+//    VehicleTransmission <- map["Transmission"]
+//    Warranties <- map["Warranties"]
+//    Recalls <- map["Recalls"]
+//    ServiceBulletins <- map["ServiceBulletins"]
+//
+//    timestamp = self.Timestamp?.toDate
+//}
