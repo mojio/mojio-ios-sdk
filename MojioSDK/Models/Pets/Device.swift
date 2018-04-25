@@ -27,7 +27,7 @@ struct Device: Codable, Equatable {
     let deviceId: String
     let name: String?
     let assetId: String?
-    let location: Location?
+    let location: PetsLocation?
     let speed: Double?
     let airplaneMode: Bool?
     let deviceType: DeviceType?
@@ -71,7 +71,7 @@ struct Device: Codable, Equatable {
             self.deviceId = try container.decode(String.self, forKey: .deviceId)
             self.name = try container.decodeIfPresent(String.self, forKey: .name)
             self.assetId = try container.decodeIfPresent(String.self, forKey: .assetId)
-            self.location = try container.decodeIfPresent(Location.self, forKey: .location)
+            self.location = try container.decodeIfPresent(PetsLocation.self, forKey: .location)
             self.speed = try container.decodeIfPresent(Double.self, forKey: .speed)
             self.airplaneMode = try container.decodeIfPresent(Bool.self, forKey: .airplaneMode)
             self.deviceType = try container.decodeIfPresent(DeviceType.self, forKey: .deviceType)

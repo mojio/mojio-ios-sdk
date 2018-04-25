@@ -25,7 +25,7 @@ struct Asset: Codable, Equatable {
     let id: String
     let name: String?
     let deviceId: String?
-    let location: Location?
+    let location: PetsLocation?
     let speed: Double?
     let type: AssetType?
     let pet: PetDetails?
@@ -59,7 +59,7 @@ struct Asset: Codable, Equatable {
             self.id = try container.decode(String.self, forKey: .id)
             self.name = try container.decodeIfPresent(String.self, forKey: .name)
             self.deviceId = try container.decodeIfPresent(String.self, forKey: .deviceId)
-            self.location = try container.decodeIfPresent(Location.self, forKey: .location)
+            self.location = try container.decodeIfPresent(PetsLocation.self, forKey: .location)
             self.speed = try container.decodeIfPresent(Double.self, forKey: .speed)
             self.type = try container.decodeIfPresent(String.self, forKey: .type).flatMap { AssetType(rawValue: $0) }
             self.pet = try container.decodeIfPresent(PetDetails.self, forKey: .pet)
@@ -107,12 +107,13 @@ struct AssetUpdate: Codable {
         )
     }
 
-    init(name: String? = nil,
-         location: Location? = nil,
-         type: AssetType? = nil,
-         pet: PetDetailsUpdate? = nil,
-         profileImageId: String? = nil,
-         profileImageUri: URL? = nil) {
+    init(
+        name: String? = nil,
+        location: PetsLocation? = nil,
+        type: AssetType? = nil,
+        pet: PetDetailsUpdate? = nil,
+        profileImageId: String? = nil,
+        profileImageUri: URL? = nil) {
         
         self.name = name
         self.type = type

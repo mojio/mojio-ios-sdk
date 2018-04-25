@@ -164,10 +164,10 @@ open class PetsClient: RestClient {
                 }
             case .locations:
                 do {
-                    return try JSONDecoder().decode(ResponseArray<Location>.self, from: responseData)
+                    return try JSONDecoder().decode(ResponseArray<PetsLocation>.self, from: responseData)
                 }
                 catch {
-                    return try JSONDecoder().decode(Location.self, from: responseData)
+                    return try JSONDecoder().decode(PetsLocation.self, from: responseData)
                 }
             case .notifications:
                 do {

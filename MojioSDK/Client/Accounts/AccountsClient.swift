@@ -175,14 +175,6 @@ open class AccountsClient: RestClient {
                     return try JSONDecoder().decode(User.self, from: responseData)
                 }
                 
-            case .activities:
-                do {
-                    return try JSONDecoder().decode(ResponseArray<PetsActivity>.self, from: responseData)
-                }
-                catch {
-                    return try JSONDecoder().decode(PetsActivity.self, from: responseData)
-                }
-                
             default:
                 return nil
             }
@@ -204,6 +196,9 @@ open class AccountsClient: RestClient {
             
         case .groups:
             return Mapper<Group>().map(JSON: dict)
+            
+        case .activities:
+            return Mapper<RootActivity>().map(JSON: dict)
 
         default:
             return super.parseDict(dict)

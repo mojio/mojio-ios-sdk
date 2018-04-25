@@ -21,7 +21,7 @@ enum LocationType: String, Codable {
     case activityLocation = "ActivityLocation"
 }
 
-struct Location: Codable {
+struct PetsLocation: Codable {
     let latitude: Double?
     let longitude: Double?
     let altitude: Double?
@@ -65,7 +65,7 @@ struct Location: Codable {
     }
 }
 
-extension Location {
+extension PetsLocation {
     init(coreLocation: CLLocation, coreHeading: CLHeading? = nil) {
         self.latitude = coreLocation.coordinate.latitude
         self.longitude = coreLocation.coordinate.longitude
@@ -79,7 +79,7 @@ extension Location {
     }
 }
 
-extension Location {
+extension PetsLocation {
     var coordinate: CLLocationCoordinate2D? {
         guard let latitude = self.latitude, let longitude = self.longitude else { return nil }
         return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)

@@ -127,7 +127,6 @@
 		BC603701208FA9CD00D855DE /* TimeIntervalExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2278359D1FB60291002D24F9 /* TimeIntervalExt.swift */; };
 		BC603702208FA9CD00D855DE /* AuthToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC59062C208E566200A098A3 /* AuthToken.swift */; };
 		BC603703208FA9CD00D855DE /* PhoneNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC590625208E566200A098A3 /* PhoneNumber.swift */; };
-		BC603704208FA9CD00D855DE /* PetsActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC590626208E566200A098A3 /* PetsActivity.swift */; };
 		BC603705208FA9CD00D855DE /* RestClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC72D7A71CC5615600D9740B /* RestClient.swift */; };
 		BC603706208FA9CD00D855DE /* PrimaryKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8808C2341EB1483A00A41A8B /* PrimaryKey.swift */; };
 		BC603708208FA9CD00D855DE /* WebSocketProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF12CC1FB9D90D00F068B2 /* WebSocketProvider.swift */; };
@@ -158,7 +157,7 @@
 		BC603747208FB20F00D855DE /* Geofence.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC59062D208E566200A098A3 /* Geofence.swift */; };
 		BC603748208FB20F00D855DE /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC59062B208E566200A098A3 /* Image.swift */; };
 		BC603749208FB20F00D855DE /* Links.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC590623208E566200A098A3 /* Links.swift */; };
-		BC60374A208FB20F00D855DE /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC590621208E566200A098A3 /* Location.swift */; };
+		BC60374A208FB20F00D855DE /* PetsLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC590621208E566200A098A3 /* PetsLocation.swift */; };
 		BC60374B208FB20F00D855DE /* NotificationToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC59062A208E566200A098A3 /* NotificationToken.swift */; };
 		BC60374C208FB20F00D855DE /* PetDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC590629208E566200A098A3 /* PetDetails.swift */; };
 		BC60374D208FB2CC00D855DE /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5767401FB4536A008F16F6 /* Image.swift */; };
@@ -235,6 +234,26 @@
 		BCFE57DB20910AB100B89104 /* MojioAccounts.h in Headers */ = {isa = PBXBuildFile; fileRef = BCFE57D820910AB100B89104 /* MojioAccounts.h */; };
 		BCFE57DE20910AB900B89104 /* MojioVehicles.h in Headers */ = {isa = PBXBuildFile; fileRef = BCFE57D920910AB100B89104 /* MojioVehicles.h */; };
 		BCFE57DF20910ABD00B89104 /* MojioPets.h in Headers */ = {isa = PBXBuildFile; fileRef = BCFE57DA20910AB100B89104 /* MojioPets.h */; };
+		BCFE57E020910D7100B89104 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B521CBEFFDD00F9177B /* Location.swift */; };
+		BCFE57E120910D7100B89104 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B521CBEFFDD00F9177B /* Location.swift */; };
+		BCFE57E220910E2200B89104 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B451CBEFFDD00F9177B /* Address.swift */; };
+		BCFE57E320910E2200B89104 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B451CBEFFDD00F9177B /* Address.swift */; };
+		BCFE57E420910E4400B89104 /* Heading.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B501CBEFFDD00F9177B /* Heading.swift */; };
+		BCFE57E520910E4400B89104 /* Heading.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B501CBEFFDD00F9177B /* Heading.swift */; };
+		BCFE57E620910E6E00B89104 /* DeviceMeasurement.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC3C66411DA8196A00179344 /* DeviceMeasurement.swift */; };
+		BCFE57E720910E6E00B89104 /* DeviceMeasurement.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC3C66411DA8196A00179344 /* DeviceMeasurement.swift */; };
+		BCFE57E92091259800B89104 /* ActivityLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC31E3D01D419F5D001649A7 /* ActivityLocation.swift */; };
+		BCFE57EA2091259800B89104 /* BaseActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884FCE5E1EB13ECD00DDCE3F /* BaseActivity.swift */; };
+		BCFE57EB2091259800B89104 /* BaseActivityLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC31E3D11D419F5D001649A7 /* BaseActivityLocation.swift */; };
+		BCFE57EC2091259800B89104 /* RootActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC31E3D21D419F5D001649A7 /* RootActivity.swift */; };
+		BCFE57EE2091259900B89104 /* ActivityLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC31E3D01D419F5D001649A7 /* ActivityLocation.swift */; };
+		BCFE57EF2091259900B89104 /* BaseActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884FCE5E1EB13ECD00DDCE3F /* BaseActivity.swift */; };
+		BCFE57F02091259900B89104 /* BaseActivityLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC31E3D11D419F5D001649A7 /* BaseActivityLocation.swift */; };
+		BCFE57F12091259900B89104 /* RootActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC31E3D21D419F5D001649A7 /* RootActivity.swift */; };
+		BCFE57F3209125D900B89104 /* VehicleActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC31E3CF1D419F5D001649A7 /* VehicleActivity.swift */; };
+		BCFE57F42091263400B89104 /* PetsActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC590626208E566200A098A3 /* PetsActivity.swift */; };
+		BCFE57F52091263400B89104 /* VehicleActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC31E3CF1D419F5D001649A7 /* VehicleActivity.swift */; };
+		BCFE57F62091263500B89104 /* PetsActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC590626208E566200A098A3 /* PetsActivity.swift */; };
 		D58640634C2DE4F142ED2588 /* Pods_Pets.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9FF603C57C10DB1F8F755BF /* Pods_Pets.framework */; };
 		E06C95691D25CA2A006AECBB /* NotificationsSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06C95671D25CA2A006AECBB /* NotificationsSettings.swift */; };
 		E06C956A1D25CA2A006AECBB /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06C95681D25CA2A006AECBB /* Result.swift */; };
@@ -358,7 +377,7 @@
 		BC3D7C83208816BB00659A92 /* PetsClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetsClient.swift; sourceTree = "<group>"; };
 		BC59061F208E566100A098A3 /* Asset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Asset.swift; sourceTree = "<group>"; };
 		BC590620208E566100A098A3 /* DeviceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceType.swift; sourceTree = "<group>"; };
-		BC590621208E566200A098A3 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		BC590621208E566200A098A3 /* PetsLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetsLocation.swift; sourceTree = "<group>"; };
 		BC590622208E566200A098A3 /* PetsError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetsError.swift; sourceTree = "<group>"; };
 		BC590623208E566200A098A3 /* Links.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Links.swift; sourceTree = "<group>"; };
 		BC590624208E566200A098A3 /* Device.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
@@ -684,12 +703,10 @@
 			children = (
 				BC879B431CBEFFDD00F9177B /* Acceleration.swift */,
 				BC879B441CBEFFDD00F9177B /* Accelerometer.swift */,
-				BC879B451CBEFFDD00F9177B /* Address.swift */,
 				644214DD1D9E6500005A86C5 /* AggregationData.swift */,
 				BC879B471CBEFFDD00F9177B /* Battery.swift */,
 				BC879B481CBEFFDD00F9177B /* BooleanState.swift */,
 				BC92329A1E7FC52900BD4038 /* CompatibilityDetails.swift */,
-				BC3C66411DA8196A00179344 /* DeviceMeasurement.swift */,
 				BC879B491CBEFFDD00F9177B /* DiagnosticCode.swift */,
 				BC31E3CD1D419E80001649A7 /* Distance.swift */,
 				BC879B4C1CBEFFDD00F9177B /* FuelCapacity.swift */,
@@ -699,10 +716,8 @@
 				BCF2DE491D454B8D00EDD376 /* Geofence.swift */,
 				F9E9FDAD1D93122A00DCB690 /* HarshEvent.swift */,
 				BCFCEB031F019FF20096C9B4 /* HarshEventState.swift */,
-				BC879B501CBEFFDD00F9177B /* Heading.swift */,
 				BCFCEB051F01A2C70096C9B4 /* IdleEvent.swift */,
 				F9623AAD1D935D74005C10F2 /* IdleState.swift */,
-				BC879B521CBEFFDD00F9177B /* Location.swift */,
 				BC879B531CBEFFDD00F9177B /* MeasurementStatistics.swift */,
 				BC879B541CBEFFDD00F9177B /* Mojio.swift */,
 				E06C95671D25CA2A006AECBB /* NotificationsSettings.swift */,
@@ -732,7 +747,7 @@
 				BC590620208E566100A098A3 /* DeviceType.swift */,
 				BC59062D208E566200A098A3 /* Geofence.swift */,
 				BC59062B208E566200A098A3 /* Image.swift */,
-				BC590621208E566200A098A3 /* Location.swift */,
+				BC590621208E566200A098A3 /* PetsLocation.swift */,
 				BC59062A208E566200A098A3 /* NotificationToken.swift */,
 				BC590629208E566200A098A3 /* PetDetails.swift */,
 			);
@@ -756,7 +771,11 @@
 		BC59065C208E7B1200A098A3 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				BC879B451CBEFFDD00F9177B /* Address.swift */,
+				BC3C66411DA8196A00179344 /* DeviceMeasurement.swift */,
+				BC879B501CBEFFDD00F9177B /* Heading.swift */,
 				BC590623208E566200A098A3 /* Links.swift */,
+				BC879B521CBEFFDD00F9177B /* Location.swift */,
 				BCC8A49C1D19EAAD00E14E2B /* MojioError.swift */,
 				BC590622208E566200A098A3 /* PetsError.swift */,
 				8808C2341EB1483A00A41A8B /* PrimaryKey.swift */,
@@ -1238,13 +1257,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				BC3D7C84208816BB00659A92 /* PetsClient.swift in Sources */,
+				BCFE57E720910E6E00B89104 /* DeviceMeasurement.swift in Sources */,
 				BC3D7C212087F3B000659A92 /* KeychainManager.swift in Sources */,
+				BCFE57E120910D7100B89104 /* Location.swift in Sources */,
 				BC603746208FB20F00D855DE /* PetsError.swift in Sources */,
+				BCFE57EE2091259900B89104 /* ActivityLocation.swift in Sources */,
+				BCFE57F12091259900B89104 /* RootActivity.swift in Sources */,
 				BC3D7C2A2087F3B000659A92 /* JsonSerializer.swift in Sources */,
 				BC3D7C2E2087F3B000659A92 /* TimeIntervalExt.swift in Sources */,
 				BC603749208FB20F00D855DE /* Links.swift in Sources */,
 				BC603750208FB36600D855DE /* Result.swift in Sources */,
 				BC60374B208FB20F00D855DE /* NotificationToken.swift in Sources */,
+				BCFE57E320910E2200B89104 /* Address.swift in Sources */,
 				BC6036F0208F9EB500D855DE /* PetsActivity.swift in Sources */,
 				BC3D7C2F2087F3B000659A92 /* RestClient.swift in Sources */,
 				BC6036EE208F9E3600D855DE /* PrimaryKey.swift in Sources */,
@@ -1253,17 +1277,21 @@
 				BC60374C208FB20F00D855DE /* PetDetails.swift in Sources */,
 				BC3D7C3B2087F3B000659A92 /* StringExt.swift in Sources */,
 				BC603742208FB20F00D855DE /* Asset.swift in Sources */,
+				BCFE57F52091263400B89104 /* VehicleActivity.swift in Sources */,
 				BC590656208E783A00A098A3 /* WSPetsClient.swift in Sources */,
-				BC60374A208FB20F00D855DE /* Location.swift in Sources */,
+				BC60374A208FB20F00D855DE /* PetsLocation.swift in Sources */,
+				BCFE57E520910E4400B89104 /* Heading.swift in Sources */,
 				BC3D7C412087F3B000659A92 /* KeychainStorageProvider.swift in Sources */,
 				BC603744208FB20F00D855DE /* Device.swift in Sources */,
 				BC3D7C492087F3B000659A92 /* ObjectMapper+Codable.swift in Sources */,
 				BC3D7C4C2087F3B000659A92 /* SwiftWebSocketProvider.swift in Sources */,
 				BC3D7C512087F3B000659A92 /* WebSocketFactory.swift in Sources */,
 				BC603743208FB20F00D855DE /* Battery.swift in Sources */,
+				BCFE57F02091259900B89104 /* BaseActivityLocation.swift in Sources */,
 				BC603735208FACF400D855DE /* AuthToken.swift in Sources */,
 				BC59065B208E7B0100A098A3 /* ResponseArray.swift in Sources */,
 				BC603745208FB20F00D855DE /* DeviceType.swift in Sources */,
+				BCFE57EF2091259900B89104 /* BaseActivity.swift in Sources */,
 				BC603747208FB20F00D855DE /* Geofence.swift in Sources */,
 				BC3D7C672087F3B000659A92 /* SwiftWebSocketFactory.swift in Sources */,
 				BC3D7C6C2087F3B000659A92 /* ClientEnvironment.swift in Sources */,
@@ -1276,23 +1304,30 @@
 			buildActionMask = 2147483647;
 			files = (
 				BC6036F9208FA9CD00D855DE /* AccountsClient.swift in Sources */,
+				BCFE57EA2091259800B89104 /* BaseActivity.swift in Sources */,
+				BCFE57EB2091259800B89104 /* BaseActivityLocation.swift in Sources */,
 				BC6036FB208FA9CD00D855DE /* KeychainManager.swift in Sources */,
 				BC603757208FB3C100D855DE /* PetsError.swift in Sources */,
 				BC6036FD208FA9CD00D855DE /* JsonSerializer.swift in Sources */,
 				BC6036FE208FA9CD00D855DE /* AuthViewController.swift in Sources */,
+				BCFE57F42091263400B89104 /* PetsActivity.swift in Sources */,
 				BC603701208FA9CD00D855DE /* TimeIntervalExt.swift in Sources */,
 				BC603702208FA9CD00D855DE /* AuthToken.swift in Sources */,
 				BC603703208FA9CD00D855DE /* PhoneNumber.swift in Sources */,
-				BC603704208FA9CD00D855DE /* PetsActivity.swift in Sources */,
+				BCFE57E420910E4400B89104 /* Heading.swift in Sources */,
 				BC603705208FA9CD00D855DE /* RestClient.swift in Sources */,
 				BC603706208FA9CD00D855DE /* PrimaryKey.swift in Sources */,
 				BC603708208FA9CD00D855DE /* WebSocketProvider.swift in Sources */,
 				BC60370A208FA9CD00D855DE /* Email.swift in Sources */,
 				BC60370D208FA9CD00D855DE /* StringExt.swift in Sources */,
+				BCFE57E220910E2200B89104 /* Address.swift in Sources */,
+				BCFE57F3209125D900B89104 /* VehicleActivity.swift in Sources */,
+				BCFE57E620910E6E00B89104 /* DeviceMeasurement.swift in Sources */,
 				BC60370F208FA9CD00D855DE /* AuthClient.swift in Sources */,
 				BC603710208FA9CD00D855DE /* WSAccountsClient.swift in Sources */,
 				BC603712208FA9CD00D855DE /* KeychainStorageProvider.swift in Sources */,
 				BC603713208FA9CD00D855DE /* User.swift in Sources */,
+				BCFE57EC2091259800B89104 /* RootActivity.swift in Sources */,
 				BC603714208FA9CD00D855DE /* ObjectMapper+Codable.swift in Sources */,
 				BC603751208FB36600D855DE /* Result.swift in Sources */,
 				BC603716208FA9CD00D855DE /* SwiftWebSocketProvider.swift in Sources */,
@@ -1303,8 +1338,10 @@
 				BC60374E208FB2F400D855DE /* Links.swift in Sources */,
 				BC603719208FA9CD00D855DE /* ResponseArray.swift in Sources */,
 				BC60371C208FA9CD00D855DE /* SwiftWebSocketFactory.swift in Sources */,
+				BCFE57E020910D7100B89104 /* Location.swift in Sources */,
 				BC60371D208FA9CD00D855DE /* ClientEnvironment.swift in Sources */,
 				BC60371E208FA9CD00D855DE /* App.swift in Sources */,
+				BCFE57E92091259800B89104 /* ActivityLocation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1318,6 +1355,7 @@
 				BC879B6D1CBEFFDD00F9177B /* Heading.swift in Sources */,
 				BC3D7C7F2087F5E700659A92 /* VehiclesClient.swift in Sources */,
 				BC31E3D51D419F5D001649A7 /* BaseActivityLocation.swift in Sources */,
+				BCFE57F62091263500B89104 /* PetsActivity.swift in Sources */,
 				BC879B771CBEFFDD00F9177B /* Speed.swift in Sources */,
 				BC879B701CBEFFDD00F9177B /* MeasurementStatistics.swift in Sources */,
 				644214DE1D9E6500005A86C5 /* AggregationData.swift in Sources */,
