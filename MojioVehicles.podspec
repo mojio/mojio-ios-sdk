@@ -9,8 +9,9 @@ Pod::Spec.new do |spec|
 
     spec.platform = :ios, "9.0"
     spec.requires_arc = true
-    spec.source = { git: "https://github.com/mojio/mojio-ios-sdk.git", tag: "v#{spec.version}", submodules: true }
-    spec.source_files = "MojioSDK/**/*.{h,swift}"
+    spec.source = { git: "https://github.com/mojio/mojio-ios-sdk.git", branch: "phoenix", submodules: true }
+
+    spec.source_files = "MojioSDK/Client/Shared/**/*.{h,swift}", "MojioSDK/Client/Vehicles/**/*.{h,swift}", "MojioSDK/Env/**/*.{h,swift}", "MojioSDK/Extensions/Shared/**/*.{h,swift}", "MojioSDK/Models/Shared/**/*.{h,swift}", "MojioSDK/Models/Vehicles/**/*.{h,swift}", "MojioSDK/Shared/**/*.{h,swift}", "MojioSDK/*.{h,swift}"
 
     spec.dependency 'Alamofire'
     spec.dependency 'SwiftyJSON'

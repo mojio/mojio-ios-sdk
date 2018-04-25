@@ -15,10 +15,10 @@
 
 #import <UIKit/UIKit.h>
 
-//! Project version number for MojioSDK.
-FOUNDATION_EXPORT double MojioSDKVersionNumber;
+//! Project version number for MojioAccounts.
+FOUNDATION_EXPORT double MojioAccountsVersionNumber;
 
-//! Project version string for MojioSDK.
-FOUNDATION_EXPORT const unsigned char MojioSDKVersionString[];
+//! Project version string for MojioAccounts.
+FOUNDATION_EXPORT const unsigned char MojioAccountsVersionString[];
 
-// In this header, you should import all the public headers of your framework using statements like #import <MojioSDK/PublicHeader.h>
+// In this header, you should import all the public headers of your framework using statements like #import <MojioAccounts/PublicHeader.h>

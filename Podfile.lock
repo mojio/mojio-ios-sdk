@@ -33,6 +33,16 @@ DEPENDENCIES:
   - SwiftWebSocket (from `https://github.com/mojio/SwiftWebSocket`, commit `d39576a`)
   - SwiftyJSON
 
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - Alamofire
+    - KeychainSwift
+    - ObjectMapper
+    - OHHTTPStubs
+    - RxSwift
+    - SwiftDate
+    - SwiftyJSON
+
 EXTERNAL SOURCES:
   SwiftWebSocket:
     :commit: d39576a
@@ -55,4 +65,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: e26116e092c20299e8381ad5992b73a5cecf9893
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.5.0

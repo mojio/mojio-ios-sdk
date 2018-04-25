@@ -112,7 +112,6 @@
 		BC3D7C6C2087F3B000659A92 /* ClientEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B8C1CBF000A00F9177B /* ClientEnvironment.swift */; };
 		BC3D7C6F2087F3B000659A92 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 75F77F0D1D19F504000CC2B4 /* libz.tbd */; };
 		BC3D7C722087F3B000659A92 /* JsonSerializerSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = BC879B881CBEFFFF00F9177B /* JsonSerializerSwift.h */; };
-		BC3D7C732087F3B000659A92 /* MojioSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = BCC2EFB31CBED4E6004D2759 /* MojioSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BC3D7C7F2087F5E700659A92 /* VehiclesClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC3D7C7E2087F5E700659A92 /* VehiclesClient.swift */; };
 		BC3D7C84208816BB00659A92 /* PetsClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC3D7C83208816BB00659A92 /* PetsClient.swift */; };
 		BC590656208E783A00A098A3 /* WSPetsClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC590654208E781200A098A3 /* WSPetsClient.swift */; };
@@ -148,7 +147,6 @@
 		BC60371E208FA9CD00D855DE /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B461CBEFFDD00F9177B /* App.swift */; };
 		BC603721208FA9CD00D855DE /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 75F77F0D1D19F504000CC2B4 /* libz.tbd */; };
 		BC603725208FA9CD00D855DE /* JsonSerializerSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = BC879B881CBEFFFF00F9177B /* JsonSerializerSwift.h */; };
-		BC603726208FA9CD00D855DE /* MojioSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = BCC2EFB31CBED4E6004D2759 /* MojioSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BC603728208FA9CD00D855DE /* AuthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC72D7A61CC5615600D9740B /* AuthViewController.xib */; };
 		BC603735208FACF400D855DE /* AuthToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC59062C208E566200A098A3 /* AuthToken.swift */; };
 		BC603736208FACF400D855DE /* AuthToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC59062C208E566200A098A3 /* AuthToken.swift */; };
@@ -228,13 +226,15 @@
 		BC8ECA501D226690009C6164 /* WifiRadio.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC8ECA4F1D226690009C6164 /* WifiRadio.swift */; };
 		BC92329B1E7FC52900BD4038 /* CompatibilityDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC92329A1E7FC52900BD4038 /* CompatibilityDetails.swift */; };
 		BC94271B1F01E17D00B7424A /* TripPolyline.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC94271A1F01E17D00B7424A /* TripPolyline.swift */; };
-		BCC2EFB41CBED4E6004D2759 /* MojioSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = BCC2EFB31CBED4E6004D2759 /* MojioSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BCC2EFBB1CBED4E6004D2759 /* Vehicles.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCC2EFB11CBED4E6004D2759 /* Vehicles.framework */; };
 		BCC8A49E1D19EAAD00E14E2B /* MojioError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC8A49C1D19EAAD00E14E2B /* MojioError.swift */; };
 		BCC8A4A01D19EABF00E14E2B /* WSVehiclesClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC8A49F1D19EABF00E14E2B /* WSVehiclesClient.swift */; };
 		BCF2DE4A1D454B8D00EDD376 /* Geofence.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF2DE491D454B8D00EDD376 /* Geofence.swift */; };
 		BCFCEB041F019FF20096C9B4 /* HarshEventState.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCFCEB031F019FF20096C9B4 /* HarshEventState.swift */; };
 		BCFCEB061F01A2C70096C9B4 /* IdleEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCFCEB051F01A2C70096C9B4 /* IdleEvent.swift */; };
+		BCFE57DB20910AB100B89104 /* MojioAccounts.h in Headers */ = {isa = PBXBuildFile; fileRef = BCFE57D820910AB100B89104 /* MojioAccounts.h */; };
+		BCFE57DE20910AB900B89104 /* MojioVehicles.h in Headers */ = {isa = PBXBuildFile; fileRef = BCFE57D920910AB100B89104 /* MojioVehicles.h */; };
+		BCFE57DF20910ABD00B89104 /* MojioPets.h in Headers */ = {isa = PBXBuildFile; fileRef = BCFE57DA20910AB100B89104 /* MojioPets.h */; };
 		D58640634C2DE4F142ED2588 /* Pods_Pets.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9FF603C57C10DB1F8F755BF /* Pods_Pets.framework */; };
 		E06C95691D25CA2A006AECBB /* NotificationsSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06C95671D25CA2A006AECBB /* NotificationsSettings.swift */; };
 		E06C956A1D25CA2A006AECBB /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06C95681D25CA2A006AECBB /* Result.swift */; };
@@ -443,7 +443,6 @@
 		BC92329A1E7FC52900BD4038 /* CompatibilityDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompatibilityDetails.swift; sourceTree = "<group>"; };
 		BC94271A1F01E17D00B7424A /* TripPolyline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripPolyline.swift; sourceTree = "<group>"; };
 		BCC2EFB11CBED4E6004D2759 /* Vehicles.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Vehicles.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		BCC2EFB31CBED4E6004D2759 /* MojioSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MojioSDK.h; sourceTree = "<group>"; };
 		BCC2EFBA1CBED4E6004D2759 /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCC2EFC11CBED4E6004D2759 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BCC8A49C1D19EAAD00E14E2B /* MojioError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MojioError.swift; sourceTree = "<group>"; };
@@ -451,6 +450,9 @@
 		BCF2DE491D454B8D00EDD376 /* Geofence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Geofence.swift; sourceTree = "<group>"; };
 		BCFCEB031F019FF20096C9B4 /* HarshEventState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HarshEventState.swift; sourceTree = "<group>"; };
 		BCFCEB051F01A2C70096C9B4 /* IdleEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdleEvent.swift; sourceTree = "<group>"; };
+		BCFE57D820910AB100B89104 /* MojioAccounts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MojioAccounts.h; sourceTree = "<group>"; };
+		BCFE57D920910AB100B89104 /* MojioVehicles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MojioVehicles.h; sourceTree = "<group>"; };
+		BCFE57DA20910AB100B89104 /* MojioPets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MojioPets.h; sourceTree = "<group>"; };
 		CA1C7625383D1B4F4A95EBA8 /* Pods-Pets.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pets.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pets/Pods-Pets.debug.xcconfig"; sourceTree = "<group>"; };
 		D220CCCBE4F1F6F5A5F24E9D /* Pods-Pets.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pets.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pets/Pods-Pets.release.xcconfig"; sourceTree = "<group>"; };
 		D4D6F7769C35C2486E30AC0F /* Pods-MojioSDKTests2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MojioSDKTests2.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MojioSDKTests2/Pods-MojioSDKTests2.debug.xcconfig"; sourceTree = "<group>"; };
@@ -912,7 +914,9 @@
 				BC879B2A1CBEFF8500F9177B /* Env */,
 				2E5767421FB454FD008F16F6 /* Extensions */,
 				BCC2EFD91CBEF74A004D2759 /* Models */,
-				BCC2EFB31CBED4E6004D2759 /* MojioSDK.h */,
+				BCFE57D820910AB100B89104 /* MojioAccounts.h */,
+				BCFE57DA20910AB100B89104 /* MojioPets.h */,
+				BCFE57D920910AB100B89104 /* MojioVehicles.h */,
 				BC879B2C1CBEFF9000F9177B /* Shared */,
 			);
 			path = MojioSDK;
@@ -983,7 +987,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BC3D7C722087F3B000659A92 /* JsonSerializerSwift.h in Headers */,
-				BC3D7C732087F3B000659A92 /* MojioSDK.h in Headers */,
+				BCFE57DF20910ABD00B89104 /* MojioPets.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -992,7 +996,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BC603725208FA9CD00D855DE /* JsonSerializerSwift.h in Headers */,
-				BC603726208FA9CD00D855DE /* MojioSDK.h in Headers */,
+				BCFE57DB20910AB100B89104 /* MojioAccounts.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1000,8 +1004,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BCFE57DE20910AB900B89104 /* MojioVehicles.h in Headers */,
 				BC879B8A1CBEFFFF00F9177B /* JsonSerializerSwift.h in Headers */,
-				BCC2EFB41CBED4E6004D2759 /* MojioSDK.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1017,7 +1021,6 @@
 				BC3D7C6E2087F3B000659A92 /* Frameworks */,
 				BC3D7C712087F3B000659A92 /* Headers */,
 				BC3D7C742087F3B000659A92 /* Resources */,
-				BC3D7C762087F3B000659A92 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1037,7 +1040,6 @@
 				BC603720208FA9CD00D855DE /* Frameworks */,
 				BC603724208FA9CD00D855DE /* Headers */,
 				BC603727208FA9CD00D855DE /* Resources */,
-				1358D57B3F33DB3E7C5AA7E3 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1057,7 +1059,6 @@
 				BCC2EFAD1CBED4E6004D2759 /* Frameworks */,
 				BCC2EFAE1CBED4E6004D2759 /* Headers */,
 				BCC2EFAF1CBED4E6004D2759 /* Resources */,
-				AEEEC770A145A20667DBE5AD /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1175,21 +1176,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1358D57B3F33DB3E7C5AA7E3 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Accounts/Pods-Accounts-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		50FFDE671998939CEF683AFB /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1226,21 +1212,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		AEEEC770A145A20667DBE5AD /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Vehicles/Pods-Vehicles-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		BC3D7C1E2087F3B000659A92 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1257,21 +1228,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		BC3D7C762087F3B000659A92 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Pets/Pods-Pets-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
