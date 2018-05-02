@@ -14,7 +14,6 @@
  *******************************************************************************/
 
 @testable import MojioSDK
-import ObjectMapper
 import XCTest
 
 class BatteryTests: XCTestCase {
@@ -27,11 +26,11 @@ class BatteryTests: XCTestCase {
         XCTAssertEqual(model?.RiskSeverity, "Unknown")
         XCTAssertNotNil(model?.LowVoltageDuration)
         XCTAssertNotNil(model?.HighVoltageDuration)
-        XCTAssertEqual(model?.BaseUnit, "MilliVolts")
-        XCTAssertEqual(model?.Unit, "MilliVolts")
-        XCTAssertEqual(model?.BaseValue, 10)
-        XCTAssertEqual(model?.Value, 20)
-        XCTAssertEqual(model?.Timestamp, "2017-11-09T07:16:58.073Z")
+        XCTAssertEqual(model?.baseUnit, "MilliVolts")
+        XCTAssertEqual(model?.unit, "MilliVolts")
+        XCTAssertEqual(model?.baseValue, 10)
+        XCTAssertEqual(model?.value, 20)
+        XCTAssertEqual(model?.timestamp, "2017-11-09T07:16:58.073Z")
     }
 }
 
@@ -42,24 +41,24 @@ extension BatteryTests {
             "Connected": true,
             "RiskSeverity": "Unknown",
             "LowVoltageDuration": {
-                "BaseUnit": "Ticks",
-                "Timestamp": "2017-11-09T07:16:58.073Z",
-                "BaseValue": 0,
-                "Unit": "Ticks",
-                "Value": 0
+                "baseUnit": "Ticks",
+                "timestamp": "2017-11-09T07:16:58.073Z",
+                "baseValue": 0,
+                "unit": "Ticks",
+                "value": 0
             },
             "HighVoltageDuration": {
-                "BaseUnit": "Ticks",
-                "Timestamp": "2017-11-09T07:16:58.073Z",
-                "BaseValue": 0,
-                "Unit": "Ticks",
-                "Value": 0
+                "baseUnit": "Ticks",
+                "timestamp": "2017-11-09T07:16:58.073Z",
+                "baseValue": 0,
+                "unit": "Ticks",
+                "value": 0
             },
-            "BaseUnit": "MilliVolts",
-            "Timestamp": "2017-11-09T07:16:58.073Z",
-            "BaseValue": 10,
-            "Unit": "MilliVolts",
-            "Value": 20
+            "baseUnit": "MilliVolts",
+            "timestamp": "2017-11-09T07:16:58.073Z",
+            "baseValue": 10,
+            "unit": "MilliVolts",
+            "value": 20
         }
         """
     }

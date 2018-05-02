@@ -15,7 +15,6 @@
 		2E57673B1FB43CA9008F16F6 /* AddressTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E57673A1FB43CA9008F16F6 /* AddressTests.swift */; };
 		2E57673D1FB43DDE008F16F6 /* AggregationDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E57673C1FB43DDE008F16F6 /* AggregationDataTests.swift */; };
 		2E57673F1FB44301008F16F6 /* AppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E57673E1FB44301008F16F6 /* AppTests.swift */; };
-		2E5767441FB4551A008F16F6 /* ObjectMapper+Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5767431FB4551A008F16F6 /* ObjectMapper+Codable.swift */; };
 		2E5767461FB45930008F16F6 /* ImageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5767451FB45930008F16F6 /* ImageTests.swift */; };
 		2E5767481FB460E5008F16F6 /* BatteryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5767471FB460E5008F16F6 /* BatteryTests.swift */; };
 		2E57674A1FB462C2008F16F6 /* BooleanStateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5767491FB462C2008F16F6 /* BooleanStateTests.swift */; };
@@ -105,7 +104,6 @@
 		BC3D7C342087F3B000659A92 /* WebSocketProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF12CC1FB9D90D00F068B2 /* WebSocketProvider.swift */; };
 		BC3D7C3B2087F3B000659A92 /* StringExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2278359B1FB60253002D24F9 /* StringExt.swift */; };
 		BC3D7C412087F3B000659A92 /* KeychainStorageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED946EF1FA9ED8E00132568 /* KeychainStorageProvider.swift */; };
-		BC3D7C492087F3B000659A92 /* ObjectMapper+Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5767431FB4551A008F16F6 /* ObjectMapper+Codable.swift */; };
 		BC3D7C4C2087F3B000659A92 /* SwiftWebSocketProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF12D21FB9E70100F068B2 /* SwiftWebSocketProvider.swift */; };
 		BC3D7C512087F3B000659A92 /* WebSocketFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF12CE1FB9DD6F00F068B2 /* WebSocketFactory.swift */; };
 		BC3D7C672087F3B000659A92 /* SwiftWebSocketFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF12D01FB9E0D700F068B2 /* SwiftWebSocketFactory.swift */; };
@@ -138,7 +136,6 @@
 		BC603710208FA9CD00D855DE /* WSAccountsClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6036F1208F9F4D00D855DE /* WSAccountsClient.swift */; };
 		BC603712208FA9CD00D855DE /* KeychainStorageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED946EF1FA9ED8E00132568 /* KeychainStorageProvider.swift */; };
 		BC603713208FA9CD00D855DE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC59062E208E566200A098A3 /* User.swift */; };
-		BC603714208FA9CD00D855DE /* ObjectMapper+Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5767431FB4551A008F16F6 /* ObjectMapper+Codable.swift */; };
 		BC603716208FA9CD00D855DE /* SwiftWebSocketProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF12D21FB9E70100F068B2 /* SwiftWebSocketProvider.swift */; };
 		BC603717208FA9CD00D855DE /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B4F1CBEFFDD00F9177B /* Group.swift */; };
 		BC603718208FA9CD00D855DE /* WebSocketFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF12CE1FB9DD6F00F068B2 /* WebSocketFactory.swift */; };
@@ -266,7 +263,6 @@
 		2E57673C1FB43DDE008F16F6 /* AggregationDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AggregationDataTests.swift; sourceTree = "<group>"; };
 		2E57673E1FB44301008F16F6 /* AppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTests.swift; sourceTree = "<group>"; };
 		2E5767401FB4536A008F16F6 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
-		2E5767431FB4551A008F16F6 /* ObjectMapper+Codable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ObjectMapper+Codable.swift"; sourceTree = "<group>"; };
 		2E5767451FB45930008F16F6 /* ImageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTests.swift; sourceTree = "<group>"; };
 		2E5767471FB460E5008F16F6 /* BatteryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryTests.swift; sourceTree = "<group>"; };
 		2E5767491FB462C2008F16F6 /* BooleanStateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BooleanStateTests.swift; sourceTree = "<group>"; };
@@ -511,7 +507,6 @@
 			children = (
 				2278359D1FB60291002D24F9 /* TimeIntervalExt.swift */,
 				2278359B1FB60253002D24F9 /* StringExt.swift */,
-				2E5767431FB4551A008F16F6 /* ObjectMapper+Codable.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1017,7 +1012,6 @@
 				BC3D7C6E2087F3B000659A92 /* Frameworks */,
 				BC3D7C712087F3B000659A92 /* Headers */,
 				BC3D7C742087F3B000659A92 /* Resources */,
-				BC3D7C762087F3B000659A92 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1037,7 +1031,6 @@
 				BC603720208FA9CD00D855DE /* Frameworks */,
 				BC603724208FA9CD00D855DE /* Headers */,
 				BC603727208FA9CD00D855DE /* Resources */,
-				1358D57B3F33DB3E7C5AA7E3 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1057,7 +1050,6 @@
 				BCC2EFAD1CBED4E6004D2759 /* Frameworks */,
 				BCC2EFAE1CBED4E6004D2759 /* Headers */,
 				BCC2EFAF1CBED4E6004D2759 /* Resources */,
-				AEEEC770A145A20667DBE5AD /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1175,21 +1167,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1358D57B3F33DB3E7C5AA7E3 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Accounts/Pods-Accounts-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		50FFDE671998939CEF683AFB /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1226,21 +1203,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		AEEEC770A145A20667DBE5AD /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Vehicles/Pods-Vehicles-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		BC3D7C1E2087F3B000659A92 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1257,21 +1219,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		BC3D7C762087F3B000659A92 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Pets/Pods-Pets-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1301,7 +1248,6 @@
 				BC60374A208FB20F00D855DE /* Location.swift in Sources */,
 				BC3D7C412087F3B000659A92 /* KeychainStorageProvider.swift in Sources */,
 				BC603744208FB20F00D855DE /* Device.swift in Sources */,
-				BC3D7C492087F3B000659A92 /* ObjectMapper+Codable.swift in Sources */,
 				BC3D7C4C2087F3B000659A92 /* SwiftWebSocketProvider.swift in Sources */,
 				BC3D7C512087F3B000659A92 /* WebSocketFactory.swift in Sources */,
 				BC603743208FB20F00D855DE /* Battery.swift in Sources */,
@@ -1337,7 +1283,6 @@
 				BC603710208FA9CD00D855DE /* WSAccountsClient.swift in Sources */,
 				BC603712208FA9CD00D855DE /* KeychainStorageProvider.swift in Sources */,
 				BC603713208FA9CD00D855DE /* User.swift in Sources */,
-				BC603714208FA9CD00D855DE /* ObjectMapper+Codable.swift in Sources */,
 				BC603751208FB36600D855DE /* Result.swift in Sources */,
 				BC603716208FA9CD00D855DE /* SwiftWebSocketProvider.swift in Sources */,
 				BC60374D208FB2CC00D855DE /* Image.swift in Sources */,
@@ -1398,7 +1343,6 @@
 				BC603736208FACF400D855DE /* AuthToken.swift in Sources */,
 				BC717D9B1DA6EFA20052317C /* ServiceInterval.swift in Sources */,
 				BC717D9A1DA6EFA20052317C /* ServiceEvent.swift in Sources */,
-				2E5767441FB4551A008F16F6 /* ObjectMapper+Codable.swift in Sources */,
 				BC879B711CBEFFDD00F9177B /* Mojio.swift in Sources */,
 				BC31E3D61D419F5D001649A7 /* RootActivity.swift in Sources */,
 				2EBF12D31FB9E70100F068B2 /* SwiftWebSocketProvider.swift in Sources */,

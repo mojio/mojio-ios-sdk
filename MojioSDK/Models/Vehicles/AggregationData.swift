@@ -25,7 +25,7 @@ public struct AggregationData: Codable {
     public var Average      : Double = 0
     public var Max          : Double = 0
     public var Min          : Double = 0
-    public var Units        : String?
+    public var units        : String?
     public var Date         : String?
     public var EndDate      : String?
     public var Count        : Int = 0

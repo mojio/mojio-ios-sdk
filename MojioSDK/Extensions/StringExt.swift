@@ -14,7 +14,6 @@
  *******************************************************************************/
 
 import Foundation
-import ObjectMapper
 import SwiftDate
 
 internal extension String {

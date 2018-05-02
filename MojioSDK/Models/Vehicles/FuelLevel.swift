@@ -13,17 +13,17 @@
  * forbidden unless prior written permission is obtained from Moj.io Inc.
  *******************************************************************************/
 
-//import UIKit
+import Foundation
 
 // Units are in PercentageUnits
 public struct FuelLevel: DeviceMeasurement {
     
     // DeviceMeasurement
-    public var BaseUnit: String? = nil
-    public var BaseValue: Double = 0
-    public var Unit: String? = nil
-    public var Value: Double = 0
-    public var Timestamp: String?  = nil
+    public var baseUnit: String? = nil
+    public var baseValue: Double = 0
+    public var unit: String? = nil
+    public var value: Double = 0
+    public var timestamp: Date?  = nil
     
     //public var timeStamp: Date? = nil
     
@@ -42,7 +42,7 @@ extension FuelLevel {
         
         let RiskSeverity = try container.decodeIfPresent(String.self, forKey: .RiskSeverity)
         
-        self.init(BaseUnit: deviceMeasurements.BaseUnit, BaseValue: deviceMeasurements.BaseValue, Unit: deviceMeasurements.Unit, Value: deviceMeasurements.Value, Timestamp: deviceMeasurements.Timestamp, RiskSeverity: RiskSeverity)
+        self.init(baseUnit: deviceMeasurements.baseUnit, baseValue: deviceMeasurements.baseValue, unit: deviceMeasurements.unit, value: deviceMeasurements.value, timestamp: deviceMeasurements.timestamp, RiskSeverity: RiskSeverity)
     }
     
     public func encode(with encoder: Encoder) throws {

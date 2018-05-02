@@ -13,22 +13,33 @@
  * forbidden unless prior written permission is obtained from Moj.io Inc.
  *******************************************************************************/
 
-//import UIKit
 import Foundation
 
 public struct BooleanState: Codable {
     
-    public var Timestamp: String? = nil
-    public var Value: Bool = false
+    public let timestamp: Date?
+    public let value: Bool
     
-    //public var timeStamp: Date? = nil
-}
-
-extension BooleanState {
+    public enum CodingKeys: String, CodingKey {
+        case timestamp = "Timestamp"
+        case value = "Value"
+    }
     
-    public var timeStamp: Date? {
-        return self.Timestamp?.toDate
+    public init(from decoder: Decoder) throws {
+        
+        do {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            
+            self.timestamp = try container.decodeIfPresent(String.self, forKey: .timestamp).flatMap { $0.dateFromIso8601 }
+            self.value = try container.decode(Bool.self, forKey: .value)
+        }
+        catch {
+            debugPrint(error)
+            throw error
+        }
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        
     }
 }
-
-//public init() {}

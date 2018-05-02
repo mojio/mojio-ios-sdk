@@ -15,16 +15,16 @@
 
 import Foundation
 
-public enum GeofenceRegionType: String {
+public enum GeofenceRegionType: String, Codable {
     case circle = "Circle"
 }
 
 public struct GeofenceRegion: Codable {
 
-    public var GeofenceType: String? = nil
-    public var Lat: Double = 0
-    public var Lng: Double = 0
-    public var Radius: Distance? = nil
+    public var type: GeofenceRegionType? = nil
+    public var lat: Double = 0
+    public var lng: Double = 0
+    public var radius: Distance? = nil
     
 //    public func jsonDict() -> [String: Any] {
 //        var map: [String:Any] = [:]
@@ -43,27 +43,15 @@ public struct GeofenceRegion: Codable {
 //        return map
 //    }
     
-    private enum CodingKeys: String, CodingKey {
-        case GeofenceType = "Type"
-        case Lat
-        case Lng
-        case Radius
+    public enum CodingKeys: String, CodingKey {
+        case type = "Type"
+        case lat = "Lat"
+        case lng = "Lng"
+        case radius = "Radius"
     }
 }
 
-//    public init() {}
-//
-//    public init?(map: Map) {
-//        self.init()
-//    }
-//    public mutating func mapping(map: Map) {
-//        GeofenceType <- map["Type"]
-//        Lat <- map["Lat"]
-//        Lng <- map["Lng"]
-//        Radius <- map["Radius"]
-//    }
-
-public enum GeofenceNotificationType: String {
+public enum GeofenceNotificationType: String, Codable {
     case onEnter = "OnEnter"
     case onExit = "OnExit"
     case always = "Always"
@@ -72,21 +60,18 @@ public enum GeofenceNotificationType: String {
 
 public struct Geofence: Codable, PrimaryKey {
     
-    public var Id: String? = nil
-    public var Name: String? = nil
-    public var Description: String? = nil
-    public var Region: GeofenceRegion? = nil
-    public var NotificationSetting: String? = nil
-    public var Enabled: Bool = false
-    public var VehicleIds: [String] = []
-    public var Tags: [String] = []
-    public var CreatedOn: String? = nil
-    public var LastModified: String? = nil
-    public var OwnerId: String? = nil
-    public var Deleted: Bool? = nil
-    
-    //public var createdOn: Date? = nil
-    //public var lastModified: Date? = nil
+    public let id: String
+    public let Name: String?
+    public let Description: String?
+    public let Region: GeofenceRegion?
+    public let NotificationSetting: GeofenceNotificationType?
+    public let Enabled: Bool
+    public let VehicleIds: [String]
+    public let Tags: [String]
+    public let CreatedOn: String?
+    public let LastModified: String?
+    public let OwnerId: String?
+    public let Deleted: Bool?
 
 //    public func jsonDict() -> [String: Any] {
 //        var map: [String: Any] = [:]
@@ -116,17 +101,6 @@ public struct Geofence: Codable, PrimaryKey {
 //
 //        return map
 //    }
-}
-
-extension Geofence {
-    
-    public var createdOn: Date? {
-        return self.CreatedOn?.toDate
-    }
-    
-    public var lastModified: Date? {
-        return self.LastModified?.toDate
-    }
 }
 
 //public init() {}

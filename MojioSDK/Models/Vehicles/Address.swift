@@ -13,19 +13,33 @@
  * forbidden unless prior written permission is obtained from Moj.io Inc.
  *******************************************************************************/
 
-import UIKit
+import Foundation
 
 public struct Address: Codable {
     
-    public var HouseNumber: String? = nil
-    public var Road: String? = nil
-    public var Neighbourhood: String? = nil
-    public var Suburb: String? = nil
-    public var City: String? = nil
-    public var County: String? = nil
-    public var State: String? = nil
-    public var PostCode: String? = nil
-    public var Country: String? = nil
-    public var CountryCode: String? = nil
-    public var FormattedAddress: String? = nil
+    public let houseNumber: String?
+    public let road: String?
+    public let neighbourhood: String?
+    public let suburb: String?
+    public let city: String?
+    public let county: String?
+    public let state: String?
+    public let postCode: String?
+    public let country: String?
+    public let countryCode: String?
+    public let formattedAddress: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case houseNumber = "HouseNumber"
+        case road = "Road"
+        case neighbourhood = "Neighbourhood"
+        case suburb = "Suburb"
+        case city = "City"
+        case county = "County"
+        case state = "State"
+        case postCode = "PostCode"
+        case country = "Country"
+        case countryCode = "CountryCode"
+        case formattedAddress = "FormattedAddress"
+    }
 }

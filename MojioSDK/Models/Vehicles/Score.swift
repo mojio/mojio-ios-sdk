@@ -13,7 +13,7 @@
  * forbidden unless prior written permission is obtained from Moj.io Inc.
  *******************************************************************************/
 
-//import UIKit
+import Foundation
 
 public enum ScoreMethods: String {
     case zScore = "ZScore"
@@ -24,7 +24,7 @@ public struct Score: Codable {
     
     // ScoreMethods
     public var ScoringMethod: String? = nil
-    public var Value: Double = 0
+    public var value: Double = 0
     public var Percentile: Double = 0
     public var Average: Double = 0
 }

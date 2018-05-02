@@ -13,55 +13,21 @@
  * forbidden unless prior written permission is obtained from Moj.io Inc.
  *******************************************************************************/
 
-//import UIKit
-//import CoreLocation
-
 import Foundation
 
-public struct TripPolyline: Codable, PrimaryKey {
+public struct Polyline: Codable, PrimaryKey {
     
-    public var Id: String? = nil
-    public var TripPolyline: String? = nil
-    public var CreatedOn: String? = nil
-    public var LastModified: String? = nil
-    public var Deleted: Bool = false
+    public let id: String
+    public let polyline: String?
+    public let createdOn: Date?
+    public let lastModified: Date?
+    public let deleted: Bool
     
-    private enum CodingKeys: String, CodingKey {
-        case Id
-        case TripPolyline = "Polyline"
-        case CreatedOn
-        case LastModified
-        case Deleted
-    }
-    // Date Values
-//    public var createdOn: Date? = nil
-//    public var lastModified: Date? = nil
-}
-
-extension TripPolyline {
-    
-    public var createdOn: Date? {
-        return self.CreatedOn?.toDate
-    }
-    
-    public var lastModified: Date? {
-        return self.LastModified?.toDate
+    public enum CodingKeys: String, CodingKey {
+        case id = "Id"
+        case polyline = "Polyline"
+        case createdOn = "CreatedOn"
+        case lastModified = "LastModified"
+        case deleted = "Deleted"
     }
 }
-
-//public init() {}
-//
-//public init?(map: Map) {
-//    self.init()
-//}
-//
-//public mutating func mapping(map: Map) {
-//    Id <- map["Id"]
-//    TripPolyline <- map["Polyline"]
-//    CreatedOn <- map["CreatedOn"]
-//    LastModified <- map["LastModified"]
-//    Deleted <- map["Deleted"]
-//
-//    createdOn = self.CreatedOn?.toDate
-//    lastModified = self.LastModified?.toDate
-//}

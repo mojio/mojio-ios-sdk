@@ -13,7 +13,7 @@
  * forbidden unless prior written permission is obtained from Moj.io Inc.
  *******************************************************************************/
 
-//import UIKit
+import Foundation
 
 public struct PlatformServiceSchedule: Codable {
     
@@ -28,8 +28,8 @@ public struct PlatformServiceSchedule: Codable {
     public var ScheduleName: String? = nil
     public var ServiceEvent: String? = nil
     public var TransNotes: String? = nil
-    public var Units: String? = nil
-    public var Value: Double = 0
+    public var units: String? = nil
+    public var value: Double = 0
 }
 
 //public init() {}

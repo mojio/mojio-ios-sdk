@@ -14,11 +14,9 @@ Pod::Spec.new do |spec|
 
     spec.dependency 'Alamofire'
     spec.dependency 'SwiftyJSON'
-    spec.dependency 'ObjectMapper'
     spec.dependency 'KeychainSwift'
     spec.dependency 'OHHTTPStubs'
     spec.dependency 'OHHTTPStubs/Swift'
     spec.dependency 'SwiftWebSocket'
     spec.dependency 'SwiftDate'
-    spec.dependency 'RxSwift'
 end

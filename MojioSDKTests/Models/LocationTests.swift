@@ -14,7 +14,6 @@
  *******************************************************************************/
 
 @testable import MojioSDK
-import ObjectMapper
 import XCTest
 
 class LocationTests: XCTestCase {
@@ -26,7 +25,7 @@ class LocationTests: XCTestCase {
         XCTAssertNotNil(model)
         XCTAssertNotNil(model?.LocationAddress)
         XCTAssertNotNil(model?.LocationHeading)
-        XCTAssertEqual(model?.Timestamp, "2017-11-09T07:16:57.388Z")
+        XCTAssertEqual(model?.timestamp, "2017-11-09T07:16:57.388Z")
         XCTAssertEqual(model?.Lat, 23.0)
         XCTAssertEqual(model?.Lng, 51.0)
         XCTAssertEqual(model?.Status, "Unknown")
@@ -40,7 +39,7 @@ extension LocationTests {
     var jsonString: String {
         return """
         {
-        "Timestamp": "2017-11-09T07:16:57.388Z",
+        "timestamp": "2017-11-09T07:16:57.388Z",
         "Lat": 23.0,
         "Lng": 51.0,
         "Status": "Unknown",
@@ -48,20 +47,20 @@ extension LocationTests {
         "Altitude": 35.0,
         "GeoHash": "string",
         "Accuracy": {
-        "BaseUnit": "Meters",
-        "Timestamp": "2017-11-09T07:16:57.388Z",
-        "BaseValue": 0,
-        "Unit": "Meters",
-        "Value": 0
+        "baseUnit": "Meters",
+        "timestamp": "2017-11-09T07:16:57.388Z",
+        "baseValue": 0,
+        "unit": "Meters",
+        "value": 0
         },
         "Heading": {
-        "BaseUnit": "Degree",
+        "baseUnit": "Degree",
         "Direction": "string",
         "LeftTurn": true,
-        "Timestamp": "2017-11-09T07:16:57.388Z",
-        "BaseValue": 0,
-        "Unit": "Degree",
-        "Value": 0
+        "timestamp": "2017-11-09T07:16:57.388Z",
+        "baseValue": 0,
+        "unit": "Degree",
+        "value": 0
         },
         "Address": {
         "HouseNumber": "string",

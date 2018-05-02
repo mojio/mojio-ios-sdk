@@ -13,59 +13,41 @@
  * forbidden unless prior written permission is obtained from Moj.io Inc.
  *******************************************************************************/
 
-//import UIKit
 import Foundation
 
 public struct VinDetails: Codable {
     
-    public var Timestamp: String? = nil
-    public var Vin: String? = nil
-    public var Year: Int = 0
-    public var Make: String? = nil
-    public var Model: String? = nil
-    public var Engine: String? = nil
-    public var Cylinders: Int? = nil
-    public var TotalFuelCapacity: FuelCapacity? = nil
-    public var FuelType: String? = nil
-    public var CityFuelEfficiency: Double = 0
-    public var HighwayFuelEfficiency: Double = 0
-    public var CombinedFuelEfficiency: Double = 0
-    public var Transmission: String? = nil
-    public var Message: String? = nil
-    public var Success: Bool? = nil
+    public let timestamp: Date?
+    public let vin: String?
+    public let year: Int
+    public let make: String?
+    public let model: String?
+    public let engine: String?
+    public let cylinders: Int?
+    public let totalFuelCapacity: FuelCapacity?
+    public let fuelType: String?
+    public let cityFuelEfficiency: Double
+    public let highwayFuelEfficiency: Double
+    public let combinedFuelEfficiency: Double
+    public let transmission: String?
+    public let message: String?
+    public let success: Bool?
     
-    //public var timestamp: Date? = nil
-}
-
-extension VinDetails {
-    
-    public var timestamp: Date? {
-        return self.Timestamp?.toDate
+    enum CodingKeys: String, CodingKey {
+        case timestamp = "Timestamp"
+        case vin = "Vin"
+        case year = "Year"
+        case make = "Make"
+        case model = "Model"
+        case engine = "Engine"
+        case cylinders = "Cylinders"
+        case totalFuelCapacity = "TotalFuelCapacity"
+        case fuelType = "FuelType"
+        case cityFuelEfficiency = "CityFuelEfficiency"
+        case highwayFuelEfficiency = "HighwayFuelEfficiency"
+        case combinedFuelEfficiency = "CombinedFuelEfficiency"
+        case transmission = "Transmission"
+        case message = "Message"
+        case success = "Success"
     }
 }
-
-//public init() {}
-//
-//public init?(map: Map) {
-//    self.init()
-//}
-//
-//public mutating func mapping(map: Map) {
-//    Timestamp <- map["Timestamp"]
-//    Vin <- map["Vin"]
-//    Year <- map["Year"]
-//    Make <- map["Make"]
-//    Model <- map["Model"]
-//    Engine <- map["Engine"]
-//    Cylinders <- map["Cylinders"]
-//    TotalFuelCapacity <- map["TotalFuelCapacity"]
-//    FuelType <- map["FuelType"]
-//    CityFuelEfficiency <- map["CityFuelEfficiency"]
-//    HighwayFuelEfficiency <- map["HighwayFuelEfficiency"]
-//    CombinedFuelEfficiency <- map["CombinedFuelEfficiency"]
-//    Transmission <- map["Transmission"]
-//    Message <- map["Message"]
-//    Success <- map["Success"]
-//
-//    timestamp = self.Timestamp?.toDate
-//}

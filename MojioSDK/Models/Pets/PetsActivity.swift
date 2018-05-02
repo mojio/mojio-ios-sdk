@@ -15,7 +15,7 @@
 
 import Foundation
 
-protocol ActivityObject: Equatable {
+protocol ActivityObject: PrimaryKey {
     associatedtype T: NestedActivityObject
     var id: String { get }
     var context: String? { get }
@@ -28,7 +28,7 @@ protocol ActivityObject: Equatable {
     var location: T? { get }
 }
 
-protocol NestedActivityObject: Equatable {
+protocol NestedActivityObject: PrimaryKey {
     var id: String { get }
     var context: String? { get }
     var type: NestedActivityType? { get }

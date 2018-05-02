@@ -14,7 +14,6 @@
  *******************************************************************************/
 
 @testable import MojioSDK
-import ObjectMapper
 import XCTest
 
 class OdometerTests: XCTestCase {
@@ -22,11 +21,11 @@ class OdometerTests: XCTestCase {
         let jsonString = """
         {
         "RolloverValue": 10,
-        "BaseUnit": "Meters",
-        "Timestamp": "2017-11-10T07:07:45.030Z",
-        "BaseValue": 20,
-        "Unit": "Meters",
-        "Value": 30
+        "baseUnit": "Meters",
+        "timestamp": "2017-11-10T07:07:45.030Z",
+        "baseValue": 20,
+        "unit": "Meters",
+        "value": 30
         }
         """
         let jsonObject = try! JSONSerialization.jsonObject(with: jsonString.data(using: .utf8)!, options: .allowFragments)
@@ -34,10 +33,10 @@ class OdometerTests: XCTestCase {
         
         XCTAssertNotNil(model)
         XCTAssertEqual(model?.RolloverValue, 10)
-        XCTAssertEqual(model?.BaseUnit, "Meters")
-        XCTAssertEqual(model?.Timestamp, "2017-11-10T07:07:45.030Z")
-        XCTAssertEqual(model?.BaseValue, 20)
-        XCTAssertEqual(model?.Unit, "Meters")
-        XCTAssertEqual(model?.Value, 30)
+        XCTAssertEqual(model?.baseUnit, "Meters")
+        XCTAssertEqual(model?.timestamp, "2017-11-10T07:07:45.030Z")
+        XCTAssertEqual(model?.baseValue, 20)
+        XCTAssertEqual(model?.unit, "Meters")
+        XCTAssertEqual(model?.value, 30)
     }
 }

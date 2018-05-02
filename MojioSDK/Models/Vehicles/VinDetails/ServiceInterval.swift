@@ -13,15 +13,15 @@
  * forbidden unless prior written permission is obtained from Moj.io Inc.
  *******************************************************************************/
 
-//import UIKit
+import Foundation
 
 public struct ServiceInterval: Codable {
     
     public var OperatingParameter: String? = nil
     public var OperatingParameterNotes: String? = nil
     public var IntervalType: String? = nil
-    public var Value: Double = 0
-    public var Units: String? = nil
+    public var value: Double = 0
+    public var units: String? = nil
     public var InitialValue: Double = 0
 }
 

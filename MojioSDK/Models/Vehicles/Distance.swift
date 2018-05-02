@@ -13,32 +13,28 @@
  * forbidden unless prior written permission is obtained from Moj.io Inc.
  *******************************************************************************/
 
-//import UIKit
-//import ObjectMapper
+import Foundation
 
-// Units in DistanceUnits
 public struct Distance: DeviceMeasurement {
     
     // DeviceMeasurement
-    public var BaseUnit: String? = nil
-    public var BaseValue: Double = 0
-    public var Unit: String? = nil
-    public var Value: Double = 0
-    public var Timestamp: String?  = nil
-    
-    //public var timeStamp: Date? = nil
+    public let baseUnit: String?
+    public let baseValue: Double
+    public let unit: String?
+    public let value: Double
+    public let timestamp: Date?
     
 //    public func jsonDict() -> [String:Any] {
 //        var map: [String:Any] = [:]
 //        
-//        if let baseUnit = self.BaseUnit {
-//            map["BaseUnit"] = baseUnit as AnyObject?
-//            map["BaseValue"] = self.BaseValue as AnyObject?
+//        if let baseUnit = self.baseUnit {
+//            map["baseUnit"] = baseUnit as AnyObject?
+//            map["baseValue"] = self.baseValue as AnyObject?
 //        }
 //        
-//        if let unit = self.Unit {
+//        if let unit = self.unit {
 //            map["Unit"] = unit as AnyObject?
-//            map["Value"] = self.Value as AnyObject?
+//            map["Value"] = self.value as AnyObject?
 //        }
 //
 //        return map
@@ -49,16 +45,10 @@ extension Distance {
     
     public init(from decoder: Decoder, with deviceMeasurements: DeviceMeasurements) throws {
         
-        self.init(BaseUnit: deviceMeasurements.BaseUnit, BaseValue: deviceMeasurements.BaseValue, Unit: deviceMeasurements.Unit, Value: deviceMeasurements.Value, Timestamp: deviceMeasurements.Timestamp)
+        self.init(baseUnit: deviceMeasurements.baseUnit, baseValue: deviceMeasurements.baseValue, unit: deviceMeasurements.unit, value: deviceMeasurements.value, timestamp: deviceMeasurements.timestamp)
     }
     
     public func encode(with encoder: Encoder) throws {
         
     }
 }
-
-//public init() {}
-//
-//public init?(map: Map) {
-//    self.init()
-//}

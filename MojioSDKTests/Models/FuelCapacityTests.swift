@@ -14,18 +14,17 @@
  *******************************************************************************/
 
 @testable import MojioSDK
-import ObjectMapper
 import XCTest
 
 class FuelCapacityTests: XCTestCase {
     func testFuelCapacityShouldBeCreatedFromJsonString() {
         let jsonString = """
             {
-            "BaseUnit": "MetersPerSecondPerSecond",
-            "BaseValue": 10,
-            "Unit": "MetersPerSecondPerSecond",
-            "Value": 20,
-            "Timestamp": "2017-11-09T07:16:58.072Z"
+            "baseUnit": "MetersPerSecondPerSecond",
+            "baseValue": 10,
+            "unit": "MetersPerSecondPerSecond",
+            "value": 20,
+            "timestamp": "2017-11-09T07:16:58.072Z"
             }
         """
         let jsonObject = try! JSONSerialization.jsonObject(with: jsonString.data(using: .utf8)!, options: .allowFragments)
@@ -33,10 +32,10 @@ class FuelCapacityTests: XCTestCase {
         let model = Mapper<FuelCapacity>().map(JSONObject: jsonObject)
         
         XCTAssertNotNil(model)
-        XCTAssertEqual(model?.BaseUnit, "MetersPerSecondPerSecond")
-        XCTAssertEqual(model?.BaseValue, 10)
-        XCTAssertEqual(model?.Unit, "MetersPerSecondPerSecond")
-        XCTAssertEqual(model?.Value, 20)
-        XCTAssertEqual(model?.Timestamp, "2017-11-09T07:16:58.072Z")
+        XCTAssertEqual(model?.baseUnit, "MetersPerSecondPerSecond")
+        XCTAssertEqual(model?.baseValue, 10)
+        XCTAssertEqual(model?.unit, "MetersPerSecondPerSecond")
+        XCTAssertEqual(model?.value, 20)
+        XCTAssertEqual(model?.timestamp, "2017-11-09T07:16:58.072Z")
     }
 }

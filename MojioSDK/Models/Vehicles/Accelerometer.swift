@@ -13,7 +13,7 @@
  * forbidden unless prior written permission is obtained from Moj.io Inc.
  *******************************************************************************/
 
-//import UIKit
+import Foundation
 
 public struct Accelerometer: Codable {
     

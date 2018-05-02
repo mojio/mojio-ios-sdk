@@ -14,7 +14,6 @@
  *******************************************************************************/
 
 @testable import MojioSDK
-import ObjectMapper
 import XCTest
 
 class HarshEventStateTests: XCTestCase {
@@ -22,8 +21,8 @@ class HarshEventStateTests: XCTestCase {
     func testHarshEvenStateModelShouldBeCreatedFromJsonString() {
         let jsonString = """
         {
-        "Timestamp": "2017-11-09T07:15:16.084Z",
-        "Value": true,
+        "timestamp": "2017-11-09T07:15:16.084Z",
+        "value": true,
         "EventType": "Acceleration",
         "TurnType": "Left"
         }
@@ -32,8 +31,8 @@ class HarshEventStateTests: XCTestCase {
         let model = Mapper<HarshEventState>().map(JSONObject: jsonObject)
         
         XCTAssertNotNil(model)
-        XCTAssertEqual(model?.Timestamp, "2017-11-09T07:15:16.084Z")
-        XCTAssertEqual(model?.Value, true)
+        XCTAssertEqual(model?.timestamp, "2017-11-09T07:15:16.084Z")
+        XCTAssertEqual(model?.value, true)
         XCTAssertEqual(model?.EventType, "Acceleration")
         XCTAssertEqual(model?.TurnType, "Left")
     }

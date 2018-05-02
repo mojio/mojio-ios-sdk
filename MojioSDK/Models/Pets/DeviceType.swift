@@ -14,7 +14,7 @@
  *******************************************************************************/
 
 struct DeviceType: Codable {
-    let id: String?
+    let id: String
     let make: String?
     let model: String?
     let tenantId: String?
@@ -34,7 +34,7 @@ struct DeviceType: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         do {
-            self.id = try container.decodeIfPresent(String.self, forKey: .id)
+            self.id = try container.decode(String.self, forKey: .id)
             self.make = try container.decodeIfPresent(String.self, forKey: .make)
             self.model = try container.decodeIfPresent(String.self, forKey: .model)
             self.tenantId = try container.decodeIfPresent(String.self, forKey: .tenantId)

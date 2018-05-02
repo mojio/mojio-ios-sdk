@@ -21,7 +21,7 @@ enum AssetType: String, Codable {
     case other = "Other"
 }
 
-struct Asset: Codable, Equatable {
+struct Asset: Codable, PrimaryKey {
     let id: String
     let name: String?
     let deviceId: String?

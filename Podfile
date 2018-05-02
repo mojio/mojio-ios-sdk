@@ -8,13 +8,11 @@ workspace 'MojioSDK.xcworkspace'
 def base_pods
     pod 'Alamofire'
     pod 'SwiftyJSON'
-    pod 'ObjectMapper'
     pod 'KeychainSwift'
     pod 'OHHTTPStubs'
     pod 'OHHTTPStubs/Swift'
     pod 'SwiftWebSocket', :git => 'https://github.com/mojio/SwiftWebSocket', :commit => 'd39576a'
     pod 'SwiftDate'
-    pod 'RxSwift'
 end
 
 target 'Accounts' do

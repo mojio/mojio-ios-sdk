@@ -79,10 +79,8 @@ open class WSAccountsClient: AccountsClient {
         webSocket.onMessage = { message in
             if let text = message as? String {
                 if let data = text.data(using: String.Encoding.utf8) {
-                    if let dict = try! JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions()) as? [String: Any] {
-                        if let obj = super.parseDict(dict) {
-                            next(obj as Any)
-                        }
+                    if let obj = super.parseData(data) {
+                        next(obj as Any)
                     }
                 }
             }

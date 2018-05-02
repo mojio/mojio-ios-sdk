@@ -14,7 +14,6 @@
  *******************************************************************************/
 
 @testable import MojioSDK
-import ObjectMapper
 import XCTest
 
 class ServiceIntervalTests: XCTestCase {
@@ -24,7 +23,7 @@ class ServiceIntervalTests: XCTestCase {
         "OperatingParameter": "string",
         "OperatingParameterNotes": "string",
         "IntervalType": "string",
-        "Value": 0,
+        "value": 0,
         "Units": "string",
         "InitialValue": 0
         }
@@ -36,8 +35,8 @@ class ServiceIntervalTests: XCTestCase {
         XCTAssertEqual(model?.OperatingParameter, "string")
         XCTAssertEqual(model?.OperatingParameterNotes, "string")
         XCTAssertEqual(model?.IntervalType, "string")
-        XCTAssertEqual(model?.Value, 0)
-        XCTAssertEqual(model?.Units, "string")
+        XCTAssertEqual(model?.value, 0)
+        XCTAssertEqual(model?.units, "string")
         XCTAssertEqual(model?.InitialValue, 0)
     }
 }

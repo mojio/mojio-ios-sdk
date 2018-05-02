@@ -13,7 +13,6 @@
  * forbidden unless prior written permission is obtained from Moj.io Inc.
  *******************************************************************************/
 
-//import UIKit
 import Foundation
 
 public enum HeadingUnit: String {
@@ -23,11 +22,11 @@ public enum HeadingUnit: String {
 public struct Heading: DeviceMeasurement {
     
     // DeviceMeasurement
-    public var BaseUnit: String? = nil
-    public var BaseValue: Double = 0
-    public var Unit: String? = nil
-    public var Value: Double = 0
-    public var Timestamp: String?  = nil
+    public var baseUnit: String? = nil
+    public var baseValue: Double = 0
+    public var unit: String? = nil
+    public var value: Double = 0
+    public var timestamp: Date?  = nil
     
     //public var timeStamp: Date? = nil
     
@@ -44,7 +43,7 @@ extension Heading {
 
     public var baseHeadingUnit: HeadingUnit? {
         
-        if let unit = self.BaseUnit {
+        if let unit = self.baseUnit {
             return HeadingUnit(rawValue: unit)
         }
         
@@ -53,7 +52,7 @@ extension Heading {
     
     public var headingUnit: HeadingUnit? {
         
-        if let unit = self.Unit {
+        if let unit = self.unit {
             return HeadingUnit(rawValue: unit)
         }
         
@@ -71,7 +70,7 @@ extension Heading  {
         
         let LeftTurn = try container.decodeIfPresent(Bool.self, forKey: .LeftTurn) ?? false
         
-        self.init(BaseUnit: deviceMeasurements.BaseUnit, BaseValue: deviceMeasurements.BaseValue, Unit: deviceMeasurements.Unit, Value: deviceMeasurements.Value, Timestamp: deviceMeasurements.Timestamp, Direction: Direction, LeftTurn: LeftTurn)
+        self.init(baseUnit: deviceMeasurements.baseUnit, baseValue: deviceMeasurements.baseValue, unit: deviceMeasurements.unit, value: deviceMeasurements.value, timestamp: deviceMeasurements.timestamp, Direction: Direction, LeftTurn: LeftTurn)
     }
     
     public func encode(with encoder: Encoder) throws {

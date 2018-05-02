@@ -14,7 +14,6 @@
  *******************************************************************************/
 
 @testable import MojioSDK
-import ObjectMapper
 import XCTest
 
 class TimePeriodTests: XCTestCase {
@@ -23,11 +22,11 @@ class TimePeriodTests: XCTestCase {
         let model = Mapper<TimePeriod>().map(JSONObject: jsonObject)
         
         XCTAssertNotNil(model)
-        XCTAssertEqual(model?.BaseUnit, "MetersPerSecondPerSecond")
-        XCTAssertEqual(model?.BaseValue, 10)
-        XCTAssertEqual(model?.Unit, "MetersPerSecondPerSecond")
-        XCTAssertEqual(model?.Value, 20)
-        XCTAssertEqual(model?.Timestamp, "2017-11-09T07:16:58.072Z")
+        XCTAssertEqual(model?.baseUnit, "MetersPerSecondPerSecond")
+        XCTAssertEqual(model?.baseValue, 10)
+        XCTAssertEqual(model?.unit, "MetersPerSecondPerSecond")
+        XCTAssertEqual(model?.value, 20)
+        XCTAssertEqual(model?.timestamp, "2017-11-09T07:16:58.072Z")
     }
 }
 
@@ -35,11 +34,11 @@ extension TimePeriodTests {
     var jsonString: String {
         return """
         {
-        "BaseUnit": "MetersPerSecondPerSecond",
-        "Timestamp": "2017-11-09T07:16:58.072Z",
-        "BaseValue": 10,
-        "Unit": "MetersPerSecondPerSecond",
-        "Value": 20
+        "baseUnit": "MetersPerSecondPerSecond",
+        "timestamp": "2017-11-09T07:16:58.072Z",
+        "baseValue": 10,
+        "unit": "MetersPerSecondPerSecond",
+        "value": 20
         }
         """
     }

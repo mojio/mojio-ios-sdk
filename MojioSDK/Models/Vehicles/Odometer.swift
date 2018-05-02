@@ -13,17 +13,17 @@
  * forbidden unless prior written permission is obtained from Moj.io Inc.
  *******************************************************************************/
 
-//import UIKit
+import Foundation
 
 // Units in DistanceUnits
 public struct Odometer: DeviceMeasurement {
     
     // DeviceMeasurement
-    public var BaseUnit: String? = nil
-    public var BaseValue: Double = 0
-    public var Unit: String? = nil
-    public var Value: Double = 0
-    public var Timestamp: String?  = nil
+    public var baseUnit: String? = nil
+    public var baseValue: Double = 0
+    public var unit: String? = nil
+    public var value: Double = 0
+    public var timestamp: Date?  = nil
     
     //public var timeStamp: Date? = nil
     
@@ -33,11 +33,11 @@ public struct Odometer: DeviceMeasurement {
 //
 //        var dictionary = [String: Any]()
 //
-//        if let unit = self.Unit {
+//        if let unit = self.unit {
 //            dictionary["Unit"] = unit
 //        }
 //
-//        dictionary["Value"] = self.Value
+//        dictionary["Value"] = self.value
 //
 //        return dictionary
 //    }
@@ -55,7 +55,7 @@ extension Odometer {
         
         let RolloverValue = try container.decodeIfPresent(Double.self, forKey: .RolloverValue) ?? 0.0
         
-        self.init(BaseUnit: deviceMeasurements.BaseUnit, BaseValue: deviceMeasurements.BaseValue, Unit: deviceMeasurements.Unit, Value: deviceMeasurements.Value, Timestamp: deviceMeasurements.Timestamp, RolloverValue: RolloverValue)
+        self.init(baseUnit: deviceMeasurements.baseUnit, baseValue: deviceMeasurements.baseValue, unit: deviceMeasurements.unit, value: deviceMeasurements.value, timestamp: deviceMeasurements.timestamp, RolloverValue: RolloverValue)
     }
     
     public func encode(with encoder: Encoder) throws {

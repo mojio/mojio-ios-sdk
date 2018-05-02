@@ -14,7 +14,6 @@
  *******************************************************************************/
 
 @testable import MojioSDK
-import ObjectMapper
 import XCTest
 
 class VinTests: XCTestCase {
@@ -25,7 +24,7 @@ class VinTests: XCTestCase {
         
         XCTAssertNotNil(model)
         XCTAssertEqual(model?.VIN, "string")
-        XCTAssertEqual(model?.Timestamp, "2017-11-10T07:07:45.359Z")
+        XCTAssertEqual(model?.timestamp, "2017-11-10T07:07:45.359Z")
         XCTAssertEqual(model?.Market, "string")
         XCTAssertEqual(model?.Year, 0)
         XCTAssertEqual(model?.Make, "string")
@@ -48,7 +47,7 @@ extension VinTests {
         return """
         {
         "VIN": "string",
-        "Timestamp": "2017-11-10T07:07:45.359Z",
+        "timestamp": "2017-11-10T07:07:45.359Z",
         "Market": "string",
         "Year": 0,
         "Make": "string",

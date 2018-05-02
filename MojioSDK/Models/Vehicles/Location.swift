@@ -65,61 +65,31 @@ public enum LocationStatus: String {
 
 public struct Location: Codable {
     
-    public var LocationAddress: Address? = nil
-    public var Timestamp: String? = nil
-    public var Lat: Double = 0
-    public var Lng: Double = 0
-    public var Radius: Double = 0
+    public let locationAddress: Address?
+    public let timestamp: Date?
+    public let lat: Double
+    public let lng: Double
+    public let radius: Double
     
     // LocationStatus
-    public var Status: String? = nil
-    public var Dilution: Double = 0
-    public var Altitude: Double = 0
-    public var GeoHash: String? = nil
+    public let status: String?
+    public let dilution: Double
+    public let altitude: Double
+    public let geoHash: String?
     
     // Heading
-    public var LocationHeading: Heading? = nil
+    public let locationHeading: Heading? = nil
     
-    // Date Values
-    //public var timestamp: Date? = nil
-    
-    private enum CodingKeys: String, CodingKey {
-        case LocationAddress = "Address"
-        case Timestamp
-        case Lat
-        case Lng
-        case Status
-        case Dilution
-        case Altitude
-        case GeoHash
-        case LocationHeading = "Heading"
+    public enum CodingKeys: String, CodingKey {
+        case locationAddress = "Address"
+        case timestamp = "Timestamp"
+        case lat = "Lat"
+        case lng = "Lng"
+        case radius = "Radius"
+        case status = "Status"
+        case dilution = "Dilution"
+        case altitude = "Altitude"
+        case geoHash = "GeoHash"
+        case locationHeading = "Heading"
     }
 }
-
-extension Location {
-    
-    public var timestamp: Date? {
-        return self.Timestamp?.toDate
-    }
-}
-
-//public init() {}
-
-//public init?(map: Map) {
-//    self.init()
-//}
-//
-//public mutating func mapping(map: Map) {
-//    LocationAddress <- map["Address"]
-//    Timestamp <- map["Timestamp"]
-//    Lat <- map["Lat"]
-//    Lng <- map["Lng"]
-//    Status <- map["Status"]
-//    Dilution <- map["Dilution"]
-//    Altitude <- map["Altitude"]
-//    GeoHash <- map["GeoHash"]
-//    LocationHeading <- map["Heading"]
-//
-//    // Date Values
-//    timestamp = self.Timestamp?.toDate
-//}

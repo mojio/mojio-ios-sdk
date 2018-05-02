@@ -16,7 +16,7 @@
 import Foundation
 
 // Risk Severity
-public enum RiskSeverity: String {
+public enum RiskSeverity: String, Codable {
     case unknown = "Unknown"
     case low = "Low"
     case medium = "Medium"
@@ -25,7 +25,7 @@ public enum RiskSeverity: String {
 }
 
 // Distance
-public enum DistanceUnit: String {
+public enum DistanceUnit: String, Codable {
     case meters = "Meters"
     case miles = "Miles"
     case kilometers = "Kilometers"
@@ -35,7 +35,7 @@ public enum DistanceUnit: String {
 }
 
 // Time
-public enum TimePeriodUnit: String {
+public enum TimePeriodUnit: String, Codable {
     case ticks = "Ticks"
     case milliseconds = "Milliseconds"
     case seconds = "Seconds"
@@ -48,30 +48,30 @@ public enum TimePeriodUnit: String {
 }
 
 // Speed
-public enum SpeedUnit: String {
+public enum SpeedUnit: String, Codable {
     case kilometersPerHour = "KilometersPerHour"
     case milesPerHour = "MilesPerHour"
 }
 
 // Acceleration
-public enum AccelerationUnit: String {
+public enum AccelerationUnit: String, Codable {
     case metersPerSecondPerSecond = "MetersPerSecondPerSecond"
     case kilometersPerHourPerSecond  = "KilometersPerHourPerSecond"
     case milesPerHourPerSecond = "MilesPerHourPerSecond"
 }
 
 // Percent
-public enum PercentageUnit: String {
+public enum PercentageUnit: String, Codable {
     case percentage = "Percentage"
 }
 
 // RPM
-public enum RPMUnit: String {
+public enum RPMUnit: String, Codable {
     case revolutionsPerMinute = "RevolutionsPerMinute"
 }
 
 // Accelerometer
-public enum AccelerometerUnit: String  {
+public enum AccelerometerUnit: String, Codable  {
     case milliGUnits = "MilliGUnits"
     case newtonsPerKilogram = "NewtonsPerKilogram"
     case xirgoUnit = "XirgoUnit"
@@ -81,31 +81,31 @@ public enum AccelerometerUnit: String  {
 }
 
 // Battery
-public enum BatteryVoltageUnit: String {
+public enum BatteryVoltageUnit: String, Codable {
     case milliVolts = "MilliVolts"
     case volts = "Volts"
 }
 
 // Fuel
-public enum FuelType: String {
+public enum FuelType: String, Codable {
     case query = "Query"
     case gasoline = "Gasoline"
     case diesel = "Diesel"
     case electric = "Electric"
 }
 
-public enum FuelCapacityUnit: String {
+public enum FuelCapacityUnit: String, Codable {
     case gallons = "Gallons"
     case liters = "Liters"
 }
 
-public enum FuelEfficiencyUnit: String {
+public enum FuelEfficiencyUnit: String, Codable {
     case milesPerGallon = "MilesPerGallon"
     case kilometerPerLiter = "KilometerPerLiter"
     case litersPerHundredKilometers = "LitersPerHundredKilometers"
 }
 
-public enum FuelEfficiencyCalculationMethod: String {
+public enum FuelEfficiencyCalculationMethod: String, Codable {
     case query = "Query"
     case engineFuelRate = "EngineFuelRate"
     case massAirFlow = "MassAirFlow"
@@ -113,7 +113,7 @@ public enum FuelEfficiencyCalculationMethod: String {
     case none = "None"
 }
 
-public enum FuelVolumeUnit: String {
+public enum FuelVolumeUnit: String, Codable {
     case gallon = "Gallon"
     case liter = "Liter"
     case gill = "Gill"

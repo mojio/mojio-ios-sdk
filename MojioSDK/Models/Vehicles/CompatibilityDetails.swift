@@ -13,10 +13,9 @@
  * forbidden unless prior written permission is obtained from Moj.io Inc.
  *******************************************************************************/
 
-//import UIKit
-//import ObjectMapper
+import Foundation
 
-public enum VehicleCompatibilityLevel: String {
+public enum VehicleCompatibilityLevel: String, Codable {
     case full = "Full"
     case partial = "Partial"
     case minimum = "Minimum"
@@ -26,29 +25,7 @@ public enum VehicleCompatibilityLevel: String {
 
 public struct CompatibilityDetails: Codable {
     
-    public var Level: String? = nil
-    public var Changed: Bool = false
-    public var LastChecked: String? = nil
+    public let level: String?
+    public let changed: Bool
+    public let lastChecked: String?
 }
-
-
-//public init() {}
-
-//public struct CompatibilityDetails: Mappable {
-//
-//    public var Level: String? = nil
-//    public var Changed: Bool = false
-//    public var LastChecked: String? = nil
-//
-//    public init() {}
-//
-//    public init?(map: Map) {
-//        self.init()
-//    }
-//
-//    public mutating func mapping(map: Map) {
-//        Level <- map["Level"]
-//        Changed <- map["Changed"]
-//        LastChecked <- map["LastChecked"]
-//    }
-//}

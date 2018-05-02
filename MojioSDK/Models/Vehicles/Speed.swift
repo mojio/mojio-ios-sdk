@@ -13,28 +13,28 @@
  * forbidden unless prior written permission is obtained from Moj.io Inc.
  *******************************************************************************/
 
-//import UIKit
+import Foundation
 
 // Units in SpeedUnits
 public struct Speed: DeviceMeasurement {
     
     // DeviceMeasurement
-    public var BaseUnit: String? = nil
-    public var BaseValue: Double = 0
-    public var Unit: String? = nil
-    public var Value: Double = 0
-    public var Timestamp: String?  = nil
+    public var baseUnit: String? = nil
+    public var baseValue: Double = 0
+    public var unit: String? = nil
+    public var value: Double = 0
+    public var timestamp: Date?  = nil
     
     //public var timeStamp: Date? = nil
     
 //    public func jsonDict () -> [String: Any] {
 //        var map: [String: Any] = [:]
 //        
-//        if let unit  = self.Unit {
+//        if let unit  = self.unit {
 //            map["Unit"] = unit
 //        }
 //        
-//        map["Value"] = self.Value
+//        map["Value"] = self.value
 //        
 //        return map
 //    }
@@ -44,7 +44,7 @@ extension Speed {
     
     public init(from decoder: Decoder, with deviceMeasurements: DeviceMeasurements) throws {
         
-        self.init(BaseUnit: deviceMeasurements.BaseUnit, BaseValue: deviceMeasurements.BaseValue, Unit: deviceMeasurements.Unit, Value: deviceMeasurements.Value, Timestamp: deviceMeasurements.Timestamp)
+        self.init(baseUnit: deviceMeasurements.baseUnit, baseValue: deviceMeasurements.baseValue, unit: deviceMeasurements.unit, value: deviceMeasurements.value, timestamp: deviceMeasurements.timestamp)
     }
     
     public func encode(with encoder: Encoder) throws {

@@ -14,7 +14,6 @@
  *******************************************************************************/
 
 @testable import MojioSDK
-import ObjectMapper
 import XCTest
 
 class NotificationsSettingsTests: XCTestCase {
@@ -55,11 +54,11 @@ extension NotificationsSettingsTests {
             "EnableLowBatteryActivity": true,
             "EnableSpeedActivity": true,
             "SpeedThreshold": {
-                "BaseUnit": "KilometersPerHour",
-                "Timestamp": "2017-11-10T07:07:44.892Z",
-                "BaseValue": 0,
-                "Unit": "KilometersPerHour",
-                "Value": 0
+                "baseUnit": "KilometersPerHour",
+                "timestamp": "2017-11-10T07:07:44.892Z",
+                "baseValue": 0,
+                "unit": "KilometersPerHour",
+                "value": 0
             },
             "EnableDtcActivity": true,
             "EnableCheckEngineActivity": true,

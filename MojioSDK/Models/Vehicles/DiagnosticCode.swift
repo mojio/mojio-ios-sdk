@@ -13,65 +13,36 @@
  * forbidden unless prior written permission is obtained from Moj.io Inc.
  *******************************************************************************/
 
-//import UIKit
 import Foundation
 
 public struct DiagnosticCode: Codable {
     
-    public var Ignored: Bool = false
-    public var Code: String? = nil
-    public var Description: String? = nil
-    public var Timestamp: String? = nil
+    public var ignored: Bool = false
+    public var code: String? = nil
+    public var description: String? = nil
+    public var timestamp: Date? = nil
     
     // RiskSeverity
-    public var Severity: String? = nil
-    public var Instructions: String? = nil
+    public var severity: String? = nil
+    public var instructions: String? = nil
     
     // Type
-    public var StateType: String? = nil
-    public var DiagnosticCodeType: String? = nil
-    
-    //public var timeStamp: Date? = nil
-    
+    public var stateType: String? = nil
+    public var diagnosticCodeType: String? = nil
+
     private enum CodingKeys: String, CodingKey {
-        case Ignored
-        case Code
-        case Description
-        case Timestamp
-        case Severity
-        case Instructions
-        case StateType
-        case DiagnosticCodeType = "Type"
+        case ignored = "Ignored"
+        case code = "Code"
+        case description = "Description"
+        case timestamp = "Timestamp"
+        case severity = "Severity"
+        case instructions = "Instructions"
+        case stateType = "StateType"
+        case diagnosticCodeType = "Type"
     }
     
 //    public func jsonIgnoredDict () -> [String: Any] {
 //        return ["Ignored": self.Ignored]
 //    }
+
 }
-
-extension DiagnosticCode {
-    
-    public var timeStamp: Date? {
-        
-        return self.Timestamp?.toDate
-    }
-}
-
-//public init() {}
-
-//public init?(map: Map) {
-//    self.init()
-//}
-//
-//public mutating func mapping(map: Map) {
-//    Ignored <- map["Ignored"]
-//    Code <- map["Code"]
-//    Description <- map["Description"]
-//    Timestamp <- map["Timestamp"]
-//    Severity <- map["Severity"]
-//    Instructions <- map["Instructions"]
-//    StateType <- map["StateType"]
-//    DiagnosticCodeType <- map["Type"]
-//
-//    timeStamp = self.Timestamp?.toDate
-//}

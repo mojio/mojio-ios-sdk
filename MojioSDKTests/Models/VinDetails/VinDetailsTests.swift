@@ -14,7 +14,6 @@
  *******************************************************************************/
 
 @testable import MojioSDK
-import ObjectMapper
 import XCTest
 
 class VinDetailsTests: XCTestCase {
@@ -23,7 +22,7 @@ class VinDetailsTests: XCTestCase {
         let model = Mapper<VinDetails>().map(JSONObject: jsonObject)
         
         XCTAssertNotNil(model)
-        XCTAssertEqual(model?.Timestamp, "2017-11-10T07:07:44.035Z")
+        XCTAssertEqual(model?.timestamp, "2017-11-10T07:07:44.035Z")
         XCTAssertEqual(model?.Vin, "string")
         XCTAssertEqual(model?.Year, 0)
         XCTAssertEqual(model?.Make, "string")
@@ -45,7 +44,7 @@ extension VinDetailsTests {
     var jsonString: String {
         return """
         {
-        "Timestamp": "2017-11-10T07:07:44.035Z",
+        "timestamp": "2017-11-10T07:07:44.035Z",
         "Vin": "string",
         "Year": 0,
         "Make": "string",
@@ -53,11 +52,11 @@ extension VinDetailsTests {
         "Engine": "string",
         "Cylinders": 0,
         "TotalFuelCapacity": {
-        "BaseUnit": "Gallons",
-        "Timestamp": "2017-11-10T07:07:44.035Z",
-        "BaseValue": 0,
-        "Unit": "Gallons",
-        "Value": 0
+        "baseUnit": "Gallons",
+        "timestamp": "2017-11-10T07:07:44.035Z",
+        "baseValue": 0,
+        "unit": "Gallons",
+        "value": 0
         },
         "FuelType": "string",
         "CityFuelEfficiency": 0,

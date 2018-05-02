@@ -13,10 +13,9 @@
  * forbidden unless prior written permission is obtained from Moj.io Inc.
  *******************************************************************************/
 
-import UIKit
+import Foundation
 import Alamofire
 import SwiftyJSON
-//import ObjectMapper
 import KeychainSwift
 
 public enum VehiclesEndpoint: String {
@@ -291,7 +290,7 @@ open class VehiclesClient: RestClient {
                 return try JSONDecoder().decode(VehicleStatistics.self, from: responseData)
             
             case .polyline:
-                return try JSONDecoder().decode(TripPolyline.self, from: responseData)
+                return try JSONDecoder().decode(Polyline.self, from: responseData)
             
             case .diagnosticCodes:
                 do {
@@ -301,20 +300,22 @@ open class VehiclesClient: RestClient {
                     return try JSONDecoder().decode(DiagnosticCode.self, from: responseData)
                 }
 
-//            case .activities:  // conformance to be implemented
-//                do {
-//                    return try JSONDecoder().decode(ResponseArray<RootActivity>.self, from: responseData)
-//                }
-//                catch {
-//                    return try JSONDecoder().decode(RootActivity.self, from: responseData)
-//                }
-//            case .wifiRadio:   // ???
-//                // Returns Transaction Id
-//                return dict["TransactionId"]
-//
-//            case .transactions: // ???
-//                // Returns Transaction State
-//                return dict["State"]
+            case .activities:  // conformance to be implemented
+                do {
+                    return try JSONDecoder().decode(ResponseArray<RootActivity>.self, from: responseData)
+                }
+                catch {
+                    return try JSONDecoder().decode(RootActivity.self, from: responseData)
+                }
+            case .wifiRadio:
+                // Returns Transaction Id
+                let response = try JSONDecoder().decode([String: String].self, from: responseData)
+                return response["TransactionId"]
+
+            case .transactions:
+                // Returns Transaction State
+                let response = try JSONDecoder().decode([String: String].self, from: responseData)
+                return response["State"]
             
             default:
                 return nil
@@ -325,65 +326,4 @@ open class VehiclesClient: RestClient {
             return nil
         }
     }
-    
-//    internal override func parseDict(_ dict: [String: Any]) -> Any? {
-//        switch VehiclesEndpoint(rawValue: self.requestEntity) ?? .base {
-//
-//        case .locations:
-//            return Mapper<Location>().map(JSON: dict)
-//
-//        case .mojios:
-//            return Mapper<Mojio>().map(JSON: dict)
-//
-//        case .trips:
-//            return Mapper<Trip>().map(JSON: dict)
-//
-//        case .vehicles:
-//            return Mapper<Vehicle>().map(JSON: dict)
-//
-//        case .address:
-//            return Mapper<Address>().map(JSON: dict)
-//
-//        case .vin:
-//            return Mapper<Vin>().map(JSON: dict)
-//
-//        case .serviceSchedule:
-//            return Mapper<ServiceSchedule>().map(JSON: dict)
-//
-//        case .next:
-//            return Mapper<NextServiceSchedule>().map(JSON: dict)
-//
-//        case .activities:
-//            return Mapper<RootActivity>().map(JSON: dict)
-//
-//        case .notificationSettings:
-//            return Mapper<NotificationsSettings>().map(JSON: dict)
-//
-//        case .wifiRadio:
-//            // Returns Transaction Id
-//            return dict["TransactionId"]
-//
-//        case .transactions:
-//            // Returns Transaction State
-//            return dict["State"]
-//
-//        case .geofences:
-//            return Mapper<Geofence>().map(JSON: dict)
-//
-//        case .aggregates:
-//            return Mapper<AggregationData>().map(JSON: dict)
-//
-//        case .statistics:
-//            return Mapper<VehicleStatistics>().map(JSON: dict)
-//
-//        case .polyline:
-//            return Mapper<TripPolyline>().map(JSON: dict)
-//
-//        case .diagnosticCodes:
-//            return Mapper<DiagnosticCode>().map(JSON: dict)
-//
-//        default:
-//            return super.parseDict(dict)
-//        }
-//    }
 }

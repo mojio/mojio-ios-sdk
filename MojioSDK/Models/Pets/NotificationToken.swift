@@ -17,7 +17,7 @@ import Foundation
 
 
 struct NotificationToken: Codable {
-    let id: String?
+    let id: String
     let platform: String?
     let token: String?
     
@@ -31,7 +31,7 @@ struct NotificationToken: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         do {
-            self.id = try container.decodeIfPresent(String.self, forKey: .id)
+            self.id = try container.decode(String.self, forKey: .id)
             self.platform = try container.decodeIfPresent(String.self, forKey: .platform)
             self.token = try container.decodeIfPresent(String.self, forKey: .token)
         }

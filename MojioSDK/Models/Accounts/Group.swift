@@ -14,29 +14,31 @@
  *******************************************************************************/
 
 import UIKit
-import ObjectMapper
 
-public struct Group: Mappable, PrimaryKey {
-    public var Name: String? = nil
-    public var Description: String? = nil
-    public var Users: [User] = []
-    public var Tags: [String] = []
-    public var Id: String? = nil
-    public var CreatedOn: String? = nil
-    public var LastModified: String? = nil
-    public var Deleted: Bool? = nil
-    public var OwnerId: String? = nil
-
-    public var createdOn: Date? = nil
-    public var lastModified: Date? = nil
+public struct Group: Codable, PrimaryKey {
+    public let id: String
+    public let name: String?
+    public let description: String?
+    public let users: [User]
+    public let tags: [String]
+    public let ownerId: String?
+    public let deleted: Bool?
+    public let createdOn: String?
+    public let lastModified: String?
     
-    public init() {}
-    
-    public init?(map: Map) {
-        self.init()
+    public enum CodingKeys: String, CodingKey {
+        case id = "Id"
+        case name = "Name"
+        case description = "Description"
+        case users = "Users"
+        case tags = "Tags"
+        case ownerId = "OwnerId"
+        case deleted = "Deleted"
+        case createdOn = "CreatedOn"
+        case lastModified = "LastModified"
     }
     
-    public func json () -> String? {
+    /* public func json () -> String? {
         var map: [String: Any] = [:]
         
         if let name = self.Name {
@@ -53,20 +55,5 @@ public struct Group: Mappable, PrimaryKey {
         
         let data = try! JSONSerialization.data(withJSONObject: map)
         return String(data: data, encoding: String.Encoding.utf8)
-    }
-    
-    public mutating func mapping(map: Map) {
-        Users <- map["Users"]
-        Tags <- map["Tags"]
-        Name <- map["Name"]
-        Description <- map["Description"]
-        Id <- map["Id"]
-        CreatedOn <- map["CreatedOn"]
-        LastModified <- map["LastModified"]
-        Deleted <- map["Deleted"]
-        OwnerId <- map["OwnerId"]
-        
-        createdOn = self.CreatedOn?.toDate
-        lastModified = self.LastModified?.toDate
-    }
+    } */
 }

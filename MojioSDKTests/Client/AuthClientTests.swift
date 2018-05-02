@@ -15,7 +15,6 @@
 
 @testable import MojioSDK
 import XCTest
-import ObjectMapper
 import OHHTTPStubs
 
 class AuthClientTests: XCTestCase {

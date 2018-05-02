@@ -14,7 +14,6 @@
  *******************************************************************************/
 
 @testable import MojioSDK
-import ObjectMapper
 import XCTest
 
 class DiagnosticCodeTests: XCTestCase {
@@ -24,7 +23,7 @@ class DiagnosticCodeTests: XCTestCase {
         let dict = model?.jsonIgnoredDict()
 
         XCTAssertNotNil(model)
-        XCTAssertEqual(model?.Timestamp, "2017-11-09T07:16:58.072Z")
+        XCTAssertEqual(model?.timestamp, "2017-11-09T07:16:58.072Z")
         XCTAssertEqual(model?.Code, "string")
         XCTAssertEqual(model?.Description, "string")
         XCTAssertEqual(model?.DiagnosticCodeType, "Standard")
@@ -41,7 +40,7 @@ extension DiagnosticCodeTests {
     var jsonString: String {
         return """
         {
-        "Timestamp": "2017-11-09T07:16:58.072Z",
+        "timestamp": "2017-11-09T07:16:58.072Z",
         "Code": "string",
         "Description": "string",
         "Type": "Standard",

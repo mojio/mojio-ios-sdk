@@ -30,7 +30,7 @@ struct MimeType {
 }
 
 struct Image: Codable {
-    let id: String?
+    let id: String
     let ownerId: String?
     let url: URL?
     let mimeType: MimeType.Image?
@@ -48,7 +48,7 @@ struct Image: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         do {
-            self.id = try container.decodeIfPresent(String.self, forKey: .id)
+            self.id = try container.decode(String.self, forKey: .id)
             self.ownerId = try container.decodeIfPresent(String.self, forKey: .ownerId)
             self.url = try container.decodeIfPresent(URL.self, forKey: .url)
             self.mimeType = try container.decodeIfPresent(MimeType.Image.self, forKey: .mimeType)

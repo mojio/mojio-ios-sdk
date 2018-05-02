@@ -14,7 +14,6 @@
  *******************************************************************************/
 
 @testable import MojioSDK
-import ObjectMapper
 import XCTest
 
 class GeofenceRegionTests: XCTestCase {
@@ -53,11 +52,11 @@ extension GeofenceRegionTests {
             "Lat": 24.1,
             "Lng": 51.2,
             "Radius": {
-                "BaseUnit": "Meters",
-                "Timestamp": "2017-11-09T07:16:57.840Z",
-                "BaseValue": 0,
-                "Unit": "Meters",
-                "Value": 0
+                "baseUnit": "Meters",
+                "timestamp": "2017-11-09T07:16:57.840Z",
+                "baseValue": 0,
+                "unit": "Meters",
+                "value": 0
             }
         }
         """

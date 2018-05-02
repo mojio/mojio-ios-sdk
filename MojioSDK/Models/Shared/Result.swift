@@ -15,9 +15,8 @@
 
 
 import Foundation
-import ObjectMapper
 
 public struct Result {
-    public var TotalCount: Int?
-    public var Data: [Any]?
+    public let totalCount: Int?
+    public let data: [Any]?
 }

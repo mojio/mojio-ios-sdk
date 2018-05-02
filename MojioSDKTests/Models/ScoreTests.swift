@@ -14,7 +14,6 @@
  *******************************************************************************/
 
 @testable import MojioSDK
-import ObjectMapper
 import XCTest
 
 class ScoreTests: XCTestCase {
@@ -23,7 +22,7 @@ class ScoreTests: XCTestCase {
         let jsonString = """
         {
         "ScoringMethod": "ZScore",
-        "Value": 10.0,
+        "value": 10.0,
         "Percentile": 0.5,
         "Average": 20.0
         }
@@ -33,7 +32,7 @@ class ScoreTests: XCTestCase {
         
         XCTAssertNotNil(model)
         XCTAssertEqual(model?.ScoringMethod, "ZScore")
-        XCTAssertEqual(model?.Value, 10.0)
+        XCTAssertEqual(model?.value, 10.0)
         XCTAssertEqual(model?.Percentile, 0.5)
         XCTAssertEqual(model?.Average, 20.0)
     }

@@ -13,36 +13,19 @@
  * forbidden unless prior written permission is obtained from Moj.io Inc.
  *******************************************************************************/
 
-import UIKit
+import Foundation
 
 public struct IdleState: Codable {
     
-    public var Timestamp: String? = nil
-    public var Value: Bool = false
-    public var StartTime: String? = nil
-    public var Duration: TimePeriod? = nil
+    public var timestamp: Date? = nil
+    public var value: Bool = false
+    public var startTime: String? = nil
+    public var duration: TimePeriod? = nil
     
-    //public var timestamp: Date? = nil
-}
-
-extension IdleState {
-    
-    public var timestamp: Date? {
-        return self.Timestamp?.toDate
+    public enum CodingKeys: String, CodingKey {
+        case timestamp = "Timestamp"
+        case value = "Value"
+        case startTime = "StartTime"
+        case duration = "Duration"
     }
 }
-
-//public init() {}
-//
-//public init?(map: Map) {
-//    self.init()
-//}
-//
-//public mutating func mapping(map: Map) {
-//    Timestamp <- map["Timestamp"]
-//    Value <- map["Value"]
-//    StartTime <- map["StartTime"]
-//    Duration <- map["Duration"]
-//
-//    timestamp = self.Timestamp?.toDate
-//}
