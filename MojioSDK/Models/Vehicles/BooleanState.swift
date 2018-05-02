@@ -13,26 +13,33 @@
  * forbidden unless prior written permission is obtained from Moj.io Inc.
  *******************************************************************************/
 
-import UIKit
-import ObjectMapper
+import Foundation
 
-public struct BooleanState: Mappable {
+public struct BooleanState: Codable {
     
-    public var Timestamp: String? = nil
-    public var Value: Bool = false
+    public let timestamp: Date?
+    public let value: Bool
     
-    public var timeStamp: Date? = nil
-    
-    public init() {}
-    
-    public init?(map: Map) {
-        self.init()
+    public enum CodingKeys: String, CodingKey {
+        case timestamp = "Timestamp"
+        case value = "Value"
     }
     
-    public mutating func mapping(map: Map) {
-        Timestamp <- map["Timestamp"]
-        Value <- map["Value"]
+    public init(from decoder: Decoder) throws {
         
-        timeStamp = self.Timestamp?.toDate
+        do {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            
+            self.timestamp = try container.decodeIfPresent(String.self, forKey: .timestamp).flatMap { $0.dateFromIso8601 }
+            self.value = try container.decode(Bool.self, forKey: .value)
+        }
+        catch {
+            debugPrint(error)
+            throw error
+        }
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        
     }
 }

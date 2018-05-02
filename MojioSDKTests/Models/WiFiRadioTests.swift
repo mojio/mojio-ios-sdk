@@ -14,14 +14,13 @@
  *******************************************************************************/
 
 @testable import MojioSDK
-import ObjectMapper
 import XCTest
 
 class WiFiRadioTests: XCTestCase {
     func testWiFiRadioModelShouldBeCreatedFromJsonString() {
         let jsonString = """
         {
-        "Timestamp": "2017-11-10T07:07:42.736Z",
+        "timestamp": "2017-11-10T07:07:42.736Z",
         "SSID": "string",
         "Password": "string",
         "AllowRoaming": true,
@@ -33,7 +32,7 @@ class WiFiRadioTests: XCTestCase {
         let model = Mapper<WifiRadio>().map(JSONObject: jsonObject)
         
         XCTAssertNotNil(model)
-        XCTAssertEqual(model?.Timestamp, "2017-11-10T07:07:42.736Z")
+        XCTAssertEqual(model?.timestamp, "2017-11-10T07:07:42.736Z")
         XCTAssertEqual(model?.SSID, "string")
         XCTAssertEqual(model?.Password, "string")
         XCTAssertEqual(model?.AllowRoaming, true)

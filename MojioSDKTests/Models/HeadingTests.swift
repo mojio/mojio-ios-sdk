@@ -14,20 +14,19 @@
  *******************************************************************************/
 
 @testable import MojioSDK
-import ObjectMapper
 import XCTest
 
 class HeadingTests: XCTestCase {
     func testHeadingModelShouldBeParsedFromJson() {
         let jsonString = """
         {
-        "BaseUnit": "Degree",
+        "baseUnit": "Degree",
         "Direction": "string",
         "LeftTurn": true,
-        "Timestamp": "2017-11-09T07:15:16.084Z",
-        "BaseValue": 10,
-        "Unit": "Degree",
-        "Value": 20
+        "timestamp": "2017-11-09T07:15:16.084Z",
+        "baseValue": 10,
+        "unit": "Degree",
+        "value": 20
         }
         """
         let jsonObject = try! JSONSerialization.jsonObject(with: jsonString.data(using: .utf8)!, options: .allowFragments)
@@ -36,11 +35,11 @@ class HeadingTests: XCTestCase {
         XCTAssertNotNil(model)
         XCTAssertEqual(model?.Direction, "string")
         XCTAssertEqual(model?.LeftTurn, true)
-        XCTAssertEqual(model?.BaseUnit, "Degree")
-        XCTAssertEqual(model?.Unit, "Degree")
-        XCTAssertEqual(model?.BaseValue, 10)
-        XCTAssertEqual(model?.Value, 20)
-        XCTAssertEqual(model?.Timestamp, "2017-11-09T07:15:16.084Z")
+        XCTAssertEqual(model?.baseUnit, "Degree")
+        XCTAssertEqual(model?.unit, "Degree")
+        XCTAssertEqual(model?.baseValue, 10)
+        XCTAssertEqual(model?.value, 20)
+        XCTAssertEqual(model?.timestamp, "2017-11-09T07:15:16.084Z")
         XCTAssertEqual(model?.baseHeadingUnit, .degree)
         XCTAssertEqual(model?.headingUnit, .degree)
     }

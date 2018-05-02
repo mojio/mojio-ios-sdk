@@ -6,8 +6,7 @@
 //  Copyright © 2017 Mojio. All rights reserved.
 //
 
-import UIKit
-import ObjectMapper
+import Foundation
 
 public enum HarshEventType: String {
     case acceleration = "Acceleration"
@@ -24,27 +23,17 @@ public enum HarshEventTurnType: String {
     case right = "Right"
 }
 
-public struct HarshEventState: Mappable {
+public struct HarshEventState: Codable {
     
-    public var Timestamp: String? = nil
-    public var Value: Bool = false
-    public var EventType: String? = nil
-    public var TurnType: String? = nil
+    public let timestamp: Date?
+    public let value: Bool
+    public let eventType: String?
+    public let turnType: String?
     
-    public var timestamp: Date? = nil
-    
-    public init() {}
-    
-    public init?(map: Map) {
-        self.init()
-    }
-    
-    public mutating func mapping(map: Map) {
-        Timestamp <- map["Timestamp"]
-        Value <- map["Value"]
-        EventType <- map["EventType"]
-        TurnType <- map["TurnType"]
-        
-        timestamp = self.Timestamp?.toDate
+    public enum CodingKeys: String, CodingKey {
+        case timestamp = "Timestamp"
+        case value = "Value"
+        case eventType = "EventType"
+        case turnType = "TurnType"
     }
 }

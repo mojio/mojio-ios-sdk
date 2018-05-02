@@ -14,7 +14,6 @@
  *******************************************************************************/
 
 import XCTest
-import ObjectMapper
 import OHHTTPStubs
 
 @testable import MojioSDK

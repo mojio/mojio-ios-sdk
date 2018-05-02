@@ -14,7 +14,6 @@
  *******************************************************************************/
 
 @testable import MojioSDK
-import ObjectMapper
 import XCTest
 
 class AggregationDataTests: XCTestCase {
@@ -27,7 +26,7 @@ class AggregationDataTests: XCTestCase {
         XCTAssertEqual(model?.Average, 15)
         XCTAssertEqual(model?.Max, 21)
         XCTAssertEqual(model?.Min, 1)
-        XCTAssertEqual(model?.Units, "MetersPerSecondPerSecond")
+        XCTAssertEqual(model?.units, "MetersPerSecondPerSecond")
         XCTAssertEqual(model?.Date, "2017-11-09T07:16:58.072Z")
         XCTAssertEqual(model?.EndDate, "2017-11-09T07:16:58.072Z")
         XCTAssertEqual(model?.Count, 31)

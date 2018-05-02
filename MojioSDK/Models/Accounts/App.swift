@@ -13,69 +13,83 @@
  * forbidden unless prior written permission is obtained from Moj.io Inc.
  *******************************************************************************/
 
-import UIKit
-import ObjectMapper
+import Foundation
 
-public struct App: Mappable, PrimaryKey {
+public struct App: Codable, PrimaryKey {
     
-    public var Name: String? = nil
-    public var Description: String? = nil
-    public var Downloads: Int? = nil
-    public var RedirectUris: [String] = []
-    public var Tags: [String] = []
-    public var Id: String? = nil
-    public var CreatedOn: String? = nil
-    public var LastModified: String? = nil
-    public var OwnerId: String? = nil
-    public var Deleted: Bool? = nil
-    public var Image: Image? = nil
+    public let id: String
+    public let name: String?
+    public let description: String?
+    public let downloads: Int?
+    public let redirectUris: [String]
+    public let tags: [String]
+    public let ownerId: String?
+    public let deleted: Bool?
+    public let image: Image?
+    public let createdOn: Date?
+    public let lastModified: Date?
     
-    public var createdOn: Date? = nil
-    public var lastModified: Date? = nil
-    
-    public init() {}
-    
-    public init?(map: Map) {
-        self.init()
+    public enum CodingKeys: String, CodingKey {
+        case id = "Id"
+        case name = "Name"
+        case description = "Description"
+        case downloads = "Downloads"
+        case redirectUris = "RedirectUris"
+        case tags = "Tags"
+        case ownerId = "OwnerId"
+        case deleted = "Deleted"
+        case image = "Image"
+        case createdOn = "CreatedOn"
+        case lastModified = "LastModified"
     }
     
-    public func json () -> String? {
-        var map: [String: Any] = [:]
-        
-        if let name = self.Name {
-            map["Name"] = name
+    public init(from decoder: Decoder) throws {
+        do {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            
+            self.id = try container.decode(String.self, forKey: .id)
+            self.name = try container.decodeIfPresent(String.self, forKey: .name)
+            self.description = try container.decodeIfPresent(String.self, forKey: .description)
+            self.downloads = try container.decodeIfPresent(Int.self, forKey: .downloads)
+            self.redirectUris = try container.decodeIfPresent([String].self, forKey: .redirectUris) ?? []
+            self.tags = try container.decodeIfPresent([String].self, forKey: .tags) ?? []
+            self.ownerId = try container.decodeIfPresent(String.self, forKey: .ownerId)
+            self.deleted = try container.decodeIfPresent(Bool.self, forKey: .deleted)
+            self.image = try container.decodeIfPresent(Image.self, forKey: .image)
+            self.createdOn = try container.decodeIfPresent(String.self, forKey: .createdOn).flatMap { $0.dateFromIso8601 }
+            self.lastModified = try container.decodeIfPresent(String.self, forKey: .lastModified).flatMap { $0.dateFromIso8601 }
         }
-
-        if let desc = self.Description {
-            map["Description"] = desc
+        catch {
+            debugPrint(error)
+            throw error
         }
-
-        if self.RedirectUris.count > 0 {
-            map["RedirectUris"] = self.RedirectUris
-        }
-        
-        if map.count == 0 {
-            return nil
-        }
-        
-        let data = try! JSONSerialization.data(withJSONObject: map)
-        return String(data: data, encoding: String.Encoding.utf8)
     }
     
-    public mutating func mapping(map: Map) {        
-        Name <- map["Name"]
-        Description <- map["Description"]
-        Downloads <- map["Downloads"]
-        RedirectUris <- map["RedirectUris"]
-        Tags <- map["Tags"]
-        Id <- map["Id"]
-        CreatedOn <- map["CreatedOn"]
-        LastModified <- map["LastModified"]
-        OwnerId <- map["OwnerId"]
-        Deleted <- map["Deleted"]
-        Image <- map["Image"]
+    public func encode(to encoder: Encoder) throws {
         
-        createdOn = self.CreatedOn?.toDate
-        lastModified = self.LastModified?.toDate
     }
 }
+
+//public func json () -> String? {
+//    var map: [String: Any] = [:]
+//
+//    if let name = self.Name {
+//        map["Name"] = name
+//    }
+//
+//    if let desc = self.Description {
+//        map["Description"] = desc
+//    }
+//
+//    if self.RedirectUris.count > 0 {
+//        map["RedirectUris"] = self.RedirectUris
+//    }
+//
+//    if map.count == 0 {
+//        return nil
+//    }
+//
+//    let data = try! JSONSerialization.data(withJSONObject: map)
+//    return String(data: data, encoding: String.Encoding.utf8)
+//}
+//

@@ -14,40 +14,76 @@
  *******************************************************************************/
 
 import Foundation
-import ObjectMapper
 
-public struct Activity: BaseActivity {
+public class Activity: BaseActivity {
+    public typealias T = Activity
     
     // BaseActivityLocation
-    public var Id: String? = nil
-    public var ActivityType: String? = nil
-    public var Href: String? = nil
-    public var Name: String? = nil
-    public var NameMap: Dictionary<String, String>? = nil
+    public let id: String
+    public let activityType: ActivityType?
+    public let href: String?
+    public let name: String?
+    public let nameMap: Dictionary<String, String>?
 
     // BaseActivity
-    public var StartTime: String? = nil
-    public var EndTime: String? = nil
-    public var Duration: String? = nil
-    public var Published: String? = nil
-    public var Updated: String? = nil
+    public let startTime: Date?
+    public let endTime: Date?
+    public let duration: TimeInterval?
+    public let published: Date?
+    public let updated: Date?
     
-    public var Context: String? = nil
+    public let context: String?
     
-    public var Content: String? = nil
-    public var Location: ActivityLocation? = nil
-    public var AttributedTo: BaseActivity? = nil
-    public var Summary: Dictionary<String, String>? = nil
-    public var Icon: Dictionary<String, Any>? = nil
+    public let content: String?
+    public let location: ActivityLocation?
+    public let attributedTo: Activity?
+    public let summary: Dictionary<String, String>?
+    public let icon: Dictionary<String, String>?
     
-    public var startTime: Date? = nil
-    public var endTime: Date? = nil
-    public var published: Date? = nil
-    public var updated: Date? = nil
+    public required init(from decoder: Decoder) throws {
+        
+        // BaseActivityLocation
+        let locationContainer = try decoder.container(keyedBy: BaseActivityLocationCodingKeys.self)
+        
+        do {
+            self.id = try locationContainer.decode(String.self, forKey: .id)
+            self.activityType = try locationContainer.decodeIfPresent(ActivityType.self, forKey: .activityType)
+            self.href = try locationContainer.decodeIfPresent(String.self, forKey: .href)
+            self.name = try locationContainer.decodeIfPresent(String.self, forKey: .name)
+            self.nameMap = try locationContainer.decodeIfPresent(Dictionary<String, String>.self, forKey: .nameMap)
+        }
+        catch {
+            debugPrint(error)
+            throw error
+        }
+        
+        // BaseActivity
+        let activityContainer = try decoder.container(keyedBy: BaseActivityCodingKeys.self)
+        
+        do {
+            self.startTime = try activityContainer.decodeIfPresent(String.self, forKey: .startTime).flatMap { $0.dateFromIso8601 }
+            self.endTime = try activityContainer.decodeIfPresent(String.self, forKey: .endTime).flatMap { $0.dateFromIso8601 }
+            self.duration = try activityContainer.decodeIfPresent(TimeInterval.self, forKey: .duration)
+            self.published = try activityContainer.decodeIfPresent(String.self, forKey: .published).flatMap { $0.dateFromIso8601 }
+            self.updated = try activityContainer.decodeIfPresent(String.self, forKey: .updated).flatMap { $0.dateFromIso8601 }
+            self.context = try activityContainer.decodeIfPresent(String.self, forKey: .context)
+            self.content = try activityContainer.decodeIfPresent(String.self, forKey: .content)
+            
+            self.location = try activityContainer.decodeIfPresent(ActivityLocation.self, forKey: .location)
+            
+            self.attributedTo = try activityContainer.decodeIfPresent(Activity.self, forKey: .attributedTo)
+            
+            self.summary = try activityContainer.decodeIfPresent(Dictionary<String, String>.self, forKey: .summary)
+            
+            self.icon = try activityContainer.decodeIfPresent(Dictionary<String, String>.self, forKey: .icon)
+        }
+        catch {
+            debugPrint(error)
+            throw error
+        }
+    }
     
-    public init() {}
-    
-    public init?(map: Map) {
-        self.init()
+    public func encode(to encoder: Encoder) throws {
+        
     }
 }

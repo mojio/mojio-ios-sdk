@@ -14,21 +14,20 @@
  *******************************************************************************/
 
 import Foundation
-import ObjectMapper
 
-public struct User: Codable, Equatable, Mappable {
+public struct User: Codable, PrimaryKey {
     
-    private(set) var id: String = String.empty
-    private(set) var firstName: String? = nil
-    private(set) var lastName: String? = nil
-    private(set) var userName: String? = nil
-    private(set) var jurisdiction: String? = nil
-    private(set) var emails: [Email]? = nil
-    private(set) var phoneNumbers: [PhoneNumber]? = nil
-    private(set) var tags: [String]? = nil
-    private(set) var defaultLanguage: String? = nil
-    private(set) var createdOn: Date? = nil
-    private(set) var lastModified: Date? = nil
+    public let id: String
+    public let firstName: String?
+    public let lastName: String?
+    public let userName: String?
+    public let jurisdiction: String?
+    public let emails: [Email]?
+    public let phoneNumbers: [PhoneNumber]?
+    public let tags: [String]?
+    public let defaultLanguage: String?
+    public let createdOn: Date?
+    public let lastModified: Date?
     
     public enum CodingKeys: String, CodingKey {
         case id = "Id"
@@ -43,8 +42,6 @@ public struct User: Codable, Equatable, Mappable {
         case createdOn = "CreatedOn"
         case lastModified = "LastModified"
     }
-    
-    public init?(map: Map) {}
     
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -68,26 +65,6 @@ public struct User: Codable, Equatable, Mappable {
             throw error
         }
     }
-    
-    public mutating func mapping(map: Map) {
-        self.firstName <- map[CodingKeys.firstName.rawValue]
-        self.lastName <- map[CodingKeys.lastName.rawValue]
-        self.userName <- map[CodingKeys.userName.rawValue]
-        self.jurisdiction <- map[CodingKeys.jurisdiction.rawValue]
-        self.emails <- map[CodingKeys.emails.rawValue]
-        self.phoneNumbers <- map[CodingKeys.phoneNumbers.rawValue]
-        self.tags <- map[CodingKeys.tags.rawValue]
-        self.id <- map[CodingKeys.tags.rawValue]
-        let createdOn = map[CodingKeys.createdOn.rawValue].currentValue as? String
-        let lastModified = map[CodingKeys.lastModified.rawValue].currentValue as? String
-        
-        self.createdOn = createdOn?.toDate
-        self.lastModified = lastModified?.toDate
-    }
-}
-
-public func ==(lhs: User, rhs: User) -> Bool {
-    return lhs.id == rhs.id
 }
 
 public struct UserUpdate: Codable {

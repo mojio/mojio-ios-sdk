@@ -14,7 +14,6 @@
  *******************************************************************************/
 
 @testable import MojioSDK
-import ObjectMapper
 import XCTest
 
 class PhoneNumberTests: XCTestCase {

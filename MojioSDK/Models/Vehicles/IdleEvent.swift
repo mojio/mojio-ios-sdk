@@ -13,22 +13,26 @@
  * forbidden unless prior written permission is obtained from Moj.io Inc.
  *******************************************************************************/
 
-import UIKit
-import ObjectMapper
+import Foundation
 
-public struct IdleEvent: Mappable {
+public struct IdleEvent: Codable {
     
     public var EventState: IdleState? = nil
     public var EventLocation: Location? = nil
     
-    public init() {}
-    
-    public init?(map: Map) {
-        self.init()
-    }
-    
-    public mutating func mapping(map: Map) {
-        EventState <- map["IdleState"]
-        EventLocation <- map["Location"]
+    private enum CodingKeys: String, CodingKey {
+        case EventState = "IdleState"
+        case EventLocation = "Location"
     }
 }
+
+//public init() {}
+//
+//public init?(map: Map) {
+//    self.init()
+//}
+//
+//public mutating func mapping(map: Map) {
+//    EventState <- map["IdleState"]
+//    EventLocation <- map["Location"]
+//}

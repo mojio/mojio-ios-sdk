@@ -14,7 +14,6 @@
  *******************************************************************************/
 
 @testable import MojioSDK
-import ObjectMapper
 import XCTest
 
 class MeasurementStatisticsTests: XCTestCase {
@@ -33,13 +32,13 @@ class MeasurementStatisticsTests: XCTestCase {
         "Max": 9,
         "StandardScore": {
         "ScoringMethod": "string",
-        "Value": 0,
+        "value": 0,
         "Percentile": 0,
         "Average": 0
         },
         "MinMaxScore": {
         "ScoringMethod": "string",
-        "Value": 0,
+        "value": 0,
         "Percentile": 0,
         "Average": 0
         }

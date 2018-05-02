@@ -14,32 +14,59 @@
  *******************************************************************************/
 
 import Foundation
-import ObjectMapper
 import SwiftDate
 
 // Base Device Measurement
-public protocol DeviceMeasurement: Mappable {
-    var BaseUnit: String? {get set}
-    var BaseValue: Double {get set}
-    var Unit: String? {get set}
-    var Value: Double {get set}
-    var Timestamp: String? {get set}
+
+enum DeviceMeasurementCodingKeys: String, CodingKey {
+    case baseUnit = "baseUnit"
+    case baseValue = "baseValue"
+    case unit = "Unit"
+    case value = "Value"
+    case timestamp = "Timestamp"
+}
+
+public protocol DeviceMeasurement: Codable {
     
-    var timeStamp: Date? {get set}
+    typealias DeviceMeasurements = (baseUnit: String?, baseValue: Double, unit: String?, value: Double, timestamp: Date?)
+    
+    var baseUnit: String? { get }
+    var baseValue: Double  { get }
+    var unit: String? { get }
+    var value: Double { get }
+    var timestamp: Date? { get }
+    
+    init(from decoder: Decoder, with deviceMeasurements: DeviceMeasurements) throws
+    func encode(with encoder: Encoder) throws
 }
 
 extension DeviceMeasurement {
-    public mutating func mapping(map: Map) {
-        self.measureMapping(map: map)
+    
+    init(with decoder: Decoder) throws {
+        
+        let container = try decoder.container(keyedBy: DeviceMeasurementCodingKeys.self)
+        
+        let baseUnit = try container.decodeIfPresent(String.self, forKey: .baseUnit)
+        let baseValue = try container.decodeIfPresent(Double.self, forKey: .baseValue) ?? 0.0
+        let unit = try container.decodeIfPresent(String.self, forKey: .unit)
+        let value = try container.decodeIfPresent(Double.self, forKey: .value) ?? 0.0
+        let timestamp = try container.decodeIfPresent(String.self, forKey: .timestamp).flatMap { $0.dateFromIso8601 }
+        
+        let deviceMeasurements = DeviceMeasurements(baseUnit: baseUnit, baseValue: baseValue, unit: unit, value: value, timestamp: timestamp)
+        
+        try self.init(from: decoder, with: deviceMeasurements)
     }
     
-    public mutating func measureMapping(map: Map) {
-        BaseUnit <- map["BaseUnit"]
-        BaseValue <- map["BaseValue"]
-        Unit <- map["Unit"]
-        Value <- map["Value"]
-        Timestamp <- map["Timestamp"]
+    public func encode(to encoder: Encoder) throws {
         
-        timeStamp = self.Timestamp?.toDate
+        var container = encoder.container(keyedBy: DeviceMeasurementCodingKeys.self)
+        
+        try container.encode(self.baseUnit, forKey: .baseUnit)
+        try container.encode(self.baseValue, forKey: .baseValue)
+        try container.encode(self.unit, forKey: .unit)
+        try container.encode(self.value, forKey: .value)
+        try container.encode(self.timestamp, forKey: .timestamp)
+        
+        try self.encode(with: encoder)
     }
 }

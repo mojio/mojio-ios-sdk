@@ -15,7 +15,7 @@
 
 import Foundation
 
-protocol ActivityObject: Equatable {
+protocol ActivityObject: PrimaryKey {
     associatedtype T: NestedActivityObject
     var id: String { get }
     var context: String? { get }
@@ -28,7 +28,7 @@ protocol ActivityObject: Equatable {
     var location: T? { get }
 }
 
-protocol NestedActivityObject: Equatable {
+protocol NestedActivityObject: PrimaryKey {
     var id: String { get }
     var context: String? { get }
     var type: NestedActivityType? { get }
@@ -39,11 +39,7 @@ protocol NestedActivityObject: Equatable {
     var radius: Double? { get }
 }
 
-//TODO: to add all possible values
-enum ActivityType: String, Codable {
-    case arrive = "Arrive"
-    case leave = "Leave"
-    
+internal extension ActivityType {
     init?(from intValue: Int?) {
         guard let intValue = intValue else { return nil }
         self = intValue == 1 ? .arrive : .leave

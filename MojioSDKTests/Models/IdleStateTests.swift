@@ -14,7 +14,6 @@
  *******************************************************************************/
 
 @testable import MojioSDK
-import ObjectMapper
 import XCTest
 
 class IdleStateTests: XCTestCase {
@@ -24,8 +23,8 @@ class IdleStateTests: XCTestCase {
         let model = Mapper<IdleState>().map(JSONObject: jsonObject)
         
         XCTAssertNotNil(model)
-        XCTAssertEqual(model?.Timestamp, "2017-11-09T07:15:16.084Z")
-        XCTAssertEqual(model?.Value, true)
+        XCTAssertEqual(model?.timestamp, "2017-11-09T07:15:16.084Z")
+        XCTAssertEqual(model?.value, true)
         XCTAssertEqual(model?.StartTime, "2017-11-09T07:15:16.084Z")
         XCTAssertNotNil(model?.Duration)
     }
@@ -35,15 +34,15 @@ extension IdleStateTests {
     var jsonString: String {
         return """
         {
-        "Timestamp": "2017-11-09T07:15:16.084Z",
-        "Value": true,
+        "timestamp": "2017-11-09T07:15:16.084Z",
+        "value": true,
         "StartTime": "2017-11-09T07:15:16.084Z",
         "Duration": {
-        "BaseUnit": "Ticks",
-        "Timestamp": "2017-11-09T07:15:16.084Z",
-        "BaseValue": 0,
-        "Unit": "Ticks",
-        "Value": 0
+        "baseUnit": "Ticks",
+        "timestamp": "2017-11-09T07:15:16.084Z",
+        "baseValue": 0,
+        "unit": "Ticks",
+        "value": 0
         }
         }
         """

@@ -15,16 +15,16 @@
 
 import Foundation
 
-struct PhoneNumber: Codable {
-    let phoneNumber: String?
-    let verified: Bool?
+public struct PhoneNumber: Codable {
+    public let phoneNumber: String?
+    public let verified: Bool?
     
-    enum CodingKeys: String, CodingKey {
+    public enum CodingKeys: String, CodingKey {
         case phoneNumber = "PhoneNumber"
         case verified = "Verified"
     }
     
-    init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         do {
@@ -38,22 +38,22 @@ struct PhoneNumber: Codable {
     }
 }
 
-struct PhoneUpdate: Codable {
-    var phoneNumber: String? = nil
+public struct PhoneUpdate: Codable {
+    public var phoneNumber: String? = nil
     
-    enum CodingKeys: String, CodingKey {
+    public enum CodingKeys: String, CodingKey {
         case phoneNumber = "PhoneNumber"
     }
     
-    init(phoneNumber: PhoneNumber? = nil) {
+    public init(phoneNumber: PhoneNumber? = nil) {
         self.phoneNumber = phoneNumber?.phoneNumber
     }
     
-    init(phoneNumber: String? = nil) {
+    public init(phoneNumber: String? = nil) {
         self.phoneNumber = phoneNumber
     }
     
-    func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         
         try container.encodeIfPresent(self.phoneNumber, forKey: .phoneNumber)

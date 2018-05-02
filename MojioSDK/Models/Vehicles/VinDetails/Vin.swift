@@ -13,58 +13,53 @@
  * forbidden unless prior written permission is obtained from Moj.io Inc.
  *******************************************************************************/
 
-import UIKit
-import ObjectMapper
+import Foundation
 
-public struct Vin: Mappable, PrimaryKey {
+protocol VinProtocol {
     
-    public var VIN: String? = nil
-    public var Timestamp: String? = nil
-    public var Market: String? = nil
-    public var Year: Int = 0
-    public var Make: String? = nil
-    public var Model: String? = nil
-    public var VehicleType: String? = nil
-    public var BodyType: String? = nil
-    public var DriveType: String? = nil
-    public var FuelTankSize: Double = 0
-    public var EPAFuelEfficiency: Double = 0
-    public var VehicleEngine: Engine? = nil
-    public var VehicleTransmission: Transmission? = nil
-    public var Warranties: [Warranty] = []
-    public var Recalls: [Recall] = []
-    public var ServiceBulletins: [ServiceBulletin] = []
-    
-    public var timestamp: Date? = nil
+}
 
-    public var Id: String? {
-        return self.VIN
+public struct Vin: Codable {
+    
+    public let vin: String
+    public let timestamp: Date?
+    public let market: String?
+    public let year: Int
+    public let make: String?
+    public let model: String?
+    public let vehicleType: String?
+    public let bodyType: String?
+    public let driveType: String?
+    public let fuelTankSize: Double
+    public let epaFuelEfficiency: Double
+    public let vehicleEngine: Engine?
+    public let vehicleTransmission: Transmission?
+    public let warranties: [Warranty]
+    public let recalls: [Recall]
+    public let serviceBulletins: [ServiceBulletin]
+    
+    enum CodingKeys: String, CodingKey {
+        case vin = "VIN"
+        case timestamp = "Timestamp"
+        case market = "Market"
+        case year = "Year"
+        case make = "Make"
+        case model = "Model"
+        case vehicleType = "VehicleType"
+        case bodyType = "BodyType"
+        case driveType = "DriveType"
+        case fuelTankSize = "FuelTankSize"
+        case epaFuelEfficiency = "EPAFuelEfficiency"
+        case vehicleEngine = "Engine"
+        case vehicleTransmission = "Transmission"
+        case warranties = "Warranties"
+        case recalls = "Recalls"
+        case serviceBulletins = "ServiceBulletins"
     }
-    
-    public init() {}
-    
-    public init?(map: Map) {
-        self.init()
-    }
-    
-    public mutating func mapping(map: Map) {
-        VIN <- map["VIN"]
-        Timestamp <- map["Timestamp"]
-        Market <- map["Market"]
-        Year <- map["Year"]
-        Make <- map["Make"]
-        Model <- map["Model"]
-        VehicleType <- map["VehicleType"]
-        BodyType <- map["BodyType"]
-        DriveType <- map["DriveType"]
-        FuelTankSize <- map["FuelTankSize"]
-        EPAFuelEfficiency <- map["EPAFuelEfficiency"]
-        VehicleEngine <- map["Engine"]
-        VehicleTransmission <- map["Transmission"]
-        Warranties <- map["Warranties"]
-        Recalls <- map["Recalls"]
-        ServiceBulletins <- map["ServiceBulletins"]
-        
-        timestamp = self.Timestamp?.toDate
+}
+
+extension Vin: PrimaryKey {
+    public var id: String {
+        return self.vin
     }
 }

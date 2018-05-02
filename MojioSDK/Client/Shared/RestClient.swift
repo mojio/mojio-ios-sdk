@@ -16,7 +16,6 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
-import ObjectMapper
 import KeychainSwift
 
 open class NextDone {}
@@ -302,8 +301,16 @@ open class RestClient {
                 "ResponseDate" : (response.response?.allHeaderFields["Date"] as? String)?.toDate,
                 "LocalDate" : Date()
             ]
-            if let responseDict = response.result.value as? [String: Any] {
-                if let dataArray = responseDict["Data"] as? [Any] {
+
+            if let responseData = response.data {
+                if let responseObject: Any = self.parseData(responseData) {
+                    completion(responseObject, headers)
+                }
+                else {
+                    failure(nil)
+                }
+                
+                /* if let dataArray = responseDict["Data"] as? [Any] {
                     
                     var array = [Any]()
                     
@@ -320,7 +327,7 @@ open class RestClient {
                         let _ = requestParams["includeCount"],
                         let count = responseDict["TotalCount"] as? Int {
                         
-                        completion(Result(TotalCount: count, Data: array), headers)
+                        completion(Result(totalCount: count, data: array), headers)
                     } else {
                         completion(array, headers)
                     }
@@ -356,8 +363,9 @@ open class RestClient {
                         }
                     }
                     
-                }
-            } else if let responseString = response.result.value as? String {
+                } */
+            }
+            else if let responseString = response.result.value as? String {
                 completion(responseString, headers);
             }
             else {
@@ -377,10 +385,6 @@ open class RestClient {
     }
     
     internal func parseData(_ responseData: Data) -> Codable? {
-        return nil
-    }
-    
-    internal func parseDict(_ dict: [String: Any]) -> Any? {
         return nil
     }
     

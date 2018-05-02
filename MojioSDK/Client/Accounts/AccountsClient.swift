@@ -16,7 +16,6 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
-import ObjectMapper
 import KeychainSwift
 
 public enum AccountsEndpoint: String {
@@ -148,6 +147,22 @@ open class AccountsClient: RestClient {
         do {
             switch AccountsEndpoint(rawValue: self.requestEntity) ?? .base {
                 
+            case .apps:
+                do {
+                    return try JSONDecoder().decode(ResponseArray<App>.self, from: responseData)
+                }
+                catch {
+                    return try JSONDecoder().decode(App.self, from: responseData)
+                }
+                
+            case .groups:
+                do {
+                    return try JSONDecoder().decode(ResponseArray<Group>.self, from: responseData)
+                }
+                catch {
+                    return try JSONDecoder().decode(Group.self, from: responseData)
+                }
+                
             case .me:
                 return try JSONDecoder().decode(User.self, from: responseData)
                 
@@ -182,26 +197,6 @@ open class AccountsClient: RestClient {
         catch let error {
             debugPrint(error)
             return nil
-        }
-    }
-    
-    internal override func parseDict(_ dict: [String: Any]) -> Any? {
-        switch AccountsEndpoint(rawValue: self.requestEntity) ?? .base {
-            
-        case .apps:
-            return Mapper<App>().map(JSON: dict)
-            
-        case .secret:
-            return nil
-            
-        case .groups:
-            return Mapper<Group>().map(JSON: dict)
-            
-        case .activities:
-            return Mapper<RootActivity>().map(JSON: dict)
-
-        default:
-            return super.parseDict(dict)
         }
     }
 }

@@ -13,8 +13,7 @@
  * forbidden unless prior written permission is obtained from Moj.io Inc.
  *******************************************************************************/
 
-import UIKit
-import ObjectMapper
+import Foundation
 
 public enum TransactionState: String {
     case pending = "Pending"
@@ -28,90 +27,110 @@ public enum WifiRadioStatus: String {
     case disconnected = "Disconnected"
 }
 
-public struct WifiRadio: Mappable  {
+public struct WifiRadio: Codable  {
     
-    public var Timestamp: String? = nil
-    public var SSID: String? = nil
-    public var Password: String? = nil
-    public var AllowRoaming: Bool? = nil
-    public var Status: String? = nil
-    public var Strength: Double? = nil
-    
-    public var timestamp: Date? = nil
-
-    public init() {}
-    
-    public init?(map: Map) {
-        self.init()
+    public enum CodingKeys: String, CodingKey {
+        case timestamp = "Timestamp"
+        case ssid = "SSID"
+        case password = "Password"
+        case allowRoaming = "AllowRoaming"
+        case status = "Status"
+        case strength = "Strength"
     }
-
-    // Time to live in seconds for the update request
-    public func jsonDict(_ timeToLive: Int? = nil, fields: [String]? = nil) -> [String: Any] {
-        var map: [String: Any] = [:]
+    
+    public let timestamp: Date?
+    public let ssid: String?
+    public let password: String?
+    public let allowRoaming: Bool?
+    public let status: String?
+    public let strength: Double?
+    
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
         
-        // Default to use all fields
-        var updateFields: Set<String> = ["SSID", "Password", "Status"]
-        if let fields = fields {
-            updateFields = Set<String>(fields)
+        do {
+            self.timestamp = try container.decodeIfPresent(String.self, forKey: .timestamp).flatMap { $0.dateFromIso8601 }
+            self.ssid = try container.decodeIfPresent(String.self, forKey: .ssid)
+            self.password = try container.decodeIfPresent(String.self, forKey: .password)
+            self.allowRoaming = try container.decodeIfPresent(Bool.self, forKey: .allowRoaming)
+            self.status = try container.decodeIfPresent(String.self, forKey: .status)
+            self.strength = try container.decodeIfPresent(Double.self, forKey: .strength)
         }
-
-        if let ssid = self.SSID , updateFields.contains("SSID") {
-            map["SSID"] = ssid
+        catch {
+            debugPrint(error)
+            throw error
         }
-
-        if let password = self.Password , updateFields.contains("Password") {
-            map["Password"] = password
-        }
-
-        if let status = self.Status, updateFields.contains("Status") {
-            map["Status"] = status
-        }
-
-        if let timeToLive: Int = timeToLive , timeToLive > 0 {
-            let formatter = NumberFormatter()
-            formatter.minimumIntegerDigits = 2
-            formatter.maximumIntegerDigits = 2
-            formatter.minimumFractionDigits = 0
-            formatter.maximumFractionDigits = 0
-            
-            var timespan = ""
-
-            let seconds = formatter.string(from: NSNumber(value: timeToLive % 60 as Int)) ?? ""
-            if timeToLive < 60 {
-                // Less than 60 seconds
-                timespan = String(format:"00:00:%@", seconds)
-            }
-            else {
-                let minutes = formatter.string(from: NSNumber(value: (timeToLive % 3600) / 60 as Int)) ?? ""
-                if timeToLive < 3600 {
-                    // Less than 1 hour
-                    timespan = String(
-                        format:"00:%@:%@",
-                        minutes,
-                        seconds)
-                }
-                else {
-                    let hours = formatter.string(from: NSNumber(value: timeToLive / 3600 as Int)) ?? ""
-                    timespan = String(format:"%@:%@:%@", hours, minutes, seconds)
-                }
-            }
-            
-            if timespan.count > 0 {
-                map["TimeToLive"] = timespan
-            }
-        }
-        
-        return map
-    }
-
-    public mutating func mapping(map: Map) {
-        Timestamp <- map["Timestamp"]
-        SSID <- map["SSID"]
-        Password <- map["Password"]
-        AllowRoaming <- map["AllowRoaming"]
-        Status <- map["Status"]
-        Strength <- map["Strength"]
-        
-        timestamp = self.Timestamp?.toDate
     }
 }
+
+// TODO: Update to handle TTL, etc. - see below
+public struct WifiRadioUpdate: Codable {
+    var ssid: String? = nil
+    var password: String? = nil
+    var status: String? = nil
+    
+    public enum CodingKeys: String, CodingKey {
+        case ssid = "SSID"
+        case password = "Password"
+        case status = "Status"
+    }
+}
+
+// Time to live in seconds for the update request
+//    public func jsonDict(_ timeToLive: Int? = nil, fields: [String]? = nil) -> [String: Any] {
+//        var map: [String: Any] = [:]
+//
+//        // Default to use all fields
+//        var updateFields: Set<String> = ["SSID", "Password", "Status"]
+//        if let fields = fields {
+//            updateFields = Set<String>(fields)
+//        }
+//
+//        if let ssid = self.SSID , updateFields.contains("SSID") {
+//            map["SSID"] = ssid
+//        }
+//
+//        if let password = self.Password , updateFields.contains("Password") {
+//            map["Password"] = password
+//        }
+//
+//        if let status = self.Status, updateFields.contains("Status") {
+//            map["Status"] = status
+//        }
+//
+//        if let timeToLive: Int = timeToLive , timeToLive > 0 {
+//            let formatter = NumberFormatter()
+//            formatter.minimumIntegerDigits = 2
+//            formatter.maximumIntegerDigits = 2
+//            formatter.minimumFractionDigits = 0
+//            formatter.maximumFractionDigits = 0
+//
+//            var timespan = ""
+//
+//            let seconds = formatter.string(from: NSNumber(value: timeToLive % 60 as Int)) ?? ""
+//            if timeToLive < 60 {
+//                // Less than 60 seconds
+//                timespan = String(format:"00:00:%@", seconds)
+//            }
+//            else {
+//                let minutes = formatter.string(from: NSNumber(value: (timeToLive % 3600) / 60 as Int)) ?? ""
+//                if timeToLive < 3600 {
+//                    // Less than 1 hour
+//                    timespan = String(
+//                        format:"00:%@:%@",
+//                        minutes,
+//                        seconds)
+//                }
+//                else {
+//                    let hours = formatter.string(from: NSNumber(value: timeToLive / 3600 as Int)) ?? ""
+//                    timespan = String(format:"%@:%@:%@", hours, minutes, seconds)
+//                }
+//            }
+//
+//            if timespan.count > 0 {
+//                map["TimeToLive"] = timespan
+//            }
+//        }
+//
+//        return map
+//    }

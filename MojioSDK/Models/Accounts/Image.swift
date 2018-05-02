@@ -13,27 +13,34 @@
  * forbidden unless prior written permission is obtained from Moj.io Inc.
  *******************************************************************************/
 
-import ObjectMapper
 import Foundation
 
-public class Image: Mappable {
-    public var source: URL? = nil
-    public var normal: URL? = nil
-    public var thumbnail: URL? = nil
+public struct Image: Codable {
+    public let source: URL?
+    public let normal: URL?
+    public let thumbnail: URL?
     
-    enum CodingKeys: String, CodingKey {
+    public enum CodingKeys: String, CodingKey {
         case source = "Src"
         case normal = "Normal"
         case thumbnail = "Thumbnail"
     }
     
-    public required init?(map: Map) {
-        mapping(map: map)
+    public init(from decoder: Decoder) throws {
+        do {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            
+            self.source = try container.decodeIfPresent(URL.self, forKey: .source)
+            self.normal = try container.decodeIfPresent(URL.self, forKey: .normal)
+            self.thumbnail = try container.decodeIfPresent(URL.self, forKey: .thumbnail)
+        }
+        catch {
+            debugPrint(error)
+            throw error
+        }
     }
     
-    public func mapping(map: Map) {
-        source <- (map[CodingKeys.source], URLTransform())
-        normal <- (map[CodingKeys.normal], URLTransform())
-        thumbnail <- (map[CodingKeys.thumbnail], URLTransform())
+    public func encode(to encoder: Encoder) throws {
+        
     }
 }

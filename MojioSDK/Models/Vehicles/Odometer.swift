@@ -13,46 +13,68 @@
  * forbidden unless prior written permission is obtained from Moj.io Inc.
  *******************************************************************************/
 
-import UIKit
-import ObjectMapper
+import Foundation
 
 // Units in DistanceUnits
 public struct Odometer: DeviceMeasurement {
     
     // DeviceMeasurement
-    public var BaseUnit: String? = nil
-    public var BaseValue: Double = 0
-    public var Unit: String? = nil
-    public var Value: Double = 0
-    public var Timestamp: String?  = nil
+    public var baseUnit: String? = nil
+    public var baseValue: Double = 0
+    public var unit: String? = nil
+    public var value: Double = 0
+    public var timestamp: Date?  = nil
     
-    public var timeStamp: Date? = nil
+    //public var timeStamp: Date? = nil
     
     public var RolloverValue: Double = 0
     
-    public init() {}
+//    public func jsonDict () -> [String: Any] {
+//
+//        var dictionary = [String: Any]()
+//
+//        if let unit = self.unit {
+//            dictionary["Unit"] = unit
+//        }
+//
+//        dictionary["Value"] = self.value
+//
+//        return dictionary
+//    }
     
-    public init?(map: Map) {
-        self.init()
-    }
-    
-    public func jsonDict () -> [String: Any] {
-        
-        var dictionary = [String: Any]()
-        
-        if let unit = self.Unit {
-            dictionary["Unit"] = unit
-        }
-        
-        dictionary["Value"] = self.Value
-        
-        return dictionary
-    }
-    
-    public mutating func mapping(map: Map) {
-        
-        self.measureMapping(map: map)
-
-        RolloverValue <- map["RolloverValue"]
+    private enum CodingKeys: String, CodingKey {
+        case RolloverValue
     }
 }
+
+extension Odometer {
+    
+    public init(from decoder: Decoder, with deviceMeasurements: DeviceMeasurements) throws {
+        
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        let RolloverValue = try container.decodeIfPresent(Double.self, forKey: .RolloverValue) ?? 0.0
+        
+        self.init(baseUnit: deviceMeasurements.baseUnit, baseValue: deviceMeasurements.baseValue, unit: deviceMeasurements.unit, value: deviceMeasurements.value, timestamp: deviceMeasurements.timestamp, RolloverValue: RolloverValue)
+    }
+    
+    public func encode(with encoder: Encoder) throws {
+        
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        try container.encode(self.RolloverValue, forKey: .RolloverValue)
+    }
+}
+
+
+//public init() {}
+//
+//public init?(map: Map) {
+//    self.init()
+//}
+//public mutating func mapping(map: Map) {
+//
+//    self.measureMapping(map: map)
+//
+//    RolloverValue <- map["RolloverValue"]
+//}

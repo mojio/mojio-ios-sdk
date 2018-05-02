@@ -13,76 +13,80 @@
  * forbidden unless prior written permission is obtained from Moj.io Inc.
  *******************************************************************************/
 
-import UIKit
-import ObjectMapper
+import Foundation
 
+public struct Mojio: Codable, PrimaryKey {
+    
+    public let id: String
+    public let name: String?
+    public let imei: String?
+    public let lastContactTime: Date?
+    public let gatewayTime: Date?
+    public let vehicleId: String?
+    public let location: Location?
+    public let tags: [String]
+    public let wifi: WifiRadio?
+    public let connectedState: BooleanState?
+    public let createdOn: Date?
+    public let lastModified: Date?
+    public let deleted: Bool
+    public let msisdn: String?
+    public let iccid: String?
 
-public struct Mojio: Mappable, PrimaryKey {
-    public var Id: String? = nil
-    public var Name: String? = nil
-    public var IMEI: String? = nil
-    public var LastContactTime: String? = nil
-    public var GatewayTime: String? = nil
-    public var VehicleId: String? = nil
-    public var MojioLocation: Location? = nil
-    public var Tags: [String] = []
-    public var Wifi: WifiRadio? = nil
-    public var ConnectedState: BooleanState? = nil
-    public var CreatedOn: String? = nil
-    public var LastModified: String? = nil
-    public var Deleted: Bool = false
-    public var MSISDN: String? = nil
-    public var ICCID: String? = nil
+//    public func json () -> String? {
+//        var map: [String: Any] = [:]
+//
+//        if let name = self.Name {
+//            map["Name"] = name
+//        }
+//
+//        if let imei = self.IMEI {
+//            map["IMEI"] = imei
+//        }
+//
+//        let data = try! JSONSerialization.data(withJSONObject: map)
+//        return String(data: data, encoding: String.Encoding.utf8)
+//    }
     
-    // Date Values
-    public var lastContactTime: Date? = nil
-    public var gatewayTime: Date? = nil
-    public var createdOn: Date? = nil
-    public var lastModified: Date? = nil
-    
-    public init() {}
-    
-    public init?(map: Map) {
-        self.init()
+    public enum CodingKeys: String, CodingKey {
+        case id = "Id"
+        case name = "Name"
+        case imei = "IMEI"
+        case lastContactTime = "LastContactTime"
+        case wifi = "WifiRadio"
+        case gatewayTime = "GatewayTime"
+        case vehicleId = "VehicleId"
+        case location = "Location"
+        case connectedState = "ConnectedState"
+        case createdOn = "CreatedOn"
+        case lastModified = "LastModified"
+        case tags = "Tags"
+        case deleted = "Deleted"
+        case msisdn = "MSISDN"
+        case iccid = "ICCID"
     }
     
-    public func json () -> String? {
-        var map: [String: Any] = [:]
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
         
-        if let name = self.Name {
-            map["Name"] = name
-        }
-
-        if let imei = self.IMEI {
-            map["IMEI"] = imei
-        }
-        
-        let data = try! JSONSerialization.data(withJSONObject: map)
-        return String(data: data, encoding: String.Encoding.utf8)
-        
+        self.id = try container.decode(String.self, forKey: .id)
+        self.name = try container.decodeIfPresent(String.self, forKey: .name)
+        self.imei = try container.decodeIfPresent(String.self, forKey: .imei)
+        self.lastContactTime = try container.decodeIfPresent(String.self, forKey: .lastContactTime).flatMap { $0.dateFromIso8601 }
+        self.wifi = try container.decodeIfPresent(WifiRadio.self, forKey: .wifi)
+        self.gatewayTime = try container.decodeIfPresent(String.self, forKey: .gatewayTime).flatMap { $0.dateFromIso8601 }
+        self.vehicleId = try container.decodeIfPresent(String.self, forKey: .vehicleId)
+        self.location = try container.decodeIfPresent(Location.self, forKey: .location)
+        self.connectedState = try container.decodeIfPresent(BooleanState.self, forKey: .connectedState)
+        self.createdOn = try container.decodeIfPresent(String.self, forKey: .createdOn).flatMap { $0.dateFromIso8601 }
+        self.lastModified = try container.decodeIfPresent(String.self, forKey: .lastModified).flatMap { $0.dateFromIso8601 }
+        self.tags = try container.decodeIfPresent([String].self, forKey: .location) ?? []
+        self.deleted = try container.decodeIfPresent(Bool.self, forKey: .location) ?? false
+        self.msisdn = try container.decodeIfPresent(String.self, forKey: .msisdn)
+        self.iccid = try container.decodeIfPresent(String.self, forKey: .iccid)
     }
     
-    public mutating func mapping(map: Map) {
-        Id <- map["Id"]
-        Name <- map["Name"]
-        IMEI <- map["IMEI"]
-        LastContactTime <- map["LastContactTime"]
-        Wifi <- map["WifiRadio"]
-        GatewayTime <- map["GatewayTime"]
-        VehicleId <- map["VehicleId"]
-        MojioLocation <- map["Location"]
-        ConnectedState <- map["ConnectedState"]
-        CreatedOn <- map["CreatedOn"]
-        LastModified <- map["LastModified"]
-        Tags <- map["Tags"]
-        Deleted <- map["Deleted"]
-        MSISDN <- map["MSISDN"]
-        ICCID <- map["ICCID"]
-        
-        // Date Values
-        lastContactTime = self.LastContactTime?.toDate
-        gatewayTime = self.GatewayTime?.toDate
-        createdOn = self.CreatedOn?.toDate
-        lastModified = self.LastModified?.toDate
+    public func encode(to encoder: Encoder) throws {
+
     }
 }

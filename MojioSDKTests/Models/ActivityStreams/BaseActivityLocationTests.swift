@@ -14,7 +14,6 @@
  *******************************************************************************/
 
 @testable import MojioSDK
-import ObjectMapper
 import XCTest
 
 class BaseActivityLocationTests: XCTestCase {
@@ -38,7 +37,7 @@ class BaseActivityLocationTests: XCTestCase {
     }
     
     class TestableBaseActivityLocation: BaseActivityLocation {
-        var Id: String? = nil
+        var id: String = nil
         var ActivityType: String? = nil
         var Href: String? = nil
         var Name: String? = nil

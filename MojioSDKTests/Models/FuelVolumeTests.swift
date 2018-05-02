@@ -14,18 +14,17 @@
  *******************************************************************************/
 
 @testable import MojioSDK
-import ObjectMapper
 import XCTest
 
 class FuelFuelVolumeTests: XCTestCase {
     func testFuelVolumeShouldBeParsedFromJsonString() {
         let jsonString = """
         {
-        "BaseUnit": "Percentage",
-        "Timestamp": "2017-11-09T07:16:58.072Z",
-        "BaseValue": 10,
-        "Unit": "Percentage",
-        "Value": 20
+        "baseUnit": "Percentage",
+        "timestamp": "2017-11-09T07:16:58.072Z",
+        "baseValue": 10,
+        "unit": "Percentage",
+        "value": 20
         }
         """
         let jsonObject = try! JSONSerialization.jsonObject(with: jsonString.data(using: .utf8)!, options: .allowFragments)
@@ -33,10 +32,10 @@ class FuelFuelVolumeTests: XCTestCase {
         let model = Mapper<FuelVolume>().map(JSONObject: jsonObject)
         
         XCTAssertNotNil(model)
-        XCTAssertEqual(model?.BaseUnit, "Percentage")
-        XCTAssertEqual(model?.BaseValue, 10)
-        XCTAssertEqual(model?.Unit, "Percentage")
-        XCTAssertEqual(model?.Value, 20)
-        XCTAssertEqual(model?.Timestamp, "2017-11-09T07:16:58.072Z")
+        XCTAssertEqual(model?.baseUnit, "Percentage")
+        XCTAssertEqual(model?.baseValue, 10)
+        XCTAssertEqual(model?.unit, "Percentage")
+        XCTAssertEqual(model?.value, 20)
+        XCTAssertEqual(model?.timestamp, "2017-11-09T07:16:58.072Z")
     }
 }

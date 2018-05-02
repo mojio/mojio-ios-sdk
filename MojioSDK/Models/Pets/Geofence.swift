@@ -45,7 +45,7 @@ struct GeofenceCircleRegion: Codable {
     }
 }
 
-struct Geofence: Codable, Equatable {
+struct Geofence: Codable, PrimaryKey {
     let id: String
     let name: String?
     let description: String?

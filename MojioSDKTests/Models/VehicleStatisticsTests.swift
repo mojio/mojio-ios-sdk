@@ -14,7 +14,6 @@
  *******************************************************************************/
 
 @testable import MojioSDK
-import ObjectMapper
 import XCTest
 
 class VehicleStatisticsTests: XCTestCase {
@@ -22,39 +21,39 @@ class VehicleStatisticsTests: XCTestCase {
         let jsonString = """
         {
           "EstimatedFuelLevel": {
-            "BaseUnit": "string",
-            "BaseValue": 10,
-            "Unit": "string",
-            "Value": 20,
-            "Timestamp": "2017-11-09T07:16:58.072Z"
+            "baseUnit": "string",
+            "baseValue": 10,
+            "unit": "string",
+            "value": 20,
+            "timestamp": "2017-11-09T07:16:58.072Z"
           },
           "EstimatedFuelVolume": {
-            "BaseUnit": "string",
-            "BaseValue": 10,
-            "Unit": "string",
-            "Value": 20,
-            "Timestamp": "2017-11-09T07:16:58.072Z"
+            "baseUnit": "string",
+            "baseValue": 10,
+            "unit": "string",
+            "value": 20,
+            "timestamp": "2017-11-09T07:16:58.072Z"
           },
           "AverageFuelEfficiency": {
-            "BaseUnit": "string",
-            "BaseValue": 10,
-            "Unit": "string",
-            "Value": 20,
-            "Timestamp": "2017-11-09T07:16:58.072Z"
+            "baseUnit": "string",
+            "baseValue": 10,
+            "unit": "string",
+            "value": 20,
+            "timestamp": "2017-11-09T07:16:58.072Z"
           },
           "TotalRange": {
-            "BaseUnit": "string",
-            "BaseValue": 10,
-            "Unit": "string",
-            "Value": 20,
-            "Timestamp": "2017-11-09T07:16:58.072Z"
+            "baseUnit": "string",
+            "baseValue": 10,
+            "unit": "string",
+            "value": 20,
+            "timestamp": "2017-11-09T07:16:58.072Z"
           },
           "CurrentRange": {
-            "BaseUnit": "string",
-            "BaseValue": 10,
-            "Unit": "string",
-            "Value": 20,
-            "Timestamp": "2017-11-09T07:16:58.072Z"
+            "baseUnit": "string",
+            "baseValue": 10,
+            "unit": "string",
+            "value": 20,
+            "timestamp": "2017-11-09T07:16:58.072Z"
           },
           "LastFillUpDate": "2017-11-09T07:16:58.072Z"
         }

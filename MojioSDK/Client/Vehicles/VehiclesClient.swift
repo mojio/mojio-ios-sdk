@@ -13,10 +13,9 @@
  * forbidden unless prior written permission is obtained from Moj.io Inc.
  *******************************************************************************/
 
-import UIKit
+import Foundation
 import Alamofire
 import SwiftyJSON
-import ObjectMapper
 import KeychainSwift
 
 public enum VehiclesEndpoint: String {
@@ -218,64 +217,113 @@ open class VehiclesClient: RestClient {
         return self
     }
     
-    internal override func parseDict(_ dict: [String: Any]) -> Any? {
-        switch VehiclesEndpoint(rawValue: self.requestEntity) ?? .base {
-                        
-        case .locations:
-            return Mapper<Location>().map(JSON: dict)
+    internal override func parseData(_ responseData: Data) -> Codable? {
+        
+        do {
             
-        case .mojios:
-            return Mapper<Mojio>().map(JSON: dict)
+            switch VehiclesEndpoint(rawValue: self.requestEntity) ?? .base {
             
-        case .trips:
-            return Mapper<Trip>().map(JSON: dict)
+            case .locations:
+                do {
+                    return try JSONDecoder().decode(ResponseArray<Location>.self, from: responseData)
+                }
+                catch {
+                    return try JSONDecoder().decode(Location.self, from: responseData)
+                }
             
-        case .vehicles:
-            return Mapper<Vehicle>().map(JSON: dict)
+            case .mojios:
+                do {
+                    return try JSONDecoder().decode(ResponseArray<Mojio>.self, from: responseData)
+                }
+                catch {
+                    return try JSONDecoder().decode(Mojio.self, from: responseData)
+                }
             
-        case .address:
-            return Mapper<Address>().map(JSON: dict)
+            case .trips:
+                do {
+                    return try JSONDecoder().decode(ResponseArray<Trip>.self, from: responseData)
+                }
+                catch {
+                    return try JSONDecoder().decode(Trip.self, from: responseData)
+                }
             
-        case .vin:
-            return Mapper<Vin>().map(JSON: dict)
+            case .vehicles:
+                do {
+                    return try JSONDecoder().decode(ResponseArray<Vehicle>.self, from: responseData)
+                }
+                catch {
+                    return try JSONDecoder().decode(Vehicle.self, from: responseData)
+                }
             
-        case .serviceSchedule:
-            return Mapper<ServiceSchedule>().map(JSON: dict)
+            case .address:
+                return try JSONDecoder().decode(Address.self, from: responseData)
             
-        case .next:
-            return Mapper<NextServiceSchedule>().map(JSON: dict)
+            case .vin:
+                return try JSONDecoder().decode(Vin.self, from: responseData)
+            
+            case .serviceSchedule:
+                return try JSONDecoder().decode(ServiceSchedule.self, from: responseData)
+            
+            case .next:
+                return try JSONDecoder().decode(NextServiceSchedule.self, from: responseData)
+            
+            case .notificationSettings:
+                return try JSONDecoder().decode(NotificationsSettings.self, from: responseData)
+            
+            case .geofences:
+                do {
+                    return try JSONDecoder().decode(ResponseArray<Geofence>.self, from: responseData)
+                }
+                catch {
+                    return try JSONDecoder().decode(Geofence.self, from: responseData)
+                }
+            
+            case .aggregates:
+                do {
+                    return try JSONDecoder().decode(ResponseArray<AggregationData>.self, from: responseData)
+                }
+                catch {
+                    return try JSONDecoder().decode(AggregationData.self, from: responseData)
+                }
+            
+            case .statistics:
+                return try JSONDecoder().decode(VehicleStatistics.self, from: responseData)
+            
+            case .polyline:
+                return try JSONDecoder().decode(Polyline.self, from: responseData)
+            
+            case .diagnosticCodes:
+                do {
+                    return try JSONDecoder().decode(ResponseArray<DiagnosticCode>.self, from: responseData)
+                }
+                catch {
+                    return try JSONDecoder().decode(DiagnosticCode.self, from: responseData)
+                }
 
-        case .activities:
-            return Mapper<RootActivity>().map(JSON: dict)
+            case .activities:  // conformance to be implemented
+                do {
+                    return try JSONDecoder().decode(ResponseArray<RootActivity>.self, from: responseData)
+                }
+                catch {
+                    return try JSONDecoder().decode(RootActivity.self, from: responseData)
+                }
+            case .wifiRadio:
+                // Returns Transaction Id
+                let response = try JSONDecoder().decode([String: String].self, from: responseData)
+                return response["TransactionId"]
+
+            case .transactions:
+                // Returns Transaction State
+                let response = try JSONDecoder().decode([String: String].self, from: responseData)
+                return response["State"]
             
-        case .notificationSettings:
-            return Mapper<NotificationsSettings>().map(JSON: dict)
-            
-        case .wifiRadio:
-            // Returns Transaction Id
-            return dict["TransactionId"]
-            
-        case .transactions:
-            // Returns Transaction State
-            return dict["State"]
-            
-        case .geofences:
-            return Mapper<Geofence>().map(JSON: dict)
-            
-        case .aggregates:
-            return Mapper<AggregationData>().map(JSON: dict)
-            
-        case .statistics:
-            return Mapper<VehicleStatistics>().map(JSON: dict)
-            
-        case .polyline:
-            return Mapper<TripPolyline>().map(JSON: dict)
-            
-        case .diagnosticCodes:
-            return Mapper<DiagnosticCode>().map(JSON: dict)
-            
-        default:
-            return super.parseDict(dict)
+            default:
+                return nil
+            }
+        }
+        catch let error {
+            debugPrint(error)
+            return nil
         }
     }
 }

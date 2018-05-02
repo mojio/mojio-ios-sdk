@@ -14,112 +14,168 @@
  *******************************************************************************/
 
 import Foundation
-import ObjectMapper
 
-public struct SettingsGeofence: Mappable, PrimaryKey {
+public enum DisturbanceThreshold: String, Codable {
     
-    public var Id: String? = nil
-    public var EnableEnterActivity: Bool = false
-    public var EnableExitActivity: Bool = false
-    
-    public init() {}
-    
-    public init?(map: Map) {
-        self.init()
-    }
-    
-    public mutating func mapping(map: Map) {
-        Id <- map["Id"]
-        EnableEnterActivity <- map["EnableEnterActivity"]
-        EnableExitActivity <- map["EnableExitActivity"]
-    }
-}
-
-public struct NotificationsSettings:  Mappable {
-    
-    public var SpeedThreshold: Speed? = nil
-    public var EnableTripCompletedActivity: Bool = false
-    public var EnableTripStartActivity: Bool = false
-    public var EnableLowFuelActivity: Bool = false
-    public var EnableLowBatteryActivity: Bool = false
-    public var EnableSpeedActivity: Bool = false
-    public var EnableDtcActivity: Bool = false
-    public var EnableCheckEngineActivity: Bool = false
-    public var EnableTowActivity: Bool = false
-    public var EnableMaintenanceActivity: Bool = false
-    public var EnableRecallActivity: Bool = false
-    public var EnableServiceBulletinActivity: Bool = false
-    public var EnableDisturbanceActivity: Bool = false
-    public var DisturbanceThreshold: DisturbanceThreshold? = nil
-    public var EnableAccidentActivity: Bool = false
-    public var EnableDeviceUnpluggedActivity: Bool = false
-    
-    public var EnableVehicleConnectedActivity: Bool = false
-    public var EnableDeviceUpdatedActivity: Bool = false
-    public var EnableSMSActivity: Bool = false
-    public var EnableVehicleCompatibilityActivity: Bool = false
-    
-    public var EnableGeofenceActivity: Bool = false
-    public var Geofences: [SettingsGeofence] = []
-    
-    public init() {}
-    
-    public init?(map: Map) {
-        self.init()
-    }
-    
-    public func jsonDict () -> [String: Any] {
-        var map = self.toJSON()
-        
-        if let threshold = self.SpeedThreshold {
-            map["SpeedThreshold"] = threshold.jsonDict()
-        }
-        
-        var geofences: [[String: Any]] = []
-        for geofence in self.Geofences {
-            geofences.append(geofence.toJSON())
-        }
-        
-        map["Geofences"] = geofences
-        
-        return map
-    }
-    
-    public mutating func mapping(map: Map) {
-        SpeedThreshold <- map["SpeedThreshold"]
-        EnableTripStartActivity <- map["EnableTripStartActivity"]
-        EnableTripCompletedActivity <- map["EnableTripCompletedActivity"]
-        EnableLowFuelActivity <- map["EnableLowFuelActivity"]
-        EnableLowBatteryActivity <- map["EnableLowBatteryActivity"]
-        EnableSpeedActivity <- map["EnableSpeedActivity"]
-        EnableDtcActivity <- map["EnableDtcActivity"]
-        EnableCheckEngineActivity <- map["EnableCheckEngineActivity"]
-        EnableTowActivity <- map["EnableTowActivity"]
-        EnableMaintenanceActivity <- map["EnableMaintenanceActivity"]
-        EnableRecallActivity <- map["EnableRecallActivity"]
-        EnableServiceBulletinActivity <- map["EnableServiceBulletinActivity"]
-        EnableDisturbanceActivity <- map["EnableDisturbanceActivity"]
-        DisturbanceThreshold <- (map["DisturbanceThreshold"], EnumTransform())
-        EnableAccidentActivity <- map["EnableAccidentActivity"]
-        EnableDeviceUnpluggedActivity <- map["EnableDeviceUnpluggedActivity"]
-        
-        EnableVehicleConnectedActivity <- map["EnableVehicleConnectedActivity"]
-        EnableDeviceUpdatedActivity <- map["EnableDeviceUpdatedActivity"]
-        EnableSMSActivity <- map["EnableSMSActivity"]
-        EnableVehicleCompatibilityActivity <- map["EnableVehicleCompatibilityActivity"]
-        
-        EnableGeofenceActivity <- map["EnableGeofenceActivity"]
-        Geofences <- map["Geofences"]
-    }
-}
-
-public enum DisturbanceThreshold: String {
     case low = "Low"
     case medium = "Medium"
     case high = "High"
+    case unknown
+    
+    public init(from decoder: Decoder) throws {
+        let label = try decoder.singleValueContainer().decode(String.self)
+        self = DisturbanceThreshold(rawValue: label) ?? .unknown
+    }
     
     public static var all: [DisturbanceThreshold] {
         return [.low, .medium, .high]
     }
 }
 
+
+
+public struct SettingsGeofence: Codable, PrimaryKey {
+    
+    public let id: String
+    public let enableEnterActivity: Bool
+    public let enableExitActivity: Bool
+    
+    public enum CodingKeys: String, CodingKey {
+        case id = "Id"
+        case enableEnterActivity = "EnableEnterActivity"
+        case enableExitActivity = "EnableExitActivity"
+    }
+    
+    public init(from decoder: Decoder) throws {
+        
+        do {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            
+            self.id = try container.decode(String.self, forKey: .id)
+            self.enableEnterActivity = try container.decode(Bool.self, forKey: .enableEnterActivity)
+            self.enableExitActivity = try container.decode(Bool.self, forKey: .enableExitActivity)
+        }
+        catch {
+            debugPrint(error)
+            throw error
+        }
+    }
+}
+
+public struct NotificationsSettings: Codable {
+    
+    public let speedThreshold: Speed?
+    public let enableTripCompletedActivity: Bool
+    public let enableTripStartActivity: Bool
+    
+    public let enableLowFuelActivity: Bool
+    public let enableLowBatteryActivity: Bool
+    public let enableSpeedActivity: Bool
+    public let enableDtcActivity: Bool
+    public let enableCheckEngineActivity: Bool
+    
+    public let enableTowActivity: Bool
+    public let enableMaintenanceActivity: Bool
+    public let enableRecallActivity: Bool
+    public let enableServiceBulletinActivity: Bool
+    public let enableDisturbanceActivity: Bool
+    public let disturbanceThreshold: DisturbanceThreshold?
+    public let enableAccidentActivity: Bool
+    public let enableDeviceUnpluggedActivity: Bool
+    
+    public let enableVehicleConnectedActivity: Bool
+    public let enableDeviceUpdatedActivity: Bool
+    public let enableSMSActivity: Bool
+    public let enableVehicleCompatibilityActivity: Bool
+    
+    public let enableGeofenceActivity: Bool
+    public let geofences: [SettingsGeofence]
+    
+    public enum CodingKeys: String, CodingKey {
+        case speedThreshold = "SpeedThreshold"
+        case enableTripCompletedActivity = "EnableTripCompletedActivity"
+        case enableTripStartActivity = "EnableTripStartActivity"
+        
+        case enableLowFuelActivity = "EnableLowFuelActivity"
+        case enableLowBatteryActivity = "EnableLowBatteryActivity"
+        case enableSpeedActivity = "EnableSpeedActivity"
+        case enableDtcActivity = "EnableDtcActivity"
+        case enableCheckEngineActivity = "EnableCheckEngineActivity"
+        
+        case enableTowActivity = "EnableTowActivity"
+        case enableMaintenanceActivity = "EnableMaintenanceActivity"
+        case enableRecallActivity = "EnableRecallActivity"
+        case enableServiceBulletinActivity = "EnableServiceBulletinActivity"
+        case enableDisturbanceActivity = "EnableDisturbanceActivity"
+        case disturbanceThreshold = "DisturbanceThreshold"
+        case enableAccidentActivity = "EnableAccidentActivity"
+        case enableDeviceUnpluggedActivity = "EnableDeviceUnpluggedActivity"
+
+        case enableVehicleConnectedActivity = "EnableVehicleConnectedActivity"
+        case enableDeviceUpdatedActivity = "EnableDeviceUpdatedActivity"
+        case enableSMSActivity = "EnableSMSActivity"
+        case enableVehicleCompatibilityActivity = "EnableVehicleCompatibilityActivity"
+
+        case enableGeofenceActivity = "EnableGeofenceActivity"
+        case geofences = "Geofences"
+    }
+    
+    public init(from decoder: Decoder) throws {
+        do {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            
+            self.speedThreshold = try container.decodeIfPresent(Speed.self, forKey: .speedThreshold)
+            self.enableTripCompletedActivity = try container.decode(Bool.self, forKey: .enableTripCompletedActivity)
+            self.enableTripStartActivity = try container.decode(Bool.self, forKey: .enableTripStartActivity)
+            
+            
+            self.enableLowFuelActivity = try container.decode(Bool.self, forKey: .enableLowFuelActivity)
+            self.enableLowBatteryActivity = try container.decode(Bool.self, forKey: .enableLowBatteryActivity)
+            self.enableSpeedActivity = try container.decode(Bool.self, forKey: .enableSpeedActivity)
+            self.enableDtcActivity = try container.decode(Bool.self, forKey: .enableDtcActivity)
+            self.enableCheckEngineActivity = try container.decode(Bool.self, forKey: .enableCheckEngineActivity)
+
+            self.enableTowActivity = try container.decode(Bool.self, forKey: .enableTowActivity)
+            self.enableMaintenanceActivity = try container.decode(Bool.self, forKey: .enableMaintenanceActivity)
+            self.enableRecallActivity = try container.decode(Bool.self, forKey: .enableRecallActivity)
+            self.enableServiceBulletinActivity = try container.decode(Bool.self, forKey: .enableServiceBulletinActivity)
+            self.enableDisturbanceActivity = try container.decode(Bool.self, forKey: .enableDisturbanceActivity)
+            self.disturbanceThreshold = try container.decode(DisturbanceThreshold.self, forKey: .disturbanceThreshold)
+            self.enableAccidentActivity = try container.decode(Bool.self, forKey: .enableAccidentActivity)
+            self.enableDeviceUnpluggedActivity = try container.decode(Bool.self, forKey: .enableDeviceUnpluggedActivity)
+
+            self.enableVehicleConnectedActivity = try container.decode(Bool.self, forKey: .enableVehicleConnectedActivity)
+            self.enableDeviceUpdatedActivity = try container.decode(Bool.self, forKey: .enableDeviceUpdatedActivity)
+            self.enableSMSActivity = try container.decode(Bool.self, forKey: .enableSMSActivity)
+            self.enableVehicleCompatibilityActivity = try container.decode(Bool.self, forKey: .enableVehicleCompatibilityActivity)
+            
+            self.enableGeofenceActivity = try container.decode(Bool.self, forKey: .enableGeofenceActivity)
+            self.geofences = try container.decodeIfPresent([SettingsGeofence].self, forKey: .geofences) ?? []
+        }
+        catch {
+            debugPrint(error)
+            throw error
+        }
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        
+    }
+}
+    
+//    public func jsonDict () -> [String: Any] {
+//        var map = self.toJSON()
+//
+//        if let threshold = self.SpeedThreshold {
+//            map["SpeedThreshold"] = threshold.jsonDict()
+//        }
+//
+//        var geofences: [[String: Any]] = []
+//        for geofence in self.Geofences {
+//            geofences.append(geofence.toJSON())
+//        }
+//
+//        map["Geofences"] = geofences
+//
+//        return map
+//    }

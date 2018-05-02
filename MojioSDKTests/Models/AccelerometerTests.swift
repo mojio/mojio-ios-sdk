@@ -15,7 +15,6 @@
 
 @testable import MojioSDK
 import XCTest
-import ObjectMapper
 
 class AccelerometerTests: XCTestCase {
     func testAccelerometerShouldBeCreatedFromJsonString() {
@@ -36,39 +35,39 @@ extension AccelerometerTests {
         return """
         {
         "X": {
-        "BaseUnit": "MilliGUnits",
-        "Timestamp": "2017-11-09T07:16:58.072Z",
-        "BaseValue": 0,
-        "Unit": "MilliGUnits",
-        "Value": 0
+        "baseUnit": "MilliGUnits",
+        "timestamp": "2017-11-09T07:16:58.072Z",
+        "baseValue": 0,
+        "unit": "MilliGUnits",
+        "value": 0
         },
         "Y": {
-        "BaseUnit": "MilliGUnits",
-        "Timestamp": "2017-11-09T07:16:58.072Z",
-        "BaseValue": 0,
-        "Unit": "MilliGUnits",
-        "Value": 0
+        "baseUnit": "MilliGUnits",
+        "timestamp": "2017-11-09T07:16:58.072Z",
+        "baseValue": 0,
+        "unit": "MilliGUnits",
+        "value": 0
         },
         "Z": {
-        "BaseUnit": "MilliGUnits",
-        "Timestamp": "2017-11-09T07:16:58.072Z",
-        "BaseValue": 0,
-        "Unit": "MilliGUnits",
-        "Value": 0
+        "baseUnit": "MilliGUnits",
+        "timestamp": "2017-11-09T07:16:58.072Z",
+        "baseValue": 0,
+        "unit": "MilliGUnits",
+        "value": 0
         },
         "Magnitude": {
-        "BaseUnit": "MilliGUnits",
-        "Timestamp": "2017-11-09T07:16:58.072Z",
-        "BaseValue": 0,
-        "Unit": "MilliGUnits",
-        "Value": 0
+        "baseUnit": "MilliGUnits",
+        "timestamp": "2017-11-09T07:16:58.072Z",
+        "baseValue": 0,
+        "unit": "MilliGUnits",
+        "value": 0
         },
         "SamplingInterval": {
-        "BaseUnit": "Ticks",
-        "Timestamp": "2017-11-09T07:16:58.072Z",
-        "BaseValue": 0,
-        "Unit": "Ticks",
-        "Value": 0
+        "baseUnit": "Ticks",
+        "timestamp": "2017-11-09T07:16:58.072Z",
+        "baseValue": 0,
+        "unit": "Ticks",
+        "value": 0
         }
         }
         """

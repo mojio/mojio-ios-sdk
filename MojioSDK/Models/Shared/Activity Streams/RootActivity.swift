@@ -14,57 +14,106 @@
  *******************************************************************************/
 
 import Foundation
-import ObjectMapper
 
-public struct RootActivity: BaseActivity {
+public class RootActivity: BaseActivity {
+    
+    public typealias T = Activity
     
     // BaseActivityLocation
-    public var Id: String? = nil
-    public var ActivityType: String? = nil
-    public var Href: String? = nil
-    public var Name: String? = nil
-    public var NameMap: Dictionary<String, String>? = nil
+    public let id: String
+    public let activityType: ActivityType?
+    public let href: String?
+    public let name: String?
+    public let nameMap: Dictionary<String, String>?
     
     // BaseActivity
-    public var StartTime: String? = nil
-    public var EndTime: String? = nil
-    public var Duration: String? = nil
-    public var Published: String? = nil
-    public var Updated: String? = nil
+    public let startTime: Date?
+    public let endTime: Date?
+    public let duration: TimeInterval?
+    public let published: Date?
+    public let updated: Date?
     
-    public var Context: String? = nil
-    
-    public var Content: String? = nil
-    public var Location: ActivityLocation? = nil
-    public var AttributedTo: BaseActivity? = nil
-    public var Summary: Dictionary<String, String>? = nil
-    public var Icon: Dictionary<String, Any>? = nil
-    
-    public var startTime: Date? = nil
-    public var endTime: Date? = nil
-    public var published: Date? = nil
-    public var updated: Date? = nil
+    public let context: String?
+    public let content: String?
+    public let location: ActivityLocation?
+    public let attributedTo: Activity?
+    public let summary: Dictionary<String, String>?
+    public let icon: Dictionary<String, String>?
 
     // Root Values
-    public var Actor: Activity? = nil
-    public var Target: Activity? = nil
-    public var Result: Activity? = nil
-    public var Object: Activity? = nil
-    public var Origin: Activity? = nil
+    public let actor: Activity?
+    public let target: Activity?
+    public let result: Activity?
+    public let object: Activity?
+    public let origin: Activity?
     
-    public init() {}
-    
-    public init?(map: Map) {
-        self.init()
+    public enum CodingKeys: String, CodingKey {
+        case actor = "Actor"
+        case target = "Target"
+        case result = "Result"
+        case object = "Object"
+        case origin = "Origin"
     }
-
-    public mutating func mapping(map: Map) {
-        self.baseActivityMapping(map: map)
-                
-        Actor <- map["Actor"]
-        Target <- map["Target"]
-        Result <- map["Result"]
-        Object <- map["Object"]
-        Origin <- map["Origin"]
+    
+    public required init(from decoder: Decoder) throws {
+        
+        // BaseActivityLocation
+        let locationContainer = try decoder.container(keyedBy: BaseActivityLocationCodingKeys.self)
+        
+        do {
+            self.id = try locationContainer.decode(String.self, forKey: .id)
+            self.activityType = try locationContainer.decodeIfPresent(ActivityType.self, forKey: .activityType)
+            self.href = try locationContainer.decodeIfPresent(String.self, forKey: .href)
+            self.name = try locationContainer.decodeIfPresent(String.self, forKey: .name)
+            self.nameMap = try locationContainer.decodeIfPresent(Dictionary<String, String>.self, forKey: .nameMap)
+        }
+        catch {
+            debugPrint(error)
+            throw error
+        }
+        
+        // BaseActivity
+        let activityContainer = try decoder.container(keyedBy: BaseActivityCodingKeys.self)
+        
+        do {
+            self.startTime = try activityContainer.decodeIfPresent(String.self, forKey: .startTime).flatMap { $0.dateFromIso8601 }
+            self.endTime = try activityContainer.decodeIfPresent(String.self, forKey: .endTime).flatMap { $0.dateFromIso8601 }
+            self.duration = try activityContainer.decodeIfPresent(TimeInterval.self, forKey: .duration)
+            self.published = try activityContainer.decodeIfPresent(String.self, forKey: .published).flatMap { $0.dateFromIso8601 }
+            self.updated = try activityContainer.decodeIfPresent(String.self, forKey: .updated).flatMap { $0.dateFromIso8601 }
+            self.context = try activityContainer.decodeIfPresent(String.self, forKey: .context)
+            self.content = try activityContainer.decodeIfPresent(String.self, forKey: .content)
+            
+            self.location = try activityContainer.decodeIfPresent(ActivityLocation.self, forKey: .location)
+            
+            self.attributedTo = try activityContainer.decodeIfPresent(Activity.self, forKey: .attributedTo)
+            
+            self.summary = try activityContainer.decodeIfPresent(Dictionary<String, String>.self, forKey: .summary)
+            
+            self.icon = try activityContainer.decodeIfPresent(Dictionary<String, String>.self, forKey: .icon)
+        }
+        catch {
+            debugPrint(error)
+            throw error
+        }
+        
+        // RootActivity
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        do {
+            self.actor = try container.decodeIfPresent(Activity.self, forKey: .actor)
+            self.target = try container.decodeIfPresent(Activity.self, forKey: .target)
+            self.result = try container.decodeIfPresent(Activity.self, forKey: .result)
+            self.object = try container.decodeIfPresent(Activity.self, forKey: .object)
+            self.origin = try container.decodeIfPresent(Activity.self, forKey: .origin)
+        }
+        catch {
+            debugPrint(error)
+            throw error
+        }
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        
     }
 }

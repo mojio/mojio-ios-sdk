@@ -14,7 +14,6 @@
  *******************************************************************************/
 
 @testable import MojioSDK
-import ObjectMapper
 import XCTest
 
 class ServiceScheduleTests: XCTestCase {
@@ -35,7 +34,7 @@ class ServiceScheduleTests: XCTestCase {
         "OperatingParameter": "string",
         "OperatingParameterNotes": "string",
         "IntervalType": "string",
-        "Value": 0,
+        "value": 0,
         "Units": "string",
         "InitialValue": 0
         }],

@@ -14,7 +14,6 @@
  *******************************************************************************/
 
 @testable import MojioSDK
-import ObjectMapper
 import XCTest
 
 class VehicleTests: XCTestCase {
@@ -95,7 +94,7 @@ extension VehicleTests {
         "LastContactTime": "2017-11-10T07:07:45.030Z",
         "DiagnosticCodes": [
         {
-        "Timestamp": "2017-11-10T07:07:45.030Z",
+        "timestamp": "2017-11-10T07:07:45.030Z",
         "Code": "string",
         "Description": "string",
         "Type": "Standard",
@@ -107,169 +106,169 @@ extension VehicleTests {
         ],
         "Accelerometer": {
         "X": {
-        "BaseUnit": "MilliGUnits",
-        "Timestamp": "2017-11-10T07:07:45.030Z",
-        "BaseValue": 0,
-        "Unit": "MilliGUnits",
-        "Value": 0
+        "baseUnit": "MilliGUnits",
+        "timestamp": "2017-11-10T07:07:45.030Z",
+        "baseValue": 0,
+        "unit": "MilliGUnits",
+        "value": 0
         },
         "Y": {
-        "BaseUnit": "MilliGUnits",
-        "Timestamp": "2017-11-10T07:07:45.030Z",
-        "BaseValue": 0,
-        "Unit": "MilliGUnits",
-        "Value": 0
+        "baseUnit": "MilliGUnits",
+        "timestamp": "2017-11-10T07:07:45.030Z",
+        "baseValue": 0,
+        "unit": "MilliGUnits",
+        "value": 0
         },
         "Z": {
-        "BaseUnit": "MilliGUnits",
-        "Timestamp": "2017-11-10T07:07:45.030Z",
-        "BaseValue": 0,
-        "Unit": "MilliGUnits",
-        "Value": 0
+        "baseUnit": "MilliGUnits",
+        "timestamp": "2017-11-10T07:07:45.030Z",
+        "baseValue": 0,
+        "unit": "MilliGUnits",
+        "value": 0
         },
         "Magnitude": {
-        "BaseUnit": "MilliGUnits",
-        "Timestamp": "2017-11-10T07:07:45.030Z",
-        "BaseValue": 0,
-        "Unit": "MilliGUnits",
-        "Value": 0
+        "baseUnit": "MilliGUnits",
+        "timestamp": "2017-11-10T07:07:45.030Z",
+        "baseValue": 0,
+        "unit": "MilliGUnits",
+        "value": 0
         },
         "SamplingInterval": {
-        "BaseUnit": "Ticks",
-        "Timestamp": "2017-11-10T07:07:45.030Z",
-        "BaseValue": 0,
-        "Unit": "Ticks",
-        "Value": 0
+        "baseUnit": "Ticks",
+        "timestamp": "2017-11-10T07:07:45.030Z",
+        "baseValue": 0,
+        "unit": "Ticks",
+        "value": 0
         }
         },
         "Acceleration": {
-        "BaseUnit": "MetersPerSecondPerSecond",
-        "Timestamp": "2017-11-10T07:07:45.030Z",
-        "BaseValue": 0,
-        "Unit": "MetersPerSecondPerSecond",
-        "Value": 0
+        "baseUnit": "MetersPerSecondPerSecond",
+        "timestamp": "2017-11-10T07:07:45.030Z",
+        "baseValue": 0,
+        "unit": "MetersPerSecondPerSecond",
+        "value": 0
         },
         "Deceleration": {
-        "BaseUnit": "MetersPerSecondPerSecond",
-        "Timestamp": "2017-11-10T07:07:45.030Z",
-        "BaseValue": 0,
-        "Unit": "MetersPerSecondPerSecond",
-        "Value": 0
+        "baseUnit": "MetersPerSecondPerSecond",
+        "timestamp": "2017-11-10T07:07:45.030Z",
+        "baseValue": 0,
+        "unit": "MetersPerSecondPerSecond",
+        "value": 0
         },
         "Speed": {
-        "BaseUnit": "KilometersPerHour",
-        "Timestamp": "2017-11-10T07:07:45.030Z",
-        "BaseValue": 0,
-        "Unit": "KilometersPerHour",
-        "Value": 0
+        "baseUnit": "KilometersPerHour",
+        "timestamp": "2017-11-10T07:07:45.030Z",
+        "baseValue": 0,
+        "unit": "KilometersPerHour",
+        "value": 0
         },
         "Odometer": {
         "RolloverValue": 0,
-        "BaseUnit": "Meters",
-        "Timestamp": "2017-11-10T07:07:45.030Z",
-        "BaseValue": 0,
-        "Unit": "Meters",
-        "Value": 0
+        "baseUnit": "Meters",
+        "timestamp": "2017-11-10T07:07:45.030Z",
+        "baseValue": 0,
+        "unit": "Meters",
+        "value": 0
         },
         "RPM": {
-        "BaseUnit": "RevolutionsPerMinute",
-        "Timestamp": "2017-11-10T07:07:45.030Z",
-        "BaseValue": 0,
-        "Unit": "RevolutionsPerMinute",
-        "Value": 0
+        "baseUnit": "RevolutionsPerMinute",
+        "timestamp": "2017-11-10T07:07:45.030Z",
+        "baseValue": 0,
+        "unit": "RevolutionsPerMinute",
+        "value": 0
         },
         "FuelEfficiency": {
-        "BaseUnit": "MilesPerGallon",
-        "Timestamp": "2017-11-10T07:07:45.030Z",
-        "BaseValue": 0,
-        "Unit": "MilesPerGallon",
-        "Value": 0
+        "baseUnit": "MilesPerGallon",
+        "timestamp": "2017-11-10T07:07:45.030Z",
+        "baseValue": 0,
+        "unit": "MilesPerGallon",
+        "value": 0
         },
         "DisturbanceState": {
-        "Timestamp": "2017-11-10T07:07:45.030Z",
-        "Value": true
+        "timestamp": "2017-11-10T07:07:45.030Z",
+        "value": true
         },
         "FuelEfficiencyCalculationMethod": "Query",
         "FuelLevel": {
-        "BaseUnit": "Percentage",
+        "baseUnit": "Percentage",
         "RiskSeverity": "Unknown",
-        "Timestamp": "2017-11-10T07:07:45.030Z",
-        "BaseValue": 0,
-        "Unit": "Percentage",
-        "Value": 0
+        "timestamp": "2017-11-10T07:07:45.030Z",
+        "baseValue": 0,
+        "unit": "Percentage",
+        "value": 0
         },
         "FuelVolume": {
-        "BaseUnit": "Gill",
-        "Timestamp": "2017-11-10T07:07:45.030Z",
-        "BaseValue": 0,
-        "Unit": "Gill",
-        "Value": 0
+        "baseUnit": "Gill",
+        "timestamp": "2017-11-10T07:07:45.030Z",
+        "baseValue": 0,
+        "unit": "Gill",
+        "value": 0
         },
         "VirtualFuelConsumption": {
-        "BaseUnit": "Gill",
-        "Timestamp": "2017-11-10T07:07:45.030Z",
-        "BaseValue": 0,
-        "Unit": "Gill",
-        "Value": 0
+        "baseUnit": "Gill",
+        "timestamp": "2017-11-10T07:07:45.030Z",
+        "baseValue": 0,
+        "unit": "Gill",
+        "value": 0
         },
         "FuelType": "Query",
         "GatewayTime": "2017-11-10T07:07:45.030Z",
         "HarshEventState": {
-        "Timestamp": "2017-11-10T07:07:45.030Z",
-        "Value": true,
+        "timestamp": "2017-11-10T07:07:45.030Z",
+        "value": true,
         "EventType": "Acceleration",
         "TurnType": "Left"
         },
         "IdleState": {
-        "Timestamp": "2017-11-10T07:07:45.030Z",
-        "Value": true,
+        "timestamp": "2017-11-10T07:07:45.030Z",
+        "value": true,
         "StartTime": "2017-11-10T07:07:45.030Z",
         "Duration": {
-        "BaseUnit": "Ticks",
-        "Timestamp": "2017-11-10T07:07:45.030Z",
-        "BaseValue": 0,
-        "Unit": "Ticks",
-        "Value": 0
+        "baseUnit": "Ticks",
+        "timestamp": "2017-11-10T07:07:45.030Z",
+        "baseValue": 0,
+        "unit": "Ticks",
+        "value": 0
         }
         },
         "IgnitionState": {
-        "Timestamp": "2017-11-10T07:07:45.030Z",
-        "Value": true
+        "timestamp": "2017-11-10T07:07:45.030Z",
+        "value": true
         },
         "Battery": {
         "Connected": true,
         "RiskSeverity": "Unknown",
         "LowVoltageDuration": {
-        "BaseUnit": "Ticks",
-        "Timestamp": "2017-11-10T07:07:45.030Z",
-        "BaseValue": 0,
-        "Unit": "Ticks",
-        "Value": 0
+        "baseUnit": "Ticks",
+        "timestamp": "2017-11-10T07:07:45.030Z",
+        "baseValue": 0,
+        "unit": "Ticks",
+        "value": 0
         },
         "HighVoltageDuration": {
-        "BaseUnit": "Ticks",
-        "Timestamp": "2017-11-10T07:07:45.030Z",
-        "BaseValue": 0,
-        "Unit": "Ticks",
-        "Value": 0
+        "baseUnit": "Ticks",
+        "timestamp": "2017-11-10T07:07:45.030Z",
+        "baseValue": 0,
+        "unit": "Ticks",
+        "value": 0
         },
-        "BaseUnit": "MilliVolts",
-        "Timestamp": "2017-11-10T07:07:45.031Z",
-        "BaseValue": 0,
-        "Unit": "MilliVolts",
-        "Value": 0
+        "baseUnit": "MilliVolts",
+        "timestamp": "2017-11-10T07:07:45.031Z",
+        "baseValue": 0,
+        "unit": "MilliVolts",
+        "value": 0
         },
         "Heading": {
-        "BaseUnit": "Degree",
+        "baseUnit": "Degree",
         "Direction": "string",
         "LeftTurn": true,
-        "Timestamp": "2017-11-10T07:07:45.031Z",
-        "BaseValue": 0,
-        "Unit": "Degree",
-        "Value": 0
+        "timestamp": "2017-11-10T07:07:45.031Z",
+        "baseValue": 0,
+        "unit": "Degree",
+        "value": 0
         },
         "Location": {
-        "Timestamp": "2017-11-10T07:07:45.031Z",
+        "timestamp": "2017-11-10T07:07:45.031Z",
         "Lat": 0,
         "Lng": 0,
         "Status": "Unknown",
@@ -277,20 +276,20 @@ extension VehicleTests {
         "Altitude": 0,
         "GeoHash": "string",
         "Accuracy": {
-        "BaseUnit": "Meters",
-        "Timestamp": "2017-11-10T07:07:45.031Z",
-        "BaseValue": 0,
-        "Unit": "Meters",
-        "Value": 0
+        "baseUnit": "Meters",
+        "timestamp": "2017-11-10T07:07:45.031Z",
+        "baseValue": 0,
+        "unit": "Meters",
+        "value": 0
         },
         "Heading": {
-        "BaseUnit": "Degree",
+        "baseUnit": "Degree",
         "Direction": "string",
         "LeftTurn": true,
-        "Timestamp": "2017-11-10T07:07:45.031Z",
-        "BaseValue": 0,
-        "Unit": "Degree",
-        "Value": 0
+        "timestamp": "2017-11-10T07:07:45.031Z",
+        "baseValue": 0,
+        "unit": "Degree",
+        "value": 0
         },
         "Address": {
         "HouseNumber": "string",
@@ -307,11 +306,11 @@ extension VehicleTests {
         }
         },
         "AccidentState": {
-        "Timestamp": "2017-11-10T07:07:45.031Z",
-        "Value": true
+        "timestamp": "2017-11-10T07:07:45.031Z",
+        "value": true
         },
         "VinDetails": {
-        "Timestamp": "2017-11-10T07:07:45.031Z",
+        "timestamp": "2017-11-10T07:07:45.031Z",
         "Vin": "string",
         "Year": 0,
         "Make": "string",
@@ -319,11 +318,11 @@ extension VehicleTests {
         "Engine": "string",
         "Cylinders": 0,
         "TotalFuelCapacity": {
-        "BaseUnit": "Gallons",
-        "Timestamp": "2017-11-10T07:07:45.031Z",
-        "BaseValue": 0,
-        "Unit": "Gallons",
-        "Value": 0
+        "baseUnit": "Gallons",
+        "timestamp": "2017-11-10T07:07:45.031Z",
+        "baseValue": 0,
+        "unit": "Gallons",
+        "value": 0
         },
         "FuelType": "string",
         "CityFuelEfficiency": 0,
@@ -334,24 +333,24 @@ extension VehicleTests {
         "Success": true
         },
         "TowState": {
-        "Timestamp": "2017-11-10T07:07:45.031Z",
-        "Value": true,
+        "timestamp": "2017-11-10T07:07:45.031Z",
+        "value": true,
         "Type": "TiltDetected"
         },
         "ParkedState": {
-        "Timestamp": "2017-11-10T07:07:45.031Z",
-        "Value": true
+        "timestamp": "2017-11-10T07:07:45.031Z",
+        "value": true
         },
         "Tags": [
         "string"
         ],
         "VirtualOdometer": {
         "RolloverValue": 0,
-        "BaseUnit": "Meters",
-        "Timestamp": "2017-11-10T07:07:45.031Z",
-        "BaseValue": 0,
-        "Unit": "Meters",
-        "Value": 0
+        "baseUnit": "Meters",
+        "timestamp": "2017-11-10T07:07:45.031Z",
+        "baseValue": 0,
+        "unit": "Meters",
+        "value": 0
         },
         "Id": "00000000-0000-0000-0000-000000000000",
         "CreatedOn": "2017-11-10T07:07:45.031Z",

@@ -14,44 +14,34 @@
  *******************************************************************************/
 
 import Foundation
-import ObjectMapper
 
 public enum AggregationDataMeasurementType: String {
     case measureBattery = "battery"
 }
 
-public struct AggregationData: Mappable {
+public struct AggregationData: Codable {
+    
     public var Total        : Double = 0
     public var Average      : Double = 0
     public var Max          : Double = 0
     public var Min          : Double = 0
-    public var Units        : String?
+    public var units        : String?
     public var Date         : String?
     public var EndDate      : String?
     public var Count        : Int = 0
     public var TripCount    : Int = 0
     
-    public var date: Date? = nil
-    public var endDate: Date? = nil
+//    public var date: Date? = nil
+//    public var endDate: Date? = nil
+}
+
+extension AggregationData {
     
-    public init() {}
-    
-    public init?(map: Map) {
-        self.init()
+    public var date: Date? {
+        return self.Date?.toDate
     }
     
-    public mutating func mapping(map: Map) {
-        Total <- map["Total"]
-        Average <- map["Average"]
-        Max <- map["Max"]
-        Min <- map["Min"]
-        Units <- map["Units"]
-        Date <- map["Date"]
-        EndDate <- map["EndDate"]
-        Count <- map["Count"]
-        TripCount <- map["TripCount"]
-        
-        date = self.Date?.toDate
-        endDate = self.EndDate?.toDate
+    public var endDate: Date? {
+        return self.EndDate?.toDate
     }
 }

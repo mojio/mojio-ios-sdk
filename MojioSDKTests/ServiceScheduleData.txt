@@ -9,7 +9,7 @@
 "ServiceEvent": "",
 "TransNotes": "",
 "Units": "km",
-"Value": 60,
+"value": 60,
 "InitialValue": 60,
 "IntervalType": "Every"
 }

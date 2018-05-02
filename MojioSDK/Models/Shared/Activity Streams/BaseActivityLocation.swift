@@ -14,27 +14,48 @@
  *******************************************************************************/
 
 import Foundation
-import ObjectMapper
 
-public protocol BaseActivityLocation: Mappable, PrimaryKey {
-    var Id: String? {get set}
-    var ActivityType: String? {get set}
-    var Href: String? {get set}
-    var Name: String? {get set}
-    var NameMap: Dictionary<String, String>? {get set}
+// Based on Activity Stream Data Identifiers
+public enum ActivityType : String, Codable {
+    case add = "Add"
+    case announce = "Announce"
+    case arrive = "Arrive"
+    case battery = "Battery"
+    case checkEngine = "CheckEngineLight"
+    case device = "TelematicDevice"
+    case dtc = "DiagnosticTroubleCode"
+    case fuelLevel = "FuelLevel"
+    case geofence = "Geofence"
+    case leave = "Leave"
+    case move = "Move"
+    case note = "Note" // SMS or Custom Messages
+    case parkingStartingSoon = "ParkingStartingSoon"
+    case parkingStarted = "ParkingStarted"
+    case parkingEndingSoon = "ParkingEndingSoon"
+    case parkingEnded = "ParkingEnded"
+    case person = "Person"
+    case recall = "Recall"
+    case remove = "Remove"
+    case speedLimit = "SpeedLimit"
+    case trip = "Trip"
+    case updateDevice = "UpdateDevice"
+    case user = "User"
+    case vehicle = "Vehicle"
+    case none = ""
 }
 
-extension BaseActivityLocation {
+public enum BaseActivityLocationCodingKeys: String, CodingKey {
+    case id = "Id"
+    case activityType = "Type"
+    case href = "Href"
+    case name = "Name"
+    case nameMap = "NameMap"
+}
 
-    public mutating func mapping(map: Map) {
-        self.baseActivityLocationMapping(map: map)
-    }
-    
-    public mutating func baseActivityLocationMapping(map: Map) {
-        Id <- map["Id"]
-        ActivityType <- map["Type"]
-        Href <- map["Href"]
-        Name <- map["Name"]
-        NameMap <- map["NameMap"]
-    }
+public protocol BaseActivityLocation: PrimaryKey, Codable {
+    var id: String { get }
+    var activityType: ActivityType? { get }
+    var href: String? { get }
+    var name: String? { get }
+    var nameMap: Dictionary<String, String>? { get }
 }

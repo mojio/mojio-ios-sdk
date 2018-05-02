@@ -14,7 +14,6 @@
  *******************************************************************************/
 
 @testable import MojioSDK
-import ObjectMapper
 import XCTest
 
 class SpeedTests: XCTestCase {
@@ -22,11 +21,11 @@ class SpeedTests: XCTestCase {
     func testSpeedModelShouldBeCreatedFromJsonString() {
         let jsonString = """
         {
-        "BaseUnit": "KilometersPerHour",
-        "Timestamp": "2017-11-10T07:07:42.740Z",
-        "BaseValue": 10,
-        "Unit": "KilometersPerHour",
-        "Value": 20
+        "baseUnit": "KilometersPerHour",
+        "timestamp": "2017-11-10T07:07:42.740Z",
+        "baseValue": 10,
+        "unit": "KilometersPerHour",
+        "value": 20
         }
         """
 
@@ -34,10 +33,10 @@ class SpeedTests: XCTestCase {
         let model = Mapper<Speed>().map(JSONObject: jsonObject)
         
         XCTAssertNotNil(model)
-        XCTAssertEqual(model?.BaseUnit, "KilometersPerHour")
-        XCTAssertEqual(model?.BaseValue, 10)
-        XCTAssertEqual(model?.Unit, "KilometersPerHour")
-        XCTAssertEqual(model?.Value, 20)
-        XCTAssertEqual(model?.Timestamp, "2017-11-10T07:07:42.740Z")
+        XCTAssertEqual(model?.baseUnit, "KilometersPerHour")
+        XCTAssertEqual(model?.baseValue, 10)
+        XCTAssertEqual(model?.unit, "KilometersPerHour")
+        XCTAssertEqual(model?.value, 20)
+        XCTAssertEqual(model?.timestamp, "2017-11-10T07:07:42.740Z")
     }
 }

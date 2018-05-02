@@ -13,10 +13,9 @@
  * forbidden unless prior written permission is obtained from Moj.io Inc.
  *******************************************************************************/
 
-import UIKit
-import ObjectMapper
+import Foundation
 
-public struct Engine: Mappable {
+public struct Engine: Codable {
     
     public var Name: String? = nil
     public var Cylinders: String? = nil
@@ -26,21 +25,21 @@ public struct Engine: Mappable {
     public var FuelType: String? = nil
     public var MaxHp: String? = nil
     public var MaxHpAt: String? = nil
-
-    public init() {}
-    
-    public init?(map: Map) {
-        self.init()
-    }
-
-    public mutating func mapping(map: Map) {
-        Name <- map["Name"]
-        Cylinders <- map["Cylinders"]
-        Displacement <- map["Displacement"]
-        FuelInduction <- map["FuelInduction"]
-        FuelQuality <- map["FuelQuality"]
-        FuelType <- map["FuelType"]
-        MaxHp <- map["MaxHp"]
-        MaxHpAt <- map["MaxHpAt"]
-    }
 }
+
+//public init() {}
+//
+//public init?(map: Map) {
+//    self.init()
+//}
+//
+//public mutating func mapping(map: Map) {
+//    Name <- map["Name"]
+//    Cylinders <- map["Cylinders"]
+//    Displacement <- map["Displacement"]
+//    FuelInduction <- map["FuelInduction"]
+//    FuelQuality <- map["FuelQuality"]
+//    FuelType <- map["FuelType"]
+//    MaxHp <- map["MaxHp"]
+//    MaxHpAt <- map["MaxHpAt"]
+//}

@@ -14,7 +14,6 @@
  *******************************************************************************/
 
 @testable import MojioSDK
-import ObjectMapper
 import XCTest
 
 class MojioTests: XCTestCase {
@@ -65,7 +64,7 @@ extension MojioTests {
         "GatewayTime": "2017-11-09T07:16:57.426Z",
         "VehicleId": "00000000-0000-0000-0000-000000000000",
         "Location": {
-        "Timestamp": "2017-11-09T07:16:57.426Z",
+        "timestamp": "2017-11-09T07:16:57.426Z",
         "Lat": 0,
         "Lng": 0,
         "Status": "Unknown",
@@ -73,20 +72,20 @@ extension MojioTests {
         "Altitude": 0,
         "GeoHash": "string",
         "Accuracy": {
-        "BaseUnit": "Meters",
-        "Timestamp": "2017-11-09T07:16:57.426Z",
-        "BaseValue": 0,
-        "Unit": "Meters",
-        "Value": 0
+        "baseUnit": "Meters",
+        "timestamp": "2017-11-09T07:16:57.426Z",
+        "baseValue": 0,
+        "unit": "Meters",
+        "value": 0
         },
         "Heading": {
-        "BaseUnit": "Degree",
+        "baseUnit": "Degree",
         "Direction": "string",
         "LeftTurn": true,
-        "Timestamp": "2017-11-09T07:16:57.426Z",
-        "BaseValue": 0,
-        "Unit": "Degree",
-        "Value": 0
+        "timestamp": "2017-11-09T07:16:57.426Z",
+        "baseValue": 0,
+        "unit": "Degree",
+        "value": 0
         },
         "Address": {
         "HouseNumber": "string",
@@ -106,7 +105,7 @@ extension MojioTests {
         "string"
         ],
         "WifiRadio": {
-        "Timestamp": "2017-11-09T07:16:57.427Z",
+        "timestamp": "2017-11-09T07:16:57.427Z",
         "SSID": "string",
         "Password": "string",
         "AllowRoaming": true,
@@ -114,13 +113,13 @@ extension MojioTests {
         "Strength": 0
         },
         "GPSRadio": {
-        "Timestamp": "2017-11-09T07:16:57.427Z",
+        "timestamp": "2017-11-09T07:16:57.427Z",
         "NumberOfSattelitesForPositionFix": 0,
         "PDOP": 0,
         "HorizontalDilutionOfPrecision": 0,
         "VDOP": 0,
         "Location": {
-        "Timestamp": "2017-11-09T07:16:57.427Z",
+        "timestamp": "2017-11-09T07:16:57.427Z",
         "Lat": 0,
         "Lng": 0,
         "Status": "Unknown",
@@ -128,20 +127,20 @@ extension MojioTests {
         "Altitude": 0,
         "GeoHash": "string",
         "Accuracy": {
-        "BaseUnit": "Meters",
-        "Timestamp": "2017-11-09T07:16:57.427Z",
-        "BaseValue": 0,
-        "Unit": "Meters",
-        "Value": 0
+        "baseUnit": "Meters",
+        "timestamp": "2017-11-09T07:16:57.427Z",
+        "baseValue": 0,
+        "unit": "Meters",
+        "value": 0
         },
         "Heading": {
-        "BaseUnit": "Degree",
+        "baseUnit": "Degree",
         "Direction": "string",
         "LeftTurn": true,
-        "Timestamp": "2017-11-09T07:16:57.427Z",
-        "BaseValue": 0,
-        "Unit": "Degree",
-        "Value": 0
+        "timestamp": "2017-11-09T07:16:57.427Z",
+        "baseValue": 0,
+        "unit": "Degree",
+        "value": 0
         },
         "Address": {
         "HouseNumber": "string",
@@ -163,29 +162,29 @@ extension MojioTests {
         "Status": "Unknown",
         "Source": "GPS",
         "LostLockTime": {
-        "BaseUnit": "Ticks",
-        "Timestamp": "2017-11-09T07:16:57.427Z",
-        "BaseValue": 0,
-        "Unit": "Ticks",
-        "Value": 0
+        "baseUnit": "Ticks",
+        "timestamp": "2017-11-09T07:16:57.427Z",
+        "baseValue": 0,
+        "unit": "Ticks",
+        "value": 0
         },
         "Speed": {
-        "BaseUnit": "KilometersPerHour",
-        "Timestamp": "2017-11-09T07:16:57.427Z",
-        "BaseValue": 0,
-        "Unit": "KilometersPerHour",
-        "Value": 0
+        "baseUnit": "KilometersPerHour",
+        "timestamp": "2017-11-09T07:16:57.427Z",
+        "baseValue": 0,
+        "unit": "KilometersPerHour",
+        "value": 0
         }
         },
         "ConnectedState": {
-        "Timestamp": "2017-11-09T07:16:57.427Z",
-        "Value": true
+        "timestamp": "2017-11-09T07:16:57.427Z",
+        "value": true
         },
         "SMSState": {
-        "Timestamp": "2017-11-09T07:16:57.427Z",
-        "Value": true,
+        "timestamp": "2017-11-09T07:16:57.427Z",
+        "value": true,
         "SMSDetails": {
-        "Timestamp": "2017-11-09T07:16:57.427Z",
+        "timestamp": "2017-11-09T07:16:57.427Z",
         "ReceiveTimestamp": "2017-11-09T07:16:57.427Z",
         "SenderNumber": "string",
         "Encoding": "string",

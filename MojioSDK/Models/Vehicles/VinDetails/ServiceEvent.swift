@@ -13,22 +13,21 @@
  * forbidden unless prior written permission is obtained from Moj.io Inc.
  *******************************************************************************/
 
-import UIKit
-import ObjectMapper
+import Foundation
 
-public struct ServiceEvent: Mappable {
+public struct ServiceEvent: Codable {
     
     public var ComputerCode: String? = nil
     public var Event: String? = nil
-    
-    public init() {}
-    
-    public init?(map: Map) {
-        self.init()
-    }
-    
-    public mutating func mapping(map: Map) {
-        ComputerCode <- map["ComputerCode"]
-        Event <- map["Event"]
-    }
 }
+
+//public init() {}
+//
+//public init?(map: Map) {
+//    self.init()
+//}
+//
+//public mutating func mapping(map: Map) {
+//    ComputerCode <- map["ComputerCode"]
+//    Event <- map["Event"]
+//}

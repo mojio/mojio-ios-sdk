@@ -14,7 +14,6 @@
  *******************************************************************************/
 
 @testable import MojioSDK
-import ObjectMapper
 import XCTest
 
 class TripTests: XCTestCase {
@@ -74,22 +73,22 @@ extension TripTests {
         "EndTimestamp": "2017-11-10T07:07:44.298Z",
         "StartOdometer": {
         "RolloverValue": 0,
-        "BaseUnit": "Meters",
-        "Timestamp": "2017-11-10T07:07:44.298Z",
-        "BaseValue": 0,
-        "Unit": "Meters",
-        "Value": 0
+        "baseUnit": "Meters",
+        "timestamp": "2017-11-10T07:07:44.298Z",
+        "baseValue": 0,
+        "unit": "Meters",
+        "value": 0
         },
         "EndOdometer": {
         "RolloverValue": 0,
-        "BaseUnit": "Meters",
-        "Timestamp": "2017-11-10T07:07:44.298Z",
-        "BaseValue": 0,
-        "Unit": "Meters",
-        "Value": 0
+        "baseUnit": "Meters",
+        "timestamp": "2017-11-10T07:07:44.298Z",
+        "baseValue": 0,
+        "unit": "Meters",
+        "value": 0
         },
         "StartLocation": {
-        "Timestamp": "2017-11-10T07:07:44.298Z",
+        "timestamp": "2017-11-10T07:07:44.298Z",
         "Lat": 0,
         "Lng": 0,
         "Status": "Unknown",
@@ -97,20 +96,20 @@ extension TripTests {
         "Altitude": 0,
         "GeoHash": "string",
         "Accuracy": {
-        "BaseUnit": "Meters",
-        "Timestamp": "2017-11-10T07:07:44.298Z",
-        "BaseValue": 0,
-        "Unit": "Meters",
-        "Value": 0
+        "baseUnit": "Meters",
+        "timestamp": "2017-11-10T07:07:44.298Z",
+        "baseValue": 0,
+        "unit": "Meters",
+        "value": 0
         },
         "Heading": {
-        "BaseUnit": "Degree",
+        "baseUnit": "Degree",
         "Direction": "string",
         "LeftTurn": true,
-        "Timestamp": "2017-11-10T07:07:44.298Z",
-        "BaseValue": 0,
-        "Unit": "Degree",
-        "Value": 0
+        "timestamp": "2017-11-10T07:07:44.298Z",
+        "baseValue": 0,
+        "unit": "Degree",
+        "value": 0
         },
         "Address": {
         "HouseNumber": "string",
@@ -127,7 +126,7 @@ extension TripTests {
         }
         },
         "EndLocation": {
-        "Timestamp": "2017-11-10T07:07:44.299Z",
+        "timestamp": "2017-11-10T07:07:44.299Z",
         "Lat": 0,
         "Lng": 0,
         "Status": "Unknown",
@@ -135,20 +134,20 @@ extension TripTests {
         "Altitude": 0,
         "GeoHash": "string",
         "Accuracy": {
-        "BaseUnit": "Meters",
-        "Timestamp": "2017-11-10T07:07:44.299Z",
-        "BaseValue": 0,
-        "Unit": "Meters",
-        "Value": 0
+        "baseUnit": "Meters",
+        "timestamp": "2017-11-10T07:07:44.299Z",
+        "baseValue": 0,
+        "unit": "Meters",
+        "value": 0
         },
         "Heading": {
-        "BaseUnit": "Degree",
+        "baseUnit": "Degree",
         "Direction": "string",
         "LeftTurn": true,
-        "Timestamp": "2017-11-10T07:07:44.299Z",
-        "BaseValue": 0,
-        "Unit": "Degree",
-        "Value": 0
+        "timestamp": "2017-11-10T07:07:44.299Z",
+        "baseValue": 0,
+        "unit": "Degree",
+        "value": 0
         },
         "Address": {
         "HouseNumber": "string",
@@ -165,51 +164,51 @@ extension TripTests {
         }
         },
         "Distance": {
-        "BaseUnit": "Meters",
-        "Timestamp": "2017-11-10T07:07:44.299Z",
-        "BaseValue": 0,
-        "Unit": "Meters",
-        "Value": 0
+        "baseUnit": "Meters",
+        "timestamp": "2017-11-10T07:07:44.299Z",
+        "baseValue": 0,
+        "unit": "Meters",
+        "value": 0
         },
         "MaxSpeed": {
-        "BaseUnit": "KilometersPerHour",
-        "Timestamp": "2017-11-10T07:07:44.299Z",
-        "BaseValue": 0,
-        "Unit": "KilometersPerHour",
-        "Value": 0
+        "baseUnit": "KilometersPerHour",
+        "timestamp": "2017-11-10T07:07:44.299Z",
+        "baseValue": 0,
+        "unit": "KilometersPerHour",
+        "value": 0
         },
         "MaxRPM": {
-        "BaseUnit": "RevolutionsPerMinute",
-        "Timestamp": "2017-11-10T07:07:44.299Z",
-        "BaseValue": 0,
-        "Unit": "RevolutionsPerMinute",
-        "Value": 0
+        "baseUnit": "RevolutionsPerMinute",
+        "timestamp": "2017-11-10T07:07:44.299Z",
+        "baseValue": 0,
+        "unit": "RevolutionsPerMinute",
+        "value": 0
         },
         "MaxAcceleration": {
-        "BaseUnit": "MetersPerSecondPerSecond",
-        "Timestamp": "2017-11-10T07:07:44.299Z",
-        "BaseValue": 0,
-        "Unit": "MetersPerSecondPerSecond",
-        "Value": 0
+        "baseUnit": "MetersPerSecondPerSecond",
+        "timestamp": "2017-11-10T07:07:44.299Z",
+        "baseValue": 0,
+        "unit": "MetersPerSecondPerSecond",
+        "value": 0
         },
         "MaxDeceleration": {
-        "BaseUnit": "MetersPerSecondPerSecond",
-        "Timestamp": "2017-11-10T07:07:44.299Z",
-        "BaseValue": 0,
-        "Unit": "MetersPerSecondPerSecond",
-        "Value": 0
+        "baseUnit": "MetersPerSecondPerSecond",
+        "timestamp": "2017-11-10T07:07:44.299Z",
+        "baseValue": 0,
+        "unit": "MetersPerSecondPerSecond",
+        "value": 0
         },
         "Polyline": "string",
         "HarshEvents": [
         {
         "HarshEventState": {
-        "Timestamp": "2017-11-10T07:07:44.299Z",
-        "Value": true,
+        "timestamp": "2017-11-10T07:07:44.299Z",
+        "value": true,
         "EventType": "Acceleration",
         "TurnType": "Left"
         },
         "Location": {
-        "Timestamp": "2017-11-10T07:07:44.299Z",
+        "timestamp": "2017-11-10T07:07:44.299Z",
         "Lat": 0,
         "Lng": 0,
         "Status": "Unknown",
@@ -217,20 +216,20 @@ extension TripTests {
         "Altitude": 0,
         "GeoHash": "string",
         "Accuracy": {
-        "BaseUnit": "Meters",
-        "Timestamp": "2017-11-10T07:07:44.299Z",
-        "BaseValue": 0,
-        "Unit": "Meters",
-        "Value": 0
+        "baseUnit": "Meters",
+        "timestamp": "2017-11-10T07:07:44.299Z",
+        "baseValue": 0,
+        "unit": "Meters",
+        "value": 0
         },
         "Heading": {
-        "BaseUnit": "Degree",
+        "baseUnit": "Degree",
         "Direction": "string",
         "LeftTurn": true,
-        "Timestamp": "2017-11-10T07:07:44.299Z",
-        "BaseValue": 0,
-        "Unit": "Degree",
-        "Value": 0
+        "timestamp": "2017-11-10T07:07:44.299Z",
+        "baseValue": 0,
+        "unit": "Degree",
+        "value": 0
         },
         "Address": {
         "HouseNumber": "string",
@@ -251,19 +250,19 @@ extension TripTests {
         "IdleEvents": [
         {
         "IdleState": {
-        "Timestamp": "2017-11-10T07:07:44.299Z",
-        "Value": true,
+        "timestamp": "2017-11-10T07:07:44.299Z",
+        "value": true,
         "StartTime": "2017-11-10T07:07:44.299Z",
         "Duration": {
-        "BaseUnit": "Ticks",
-        "Timestamp": "2017-11-10T07:07:44.299Z",
-        "BaseValue": 0,
-        "Unit": "Ticks",
-        "Value": 0
+        "baseUnit": "Ticks",
+        "timestamp": "2017-11-10T07:07:44.299Z",
+        "baseValue": 0,
+        "unit": "Ticks",
+        "value": 0
         }
         },
         "Location": {
-        "Timestamp": "2017-11-10T07:07:44.299Z",
+        "timestamp": "2017-11-10T07:07:44.299Z",
         "Lat": 0,
         "Lng": 0,
         "Status": "Unknown",
@@ -271,20 +270,20 @@ extension TripTests {
         "Altitude": 0,
         "GeoHash": "string",
         "Accuracy": {
-        "BaseUnit": "Meters",
-        "Timestamp": "2017-11-10T07:07:44.300Z",
-        "BaseValue": 0,
-        "Unit": "Meters",
-        "Value": 0
+        "baseUnit": "Meters",
+        "timestamp": "2017-11-10T07:07:44.300Z",
+        "baseValue": 0,
+        "unit": "Meters",
+        "value": 0
         },
         "Heading": {
-        "BaseUnit": "Degree",
+        "baseUnit": "Degree",
         "Direction": "string",
         "LeftTurn": true,
-        "Timestamp": "2017-11-10T07:07:44.300Z",
-        "BaseValue": 0,
-        "Unit": "Degree",
-        "Value": 0
+        "timestamp": "2017-11-10T07:07:44.300Z",
+        "baseValue": 0,
+        "unit": "Degree",
+        "value": 0
         },
         "Address": {
         "HouseNumber": "string",
@@ -303,30 +302,30 @@ extension TripTests {
         }
         ],
         "FuelEfficiency": {
-        "BaseUnit": "MilesPerGallon",
-        "Timestamp": "2017-11-10T07:07:44.300Z",
-        "BaseValue": 0,
-        "Unit": "MilesPerGallon",
-        "Value": 0
+        "baseUnit": "MilesPerGallon",
+        "timestamp": "2017-11-10T07:07:44.300Z",
+        "baseValue": 0,
+        "unit": "MilesPerGallon",
+        "value": 0
         },
         "StartFuelLevel": {
-        "BaseUnit": "Percentage",
+        "baseUnit": "Percentage",
         "RiskSeverity": "Unknown",
-        "Timestamp": "2017-11-10T07:07:44.300Z",
-        "BaseValue": 0,
-        "Unit": "Percentage",
-        "Value": 0
+        "timestamp": "2017-11-10T07:07:44.300Z",
+        "baseValue": 0,
+        "unit": "Percentage",
+        "value": 0
         },
         "HarshAcclCount": 0,
         "HarshDecelCount": 0,
         "IdlingCount": 0,
         "EndFuelLevel": {
-        "BaseUnit": "Percentage",
+        "baseUnit": "Percentage",
         "RiskSeverity": "Unknown",
-        "Timestamp": "2017-11-10T07:07:44.300Z",
-        "BaseValue": 0,
-        "Unit": "Percentage",
-        "Value": 0
+        "timestamp": "2017-11-10T07:07:44.300Z",
+        "baseValue": 0,
+        "unit": "Percentage",
+        "value": 0
         },
         "Id": "00000000-0000-0000-0000-000000000000",
         "CreatedOn": "2017-11-10T07:07:44.300Z",

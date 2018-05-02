@@ -14,7 +14,6 @@
  *******************************************************************************/
 
 @testable import MojioSDK
-import ObjectMapper
 import XCTest
 
 class IdleEventTests: XCTestCase {
@@ -33,19 +32,19 @@ extension IdleEventTests {
         return """
         {
         "IdleState": {
-        "Timestamp": "2017-11-09T07:15:16.084Z",
-        "Value": true,
+        "timestamp": "2017-11-09T07:15:16.084Z",
+        "value": true,
         "StartTime": "2017-11-09T07:15:16.084Z",
         "Duration": {
-        "BaseUnit": "Ticks",
-        "Timestamp": "2017-11-09T07:15:16.084Z",
-        "BaseValue": 0,
-        "Unit": "Ticks",
-        "Value": 0
+        "baseUnit": "Ticks",
+        "timestamp": "2017-11-09T07:15:16.084Z",
+        "baseValue": 0,
+        "unit": "Ticks",
+        "value": 0
         }
         },
         "Location": {
-        "Timestamp": "2017-11-09T07:15:16.084Z",
+        "timestamp": "2017-11-09T07:15:16.084Z",
         "Lat": 0,
         "Lng": 0,
         "Status": "Unknown",
@@ -53,20 +52,20 @@ extension IdleEventTests {
         "Altitude": 0,
         "GeoHash": "string",
         "Accuracy": {
-        "BaseUnit": "Meters",
-        "Timestamp": "2017-11-09T07:15:16.084Z",
-        "BaseValue": 0,
-        "Unit": "Meters",
-        "Value": 0
+        "baseUnit": "Meters",
+        "timestamp": "2017-11-09T07:15:16.084Z",
+        "baseValue": 0,
+        "unit": "Meters",
+        "value": 0
         },
         "Heading": {
-        "BaseUnit": "Degree",
+        "baseUnit": "Degree",
         "Direction": "string",
         "LeftTurn": true,
-        "Timestamp": "2017-11-09T07:15:16.084Z",
-        "BaseValue": 0,
-        "Unit": "Degree",
-        "Value": 0
+        "timestamp": "2017-11-09T07:15:16.084Z",
+        "baseValue": 0,
+        "unit": "Degree",
+        "value": 0
         },
         "Address": {
         "HouseNumber": "string",

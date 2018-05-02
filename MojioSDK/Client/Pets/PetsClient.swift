@@ -16,7 +16,6 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
-import ObjectMapper
 import KeychainSwift
 
 public enum PetsEndpoint: String {

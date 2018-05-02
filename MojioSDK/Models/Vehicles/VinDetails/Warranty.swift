@@ -13,26 +13,25 @@
  * forbidden unless prior written permission is obtained from Moj.io Inc.
  *******************************************************************************/
 
-import UIKit
-import ObjectMapper
+import Foundation
 
-public struct Warranty: Mappable {
+public struct Warranty: Codable {
     
     public var Name: String? = nil
     public var `Type`: String? = nil
     public var Months: String? = nil
     public var Km: Double? = nil
-    
-    public init() {}
-    
-    public init?(map: Map) {
-        self.init()
-    }
-
-    public mutating func mapping(map: Map) {
-        Name <- map["Name"]
-        Type <- map["Type"]
-        Months <- map["Months"]
-        Km <- map["Km"]
-    }
 }
+
+//public init() {}
+//
+//public init?(map: Map) {
+//    self.init()
+//}
+//
+//public mutating func mapping(map: Map) {
+//    Name <- map["Name"]
+//    Type <- map["Type"]
+//    Months <- map["Months"]
+//    Km <- map["Km"]
+//}

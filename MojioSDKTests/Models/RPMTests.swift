@@ -14,7 +14,6 @@
  *******************************************************************************/
 
 @testable import MojioSDK
-import ObjectMapper
 import XCTest
 
 class RPMTests: XCTestCase {
@@ -22,21 +21,21 @@ class RPMTests: XCTestCase {
     func testRpmModelShouldBeCreatedFromJsonString() {
         let jsonString = """
         {
-        "BaseUnit": "RevolutionsPerMinute",
-        "Timestamp": "2017-11-10T07:07:45.030Z",
-        "BaseValue": 10,
-        "Unit": "RevolutionsPerMinute",
-        "Value": 20
+        "baseUnit": "RevolutionsPerMinute",
+        "timestamp": "2017-11-10T07:07:45.030Z",
+        "baseValue": 10,
+        "unit": "RevolutionsPerMinute",
+        "value": 20
         }
         """
         let jsonObject = try! JSONSerialization.jsonObject(with: jsonString.data(using: .utf8)!, options: .allowFragments)
         let model = Mapper<RPM>().map(JSONObject: jsonObject)
         
         XCTAssertNotNil(model)
-        XCTAssertEqual(model?.BaseUnit, "RevolutionsPerMinute")
-        XCTAssertEqual(model?.BaseValue, 10)
-        XCTAssertEqual(model?.Unit, "RevolutionsPerMinute")
-        XCTAssertEqual(model?.Value, 20)
-        XCTAssertEqual(model?.Timestamp, "2017-11-10T07:07:45.030Z")
+        XCTAssertEqual(model?.baseUnit, "RevolutionsPerMinute")
+        XCTAssertEqual(model?.baseValue, 10)
+        XCTAssertEqual(model?.unit, "RevolutionsPerMinute")
+        XCTAssertEqual(model?.value, 20)
+        XCTAssertEqual(model?.timestamp, "2017-11-10T07:07:45.030Z")
     }
 }

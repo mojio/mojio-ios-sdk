@@ -13,24 +13,23 @@
  * forbidden unless prior written permission is obtained from Moj.io Inc.
  *******************************************************************************/
 
-import UIKit
-import ObjectMapper
+import Foundation
 
-public struct ServiceSchedule: Mappable {
+public struct ServiceSchedule: Codable {
     
     public var VIN: String? = nil
     public var IsDefault: Bool? = nil
     public var Items: [ServiceScheduleItem] = []
-    
-    public init() {}
-    
-    public init?(map: Map) {
-        self.init()
-    }
-    
-    public mutating func mapping(map: Map) {
-        VIN <- map["VIN"]
-        IsDefault <- map["IsDefault"]
-        Items <- map["Items"]
-    }
 }
+
+//public init() {}
+//
+//public init?(map: Map) {
+//    self.init()
+//}
+//
+//public mutating func mapping(map: Map) {
+//    VIN <- map["VIN"]
+//    IsDefault <- map["IsDefault"]
+//    Items <- map["Items"]
+//}

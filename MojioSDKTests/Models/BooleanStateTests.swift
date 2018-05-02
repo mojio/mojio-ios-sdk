@@ -14,7 +14,6 @@
  *******************************************************************************/
 
 @testable import MojioSDK
-import ObjectMapper
 import XCTest
 
 class BooleanStateTests: XCTestCase {
@@ -23,8 +22,8 @@ class BooleanStateTests: XCTestCase {
         let model = Mapper<BooleanState>().map(JSONObject: jsonObject)
         
         XCTAssertNotNil(model)
-        XCTAssertEqual(model?.Timestamp, "2017-11-09T07:16:58.073Z")
-        XCTAssertEqual(model?.Value, true)
+        XCTAssertEqual(model?.timestamp, "2017-11-09T07:16:58.073Z")
+        XCTAssertEqual(model?.value, true)
 
     }
 }
@@ -33,8 +32,8 @@ extension BooleanStateTests {
     var jsonString: String {
         return """
         {
-        "Timestamp": "2017-11-09T07:16:58.073Z",
-        "Value": true
+        "timestamp": "2017-11-09T07:16:58.073Z",
+        "value": true
         }
         
         """

@@ -15,7 +15,6 @@
 
 @testable import MojioSDK
 import XCTest
-import ObjectMapper
 
 class AccelerationTests: XCTestCase {
     func testAccelerationModelShouldBeParsedFromJson() {
@@ -23,11 +22,11 @@ class AccelerationTests: XCTestCase {
         let model = Mapper<Acceleration>().map(JSONObject: jsonObject)
 
         XCTAssertNotNil(model)
-        XCTAssertEqual(model?.BaseUnit, "MetersPerSecondPerSecond")
-        XCTAssertEqual(model?.BaseValue, 100)
-        XCTAssertEqual(model?.Unit, "MetersPerSecondPerSecond")
-        XCTAssertEqual(model?.Value, 120)
-        XCTAssertEqual(model?.Timestamp, "2017-11-09T07:16:58.072Z")
+        XCTAssertEqual(model?.baseUnit, "MetersPerSecondPerSecond")
+        XCTAssertEqual(model?.baseValue, 100)
+        XCTAssertEqual(model?.unit, "MetersPerSecondPerSecond")
+        XCTAssertEqual(model?.value, 120)
+        XCTAssertEqual(model?.timestamp, "2017-11-09T07:16:58.072Z")
     }
 }
 
@@ -35,11 +34,11 @@ extension AccelerationTests {
     var jsonString: String {
         return """
         {
-        "BaseUnit": "MetersPerSecondPerSecond",
-        "BaseValue": 100,
-        "Unit": "MetersPerSecondPerSecond",
-        "Value": 120,
-        "Timestamp": "2017-11-09T07:16:58.072Z"
+        "baseUnit": "MetersPerSecondPerSecond",
+        "baseValue": 100,
+        "unit": "MetersPerSecondPerSecond",
+        "value": 120,
+        "timestamp": "2017-11-09T07:16:58.072Z"
         }
         """
     }

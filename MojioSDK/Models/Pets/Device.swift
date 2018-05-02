@@ -22,7 +22,7 @@ enum PowerStatus: String, Codable {
     case normal = "Normal"
 }
 
-struct Device: Codable, Equatable {
+struct Device: Codable, PrimaryKey {
     let imei: String
     let deviceId: String
     let name: String?
@@ -41,6 +41,10 @@ struct Device: Codable, Equatable {
     let deleted: Bool?
     let lastModified: Date?
     let gatewayTime: Date?
+    
+    var id: String {
+        return self.imei
+    }
     
     enum CodingKeys: String, CodingKey {
         case imei = "IMEI"
@@ -91,10 +95,6 @@ struct Device: Codable, Equatable {
             throw error
         }
     }
-}
-
-func ==(lhs: Device, rhs: Device) -> Bool {
-    return lhs.imei == rhs.imei
 }
 
 struct DeviceUpdate: Codable {
