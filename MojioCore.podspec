@@ -11,7 +11,7 @@ Pod::Spec.new do |spec|
     spec.requires_arc = true
     spec.source = { git: "https://github.com/mojio/mojio-ios-sdk.git", branch: "phoenix", submodules: true }
 
-    spec.source_files = "MojioSDK/Client/Core/**/*.{h,swift}", "MojioSDK/Env/**/*.{h,swift}", "MojioSDK/Extensions/**/*.{h,swift}", "MojioSDK/Models/Core/**/*.{h,swift}", "MojioSDK/Core/**/*.{h,swift}", "MojioSDK/*.{h,swift}"
+    spec.source_files = "MojioSDK/Client/Core/**/*.{h,swift}", "MojioSDK/Env/**/*.{h,swift}", "MojioSDK/Extensions/**/*.{h,swift}", "MojioSDK/Models/Core/**/*.{h,swift}", "MojioSDK/Core/**/*.{h,swift}", "MojioSDK/MojioCore.h"
 
     spec.dependency 'Alamofire'
     spec.dependency 'SwiftyJSON'
