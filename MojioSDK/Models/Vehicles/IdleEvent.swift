@@ -18,22 +18,11 @@ import MojioCore
 
 public struct IdleEvent: Codable {
     
-    public var EventState: IdleState? = nil
-    public var EventLocation: Location? = nil
+    public var eventState: IdleState? = nil
+    public var eventLocation: Location? = nil
     
     private enum CodingKeys: String, CodingKey {
-        case EventState = "IdleState"
-        case EventLocation = "Location"
+        case eventState = "IdleState"
+        case eventLocation = "Location"
     }
 }
-
-//public init() {}
-//
-//public init?(map: Map) {
-//    self.init()
-//}
-//
-//public mutating func mapping(map: Map) {
-//    EventState <- map["IdleState"]
-//    EventLocation <- map["Location"]
-//}

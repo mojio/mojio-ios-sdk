@@ -28,4 +28,10 @@ public struct CompatibilityDetails: Codable {
     public let level: String?
     public let changed: Bool
     public let lastChecked: String?
+    
+    private enum CodingKeys: String, CodingKey {
+        case level = "Level"
+        case changed = "Changed"
+        case lastChecked = "LastChecked"
+    }
 }
