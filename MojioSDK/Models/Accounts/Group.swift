@@ -14,6 +14,7 @@
  *******************************************************************************/
 
 import UIKit
+import MojioCore
 
 public struct Group: Codable, PrimaryKey {
     public let id: String

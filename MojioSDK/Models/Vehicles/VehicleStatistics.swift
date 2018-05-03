@@ -14,27 +14,23 @@
  *******************************************************************************/
 
 import Foundation
-
-import Foundation
+import MojioCore
 
 public struct VehicleStatistics: Codable {
     
-    public var EstimatedFuelLevel: FuelLevel? = nil
-    public var EstimatedFuelVolume: FuelVolume? = nil
-    public var AverageFuelEfficiency: FuelEfficiency? = nil
-    public var TotalRange: Distance? = nil
-    public var CurrentRange: Distance? = nil
-    public var LastFillUpDate: String? = nil
-    
-    //public var lastFillUpDate: Date? = nil
+    public let estimatedFuelLevel: FuelLevel?
+    public let estimatedFuelVolume: FuelVolume?
+    public let averageFuelEfficiency: FuelEfficiency?
+    public let totalRange: Distance?
+    public let currentRange: Distance?
+    public let lastFillUpDate: Date?
 }
 
-extension VehicleStatistics {
-    
+/* public extension VehicleStatistics {
     public var lastFillUpDate: Date? {
         return self.LastFillUpDate?.toDate
     }
-}
+} */
 
 //public init() {}
 //

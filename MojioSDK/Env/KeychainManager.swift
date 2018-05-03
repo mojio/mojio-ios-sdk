@@ -34,7 +34,7 @@ protocol AuthTokenManager {
 
 public final class KeychainManager: AuthTokenManager {
     
-    internal static var sharedInstance = KeychainManager()
+    public static var sharedInstance = KeychainManager()
     
     public init() {}
     

@@ -14,6 +14,7 @@
  *******************************************************************************/
 
 import Foundation
+import MojioCore
 
 public struct Mojio: Codable, PrimaryKey {
     

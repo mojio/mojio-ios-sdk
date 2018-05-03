@@ -14,6 +14,7 @@
  *******************************************************************************/
 
 import Foundation
+import MojioCore
 
 // Units in RPMUnits
 public struct RPM: DeviceMeasurement {

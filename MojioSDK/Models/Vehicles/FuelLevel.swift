@@ -14,6 +14,7 @@
  *******************************************************************************/
 
 import Foundation
+import MojioCore
 
 // Units are in PercentageUnits
 public struct FuelLevel: DeviceMeasurement {

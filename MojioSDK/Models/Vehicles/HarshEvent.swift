@@ -14,15 +14,16 @@
  *******************************************************************************/
 
 import Foundation
+import MojioCore
 
 public struct HarshEvent: Codable {
     
-    public var EventState: HarshEventState? = nil
-    public var EventLocation: Location? = nil
+    public var eventState: HarshEventState? = nil
+    public var eventLocation: Location? = nil
     
-    private enum CodingKeys: String, CodingKey {
-        case EventState = "HarshEventState"
-        case EventLocation = "Location"
+    public enum CodingKeys: String, CodingKey {
+        case eventState = "HarshEventState"
+        case eventLocation = "Location"
     }
 }
 

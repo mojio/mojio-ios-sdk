@@ -14,6 +14,7 @@
  *******************************************************************************/
 
 import Foundation
+import MojioCore
 
 // Units in FuelEfficiencyUnits
 public struct FuelEfficiency: DeviceMeasurement {

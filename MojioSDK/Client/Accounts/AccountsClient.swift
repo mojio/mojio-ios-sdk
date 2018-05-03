@@ -17,6 +17,7 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import KeychainSwift
+import MojioCore
 
 public enum AccountsEndpoint: String {
     case base = "/"
@@ -143,7 +144,7 @@ open class AccountsClient: RestClient {
         return self
     }
     
-    internal override func parseData(_ responseData: Data) -> Codable? {
+    open override func parseData(_ responseData: Data) -> Codable? {
         do {
             switch AccountsEndpoint(rawValue: self.requestEntity) ?? .base {
                 

@@ -17,6 +17,7 @@ import Foundation
 import SwiftWebSocket
 import SwiftyJSON
 import Alamofire
+import MojioCore
 
 open class WSAccountsClient: AccountsClient {
     
@@ -50,7 +51,7 @@ open class WSAccountsClient: AccountsClient {
         super.init(clientEnvironment: clientEnvironment, sessionManager: sessionManager)
     }
     
-    public override func dispatch(queue: DispatchQueue) {
+    open override func dispatch(queue: DispatchQueue) {
         self.wsDispatchQueue = queue
     }
     

@@ -14,6 +14,7 @@
  *******************************************************************************/
 
 import Foundation
+import MojioCore
 
 enum AssetType: String, Codable {
     case pet = "Pet"

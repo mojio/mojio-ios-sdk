@@ -122,7 +122,7 @@ open class RestClient {
         return self
     }
     
-    internal func appendRequestUrlEntityId(asFinal: Bool = false) {
+    open func appendRequestUrlEntityId(asFinal: Bool = false) {
         if let entityId = self.requestEntityId {
             self.requestUrl = self.requestUrl! + self.requestEntity + entityId + (asFinal ? "" : "/")
         }
@@ -131,7 +131,7 @@ open class RestClient {
         }
     }
     
-    internal func appendRequestUrlEntity(_ entity: String?, asFinal: Bool = false) {
+    open func appendRequestUrlEntity(_ entity: String?, asFinal: Bool = false) {
         if let entity = entity {
             self.requestUrl = self.requestUrl! + entity + (asFinal ? "" : "/")
         }
@@ -140,7 +140,7 @@ open class RestClient {
         }
     }
     
-    internal func appendPushUrlEntityId(asFinal: Bool = false) {
+    open func appendPushUrlEntityId(asFinal: Bool = false) {
         if let entityId = self.requestEntityId {
             self.pushUrl = self.pushUrl! + self.requestEntity + entityId + (asFinal ? "" : "/")
         }
@@ -194,7 +194,7 @@ open class RestClient {
         return self
     }
 
-    public func dispatch(queue: DispatchQueue) {
+    open func dispatch(queue: DispatchQueue) {
         self.dispatchQueue = queue
     }
     
@@ -295,7 +295,7 @@ open class RestClient {
         #endif
     }
     
-    func handleResponse(_ response: DataResponse<Any>, completion: @escaping (_ response: Any, _ headers: [String : Any?]) -> Void, failure: @escaping (_ error: Any?) -> Void){
+    open func handleResponse(_ response: DataResponse<Any>, completion: @escaping (_ response: Any, _ headers: [String : Any?]) -> Void, failure: @escaping (_ error: Any?) -> Void){
         if response.response?.statusCode == 200 || response.response?.statusCode == 201 {
             let headers: [String : Any?] = [
                 "ResponseDate" : (response.response?.allHeaderFields["Date"] as? String)?.toDate,
@@ -384,11 +384,11 @@ open class RestClient {
         }
     }
     
-    internal func parseData(_ responseData: Data) -> Codable? {
+    open func parseData(_ responseData: Data) -> Codable? {
         return nil
     }
     
-    func accessToken() -> String? {
+    open func accessToken() -> String? {
         return KeychainManager.sharedInstance.authToken?.accessToken
     }    
 }

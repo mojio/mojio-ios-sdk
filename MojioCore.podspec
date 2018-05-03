@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
-    spec.name = "MojioVehicles"
+    spec.name = "MojioCore"
     spec.version = "3.0.0"
-    spec.summary = "Mojio Vehicle Framework"
+    spec.summary = "Mojio Accounts Framework"
     spec.homepage = "https://github.com/mojio/mojio-ios-sdk"
     spec.license = {type: 'MIT', file: 'LICENSE'}
     spec.authors = {"Mojio, Inc." => 'support@moj.io'}
@@ -11,7 +11,7 @@ Pod::Spec.new do |spec|
     spec.requires_arc = true
     spec.source = { git: "https://github.com/mojio/mojio-ios-sdk.git", branch: "phoenix", submodules: true }
 
-    spec.source_files = "MojioSDK/Client/Shared/**/*.{h,swift}", "MojioSDK/Client/Vehicles/**/*.{h,swift}", "MojioSDK/Env/**/*.{h,swift}", "MojioSDK/Extensions/**/*.{h,swift}", "MojioSDK/Models/Shared/**/*.{h,swift}", "MojioSDK/Models/Vehicles/**/*.{h,swift}", "MojioSDK/Shared/**/*.{h,swift}", "MojioSDK/*.{h,swift}"
+    spec.source_files = "MojioSDK/Client/Core/**/*.{h,swift}", "MojioSDK/Env/**/*.{h,swift}", "MojioSDK/Extensions/**/*.{h,swift}", "MojioSDK/Models/Core/**/*.{h,swift}", "MojioSDK/Core/**/*.{h,swift}", "MojioSDK/*.{h,swift}"
 
     spec.dependency 'Alamofire'
     spec.dependency 'SwiftyJSON'
@@ -20,5 +20,4 @@ Pod::Spec.new do |spec|
     spec.dependency 'OHHTTPStubs/Swift'
     spec.dependency 'SwiftWebSocket'
     spec.dependency 'SwiftDate'
-    spec.dependency 'MojioCore'
 end

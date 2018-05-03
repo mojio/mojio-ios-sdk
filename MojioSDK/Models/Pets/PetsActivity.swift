@@ -14,8 +14,9 @@
  *******************************************************************************/
 
 import Foundation
+import MojioCore
 
-protocol ActivityObject: PrimaryKey {
+public protocol ActivityObject: PrimaryKey {
     associatedtype T: NestedActivityObject
     var id: String { get }
     var context: String? { get }
@@ -28,7 +29,7 @@ protocol ActivityObject: PrimaryKey {
     var location: T? { get }
 }
 
-protocol NestedActivityObject: PrimaryKey {
+public protocol NestedActivityObject: PrimaryKey {
     var id: String { get }
     var context: String? { get }
     var type: NestedActivityType? { get }
@@ -47,13 +48,13 @@ internal extension ActivityType {
 }
 
 //TODO: to add all possible values
-enum NestedActivityType: String, Codable {
+public enum NestedActivityType: String, Codable {
     case asset = "Asset"
     case pet = "Pet"
     case person = "Person"
     case geofence = "Geofence"
     
-    init?(from intValue: Int?) {
+    public init?(from intValue: Int?) {
         guard let intValue = intValue else { return nil }
         switch intValue {
         case 1:
@@ -70,18 +71,18 @@ enum NestedActivityType: String, Codable {
     }
 }
 
-struct PetsActivity: Codable, ActivityObject {
-    let id: String
-    let context: String?
-    let type: ActivityType?
-    let name: String?
-    let summary: String?
-    let publishedTime: Date?
-    let actor: NestedActivity?
-    let audience: NestedActivity?
-    let location: NestedActivity?
+public struct PetsActivity: Codable, ActivityObject {
+    public let id: String
+    public let context: String?
+    public let type: ActivityType?
+    public let name: String?
+    public let summary: String?
+    public let publishedTime: Date?
+    public let actor: NestedActivity?
+    public let audience: NestedActivity?
+    public let location: NestedActivity?
     
-    enum CodingKeys: String, CodingKey {
+    public enum CodingKeys: String, CodingKey {
         case id = "Id"
         case context = "Context"
         case type = "Type"
@@ -93,7 +94,7 @@ struct PetsActivity: Codable, ActivityObject {
         case location = "Location"
     }
     
-    init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         do {
@@ -122,21 +123,21 @@ struct PetsActivity: Codable, ActivityObject {
     }
 }
 
-func ==(lhs: PetsActivity, rhs: PetsActivity) -> Bool {
+public func ==(lhs: PetsActivity, rhs: PetsActivity) -> Bool {
     return lhs.id == rhs.id
 }
 
-struct NestedActivity: Codable, NestedActivityObject {
-    let id: String
-    let context: String?
-    let type: NestedActivityType?
-    let name: String?
-    let latitude: Double?
-    let longitude: Double?
-    let altitude: Double?
-    let radius: Double?
+public struct NestedActivity: Codable, NestedActivityObject {
+    public let id: String
+    public let context: String?
+    public let type: NestedActivityType?
+    public let name: String?
+    public let latitude: Double?
+    public let longitude: Double?
+    public let altitude: Double?
+    public let radius: Double?
 
-    enum CodingKeys: String, CodingKey {
+    public enum CodingKeys: String, CodingKey {
         case id = "Id"
         case context = "Context"
         case type = "Type"
@@ -147,7 +148,7 @@ struct NestedActivity: Codable, NestedActivityObject {
         case radius = "Radius"
     }
 
-    init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         do {
@@ -175,6 +176,6 @@ struct NestedActivity: Codable, NestedActivityObject {
     }
 }
 
-func ==(lhs: NestedActivity, rhs: NestedActivity) -> Bool {
+public func ==(lhs: NestedActivity, rhs: NestedActivity) -> Bool {
     return lhs.id == rhs.id
 }

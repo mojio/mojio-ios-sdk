@@ -14,6 +14,7 @@
  *******************************************************************************/
 
 import Foundation
+import MojioCore
 
 // Units in SpeedUnits
 public struct Speed: DeviceMeasurement {

@@ -15,13 +15,13 @@
 
 import Foundation
 
-struct ResponseArray<T: Codable>: Codable {
-    let data: [T]
-    let results: Int?
-    let totalCount: Int?
-    let links: Links?
+public struct ResponseArray<T: Codable>: Codable {
+    public let data: [T]
+    public let results: Int?
+    public let totalCount: Int?
+    public let links: Links?
     
-    enum CodingKeys: String, CodingKey {
+    public enum CodingKeys: String, CodingKey {
         case data = "Data"
         case results = "Results"
         case totalCount = "TotalCount"
@@ -29,12 +29,12 @@ struct ResponseArray<T: Codable>: Codable {
     }
 }
 
-struct RangeResponse<E: Codable> {
-    let response: ResponseArray<E>
-    let offset: Int?
-    let limit: Int?
+public struct RangeResponse<E: Codable> {
+    public let response: ResponseArray<E>
+    public let offset: Int?
+    public let limit: Int?
     
-    init(response: ResponseArray<E>, offset: Int? = nil, limit: Int? = nil) {
+    public init(response: ResponseArray<E>, offset: Int? = nil, limit: Int? = nil) {
         self.response = response
         self.offset = offset
         self.limit = limit

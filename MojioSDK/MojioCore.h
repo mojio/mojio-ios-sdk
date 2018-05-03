@@ -13,22 +13,12 @@
  * forbidden unless prior written permission is obtained from Moj.io Inc.
  *******************************************************************************/
 
-import Foundation
-import MojioCore
+#import <UIKit/UIKit.h>
 
-public struct Polyline: Codable, PrimaryKey {
-    
-    public let id: String
-    public let polyline: String?
-    public let createdOn: Date?
-    public let lastModified: Date?
-    public let deleted: Bool
-    
-    public enum CodingKeys: String, CodingKey {
-        case id = "Id"
-        case polyline = "Polyline"
-        case createdOn = "CreatedOn"
-        case lastModified = "LastModified"
-        case deleted = "Deleted"
-    }
-}
+//! Project version number for MojioAccounts.
+FOUNDATION_EXPORT double MojioCoreVersionNumber;
+
+//! Project version string for MojioAccounts.
+FOUNDATION_EXPORT const unsigned char MojioCoreVersionString[];
+
+// In this header, you should import all the public headers of your framework using statements like #import <MojioCore/PublicHeader.h>

@@ -15,22 +15,31 @@ def base_pods
     pod 'SwiftDate'
 end
 
+target 'Core' do
+    project 'MojioSDK.xcodeproj'
+
+    base_pods
+end
+
 target 'Accounts' do
     project 'MojioSDK.xcodeproj'
 
     base_pods
+    pod 'MojioCore', :path => '.'
 end
 
 target 'Vehicles' do
     project 'MojioSDK.xcodeproj'
 
     base_pods
+    pod 'MojioCore', :path => '.'
 end
 
 target 'Pets' do
     project 'MojioSDK.xcodeproj'
 
     base_pods
+    pod 'MojioCore', :path => '.'
 end
 
 # target 'Tests' do

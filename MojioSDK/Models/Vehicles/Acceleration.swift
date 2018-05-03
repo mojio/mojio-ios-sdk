@@ -14,6 +14,7 @@
  *******************************************************************************/
 
 import Foundation
+import MojioCore
 
 // Units are in AccelerationUnits
 public struct Acceleration: DeviceMeasurement {

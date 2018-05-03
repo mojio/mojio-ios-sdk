@@ -17,6 +17,7 @@ import UIKit
 import KeychainSwift
 import Alamofire
 import SwiftyJSON
+import MojioCore
 
 public enum AuthClientEndpoint: String {
     case authorize = "oauth2/authorize"

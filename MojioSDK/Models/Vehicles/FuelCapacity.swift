@@ -14,6 +14,7 @@
  *******************************************************************************/
 
 import Foundation
+import MojioCore
 
 // Units in FuelCapacityUnits
 public struct FuelCapacity: DeviceMeasurement {

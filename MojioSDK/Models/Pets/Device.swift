@@ -14,6 +14,7 @@
  *******************************************************************************/
 
 import Foundation
+import MojioCore
 
 enum PowerStatus: String, Codable {
     case unknown = "Unknown"

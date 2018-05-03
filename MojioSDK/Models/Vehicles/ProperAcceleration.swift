@@ -14,6 +14,7 @@
  *******************************************************************************/
 
 import Foundation
+import MojioCore
 
 // Units in AccelerometerUnits
 public struct ProperAcceleration: DeviceMeasurement {

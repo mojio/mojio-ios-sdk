@@ -20,4 +20,5 @@ Pod::Spec.new do |spec|
     spec.dependency 'OHHTTPStubs/Swift'
     spec.dependency 'SwiftWebSocket'
     spec.dependency 'SwiftDate'
+    spec.dependency 'MojioCore'
 end

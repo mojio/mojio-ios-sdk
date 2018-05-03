@@ -14,8 +14,7 @@
  *******************************************************************************/
 
 import Foundation
-
-import Foundation
+import MojioCore
 
 public struct Vehicle: Codable, PrimaryKey {
     

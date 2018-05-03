@@ -17,6 +17,7 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import KeychainSwift
+import MojioCore
 
 public enum PetsEndpoint: String {
     case base = "/"
@@ -130,7 +131,7 @@ open class PetsClient: RestClient {
         return self
     }
     
-    internal override func parseData(_ responseData: Data) -> Codable? {
+    open override func parseData(_ responseData: Data) -> Codable? {
         do {
             switch PetsEndpoint(rawValue: self.requestEntity) ?? .base {
             case .devices:

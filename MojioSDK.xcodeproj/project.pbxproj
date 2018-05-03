@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2278359C1FB60253002D24F9 /* StringExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2278359B1FB60253002D24F9 /* StringExt.swift */; };
-		2278359E1FB60291002D24F9 /* TimeIntervalExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2278359D1FB60291002D24F9 /* TimeIntervalExt.swift */; };
 		2E29D8751FB1F3AA00BBEB16 /* RestClientHandleResponseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E29D8741FB1F3AA00BBEB16 /* RestClientHandleResponseTests.swift */; };
 		2E5767371FB43A62008F16F6 /* ProperAccelerationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5767361FB43A62008F16F6 /* ProperAccelerationTests.swift */; };
 		2E5767391FB43B3C008F16F6 /* TimePeriodTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5767381FB43B3C008F16F6 /* TimePeriodTests.swift */; };
@@ -50,10 +48,6 @@
 		2EBF12C71FB9C22C00F068B2 /* ActivityLocationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF12C61FB9C22C00F068B2 /* ActivityLocationTests.swift */; };
 		2EBF12C91FB9C3F100F068B2 /* RootActivityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF12C81FB9C3F100F068B2 /* RootActivityTests.swift */; };
 		2EBF12CB1FB9CDF700F068B2 /* WSClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF12CA1FB9CDF700F068B2 /* WSClientTests.swift */; };
-		2EBF12CD1FB9D90D00F068B2 /* WebSocketProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF12CC1FB9D90D00F068B2 /* WebSocketProvider.swift */; };
-		2EBF12CF1FB9DD6F00F068B2 /* WebSocketFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF12CE1FB9DD6F00F068B2 /* WebSocketFactory.swift */; };
-		2EBF12D11FB9E0D700F068B2 /* SwiftWebSocketFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF12D01FB9E0D700F068B2 /* SwiftWebSocketFactory.swift */; };
-		2EBF12D31FB9E70100F068B2 /* SwiftWebSocketProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF12D21FB9E70100F068B2 /* SwiftWebSocketProvider.swift */; };
 		2EC36F4B1FB58A9A006A07B8 /* SettingsGeofenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC36F4A1FB58A9A006A07B8 /* SettingsGeofenceTests.swift */; };
 		2EC36F4D1FB58B89006A07B8 /* NotificationSettingsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC36F4C1FB58B89006A07B8 /* NotificationSettingsTests.swift */; };
 		2EC36F4F1FB59304006A07B8 /* OdometerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC36F4E1FB59304006A07B8 /* OdometerTests.swift */; };
@@ -81,97 +75,41 @@
 		2EC36F7C1FB60333006A07B8 /* VinDetailsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC36F7B1FB60333006A07B8 /* VinDetailsTests.swift */; };
 		2EC36F7E1FB60498006A07B8 /* WarrantyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC36F7D1FB60498006A07B8 /* WarrantyTests.swift */; };
 		2ED946EE1FA9D5E400132568 /* KeychainManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED946ED1FA9D5E400132568 /* KeychainManagerTests.swift */; };
-		2ED946F01FA9ED8E00132568 /* KeychainStorageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED946EF1FA9ED8E00132568 /* KeychainStorageProvider.swift */; };
 		2ED946F21FA9FCFD00132568 /* ClientEnvironmentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED946F11FA9FCFD00132568 /* ClientEnvironmentTests.swift */; };
 		2ED946F51FAA207700132568 /* AuthClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED946F41FAA207700132568 /* AuthClientTests.swift */; };
 		3AE11A9B63EBCDC7B6365890 /* Pods_Vehicles.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F28CBD045B5B77B3EC893BCA /* Pods_Vehicles.framework */; };
+		3D6869BE2149CD45D324016A /* Pods_Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9980F32E31CB2E846A417B2C /* Pods_Core.framework */; };
 		432FA0CCDBE729284225021F /* Pods_Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEFFCAA2C464247F32E3DE5C /* Pods_Accounts.framework */; };
 		644214DE1D9E6500005A86C5 /* AggregationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644214DD1D9E6500005A86C5 /* AggregationData.swift */; };
 		75F77F0E1D19F504000CC2B4 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 75F77F0D1D19F504000CC2B4 /* libz.tbd */; };
-		8808C2351EB1483A00A41A8B /* PrimaryKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8808C2341EB1483A00A41A8B /* PrimaryKey.swift */; };
-		884FCE5F1EB13ECD00DDCE3F /* BaseActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884FCE5E1EB13ECD00DDCE3F /* BaseActivity.swift */; };
 		887014791DA833CA00EFEC6D /* VehicleStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887014781DA833CA00EFEC6D /* VehicleStatistics.swift */; };
 		BC31E3CE1D419E80001649A7 /* Distance.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC31E3CD1D419E80001649A7 /* Distance.swift */; };
-		BC31E3D31D419F5D001649A7 /* VehicleActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC31E3CF1D419F5D001649A7 /* VehicleActivity.swift */; };
-		BC31E3D41D419F5D001649A7 /* ActivityLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC31E3D01D419F5D001649A7 /* ActivityLocation.swift */; };
-		BC31E3D51D419F5D001649A7 /* BaseActivityLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC31E3D11D419F5D001649A7 /* BaseActivityLocation.swift */; };
-		BC31E3D61D419F5D001649A7 /* RootActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC31E3D21D419F5D001649A7 /* RootActivity.swift */; };
-		BC3C66421DA8196A00179344 /* DeviceMeasurement.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC3C66411DA8196A00179344 /* DeviceMeasurement.swift */; };
-		BC3D7C212087F3B000659A92 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B8D1CBF000A00F9177B /* KeychainManager.swift */; };
-		BC3D7C2A2087F3B000659A92 /* JsonSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B871CBEFFFF00F9177B /* JsonSerializer.swift */; };
-		BC3D7C2E2087F3B000659A92 /* TimeIntervalExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2278359D1FB60291002D24F9 /* TimeIntervalExt.swift */; };
-		BC3D7C2F2087F3B000659A92 /* RestClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC72D7A71CC5615600D9740B /* RestClient.swift */; };
-		BC3D7C342087F3B000659A92 /* WebSocketProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF12CC1FB9D90D00F068B2 /* WebSocketProvider.swift */; };
-		BC3D7C3B2087F3B000659A92 /* StringExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2278359B1FB60253002D24F9 /* StringExt.swift */; };
-		BC3D7C412087F3B000659A92 /* KeychainStorageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED946EF1FA9ED8E00132568 /* KeychainStorageProvider.swift */; };
-		BC3D7C4C2087F3B000659A92 /* SwiftWebSocketProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF12D21FB9E70100F068B2 /* SwiftWebSocketProvider.swift */; };
-		BC3D7C512087F3B000659A92 /* WebSocketFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF12CE1FB9DD6F00F068B2 /* WebSocketFactory.swift */; };
-		BC3D7C672087F3B000659A92 /* SwiftWebSocketFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF12D01FB9E0D700F068B2 /* SwiftWebSocketFactory.swift */; };
-		BC3D7C6C2087F3B000659A92 /* ClientEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B8C1CBF000A00F9177B /* ClientEnvironment.swift */; };
 		BC3D7C6F2087F3B000659A92 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 75F77F0D1D19F504000CC2B4 /* libz.tbd */; };
-		BC3D7C722087F3B000659A92 /* JsonSerializerSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = BC879B881CBEFFFF00F9177B /* JsonSerializerSwift.h */; };
 		BC3D7C7F2087F5E700659A92 /* VehiclesClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC3D7C7E2087F5E700659A92 /* VehiclesClient.swift */; };
 		BC3D7C84208816BB00659A92 /* PetsClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC3D7C83208816BB00659A92 /* PetsClient.swift */; };
 		BC590656208E783A00A098A3 /* WSPetsClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC590654208E781200A098A3 /* WSPetsClient.swift */; };
-		BC59065B208E7B0100A098A3 /* ResponseArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC590657208E7ACC00A098A3 /* ResponseArray.swift */; };
-		BC59065D208E7CB800A098A3 /* ResponseArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC590657208E7ACC00A098A3 /* ResponseArray.swift */; };
 		BC5F7F031CC58D4000FAB205 /* Units.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5F7F021CC58D4000FAB205 /* Units.swift */; };
-		BC6036EE208F9E3600D855DE /* PrimaryKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8808C2341EB1483A00A41A8B /* PrimaryKey.swift */; };
-		BC6036F0208F9EB500D855DE /* PetsActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC590626208E566200A098A3 /* PetsActivity.swift */; };
-		BC6036F9208FA9CD00D855DE /* AccountsClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6036E8208F9C7400D855DE /* AccountsClient.swift */; };
-		BC6036FB208FA9CD00D855DE /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B8D1CBF000A00F9177B /* KeychainManager.swift */; };
-		BC6036FD208FA9CD00D855DE /* JsonSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B871CBEFFFF00F9177B /* JsonSerializer.swift */; };
-		BC6036FE208FA9CD00D855DE /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC72D7A51CC5615600D9740B /* AuthViewController.swift */; };
-		BC603701208FA9CD00D855DE /* TimeIntervalExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2278359D1FB60291002D24F9 /* TimeIntervalExt.swift */; };
-		BC603702208FA9CD00D855DE /* AuthToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC59062C208E566200A098A3 /* AuthToken.swift */; };
 		BC603703208FA9CD00D855DE /* PhoneNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC590625208E566200A098A3 /* PhoneNumber.swift */; };
-		BC603705208FA9CD00D855DE /* RestClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC72D7A71CC5615600D9740B /* RestClient.swift */; };
-		BC603706208FA9CD00D855DE /* PrimaryKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8808C2341EB1483A00A41A8B /* PrimaryKey.swift */; };
-		BC603708208FA9CD00D855DE /* WebSocketProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF12CC1FB9D90D00F068B2 /* WebSocketProvider.swift */; };
 		BC60370A208FA9CD00D855DE /* Email.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC590627208E566200A098A3 /* Email.swift */; };
-		BC60370D208FA9CD00D855DE /* StringExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2278359B1FB60253002D24F9 /* StringExt.swift */; };
-		BC60370F208FA9CD00D855DE /* AuthClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC72D7A41CC5615600D9740B /* AuthClient.swift */; };
-		BC603710208FA9CD00D855DE /* WSAccountsClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6036F1208F9F4D00D855DE /* WSAccountsClient.swift */; };
-		BC603712208FA9CD00D855DE /* KeychainStorageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED946EF1FA9ED8E00132568 /* KeychainStorageProvider.swift */; };
 		BC603713208FA9CD00D855DE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC59062E208E566200A098A3 /* User.swift */; };
-		BC603716208FA9CD00D855DE /* SwiftWebSocketProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF12D21FB9E70100F068B2 /* SwiftWebSocketProvider.swift */; };
 		BC603717208FA9CD00D855DE /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B4F1CBEFFDD00F9177B /* Group.swift */; };
-		BC603718208FA9CD00D855DE /* WebSocketFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF12CE1FB9DD6F00F068B2 /* WebSocketFactory.swift */; };
-		BC603719208FA9CD00D855DE /* ResponseArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC590657208E7ACC00A098A3 /* ResponseArray.swift */; };
-		BC60371C208FA9CD00D855DE /* SwiftWebSocketFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF12D01FB9E0D700F068B2 /* SwiftWebSocketFactory.swift */; };
-		BC60371D208FA9CD00D855DE /* ClientEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B8C1CBF000A00F9177B /* ClientEnvironment.swift */; };
 		BC60371E208FA9CD00D855DE /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B461CBEFFDD00F9177B /* App.swift */; };
 		BC603721208FA9CD00D855DE /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 75F77F0D1D19F504000CC2B4 /* libz.tbd */; };
-		BC603725208FA9CD00D855DE /* JsonSerializerSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = BC879B881CBEFFFF00F9177B /* JsonSerializerSwift.h */; };
-		BC603728208FA9CD00D855DE /* AuthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC72D7A61CC5615600D9740B /* AuthViewController.xib */; };
-		BC603735208FACF400D855DE /* AuthToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC59062C208E566200A098A3 /* AuthToken.swift */; };
-		BC603736208FACF400D855DE /* AuthToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC59062C208E566200A098A3 /* AuthToken.swift */; };
 		BC603742208FB20F00D855DE /* Asset.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC59061F208E566100A098A3 /* Asset.swift */; };
 		BC603743208FB20F00D855DE /* Battery.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC59062F208E566200A098A3 /* Battery.swift */; };
 		BC603744208FB20F00D855DE /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC590624208E566200A098A3 /* Device.swift */; };
 		BC603745208FB20F00D855DE /* DeviceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC590620208E566100A098A3 /* DeviceType.swift */; };
-		BC603746208FB20F00D855DE /* PetsError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC590622208E566200A098A3 /* PetsError.swift */; };
 		BC603747208FB20F00D855DE /* Geofence.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC59062D208E566200A098A3 /* Geofence.swift */; };
 		BC603748208FB20F00D855DE /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC59062B208E566200A098A3 /* Image.swift */; };
-		BC603749208FB20F00D855DE /* Links.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC590623208E566200A098A3 /* Links.swift */; };
 		BC60374A208FB20F00D855DE /* PetsLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC590621208E566200A098A3 /* PetsLocation.swift */; };
 		BC60374B208FB20F00D855DE /* NotificationToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC59062A208E566200A098A3 /* NotificationToken.swift */; };
 		BC60374C208FB20F00D855DE /* PetDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC590629208E566200A098A3 /* PetDetails.swift */; };
 		BC60374D208FB2CC00D855DE /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5767401FB4536A008F16F6 /* Image.swift */; };
-		BC60374E208FB2F400D855DE /* Links.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC590623208E566200A098A3 /* Links.swift */; };
-		BC60374F208FB31000D855DE /* Links.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC590623208E566200A098A3 /* Links.swift */; };
-		BC603750208FB36600D855DE /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06C95681D25CA2A006AECBB /* Result.swift */; };
-		BC603751208FB36600D855DE /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06C95681D25CA2A006AECBB /* Result.swift */; };
-		BC603754208FB3A200D855DE /* MojioError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC8A49C1D19EAAD00E14E2B /* MojioError.swift */; };
-		BC603755208FB3A200D855DE /* MojioError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC8A49C1D19EAAD00E14E2B /* MojioError.swift */; };
-		BC603756208FB3C100D855DE /* PetsError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC590622208E566200A098A3 /* PetsError.swift */; };
-		BC603757208FB3C100D855DE /* PetsError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC590622208E566200A098A3 /* PetsError.swift */; };
 		BC60375D208FC4C600D855DE /* Accounts.plist in Resources */ = {isa = PBXBuildFile; fileRef = BC60375A208FC4C600D855DE /* Accounts.plist */; };
 		BC60375E208FC4C600D855DE /* Pets.plist in Resources */ = {isa = PBXBuildFile; fileRef = BC60375B208FC4C600D855DE /* Pets.plist */; };
 		BC717D9A1DA6EFA20052317C /* ServiceEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC717D971DA6EFA20052317C /* ServiceEvent.swift */; };
 		BC717D9B1DA6EFA20052317C /* ServiceInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC717D981DA6EFA20052317C /* ServiceInterval.swift */; };
 		BC717D9C1DA6EFA20052317C /* ServiceScheduleItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC717D991DA6EFA20052317C /* ServiceScheduleItem.swift */; };
-		BC72D7AB1CC5615600D9740B /* RestClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC72D7A71CC5615600D9740B /* RestClient.swift */; };
 		BC879B391CBEFFC000F9177B /* Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B2F1CBEFFC000F9177B /* Engine.swift */; };
 		BC879B3A1CBEFFC000F9177B /* NextServiceSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B301CBEFFC000F9177B /* NextServiceSchedule.swift */; };
 		BC879B3B1CBEFFC000F9177B /* PlatformServiceSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B311CBEFFC000F9177B /* PlatformServiceSchedule.swift */; };
@@ -184,7 +122,6 @@
 		BC879B421CBEFFC000F9177B /* Warranty.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B381CBEFFC000F9177B /* Warranty.swift */; };
 		BC879B601CBEFFDD00F9177B /* Acceleration.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B431CBEFFDD00F9177B /* Acceleration.swift */; };
 		BC879B611CBEFFDD00F9177B /* Accelerometer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B441CBEFFDD00F9177B /* Accelerometer.swift */; };
-		BC879B621CBEFFDD00F9177B /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B451CBEFFDD00F9177B /* Address.swift */; };
 		BC879B641CBEFFDD00F9177B /* Battery.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B471CBEFFDD00F9177B /* Battery.swift */; };
 		BC879B651CBEFFDD00F9177B /* BooleanState.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B481CBEFFDD00F9177B /* BooleanState.swift */; };
 		BC879B661CBEFFDD00F9177B /* DiagnosticCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B491CBEFFDD00F9177B /* DiagnosticCode.swift */; };
@@ -192,8 +129,6 @@
 		BC879B691CBEFFDD00F9177B /* FuelCapacity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B4C1CBEFFDD00F9177B /* FuelCapacity.swift */; };
 		BC879B6A1CBEFFDD00F9177B /* FuelEfficiency.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B4D1CBEFFDD00F9177B /* FuelEfficiency.swift */; };
 		BC879B6B1CBEFFDD00F9177B /* FuelLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B4E1CBEFFDD00F9177B /* FuelLevel.swift */; };
-		BC879B6D1CBEFFDD00F9177B /* Heading.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B501CBEFFDD00F9177B /* Heading.swift */; };
-		BC879B6F1CBEFFDD00F9177B /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B521CBEFFDD00F9177B /* Location.swift */; };
 		BC879B701CBEFFDD00F9177B /* MeasurementStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B531CBEFFDD00F9177B /* MeasurementStatistics.swift */; };
 		BC879B711CBEFFDD00F9177B /* Mojio.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B541CBEFFDD00F9177B /* Mojio.swift */; };
 		BC879B721CBEFFDD00F9177B /* Odometer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B551CBEFFDD00F9177B /* Odometer.swift */; };
@@ -203,10 +138,6 @@
 		BC879B771CBEFFDD00F9177B /* Speed.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B5A1CBEFFDD00F9177B /* Speed.swift */; };
 		BC879B791CBEFFDD00F9177B /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B5C1CBEFFDD00F9177B /* Trip.swift */; };
 		BC879B7B1CBEFFDD00F9177B /* Vehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B5E1CBEFFDD00F9177B /* Vehicle.swift */; };
-		BC879B891CBEFFFF00F9177B /* JsonSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B871CBEFFFF00F9177B /* JsonSerializer.swift */; };
-		BC879B8A1CBEFFFF00F9177B /* JsonSerializerSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = BC879B881CBEFFFF00F9177B /* JsonSerializerSwift.h */; };
-		BC879B8F1CBF000A00F9177B /* ClientEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B8C1CBF000A00F9177B /* ClientEnvironment.swift */; };
-		BC879B901CBF000A00F9177B /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B8D1CBF000A00F9177B /* KeychainManager.swift */; };
 		BC879BA01CBF044700F9177B /* AppData.txt in Resources */ = {isa = PBXBuildFile; fileRef = BC879B921CBF044700F9177B /* AppData.txt */; };
 		BC879BA31CBF044700F9177B /* GroupData.txt in Resources */ = {isa = PBXBuildFile; fileRef = BC879B951CBF044700F9177B /* GroupData.txt */; };
 		BC879BA41CBF044700F9177B /* MojioData.txt in Resources */ = {isa = PBXBuildFile; fileRef = BC879B961CBF044700F9177B /* MojioData.txt */; };
@@ -222,37 +153,57 @@
 		BC92329B1E7FC52900BD4038 /* CompatibilityDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC92329A1E7FC52900BD4038 /* CompatibilityDetails.swift */; };
 		BC94271B1F01E17D00B7424A /* TripPolyline.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC94271A1F01E17D00B7424A /* TripPolyline.swift */; };
 		BCC2EFBB1CBED4E6004D2759 /* Vehicles.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCC2EFB11CBED4E6004D2759 /* Vehicles.framework */; };
-		BCC8A49E1D19EAAD00E14E2B /* MojioError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC8A49C1D19EAAD00E14E2B /* MojioError.swift */; };
 		BCC8A4A01D19EABF00E14E2B /* WSVehiclesClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC8A49F1D19EABF00E14E2B /* WSVehiclesClient.swift */; };
 		BCF2DE4A1D454B8D00EDD376 /* Geofence.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF2DE491D454B8D00EDD376 /* Geofence.swift */; };
 		BCFCEB041F019FF20096C9B4 /* HarshEventState.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCFCEB031F019FF20096C9B4 /* HarshEventState.swift */; };
 		BCFCEB061F01A2C70096C9B4 /* IdleEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCFCEB051F01A2C70096C9B4 /* IdleEvent.swift */; };
-		BCFE57DB20910AB100B89104 /* MojioAccounts.h in Headers */ = {isa = PBXBuildFile; fileRef = BCFE57D820910AB100B89104 /* MojioAccounts.h */; };
 		BCFE57DE20910AB900B89104 /* MojioVehicles.h in Headers */ = {isa = PBXBuildFile; fileRef = BCFE57D920910AB100B89104 /* MojioVehicles.h */; };
 		BCFE57DF20910ABD00B89104 /* MojioPets.h in Headers */ = {isa = PBXBuildFile; fileRef = BCFE57DA20910AB100B89104 /* MojioPets.h */; };
-		BCFE57E020910D7100B89104 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B521CBEFFDD00F9177B /* Location.swift */; };
-		BCFE57E120910D7100B89104 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B521CBEFFDD00F9177B /* Location.swift */; };
-		BCFE57E220910E2200B89104 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B451CBEFFDD00F9177B /* Address.swift */; };
-		BCFE57E320910E2200B89104 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B451CBEFFDD00F9177B /* Address.swift */; };
-		BCFE57E420910E4400B89104 /* Heading.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B501CBEFFDD00F9177B /* Heading.swift */; };
-		BCFE57E520910E4400B89104 /* Heading.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B501CBEFFDD00F9177B /* Heading.swift */; };
-		BCFE57E620910E6E00B89104 /* DeviceMeasurement.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC3C66411DA8196A00179344 /* DeviceMeasurement.swift */; };
-		BCFE57E720910E6E00B89104 /* DeviceMeasurement.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC3C66411DA8196A00179344 /* DeviceMeasurement.swift */; };
-		BCFE57E92091259800B89104 /* ActivityLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC31E3D01D419F5D001649A7 /* ActivityLocation.swift */; };
-		BCFE57EA2091259800B89104 /* BaseActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884FCE5E1EB13ECD00DDCE3F /* BaseActivity.swift */; };
-		BCFE57EB2091259800B89104 /* BaseActivityLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC31E3D11D419F5D001649A7 /* BaseActivityLocation.swift */; };
-		BCFE57EC2091259800B89104 /* RootActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC31E3D21D419F5D001649A7 /* RootActivity.swift */; };
-		BCFE57EE2091259900B89104 /* ActivityLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC31E3D01D419F5D001649A7 /* ActivityLocation.swift */; };
-		BCFE57EF2091259900B89104 /* BaseActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884FCE5E1EB13ECD00DDCE3F /* BaseActivity.swift */; };
-		BCFE57F02091259900B89104 /* BaseActivityLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC31E3D11D419F5D001649A7 /* BaseActivityLocation.swift */; };
-		BCFE57F12091259900B89104 /* RootActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC31E3D21D419F5D001649A7 /* RootActivity.swift */; };
-		BCFE57F3209125D900B89104 /* VehicleActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC31E3CF1D419F5D001649A7 /* VehicleActivity.swift */; };
-		BCFE57F42091263400B89104 /* PetsActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC590626208E566200A098A3 /* PetsActivity.swift */; };
-		BCFE57F52091263400B89104 /* VehicleActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC31E3CF1D419F5D001649A7 /* VehicleActivity.swift */; };
-		BCFE57F62091263500B89104 /* PetsActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC590626208E566200A098A3 /* PetsActivity.swift */; };
+		BCFE58D3209AF70B00B89104 /* BaseActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884FCE5E1EB13ECD00DDCE3F /* BaseActivity.swift */; };
+		BCFE58D4209AF70B00B89104 /* BaseActivityLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC31E3D11D419F5D001649A7 /* BaseActivityLocation.swift */; };
+		BCFE58D5209AF70B00B89104 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B8D1CBF000A00F9177B /* KeychainManager.swift */; };
+		BCFE58D6209AF70B00B89104 /* PetsError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC590622208E566200A098A3 /* PetsError.swift */; };
+		BCFE58DA209AF70B00B89104 /* TimeIntervalExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2278359D1FB60291002D24F9 /* TimeIntervalExt.swift */; };
+		BCFE58DB209AF70B00B89104 /* AuthToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC59062C208E566200A098A3 /* AuthToken.swift */; };
+		BCFE58DD209AF70B00B89104 /* Heading.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B501CBEFFDD00F9177B /* Heading.swift */; };
+		BCFE58DE209AF70B00B89104 /* RestClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC72D7A71CC5615600D9740B /* RestClient.swift */; };
+		BCFE58DF209AF70B00B89104 /* PrimaryKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8808C2341EB1483A00A41A8B /* PrimaryKey.swift */; };
+		BCFE58E0209AF70B00B89104 /* WebSocketProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF12CC1FB9D90D00F068B2 /* WebSocketProvider.swift */; };
+		BCFE58E2209AF70B00B89104 /* StringExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2278359B1FB60253002D24F9 /* StringExt.swift */; };
+		BCFE58E3209AF70B00B89104 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B451CBEFFDD00F9177B /* Address.swift */; };
+		BCFE58E4209AF70B00B89104 /* VehicleActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC31E3CF1D419F5D001649A7 /* VehicleActivity.swift */; };
+		BCFE58E5209AF70B00B89104 /* DeviceMeasurement.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC3C66411DA8196A00179344 /* DeviceMeasurement.swift */; };
+		BCFE58E8209AF70B00B89104 /* KeychainStorageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED946EF1FA9ED8E00132568 /* KeychainStorageProvider.swift */; };
+		BCFE58EA209AF70B00B89104 /* RootActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC31E3D21D419F5D001649A7 /* RootActivity.swift */; };
+		BCFE58EB209AF70B00B89104 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06C95681D25CA2A006AECBB /* Result.swift */; };
+		BCFE58EC209AF70B00B89104 /* SwiftWebSocketProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF12D21FB9E70100F068B2 /* SwiftWebSocketProvider.swift */; };
+		BCFE58EE209AF70B00B89104 /* MojioError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC8A49C1D19EAAD00E14E2B /* MojioError.swift */; };
+		BCFE58F0209AF70B00B89104 /* WebSocketFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF12CE1FB9DD6F00F068B2 /* WebSocketFactory.swift */; };
+		BCFE58F1209AF70B00B89104 /* Links.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC590623208E566200A098A3 /* Links.swift */; };
+		BCFE58F2209AF70B00B89104 /* ResponseArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC590657208E7ACC00A098A3 /* ResponseArray.swift */; };
+		BCFE58F3209AF70B00B89104 /* SwiftWebSocketFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF12D01FB9E0D700F068B2 /* SwiftWebSocketFactory.swift */; };
+		BCFE58F4209AF70B00B89104 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B521CBEFFDD00F9177B /* Location.swift */; };
+		BCFE58F5209AF70B00B89104 /* ClientEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B8C1CBF000A00F9177B /* ClientEnvironment.swift */; };
+		BCFE58F7209AF70B00B89104 /* ActivityLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC31E3D01D419F5D001649A7 /* ActivityLocation.swift */; };
+		BCFE58F9209AF70B00B89104 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 75F77F0D1D19F504000CC2B4 /* libz.tbd */; };
+		BCFE58FA209AF70B00B89104 /* Pods_Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEFFCAA2C464247F32E3DE5C /* Pods_Accounts.framework */; };
+		BCFE5906209AF84E00B89104 /* Core.plist in Resources */ = {isa = PBXBuildFile; fileRef = BCFE5905209AF84E00B89104 /* Core.plist */; };
+		BCFE5907209AF8E600B89104 /* AccountsClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6036E8208F9C7400D855DE /* AccountsClient.swift */; };
+		BCFE5908209AF8E600B89104 /* AuthClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC72D7A41CC5615600D9740B /* AuthClient.swift */; };
+		BCFE5909209AF8E600B89104 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC72D7A51CC5615600D9740B /* AuthViewController.swift */; };
+		BCFE590A209AF8E600B89104 /* AuthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC72D7A61CC5615600D9740B /* AuthViewController.xib */; };
+		BCFE590B209AF8E600B89104 /* WSAccountsClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6036F1208F9F4D00D855DE /* WSAccountsClient.swift */; };
+		BCFE590C209AF92200B89104 /* TimeIntervalExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2278359D1FB60291002D24F9 /* TimeIntervalExt.swift */; };
+		BCFE590D209AF92200B89104 /* StringExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2278359B1FB60253002D24F9 /* StringExt.swift */; };
+		BCFE5910209AF92400B89104 /* TimeIntervalExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2278359D1FB60291002D24F9 /* TimeIntervalExt.swift */; };
+		BCFE5911209AF92400B89104 /* StringExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2278359B1FB60253002D24F9 /* StringExt.swift */; };
+		BCFE5912209AF92500B89104 /* TimeIntervalExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2278359D1FB60291002D24F9 /* TimeIntervalExt.swift */; };
+		BCFE5913209AF92500B89104 /* StringExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2278359B1FB60253002D24F9 /* StringExt.swift */; };
+		BCFE5915209AF99000B89104 /* MojioCore.h in Headers */ = {isa = PBXBuildFile; fileRef = BCFE5914209AF99000B89104 /* MojioCore.h */; };
+		BCFE5916209AF9BE00B89104 /* MojioAccounts.h in Headers */ = {isa = PBXBuildFile; fileRef = BCFE57D820910AB100B89104 /* MojioAccounts.h */; };
+		BCFE5918209B01DE00B89104 /* PetsActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC590626208E566200A098A3 /* PetsActivity.swift */; };
 		D58640634C2DE4F142ED2588 /* Pods_Pets.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9FF603C57C10DB1F8F755BF /* Pods_Pets.framework */; };
 		E06C95691D25CA2A006AECBB /* NotificationsSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06C95671D25CA2A006AECBB /* NotificationsSettings.swift */; };
-		E06C956A1D25CA2A006AECBB /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06C95681D25CA2A006AECBB /* Result.swift */; };
 		E0E63D351D21E4B900DDF336 /* VehicleActivityData.txt in Resources */ = {isa = PBXBuildFile; fileRef = E0E63D341D21E4B900DDF336 /* VehicleActivityData.txt */; };
 		F9623AAE1D935D74005C10F2 /* IdleState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9623AAD1D935D74005C10F2 /* IdleState.swift */; };
 		F9E9FDAE1D93122A00DCB690 /* HarshEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E9FDAD1D93122A00DCB690 /* HarshEvent.swift */; };
@@ -274,6 +225,7 @@
 		188FAF605C15F9919D241723 /* Pods_MojioSDKTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MojioSDKTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2278359B1FB60253002D24F9 /* StringExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExt.swift; sourceTree = "<group>"; };
 		2278359D1FB60291002D24F9 /* TimeIntervalExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalExt.swift; sourceTree = "<group>"; };
+		2D3D183CD5E1E3D4078EDD6B /* Pods-Core.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Core.release.xcconfig"; path = "Pods/Target Support Files/Pods-Core/Pods-Core.release.xcconfig"; sourceTree = "<group>"; };
 		2E29D8741FB1F3AA00BBEB16 /* RestClientHandleResponseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestClientHandleResponseTests.swift; sourceTree = "<group>"; };
 		2E5767361FB43A62008F16F6 /* ProperAccelerationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProperAccelerationTests.swift; sourceTree = "<group>"; };
 		2E5767381FB43B3C008F16F6 /* TimePeriodTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePeriodTests.swift; sourceTree = "<group>"; };
@@ -357,9 +309,11 @@
 		8808C2341EB1483A00A41A8B /* PrimaryKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimaryKey.swift; sourceTree = "<group>"; };
 		884FCE5E1EB13ECD00DDCE3F /* BaseActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseActivity.swift; sourceTree = "<group>"; };
 		887014781DA833CA00EFEC6D /* VehicleStatistics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VehicleStatistics.swift; sourceTree = "<group>"; };
+		9980F32E31CB2E846A417B2C /* Pods_Core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Core.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		99F172CDA9C69F9BF12B704A /* Pods_MojioSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MojioSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9FF603C57C10DB1F8F755BF /* Pods_Pets.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pets.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE37CC1D524CCDEBA1663048 /* Pods-Vehicles.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vehicles.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Vehicles/Pods-Vehicles.debug.xcconfig"; sourceTree = "<group>"; };
+		AF0D505D9B7CEF6E8A9E8FFB /* Pods-Core.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Core.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Core/Pods-Core.debug.xcconfig"; sourceTree = "<group>"; };
 		BB935783B8EEA97833A0CF69 /* Pods-Accounts.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Accounts.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Accounts/Pods-Accounts.debug.xcconfig"; sourceTree = "<group>"; };
 		BC31E3CD1D419E80001649A7 /* Distance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Distance.swift; sourceTree = "<group>"; };
 		BC31E3CF1D419F5D001649A7 /* VehicleActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VehicleActivity.swift; sourceTree = "<group>"; };
@@ -435,8 +389,6 @@
 		BC879B5A1CBEFFDD00F9177B /* Speed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Speed.swift; sourceTree = "<group>"; };
 		BC879B5C1CBEFFDD00F9177B /* Trip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
 		BC879B5E1CBEFFDD00F9177B /* Vehicle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vehicle.swift; sourceTree = "<group>"; };
-		BC879B871CBEFFFF00F9177B /* JsonSerializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonSerializer.swift; sourceTree = "<group>"; };
-		BC879B881CBEFFFF00F9177B /* JsonSerializerSwift.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JsonSerializerSwift.h; sourceTree = "<group>"; };
 		BC879B8C1CBF000A00F9177B /* ClientEnvironment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientEnvironment.swift; sourceTree = "<group>"; };
 		BC879B8D1CBF000A00F9177B /* KeychainManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		BC879B911CBF044700F9177B /* ApiPathTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiPathTests.swift; sourceTree = "<group>"; };
@@ -467,6 +419,9 @@
 		BCFE57D820910AB100B89104 /* MojioAccounts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MojioAccounts.h; sourceTree = "<group>"; };
 		BCFE57D920910AB100B89104 /* MojioVehicles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MojioVehicles.h; sourceTree = "<group>"; };
 		BCFE57DA20910AB100B89104 /* MojioPets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MojioPets.h; sourceTree = "<group>"; };
+		BCFE5903209AF70B00B89104 /* Core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Core.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BCFE5905209AF84E00B89104 /* Core.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Core.plist; sourceTree = "<group>"; };
+		BCFE5914209AF99000B89104 /* MojioCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MojioCore.h; sourceTree = "<group>"; };
 		CA1C7625383D1B4F4A95EBA8 /* Pods-Pets.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pets.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pets/Pods-Pets.debug.xcconfig"; sourceTree = "<group>"; };
 		D220CCCBE4F1F6F5A5F24E9D /* Pods-Pets.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pets.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pets/Pods-Pets.release.xcconfig"; sourceTree = "<group>"; };
 		D4D6F7769C35C2486E30AC0F /* Pods-MojioSDKTests2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MojioSDKTests2.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MojioSDKTests2/Pods-MojioSDKTests2.debug.xcconfig"; sourceTree = "<group>"; };
@@ -516,6 +471,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				BCC2EFBB1CBED4E6004D2759 /* Vehicles.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BCFE58F8209AF70B00B89104 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BCFE58F9209AF70B00B89104 /* libz.tbd in Frameworks */,
+				BCFE58FA209AF70B00B89104 /* Pods_Accounts.framework in Frameworks */,
+				3D6869BE2149CD45D324016A /* Pods_Core.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -674,6 +639,7 @@
 				BCC2EFBA1CBED4E6004D2759 /* Tests.xctest */,
 				BC3D7C7A2087F3B000659A92 /* Pets.framework */,
 				BC60372D208FA9CD00D855DE /* Accounts.framework */,
+				BCFE5903209AF70B00B89104 /* Core.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -688,6 +654,7 @@
 				A9FF603C57C10DB1F8F755BF /* Pods_Pets.framework */,
 				F28CBD045B5B77B3EC893BCA /* Pods_Vehicles.framework */,
 				EEFFCAA2C464247F32E3DE5C /* Pods_Accounts.framework */,
+				9980F32E31CB2E846A417B2C /* Pods_Core.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -761,7 +728,7 @@
 			path = Accounts;
 			sourceTree = "<group>";
 		};
-		BC59065C208E7B1200A098A3 /* Shared */ = {
+		BC59065C208E7B1200A098A3 /* Core */ = {
 			isa = PBXGroup;
 			children = (
 				BC59062C208E566200A098A3 /* AuthToken.swift */,
@@ -777,7 +744,7 @@
 				E06C95681D25CA2A006AECBB /* Result.swift */,
 				E0E63D2D1D21DF3200DDF336 /* ActivityStreams */,
 			);
-			path = Shared;
+			path = Core;
 			sourceTree = "<group>";
 		};
 		BC60372F208FA9E800D855DE /* Accounts */ = {
@@ -810,7 +777,7 @@
 			path = Vehicles;
 			sourceTree = "<group>";
 		};
-		BC603732208FAA2100D855DE /* Shared */ = {
+		BC603732208FAA2100D855DE /* Core */ = {
 			isa = PBXGroup;
 			children = (
 				BC72D7A71CC5615600D9740B /* RestClient.swift */,
@@ -819,13 +786,14 @@
 				2EBF12CE1FB9DD6F00F068B2 /* WebSocketFactory.swift */,
 				2EBF12CC1FB9D90D00F068B2 /* WebSocketProvider.swift */,
 			);
-			path = Shared;
+			path = Core;
 			sourceTree = "<group>";
 		};
 		BC603758208FC47600D855DE /* List */ = {
 			isa = PBXGroup;
 			children = (
 				BC60375A208FC4C600D855DE /* Accounts.plist */,
+				BCFE5905209AF84E00B89104 /* Core.plist */,
 				BC60375B208FC4C600D855DE /* Pets.plist */,
 				BC603759208FC4C600D855DE /* Vehicles.plist */,
 			);
@@ -836,8 +804,8 @@
 			isa = PBXGroup;
 			children = (
 				BC60372F208FA9E800D855DE /* Accounts */,
+				BC603732208FAA2100D855DE /* Core */,
 				BC603730208FA9ED00D855DE /* Pets */,
-				BC603732208FAA2100D855DE /* Shared */,
 				BC603731208FA9F500D855DE /* Vehicles */,
 			);
 			path = Client;
@@ -851,15 +819,6 @@
 				2ED946EF1FA9ED8E00132568 /* KeychainStorageProvider.swift */,
 			);
 			path = Env;
-			sourceTree = "<group>";
-		};
-		BC879B2C1CBEFF9000F9177B /* Shared */ = {
-			isa = PBXGroup;
-			children = (
-				BC879B871CBEFFFF00F9177B /* JsonSerializer.swift */,
-				BC879B881CBEFFFF00F9177B /* JsonSerializerSwift.h */,
-			);
-			path = Shared;
 			sourceTree = "<group>";
 		};
 		BC879B2E1CBEFFB000F9177B /* VinDetails */ = {
@@ -928,9 +887,9 @@
 				2E5767421FB454FD008F16F6 /* Extensions */,
 				BCC2EFD91CBEF74A004D2759 /* Models */,
 				BCFE57D820910AB100B89104 /* MojioAccounts.h */,
+				BCFE5914209AF99000B89104 /* MojioCore.h */,
 				BCFE57DA20910AB100B89104 /* MojioPets.h */,
 				BCFE57D920910AB100B89104 /* MojioVehicles.h */,
-				BC879B2C1CBEFF9000F9177B /* Shared */,
 			);
 			path = MojioSDK;
 			sourceTree = "<group>";
@@ -953,7 +912,7 @@
 		BCC2EFD91CBEF74A004D2759 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				BC59065C208E7B1200A098A3 /* Shared */,
+				BC59065C208E7B1200A098A3 /* Core */,
 				BC590641208E566D00A098A3 /* Accounts */,
 				BC59061E208E55CF00A098A3 /* Pets */,
 				BC3D7C7C2087F41800659A92 /* Vehicles */,
@@ -988,6 +947,8 @@
 				D220CCCBE4F1F6F5A5F24E9D /* Pods-Pets.release.xcconfig */,
 				BB935783B8EEA97833A0CF69 /* Pods-Accounts.debug.xcconfig */,
 				704FA7BB4426F78E7857D7EF /* Pods-Accounts.release.xcconfig */,
+				AF0D505D9B7CEF6E8A9E8FFB /* Pods-Core.debug.xcconfig */,
+				2D3D183CD5E1E3D4078EDD6B /* Pods-Core.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -999,7 +960,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BC3D7C722087F3B000659A92 /* JsonSerializerSwift.h in Headers */,
 				BCFE57DF20910ABD00B89104 /* MojioPets.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1008,8 +968,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BC603725208FA9CD00D855DE /* JsonSerializerSwift.h in Headers */,
-				BCFE57DB20910AB100B89104 /* MojioAccounts.h in Headers */,
+				BCFE5916209AF9BE00B89104 /* MojioAccounts.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1018,7 +977,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				BCFE57DE20910AB900B89104 /* MojioVehicles.h in Headers */,
-				BC879B8A1CBEFFFF00F9177B /* JsonSerializerSwift.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BCFE58FB209AF70B00B89104 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BCFE5915209AF99000B89104 /* MojioCore.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1100,6 +1066,25 @@
 			productReference = BCC2EFBA1CBED4E6004D2759 /* Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		BCFE58CF209AF70B00B89104 /* Core */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BCFE5900209AF70B00B89104 /* Build configuration list for PBXNativeTarget "Core" */;
+			buildPhases = (
+				BCFE58D0209AF70B00B89104 /* [CP] Check Pods Manifest.lock */,
+				BCFE58D1209AF70B00B89104 /* Sources */,
+				BCFE58F8209AF70B00B89104 /* Frameworks */,
+				BCFE58FB209AF70B00B89104 /* Headers */,
+				BCFE58FE209AF70B00B89104 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Core;
+			productName = MojioSDK;
+			productReference = BCFE5903209AF70B00B89104 /* Core.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -1133,6 +1118,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
+				BCFE58CF209AF70B00B89104 /* Core */,
 				BC6036F6208FA9CD00D855DE /* Accounts */,
 				BC3D7C1D2087F3B000659A92 /* Pets */,
 				BCC2EFB01CBED4E6004D2759 /* Vehicles */,
@@ -1153,7 +1139,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BC603728208FA9CD00D855DE /* AuthViewController.xib in Resources */,
+				BCFE590A209AF8E600B89104 /* AuthViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1182,6 +1168,14 @@
 				BC879BAB1CBF044700F9177B /* VehicleStateData.txt in Resources */,
 				BC879BA51CBF044700F9177B /* NextServiceData.txt in Resources */,
 				BC879BA91CBF044700F9177B /* VehicleData.txt in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BCFE58FE209AF70B00B89104 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BCFE5906209AF84E00B89104 /* Core.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1242,6 +1236,24 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		BCFE58D0209AF70B00B89104 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Core-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1249,44 +1261,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BCFE5918209B01DE00B89104 /* PetsActivity.swift in Sources */,
 				BC3D7C84208816BB00659A92 /* PetsClient.swift in Sources */,
-				BCFE57E720910E6E00B89104 /* DeviceMeasurement.swift in Sources */,
-				BC3D7C212087F3B000659A92 /* KeychainManager.swift in Sources */,
-				BCFE57E120910D7100B89104 /* Location.swift in Sources */,
-				BC603746208FB20F00D855DE /* PetsError.swift in Sources */,
-				BCFE57EE2091259900B89104 /* ActivityLocation.swift in Sources */,
-				BCFE57F12091259900B89104 /* RootActivity.swift in Sources */,
-				BC3D7C2A2087F3B000659A92 /* JsonSerializer.swift in Sources */,
-				BC3D7C2E2087F3B000659A92 /* TimeIntervalExt.swift in Sources */,
-				BC603749208FB20F00D855DE /* Links.swift in Sources */,
-				BC603750208FB36600D855DE /* Result.swift in Sources */,
+				BCFE5912209AF92500B89104 /* TimeIntervalExt.swift in Sources */,
+				BCFE5913209AF92500B89104 /* StringExt.swift in Sources */,
 				BC60374B208FB20F00D855DE /* NotificationToken.swift in Sources */,
-				BCFE57E320910E2200B89104 /* Address.swift in Sources */,
-				BC6036F0208F9EB500D855DE /* PetsActivity.swift in Sources */,
-				BC3D7C2F2087F3B000659A92 /* RestClient.swift in Sources */,
-				BC6036EE208F9E3600D855DE /* PrimaryKey.swift in Sources */,
-				BC3D7C342087F3B000659A92 /* WebSocketProvider.swift in Sources */,
-				BC603754208FB3A200D855DE /* MojioError.swift in Sources */,
 				BC60374C208FB20F00D855DE /* PetDetails.swift in Sources */,
-				BC3D7C3B2087F3B000659A92 /* StringExt.swift in Sources */,
 				BC603742208FB20F00D855DE /* Asset.swift in Sources */,
-				BCFE57F52091263400B89104 /* VehicleActivity.swift in Sources */,
 				BC590656208E783A00A098A3 /* WSPetsClient.swift in Sources */,
 				BC60374A208FB20F00D855DE /* PetsLocation.swift in Sources */,
-				BCFE57E520910E4400B89104 /* Heading.swift in Sources */,
-				BC3D7C412087F3B000659A92 /* KeychainStorageProvider.swift in Sources */,
 				BC603744208FB20F00D855DE /* Device.swift in Sources */,
-				BC3D7C4C2087F3B000659A92 /* SwiftWebSocketProvider.swift in Sources */,
-				BC3D7C512087F3B000659A92 /* WebSocketFactory.swift in Sources */,
 				BC603743208FB20F00D855DE /* Battery.swift in Sources */,
-				BCFE57F02091259900B89104 /* BaseActivityLocation.swift in Sources */,
-				BC603735208FACF400D855DE /* AuthToken.swift in Sources */,
-				BC59065B208E7B0100A098A3 /* ResponseArray.swift in Sources */,
 				BC603745208FB20F00D855DE /* DeviceType.swift in Sources */,
-				BCFE57EF2091259900B89104 /* BaseActivity.swift in Sources */,
 				BC603747208FB20F00D855DE /* Geofence.swift in Sources */,
-				BC3D7C672087F3B000659A92 /* SwiftWebSocketFactory.swift in Sources */,
-				BC3D7C6C2087F3B000659A92 /* ClientEnvironment.swift in Sources */,
 				BC603748208FB20F00D855DE /* Image.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1295,44 +1282,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BC6036F9208FA9CD00D855DE /* AccountsClient.swift in Sources */,
-				BCFE57EA2091259800B89104 /* BaseActivity.swift in Sources */,
-				BCFE57EB2091259800B89104 /* BaseActivityLocation.swift in Sources */,
-				BC6036FB208FA9CD00D855DE /* KeychainManager.swift in Sources */,
-				BC603757208FB3C100D855DE /* PetsError.swift in Sources */,
-				BC6036FD208FA9CD00D855DE /* JsonSerializer.swift in Sources */,
-				BC6036FE208FA9CD00D855DE /* AuthViewController.swift in Sources */,
-				BCFE57F42091263400B89104 /* PetsActivity.swift in Sources */,
-				BC603701208FA9CD00D855DE /* TimeIntervalExt.swift in Sources */,
-				BC603702208FA9CD00D855DE /* AuthToken.swift in Sources */,
+				BCFE5907209AF8E600B89104 /* AccountsClient.swift in Sources */,
+				BCFE5909209AF8E600B89104 /* AuthViewController.swift in Sources */,
+				BCFE590D209AF92200B89104 /* StringExt.swift in Sources */,
 				BC603703208FA9CD00D855DE /* PhoneNumber.swift in Sources */,
-				BCFE57E420910E4400B89104 /* Heading.swift in Sources */,
-				BC603705208FA9CD00D855DE /* RestClient.swift in Sources */,
-				BC603706208FA9CD00D855DE /* PrimaryKey.swift in Sources */,
-				BC603708208FA9CD00D855DE /* WebSocketProvider.swift in Sources */,
 				BC60370A208FA9CD00D855DE /* Email.swift in Sources */,
-				BC60370D208FA9CD00D855DE /* StringExt.swift in Sources */,
-				BCFE57E220910E2200B89104 /* Address.swift in Sources */,
-				BCFE57F3209125D900B89104 /* VehicleActivity.swift in Sources */,
-				BCFE57E620910E6E00B89104 /* DeviceMeasurement.swift in Sources */,
-				BC60370F208FA9CD00D855DE /* AuthClient.swift in Sources */,
-				BC603710208FA9CD00D855DE /* WSAccountsClient.swift in Sources */,
-				BC603712208FA9CD00D855DE /* KeychainStorageProvider.swift in Sources */,
 				BC603713208FA9CD00D855DE /* User.swift in Sources */,
-				BCFE57EC2091259800B89104 /* RootActivity.swift in Sources */,
-				BC603751208FB36600D855DE /* Result.swift in Sources */,
-				BC603716208FA9CD00D855DE /* SwiftWebSocketProvider.swift in Sources */,
+				BCFE590C209AF92200B89104 /* TimeIntervalExt.swift in Sources */,
 				BC60374D208FB2CC00D855DE /* Image.swift in Sources */,
-				BC603755208FB3A200D855DE /* MojioError.swift in Sources */,
+				BCFE590B209AF8E600B89104 /* WSAccountsClient.swift in Sources */,
 				BC603717208FA9CD00D855DE /* Group.swift in Sources */,
-				BC603718208FA9CD00D855DE /* WebSocketFactory.swift in Sources */,
-				BC60374E208FB2F400D855DE /* Links.swift in Sources */,
-				BC603719208FA9CD00D855DE /* ResponseArray.swift in Sources */,
-				BC60371C208FA9CD00D855DE /* SwiftWebSocketFactory.swift in Sources */,
-				BCFE57E020910D7100B89104 /* Location.swift in Sources */,
-				BC60371D208FA9CD00D855DE /* ClientEnvironment.swift in Sources */,
+				BCFE5908209AF8E600B89104 /* AuthClient.swift in Sources */,
 				BC60371E208FA9CD00D855DE /* App.swift in Sources */,
-				BCFE57E92091259800B89104 /* ActivityLocation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1341,55 +1302,34 @@
 			buildActionMask = 2147483647;
 			files = (
 				BC879B671CBEFFDD00F9177B /* TimePeriod.swift in Sources */,
-				BC879B901CBF000A00F9177B /* KeychainManager.swift in Sources */,
 				BC8ECA501D226690009C6164 /* WifiRadio.swift in Sources */,
-				BC879B6D1CBEFFDD00F9177B /* Heading.swift in Sources */,
 				BC3D7C7F2087F5E700659A92 /* VehiclesClient.swift in Sources */,
-				BC31E3D51D419F5D001649A7 /* BaseActivityLocation.swift in Sources */,
-				BCFE57F62091263500B89104 /* PetsActivity.swift in Sources */,
 				BC879B771CBEFFDD00F9177B /* Speed.swift in Sources */,
 				BC879B701CBEFFDD00F9177B /* MeasurementStatistics.swift in Sources */,
 				644214DE1D9E6500005A86C5 /* AggregationData.swift in Sources */,
-				884FCE5F1EB13ECD00DDCE3F /* BaseActivity.swift in Sources */,
 				BC879B641CBEFFDD00F9177B /* Battery.swift in Sources */,
-				BC879B891CBEFFFF00F9177B /* JsonSerializer.swift in Sources */,
 				BC717D9C1DA6EFA20052317C /* ServiceScheduleItem.swift in Sources */,
 				BC879B601CBEFFDD00F9177B /* Acceleration.swift in Sources */,
-				2278359E1FB60291002D24F9 /* TimeIntervalExt.swift in Sources */,
-				BC72D7AB1CC5615600D9740B /* RestClient.swift in Sources */,
 				BC879B391CBEFFC000F9177B /* Engine.swift in Sources */,
-				BC603756208FB3C100D855DE /* PetsError.swift in Sources */,
-				BC60374F208FB31000D855DE /* Links.swift in Sources */,
-				BC879B621CBEFFDD00F9177B /* Address.swift in Sources */,
 				BC879B401CBEFFC000F9177B /* Vin.swift in Sources */,
-				BC879B6F1CBEFFDD00F9177B /* Location.swift in Sources */,
-				2EBF12CD1FB9D90D00F068B2 /* WebSocketProvider.swift in Sources */,
 				F9E9FDAE1D93122A00DCB690 /* HarshEvent.swift in Sources */,
-				BC31E3D31D419F5D001649A7 /* VehicleActivity.swift in Sources */,
-				BCC8A49E1D19EAAD00E14E2B /* MojioError.swift in Sources */,
 				BC879B6A1CBEFFDD00F9177B /* FuelEfficiency.swift in Sources */,
 				BCC8A4A01D19EABF00E14E2B /* WSVehiclesClient.swift in Sources */,
-				2278359C1FB60253002D24F9 /* StringExt.swift in Sources */,
 				BCF2DE4A1D454B8D00EDD376 /* Geofence.swift in Sources */,
-				E06C956A1D25CA2A006AECBB /* Result.swift in Sources */,
 				BC879B6B1CBEFFDD00F9177B /* FuelLevel.swift in Sources */,
 				BCFCEB061F01A2C70096C9B4 /* IdleEvent.swift in Sources */,
-				2ED946F01FA9ED8E00132568 /* KeychainStorageProvider.swift in Sources */,
-				BC59065D208E7CB800A098A3 /* ResponseArray.swift in Sources */,
+				BCFE5910209AF92400B89104 /* TimeIntervalExt.swift in Sources */,
 				BC879B791CBEFFDD00F9177B /* Trip.swift in Sources */,
 				BC5F7F031CC58D4000FAB205 /* Units.swift in Sources */,
 				BC92329B1E7FC52900BD4038 /* CompatibilityDetails.swift in Sources */,
 				BC879B411CBEFFC000F9177B /* VinDetails.swift in Sources */,
-				BC603736208FACF400D855DE /* AuthToken.swift in Sources */,
+				BCFE5911209AF92400B89104 /* StringExt.swift in Sources */,
 				BC717D9B1DA6EFA20052317C /* ServiceInterval.swift in Sources */,
 				BC717D9A1DA6EFA20052317C /* ServiceEvent.swift in Sources */,
 				BC879B711CBEFFDD00F9177B /* Mojio.swift in Sources */,
-				BC31E3D61D419F5D001649A7 /* RootActivity.swift in Sources */,
-				2EBF12D31FB9E70100F068B2 /* SwiftWebSocketProvider.swift in Sources */,
 				2EBF12BE1FB986FE00F068B2 /* FuelVolume.swift in Sources */,
 				BC879B721CBEFFDD00F9177B /* Odometer.swift in Sources */,
 				BC94271B1F01E17D00B7424A /* TripPolyline.swift in Sources */,
-				2EBF12CF1FB9DD6F00F068B2 /* WebSocketFactory.swift in Sources */,
 				BC879B661CBEFFDD00F9177B /* DiagnosticCode.swift in Sources */,
 				BC879B3D1CBEFFC000F9177B /* ServiceBulletin.swift in Sources */,
 				BC879B3F1CBEFFC000F9177B /* Transmission.swift in Sources */,
@@ -1400,8 +1340,6 @@
 				E06C95691D25CA2A006AECBB /* NotificationsSettings.swift in Sources */,
 				BC879B3C1CBEFFC000F9177B /* Recall.swift in Sources */,
 				BC879B421CBEFFC000F9177B /* Warranty.swift in Sources */,
-				8808C2351EB1483A00A41A8B /* PrimaryKey.swift in Sources */,
-				BC3C66421DA8196A00179344 /* DeviceMeasurement.swift in Sources */,
 				BC879B611CBEFFDD00F9177B /* Accelerometer.swift in Sources */,
 				BC31E3CE1D419E80001649A7 /* Distance.swift in Sources */,
 				BC879B691CBEFFDD00F9177B /* FuelCapacity.swift in Sources */,
@@ -1409,12 +1347,9 @@
 				BC879B741CBEFFDD00F9177B /* ProperAcceleration.swift in Sources */,
 				F9623AAE1D935D74005C10F2 /* IdleState.swift in Sources */,
 				BC879B3E1CBEFFC000F9177B /* ServiceSchedule.swift in Sources */,
-				2EBF12D11FB9E0D700F068B2 /* SwiftWebSocketFactory.swift in Sources */,
 				BC879B651CBEFFDD00F9177B /* BooleanState.swift in Sources */,
 				BC879B3A1CBEFFC000F9177B /* NextServiceSchedule.swift in Sources */,
 				BC879B761CBEFFDD00F9177B /* Score.swift in Sources */,
-				BC879B8F1CBF000A00F9177B /* ClientEnvironment.swift in Sources */,
-				BC31E3D41D419F5D001649A7 /* ActivityLocation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1491,6 +1426,39 @@
 				2EBD23B91FAB66BB00399D63 /* Errors.swift in Sources */,
 				2ED946EE1FA9D5E400132568 /* KeychainManagerTests.swift in Sources */,
 				2E5767621FB4ACFA008F16F6 /* HarshEventTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BCFE58D1209AF70B00B89104 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BCFE58D3209AF70B00B89104 /* BaseActivity.swift in Sources */,
+				BCFE58D4209AF70B00B89104 /* BaseActivityLocation.swift in Sources */,
+				BCFE58D5209AF70B00B89104 /* KeychainManager.swift in Sources */,
+				BCFE58D6209AF70B00B89104 /* PetsError.swift in Sources */,
+				BCFE58DA209AF70B00B89104 /* TimeIntervalExt.swift in Sources */,
+				BCFE58DB209AF70B00B89104 /* AuthToken.swift in Sources */,
+				BCFE58DD209AF70B00B89104 /* Heading.swift in Sources */,
+				BCFE58DE209AF70B00B89104 /* RestClient.swift in Sources */,
+				BCFE58DF209AF70B00B89104 /* PrimaryKey.swift in Sources */,
+				BCFE58E0209AF70B00B89104 /* WebSocketProvider.swift in Sources */,
+				BCFE58E2209AF70B00B89104 /* StringExt.swift in Sources */,
+				BCFE58E3209AF70B00B89104 /* Address.swift in Sources */,
+				BCFE58E4209AF70B00B89104 /* VehicleActivity.swift in Sources */,
+				BCFE58E5209AF70B00B89104 /* DeviceMeasurement.swift in Sources */,
+				BCFE58E8209AF70B00B89104 /* KeychainStorageProvider.swift in Sources */,
+				BCFE58EA209AF70B00B89104 /* RootActivity.swift in Sources */,
+				BCFE58EB209AF70B00B89104 /* Result.swift in Sources */,
+				BCFE58EC209AF70B00B89104 /* SwiftWebSocketProvider.swift in Sources */,
+				BCFE58EE209AF70B00B89104 /* MojioError.swift in Sources */,
+				BCFE58F0209AF70B00B89104 /* WebSocketFactory.swift in Sources */,
+				BCFE58F1209AF70B00B89104 /* Links.swift in Sources */,
+				BCFE58F2209AF70B00B89104 /* ResponseArray.swift in Sources */,
+				BCFE58F3209AF70B00B89104 /* SwiftWebSocketFactory.swift in Sources */,
+				BCFE58F4209AF70B00B89104 /* Location.swift in Sources */,
+				BCFE58F5209AF70B00B89104 /* ClientEnvironment.swift in Sources */,
+				BCFE58F7209AF70B00B89104 /* ActivityLocation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1625,7 +1593,7 @@
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/List/Pets.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.moj.mobile.ios.sdk.Pets;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1654,7 +1622,7 @@
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/List/Pets.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.moj.mobile.ios.sdk.Pets;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1682,7 +1650,7 @@
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/List/Accounts.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.moj.mobile.ios.sdk.Accounts;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1711,7 +1679,7 @@
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/List/Accounts.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.moj.mobile.ios.sdk.Accounts;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1739,7 +1707,7 @@
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/List/Vehicles.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.moj.mobile.ios.sdk.Vehicles;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1768,7 +1736,7 @@
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/List/Vehicles.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.moj.mobile.ios.sdk.Vehicles;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1805,6 +1773,63 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.0;
+			};
+			name = Release;
+		};
+		BCFE5901209AF70B00B89104 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AF0D505D9B7CEF6E8A9E8FFB /* Pods-Core.debug.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_BITCODE = YES;
+				INFOPLIST_FILE = "$(SRCROOT)/List/Core.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = io.moj.mobile.ios.sdk.Core;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		BCFE5902209AF70B00B89104 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2D3D183CD5E1E3D4078EDD6B /* Pods-Core.release.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_BITCODE = YES;
+				INFOPLIST_FILE = "$(SRCROOT)/List/Core.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = io.moj.mobile.ios.sdk.Core;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
@@ -1852,6 +1877,15 @@
 			buildConfigurations = (
 				BCC2EFC61CBED4E6004D2759 /* Debug */,
 				BCC2EFC71CBED4E6004D2759 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BCFE5900209AF70B00B89104 /* Build configuration list for PBXNativeTarget "Core" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BCFE5901209AF70B00B89104 /* Debug */,
+				BCFE5902209AF70B00B89104 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

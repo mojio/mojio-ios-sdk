@@ -17,6 +17,7 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 import KeychainSwift
+import MojioCore
 
 public enum VehiclesEndpoint: String {
     case base = "/"
@@ -217,7 +218,7 @@ open class VehiclesClient: RestClient {
         return self
     }
     
-    internal override func parseData(_ responseData: Data) -> Codable? {
+    open override func parseData(_ responseData: Data) -> Codable? {
         
         do {
             

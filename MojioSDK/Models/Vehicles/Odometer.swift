@@ -14,6 +14,7 @@
  *******************************************************************************/
 
 import Foundation
+import MojioCore
 
 // Units in DistanceUnits
 public struct Odometer: DeviceMeasurement {

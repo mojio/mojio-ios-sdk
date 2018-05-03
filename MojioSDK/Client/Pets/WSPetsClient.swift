@@ -17,6 +17,7 @@ import Foundation
 import SwiftWebSocket
 import SwiftyJSON
 import Alamofire
+import MojioCore
 
 open class WSPetsClient: PetsClient {
     
@@ -40,7 +41,7 @@ open class WSPetsClient: PetsClient {
         super.init(clientEnvironment: clientEnvironment, sessionManager: sessionManager, keychainManager: keychainManager)
     }
     
-    public override func dispatch(queue: DispatchQueue) {
+    open override func dispatch(queue: DispatchQueue) {
         self.wsDispatchQueue = queue
     }
     

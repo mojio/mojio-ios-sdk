@@ -14,6 +14,7 @@
  *******************************************************************************/
 
 import Foundation
+import MojioCore
 
 // Units in BatteryVoltageUnits
 public struct Battery: DeviceMeasurement {
