@@ -186,7 +186,6 @@
 		BCFE58F5209AF70B00B89104 /* ClientEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B8C1CBF000A00F9177B /* ClientEnvironment.swift */; };
 		BCFE58F7209AF70B00B89104 /* ActivityLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC31E3D01D419F5D001649A7 /* ActivityLocation.swift */; };
 		BCFE58F9209AF70B00B89104 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 75F77F0D1D19F504000CC2B4 /* libz.tbd */; };
-		BCFE58FA209AF70B00B89104 /* Pods_Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEFFCAA2C464247F32E3DE5C /* Pods_Accounts.framework */; };
 		BCFE5906209AF84E00B89104 /* Core.plist in Resources */ = {isa = PBXBuildFile; fileRef = BCFE5905209AF84E00B89104 /* Core.plist */; };
 		BCFE5907209AF8E600B89104 /* AccountsClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6036E8208F9C7400D855DE /* AccountsClient.swift */; };
 		BCFE5908209AF8E600B89104 /* AuthClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC72D7A41CC5615600D9740B /* AuthClient.swift */; };
@@ -479,7 +478,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				BCFE58F9209AF70B00B89104 /* libz.tbd in Frameworks */,
-				BCFE58FA209AF70B00B89104 /* Pods_Accounts.framework in Frameworks */,
 				3D6869BE2149CD45D324016A /* Pods_Core.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
