@@ -17,15 +17,21 @@ import Foundation
 
 public struct IdleState: Codable {
     
-    public var timestamp: Date? = nil
+    public var timestampString: String? = nil
     public var value: Bool = false
     public var startTime: String? = nil
     public var duration: TimePeriod? = nil
     
     public enum CodingKeys: String, CodingKey {
-        case timestamp = "Timestamp"
+        case timestampString = "Timestamp"
         case value = "Value"
         case startTime = "StartTime"
         case duration = "Duration"
+    }
+}
+
+extension IdleState {
+    public var timestamp: Date? {
+        return timestampString.flatMap { $0.dateFromIso8601 }
     }
 }

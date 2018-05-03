@@ -31,8 +31,17 @@ public struct AggregationData: Codable {
     public var Count        : Int = 0
     public var TripCount    : Int = 0
     
-//    public var date: Date? = nil
-//    public var endDate: Date? = nil
+    private enum CodingKeys: String, CodingKey {
+        case Total
+        case Average
+        case Max
+        case Min
+        case units = "Units"
+        case Date
+        case EndDate
+        case Count
+        case TripCount    
+    }
 }
 
 extension AggregationData {

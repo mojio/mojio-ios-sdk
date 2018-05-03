@@ -25,8 +25,6 @@ public struct FuelEfficiency: DeviceMeasurement {
     public var unit: String? = nil
     public var value: Double = 0
     public var timestamp: Date?  = nil
-    
-    //public var timeStamp: Date? = nil
 }
 
 extension FuelEfficiency {
@@ -40,9 +38,3 @@ extension FuelEfficiency {
         
     }
 }
-
-//public init() {}
-
-//public init?(map: Map) {
-//    self.init()
-//}

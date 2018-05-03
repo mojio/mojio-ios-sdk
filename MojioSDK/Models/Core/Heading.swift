@@ -28,8 +28,6 @@ public struct Heading: DeviceMeasurement {
     public var value: Double = 0
     public var timestamp: Date?  = nil
     
-    //public var timeStamp: Date? = nil
-    
     public var Direction: String? = nil
     public var LeftTurn: Bool = false
 

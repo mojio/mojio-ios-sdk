@@ -26,8 +26,6 @@ public struct Battery: DeviceMeasurement {
     public var value: Double = 0
     public var timestamp: Date?  = nil
     
-    //public var timeStamp: Date? = nil
-    
     public var Connected: Bool = false
     
     // RiskSeverity

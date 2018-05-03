@@ -13,20 +13,34 @@
  * forbidden unless prior written permission is obtained from Moj.io Inc.
  *******************************************************************************/
 
-@testable import Vehicles //MojioSDK
+@testable import Vehicles
 import XCTest
 
 class AccelerometerTests: XCTestCase {
-    func testAccelerometerShouldBeCreatedFromJsonString() {
-//        let jsonObject = try! JSONSerialization.jsonObject(with: jsonString.data(using: .utf8)!, options: .allowFragments)
-//        let model = Mapper<Accelerometer>().map(JSONObject: jsonObject)
-//
-//        XCTAssertNotNil(model)
-//        XCTAssertNotNil(model?.X)
-//        XCTAssertNotNil(model?.Y)
-//        XCTAssertNotNil(model?.Z)
-//        XCTAssertNotNil(model?.Magnitude)
-//        XCTAssertNotNil(model?.SamplingInterval)
+    
+    var model: Accelerometer!
+    
+    override func setUp() {
+        do {
+            let data = self.jsonString.data(using: .utf8)
+            self.model = try JSONDecoder().decode(Accelerometer.self, from: data!)
+        } catch let error {
+            print(error)
+        }
+    }
+    
+    override func tearDown() {
+        
+        self.model = nil
+    }
+    
+    func testAccelerometerModelDecoding() {
+        XCTAssertNotNil(model)
+        XCTAssertNotNil(model?.x)
+        XCTAssertNotNil(model?.y)
+        XCTAssertNotNil(model?.z)
+        XCTAssertNotNil(model?.magnitude)
+        XCTAssertNotNil(model?.samplingInterval)
     }
 }
 

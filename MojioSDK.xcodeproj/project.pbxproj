@@ -9,6 +9,28 @@
 /* Begin PBXBuildFile section */
 		2E8BC6671FB343FB00A165C3 /* AccelerometerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8BC6661FB343FB00A165C3 /* AccelerometerTests.swift */; };
 		2EBF12BE1FB986FE00F068B2 /* FuelVolume.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF12BD1FB986FE00F068B2 /* FuelVolume.swift */; };
+		373188D6209B363800E61E3A /* ProperAccelerationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373188D5209B363800E61E3A /* ProperAccelerationTests.swift */; };
+		373188D9209B3F3800E61E3A /* TimePeriodTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373188D8209B3F3800E61E3A /* TimePeriodTests.swift */; };
+		373188DB209B3FD100E61E3A /* AccelerationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373188DA209B3FD100E61E3A /* AccelerationTests.swift */; };
+		373188DE209B405500E61E3A /* AddressTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373188DD209B405500E61E3A /* AddressTests.swift */; };
+		373188E0209B40FD00E61E3A /* AggregationDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373188DF209B40FD00E61E3A /* AggregationDataTests.swift */; };
+		373188E2209B41FF00E61E3A /* BatteryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373188E1209B41FF00E61E3A /* BatteryTests.swift */; };
+		373188E4209B426E00E61E3A /* BooleanStateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373188E3209B426E00E61E3A /* BooleanStateTests.swift */; };
+		373188E6209B434800E61E3A /* CompatibilityDetailsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373188E5209B434800E61E3A /* CompatibilityDetailsTests.swift */; };
+		373188E8209B445B00E61E3A /* DiagnosticCodeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373188E7209B445B00E61E3A /* DiagnosticCodeTests.swift */; };
+		373188EA209B44F700E61E3A /* DistanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373188E9209B44F700E61E3A /* DistanceTests.swift */; };
+		373188ED209B45B800E61E3A /* FuelCapacityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373188EC209B45B800E61E3A /* FuelCapacityTests.swift */; };
+		373188EF209B461800E61E3A /* FuelLevelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373188EE209B461800E61E3A /* FuelLevelTests.swift */; };
+		373188F1209B469A00E61E3A /* FuelEfficiencyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373188F0209B469A00E61E3A /* FuelEfficiencyTests.swift */; };
+		373188F3209B472400E61E3A /* FuelVolumeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373188F2209B472400E61E3A /* FuelVolumeTests.swift */; };
+		373188F5209B47A300E61E3A /* GeofenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373188F4209B47A300E61E3A /* GeofenceTests.swift */; };
+		373188F7209B49FC00E61E3A /* GeofenceRegionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373188F6209B49FC00E61E3A /* GeofenceRegionTests.swift */; };
+		373188F9209B4B2200E61E3A /* HarshEventStateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373188F8209B4B2200E61E3A /* HarshEventStateTests.swift */; };
+		373188FB209B4D1A00E61E3A /* HarshEventTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373188FA209B4D1A00E61E3A /* HarshEventTests.swift */; };
+		373188FD209B4E7300E61E3A /* HeadingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373188FC209B4E7300E61E3A /* HeadingTests.swift */; };
+		373188FF209B4F4900E61E3A /* IdleStateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373188FE209B4F4900E61E3A /* IdleStateTests.swift */; };
+		37318901209B550100E61E3A /* IdleEventTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37318900209B550100E61E3A /* IdleEventTests.swift */; };
+		37318903209B55E500E61E3A /* LocationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37318902209B55E500E61E3A /* LocationTests.swift */; };
 		3AE11A9B63EBCDC7B6365890 /* Pods_Vehicles.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F28CBD045B5B77B3EC893BCA /* Pods_Vehicles.framework */; };
 		3C29817EDB59698171B61EF3 /* Pods_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD9B8527DB821719AED94CC4 /* Pods_Tests.framework */; };
 		3D6869BE2149CD45D324016A /* Pods_Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9980F32E31CB2E846A417B2C /* Pods_Core.framework */; };
@@ -155,6 +177,28 @@
 		2EBF12D01FB9E0D700F068B2 /* SwiftWebSocketFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftWebSocketFactory.swift; sourceTree = "<group>"; };
 		2EBF12D21FB9E70100F068B2 /* SwiftWebSocketProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftWebSocketProvider.swift; sourceTree = "<group>"; };
 		2ED946EF1FA9ED8E00132568 /* KeychainStorageProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainStorageProvider.swift; sourceTree = "<group>"; };
+		373188D5209B363800E61E3A /* ProperAccelerationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProperAccelerationTests.swift; sourceTree = "<group>"; };
+		373188D8209B3F3800E61E3A /* TimePeriodTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePeriodTests.swift; sourceTree = "<group>"; };
+		373188DA209B3FD100E61E3A /* AccelerationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccelerationTests.swift; sourceTree = "<group>"; };
+		373188DD209B405500E61E3A /* AddressTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressTests.swift; sourceTree = "<group>"; };
+		373188DF209B40FD00E61E3A /* AggregationDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AggregationDataTests.swift; sourceTree = "<group>"; };
+		373188E1209B41FF00E61E3A /* BatteryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryTests.swift; sourceTree = "<group>"; };
+		373188E3209B426E00E61E3A /* BooleanStateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BooleanStateTests.swift; sourceTree = "<group>"; };
+		373188E5209B434800E61E3A /* CompatibilityDetailsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompatibilityDetailsTests.swift; sourceTree = "<group>"; };
+		373188E7209B445B00E61E3A /* DiagnosticCodeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiagnosticCodeTests.swift; sourceTree = "<group>"; };
+		373188E9209B44F700E61E3A /* DistanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceTests.swift; sourceTree = "<group>"; };
+		373188EC209B45B800E61E3A /* FuelCapacityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuelCapacityTests.swift; sourceTree = "<group>"; };
+		373188EE209B461800E61E3A /* FuelLevelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuelLevelTests.swift; sourceTree = "<group>"; };
+		373188F0209B469A00E61E3A /* FuelEfficiencyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuelEfficiencyTests.swift; sourceTree = "<group>"; };
+		373188F2209B472400E61E3A /* FuelVolumeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuelVolumeTests.swift; sourceTree = "<group>"; };
+		373188F4209B47A300E61E3A /* GeofenceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeofenceTests.swift; sourceTree = "<group>"; };
+		373188F6209B49FC00E61E3A /* GeofenceRegionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeofenceRegionTests.swift; sourceTree = "<group>"; };
+		373188F8209B4B2200E61E3A /* HarshEventStateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HarshEventStateTests.swift; sourceTree = "<group>"; };
+		373188FA209B4D1A00E61E3A /* HarshEventTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HarshEventTests.swift; sourceTree = "<group>"; };
+		373188FC209B4E7300E61E3A /* HeadingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadingTests.swift; sourceTree = "<group>"; };
+		373188FE209B4F4900E61E3A /* IdleStateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdleStateTests.swift; sourceTree = "<group>"; };
+		37318900209B550100E61E3A /* IdleEventTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdleEventTests.swift; sourceTree = "<group>"; };
+		37318902209B55E500E61E3A /* LocationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTests.swift; sourceTree = "<group>"; };
 		644214DD1D9E6500005A86C5 /* AggregationData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AggregationData.swift; sourceTree = "<group>"; };
 		6DF2E7C31752EFE452CAEE01 /* Pods-MojioSDKTests2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MojioSDKTests2.release.xcconfig"; path = "Pods/Target Support Files/Pods-MojioSDKTests2/Pods-MojioSDKTests2.release.xcconfig"; sourceTree = "<group>"; };
 		704FA7BB4426F78E7857D7EF /* Pods-Accounts.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Accounts.release.xcconfig"; path = "Pods/Target Support Files/Pods-Accounts/Pods-Accounts.release.xcconfig"; sourceTree = "<group>"; };
@@ -337,11 +381,49 @@
 		2E791CA21FB3421B0074F9C8 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				2E8BC6661FB343FB00A165C3 /* AccelerometerTests.swift */,
+				373188DC209B404700E61E3A /* Core */,
+				373188D7209B3EE500E61E3A /* Vehicles */,
 			);
 			name = Models;
 			path = MojioSDKTests/Models;
 			sourceTree = SOURCE_ROOT;
+		};
+		373188D7209B3EE500E61E3A /* Vehicles */ = {
+			isa = PBXGroup;
+			children = (
+				2E8BC6661FB343FB00A165C3 /* AccelerometerTests.swift */,
+				373188D5209B363800E61E3A /* ProperAccelerationTests.swift */,
+				373188D8209B3F3800E61E3A /* TimePeriodTests.swift */,
+				373188DA209B3FD100E61E3A /* AccelerationTests.swift */,
+				373188DF209B40FD00E61E3A /* AggregationDataTests.swift */,
+				373188E1209B41FF00E61E3A /* BatteryTests.swift */,
+				373188E3209B426E00E61E3A /* BooleanStateTests.swift */,
+				373188E5209B434800E61E3A /* CompatibilityDetailsTests.swift */,
+				373188E7209B445B00E61E3A /* DiagnosticCodeTests.swift */,
+				373188E9209B44F700E61E3A /* DistanceTests.swift */,
+				373188EC209B45B800E61E3A /* FuelCapacityTests.swift */,
+				373188EE209B461800E61E3A /* FuelLevelTests.swift */,
+				373188F0209B469A00E61E3A /* FuelEfficiencyTests.swift */,
+				373188F2209B472400E61E3A /* FuelVolumeTests.swift */,
+				373188F4209B47A300E61E3A /* GeofenceTests.swift */,
+				373188F6209B49FC00E61E3A /* GeofenceRegionTests.swift */,
+				373188F8209B4B2200E61E3A /* HarshEventStateTests.swift */,
+				373188FA209B4D1A00E61E3A /* HarshEventTests.swift */,
+				373188FE209B4F4900E61E3A /* IdleStateTests.swift */,
+				37318900209B550100E61E3A /* IdleEventTests.swift */,
+			);
+			path = Vehicles;
+			sourceTree = "<group>";
+		};
+		373188DC209B404700E61E3A /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				373188DD209B405500E61E3A /* AddressTests.swift */,
+				373188FC209B4E7300E61E3A /* HeadingTests.swift */,
+				37318902209B55E500E61E3A /* LocationTests.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
 		};
 		755785381C6BE403000D65B3 = {
 			isa = PBXGroup;
@@ -1165,7 +1247,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				373188F1209B469A00E61E3A /* FuelEfficiencyTests.swift in Sources */,
+				373188F3209B472400E61E3A /* FuelVolumeTests.swift in Sources */,
+				37318901209B550100E61E3A /* IdleEventTests.swift in Sources */,
+				373188D9209B3F3800E61E3A /* TimePeriodTests.swift in Sources */,
+				373188EF209B461800E61E3A /* FuelLevelTests.swift in Sources */,
+				373188FD209B4E7300E61E3A /* HeadingTests.swift in Sources */,
+				373188E8209B445B00E61E3A /* DiagnosticCodeTests.swift in Sources */,
 				2E8BC6671FB343FB00A165C3 /* AccelerometerTests.swift in Sources */,
+				373188FB209B4D1A00E61E3A /* HarshEventTests.swift in Sources */,
+				373188FF209B4F4900E61E3A /* IdleStateTests.swift in Sources */,
+				373188E6209B434800E61E3A /* CompatibilityDetailsTests.swift in Sources */,
+				373188E2209B41FF00E61E3A /* BatteryTests.swift in Sources */,
+				37318903209B55E500E61E3A /* LocationTests.swift in Sources */,
+				373188EA209B44F700E61E3A /* DistanceTests.swift in Sources */,
+				373188E0209B40FD00E61E3A /* AggregationDataTests.swift in Sources */,
+				373188ED209B45B800E61E3A /* FuelCapacityTests.swift in Sources */,
+				373188D6209B363800E61E3A /* ProperAccelerationTests.swift in Sources */,
+				373188DB209B3FD100E61E3A /* AccelerationTests.swift in Sources */,
+				373188F5209B47A300E61E3A /* GeofenceTests.swift in Sources */,
+				373188E4209B426E00E61E3A /* BooleanStateTests.swift in Sources */,
+				373188F7209B49FC00E61E3A /* GeofenceRegionTests.swift in Sources */,
+				373188DE209B405500E61E3A /* AddressTests.swift in Sources */,
+				373188F9209B4B2200E61E3A /* HarshEventStateTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

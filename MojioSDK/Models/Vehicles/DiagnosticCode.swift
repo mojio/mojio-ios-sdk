@@ -40,9 +40,4 @@ public struct DiagnosticCode: Codable {
         case stateType = "StateType"
         case diagnosticCodeType = "Type"
     }
-    
-//    public func jsonIgnoredDict () -> [String: Any] {
-//        return ["Ignored": self.Ignored]
-//    }
-
 }

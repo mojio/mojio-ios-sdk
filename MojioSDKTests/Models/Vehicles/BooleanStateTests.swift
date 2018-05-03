@@ -13,16 +13,41 @@
  * forbidden unless prior written permission is obtained from Moj.io Inc.
  *******************************************************************************/
 
-import Foundation
-import MojioCore
+@testable import Vehicles
+import XCTest
 
-public struct HarshEvent: Codable {
+class BooleanStateTests: XCTestCase {
     
-    public var eventState: HarshEventState? = nil
-    public var eventLocation: Location? = nil
+    var model: BooleanState!
     
-    public enum CodingKeys: String, CodingKey {
-        case eventState = "HarshEventState"
-        case eventLocation = "Location"
+    override func setUp() {
+        do {
+            let data = self.jsonString.data(using: .utf8)
+            self.model = try JSONDecoder().decode(BooleanState.self, from: data!)
+        } catch let error {
+            print(error)
+        }
+    }
+    
+    override func tearDown() {
+        
+        self.model = nil
+    }
+    
+    func testBooleanStateModelDecoding() {
+        XCTAssertNotNil(model)
+        XCTAssertEqual(model?.value, true)
+    }
+}
+
+extension BooleanStateTests {
+    var jsonString: String {
+        return """
+        {
+        "Timestamp": "2017-11-09T07:16:58.073Z",
+        "Value": true
+        }
+        
+        """
     }
 }

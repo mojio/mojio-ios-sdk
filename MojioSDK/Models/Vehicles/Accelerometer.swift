@@ -17,21 +17,17 @@ import Foundation
 
 public struct Accelerometer: Codable {
     
-    public var X: ProperAcceleration? = nil
-    public var Y: ProperAcceleration? = nil
-    public var Z: ProperAcceleration? = nil
-    public var Magnitude: ProperAcceleration? = nil
-    public var SamplingInterval: TimePeriod? = nil
+    public var x: ProperAcceleration? = nil
+    public var y: ProperAcceleration? = nil
+    public var z: ProperAcceleration? = nil
+    public var magnitude: ProperAcceleration? = nil
+    public var samplingInterval: TimePeriod? = nil
+    
+    private enum CodingKeys: String, CodingKey {
+        case x = "X"
+        case y = "Y"
+        case z = "Z"
+        case magnitude = "Magnitude"
+        case samplingInterval = "SamplingInterval"
+    }
 }
-
-//    public init?(map: Map) {
-//        self.init()
-//    }
-//
-//    public mutating func mapping(map: Map) {
-//        X <- map["X"]
-//        Y <- map["Y"]
-//        Z <- map["Z"]
-//        Magnitude <- map["Magnitude"]
-//        SamplingInterval <- map["SamplingInterval"]
-//    }

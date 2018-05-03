@@ -23,8 +23,8 @@ public enum GeofenceRegionType: String, Codable {
 public struct GeofenceRegion: Codable {
 
     public var type: GeofenceRegionType? = nil
-    public var lat: Double = 0
-    public var lng: Double = 0
+    public var lat: Double? = 0
+    public var lng: Double? = 0
     public var radius: Distance? = nil
     
 //    public func jsonDict() -> [String: Any] {
@@ -73,6 +73,21 @@ public struct Geofence: Codable, PrimaryKey {
     public let LastModified: String?
     public let OwnerId: String?
     public let Deleted: Bool?
+    
+    private enum CodingKeys: String, CodingKey {
+        case id = "Id"
+        case Name
+        case Description
+        case Region
+        case NotificationSetting
+        case Enabled
+        case VehicleIds
+        case Tags
+        case CreatedOn
+        case LastModified
+        case OwnerId
+        case Deleted
+    }
 
 //    public func jsonDict() -> [String: Any] {
 //        var map: [String: Any] = [:]
@@ -103,27 +118,3 @@ public struct Geofence: Codable, PrimaryKey {
 //        return map
 //    }
 }
-
-//public init() {}
-//
-//public init?(map: Map) {
-//    self.init()
-//}
-//
-//public mutating func mapping(map: Map) {
-//    Id <- map["Id"]
-//    Name <- map["Name"]
-//    Description <- map["Description"]
-//    Region <- map["Region"]
-//    NotificationSetting <- map["NotificationSetting"]
-//    Enabled <- map["Enabled"]
-//    VehicleIds <- map["VehicleIds"]
-//    CreatedOn <- map["CreatedOn"]
-//    LastModified <- map["LastModified"]
-//    Tags <- map["Tags"]
-//    Deleted <- map["Deleted"]
-//    OwnerId <- map["OwnerId"]
-//
-//    createdOn = self.CreatedOn?.toDate
-//    lastModified = self.LastModified?.toDate
-//}
