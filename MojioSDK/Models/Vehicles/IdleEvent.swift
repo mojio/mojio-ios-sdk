@@ -25,4 +25,22 @@ public struct IdleEvent: Codable {
         case eventState = "IdleState"
         case eventLocation = "Location"
     }
+    
+    public init(from decoder: Decoder) throws {
+        
+        do {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            
+            self.eventState = try container.decodeIfPresent(IdleState.self, forKey: .eventState)
+            self.eventLocation = try container.decodeIfPresent(Location.self, forKey: .eventLocation) 
+        }
+        catch {
+            debugPrint(error)
+            throw error
+        }
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        
+    }
 }

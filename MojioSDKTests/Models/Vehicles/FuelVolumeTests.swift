@@ -47,11 +47,11 @@ extension FuelVolumeTests {
     var jsonString: String {
         return """
         {
-        "baseUnit": "Percentage",
-        "timestamp": "2017-11-09T07:16:58.072Z",
-        "baseValue": 10,
-        "unit": "Percentage",
-        "value": 20
+        "BaseUnit": "Percentage",
+        "Timestamp": "2017-11-09T07:16:58.072Z",
+        "BaseValue": 10,
+        "Unit": "Percentage",
+        "Value": 20
         }
         """
     }

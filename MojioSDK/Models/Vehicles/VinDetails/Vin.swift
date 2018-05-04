@@ -57,6 +57,45 @@ public struct Vin: Codable {
         case recalls = "Recalls"
         case serviceBulletins = "ServiceBulletins"
     }
+    
+    public init(from decoder: Decoder) throws {
+        do {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            
+            self.vin = try container.decodeIfPresent(String.self, forKey: .vin) ?? String.empty
+            self.timestamp = try container.decodeIfPresent(String.self, forKey: .timestamp).flatMap { $0.dateFromIso8601 }
+            
+            self.market = try container.decodeIfPresent(String.self, forKey: .market)
+            self.year = try container.decodeIfPresent(Int.self, forKey: .year) ?? 0
+            self.make = try container.decodeIfPresent(String.self, forKey: .make)
+            self.model = try container.decodeIfPresent(String.self, forKey: .model)
+            
+            self.vehicleType = try container.decodeIfPresent(String.self, forKey: .vehicleType)
+            self.bodyType = try container.decodeIfPresent(String.self, forKey: .bodyType)
+            self.driveType = try container.decodeIfPresent(String.self, forKey: .driveType)
+            
+            self.fuelTankSize = try container.decodeIfPresent(Double.self, forKey: .fuelTankSize) ?? 0
+            self.epaFuelEfficiency = try container.decodeIfPresent(Double.self, forKey: .epaFuelEfficiency) ?? 0
+            
+            self.vehicleEngine = try container.decodeIfPresent(Engine.self, forKey: .vehicleEngine)
+            
+            self.vehicleTransmission = try container.decodeIfPresent(Transmission.self, forKey: .vehicleTransmission)
+            
+            self.warranties = try container.decodeIfPresent([Warranty].self, forKey: .warranties) ?? []
+            
+            self.recalls = try container.decodeIfPresent([Recall].self, forKey: .recalls) ?? []
+            
+            self.serviceBulletins = try container.decodeIfPresent([ServiceBulletin].self, forKey: .serviceBulletins) ?? []
+        }
+        catch {
+            debugPrint(error)
+            throw error
+        }
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        
+    }
 }
 
 extension Vin: PrimaryKey {

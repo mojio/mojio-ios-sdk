@@ -40,7 +40,7 @@ class FuelLevelTests: XCTestCase {
         XCTAssertEqual(model?.baseValue, 10)
         XCTAssertEqual(model?.unit, "Percentage")
         XCTAssertEqual(model?.value, 20)
-        XCTAssertEqual(model?.RiskSeverity, "Unknown")
+        XCTAssertEqual(model?.riskSeverity, "Unknown")
     }
 }
 
@@ -48,12 +48,12 @@ extension FuelLevelTests {
     var jsonString: String {
         return """
         {
-        "baseUnit": "Percentage",
+        "BaseUnit": "Percentage",
         "RiskSeverity": "Unknown",
-        "timestamp": "2017-11-09T07:16:58.072Z",
-        "baseValue": 10,
-        "unit": "Percentage",
-        "value": 20
+        "Timestamp": "2017-11-09T07:16:58.072Z",
+        "BaseValue": 10,
+        "Unit": "Percentage",
+        "Value": 20
         }
         """
     }

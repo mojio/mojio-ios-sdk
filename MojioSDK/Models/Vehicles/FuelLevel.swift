@@ -26,10 +26,10 @@ public struct FuelLevel: DeviceMeasurement {
     public let value: Double
     public let timestamp: Date?
     
-    public var RiskSeverity: String? = nil
+    public var riskSeverity: String? = nil
     
     public enum CodingKeys: String, CodingKey {
-        case RiskSeverity
+        case riskSeverity = "RiskSeverity"
     }
 }
 
@@ -39,15 +39,15 @@ extension FuelLevel {
         
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
-        let RiskSeverity = try container.decodeIfPresent(String.self, forKey: .RiskSeverity)
+        let riskSeverity = try container.decodeIfPresent(String.self, forKey: .riskSeverity)
         
-        self.init(baseUnit: deviceMeasurements.baseUnit, baseValue: deviceMeasurements.baseValue, unit: deviceMeasurements.unit, value: deviceMeasurements.value, timestamp: deviceMeasurements.timestamp, RiskSeverity: RiskSeverity)
+        self.init(baseUnit: deviceMeasurements.baseUnit, baseValue: deviceMeasurements.baseValue, unit: deviceMeasurements.unit, value: deviceMeasurements.value, timestamp: deviceMeasurements.timestamp, riskSeverity: riskSeverity)
     }
     
     public func encode(with encoder: Encoder) throws {
         
         var container = encoder.container(keyedBy: CodingKeys.self)
         
-        try container.encode(self.RiskSeverity, forKey: .RiskSeverity)
+        try container.encode(self.riskSeverity, forKey: .riskSeverity)
     }
 }

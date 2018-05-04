@@ -42,4 +42,30 @@ public struct AggregationData: Codable {
         case count = "Count"
         case tripCount = "TripCount"
     }
+    
+    public init(from decoder: Decoder) throws {
+        
+        do {
+            
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            
+            self.total = try container.decodeIfPresent(Double.self, forKey: .total) ?? 0
+            self.average = try container.decodeIfPresent(Double.self, forKey: .average) ?? 0
+            self.max = try container.decodeIfPresent(Double.self, forKey: .max) ?? 0
+            self.min = try container.decodeIfPresent(Double.self, forKey: .min) ?? 0
+            self.units = try container.decodeIfPresent(String.self, forKey: .units)
+            self.date = try container.decodeIfPresent(String.self, forKey: .date).flatMap { $0.dateFromIso8601 }
+            self.endDate = try container.decodeIfPresent(String.self, forKey: .endDate).flatMap { $0.dateFromIso8601 }
+            self.count = try container.decodeIfPresent(Int.self, forKey: .count) ?? 0
+            self.tripCount = try container.decodeIfPresent(Int.self, forKey: .tripCount) ?? 0
+        }
+        catch {
+            debugPrint(error)
+            throw error
+        }
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        //MARK: - TO DO/TO CHECK
+    }
 }

@@ -36,10 +36,10 @@ class BatteryTests: XCTestCase {
     
     func testBatteryModelDecoding() {
         XCTAssertNotNil(model)
-        XCTAssertEqual(model?.Connected, true)
-        XCTAssertEqual(model?.RiskSeverity, "Unknown")
-        XCTAssertNotNil(model?.LowVoltageDuration)
-        XCTAssertNotNil(model?.HighVoltageDuration)
+        XCTAssertEqual(model?.connected, true)
+        XCTAssertEqual(model?.riskSeverity, "Unknown")
+        XCTAssertNotNil(model?.lowVoltageDuration)
+        XCTAssertNotNil(model?.highVoltageDuration)
         XCTAssertEqual(model?.baseUnit, "MilliVolts")
         XCTAssertEqual(model?.unit, "MilliVolts")
         XCTAssertEqual(model?.baseValue, 10)
@@ -54,24 +54,24 @@ extension BatteryTests {
         "Connected": true,
         "RiskSeverity": "Unknown",
         "LowVoltageDuration": {
-        "baseUnit": "Ticks",
-        "timestamp": "2017-11-09T07:16:58.073Z",
-        "baseValue": 0,
-        "unit": "Ticks",
-        "value": 0
+        "BaseUnit": "Ticks",
+        "Timestamp": "2017-11-09T07:16:58.073Z",
+        "BaseValue": 0,
+        "Unit": "Ticks",
+        "Value": 0
         },
         "HighVoltageDuration": {
-        "baseUnit": "Ticks",
-        "timestamp": "2017-11-09T07:16:58.073Z",
-        "baseValue": 0,
-        "unit": "Ticks",
-        "value": 0
+        "BaseUnit": "Ticks",
+        "Timestamp": "2017-11-09T07:16:58.073Z",
+        "BaseValue": 0,
+        "Unit": "Ticks",
+        "Value": 0
         },
-        "baseUnit": "MilliVolts",
-        "timestamp": "2017-11-09T07:16:58.073Z",
-        "baseValue": 10,
-        "unit": "MilliVolts",
-        "value": 20
+        "BaseUnit": "MilliVolts",
+        "Timestamp": "2017-11-09T07:16:58.073Z",
+        "BaseValue": 10,
+        "Unit": "MilliVolts",
+        "Value": 20
         }
         """
     }

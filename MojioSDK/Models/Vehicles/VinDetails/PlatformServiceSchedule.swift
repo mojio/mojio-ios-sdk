@@ -46,4 +46,36 @@ public struct PlatformServiceSchedule: Codable {
         case units = "Units"
         case value = "Value"
     }
+    
+    public init(from decoder: Decoder) throws {
+        do {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            
+            self.initialValue = try container.decodeIfPresent(Double.self, forKey: .initialValue) ?? 0
+            
+            self.intervalType = try container.decodeIfPresent(String.self, forKey: .intervalType)
+            
+            self.maintenanceName = try container.decodeIfPresent(String.self, forKey: .maintenanceName)
+            self.maintenanceCategory = try container.decodeIfPresent(String.self, forKey: .maintenanceCategory)
+            self.maintenanceNotes = try container.decodeIfPresent(String.self, forKey: .maintenanceNotes)
+            
+            self.operatingParameter = try container.decodeIfPresent(String.self, forKey: .operatingParameter)
+            self.operatingParameterNotes = try container.decodeIfPresent(String.self, forKey: .operatingParameterNotes)
+            
+            self.scheduleDescription = try container.decodeIfPresent(String.self, forKey: .scheduleDescription)
+            self.scheduleName = try container.decodeIfPresent(String.self, forKey: .scheduleName)
+            self.serviceEvent = try container.decodeIfPresent(String.self, forKey: .serviceEvent)
+            self.transNotes = try container.decodeIfPresent(String.self, forKey: .transNotes)
+            self.units = try container.decodeIfPresent(String.self, forKey: .units)
+            self.value = try container.decodeIfPresent(Double.self, forKey: .value) ?? 0
+        }
+        catch {
+            debugPrint(error)
+            throw error
+        }
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        
+    }
 }

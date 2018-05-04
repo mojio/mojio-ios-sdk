@@ -8,7 +8,8 @@
 
 import Foundation
 
-public enum HarshEventType: String {
+public enum HarshEventType: String, Codable {
+    
     case acceleration = "Acceleration"
     case deceleration = "Deceleration"
     case turning = "Turning"
@@ -16,30 +17,59 @@ public enum HarshEventType: String {
     case downward = "Downward"
     case accident = "Accident"
     case postAccident = "PostAccident"
+    
+    case unknown
+    
+    public init(from decoder: Decoder) throws {
+        let label = try decoder.singleValueContainer().decode(String.self)
+        self = HarshEventType(rawValue: label) ?? .unknown
+    }
 }
 
-public enum HarshEventTurnType: String {
+public enum HarshEventTurnType: String, Codable {
+    
     case left = "Left"
     case right = "Right"
+    
+    case unknown
+    
+    public init(from decoder: Decoder) throws {
+        let label = try decoder.singleValueContainer().decode(String.self)
+        self = HarshEventTurnType(rawValue: label) ?? .unknown
+    }
 }
 
 public struct HarshEventState: Codable {
     
-    public let timestampString: String?
+    public let timestamp: Date?
     public let value: Bool
-    public let eventType: String?
-    public let turnType: String?
+    public let eventType: HarshEventType?
+    public let turnType: HarshEventTurnType?
     
     public enum CodingKeys: String, CodingKey {
-        case timestampString = "Timestamp"
+        case timestamp = "Timestamp"
         case value = "Value"
         case eventType = "EventType"
         case turnType = "TurnType"
     }
-}
-
-extension HarshEventState {
-    public var timestamp: Date? {
-        return timestampString.flatMap { $0.dateFromIso8601 }
+    
+    public init(from decoder: Decoder) throws {
+        
+        do {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            
+            self.timestamp = try container.decodeIfPresent(String.self, forKey: .timestamp).flatMap { $0.dateFromIso8601 }
+            self.value = try container.decodeIfPresent(Bool.self, forKey: .value) ?? false
+            self.eventType = try container.decodeIfPresent(HarshEventType.self, forKey: .eventType)
+            self.turnType = try container.decodeIfPresent(HarshEventTurnType.self, forKey: .turnType)
+        }
+        catch {
+            debugPrint(error)
+            throw error
+        }
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        
     }
 }

@@ -28,21 +28,8 @@ public struct Odometer: DeviceMeasurement {
 
     public var rolloverValue: Double
     
-//    public func jsonDict () -> [String: Any] {
-//
-//        var dictionary = [String: Any]()
-//
-//        if let unit = self.unit {
-//            dictionary["Unit"] = unit
-//        }
-//
-//        dictionary["Value"] = self.value
-//
-//        return dictionary
-//    }
-    
     public enum CodingKeys: String, CodingKey {
-        case rolloverValue = "rolloverValue"
+        case rolloverValue = "RolloverValue"
     }
 }
 

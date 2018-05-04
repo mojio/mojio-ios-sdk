@@ -25,18 +25,6 @@ public struct Speed: DeviceMeasurement {
     public let unit: String?
     public let value: Double
     public let timestamp: Date?
-    
-//    public func jsonDict () -> [String: Any] {
-//        var map: [String: Any] = [:]
-//        
-//        if let unit  = self.unit {
-//            map["Unit"] = unit
-//        }
-//        
-//        map["Value"] = self.value
-//        
-//        return map
-//    }
 }
 
 extension Speed {

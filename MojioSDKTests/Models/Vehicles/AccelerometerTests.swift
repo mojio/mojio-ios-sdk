@@ -34,6 +34,7 @@ class AccelerometerTests: XCTestCase {
         self.model = nil
     }
     
+    //MARK: - TO EXTEND WITH NOT ONLY NIL
     func testAccelerometerModelDecoding() {
         XCTAssertNotNil(model)
         XCTAssertNotNil(model?.x)
@@ -49,39 +50,39 @@ extension AccelerometerTests {
         return """
         {
         "X": {
-        "baseUnit": "MilliGUnits",
-        "timestamp": "2017-11-09T07:16:58.072Z",
-        "baseValue": 0,
-        "unit": "MilliGUnits",
-        "value": 0
+        "BaseUnit": "MilliGUnits",
+        "Timestamp": "2017-11-09T07:16:58.072Z",
+        "BaseValue": 0,
+        "Unit": "MilliGUnits",
+        "Value": 0
         },
         "Y": {
-        "baseUnit": "MilliGUnits",
-        "timestamp": "2017-11-09T07:16:58.072Z",
-        "baseValue": 0,
-        "unit": "MilliGUnits",
-        "value": 0
+        "BaseUnit": "MilliGUnits",
+        "Timestamp": "2017-11-09T07:16:58.072Z",
+        "BaseValue": 0,
+        "Unit": "MilliGUnits",
+        "Value": 0
         },
         "Z": {
-        "baseUnit": "MilliGUnits",
-        "timestamp": "2017-11-09T07:16:58.072Z",
-        "baseValue": 0,
-        "unit": "MilliGUnits",
-        "value": 0
+        "BaseUnit": "MilliGUnits",
+        "Timestamp": "2017-11-09T07:16:58.072Z",
+        "BaseValue": 0,
+        "Unit": "MilliGUnits",
+        "Value": 0
         },
         "Magnitude": {
-        "baseUnit": "MilliGUnits",
-        "timestamp": "2017-11-09T07:16:58.072Z",
-        "baseValue": 0,
-        "unit": "MilliGUnits",
-        "value": 0
+        "BaseUnit": "MilliGUnits",
+        "Timestamp": "2017-11-09T07:16:58.072Z",
+        "BaseValue": 0,
+        "Unit": "MilliGUnits",
+        "Value": 0
         },
         "SamplingInterval": {
-        "baseUnit": "Ticks",
-        "timestamp": "2017-11-09T07:16:58.072Z",
-        "baseValue": 0,
-        "unit": "Ticks",
-        "value": 0
+        "BaseUnit": "MilliGUnits",
+        "Timestamp": "2017-11-09T07:16:58.072Z",
+        "BaseValue": 0,
+        "Unit": "MilliGUnits",
+        "Value": 0
         }
         }
         """

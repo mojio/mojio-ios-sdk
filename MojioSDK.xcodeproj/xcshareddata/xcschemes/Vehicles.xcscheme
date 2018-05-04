@@ -37,11 +37,6 @@
                BlueprintName = "Tests"
                ReferencedContainer = "container:MojioSDK.xcodeproj">
             </BuildableReference>
-            <SkippedTests>
-               <Test
-                  Identifier = "LocationTests">
-               </Test>
-            </SkippedTests>
          </TestableReference>
       </Testables>
       <MacroExpansion>

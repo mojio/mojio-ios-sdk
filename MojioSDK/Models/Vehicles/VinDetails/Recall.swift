@@ -62,4 +62,46 @@ public struct Recall: Codable {
         case notes = "Notes"
         case recalledComponentId = "RecalledComponentId"
     }
+    
+    public init(from decoder: Decoder) throws {
+        do {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            
+            self.title = try container.decodeIfPresent(String.self, forKey: .title)
+            self.nhtsaCampaignNumber = try container.decodeIfPresent(String.self, forKey: .nhtsaCampaignNumber)
+            self.mfrCampaignNumber = try container.decodeIfPresent(String.self, forKey: .mfrCampaignNumber)
+            self.componentDescription = try container.decodeIfPresent(String.self, forKey: .componentDescription)
+            self.reportManufacturer = try container.decodeIfPresent(String.self, forKey: .reportManufacturer)
+            self.manufacturingStartDate = try container.decodeIfPresent(String.self, forKey: .manufacturingStartDate).flatMap { $0.dateFromIso8601 }
+            self.manufacturingEndDate = try container.decodeIfPresent(String.self, forKey: .manufacturingEndDate).flatMap { $0.dateFromIso8601 }
+            self.recallTypeCode = try container.decodeIfPresent(String.self, forKey: .recallTypeCode)
+            
+            self.potentialUnitsAffected = try container.decodeIfPresent(String.self, forKey: .potentialUnitsAffected)
+            self.ownerNotificationDate = try container.decodeIfPresent(String.self, forKey: .ownerNotificationDate).flatMap { $0.dateFromIso8601 }
+            self.recallInitiator = try container.decodeIfPresent(String.self, forKey: .recallInitiator)
+            
+            self.componentDescription = try container.decodeIfPresent(String.self, forKey: .componentDescription)
+            self.reportManufacturer = try container.decodeIfPresent(String.self, forKey: .reportManufacturer)
+            self.productManufacturer = try container.decodeIfPresent(String.self, forKey: .productManufacturer)
+            self.reportReceivedDate = try container.decodeIfPresent(String.self, forKey: .reportReceivedDate).flatMap { $0.dateFromIso8601 }
+            self.recordCreationDate = try container.decodeIfPresent(String.self, forKey: .recordCreationDate).flatMap { $0.dateFromIso8601 }
+            
+            self.regulationPartNumber = try container.decodeIfPresent(String.self, forKey: .regulationPartNumber)
+            self.fmvvsNumber = try container.decodeIfPresent(String.self, forKey: .fmvvsNumber)
+            self.defectSummary = try container.decodeIfPresent(String.self, forKey: .defectSummary)
+            self.consequenceSummary = try container.decodeIfPresent(String.self, forKey: .consequenceSummary)
+            self.correctiveAction = try container.decodeIfPresent(String.self, forKey: .correctiveAction)
+            
+            self.notes = try container.decodeIfPresent(String.self, forKey: .notes)
+            self.recalledComponentId = try container.decodeIfPresent(String.self, forKey: .recalledComponentId)
+        }
+        catch {
+            debugPrint(error)
+            throw error
+        }
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        
+    }
 }

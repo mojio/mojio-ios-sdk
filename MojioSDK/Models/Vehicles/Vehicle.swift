@@ -59,44 +59,6 @@ public struct Vehicle: Codable, PrimaryKey {
     public var createdOn: Date?
     public var lastModified: Date?
     
-//    public func jsonVINDict () -> [String: Any] {
-//
-//        var dictionary = [String: Any]()
-//
-//        if let VIN = self.VIN {
-//            dictionary["VIN"] = VIN
-//        }
-//
-//        if let detectedVin = self.DetectedVIN {
-//            dictionary["DetectedVIN"] = detectedVin
-//        }
-//
-//        if let overrideVIN = self.OverrideVIN {
-//            dictionary["OverrideVIN"] = overrideVIN
-//        }
-//
-//        return dictionary
-//    }
-//
-//    public func jsonDict () -> [String: Any] {
-//
-//        var dictionary = [String: Any]()
-//
-//        if let name = self.Name {
-//            dictionary["Name"] = name
-//        }
-//
-//        if let licensePlate = self.LicensePlate {
-//            dictionary["LicensePlate"] = licensePlate
-//        }
-//
-//        if let vehicleOdometer = self.VehicleOdometer {
-//            dictionary["Odometer"] = vehicleOdometer.jsonDict()
-//        }
-//
-//        return dictionary
-//    }
-    
     public enum CodingKeys: String, CodingKey {
         case id = "Id"
         case name = "Name"
@@ -150,6 +112,7 @@ public struct Vehicle: Codable, PrimaryKey {
             self.vin = try container.decodeIfPresent(String.self, forKey: .vin)
             self.detectedVIN = try container.decodeIfPresent(String.self, forKey: .detectedVIN)
             self.overrideVIN = try container.decodeIfPresent(String.self, forKey: .overrideVIN)
+            self.mojioId = try container.decodeIfPresent(String.self, forKey: .mojioId)
             self.compatDetails = try container.decodeIfPresent(CompatibilityDetails.self, forKey: .compatDetails)
             self.currentTrip = try container.decodeIfPresent(String.self, forKey: .currentTrip)
             self.milStatus = try container.decodeIfPresent(Bool.self, forKey: .milStatus) ?? false

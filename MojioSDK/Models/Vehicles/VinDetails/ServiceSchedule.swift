@@ -26,4 +26,24 @@ public struct ServiceSchedule: Codable {
         case isDefault = "IsDefault"
         case items = "Items"
     }
+    
+    public init(from decoder: Decoder) throws {
+        do {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            
+            self.vin = try container.decodeIfPresent(String.self, forKey: .vin)
+            self.isDefault = try container.decodeIfPresent(Bool.self, forKey: .isDefault) ?? false
+            
+            self.items = try container.decodeIfPresent([ServiceScheduleItem].self, forKey: .items) ?? []
+            
+        }
+        catch {
+            debugPrint(error)
+            throw error
+        }
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        
+    }
 }

@@ -103,7 +103,7 @@ public struct Trip: Codable, PrimaryKey {
             self.maxRPM = try container.decodeIfPresent(RPM.self, forKey: .maxRPM)
             self.maxAcceleration = try container.decodeIfPresent(Acceleration.self, forKey: .maxAcceleration)
             self.maxDeceleration = try container.decodeIfPresent(Acceleration.self, forKey: .maxDeceleration)
-            self.polyline = try container.decodeIfPresent(String.self, forKey: .maxDeceleration)
+            self.polyline = try container.decodeIfPresent(String.self, forKey: .polyline)
             self.harshEvents = try container.decodeIfPresent([HarshEvent].self, forKey: .harshEvents) ?? []
             self.idleEvents = try container.decodeIfPresent([IdleEvent].self, forKey: .idleEvents) ?? []
             self.fuelEfficiency = try container.decodeIfPresent(FuelEfficiency.self, forKey: .fuelEfficiency)
@@ -112,7 +112,7 @@ public struct Trip: Codable, PrimaryKey {
             self.idlingCount = try container.decodeIfPresent(Int.self, forKey: .idlingCount)
             self.harshAccelCount = try container.decodeIfPresent(Int.self, forKey: .harshAccelCount)
             self.harshDecelCount = try container.decodeIfPresent(Int.self, forKey: .harshDecelCount)
-            self.tags = try container.decodeIfPresent([String].self, forKey: .maxDeceleration) ?? []
+            self.tags = try container.decodeIfPresent([String].self, forKey: .tags) ?? []
             self.createdOn = try container.decodeIfPresent(String.self, forKey: .createdOn).flatMap { $0.dateFromIso8601 }
             self.lastModified = try container.decodeIfPresent(String.self, forKey: .lastModified).flatMap { $0.dateFromIso8601 }
             

@@ -37,8 +37,8 @@ class HarshEventStateTests: XCTestCase {
     func testHarshEventStateModelDecoding() {
         XCTAssertNotNil(model)
         XCTAssertEqual(model?.value, true)
-        XCTAssertEqual(model?.eventType, "Acceleration")
-        XCTAssertEqual(model?.turnType, "Left")
+        XCTAssertEqual(model?.eventType, .acceleration)
+        XCTAssertEqual(model?.turnType, .left)
     }
 }
 

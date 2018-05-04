@@ -16,17 +16,6 @@
 @testable import MojioCore
 import XCTest
 
-//extension DateFormatter {
-//    static let iso8601Full: DateFormatter = {
-//        let formatter = DateFormatter()
-//        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"
-//        formatter.calendar = Calendar(identifier: .iso8601)
-//        formatter.timeZone = TimeZone(secondsFromGMT: 0)
-//        formatter.locale = Locale(identifier: "en_US_POSIX")
-//        return formatter
-//    }()
-//}
-
 class LocationTests: XCTestCase {
     
     var model: Location!
@@ -34,8 +23,6 @@ class LocationTests: XCTestCase {
     override func setUp() {
         do {
             let data = self.jsonString.data(using: .utf8)
-            let decoder = JSONDecoder()
-            //decoder.dateDecodingStrategy = .formatted(DateFormatter.iso8601Full) //.iso8601
             self.model = try JSONDecoder().decode(Location.self, from: data!)
         } catch let error {
             print(error)

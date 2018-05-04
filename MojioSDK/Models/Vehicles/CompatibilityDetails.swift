@@ -21,17 +21,41 @@ public enum VehicleCompatibilityLevel: String, Codable {
     case minimum = "Minimum"
     case notCompatible = "NotCompatible"
     case unknown = "Unknown"
+    
+    public init(from decoder: Decoder) throws {
+        let label = try decoder.singleValueContainer().decode(String.self)
+        self = VehicleCompatibilityLevel(rawValue: label) ?? .unknown
+    }
 }
 
 public struct CompatibilityDetails: Codable {
     
-    public let level: String?
+    public let level: VehicleCompatibilityLevel?
     public let changed: Bool
-    public let lastChecked: String?
+    public let lastChecked: Date?
     
     public enum CodingKeys: String, CodingKey {
         case level = "Level"
         case changed = "Changed"
         case lastChecked = "LastChecked"
+    }
+    
+    public init(from decoder: Decoder) throws {
+        
+        do {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            
+            self.lastChecked = try container.decodeIfPresent(String.self, forKey: .lastChecked).flatMap { $0.dateFromIso8601 }
+            self.changed = try container.decodeIfPresent(Bool.self, forKey: .changed) ?? false
+            self.level = try container.decodeIfPresent(VehicleCompatibilityLevel.self, forKey: .level)
+        }
+        catch {
+            debugPrint(error)
+            throw error
+        }
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        
     }
 }

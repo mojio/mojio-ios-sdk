@@ -30,4 +30,26 @@ public struct Accelerometer: Codable {
         case magnitude = "Magnitude"
         case samplingInterval = "SamplingInterval"
     }
+    
+    public init(from decoder: Decoder) throws {
+        
+        do {
+            
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            
+            self.x = try container.decodeIfPresent(ProperAcceleration.self, forKey: .x)
+            self.y = try container.decodeIfPresent(ProperAcceleration.self, forKey: .y)
+            self.z = try container.decodeIfPresent(ProperAcceleration.self, forKey: .z)
+            self.magnitude = try container.decodeIfPresent(ProperAcceleration.self, forKey: .magnitude)
+            self.samplingInterval = try container.decodeIfPresent(TimePeriod.self, forKey: .samplingInterval)
+        }
+        catch {
+            debugPrint(error)
+            throw error
+        }
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        //MARK: - TO DO/TO CHECK
+    }
 }

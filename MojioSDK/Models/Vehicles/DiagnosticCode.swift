@@ -40,4 +40,30 @@ public struct DiagnosticCode: Codable {
         case stateType = "StateType"
         case diagnosticCodeType = "Type"
     }
+    
+    public init(from decoder: Decoder) throws {
+        
+        do {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            
+            self.ignored = try container.decodeIfPresent(Bool.self, forKey: .ignored) ?? false
+            self.code = try container.decodeIfPresent(String.self, forKey: .code)
+            self.description = try container.decodeIfPresent(String.self, forKey: .description)
+            self.timestamp = try container.decodeIfPresent(String.self, forKey: .timestamp).flatMap { $0.dateFromIso8601 }
+            
+            self.severity = try container.decodeIfPresent(String.self, forKey: .severity)
+            self.instructions = try container.decodeIfPresent(String.self, forKey: .instructions)
+            
+            self.stateType = try container.decodeIfPresent(String.self, forKey: .stateType)
+            self.diagnosticCodeType = try container.decodeIfPresent(String.self, forKey: .diagnosticCodeType)
+        }
+        catch {
+            debugPrint(error)
+            throw error
+        }
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        
+    }
 }

@@ -15,15 +15,23 @@
 
 import Foundation
 
-public enum ScoreMethods: String {
+public enum ScoreMethods: String, Codable {
+    
     case zScore = "ZScore"
     case minMaxScore = "MinMaxScore"
+    
+    case unknown
+    
+    public init(from decoder: Decoder) throws {
+        let label = try decoder.singleValueContainer().decode(String.self)
+        self = ScoreMethods(rawValue: label) ?? .unknown
+    }
 }
 
 public struct Score: Codable {
     
     // ScoreMethods
-    public let scoringMethod: String?
+    public let scoringMethod: ScoreMethods?
     public let value: Double
     public let percentile: Double
     public let average: Double
@@ -33,5 +41,25 @@ public struct Score: Codable {
         case value = "Value"
         case percentile = "Percentile"
         case average = "Average"
+    }
+    
+    public init(from decoder: Decoder) throws {
+        
+        do {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            
+            self.scoringMethod = try container.decodeIfPresent(ScoreMethods.self, forKey: .scoringMethod)
+            self.value = try container.decodeIfPresent(Double.self, forKey: .value) ?? 0
+            self.percentile = try container.decodeIfPresent(Double.self, forKey: .percentile) ?? 0
+            self.average = try container.decodeIfPresent(Double.self, forKey: .average) ?? 0
+        }
+        catch {
+            debugPrint(error)
+            throw error
+        }
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        
     }
 }

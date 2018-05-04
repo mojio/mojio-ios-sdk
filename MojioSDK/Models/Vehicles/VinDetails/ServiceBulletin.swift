@@ -34,4 +34,26 @@ public struct ServiceBulletin: Codable {
         case bulletinDate = "BulletinDate"
         case summary = "Summary"
     }
+    
+    public init(from decoder: Decoder) throws {
+        do {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            
+            self.itemNumber = try container.decodeIfPresent(String.self, forKey: .itemNumber)
+            self.bulletinNumber = try container.decodeIfPresent(String.self, forKey: .bulletinNumber)
+            self.replacementBulletinNumber = try container.decodeIfPresent(String.self, forKey: .replacementBulletinNumber)
+            self.dateAdded = try container.decodeIfPresent(String.self, forKey: .dateAdded).flatMap { $0.dateFromIso8601 }
+            self.component = try container.decodeIfPresent(String.self, forKey: .component)
+            self.bulletinDate = try container.decodeIfPresent(String.self, forKey: .bulletinDate).flatMap { $0.dateFromIso8601 }
+            self.summary = try container.decodeIfPresent(String.self, forKey: .summary)
+        }
+        catch {
+            debugPrint(error)
+            throw error
+        }
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        
+    }
 }

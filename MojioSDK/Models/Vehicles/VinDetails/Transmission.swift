@@ -27,6 +27,24 @@ public struct Transmission: Codable {
         case type = "Type"
         case detailType = "DetailType"
         case gears = "Gears"
-
+    }
+    
+    public init(from decoder: Decoder) throws {
+        do {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            
+            self.name = try container.decodeIfPresent(String.self, forKey: .name)
+            self.type = try container.decodeIfPresent(String.self, forKey: .type)
+            self.detailType = try container.decodeIfPresent(String.self, forKey: .detailType)
+            self.gears = try container.decodeIfPresent(String.self, forKey: .gears)
+        }
+        catch {
+            debugPrint(error)
+            throw error
+        }
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        
     }
 }
