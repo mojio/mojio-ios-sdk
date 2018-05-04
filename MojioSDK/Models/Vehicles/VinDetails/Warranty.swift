@@ -28,4 +28,23 @@ public struct Warranty: Codable {
         case months = "Months"
         case km = "Km"
     }
+    
+    public init(from decoder: Decoder) throws {
+        do {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            
+            self.name = try container.decodeIfPresent(String.self, forKey: .name)
+            self.type = try container.decodeIfPresent(String.self, forKey: .type)
+            self.months = try container.decodeIfPresent(String.self, forKey: .months)
+            self.km = try container.decodeIfPresent(Double.self, forKey: .km)
+        }
+        catch {
+            debugPrint(error)
+            throw error
+        }
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        
+    }
 }

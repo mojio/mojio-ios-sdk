@@ -36,8 +36,8 @@ class HeadingTests: XCTestCase {
     
     func testHeadingModelDecoding() {
         XCTAssertNotNil(model)
-        XCTAssertEqual(model?.Direction, "string")
-        XCTAssertEqual(model?.LeftTurn, true)
+        XCTAssertEqual(model?.direction, "string")
+        XCTAssertEqual(model?.leftTurn, true)
         XCTAssertEqual(model?.baseUnit, "Degree")
         XCTAssertEqual(model?.unit, "Degree")
         XCTAssertEqual(model?.baseValue, 10)
@@ -51,14 +51,13 @@ extension HeadingTests {
     var jsonString: String {
         return """
         {
-        "baseUnit": "Degree",
+        "BaseUnit": "Degree",
         "Direction": "string",
         "LeftTurn": true,
-        "timestamp": "2017-11-09T07:15:16.084Z",
-        "baseValue": 10,
-        "unit": "Degree",
-        "value": 20
-        
+        "Timestamp": "2017-11-09T07:15:16.084Z",
+        "BaseValue": 10,
+        "Unit": "Degree",
+        "Value": 20
         }
         """
     }

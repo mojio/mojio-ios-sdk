@@ -36,38 +36,38 @@ public struct ActivityLocation: BaseActivityLocation {
         case radius = "Radius"
     }
     
-    public func toLocation() -> Location {
-        
-        var locationAddress: Address? = nil
-        if let name = self.name {
-            let address = Address.init(
-                houseNumber: nil,
-                road: nil,
-                neighbourhood:
-                nil,
-                suburb: nil,
-                city: nil,
-                county: nil,
-                state: nil,
-                postCode: nil,
-                country: nil,
-                countryCode: nil,
-                formattedAddress: name)
-
-            locationAddress = address
-        }
-        
-        return Location(
-            locationAddress: locationAddress,
-            timestamp: nil,
-            lat: self.latitude,
-            lng: self.longitude,
-            radius: self.radius,
-            status: nil,
-            dilution: 0,
-            altitude: 0,
-            geoHash: nil)
-    }
+//    public func toLocation() -> Location {
+//
+//        var locationAddress: Address? = nil
+//        if let name = self.name {
+//            let address = Address.init(
+//                houseNumber: nil,
+//                road: nil,
+//                neighbourhood:
+//                nil,
+//                suburb: nil,
+//                city: nil,
+//                county: nil,
+//                state: nil,
+//                postCode: nil,
+//                country: nil,
+//                countryCode: nil,
+//                formattedAddress: name)
+//
+//            locationAddress = address
+//        }
+//
+//        return Location(
+//            locationAddress: locationAddress,
+//            timestamp: nil,
+//            lat: self.latitude,
+//            lng: self.longitude,
+//            radius: self.radius,
+//            status: nil,
+//            dilution: 0,
+//            altitude: 0,
+//            geoHash: nil)
+//    }
     
     public init(from decoder: Decoder) throws {
         

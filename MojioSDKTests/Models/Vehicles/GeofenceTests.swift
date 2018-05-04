@@ -36,17 +36,15 @@ class GeofenceTests: XCTestCase {
     
     func testGeofenceModelDecoding() {
         XCTAssertNotNil(model)
-        XCTAssertEqual(model?.Name, "string")
-        XCTAssertEqual(model?.Description, "string")
-        XCTAssertNotNil(model?.Region)
-        XCTAssertEqual(model?.NotificationSetting, .always)
-        XCTAssertEqual(model?.VehicleIds[0], "00000000-0000-0000-0000-000000000000")
-        XCTAssertEqual(model?.Tags[0], "string")
-        XCTAssertEqual(model?.OwnerId, "00000000-0000-0000-0000-000000000000")
+        XCTAssertEqual(model?.name, "string")
+        XCTAssertEqual(model?.description, "string")
+        XCTAssertNotNil(model?.region)
+        XCTAssertEqual(model?.notificationSetting, .always)
+        XCTAssertEqual(model?.vehicleIds[0], "00000000-0000-0000-0000-000000000000")
+        XCTAssertEqual(model?.tags[0], "string")
+        XCTAssertEqual(model?.ownerId, "00000000-0000-0000-0000-000000000000")
         XCTAssertEqual(model?.id, "00000000-0000-0000-0000-000000000000")
-        XCTAssertEqual(model?.CreatedOn, "2017-11-09T07:15:14.799Z")
-        XCTAssertEqual(model?.LastModified, "2017-11-09T07:15:14.799Z")
-        XCTAssertEqual(model?.Deleted, true)
+        XCTAssertEqual(model?.deleted, true)
     }
 }
 

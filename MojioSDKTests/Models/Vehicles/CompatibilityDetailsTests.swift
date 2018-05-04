@@ -22,7 +22,7 @@ class CompatibilityDetailsTests: XCTestCase {
     
     override func setUp() {
         do {
-            let data = self.jsonString.data(using: .utf8)
+            let data = self.strangeLevelString.data(using: .utf8)
             self.model = try JSONDecoder().decode(CompatibilityDetails.self, from: data!)
         } catch let error {
             print(error)
@@ -34,11 +34,16 @@ class CompatibilityDetailsTests: XCTestCase {
         self.model = nil
     }
     
+//    func testCompatibilityDetailsModelDecoding() {
+//        XCTAssertNotNil(model)
+//        XCTAssertEqual(model?.changed, true)
+//        XCTAssertEqual(model?.level, .full)
+//    }
+    
     func testCompatibilityDetailsModelDecoding() {
         XCTAssertNotNil(model)
-        XCTAssertEqual(model?.lastChecked, "2017-11-09T07:16:58.073Z")
         XCTAssertEqual(model?.changed, true)
-        XCTAssertEqual(model?.level, "Full")
+        XCTAssertEqual(model?.level, .unknown)
     }
 }
 
@@ -47,6 +52,16 @@ extension CompatibilityDetailsTests {
         return """
         {
         "Level": "Full",
+        "Changed": true,
+        "LastChecked": "2017-11-09T07:16:58.073Z"
+        }
+        """
+    }
+    
+    var strangeLevelString: String {
+        return """
+        {
+        "Level": "Strange",
         "Changed": true,
         "LastChecked": "2017-11-09T07:16:58.073Z"
         }

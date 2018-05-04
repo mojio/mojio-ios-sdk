@@ -47,11 +47,11 @@ extension AccelerationTests {
     var jsonString: String {
         return """
         {
-        "baseUnit": "MetersPerSecondPerSecond",
-        "baseValue": 100,
-        "unit": "MetersPerSecondPerSecond",
-        "value": 120,
-        "timestamp": "2017-11-09T07:16:58.072Z"
+        "BaseUnit": "MetersPerSecondPerSecond",
+        "BaseValue": 100,
+        "Unit": "MetersPerSecondPerSecond",
+        "Value": 120,
+        "Timestamp": "2017-11-09T07:16:58.072Z"
         }
         """
     }

@@ -31,6 +31,32 @@
 		373188FF209B4F4900E61E3A /* IdleStateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373188FE209B4F4900E61E3A /* IdleStateTests.swift */; };
 		37318901209B550100E61E3A /* IdleEventTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37318900209B550100E61E3A /* IdleEventTests.swift */; };
 		37318903209B55E500E61E3A /* LocationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37318902209B55E500E61E3A /* LocationTests.swift */; };
+		37318905209C7D0800E61E3A /* MeasurementStatisticsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37318904209C7D0800E61E3A /* MeasurementStatisticsTests.swift */; };
+		37318907209C821900E61E3A /* ScoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37318906209C821800E61E3A /* ScoreTests.swift */; };
+		37318909209C82D300E61E3A /* MojioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37318908209C82D200E61E3A /* MojioTests.swift */; };
+		3731890B209C843B00E61E3A /* NotificationSettingsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3731890A209C843B00E61E3A /* NotificationSettingsTests.swift */; };
+		3731890D209C850300E61E3A /* SettingsGeofenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3731890C209C850300E61E3A /* SettingsGeofenceTests.swift */; };
+		3731890F209C879500E61E3A /* SpeedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3731890E209C879500E61E3A /* SpeedTests.swift */; };
+		37318911209C898300E61E3A /* OdometerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37318910209C898300E61E3A /* OdometerTests.swift */; };
+		37318913209C8B0000E61E3A /* RPMTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37318912209C8B0000E61E3A /* RPMTests.swift */; };
+		37318915209C8C0B00E61E3A /* PolylineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37318914209C8C0B00E61E3A /* PolylineTests.swift */; };
+		37318917209C8CEE00E61E3A /* VehicleStatisticsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37318916209C8CEE00E61E3A /* VehicleStatisticsTests.swift */; };
+		37318919209C920D00E61E3A /* WifiRadioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37318918209C920D00E61E3A /* WifiRadioTests.swift */; };
+		3731891C209C936A00E61E3A /* EngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3731891B209C936A00E61E3A /* EngineTests.swift */; };
+		3731891E209C947900E61E3A /* NextServiceScheduleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3731891D209C947900E61E3A /* NextServiceScheduleTests.swift */; };
+		37318920209C968400E61E3A /* PlatformServiceScheduleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3731891F209C968400E61E3A /* PlatformServiceScheduleTests.swift */; };
+		37318922209C9EAA00E61E3A /* RecallTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37318921209C9EAA00E61E3A /* RecallTests.swift */; };
+		37318924209C9F5E00E61E3A /* ServiceBulletinTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37318923209C9F5E00E61E3A /* ServiceBulletinTests.swift */; };
+		37318926209CA04200E61E3A /* ServiceEventTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37318925209CA04200E61E3A /* ServiceEventTests.swift */; };
+		37318928209CA16000E61E3A /* ServiceIntervalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37318927209CA16000E61E3A /* ServiceIntervalTests.swift */; };
+		3731892A209CA2AC00E61E3A /* ServiceScheduleItemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37318929209CA2AB00E61E3A /* ServiceScheduleItemTests.swift */; };
+		3731892C209CA31700E61E3A /* ServiceScheduleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3731892B209CA31700E61E3A /* ServiceScheduleTests.swift */; };
+		3731892E209CA37700E61E3A /* TransmissionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3731892D209CA37700E61E3A /* TransmissionTests.swift */; };
+		37318930209CA3FC00E61E3A /* VinTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3731892F209CA3FC00E61E3A /* VinTests.swift */; };
+		37318932209CA6AD00E61E3A /* VinDetailsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37318931209CA6AC00E61E3A /* VinDetailsTests.swift */; };
+		37318934209CA94900E61E3A /* WarrantyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37318933209CA94900E61E3A /* WarrantyTests.swift */; };
+		37318936209CAD8D00E61E3A /* TripTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37318935209CAD8D00E61E3A /* TripTests.swift */; };
+		37318938209CB06400E61E3A /* VehicleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37318937209CB06400E61E3A /* VehicleTests.swift */; };
 		3AE11A9B63EBCDC7B6365890 /* Pods_Vehicles.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F28CBD045B5B77B3EC893BCA /* Pods_Vehicles.framework */; };
 		3C29817EDB59698171B61EF3 /* Pods_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD9B8527DB821719AED94CC4 /* Pods_Tests.framework */; };
 		3D6869BE2149CD45D324016A /* Pods_Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9980F32E31CB2E846A417B2C /* Pods_Core.framework */; };
@@ -199,6 +225,32 @@
 		373188FE209B4F4900E61E3A /* IdleStateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdleStateTests.swift; sourceTree = "<group>"; };
 		37318900209B550100E61E3A /* IdleEventTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdleEventTests.swift; sourceTree = "<group>"; };
 		37318902209B55E500E61E3A /* LocationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTests.swift; sourceTree = "<group>"; };
+		37318904209C7D0800E61E3A /* MeasurementStatisticsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementStatisticsTests.swift; sourceTree = "<group>"; };
+		37318906209C821800E61E3A /* ScoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreTests.swift; sourceTree = "<group>"; };
+		37318908209C82D200E61E3A /* MojioTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MojioTests.swift; sourceTree = "<group>"; };
+		3731890A209C843B00E61E3A /* NotificationSettingsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingsTests.swift; sourceTree = "<group>"; };
+		3731890C209C850300E61E3A /* SettingsGeofenceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsGeofenceTests.swift; sourceTree = "<group>"; };
+		3731890E209C879500E61E3A /* SpeedTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedTests.swift; sourceTree = "<group>"; };
+		37318910209C898300E61E3A /* OdometerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OdometerTests.swift; sourceTree = "<group>"; };
+		37318912209C8B0000E61E3A /* RPMTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPMTests.swift; sourceTree = "<group>"; };
+		37318914209C8C0B00E61E3A /* PolylineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolylineTests.swift; sourceTree = "<group>"; };
+		37318916209C8CEE00E61E3A /* VehicleStatisticsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleStatisticsTests.swift; sourceTree = "<group>"; };
+		37318918209C920D00E61E3A /* WifiRadioTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WifiRadioTests.swift; sourceTree = "<group>"; };
+		3731891B209C936A00E61E3A /* EngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EngineTests.swift; sourceTree = "<group>"; };
+		3731891D209C947900E61E3A /* NextServiceScheduleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextServiceScheduleTests.swift; sourceTree = "<group>"; };
+		3731891F209C968400E61E3A /* PlatformServiceScheduleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformServiceScheduleTests.swift; sourceTree = "<group>"; };
+		37318921209C9EAA00E61E3A /* RecallTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecallTests.swift; sourceTree = "<group>"; };
+		37318923209C9F5E00E61E3A /* ServiceBulletinTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceBulletinTests.swift; sourceTree = "<group>"; };
+		37318925209CA04200E61E3A /* ServiceEventTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceEventTests.swift; sourceTree = "<group>"; };
+		37318927209CA16000E61E3A /* ServiceIntervalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceIntervalTests.swift; sourceTree = "<group>"; };
+		37318929209CA2AB00E61E3A /* ServiceScheduleItemTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceScheduleItemTests.swift; sourceTree = "<group>"; };
+		3731892B209CA31700E61E3A /* ServiceScheduleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceScheduleTests.swift; sourceTree = "<group>"; };
+		3731892D209CA37700E61E3A /* TransmissionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransmissionTests.swift; sourceTree = "<group>"; };
+		3731892F209CA3FC00E61E3A /* VinTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VinTests.swift; sourceTree = "<group>"; };
+		37318931209CA6AC00E61E3A /* VinDetailsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VinDetailsTests.swift; sourceTree = "<group>"; };
+		37318933209CA94900E61E3A /* WarrantyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarrantyTests.swift; sourceTree = "<group>"; };
+		37318935209CAD8D00E61E3A /* TripTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripTests.swift; sourceTree = "<group>"; };
+		37318937209CB06400E61E3A /* VehicleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleTests.swift; sourceTree = "<group>"; };
 		644214DD1D9E6500005A86C5 /* AggregationData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AggregationData.swift; sourceTree = "<group>"; };
 		6DF2E7C31752EFE452CAEE01 /* Pods-MojioSDKTests2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MojioSDKTests2.release.xcconfig"; path = "Pods/Target Support Files/Pods-MojioSDKTests2/Pods-MojioSDKTests2.release.xcconfig"; sourceTree = "<group>"; };
 		704FA7BB4426F78E7857D7EF /* Pods-Accounts.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Accounts.release.xcconfig"; path = "Pods/Target Support Files/Pods-Accounts/Pods-Accounts.release.xcconfig"; sourceTree = "<group>"; };
@@ -391,6 +443,7 @@
 		373188D7209B3EE500E61E3A /* Vehicles */ = {
 			isa = PBXGroup;
 			children = (
+				3731891A209C935600E61E3A /* VinDetails */,
 				2E8BC6661FB343FB00A165C3 /* AccelerometerTests.swift */,
 				373188D5209B363800E61E3A /* ProperAccelerationTests.swift */,
 				373188D8209B3F3800E61E3A /* TimePeriodTests.swift */,
@@ -411,6 +464,19 @@
 				373188FA209B4D1A00E61E3A /* HarshEventTests.swift */,
 				373188FE209B4F4900E61E3A /* IdleStateTests.swift */,
 				37318900209B550100E61E3A /* IdleEventTests.swift */,
+				37318904209C7D0800E61E3A /* MeasurementStatisticsTests.swift */,
+				37318906209C821800E61E3A /* ScoreTests.swift */,
+				37318908209C82D200E61E3A /* MojioTests.swift */,
+				3731890A209C843B00E61E3A /* NotificationSettingsTests.swift */,
+				3731890C209C850300E61E3A /* SettingsGeofenceTests.swift */,
+				3731890E209C879500E61E3A /* SpeedTests.swift */,
+				37318910209C898300E61E3A /* OdometerTests.swift */,
+				37318912209C8B0000E61E3A /* RPMTests.swift */,
+				37318914209C8C0B00E61E3A /* PolylineTests.swift */,
+				37318916209C8CEE00E61E3A /* VehicleStatisticsTests.swift */,
+				37318918209C920D00E61E3A /* WifiRadioTests.swift */,
+				37318935209CAD8D00E61E3A /* TripTests.swift */,
+				37318937209CB06400E61E3A /* VehicleTests.swift */,
 			);
 			path = Vehicles;
 			sourceTree = "<group>";
@@ -423,6 +489,26 @@
 				37318902209B55E500E61E3A /* LocationTests.swift */,
 			);
 			path = Core;
+			sourceTree = "<group>";
+		};
+		3731891A209C935600E61E3A /* VinDetails */ = {
+			isa = PBXGroup;
+			children = (
+				3731891B209C936A00E61E3A /* EngineTests.swift */,
+				3731891D209C947900E61E3A /* NextServiceScheduleTests.swift */,
+				3731891F209C968400E61E3A /* PlatformServiceScheduleTests.swift */,
+				37318921209C9EAA00E61E3A /* RecallTests.swift */,
+				37318923209C9F5E00E61E3A /* ServiceBulletinTests.swift */,
+				37318925209CA04200E61E3A /* ServiceEventTests.swift */,
+				37318927209CA16000E61E3A /* ServiceIntervalTests.swift */,
+				37318929209CA2AB00E61E3A /* ServiceScheduleItemTests.swift */,
+				3731892B209CA31700E61E3A /* ServiceScheduleTests.swift */,
+				3731892D209CA37700E61E3A /* TransmissionTests.swift */,
+				3731892F209CA3FC00E61E3A /* VinTests.swift */,
+				37318931209CA6AC00E61E3A /* VinDetailsTests.swift */,
+				37318933209CA94900E61E3A /* WarrantyTests.swift */,
+			);
+			path = VinDetails;
 			sourceTree = "<group>";
 		};
 		755785381C6BE403000D65B3 = {
@@ -772,6 +858,7 @@
 				BC3D7C6E2087F3B000659A92 /* Frameworks */,
 				BC3D7C712087F3B000659A92 /* Headers */,
 				BC3D7C742087F3B000659A92 /* Resources */,
+				5331B77A5E74AA7CDA747216 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -791,6 +878,7 @@
 				BC603720208FA9CD00D855DE /* Frameworks */,
 				BC603724208FA9CD00D855DE /* Headers */,
 				BC603727208FA9CD00D855DE /* Resources */,
+				8C750877119052A0FC9F9C25 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -810,6 +898,7 @@
 				BCC2EFAD1CBED4E6004D2759 /* Frameworks */,
 				BCC2EFAE1CBED4E6004D2759 /* Headers */,
 				BCC2EFAF1CBED4E6004D2759 /* Resources */,
+				CF3B6D2B9BFACC0F9A4D8C46 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -829,6 +918,7 @@
 				BCC2EFB71CBED4E6004D2759 /* Frameworks */,
 				BCC2EFB81CBED4E6004D2759 /* Resources */,
 				B2D9CDB2789AA386709AE5D2 /* [CP] Embed Pods Frameworks */,
+				3AAF046E6937BCECD1EC9359 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -849,6 +939,7 @@
 				BCFE58F8209AF70B00B89104 /* Frameworks */,
 				BCFE58FB209AF70B00B89104 /* Headers */,
 				BCFE58FE209AF70B00B89104 /* Resources */,
+				B27132DB72DA5D6078C8D67D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -944,6 +1035,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		3AAF046E6937BCECD1EC9359 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Tests/Pods-Tests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		50FFDE671998939CEF683AFB /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -962,6 +1068,21 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		5331B77A5E74AA7CDA747216 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Pets/Pods-Pets-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		74E1E50A295582D6CD87F8FD /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -978,6 +1099,36 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8C750877119052A0FC9F9C25 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Accounts/Pods-Accounts-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B27132DB72DA5D6078C8D67D /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Core/Pods-Core-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		B2D9CDB2789AA386709AE5D2 /* [CP] Embed Pods Frameworks */ = {
@@ -1044,6 +1195,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CF3B6D2B9BFACC0F9A4D8C46 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Vehicles/Pods-Vehicles-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F85F99627B16836D043D0440 /* [CP] Check Pods Manifest.lock */ = {
@@ -1168,18 +1334,41 @@
 			buildActionMask = 2147483647;
 			files = (
 				373188F1209B469A00E61E3A /* FuelEfficiencyTests.swift in Sources */,
+				3731892A209CA2AC00E61E3A /* ServiceScheduleItemTests.swift in Sources */,
+				3731891E209C947900E61E3A /* NextServiceScheduleTests.swift in Sources */,
 				373188F3209B472400E61E3A /* FuelVolumeTests.swift in Sources */,
+				37318924209C9F5E00E61E3A /* ServiceBulletinTests.swift in Sources */,
+				37318911209C898300E61E3A /* OdometerTests.swift in Sources */,
+				37318928209CA16000E61E3A /* ServiceIntervalTests.swift in Sources */,
+				37318922209C9EAA00E61E3A /* RecallTests.swift in Sources */,
 				37318901209B550100E61E3A /* IdleEventTests.swift in Sources */,
+				37318934209CA94900E61E3A /* WarrantyTests.swift in Sources */,
 				373188D9209B3F3800E61E3A /* TimePeriodTests.swift in Sources */,
+				3731890B209C843B00E61E3A /* NotificationSettingsTests.swift in Sources */,
 				373188EF209B461800E61E3A /* FuelLevelTests.swift in Sources */,
 				373188FD209B4E7300E61E3A /* HeadingTests.swift in Sources */,
+				37318905209C7D0800E61E3A /* MeasurementStatisticsTests.swift in Sources */,
+				3731892C209CA31700E61E3A /* ServiceScheduleTests.swift in Sources */,
 				373188E8209B445B00E61E3A /* DiagnosticCodeTests.swift in Sources */,
 				2E8BC6671FB343FB00A165C3 /* AccelerometerTests.swift in Sources */,
 				373188FB209B4D1A00E61E3A /* HarshEventTests.swift in Sources */,
+				37318917209C8CEE00E61E3A /* VehicleStatisticsTests.swift in Sources */,
+				37318926209CA04200E61E3A /* ServiceEventTests.swift in Sources */,
+				3731891C209C936A00E61E3A /* EngineTests.swift in Sources */,
 				373188FF209B4F4900E61E3A /* IdleStateTests.swift in Sources */,
+				37318915209C8C0B00E61E3A /* PolylineTests.swift in Sources */,
 				373188E6209B434800E61E3A /* CompatibilityDetailsTests.swift in Sources */,
+				37318913209C8B0000E61E3A /* RPMTests.swift in Sources */,
 				373188E2209B41FF00E61E3A /* BatteryTests.swift in Sources */,
+				3731890F209C879500E61E3A /* SpeedTests.swift in Sources */,
+				37318936209CAD8D00E61E3A /* TripTests.swift in Sources */,
+				3731892E209CA37700E61E3A /* TransmissionTests.swift in Sources */,
 				37318903209B55E500E61E3A /* LocationTests.swift in Sources */,
+				37318919209C920D00E61E3A /* WifiRadioTests.swift in Sources */,
+				37318909209C82D300E61E3A /* MojioTests.swift in Sources */,
+				37318907209C821900E61E3A /* ScoreTests.swift in Sources */,
+				37318932209CA6AD00E61E3A /* VinDetailsTests.swift in Sources */,
+				37318930209CA3FC00E61E3A /* VinTests.swift in Sources */,
 				373188EA209B44F700E61E3A /* DistanceTests.swift in Sources */,
 				373188E0209B40FD00E61E3A /* AggregationDataTests.swift in Sources */,
 				373188ED209B45B800E61E3A /* FuelCapacityTests.swift in Sources */,
@@ -1188,7 +1377,10 @@
 				373188F5209B47A300E61E3A /* GeofenceTests.swift in Sources */,
 				373188E4209B426E00E61E3A /* BooleanStateTests.swift in Sources */,
 				373188F7209B49FC00E61E3A /* GeofenceRegionTests.swift in Sources */,
+				37318920209C968400E61E3A /* PlatformServiceScheduleTests.swift in Sources */,
 				373188DE209B405500E61E3A /* AddressTests.swift in Sources */,
+				37318938209CB06400E61E3A /* VehicleTests.swift in Sources */,
+				3731890D209C850300E61E3A /* SettingsGeofenceTests.swift in Sources */,
 				373188F9209B4B2200E61E3A /* HarshEventStateTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

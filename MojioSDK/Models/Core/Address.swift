@@ -42,4 +42,32 @@ public struct Address: Codable {
         case countryCode = "CountryCode"
         case formattedAddress = "FormattedAddress"
     }
+    
+    public init(from decoder: Decoder) throws {
+        
+        do {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            
+            self.houseNumber = try container.decodeIfPresent(String.self, forKey: .houseNumber)
+            self.road = try container.decodeIfPresent(String.self, forKey: .road)
+            
+            self.neighbourhood = try container.decodeIfPresent(String.self, forKey: .neighbourhood)
+            self.suburb = try container.decodeIfPresent(String.self, forKey: .suburb)
+            self.city = try container.decodeIfPresent(String.self, forKey: .city)
+            self.county = try container.decodeIfPresent(String.self, forKey: .county)
+            self.state = try container.decodeIfPresent(String.self, forKey: .state)
+            self.postCode = try container.decodeIfPresent(String.self, forKey: .postCode)
+            self.country = try container.decodeIfPresent(String.self, forKey: .country)
+            self.countryCode = try container.decodeIfPresent(String.self, forKey: .countryCode)
+            self.formattedAddress = try container.decodeIfPresent(String.self, forKey: .formattedAddress)
+        }
+        catch {
+            debugPrint(error)
+            throw error
+        }
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        
+    }
 }

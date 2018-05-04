@@ -19,11 +19,11 @@ import SwiftDate
 // Base Device Measurement
 
 enum DeviceMeasurementCodingKeys: String, CodingKey {
-    case baseUnit
-    case baseValue
-    case unit
-    case value
-    case timestamp
+    case baseUnit = "BaseUnit"
+    case baseValue = "BaseValue"
+    case unit = "Unit"
+    case value = "Value"
+    case timestamp = "Timestamp"
 }
 
 public protocol DeviceMeasurement: Codable {

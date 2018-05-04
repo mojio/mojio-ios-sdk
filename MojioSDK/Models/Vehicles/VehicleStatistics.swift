@@ -33,4 +33,26 @@ public struct VehicleStatistics: Codable {
         case currentRange = "CurrentRange"
         case lastFillUpDate = "LastFillUpDate"
     }
+    
+    public init(from decoder: Decoder) throws {
+        do {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            
+            self.estimatedFuelLevel = try container.decodeIfPresent(FuelLevel.self, forKey: .estimatedFuelLevel)
+            self.estimatedFuelVolume = try container.decodeIfPresent(FuelVolume.self, forKey: .estimatedFuelVolume)
+            self.averageFuelEfficiency = try container.decodeIfPresent(FuelEfficiency.self, forKey: .averageFuelEfficiency)
+            
+            self.totalRange = try container.decodeIfPresent(Distance.self, forKey: .totalRange)
+            self.currentRange = try container.decodeIfPresent(Distance.self, forKey: .currentRange)
+            self.lastFillUpDate = try container.decodeIfPresent(String.self, forKey: .lastFillUpDate).flatMap { $0.dateFromIso8601 }
+        }
+        catch {
+            debugPrint(error)
+            throw error
+        }
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        
+    }
 }

@@ -24,4 +24,21 @@ public struct ServiceEvent: Codable {
         case computerCode = "ComputerCode"
         case event = "Event"
     }
+    
+    public init(from decoder: Decoder) throws {
+        do {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            
+            self.computerCode = try container.decodeIfPresent(String.self, forKey: .computerCode)
+            self.event = try container.decodeIfPresent(String.self, forKey: .event)
+        }
+        catch {
+            debugPrint(error)
+            throw error
+        }
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        
+    }
 }

@@ -78,7 +78,7 @@ public struct Location: Codable {
     public let geoHash: String?
     
     // Heading
-    public let locationHeading: Heading? = nil
+    public let locationHeading: Heading? 
     
     public enum CodingKeys: String, CodingKey {
         case locationAddress = "Address"
@@ -91,5 +91,34 @@ public struct Location: Codable {
         case altitude = "Altitude"
         case geoHash = "GeoHash"
         case locationHeading = "Heading"
+    }
+    
+    public init(from decoder: Decoder) throws {
+        
+        do {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            
+            self.locationAddress = try container.decodeIfPresent(Address.self, forKey: .locationAddress)
+            self.timestamp = try container.decodeIfPresent(String.self, forKey: .timestamp).flatMap { $0.dateFromIso8601 }
+            
+            self.lat = try container.decodeIfPresent(Double.self, forKey: .lat) ?? 0
+            self.lng = try container.decodeIfPresent(Double.self, forKey: .lng) ?? 0
+            
+            self.radius = try container.decodeIfPresent(Double.self, forKey: .radius) ?? 0
+            self.status = try container.decodeIfPresent(String.self, forKey: .status)
+            
+            self.dilution = try container.decodeIfPresent(Double.self, forKey: .dilution) ?? 0
+            self.altitude = try container.decodeIfPresent(Double.self, forKey: .altitude) ?? 0
+            self.geoHash = try container.decodeIfPresent(String.self, forKey: .geoHash)
+            self.locationHeading = try container.decodeIfPresent(Heading.self, forKey: .locationHeading)
+        }
+        catch {
+            debugPrint(error)
+            throw error
+        }
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        
     }
 }

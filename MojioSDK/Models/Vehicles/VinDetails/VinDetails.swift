@@ -50,4 +50,43 @@ public struct VinDetails: Codable {
         case message = "Message"
         case success = "Success"
     }
+    
+    public init(from decoder: Decoder) throws {
+        do {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            
+            self.timestamp = try container.decodeIfPresent(String.self, forKey: .timestamp).flatMap { $0.dateFromIso8601 }
+            
+            self.vin = try container.decodeIfPresent(String.self, forKey: .vin)
+            self.year = try container.decodeIfPresent(Int.self, forKey: .year) ?? 0
+            self.make = try container.decodeIfPresent(String.self, forKey: .make)
+            self.model = try container.decodeIfPresent(String.self, forKey: .model)
+            
+            self.engine = try container.decodeIfPresent(String.self, forKey: .engine)
+            self.cylinders = try container.decodeIfPresent(Int.self, forKey: .cylinders)
+            self.totalFuelCapacity = try container.decodeIfPresent(FuelCapacity.self, forKey: .totalFuelCapacity)
+            
+            self.fuelType = try container.decodeIfPresent(String.self, forKey: .fuelType)
+            
+            self.cityFuelEfficiency = try container.decodeIfPresent(Double.self, forKey: .cityFuelEfficiency) ?? 0
+            
+            self.highwayFuelEfficiency = try container.decodeIfPresent(Double.self, forKey: .highwayFuelEfficiency) ?? 0
+            
+            self.combinedFuelEfficiency = try container.decodeIfPresent(Double.self, forKey: .combinedFuelEfficiency) ?? 0
+            
+            self.transmission = try container.decodeIfPresent(String.self, forKey: .transmission)
+            
+            self.message = try container.decodeIfPresent(String.self, forKey: .message)
+            
+            self.success = try container.decodeIfPresent(Bool.self, forKey: .success) ?? false
+        }
+        catch {
+            debugPrint(error)
+            throw error
+        }
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        
+    }
 }

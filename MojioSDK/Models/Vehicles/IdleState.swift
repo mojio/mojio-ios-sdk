@@ -17,21 +17,35 @@ import Foundation
 
 public struct IdleState: Codable {
     
-    public var timestampString: String? = nil
+    public var timestamp: Date? = nil
     public var value: Bool = false
     public var startTime: String? = nil
     public var duration: TimePeriod? = nil
     
     public enum CodingKeys: String, CodingKey {
-        case timestampString = "Timestamp"
+        case timestamp = "Timestamp"
         case value = "Value"
         case startTime = "StartTime"
         case duration = "Duration"
     }
-}
-
-extension IdleState {
-    public var timestamp: Date? {
-        return timestampString.flatMap { $0.dateFromIso8601 }
+    
+    public init(from decoder: Decoder) throws {
+        
+        do {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            
+            self.timestamp = try container.decodeIfPresent(String.self, forKey: .timestamp).flatMap { $0.dateFromIso8601 }
+            self.value = try container.decodeIfPresent(Bool.self, forKey: .value) ?? false
+            self.startTime = try container.decodeIfPresent(String.self, forKey: .startTime)
+            self.duration = try container.decodeIfPresent(TimePeriod.self, forKey: .duration)
+        }
+        catch {
+            debugPrint(error)
+            throw error
+        }
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        
     }
 }

@@ -42,4 +42,31 @@ public struct MeasurementStatistics: Codable {
         case standardScore = "StandardScore"
         case minMaxScore = "MinMaxScore"
     }
+    
+    public init(from decoder: Decoder) throws {
+        
+        do {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            
+            self.numOfSamples = try container.decodeIfPresent(Double.self, forKey: .numOfSamples) ?? 0
+            self.average = try container.decodeIfPresent(Double.self, forKey: .average) ?? 0
+            self.variance = try container.decodeIfPresent(Double.self, forKey: .variance) ?? 0
+            self.stdDev = try container.decodeIfPresent(Double.self, forKey: .stdDev) ?? 0
+            self.indexOfDispersion = try container.decodeIfPresent(Double.self, forKey: .indexOfDispersion) ?? 0
+            self.coeffOfVariation = try container.decodeIfPresent(Double.self, forKey: .coeffOfVariation) ?? 0
+            self.m2 = try container.decodeIfPresent(Double.self, forKey: .m2) ?? 0
+            self.min = try container.decodeIfPresent(Double.self, forKey: .min) ?? 0
+            self.max = try container.decodeIfPresent(Double.self, forKey: .max) ?? 0
+            self.standardScore = try container.decodeIfPresent(Score.self, forKey: .standardScore)
+            self.minMaxScore = try container.decodeIfPresent(Score.self, forKey: .minMaxScore)
+        }
+        catch {
+            debugPrint(error)
+            throw error
+        }
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        
+    }
 }

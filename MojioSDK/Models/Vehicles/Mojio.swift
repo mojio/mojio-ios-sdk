@@ -33,21 +33,6 @@ public struct Mojio: Codable, PrimaryKey {
     public let deleted: Bool
     public let msisdn: String?
     public let iccid: String?
-
-//    public func json () -> String? {
-//        var map: [String: Any] = [:]
-//
-//        if let name = self.Name {
-//            map["Name"] = name
-//        }
-//
-//        if let imei = self.IMEI {
-//            map["IMEI"] = imei
-//        }
-//
-//        let data = try! JSONSerialization.data(withJSONObject: map)
-//        return String(data: data, encoding: String.Encoding.utf8)
-//    }
     
     public enum CodingKeys: String, CodingKey {
         case id = "Id"
@@ -81,8 +66,8 @@ public struct Mojio: Codable, PrimaryKey {
         self.connectedState = try container.decodeIfPresent(BooleanState.self, forKey: .connectedState)
         self.createdOn = try container.decodeIfPresent(String.self, forKey: .createdOn).flatMap { $0.dateFromIso8601 }
         self.lastModified = try container.decodeIfPresent(String.self, forKey: .lastModified).flatMap { $0.dateFromIso8601 }
-        self.tags = try container.decodeIfPresent([String].self, forKey: .location) ?? []
-        self.deleted = try container.decodeIfPresent(Bool.self, forKey: .location) ?? false
+        self.tags = try container.decodeIfPresent([String].self, forKey: .tags) ?? []
+        self.deleted = try container.decodeIfPresent(Bool.self, forKey: .deleted) ?? false
         self.msisdn = try container.decodeIfPresent(String.self, forKey: .msisdn)
         self.iccid = try container.decodeIfPresent(String.self, forKey: .iccid)
     }

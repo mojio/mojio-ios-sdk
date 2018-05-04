@@ -36,4 +36,27 @@ public struct Engine: Codable {
         case maxHp = "MaxHp"
         case maxHpAt = "MaxHpAt"
     }
+    
+    public init(from decoder: Decoder) throws {
+        do {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            
+            self.name = try container.decodeIfPresent(String.self, forKey: .name)
+            self.cylinders = try container.decodeIfPresent(String.self, forKey: .cylinders)
+            self.displacement = try container.decodeIfPresent(Double.self, forKey: .displacement) ?? 0
+            self.fuelInduction = try container.decodeIfPresent(String.self, forKey: .fuelInduction)
+            self.fuelQuality = try container.decodeIfPresent(String.self, forKey: .fuelQuality)
+            self.fuelType = try container.decodeIfPresent(String.self, forKey: .fuelType)
+            self.maxHp = try container.decodeIfPresent(String.self, forKey: .maxHp)
+            self.maxHpAt = try container.decodeIfPresent(String.self, forKey: .maxHpAt)
+        }
+        catch {
+            debugPrint(error)
+            throw error
+        }
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        
+    }
 }

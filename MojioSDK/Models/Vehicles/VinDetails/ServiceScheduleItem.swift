@@ -36,4 +36,29 @@ public struct ServiceScheduleItem: Codable {
         case intervals = "Intervals"
         case events = "Events"
     }
+    
+    public init(from decoder: Decoder) throws {
+        do {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            
+            self.transNotes = try container.decodeIfPresent(String.self, forKey: .transNotes)
+            self.scheduleName = try container.decodeIfPresent(String.self, forKey: .scheduleName)
+            self.scheduleDescription = try container.decodeIfPresent(String.self, forKey: .scheduleDescription)
+            
+            self.maintenanceCategory = try container.decodeIfPresent(String.self, forKey: .maintenanceCategory)
+            self.maintenanceName = try container.decodeIfPresent(String.self, forKey: .maintenanceName)
+            self.maintenanceNotes = try container.decodeIfPresent(String.self, forKey: .maintenanceNotes)
+            
+            self.intervals = try container.decodeIfPresent([ServiceInterval].self, forKey: .intervals) ?? []
+            self.events = try container.decodeIfPresent([ServiceEvent].self, forKey: .events) ?? []
+        }
+        catch {
+            debugPrint(error)
+            throw error
+        }
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        
+    }
 }

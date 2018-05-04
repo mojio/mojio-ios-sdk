@@ -47,11 +47,11 @@ extension TimePeriodTests {
     var jsonString: String {
         return """
         {
-        "baseUnit": "MetersPerSecondPerSecond",
-        "timestamp": "2017-11-09T07:16:58.072Z",
-        "baseValue": 10,
-        "unit": "MetersPerSecondPerSecond",
-        "value": 20
+        "BaseUnit": "MetersPerSecondPerSecond",
+        "Timestamp": "2017-11-09T07:16:58.072Z",
+        "BaseValue": 10,
+        "Unit": "MetersPerSecondPerSecond",
+        "Value": 20
         }
         """
     }

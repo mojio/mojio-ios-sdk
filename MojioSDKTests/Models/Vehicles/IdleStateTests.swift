@@ -36,7 +36,6 @@ class IdleStateTests: XCTestCase {
     
     func testIdleStateModelDecoding() {
         XCTAssertNotNil(model)
-        XCTAssertEqual(model?.timestampString, "2017-11-09T07:15:16.084Z")
         XCTAssertEqual(model?.value, true)
         XCTAssertEqual(model?.startTime, "2017-11-09T07:15:16.084Z")
         XCTAssertNotNil(model?.duration)
@@ -51,11 +50,11 @@ extension IdleStateTests {
         "Value": true,
         "StartTime": "2017-11-09T07:15:16.084Z",
         "Duration": {
-        "baseUnit": "Ticks",
-        "timestamp": "2017-11-09T07:15:16.084Z",
-        "baseValue": 0,
-        "unit": "Ticks",
-        "value": 0
+        "BaseUnit": "Ticks",
+        "Timestamp": "2017-11-09T07:15:16.084Z",
+        "BaseValue": 0,
+        "Unit": "Ticks",
+        "Value": 0
         }
         }
         

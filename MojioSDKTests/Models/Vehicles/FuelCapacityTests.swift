@@ -47,11 +47,11 @@ extension FuelCapacityTests {
     var jsonString: String {
         return """
         {
-        "baseUnit": "MetersPerSecondPerSecond",
-        "baseValue": 10,
-        "unit": "MetersPerSecondPerSecond",
-        "value": 20,
-        "timestamp": "2017-11-09T07:16:58.072Z"
+        "BaseUnit": "MetersPerSecondPerSecond",
+        "BaseValue": 10,
+        "Unit": "MetersPerSecondPerSecond",
+        "Value": 20,
+        "Timestamp": "2017-11-09T07:16:58.072Z"
         }
         """
     }

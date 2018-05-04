@@ -36,4 +36,27 @@ public struct NextServiceSchedule: Codable {
         case distanceValue = "DistanceValue"
         case services = "Items"
     }
+    
+    public init(from decoder: Decoder) throws {
+        do {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            
+            self.timeStamp = try container.decodeIfPresent(String.self, forKey: .timeStamp)
+            self.odometer = try container.decodeIfPresent(Double.self, forKey: .odometer) ?? 0
+            self.ageInMonths = try container.decodeIfPresent(Int.self, forKey: .ageInMonths) ?? 0
+            self.timeUnits = try container.decodeIfPresent(String.self, forKey: .timeUnits)
+            self.timeValue = try container.decodeIfPresent(Double.self, forKey: .timeValue) ?? 0
+            self.distanceUnits = try container.decodeIfPresent(String.self, forKey: .distanceUnits)
+            self.distanceValue = try container.decodeIfPresent(Double.self, forKey: .distanceValue) ?? 0
+            self.services = try container.decodeIfPresent([PlatformServiceSchedule].self, forKey: .services) ?? []
+        }
+        catch {
+            debugPrint(error)
+            throw error
+        }
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        
+    }
 }

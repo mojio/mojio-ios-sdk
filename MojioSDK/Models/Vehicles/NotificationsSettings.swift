@@ -33,8 +33,6 @@ public enum DisturbanceThreshold: String, Codable {
     }
 }
 
-
-
 public struct SettingsGeofence: Codable, PrimaryKey {
     
     public let id: String
@@ -129,7 +127,6 @@ public struct NotificationsSettings: Codable {
             self.enableTripCompletedActivity = try container.decode(Bool.self, forKey: .enableTripCompletedActivity)
             self.enableTripStartActivity = try container.decode(Bool.self, forKey: .enableTripStartActivity)
             
-            
             self.enableLowFuelActivity = try container.decode(Bool.self, forKey: .enableLowFuelActivity)
             self.enableLowBatteryActivity = try container.decode(Bool.self, forKey: .enableLowBatteryActivity)
             self.enableSpeedActivity = try container.decode(Bool.self, forKey: .enableSpeedActivity)
@@ -163,20 +160,3 @@ public struct NotificationsSettings: Codable {
         
     }
 }
-    
-//    public func jsonDict () -> [String: Any] {
-//        var map = self.toJSON()
-//
-//        if let threshold = self.SpeedThreshold {
-//            map["SpeedThreshold"] = threshold.jsonDict()
-//        }
-//
-//        var geofences: [[String: Any]] = []
-//        for geofence in self.Geofences {
-//            geofences.append(geofence.toJSON())
-//        }
-//
-//        map["Geofences"] = geofences
-//
-//        return map
-//    }

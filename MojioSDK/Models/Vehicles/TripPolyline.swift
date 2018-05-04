@@ -31,4 +31,25 @@ public struct Polyline: Codable, PrimaryKey {
         case lastModified = "LastModified"
         case deleted = "Deleted"
     }
+    
+    public init(from decoder: Decoder) throws {
+        
+        do {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            
+            self.id = try container.decode(String.self, forKey: .id)
+            self.polyline = try container.decodeIfPresent(String.self, forKey: .polyline)
+            self.createdOn = try container.decodeIfPresent(String.self, forKey: .createdOn).flatMap { $0.dateFromIso8601 }
+            self.lastModified = try container.decodeIfPresent(String.self, forKey: .lastModified).flatMap { $0.dateFromIso8601 }
+            self.deleted = try container.decodeIfPresent(Bool.self, forKey: .deleted) ?? false
+        }
+        catch {
+            debugPrint(error)
+            throw error
+        }
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        
+    }
 }

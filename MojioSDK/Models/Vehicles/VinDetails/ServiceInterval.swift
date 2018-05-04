@@ -32,4 +32,27 @@ public struct ServiceInterval: Codable {
         case units = "Units"
         case initialValue = "InitialValue"
     }
+    
+    public init(from decoder: Decoder) throws {
+        do {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            
+            self.operatingParameter = try container.decodeIfPresent(String.self, forKey: .operatingParameter)
+            self.operatingParameterNotes = try container.decodeIfPresent(String.self, forKey: .operatingParameterNotes)
+            
+            self.intervalType = try container.decodeIfPresent(String.self, forKey: .intervalType)
+            self.value = try container.decodeIfPresent(Double.self, forKey: .value) ?? 0
+            
+            self.units = try container.decodeIfPresent(String.self, forKey: .units)
+            self.initialValue = try container.decodeIfPresent(Double.self, forKey: .initialValue) ?? 0
+        }
+        catch {
+            debugPrint(error)
+            throw error
+        }
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        
+    }
 }

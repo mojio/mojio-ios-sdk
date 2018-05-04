@@ -21,10 +21,18 @@ public enum TransactionState: String {
     case failure = "Failure"
 }
 
-public enum WifiRadioStatus: String {
+public enum WifiRadioStatus: String, Codable {
+    
     case connected = "Connected"
     case roaming = "Roaming"
     case disconnected = "Disconnected"
+    
+    case unknown
+    
+    public init(from decoder: Decoder) throws {
+        let label = try decoder.singleValueContainer().decode(String.self)
+        self = WifiRadioStatus(rawValue: label) ?? .unknown
+    }
 }
 
 public struct WifiRadio: Codable  {
@@ -42,7 +50,7 @@ public struct WifiRadio: Codable  {
     public let ssid: String?
     public let password: String?
     public let allowRoaming: Bool?
-    public let status: String?
+    public let status: WifiRadioStatus?
     public let strength: Double?
     
     public init(from decoder: Decoder) throws {
@@ -53,7 +61,7 @@ public struct WifiRadio: Codable  {
             self.ssid = try container.decodeIfPresent(String.self, forKey: .ssid)
             self.password = try container.decodeIfPresent(String.self, forKey: .password)
             self.allowRoaming = try container.decodeIfPresent(Bool.self, forKey: .allowRoaming)
-            self.status = try container.decodeIfPresent(String.self, forKey: .status)
+            self.status = try container.decodeIfPresent(WifiRadioStatus.self, forKey: .status)
             self.strength = try container.decodeIfPresent(Double.self, forKey: .strength)
         }
         catch {
