@@ -17,21 +17,15 @@ import Foundation
 
 public struct Warranty: Codable {
     
-    public var Name: String? = nil
-    public var `Type`: String? = nil
-    public var Months: String? = nil
-    public var Km: Double? = nil
+    public let name: String?
+    public let type: String?
+    public let months: String?
+    public let km: Double?
+    
+    public enum CodingKeys: String, CodingKey {
+        case name = "Name"
+        case type = "Type"
+        case months = "Months"
+        case km = "Km"
+    }
 }
-
-//public init() {}
-//
-//public init?(map: Map) {
-//    self.init()
-//}
-//
-//public mutating func mapping(map: Map) {
-//    Name <- map["Name"]
-//    Type <- map["Type"]
-//    Months <- map["Months"]
-//    Km <- map["Km"]
-//}

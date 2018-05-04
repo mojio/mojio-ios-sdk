@@ -22,18 +22,18 @@ public enum HeadingUnit: String {
 public struct Heading: DeviceMeasurement {
     
     // DeviceMeasurement
-    public var baseUnit: String? = nil
-    public var baseValue: Double = 0
-    public var unit: String? = nil
-    public var value: Double = 0
-    public var timestamp: Date?  = nil
+    public let baseUnit: String?
+    public let baseValue: Double
+    public let unit: String?
+    public let value: Double
+    public let timestamp: Date?
     
-    public var Direction: String? = nil
-    public var LeftTurn: Bool = false
+    public let direction: String?
+    public let leftTurn: Bool
 
-    private enum CodingKeys: String, CodingKey {
-        case Direction
-        case LeftTurn
+    public enum CodingKeys: String, CodingKey {
+        case direction = "Direction"
+        case leftTurn = "LeftTurn"
     }
 }
 
@@ -64,31 +64,25 @@ extension Heading  {
         
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
-        let Direction = try container.decodeIfPresent(String.self, forKey: .Direction)
+        let direction = try container.decodeIfPresent(String.self, forKey: .direction)
         
-        let LeftTurn = try container.decodeIfPresent(Bool.self, forKey: .LeftTurn) ?? false
+        let leftTurn = try container.decodeIfPresent(Bool.self, forKey: .leftTurn) ?? false
         
-        self.init(baseUnit: deviceMeasurements.baseUnit, baseValue: deviceMeasurements.baseValue, unit: deviceMeasurements.unit, value: deviceMeasurements.value, timestamp: deviceMeasurements.timestamp, Direction: Direction, LeftTurn: LeftTurn)
+        self.init(
+            baseUnit: deviceMeasurements.baseUnit,
+            baseValue: deviceMeasurements.baseValue,
+            unit: deviceMeasurements.unit,
+            value: deviceMeasurements.value,
+            timestamp: deviceMeasurements.timestamp,
+            direction: direction,
+            leftTurn: leftTurn)
     }
     
     public func encode(with encoder: Encoder) throws {
         
         var container = encoder.container(keyedBy: CodingKeys.self)
         
-        try container.encode(self.Direction, forKey: .Direction)
-        try container.encode(self.LeftTurn, forKey: .LeftTurn)
+        try container.encode(self.direction, forKey: .direction)
+        try container.encode(self.leftTurn, forKey: .leftTurn)
     }
 }
-
-//public init() {}
-
-//public init?(map: Map) {
-//    self.init()
-//}
-//
-//public mutating func mapping(map: Map) {
-//    self.measureMapping(map: map)
-//
-//    Direction <- map["Direction"]
-//    LeftTurn <- map["LeftTurn"]
-//}

@@ -20,17 +20,15 @@ import MojioCore
 public struct FuelLevel: DeviceMeasurement {
     
     // DeviceMeasurement
-    public var baseUnit: String? = nil
-    public var baseValue: Double = 0
-    public var unit: String? = nil
-    public var value: Double = 0
-    public var timestamp: Date?  = nil
-    
-    //public var timeStamp: Date? = nil
+    public let baseUnit: String?
+    public let baseValue: Double
+    public let unit: String?
+    public let value: Double
+    public let timestamp: Date?
     
     public var RiskSeverity: String? = nil
     
-    private enum CodingKeys: String, CodingKey {
+    public enum CodingKeys: String, CodingKey {
         case RiskSeverity
     }
 }
@@ -53,15 +51,3 @@ extension FuelLevel {
         try container.encode(self.RiskSeverity, forKey: .RiskSeverity)
     }
 }
-
-//public init() {}
-//
-//public init?(map: Map) {
-//    self.init()
-//}
-//
-//public mutating func mapping(map: Map) {
-//    self.measureMapping(map: map)
-//
-//    RiskSeverity <- map["RiskSeverity"]
-//}

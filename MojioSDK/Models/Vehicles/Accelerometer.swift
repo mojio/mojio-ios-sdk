@@ -23,7 +23,7 @@ public struct Accelerometer: Codable {
     public var magnitude: ProperAcceleration? = nil
     public var samplingInterval: TimePeriod? = nil
     
-    private enum CodingKeys: String, CodingKey {
+    public enum CodingKeys: String, CodingKey {
         case x = "X"
         case y = "Y"
         case z = "Z"

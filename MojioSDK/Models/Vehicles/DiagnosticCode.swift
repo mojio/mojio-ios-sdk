@@ -20,7 +20,7 @@ public struct DiagnosticCode: Codable {
     public var ignored: Bool = false
     public var code: String? = nil
     public var description: String? = nil
-    public var timestamp: Date? = nil
+    public let timestamp: Date?
     
     // RiskSeverity
     public var severity: String? = nil
@@ -30,7 +30,7 @@ public struct DiagnosticCode: Codable {
     public var stateType: String? = nil
     public var diagnosticCodeType: String? = nil
 
-    private enum CodingKeys: String, CodingKey {
+    public enum CodingKeys: String, CodingKey {
         case ignored = "Ignored"
         case code = "Code"
         case description = "Description"

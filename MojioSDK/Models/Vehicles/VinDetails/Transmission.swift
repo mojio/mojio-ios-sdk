@@ -17,21 +17,16 @@ import Foundation
 
 public struct Transmission: Codable {
     
-    public var Name: String? = nil
-    public var `Type`: String? = nil
-    public var DetailType: String? = nil
-    public var Gears: String? = nil
-}
+    public let name: String?
+    public let type: String?
+    public let detailType: String?
+    public let gears: String?
+    
+    public enum CodingKeys: String, CodingKey {
+        case name = "Name"
+        case type = "Type"
+        case detailType = "DetailType"
+        case gears = "Gears"
 
-//public init() {}
-//
-//public init?(map: Map) {
-//    self.init()
-//}
-//
-//public mutating func mapping(map: Map) {
-//    Name <- map["Name"]
-//    Type <- map["Type"]
-//    DetailType <- map["DetailType"]
-//    Gears <- map["Gears"]
-//}
+    }
+}

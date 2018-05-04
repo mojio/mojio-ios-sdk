@@ -20,15 +20,13 @@ import MojioCore
 public struct Odometer: DeviceMeasurement {
     
     // DeviceMeasurement
-    public var baseUnit: String? = nil
-    public var baseValue: Double = 0
-    public var unit: String? = nil
-    public var value: Double = 0
-    public var timestamp: Date?  = nil
-    
-    //public var timeStamp: Date? = nil
-    
-    public var RolloverValue: Double = 0
+    public let baseUnit: String?
+    public let baseValue: Double
+    public let unit: String?
+    public let value: Double
+    public let timestamp: Date?
+
+    public var rolloverValue: Double
     
 //    public func jsonDict () -> [String: Any] {
 //
@@ -43,8 +41,8 @@ public struct Odometer: DeviceMeasurement {
 //        return dictionary
 //    }
     
-    private enum CodingKeys: String, CodingKey {
-        case RolloverValue
+    public enum CodingKeys: String, CodingKey {
+        case rolloverValue = "rolloverValue"
     }
 }
 
@@ -54,28 +52,15 @@ extension Odometer {
         
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
-        let RolloverValue = try container.decodeIfPresent(Double.self, forKey: .RolloverValue) ?? 0.0
+        let rolloverValue = try container.decodeIfPresent(Double.self, forKey: .rolloverValue) ?? 0
         
-        self.init(baseUnit: deviceMeasurements.baseUnit, baseValue: deviceMeasurements.baseValue, unit: deviceMeasurements.unit, value: deviceMeasurements.value, timestamp: deviceMeasurements.timestamp, RolloverValue: RolloverValue)
+        self.init(baseUnit: deviceMeasurements.baseUnit, baseValue: deviceMeasurements.baseValue, unit: deviceMeasurements.unit, value: deviceMeasurements.value, timestamp: deviceMeasurements.timestamp, rolloverValue: rolloverValue)
     }
     
     public func encode(with encoder: Encoder) throws {
         
         var container = encoder.container(keyedBy: CodingKeys.self)
         
-        try container.encode(self.RolloverValue, forKey: .RolloverValue)
+        try container.encode(self.rolloverValue, forKey: .rolloverValue)
     }
 }
-
-
-//public init() {}
-//
-//public init?(map: Map) {
-//    self.init()
-//}
-//public mutating func mapping(map: Map) {
-//
-//    self.measureMapping(map: map)
-//
-//    RolloverValue <- map["RolloverValue"]
-//}

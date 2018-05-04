@@ -97,7 +97,7 @@ public struct Vehicle: Codable, PrimaryKey {
 //        return dictionary
 //    }
     
-    private enum CodingKeys: String, CodingKey {
+    public enum CodingKeys: String, CodingKey {
         case id = "Id"
         case name = "Name"
         case licensePlate = "LicensePlate"

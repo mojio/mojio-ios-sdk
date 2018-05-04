@@ -17,29 +17,23 @@ import Foundation
 
 public struct ServiceScheduleItem: Codable {
     
-    public var TransNotes: String? = nil
-    public var ScheduleName: String? = nil
-    public var ScheduleDescription: String? = nil
-    public var MaintenanceCategory: String? = nil
-    public var MaintenanceName: String? = nil
-    public var MaintenanceNotes: String? = nil
-    public var Intervals: [ServiceInterval] = []
-    public var Events: [ServiceEvent] = []
+    public let transNotes: String?
+    public let scheduleName: String?
+    public let scheduleDescription: String?
+    public let maintenanceCategory: String?
+    public let maintenanceName: String?
+    public let maintenanceNotes: String?
+    public let intervals: [ServiceInterval]
+    public let events: [ServiceEvent]
+    
+    public enum CodingKeys: String, CodingKey {
+        case transNotes = "TransNotes"
+        case scheduleName = "ScheduleName"
+        case scheduleDescription = "ScheduleDescription"
+        case maintenanceCategory = "MaintenanceCategory"
+        case maintenanceName = "MaintenanceName"
+        case maintenanceNotes = "MaintenanceNotes"
+        case intervals = "Intervals"
+        case events = "Events"
+    }
 }
-
-//public init() {}
-//
-//public init?(map: Map) {
-//    self.init()
-//}
-//
-//public mutating func mapping(map: Map) {
-//    TransNotes <- map["TransNotes"]
-//    ScheduleName <- map["ScheduleName"]
-//    ScheduleDescription <- map["ScheduleDescription"]
-//    MaintenanceCategory <- map["MaintenanceCategory"]
-//    MaintenanceName <- map["MaintenanceName"]
-//    MaintenanceNotes <- map["MaintenanceNotes"]
-//    Intervals <- map["Intervals"]
-//    Events <- map["Events"]
-//}

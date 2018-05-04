@@ -21,36 +21,25 @@ public enum AggregationDataMeasurementType: String {
 
 public struct AggregationData: Codable {
     
-    public var Total        : Double = 0
-    public var Average      : Double = 0
-    public var Max          : Double = 0
-    public var Min          : Double = 0
-    public var units        : String?
-    public var Date         : String?
-    public var EndDate      : String?
-    public var Count        : Int = 0
-    public var TripCount    : Int = 0
+    public let total        : Double
+    public let average      : Double
+    public let max          : Double
+    public let min          : Double
+    public let units        : String?
+    public let date         : Date?
+    public let endDate      : Date?
+    public let count        : Int
+    public let tripCount    : Int
     
-    private enum CodingKeys: String, CodingKey {
-        case Total
-        case Average
-        case Max
-        case Min
+    public enum CodingKeys: String, CodingKey {
+        case total = "Total"
+        case average = "Average"
+        case max = "Max"
+        case min = "Min"
         case units = "Units"
-        case Date
-        case EndDate
-        case Count
-        case TripCount    
-    }
-}
-
-extension AggregationData {
-    
-    public var date: Date? {
-        return self.Date?.toDate
-    }
-    
-    public var endDate: Date? {
-        return self.EndDate?.toDate
+        case date = "Date"
+        case endDate = "EndDate"
+        case count = "Count"
+        case tripCount = "TripCount"
     }
 }

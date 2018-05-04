@@ -62,32 +62,33 @@ public enum GeofenceNotificationType: String, Codable {
 public struct Geofence: Codable, PrimaryKey {
     
     public let id: String
-    public let Name: String?
-    public let Description: String?
-    public let Region: GeofenceRegion?
-    public let NotificationSetting: GeofenceNotificationType?
-    public let Enabled: Bool
-    public let VehicleIds: [String]
-    public let Tags: [String]
-    public let CreatedOn: String?
-    public let LastModified: String?
-    public let OwnerId: String?
-    public let Deleted: Bool?
+    public let ownerId: String?
+    public let name: String?
+    public let description: String?
+    public let region: GeofenceRegion?
+    public let notificationSetting: GeofenceNotificationType?
+    public let enabled: Bool
+    public let vehicleIds: [String]
+    public let tags: [String]
+    public let deleted: Bool?
+    public let createdOn: Date?
+    public let lastModified: Date?
     
-    private enum CodingKeys: String, CodingKey {
+    public enum CodingKeys: String, CodingKey {
         case id = "Id"
-        case Name
-        case Description
-        case Region
-        case NotificationSetting
-        case Enabled
-        case VehicleIds
-        case Tags
-        case CreatedOn
-        case LastModified
-        case OwnerId
-        case Deleted
+        case ownerId = "OwnerId"
+        case name = "Name"
+        case description = "Description"
+        case region = "Region"
+        case notificationSetting = "NotificationSetting"
+        case enabled = "Enabled"
+        case vehicleIds = "VehicleIds"
+        case tags = "Tags"
+        case deleted = "Deleted"
+        case createdOn = "CreatedOn"
+        case lastModified = "LastModified"
     }
+}
 
 //    public func jsonDict() -> [String: Any] {
 //        var map: [String: Any] = [:]
@@ -117,4 +118,3 @@ public struct Geofence: Codable, PrimaryKey {
 //
 //        return map
 //    }
-}

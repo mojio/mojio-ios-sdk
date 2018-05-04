@@ -17,39 +17,33 @@ import Foundation
 
 public struct PlatformServiceSchedule: Codable {
     
-    public var InitialValue: Double = 0
-    public var IntervalType: String? = nil
-    public var MaintenanceCategory: String? = nil
-    public var MaintenanceName: String? = nil
-    public var MaintenanceNotes: String? = nil
-    public var OperatingParameter: String? = nil
-    public var OperatingParameterNotes: String? = nil
-    public var ScheduleDescription: String? = nil
-    public var ScheduleName: String? = nil
-    public var ServiceEvent: String? = nil
-    public var TransNotes: String? = nil
-    public var units: String? = nil
-    public var value: Double = 0
+    public let initialValue: Double
+    public let intervalType: String?
+    public let maintenanceCategory: String?
+    public let maintenanceName: String?
+    public let maintenanceNotes: String?
+    public let operatingParameter: String?
+    public let operatingParameterNotes: String?
+    public let scheduleDescription: String?
+    public let scheduleName: String?
+    public let serviceEvent: String?
+    public let transNotes: String?
+    public let units: String?
+    public let value: Double
+    
+    public enum CodingKeys: String, CodingKey {
+        case initialValue = "InitialValue"
+        case intervalType = "IntervalType"
+        case maintenanceCategory = "MaintenanceCategory"
+        case maintenanceName = "MaintenanceName"
+        case maintenanceNotes = "MaintenanceNotes"
+        case operatingParameter = "OperatingParameter"
+        case operatingParameterNotes = "OperatingParameterNotes"
+        case scheduleDescription = "ScheduleDescription"
+        case scheduleName = "ScheduleName"
+        case serviceEvent = "ServiceEvent"
+        case transNotes = "TransNotes"
+        case units = "Units"
+        case value = "Value"
+    }
 }
-
-//public init() {}
-//
-//public init?(map: Map) {
-//    self.init()
-//}
-//
-//public mutating func mapping(map: Map) {
-//    InitialValue <- map["InitialValue"]
-//    IntervalType <- map["IntervalType"]
-//    MaintenanceCategory <- map["MaintenanceCategory"]
-//    MaintenanceName <- map["MaintenanceName"]
-//    MaintenanceNotes <- map["MaintenanceNotes"]
-//    OperatingParameter <- map["OperatingParameter"]
-//    OperatingParameterNotes <- map["OperatingParameterNotes"]
-//    ScheduleDescription <- map["ScheduleDescription"]
-//    ScheduleName <- map["ScheduleName"]
-//    ServiceEvent <- map["ServiceEvent"]
-//    TransNotes <- map["TransNotes"]
-//    Units <- map["Units"]
-//    Value <- map["Value"]
-//}

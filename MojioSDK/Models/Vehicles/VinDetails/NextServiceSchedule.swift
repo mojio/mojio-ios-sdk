@@ -17,52 +17,23 @@ import Foundation
 
 public struct NextServiceSchedule: Codable {
 
-    public var TimeStamp: String? = nil
-    public var Odometer: Double = 0
-    public var AgeInMonths: Int? = nil
-    public var TimeUnits: String? = nil
-    public var TimeValue: Double = 0
-    public var DistanceUnits: String? = nil
-    public var DistanceValue: Double = 0
-    public var Services: [PlatformServiceSchedule] = []
+    public var timeStamp: String? = nil
+    public var odometer: Double = 0
+    public var ageInMonths: Int? = nil
+    public var timeUnits: String? = nil
+    public var timeValue: Double = 0
+    public var distanceUnits: String? = nil
+    public var distanceValue: Double = 0
+    public var services: [PlatformServiceSchedule] = []
     
-    //public var timeStamp: Date? = nil
-    
-    private enum CodingKeys: String, CodingKey {
-        case TimeStamp
-        case Odometer
-        case AgeInMonths
-        case TimeUnits
-        case TimeValue
-        case DistanceUnits
-        case DistanceValue
-        case Services = "Items"
+    public enum CodingKeys: String, CodingKey {
+        case timeStamp = "TimeStamp"
+        case odometer = "Odometer"
+        case ageInMonths = "AgeInMonths"
+        case timeUnits = "TimeUnits"
+        case timeValue = "TimeValue"
+        case distanceUnits = "DistanceUnits"
+        case distanceValue = "DistanceValue"
+        case services = "Items"
     }
 }
-
-extension NextServiceSchedule {
-    
-    public var timeStamp: Date? {
-        return self.TimeStamp?.toDate
-    }
-}
-
-
-//public init() {}
-//
-//public init?(map: Map) {
-//    self.init()
-//}
-//
-//public mutating func mapping(map: Map) {
-//    TimeStamp <- map["TimeStamp"]
-//    Odometer <- map["Odometer"]
-//    AgeInMonths <- map["AgeInMonths"]
-//    TimeUnits <- map["TimeUnits"]
-//    TimeValue <- map["TimeValue"]
-//    DistanceUnits <- map["DistanceUnits"]
-//    DistanceValue <- map["DistanceValue"]
-//    Services <- map["Items"]
-//
-//    timeStamp = self.TimeStamp?.toDate
-//}

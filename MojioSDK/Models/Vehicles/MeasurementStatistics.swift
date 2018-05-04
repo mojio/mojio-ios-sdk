@@ -17,35 +17,29 @@ import Foundation
 
 public struct MeasurementStatistics: Codable {
     
-    public var NumOfSamples: Double = 0
-    public var Average: Double = 0
-    public var Variance: Double = 0
-    public var StdDev: Double = 0
-    public var IndexOfDispersion: Double = 0
-    public var CoeffOfVariation: Double = 0
-    public var M2: Double = 0
-    public var Min: Double = 0
-    public var Max: Double = 0
-    public var StandardScore: Score? = nil
-    public var MinMaxScore: Score? = nil
+    public let numOfSamples: Double
+    public let average: Double
+    public let variance: Double
+    public let stdDev: Double
+    public let indexOfDispersion: Double
+    public let coeffOfVariation: Double
+    public let m2: Double
+    public let min: Double
+    public let max: Double
+    public let standardScore: Score?
+    public let minMaxScore: Score?
+    
+    public enum CodingKeys: String, CodingKey {
+        case numOfSamples = "NumOfSamples"
+        case average = "Average"
+        case variance = "Variance"
+        case stdDev = "StdDev"
+        case indexOfDispersion = "IndexOfDispersion"
+        case coeffOfVariation = "CoeffOfVariation"
+        case m2 = "M2"
+        case min = "Min"
+        case max = "Max"
+        case standardScore = "StandardScore"
+        case minMaxScore = "MinMaxScore"
+    }
 }
-
-//public init() {}
-
-//public init?(map: Map) {
-//    self.init()
-//}
-//
-//public mutating func mapping(map: Map) {
-//    NumOfSamples <- map["NumOfSamples"]
-//    Average <- map["Average"]
-//    Variance <- map["Variance"]
-//    StdDev <- map["StdDev"]
-//    IndexOfDispersion <- map["IndexOfDispersion"]
-//    CoeffOfVariation <- map["CoeffOfVariation"]
-//    M2 <- map["M2"]
-//    Min <- map["Min"]
-//    Max <- map["Max"]
-//    StandardScore <- map["StandardScore"]
-//    MinMaxScore <- map["MinMaxScore"]
-//}

@@ -24,27 +24,13 @@ public struct VehicleStatistics: Codable {
     public let totalRange: Distance?
     public let currentRange: Distance?
     public let lastFillUpDate: Date?
-}
-
-/* public extension VehicleStatistics {
-    public var lastFillUpDate: Date? {
-        return self.LastFillUpDate?.toDate
+    
+    public enum CodingKeys: String, CodingKey {
+        case estimatedFuelLevel = "EstimatedFuelLevel"
+        case estimatedFuelVolume = "EstimatedFuelVolume"
+        case averageFuelEfficiency = "AverageFuelEfficiency"
+        case totalRange = "TotalRange"
+        case currentRange = "CurrentRange"
+        case lastFillUpDate = "LastFillUpDate"
     }
-} */
-
-//public init() {}
-//
-//public init?(map: Map) {
-//    self.init()
-//}
-//
-//public mutating func mapping(map: Map) {
-//    EstimatedFuelLevel <- map["EstimatedFuelLevel"]
-//    EstimatedFuelVolume <- map["EstimatedFuelVolume"]
-//    AverageFuelEfficiency <- map["AverageFuelEfficiency"]
-//    TotalRange <- map["TotalRange"]
-//    CurrentRange <- map["CurrentRange"]
-//    LastFillUpDate <- map["LastFillUpDate"]
-//
-//    lastFillUpDate = self.LastFillUpDate?.toDate
-//}
+}

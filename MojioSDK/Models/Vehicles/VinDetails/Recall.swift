@@ -17,90 +17,49 @@ import Foundation
 
 public struct Recall: Codable {
     
-    public var Title: String? = nil
-    public var NHTSACampaignNumber: String? = nil
-    public var MFRCampaignNumber: String? = nil
-    public var ComponentDescription: String? = nil
-    public var ReportManufacturer: String? = nil
-    public var ManufacturingStartDate: String? = nil
-    public var ManufacturingEndDate: String? = nil
-    public var RecallTypeCode: String? = nil
-    public var PotentialUnitsAffected: String? = nil
-    public var OwnerNotificationDate: String? = nil
-    public var RecallInitiator: String? = nil
-    public var ProductManufacturer: String? = nil
-    public var ReportReceivedDate: String? = nil
-    public var RecordCreationDate: String? = nil
-    public var RegulationPartNumber: String? = nil
-    public var FMVVSNumber: String? = nil
-    public var DefectSummary: String? = nil
-    public var ConsequenceSummary: String? = nil
-    public var CorrectiveAction: String? = nil
-    public var Notes: String? = nil
-    public var RecalledComponentId: String? = nil
+    public var title: String?
+    public var nhtsaCampaignNumber: String?
+    public var mfrCampaignNumber: String?
+    public var componentDescription: String?
+    public var reportManufacturer: String?
+    public var manufacturingStartDate: Date?
+    public var manufacturingEndDate: Date?
+    public var recallTypeCode: String?
+    public var potentialUnitsAffected: String?
+    public var ownerNotificationDate: Date?
+    public var recallInitiator: String?
+    public var productManufacturer: String?
+    public var reportReceivedDate: Date?
+    public var recordCreationDate: Date?
+    public var regulationPartNumber: String?
+    public var fmvvsNumber: String?
+    public var defectSummary: String?
+    public var consequenceSummary: String?
+    public var correctiveAction: String?
+    public var notes: String?
+    public var recalledComponentId: String?
     
-//    public var manufacturingStartDate: Date? = nil
-//    public var manufacturingEndDate: Date? = nil
-//    public var ownerNotificationDate: Date? = nil
-//    public var reportReceivedDate: Date? = nil
-//    public var recordCreationDate: Date? = nil
-}
-
-extension Recall {
-    
-    public var manufacturingStartDate: Date? {
-        return self.ManufacturingStartDate?.toDate
-    }
-    
-    public var manufacturingEndDate: Date? {
-        return self.ManufacturingEndDate?.toDate
-    }
-    
-    public var ownerNotificationDate: Date? {
-        return self.OwnerNotificationDate?.toDate
-    }
-    
-    public var reportReceivedDate: Date? {
-        return self.ReportReceivedDate?.toDate
-    }
-    
-    public var recordCreationDate: Date? {
-        return self.RecordCreationDate?.toDate
+    public enum CodingKeys: String, CodingKey {
+        case title = "Title"
+        case nhtsaCampaignNumber = "NHTSACampaignNumber"
+        case mfrCampaignNumber = "MFRCampaignNumber"
+        case componentDescription = "ComponentDescription"
+        case reportManufacturer = "ReportManufacturer"
+        case manufacturingStartDate = "ManufacturingStartDate"
+        case manufacturingEndDate = "ManufacturingEndDate"
+        case recallTypeCode = "RecallTypeCode"
+        case potentialUnitsAffected = "PotentialUnitsAffected"
+        case ownerNotificationDate = "OwnerNotificationDate"
+        case recallInitiator = "RecallInitiator"
+        case productManufacturer = "ProductManufacturer"
+        case reportReceivedDate = "ReportReceivedDate"
+        case recordCreationDate = "RecordCreationDate"
+        case regulationPartNumber = "RegulationPartNumber"
+        case fmvvsNumber = "FMVVSNumber"
+        case defectSummary = "DefectSummary"
+        case consequenceSummary = "ConsequenceSummary"
+        case correctiveAction = "CorrectiveAction"
+        case notes = "Notes"
+        case recalledComponentId = "RecalledComponentId"
     }
 }
-
-//public init() {}
-//
-//public init?(map: Map) {
-//    self.init()
-//}
-//
-//public mutating func mapping(map: Map) {
-//    Title <- map["Title"]
-//    NHTSACampaignNumber <- map["NHTSACampaignNumber"]
-//    MFRCampaignNumber <- map["MFRCampaignNumber"]
-//    ComponentDescription <- map["ComponentDescription"]
-//    ReportManufacturer <- map["ReportManufacturer"]
-//    ManufacturingStartDate <- map["ManufacturingStartDate"]
-//    ManufacturingEndDate <- map["ManufacturingEndDate"]
-//    RecallTypeCode <- map["RecallTypeCode"]
-//    PotentialUnitsAffected <- map["PotentialUnitsAffected"]
-//    OwnerNotificationDate <- map["OwnerNotificationDate"]
-//    RecallInitiator <- map["RecallInitiator"]
-//    ProductManufacturer <- map["ProductManufacturer"]
-//    ReportReceivedDate <- map["ReportReceivedDate"]
-//    RecordCreationDate <- map["RecordCreationDate"]
-//    RegulationPartNumber <- map["RegulationPartNumber"]
-//    FMVVSNumber <- map["FMVVSNumber"]
-//    DefectSummary <- map["DefectSummary"]
-//    ConsequenceSummary <- map["ConsequenceSummary"]
-//    CorrectiveAction <- map["CorrectiveAction"]
-//    Notes <- map["Notes"]
-//    RecalledComponentId <- map["RecalledComponentId"]
-//
-//    manufacturingStartDate = self.ManufacturingStartDate?.toDate
-//    manufacturingEndDate = self.ManufacturingEndDate?.toDate
-//    ownerNotificationDate = self.OwnerNotificationDate?.toDate
-//    reportReceivedDate = self.ReportReceivedDate?.toDate
-//    recordCreationDate = self.RecordCreationDate?.toDate
-//}

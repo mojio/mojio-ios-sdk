@@ -20,13 +20,11 @@ import MojioCore
 public struct TimePeriod: DeviceMeasurement {
     
     // DeviceMeasurement
-    public var baseUnit: String? = nil
-    public var baseValue: Double = 0
-    public var unit: String? = nil
-    public var value: Double = 0
-    public var timestamp: Date?  = nil
-    
-    //public var timeStamp: Date? = nil
+    public let baseUnit: String?
+    public let baseValue: Double
+    public let unit: String?
+    public let value: Double
+    public let timestamp: Date?
 }
 
 extension TimePeriod {
@@ -40,5 +38,3 @@ extension TimePeriod {
         
     }
 }
-
-//public init() {}

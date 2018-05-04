@@ -17,25 +17,19 @@ import Foundation
 
 public struct ServiceInterval: Codable {
     
-    public var OperatingParameter: String? = nil
-    public var OperatingParameterNotes: String? = nil
-    public var IntervalType: String? = nil
-    public var value: Double = 0
-    public var units: String? = nil
-    public var InitialValue: Double = 0
+    public let operatingParameter: String?
+    public let operatingParameterNotes: String?
+    public let intervalType: String?
+    public let value: Double
+    public let units: String?
+    public let initialValue: Double
+    
+    public enum CodingKeys: String, CodingKey {
+        case operatingParameter = "OperatingParameter"
+        case operatingParameterNotes = "OperatingParameterNotes"
+        case intervalType = "IntervalType"
+        case value = "Value"
+        case units = "Units"
+        case initialValue = "InitialValue"
+    }
 }
-
-//public init() {}
-//
-//public init?(map: Map) {
-//    self.init()
-//}
-//
-//public mutating func mapping(map: Map) {
-//    OperatingParameter <- map["OperatingParameter"]
-//    OperatingParameterNotes <- map["OperatingParameterNotes"]
-//    IntervalType <- map["IntervalType"]
-//    Value <- map["Value"]
-//    Units <- map["Units"]
-//    InitialValue <- map["InitialValue"]
-//}

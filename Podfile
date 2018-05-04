@@ -42,7 +42,7 @@ target 'Pets' do
     pod 'MojioCore', :path => '.'
 end
 
- target 'Tests' do
+target 'Tests' do
      base_pods
      #pod 'OHHTTPStubs'
      #pod 'OHHTTPStubs/Swift'

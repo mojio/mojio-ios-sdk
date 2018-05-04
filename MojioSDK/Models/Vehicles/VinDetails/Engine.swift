@@ -17,29 +17,23 @@ import Foundation
 
 public struct Engine: Codable {
     
-    public var Name: String? = nil
-    public var Cylinders: String? = nil
-    public var Displacement: Double = 0
-    public var FuelInduction: String? = nil
-    public var FuelQuality: String? = nil
-    public var FuelType: String? = nil
-    public var MaxHp: String? = nil
-    public var MaxHpAt: String? = nil
+    public let name: String?
+    public let cylinders: String?
+    public let displacement: Double
+    public let fuelInduction: String?
+    public let fuelQuality: String?
+    public let fuelType: String?
+    public let maxHp: String?
+    public let maxHpAt: String?
+    
+    public enum CodingKeys: String, CodingKey {
+        case name = "Name"
+        case cylinders = "Cylinders"
+        case displacement = "Displacement"
+        case fuelInduction = "FuelInduction"
+        case fuelQuality = "FuelQuality"
+        case fuelType = "FuelType"
+        case maxHp = "MaxHp"
+        case maxHpAt = "MaxHpAt"
+    }
 }
-
-//public init() {}
-//
-//public init?(map: Map) {
-//    self.init()
-//}
-//
-//public mutating func mapping(map: Map) {
-//    Name <- map["Name"]
-//    Cylinders <- map["Cylinders"]
-//    Displacement <- map["Displacement"]
-//    FuelInduction <- map["FuelInduction"]
-//    FuelQuality <- map["FuelQuality"]
-//    FuelType <- map["FuelType"]
-//    MaxHp <- map["MaxHp"]
-//    MaxHpAt <- map["MaxHpAt"]
-//}

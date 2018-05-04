@@ -17,17 +17,11 @@ import Foundation
 
 public struct ServiceEvent: Codable {
     
-    public var ComputerCode: String? = nil
-    public var Event: String? = nil
+    public let computerCode: String?
+    public let event: String?
+    
+    public enum CodingKeys: String, CodingKey {
+        case computerCode = "ComputerCode"
+        case event = "Event"
+    }
 }
-
-//public init() {}
-//
-//public init?(map: Map) {
-//    self.init()
-//}
-//
-//public mutating func mapping(map: Map) {
-//    ComputerCode <- map["ComputerCode"]
-//    Event <- map["Event"]
-//}

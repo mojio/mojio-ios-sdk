@@ -49,7 +49,7 @@ public struct Trip: Codable, PrimaryKey {
     public let createdOn: Date?
     public let lastModified: Date?
     
-    private enum CodingKeys: String, CodingKey {
+    public enum CodingKeys: String, CodingKey {
         case id = "Id"
         case vehicleId = "VehicleId"
         case name = "Name"

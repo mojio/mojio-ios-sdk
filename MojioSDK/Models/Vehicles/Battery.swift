@@ -20,24 +20,24 @@ import MojioCore
 public struct Battery: DeviceMeasurement {
     
     //DeviceMeasurement
-    public var baseUnit: String? = nil
-    public var baseValue: Double = 0
-    public var unit: String? = nil
-    public var value: Double = 0
-    public var timestamp: Date?  = nil
+    public let baseUnit: String?
+    public let baseValue: Double
+    public let unit: String?
+    public let value: Double
+    public let timestamp: Date?
     
-    public var Connected: Bool = false
+    public var connected: Bool = false
     
     // RiskSeverity
-    public var RiskSeverity: String? = nil
-    public var LowVoltageDuration: TimePeriod? = nil
-    public var HighVoltageDuration: TimePeriod? = nil
+    public var riskSeverity: String? = nil
+    public var lowVoltageDuration: TimePeriod? = nil
+    public var highVoltageDuration: TimePeriod? = nil
     
-    private enum CodingKeys: String, CodingKey {
-        case Connected
-        case RiskSeverity
-        case LowVoltageDuration
-        case HighVoltageDuration
+    public enum CodingKeys: String, CodingKey {
+        case connected = "Connected"
+        case riskSeverity = "RiskSeverity"
+        case lowVoltageDuration = "LowVoltageDuration"
+        case highVoltageDuration = "HighVoltageDuration"
     }
 }
 
@@ -47,23 +47,21 @@ extension Battery {
         
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
-        let Connected = try container.decodeIfPresent(Bool.self, forKey: .Connected) ?? false
-        let RiskSeverity = try container.decodeIfPresent(String.self, forKey: .RiskSeverity)
-        let LowVoltageDuration = try container.decodeIfPresent(TimePeriod.self, forKey: .LowVoltageDuration)
-        let HighVoltageDuration = try container.decodeIfPresent(TimePeriod.self, forKey: .HighVoltageDuration)
+        let connected = try container.decodeIfPresent(Bool.self, forKey: .connected) ?? false
+        let riskSeverity = try container.decodeIfPresent(String.self, forKey: .riskSeverity)
+        let lowVoltageDuration = try container.decodeIfPresent(TimePeriod.self, forKey: .lowVoltageDuration)
+        let highVoltageDuration = try container.decodeIfPresent(TimePeriod.self, forKey: .highVoltageDuration)
         
-        self.init(baseUnit: deviceMeasurements.baseUnit, baseValue: deviceMeasurements.baseValue, unit: deviceMeasurements.unit, value: deviceMeasurements.value, timestamp: deviceMeasurements.timestamp, Connected: Connected, RiskSeverity: RiskSeverity, LowVoltageDuration: LowVoltageDuration, HighVoltageDuration: HighVoltageDuration)
+        self.init(baseUnit: deviceMeasurements.baseUnit, baseValue: deviceMeasurements.baseValue, unit: deviceMeasurements.unit, value: deviceMeasurements.value, timestamp: deviceMeasurements.timestamp, connected: connected, riskSeverity: riskSeverity, lowVoltageDuration: lowVoltageDuration, highVoltageDuration: highVoltageDuration)
     }
     
     public func encode(with encoder: Encoder) throws {
         
         var container = encoder.container(keyedBy: CodingKeys.self)
         
-        try container.encode(self.Connected, forKey: .Connected)
-        try container.encode(self.RiskSeverity, forKey: .RiskSeverity)
-        try container.encode(self.LowVoltageDuration, forKey: .LowVoltageDuration)
-        try container.encode(self.HighVoltageDuration, forKey: .HighVoltageDuration)
+        try container.encode(self.connected, forKey: .connected)
+        try container.encode(self.riskSeverity, forKey: .riskSeverity)
+        try container.encode(self.lowVoltageDuration, forKey: .lowVoltageDuration)
+        try container.encode(self.highVoltageDuration, forKey: .highVoltageDuration)
     }
 }
-
-//public init() {}

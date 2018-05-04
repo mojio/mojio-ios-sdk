@@ -21,7 +21,7 @@ public struct IdleEvent: Codable {
     public var eventState: IdleState? = nil
     public var eventLocation: Location? = nil
     
-    private enum CodingKeys: String, CodingKey {
+    public enum CodingKeys: String, CodingKey {
         case eventState = "IdleState"
         case eventLocation = "Location"
     }

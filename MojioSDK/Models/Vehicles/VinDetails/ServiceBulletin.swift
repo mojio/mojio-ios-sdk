@@ -17,44 +17,21 @@ import Foundation
 
 public struct ServiceBulletin: Codable {
     
-    public var ItemNumber: String? = nil
-    public var BulletinNumber: String? = nil
-    public var ReplacementBulletinNumber: String? = nil
-    public var DateAdded: String? = nil
-    public var Component: String? = nil
-    public var BulletinDate: String? = nil
-    public var Summary: String? = nil
-    
-//    public var dateAdded: Date? = nil
-//    public var bulletinDate: Date? = nil
-}
+    public let itemNumber: String?
+    public let bulletinNumber: String?
+    public let replacementBulletinNumber: String?
+    public let dateAdded: Date?
+    public let component: String?
+    public let bulletinDate: Date?
+    public let summary: String?
 
-extension ServiceBulletin {
-    
-    public var dateAdded: Date? {
-        return self.DateAdded?.toDate
-    }
-    
-    public var bulletinDate: Date? {
-        return self.BulletinDate?.toDate
+    public enum CodingKeys: String, CodingKey {
+        case itemNumber = "ItemNumber"
+        case bulletinNumber = "BulletinNumber"
+        case replacementBulletinNumber = "ReplacementBulletinNumber"
+        case dateAdded = "DateAdded"
+        case component = "Component"
+        case bulletinDate = "BulletinDate"
+        case summary = "Summary"
     }
 }
-
-//public init() {}
-//
-//public init?(map: Map) {
-//    self.init()
-//}
-//
-//public mutating func mapping(map: Map) {
-//    ItemNumber <- map["ItemNumber"]
-//    BulletinNumber <- map["BulletinNumber"]
-//    ReplacementBulletinNumber <- map["ReplacementBulletinNumber"]
-//    DateAdded <- map["DateAdded"]
-//    Component <- map["Component"]
-//    BulletinDate <- map["BulletinDate"]
-//    Summary <- map["Summary"]
-//
-//    dateAdded = self.DateAdded?.toDate
-//    bulletinDate = self.BulletinDate?.toDate
-//}

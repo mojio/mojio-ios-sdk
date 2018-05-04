@@ -17,19 +17,13 @@ import Foundation
 
 public struct ServiceSchedule: Codable {
     
-    public var VIN: String? = nil
-    public var IsDefault: Bool? = nil
-    public var Items: [ServiceScheduleItem] = []
+    public var vin: String? = nil
+    public var isDefault: Bool? = nil
+    public var items: [ServiceScheduleItem] = []
+    
+    public enum CodingKeys: String, CodingKey {
+        case vin = "VIN"
+        case isDefault = "IsDefault"
+        case items = "Items"
+    }
 }
-
-//public init() {}
-//
-//public init?(map: Map) {
-//    self.init()
-//}
-//
-//public mutating func mapping(map: Map) {
-//    VIN <- map["VIN"]
-//    IsDefault <- map["IsDefault"]
-//    Items <- map["Items"]
-//}

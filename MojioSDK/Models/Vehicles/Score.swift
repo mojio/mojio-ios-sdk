@@ -23,21 +23,15 @@ public enum ScoreMethods: String {
 public struct Score: Codable {
     
     // ScoreMethods
-    public var ScoringMethod: String? = nil
-    public var value: Double = 0
-    public var Percentile: Double = 0
-    public var Average: Double = 0
+    public let scoringMethod: String?
+    public let value: Double
+    public let percentile: Double
+    public let average: Double
+    
+    public enum CodingKeys: String, CodingKey {
+        case scoringMethod = "ScoringMethod"
+        case value = "Value"
+        case percentile = "Percentile"
+        case average = "Average"
+    }
 }
-
-//public init() {}
-
-//public init?(map: Map) {
-//    self.init()
-//}
-//
-//public mutating func mapping(map: Map) {
-//    ScoringMethod <- map["ScoringMethod"]
-//    Value <- map["Value"]
-//    Percentile <- map["Percentile"]
-//    Average <- map["Average"]
-//}

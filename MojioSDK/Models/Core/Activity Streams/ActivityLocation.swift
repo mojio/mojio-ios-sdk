@@ -29,7 +29,7 @@ public struct ActivityLocation: BaseActivityLocation {
     public let altitude: Double
     public let radius: Double
     
-    private enum CodingKeys: String, CodingKey {
+    public enum CodingKeys: String, CodingKey {
         case latitude = "Latitude"
         case longitude = "Longitude"
         case altitude = "Altitude"
