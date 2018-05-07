@@ -46,6 +46,11 @@ open class ClientHeaders {
     }
 }
 
+public enum SortDirection: String {
+    case ascending = "asc"
+    case descending = "desc"
+}
+
 public enum RestEndpoint: String {
     case base = "/"
 }
@@ -59,15 +64,32 @@ open class RestClient {
     open var pushUrl: String?
     open var requestUrl: String?
     open var requestV1Url: String?
-    open var requestParams: [String:AnyObject] = [:]
+    open var requestParams: [String: Codable] = [:]
     open var requestEntity: String = RestEndpoint.base.rawValue
     open var requestEntityId: String?
     
     internal var doNext: Bool = false
     internal var nextUrl: String? = nil
-    internal var sinceBeforeFormatter = DateFormatter()
-    internal static let SinceBeforeDateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
-    internal static let SinceBeforeTimezone = TimeZone(abbreviation: "UTC")
+    
+    fileprivate static let sinceBeforeDateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+    fileprivate static let fromToDateFormat = "yyyy-MM-dd"
+    fileprivate static let sinceBeforeTimezone = TimeZone(abbreviation: "UTC");
+    
+    fileprivate var sinceBeforeFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = RestClient.sinceBeforeDateFormat
+        formatter.timeZone = RestClient.sinceBeforeTimezone
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        return formatter
+    }()
+    
+    fileprivate var fromToDateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = RestClient.fromToDateFormat
+        formatter.timeZone = RestClient.sinceBeforeTimezone
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        return formatter
+    }()
 
     // Default to global concurrent queue with default priority
     open static var defaultDispatchQueue = DispatchQueue.global()
@@ -87,14 +109,6 @@ open class RestClient {
         self.pushUrl = clientEnvironment.getPushWSEndpoint()
         self.sessionManager = sessionManager
         self.keychainManager = keychainManager ?? KeychainManager.sharedInstance
-        
-        self.initDateFormatters()
-    }
-    
-    private func initDateFormatters() {
-        self.sinceBeforeFormatter.dateFormat = RestClient.SinceBeforeDateFormat
-        self.sinceBeforeFormatter.timeZone = RestClient.SinceBeforeTimezone
-        self.sinceBeforeFormatter.locale = Locale(identifier: "en_US_POSIX")
     }
     
     open func get() -> Self {
@@ -119,6 +133,48 @@ open class RestClient {
     
     open func delete() -> Self {
         self.requestMethod = .delete
+        return self
+    }
+    
+    func offset(offset: Int) -> Self {
+        self.requestParams["skip"] = offset
+        return self
+    }
+    
+    func limit(limit: Int) -> Self {
+        self.requestParams["top"] = limit
+        return self
+    }
+    
+    func sortBy(field: String, direction: SortDirection) -> Self {
+        self.requestParams["orderby"] = String(format: "%s %s", field, direction.rawValue)
+        return self
+    }
+    
+    func includeCount() -> Self {
+        self.requestParams["includeCount"] = true
+        return self
+    }
+    
+    func from(fromDate: Date, includeTime: Bool = false) -> Self {
+        let fromStr = includeTime ? self.sinceBeforeFormatter.string(from: fromDate) : self.fromToDateFormatter.string(from: fromDate)
+        self.requestParams["from"] = fromStr
+        return self
+    }
+    
+    func to(toDate: Date, includeTime: Bool = false) -> Self {
+        let toStr = includeTime ? self.sinceBeforeFormatter.string(from: toDate) : self.fromToDateFormatter.string(from: toDate)
+        self.requestParams["to"] = toStr
+        return self
+    }
+    
+    func since(sinceDate: Date) -> Self {
+        self.requestParams["since"] = self.sinceBeforeFormatter.string(from: sinceDate)
+        return self
+    }
+    
+    func before(beforeDate: Date) -> Self {
+        self.requestParams["before"] = self.sinceBeforeFormatter.string(from: beforeDate)
         return self
     }
     
@@ -156,44 +212,43 @@ open class RestClient {
 
     open func query(top: String? = nil, skip: String? = nil, filter: String? = nil, select: String? = nil, orderby: String? = nil, count: String? = nil, since: Date? = nil, before: Date? = nil, fields: [String]? = nil) -> Self {
         
-        var requestParams: [String:AnyObject] = [:]
+        var requestParams: [String:Codable] = [:]
         
         if let top = top {
-            requestParams["top"] = top as AnyObject?
+            requestParams["top"] = top
         }
 
         if let skip = skip {
-            requestParams["skip"] = skip as AnyObject?
+            requestParams["skip"] = skip
         }
 
         if let filter = filter {
-            requestParams["filter"] = filter as AnyObject?
+            requestParams["filter"] = filter
         }
 
         if let select = select {
-            requestParams["select"] = select as AnyObject?
+            requestParams["select"] = select
         }
 
         if let orderby = orderby {
-            requestParams["orderby"] = orderby as AnyObject?
+            requestParams["orderby"] = orderby
         }
         
         if let count = count {
-            requestParams["includeCount"] = count as AnyObject?
+            requestParams["includeCount"] = count
         }
         
         if let date = since {
-            requestParams["since"] = self.sinceBeforeFormatter.string(from: date) as AnyObject?
+            requestParams["since"] = self.sinceBeforeFormatter.string(from: date)
         }
 
         if let date = before {
-            requestParams["before"] = self.sinceBeforeFormatter.string(from: date) as AnyObject?
+            requestParams["before"] = self.sinceBeforeFormatter.string(from: date)
         }
         
         if let fields = fields , fields.count > 0 {
-            requestParams["fields"] = fields.joined(separator: ",") as AnyObject?
+            requestParams["fields"] = fields.joined(separator: ",")
         }
-        
         
         self.requestParams.update(requestParams)
         return self
