@@ -171,6 +171,7 @@
 		BCFE5915209AF99000B89104 /* MojioCore.h in Headers */ = {isa = PBXBuildFile; fileRef = BCFE5914209AF99000B89104 /* MojioCore.h */; };
 		BCFE5916209AF9BE00B89104 /* MojioAccounts.h in Headers */ = {isa = PBXBuildFile; fileRef = BCFE57D820910AB100B89104 /* MojioAccounts.h */; };
 		BCFE5918209B01DE00B89104 /* PetsActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC590626208E566200A098A3 /* PetsActivity.swift */; };
+		BCFE5DC520A063B500B89104 /* Stats.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCFE5DC420A063B500B89104 /* Stats.swift */; };
 		D58640634C2DE4F142ED2588 /* Pods_Pets.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9FF603C57C10DB1F8F755BF /* Pods_Pets.framework */; };
 		E06C95691D25CA2A006AECBB /* NotificationsSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06C95671D25CA2A006AECBB /* NotificationsSettings.swift */; };
 		F9623AAE1D935D74005C10F2 /* IdleState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9623AAD1D935D74005C10F2 /* IdleState.swift */; };
@@ -358,6 +359,7 @@
 		BCFE5903209AF70B00B89104 /* Core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Core.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCFE5905209AF84E00B89104 /* Core.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Core.plist; sourceTree = "<group>"; };
 		BCFE5914209AF99000B89104 /* MojioCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MojioCore.h; sourceTree = "<group>"; };
+		BCFE5DC420A063B500B89104 /* Stats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stats.swift; sourceTree = "<group>"; };
 		CA1C7625383D1B4F4A95EBA8 /* Pods-Pets.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pets.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pets/Pods-Pets.debug.xcconfig"; sourceTree = "<group>"; };
 		CD9B8527DB821719AED94CC4 /* Pods_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D220CCCBE4F1F6F5A5F24E9D /* Pods-Pets.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pets.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pets/Pods-Pets.release.xcconfig"; sourceTree = "<group>"; };
@@ -603,6 +605,7 @@
 				BC590621208E566200A098A3 /* PetsLocation.swift */,
 				BC59062A208E566200A098A3 /* NotificationToken.swift */,
 				BC590629208E566200A098A3 /* PetDetails.swift */,
+				BCFE5DC420A063B500B89104 /* Stats.swift */,
 			);
 			path = Pets;
 			sourceTree = "<group>";
@@ -1158,6 +1161,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BCFE5918209B01DE00B89104 /* PetsActivity.swift in Sources */,
+				BCFE5DC520A063B500B89104 /* Stats.swift in Sources */,
 				BC3D7C84208816BB00659A92 /* PetsClient.swift in Sources */,
 				BCFE5912209AF92500B89104 /* TimeIntervalExt.swift in Sources */,
 				BCFE5913209AF92500B89104 /* StringExt.swift in Sources */,
