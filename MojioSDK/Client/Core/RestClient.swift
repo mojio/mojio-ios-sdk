@@ -112,6 +112,11 @@ open class RestClient {
         return self
     }
     
+    open func patch() -> Self {
+        self.requestMethod = .patch
+        return self
+    }
+    
     open func delete() -> Self {
         self.requestMethod = .delete
         return self
