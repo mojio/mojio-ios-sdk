@@ -104,7 +104,7 @@ open class VehiclesClient: RestClient {
     public func vehicles(_ vehicleId: String, mergeVehicleId: String) -> Self {
         self.requestEntity = VehiclesEndpoint.vehicles.rawValue
         self.requestEntityId = vehicleId
-        self.requestParams["actual"] = mergeVehicleId as AnyObject?
+        self.requestParams["actual"] = mergeVehicleId
         self.requestUrl = self.requestUrl! + self.requestEntity + vehicleId + "/"
         self.pushUrl = self.pushUrl! + self.requestEntity + vehicleId + "/"
         
