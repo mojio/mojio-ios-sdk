@@ -62,6 +62,7 @@
 		3D6869BE2149CD45D324016A /* Pods_Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9980F32E31CB2E846A417B2C /* Pods_Core.framework */; };
 		432FA0CCDBE729284225021F /* Pods_Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEFFCAA2C464247F32E3DE5C /* Pods_Accounts.framework */; };
 		644214DE1D9E6500005A86C5 /* AggregationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644214DD1D9E6500005A86C5 /* AggregationData.swift */; };
+		68CF7CDEA225012F8E872CEE /* Pods_Images.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCEF188E65189732E37C36FD /* Pods_Images.framework */; };
 		75F77F0E1D19F504000CC2B4 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 75F77F0D1D19F504000CC2B4 /* libz.tbd */; };
 		887014791DA833CA00EFEC6D /* VehicleStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887014781DA833CA00EFEC6D /* VehicleStatistics.swift */; };
 		BC31E3CE1D419E80001649A7 /* Distance.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC31E3CD1D419E80001649A7 /* Distance.swift */; };
@@ -81,11 +82,9 @@
 		BC603744208FB20F00D855DE /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC590624208E566200A098A3 /* Device.swift */; };
 		BC603745208FB20F00D855DE /* DeviceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC590620208E566100A098A3 /* DeviceType.swift */; };
 		BC603747208FB20F00D855DE /* Geofence.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC59062D208E566200A098A3 /* Geofence.swift */; };
-		BC603748208FB20F00D855DE /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC59062B208E566200A098A3 /* Image.swift */; };
 		BC60374A208FB20F00D855DE /* PetsLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC590621208E566200A098A3 /* PetsLocation.swift */; };
 		BC60374B208FB20F00D855DE /* NotificationToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC59062A208E566200A098A3 /* NotificationToken.swift */; };
 		BC60374C208FB20F00D855DE /* PetDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC590629208E566200A098A3 /* PetDetails.swift */; };
-		BC60374D208FB2CC00D855DE /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5767401FB4536A008F16F6 /* Image.swift */; };
 		BC60375D208FC4C600D855DE /* Accounts.plist in Resources */ = {isa = PBXBuildFile; fileRef = BC60375A208FC4C600D855DE /* Accounts.plist */; };
 		BC60375E208FC4C600D855DE /* Pets.plist in Resources */ = {isa = PBXBuildFile; fileRef = BC60375B208FC4C600D855DE /* Pets.plist */; };
 		BC717D9A1DA6EFA20052317C /* ServiceEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC717D971DA6EFA20052317C /* ServiceEvent.swift */; };
@@ -172,6 +171,16 @@
 		BCFE5916209AF9BE00B89104 /* MojioAccounts.h in Headers */ = {isa = PBXBuildFile; fileRef = BCFE57D820910AB100B89104 /* MojioAccounts.h */; };
 		BCFE5918209B01DE00B89104 /* PetsActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC590626208E566200A098A3 /* PetsActivity.swift */; };
 		BCFE5DC520A063B500B89104 /* Stats.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCFE5DC420A063B500B89104 /* Stats.swift */; };
+		BCFE5DCB20A0679400B89104 /* StringExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2278359B1FB60253002D24F9 /* StringExt.swift */; };
+		BCFE5DCF20A0679400B89104 /* TimeIntervalExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2278359D1FB60291002D24F9 /* TimeIntervalExt.swift */; };
+		BCFE5DD620A0679400B89104 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 75F77F0D1D19F504000CC2B4 /* libz.tbd */; };
+		BCFE5DD720A0679400B89104 /* Pods_Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEFFCAA2C464247F32E3DE5C /* Pods_Accounts.framework */; };
+		BCFE5DD920A0679400B89104 /* MojioAccounts.h in Headers */ = {isa = PBXBuildFile; fileRef = BCFE57D820910AB100B89104 /* MojioAccounts.h */; };
+		BCFE5DE220A0686000B89104 /* Images.plist in Resources */ = {isa = PBXBuildFile; fileRef = BCFE5DE120A0686000B89104 /* Images.plist */; };
+		BCFE5DE620A06BB200B89104 /* ImagesClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCFE5DE420A0692C00B89104 /* ImagesClient.swift */; };
+		BCFE5DE920A06C2A00B89104 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5767401FB4536A008F16F6 /* Image.swift */; };
+		BCFE5DEA20A06C3200B89104 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC59062B208E566200A098A3 /* Image.swift */; };
+		BCFE5DEC20A06D0F00B89104 /* MojioImages.h in Headers */ = {isa = PBXBuildFile; fileRef = BCFE5DEB20A06D0F00B89104 /* MojioImages.h */; };
 		D58640634C2DE4F142ED2588 /* Pods_Pets.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9FF603C57C10DB1F8F755BF /* Pods_Pets.framework */; };
 		E06C95691D25CA2A006AECBB /* NotificationsSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06C95671D25CA2A006AECBB /* NotificationsSettings.swift */; };
 		F9623AAE1D935D74005C10F2 /* IdleState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9623AAD1D935D74005C10F2 /* IdleState.swift */; };
@@ -256,12 +265,14 @@
 		6DF2E7C31752EFE452CAEE01 /* Pods-MojioSDKTests2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MojioSDKTests2.release.xcconfig"; path = "Pods/Target Support Files/Pods-MojioSDKTests2/Pods-MojioSDKTests2.release.xcconfig"; sourceTree = "<group>"; };
 		704FA7BB4426F78E7857D7EF /* Pods-Accounts.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Accounts.release.xcconfig"; path = "Pods/Target Support Files/Pods-Accounts/Pods-Accounts.release.xcconfig"; sourceTree = "<group>"; };
 		75F77F0D1D19F504000CC2B4 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		82379D5AA78EB8C45A6589E6 /* Pods-Images.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Images.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Images/Pods-Images.debug.xcconfig"; sourceTree = "<group>"; };
 		8808C2341EB1483A00A41A8B /* PrimaryKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimaryKey.swift; sourceTree = "<group>"; };
 		884FCE5E1EB13ECD00DDCE3F /* BaseActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseActivity.swift; sourceTree = "<group>"; };
 		887014781DA833CA00EFEC6D /* VehicleStatistics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VehicleStatistics.swift; sourceTree = "<group>"; };
 		9980F32E31CB2E846A417B2C /* Pods_Core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Core.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		99F172CDA9C69F9BF12B704A /* Pods_MojioSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MojioSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9FF603C57C10DB1F8F755BF /* Pods_Pets.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pets.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AB3BB805D64071BFF9C018A0 /* Pods-Images.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Images.release.xcconfig"; path = "Pods/Target Support Files/Pods-Images/Pods-Images.release.xcconfig"; sourceTree = "<group>"; };
 		AE37CC1D524CCDEBA1663048 /* Pods-Vehicles.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vehicles.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Vehicles/Pods-Vehicles.debug.xcconfig"; sourceTree = "<group>"; };
 		AF0D505D9B7CEF6E8A9E8FFB /* Pods-Core.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Core.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Core/Pods-Core.debug.xcconfig"; sourceTree = "<group>"; };
 		B05A25508E7E57D8DB8C6D24 /* Pods-Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Tests/Pods-Tests.release.xcconfig"; sourceTree = "<group>"; };
@@ -360,7 +371,12 @@
 		BCFE5905209AF84E00B89104 /* Core.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Core.plist; sourceTree = "<group>"; };
 		BCFE5914209AF99000B89104 /* MojioCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MojioCore.h; sourceTree = "<group>"; };
 		BCFE5DC420A063B500B89104 /* Stats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stats.swift; sourceTree = "<group>"; };
+		BCFE5DDF20A0679400B89104 /* Images.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Images.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BCFE5DE120A0686000B89104 /* Images.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Images.plist; sourceTree = "<group>"; };
+		BCFE5DE420A0692C00B89104 /* ImagesClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesClient.swift; sourceTree = "<group>"; };
+		BCFE5DEB20A06D0F00B89104 /* MojioImages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MojioImages.h; sourceTree = "<group>"; };
 		CA1C7625383D1B4F4A95EBA8 /* Pods-Pets.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pets.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pets/Pods-Pets.debug.xcconfig"; sourceTree = "<group>"; };
+		CCEF188E65189732E37C36FD /* Pods_Images.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Images.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD9B8527DB821719AED94CC4 /* Pods_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D220CCCBE4F1F6F5A5F24E9D /* Pods-Pets.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pets.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pets/Pods-Pets.release.xcconfig"; sourceTree = "<group>"; };
 		D4D6F7769C35C2486E30AC0F /* Pods-MojioSDKTests2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MojioSDKTests2.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MojioSDKTests2/Pods-MojioSDKTests2.debug.xcconfig"; sourceTree = "<group>"; };
@@ -417,6 +433,16 @@
 			files = (
 				BCFE58F9209AF70B00B89104 /* libz.tbd in Frameworks */,
 				3D6869BE2149CD45D324016A /* Pods_Core.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BCFE5DD520A0679400B89104 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BCFE5DD620A0679400B89104 /* libz.tbd in Frameworks */,
+				BCFE5DD720A0679400B89104 /* Pods_Accounts.framework in Frameworks */,
+				68CF7CDEA225012F8E872CEE /* Pods_Images.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -533,6 +559,7 @@
 				BC3D7C7A2087F3B000659A92 /* Pets.framework */,
 				BC60372D208FA9CD00D855DE /* Accounts.framework */,
 				BCFE5903209AF70B00B89104 /* Core.framework */,
+				BCFE5DDF20A0679400B89104 /* Images.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -549,6 +576,7 @@
 				EEFFCAA2C464247F32E3DE5C /* Pods_Accounts.framework */,
 				9980F32E31CB2E846A417B2C /* Pods_Core.framework */,
 				CD9B8527DB821719AED94CC4 /* Pods_Tests.framework */,
+				CCEF188E65189732E37C36FD /* Pods_Images.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -601,7 +629,6 @@
 				BC590624208E566200A098A3 /* Device.swift */,
 				BC590620208E566100A098A3 /* DeviceType.swift */,
 				BC59062D208E566200A098A3 /* Geofence.swift */,
-				BC59062B208E566200A098A3 /* Image.swift */,
 				BC590621208E566200A098A3 /* PetsLocation.swift */,
 				BC59062A208E566200A098A3 /* NotificationToken.swift */,
 				BC590629208E566200A098A3 /* PetDetails.swift */,
@@ -615,8 +642,8 @@
 			children = (
 				BC879B461CBEFFDD00F9177B /* App.swift */,
 				BC590627208E566200A098A3 /* Email.swift */,
-				2E5767401FB4536A008F16F6 /* Image.swift */,
 				BC879B4F1CBEFFDD00F9177B /* Group.swift */,
+				2E5767401FB4536A008F16F6 /* Image.swift */,
 				BC590625208E566200A098A3 /* PhoneNumber.swift */,
 				BC59062E208E566200A098A3 /* User.swift */,
 			);
@@ -687,6 +714,7 @@
 		BC603758208FC47600D855DE /* List */ = {
 			isa = PBXGroup;
 			children = (
+				BCFE5DE120A0686000B89104 /* Images.plist */,
 				BC60375A208FC4C600D855DE /* Accounts.plist */,
 				BCFE5905209AF84E00B89104 /* Core.plist */,
 				BC60375B208FC4C600D855DE /* Pets.plist */,
@@ -700,6 +728,7 @@
 			children = (
 				BC60372F208FA9E800D855DE /* Accounts */,
 				BC603732208FAA2100D855DE /* Core */,
+				BCFE5DE320A068E100B89104 /* Images */,
 				BC603730208FA9ED00D855DE /* Pets */,
 				BC603731208FA9F500D855DE /* Vehicles */,
 			);
@@ -752,6 +781,7 @@
 				BCC2EFD91CBEF74A004D2759 /* Models */,
 				BCFE57D820910AB100B89104 /* MojioAccounts.h */,
 				BCFE5914209AF99000B89104 /* MojioCore.h */,
+				BCFE5DEB20A06D0F00B89104 /* MojioImages.h */,
 				BCFE57DA20910AB100B89104 /* MojioPets.h */,
 				BCFE57D920910AB100B89104 /* MojioVehicles.h */,
 			);
@@ -771,12 +801,29 @@
 		BCC2EFD91CBEF74A004D2759 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				BC59065C208E7B1200A098A3 /* Core */,
 				BC590641208E566D00A098A3 /* Accounts */,
+				BC59065C208E7B1200A098A3 /* Core */,
+				BCFE5DE720A06BCB00B89104 /* Images */,
 				BC59061E208E55CF00A098A3 /* Pets */,
 				BC3D7C7C2087F41800659A92 /* Vehicles */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		BCFE5DE320A068E100B89104 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				BCFE5DE420A0692C00B89104 /* ImagesClient.swift */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		BCFE5DE720A06BCB00B89104 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				BC59062B208E566200A098A3 /* Image.swift */,
+			);
+			path = Images;
 			sourceTree = "<group>";
 		};
 		E0E63D2D1D21DF3200DDF336 /* ActivityStreams */ = {
@@ -810,6 +857,8 @@
 				2D3D183CD5E1E3D4078EDD6B /* Pods-Core.release.xcconfig */,
 				1EA59F2E2538174F190F6401 /* Pods-Tests.debug.xcconfig */,
 				B05A25508E7E57D8DB8C6D24 /* Pods-Tests.release.xcconfig */,
+				82379D5AA78EB8C45A6589E6 /* Pods-Images.debug.xcconfig */,
+				AB3BB805D64071BFF9C018A0 /* Pods-Images.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -822,6 +871,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BCFE57DF20910ABD00B89104 /* MojioPets.h in Headers */,
+				BCFE5DEC20A06D0F00B89104 /* MojioImages.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -846,6 +896,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				BCFE5915209AF99000B89104 /* MojioCore.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BCFE5DD820A0679400B89104 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BCFE5DD920A0679400B89104 /* MojioAccounts.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -948,6 +1006,25 @@
 			productReference = BCFE5903209AF70B00B89104 /* Core.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		BCFE5DC620A0679400B89104 /* Images */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BCFE5DDC20A0679400B89104 /* Build configuration list for PBXNativeTarget "Images" */;
+			buildPhases = (
+				BCFE5DC720A0679400B89104 /* [CP] Check Pods Manifest.lock */,
+				BCFE5DC820A0679400B89104 /* Sources */,
+				BCFE5DD520A0679400B89104 /* Frameworks */,
+				BCFE5DD820A0679400B89104 /* Headers */,
+				BCFE5DDA20A0679400B89104 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Images;
+			productName = MojioSDK;
+			productReference = BCFE5DDF20A0679400B89104 /* Images.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -983,6 +1060,7 @@
 			targets = (
 				BCFE58CF209AF70B00B89104 /* Core */,
 				BC6036F6208FA9CD00D855DE /* Accounts */,
+				BCFE5DC620A0679400B89104 /* Images */,
 				BC3D7C1D2087F3B000659A92 /* Pets */,
 				BCC2EFB01CBED4E6004D2759 /* Vehicles */,
 				BCC2EFB91CBED4E6004D2759 /* Tests */,
@@ -995,6 +1073,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BCFE5DE220A0686000B89104 /* Images.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1027,6 +1106,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				BCFE5906209AF84E00B89104 /* Core.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BCFE5DDA20A0679400B89104 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1135,6 +1221,24 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		BCFE5DC720A0679400B89104 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Images-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		F85F99627B16836D043D0440 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1174,7 +1278,6 @@
 				BC603743208FB20F00D855DE /* Battery.swift in Sources */,
 				BC603745208FB20F00D855DE /* DeviceType.swift in Sources */,
 				BC603747208FB20F00D855DE /* Geofence.swift in Sources */,
-				BC603748208FB20F00D855DE /* Image.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1183,13 +1286,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				BCFE5907209AF8E600B89104 /* AccountsClient.swift in Sources */,
+				BCFE5DE920A06C2A00B89104 /* Image.swift in Sources */,
 				BCFE5909209AF8E600B89104 /* AuthViewController.swift in Sources */,
 				BCFE590D209AF92200B89104 /* StringExt.swift in Sources */,
 				BC603703208FA9CD00D855DE /* PhoneNumber.swift in Sources */,
 				BC60370A208FA9CD00D855DE /* Email.swift in Sources */,
 				BC603713208FA9CD00D855DE /* User.swift in Sources */,
 				BCFE590C209AF92200B89104 /* TimeIntervalExt.swift in Sources */,
-				BC60374D208FB2CC00D855DE /* Image.swift in Sources */,
 				BCFE590B209AF8E600B89104 /* WSAccountsClient.swift in Sources */,
 				BC603717208FA9CD00D855DE /* Group.swift in Sources */,
 				BCFE5908209AF8E600B89104 /* AuthClient.swift in Sources */,
@@ -1339,6 +1442,17 @@
 				BCFE58F4209AF70B00B89104 /* Location.swift in Sources */,
 				BCFE58F5209AF70B00B89104 /* ClientEnvironment.swift in Sources */,
 				BCFE58F7209AF70B00B89104 /* ActivityLocation.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BCFE5DC820A0679400B89104 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BCFE5DCB20A0679400B89104 /* StringExt.swift in Sources */,
+				BCFE5DEA20A06C3200B89104 /* Image.swift in Sources */,
+				BCFE5DE620A06BB200B89104 /* ImagesClient.swift in Sources */,
+				BCFE5DCF20A0679400B89104 /* TimeIntervalExt.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1715,6 +1829,63 @@
 			};
 			name = Release;
 		};
+		BCFE5DDD20A0679400B89104 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 82379D5AA78EB8C45A6589E6 /* Pods-Images.debug.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_BITCODE = YES;
+				INFOPLIST_FILE = "$(SRCROOT)/List/Images.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = io.moj.mobile.ios.sdk.Images;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		BCFE5DDE20A0679400B89104 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AB3BB805D64071BFF9C018A0 /* Pods-Images.release.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_BITCODE = YES;
+				INFOPLIST_FILE = "$(SRCROOT)/List/Images.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = io.moj.mobile.ios.sdk.Images;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1768,6 +1939,15 @@
 			buildConfigurations = (
 				BCFE5901209AF70B00B89104 /* Debug */,
 				BCFE5902209AF70B00B89104 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BCFE5DDC20A0679400B89104 /* Build configuration list for PBXNativeTarget "Images" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BCFE5DDD20A0679400B89104 /* Debug */,
+				BCFE5DDE20A0679400B89104 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

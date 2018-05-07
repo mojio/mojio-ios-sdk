@@ -28,6 +28,14 @@ target 'Accounts' do
     pod 'MojioCore', :path => '.'
 end
 
+target 'Images' do
+    project 'MojioSDK.xcodeproj'
+
+    base_pods
+    pod 'AlamofireImage'
+    pod 'MojioCore', :path => '.'
+end
+
 target 'Vehicles' do
     project 'MojioSDK.xcodeproj'
 
