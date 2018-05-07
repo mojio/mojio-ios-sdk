@@ -136,44 +136,44 @@ open class RestClient {
         return self
     }
     
-    func offset(offset: Int) -> Self {
+    open func offset(offset: Int) -> Self {
         self.requestParams["skip"] = offset
         return self
     }
     
-    func limit(limit: Int) -> Self {
+    open func limit(limit: Int) -> Self {
         self.requestParams["top"] = limit
         return self
     }
     
-    func sortBy(field: String, direction: SortDirection) -> Self {
+    open func sortBy(field: String, direction: SortDirection) -> Self {
         self.requestParams["orderby"] = String(format: "%s %s", field, direction.rawValue)
         return self
     }
     
-    func includeCount() -> Self {
+    open func includeCount() -> Self {
         self.requestParams["includeCount"] = true
         return self
     }
     
-    func from(fromDate: Date, includeTime: Bool = false) -> Self {
+    open func from(fromDate: Date, includeTime: Bool = false) -> Self {
         let fromStr = includeTime ? self.sinceBeforeFormatter.string(from: fromDate) : self.fromToDateFormatter.string(from: fromDate)
         self.requestParams["from"] = fromStr
         return self
     }
     
-    func to(toDate: Date, includeTime: Bool = false) -> Self {
+    open func to(toDate: Date, includeTime: Bool = false) -> Self {
         let toStr = includeTime ? self.sinceBeforeFormatter.string(from: toDate) : self.fromToDateFormatter.string(from: toDate)
         self.requestParams["to"] = toStr
         return self
     }
     
-    func since(sinceDate: Date) -> Self {
+    open func since(sinceDate: Date) -> Self {
         self.requestParams["since"] = self.sinceBeforeFormatter.string(from: sinceDate)
         return self
     }
     
-    func before(beforeDate: Date) -> Self {
+    open func before(beforeDate: Date) -> Self {
         self.requestParams["before"] = self.sinceBeforeFormatter.string(from: beforeDate)
         return self
     }
