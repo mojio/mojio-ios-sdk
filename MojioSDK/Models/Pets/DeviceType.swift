@@ -13,15 +13,15 @@
  * forbidden unless prior written permission is obtained from Moj.io Inc.
  *******************************************************************************/
 
-struct DeviceType: Codable {
-    let id: String
-    let make: String?
-    let model: String?
-    let tenantId: String?
-    let capabilities: String?
-    let firmwareVersion: String?
+public struct DeviceType: Codable {
+    public let id: String
+    public let make: String?
+    public let model: String?
+    public let tenantId: String?
+    public let capabilities: String?
+    public let firmwareVersion: String?
     
-    enum CodingKeys: String, CodingKey {
+    public enum CodingKeys: String, CodingKey {
         case id = "Id"
         case make = "Make"
         case model = "Model"
@@ -30,7 +30,7 @@ struct DeviceType: Codable {
         case firmwareVersion = "FirmwareVersion"
     }
 
-    init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         do {

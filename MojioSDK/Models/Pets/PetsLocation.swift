@@ -16,23 +16,23 @@
 import Foundation
 import CoreLocation
 
-enum LocationType: String, Codable {
+public enum LocationType: String, Codable {
     case place = "Place"
     case activityLocation = "ActivityLocation"
 }
 
-struct PetsLocation: Codable {
-    let latitude: Double?
-    let longitude: Double?
-    let altitude: Double?
-    let timestamp: Date?
-    let heading: Double?
-    let hError: Double?
-    let vError: Double?
-    let type: LocationType?
-    let name: String?
+public struct PetsLocation: Codable {
+    public let latitude: Double?
+    public let longitude: Double?
+    public let altitude: Double?
+    public let timestamp: Date?
+    public let heading: Double?
+    public let hError: Double?
+    public let vError: Double?
+    public let type: LocationType?
+    public let name: String?
     
-    enum CodingKeys: String, CodingKey {
+    public enum CodingKeys: String, CodingKey {
         case latitude = "Latitude"
         case longitude = "Longitude"
         case altitude = "Altitude"
@@ -44,7 +44,7 @@ struct PetsLocation: Codable {
         case name = "Name"
     }
     
-    init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         do {
@@ -65,7 +65,7 @@ struct PetsLocation: Codable {
     }
 }
 
-extension PetsLocation {
+public extension PetsLocation {
     init(coreLocation: CLLocation, coreHeading: CLHeading? = nil) {
         self.latitude = coreLocation.coordinate.latitude
         self.longitude = coreLocation.coordinate.longitude
@@ -79,7 +79,7 @@ extension PetsLocation {
     }
 }
 
-extension PetsLocation {
+public extension PetsLocation {
     var coordinate: CLLocationCoordinate2D? {
         guard let latitude = self.latitude, let longitude = self.longitude else { return nil }
         return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)

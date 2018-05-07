@@ -16,18 +16,18 @@
 import Foundation
 
 
-struct NotificationToken: Codable {
-    let id: String
-    let platform: String?
-    let token: String?
+public struct NotificationToken: Codable {
+    public let id: String
+    public let platform: String?
+    public let token: String?
     
-    enum CodingKeys: String, CodingKey {
+    public enum CodingKeys: String, CodingKey {
         case id = "Id"
         case platform = "Platform"
         case token = "Token"
     }
     
-    init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         do {

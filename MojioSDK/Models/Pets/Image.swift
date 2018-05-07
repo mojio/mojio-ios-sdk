@@ -16,27 +16,27 @@
 import Foundation
 import Alamofire
 
-struct MimeType {
-    enum Image: String, Codable {
+public struct MimeType {
+    public enum Image: String, Codable {
         case jpeg = "image/jpeg"
         case png = "image/png"
         case gif = "image/gif"
         case bmp = "image/bmp"
     }
     
-    enum Application: String, Codable {
+    public enum Application: String, Codable {
         case json = "application/json"
     }
 }
 
-struct Image: Codable {
-    let id: String
-    let ownerId: String?
-    let url: URL?
-    let mimeType: MimeType.Image?
-    let deleted: Bool?
+public struct Image: Codable {
+    public let id: String
+    public let ownerId: String?
+    public let url: URL?
+    public let mimeType: MimeType.Image?
+    public let deleted: Bool?
     
-    enum CodingKeys: String, CodingKey {
+    public enum CodingKeys: String, CodingKey {
         case id = "Id"
         case ownerId = "OwnerId"
         case url = "Url"
@@ -44,7 +44,7 @@ struct Image: Codable {
         case deleted = "Deleted"
     }
 
-    init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         do {

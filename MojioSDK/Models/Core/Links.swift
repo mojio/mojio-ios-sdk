@@ -16,11 +16,11 @@
 import Foundation
 
 public struct Links: Codable {
-    let linkSelf: URL?
-    let permission: URL?
-    let permissions: URL?
-    let first: URL?
-    let next: URL?
+    public let linkSelf: URL?
+    public let permission: URL?
+    public let permissions: URL?
+    public let first: URL?
+    public let next: URL?
     
     public enum CodingKeys: String, CodingKey {
         case linkSelf = "Self"

@@ -16,22 +16,22 @@
 import Foundation
 import MojioCore
 
-enum GeofenceRegionType: String, Codable {
+public enum GeofenceRegionType: String, Codable {
     case circle = "Circle"
 }
 
-struct GeofenceCircleRegion: Codable {
-    let latitude: Double?
-    let longitude: Double?
-    let radius: Double?
+public struct GeofenceCircleRegion: Codable {
+    public let latitude: Double?
+    public let longitude: Double?
+    public let radius: Double?
     
-    enum CodingKeys: String, CodingKey {
+    public enum CodingKeys: String, CodingKey {
         case latitude = "Latitude"
         case longitude = "Longitude"
         case radius = "Radius"
     }
 
-    init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         do {
@@ -46,20 +46,20 @@ struct GeofenceCircleRegion: Codable {
     }
 }
 
-struct Geofence: Codable, PrimaryKey {
-    let id: String
-    let name: String?
-    let description: String?
-    let region: GeofenceCircleRegion?
-    let geofenceEnterNotification: Bool?
-    let geofenceExitNotification: Bool?
-    let assetIds: [String]?
-    let ownerId: String?
-    let deleted: Bool?
-    let lastModified: Date?
-    let createdOn: Date?
+public struct Geofence: Codable, PrimaryKey {
+    public let id: String
+    public let name: String?
+    public let description: String?
+    public let region: GeofenceCircleRegion?
+    public let geofenceEnterNotification: Bool?
+    public let geofenceExitNotification: Bool?
+    public let assetIds: [String]?
+    public let ownerId: String?
+    public let deleted: Bool?
+    public let lastModified: Date?
+    public let createdOn: Date?
     
-    enum CodingKeys: String, CodingKey {
+    public enum CodingKeys: String, CodingKey {
         case id = "Id"
         case name = "Name"
         case description = "Description"
@@ -73,7 +73,7 @@ struct Geofence: Codable, PrimaryKey {
         case createdOn = "CreatedOn"
     }
     
-    init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         do {
@@ -96,19 +96,19 @@ struct Geofence: Codable, PrimaryKey {
     }
 }
 
-func ==(lhs: Geofence, rhs: Geofence) -> Bool {
+public func ==(lhs: Geofence, rhs: Geofence) -> Bool {
     return lhs.id == rhs.id
 }
 
-struct GeofenceUpdate: Codable {
-    var name: String? = nil
-    var description: String? = nil
-    var region: GeofenceCircleRegion? = nil
-    var geofenceEnterNotification: Bool? = nil
-    var geofenceExitNotification: Bool? = nil
-    var assetIds: [String]? = nil
+public struct GeofenceUpdate: Codable {
+    public var name: String? = nil
+    public var description: String? = nil
+    public var region: GeofenceCircleRegion? = nil
+    public var geofenceEnterNotification: Bool? = nil
+    public var geofenceExitNotification: Bool? = nil
+    public var assetIds: [String]? = nil
     
-    enum CodingKeys: String, CodingKey {
+    public enum CodingKeys: String, CodingKey {
         case name = "Name"
         case description = "Description"
         case region = "Region"
@@ -117,7 +117,7 @@ struct GeofenceUpdate: Codable {
         case assetIds = "AssetIds"
     }
     
-    func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         
         try container.encodeIfPresent(self.name, forKey: .name)

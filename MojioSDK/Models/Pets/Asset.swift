@@ -16,28 +16,28 @@
 import Foundation
 import MojioCore
 
-enum AssetType: String, Codable {
+public enum AssetType: String, Codable {
     case pet = "Pet"
     case unknown = "Unknown"
     case other = "Other"
 }
 
-struct Asset: Codable, PrimaryKey {
-    let id: String
-    let name: String?
-    let deviceId: String?
-    let location: PetsLocation?
-    let speed: Double?
-    let type: AssetType?
-    let pet: PetDetails?
-    let ownerId: String?
-    var profileImageId: String?
-    let profileImageUri: URL?
-    let deleted: Bool?
-    let createdOn: Date?
-    let lastModified: Date?
+public struct Asset: Codable, PrimaryKey {
+    public let id: String
+    public let name: String?
+    public let deviceId: String?
+    public let location: PetsLocation?
+    public let speed: Double?
+    public let type: AssetType?
+    public let pet: PetDetails?
+    public let ownerId: String?
+    public let profileImageId: String?
+    public let profileImageUri: URL?
+    public let deleted: Bool?
+    public let createdOn: Date?
+    public let lastModified: Date?
     
-    enum CodingKeys: String, CodingKey {
+    public enum CodingKeys: String, CodingKey {
         case id = "Id"
         case name = "Name"
         case deviceId = "DeviceId"
@@ -53,7 +53,7 @@ struct Asset: Codable, PrimaryKey {
         case lastModified = "LastModified"
     }
 
-    init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         do {
@@ -78,18 +78,18 @@ struct Asset: Codable, PrimaryKey {
     }
 }
 
-func ==(lhs: Asset, rhs: Asset) -> Bool {
+public func ==(lhs: Asset, rhs: Asset) -> Bool {
     return lhs.id == rhs.id
 }
 
-struct AssetUpdate: Codable {
-    var name: String? = nil
-    var type: AssetType? = nil
-    var profileImageId: String? = nil
-    var profileImageUri: URL? = nil
-    var pet: PetDetailsUpdate? = nil
+public struct AssetUpdate: Codable {
+    public var name: String? = nil
+    public var type: AssetType? = nil
+    public var profileImageId: String? = nil
+    public var profileImageUri: URL? = nil
+    public var pet: PetDetailsUpdate? = nil
     
-    enum CodingKeys: String, CodingKey {
+    public enum CodingKeys: String, CodingKey {
         case name = "Name"
         case type = "Type"
         case profileImageId = "ProfileImageId"
@@ -97,7 +97,7 @@ struct AssetUpdate: Codable {
         case pet = "PetDetails"
     }
     
-    init(asset: Asset? = nil) {
+    public init(asset: Asset? = nil) {
         self.init(
             name: asset?.name,
             location: asset?.location,
@@ -108,7 +108,7 @@ struct AssetUpdate: Codable {
         )
     }
 
-    init(
+    public init(
         name: String? = nil,
         location: PetsLocation? = nil,
         type: AssetType? = nil,
@@ -123,7 +123,7 @@ struct AssetUpdate: Codable {
         self.profileImageUri = profileImageUri
     }
 
-    func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         
         try container.encodeIfPresent(self.name, forKey: .name)

@@ -16,38 +16,38 @@
 import Foundation
 import MojioCore
 
-enum PowerStatus: String, Codable {
+public enum PowerStatus: String, Codable {
     case unknown = "Unknown"
     case sleep = "Sleep"
     case powerOff = "PowerOff"
     case normal = "Normal"
 }
 
-struct Device: Codable, PrimaryKey {
-    let imei: String
-    let deviceId: String
-    let name: String?
-    let assetId: String?
-    let location: PetsLocation?
-    let speed: Double?
-    let airplaneMode: Bool?
-    let deviceType: DeviceType?
-    let powerStatus: PowerStatus?
-    let battery: Battery?
-    let firmwareVersion: String?
-    let color: String?
-    let tenantId: String?
-    let ownerId: String?
-    let createdOn: Date?
-    let deleted: Bool?
-    let lastModified: Date?
-    let gatewayTime: Date?
+public struct Device: Codable, PrimaryKey {
+    public let imei: String
+    public let deviceId: String
+    public let name: String?
+    public let assetId: String?
+    public let location: PetsLocation?
+    public let speed: Double?
+    public let airplaneMode: Bool?
+    public let deviceType: DeviceType?
+    public let powerStatus: PowerStatus?
+    public let battery: Battery?
+    public let firmwareVersion: String?
+    public let color: String?
+    public let tenantId: String?
+    public let ownerId: String?
+    public let createdOn: Date?
+    public let deleted: Bool?
+    public let lastModified: Date?
+    public let gatewayTime: Date?
     
-    var id: String {
+    public var id: String {
         return self.imei
     }
     
-    enum CodingKeys: String, CodingKey {
+    public enum CodingKeys: String, CodingKey {
         case imei = "IMEI"
         case deviceId = "DeviceId"
         case name = "Name"
@@ -68,7 +68,7 @@ struct Device: Codable, PrimaryKey {
         case gatewayTime = "GatewayTime"
     }
 
-    init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         do {
@@ -98,16 +98,16 @@ struct Device: Codable, PrimaryKey {
     }
 }
 
-struct DeviceUpdate: Codable {
-    var name: String? = nil
-    var color: String? = nil
+public struct DeviceUpdate: Codable {
+    public var name: String? = nil
+    public var color: String? = nil
     
-    enum CodingKeys: String, CodingKey {
+    public enum CodingKeys: String, CodingKey {
         case name = "Name"
         case color = "Color"
     }
     
-    func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         
         try container.encodeIfPresent(self.name, forKey: .name)

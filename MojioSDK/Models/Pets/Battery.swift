@@ -15,23 +15,23 @@
 
 import Foundation
 
-enum BatteryStatus: String, Codable {
+public enum BatteryStatus: String, Codable {
     case unknown = "Unknown"
     case charging = "Charging"
     case lowBattery = "LowBattery"
     case normal = "Normal"
 }
 
-struct Battery: Codable {
-    let level: Double?
-    let status: BatteryStatus?
+public struct Battery: Codable {
+    public let level: Double?
+    public let status: BatteryStatus?
     
-    enum CodingKeys: String, CodingKey {
+    public enum CodingKeys: String, CodingKey {
         case level = "Level"
         case status = "Status"
     }
 
-    init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         do {

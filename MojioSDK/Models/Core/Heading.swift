@@ -37,7 +37,7 @@ public struct Heading: DeviceMeasurement {
     }
 }
 
-extension Heading {
+public extension Heading {
 
     public var baseHeadingUnit: HeadingUnit? {
         
@@ -58,7 +58,7 @@ extension Heading {
     }
 }
 
-extension Heading  {
+public extension Heading  {
     
     public init(from decoder: Decoder, with deviceMeasurements: DeviceMeasurements) throws {
         

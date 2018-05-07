@@ -15,55 +15,54 @@
 
 import Foundation
 
-enum PetType: String, Codable {
+public enum PetType: String, Codable {
     case other = "Other"
     case cat = "Cat"
     case dog = "Dog"
     
-    static var all: [PetType] {
+    public static var all: [PetType] {
         return [.cat, .dog, .other]
     }
 
     /// Creates a new instance by using the specified string value with non case sensitive comparison.
-    init?(stringValue: String) {
+    public init?(stringValue: String) {
         self.init(rawValue: stringValue.capitalized)
     }
 }
 
-enum Gender: String, Codable {
+public enum Gender: String, Codable {
     case unknown = "Unknown"
     case male = "Male"
     case female = "Female"
     case neutral = "Neutral"
 
-    static var all: [Gender] {
+    public static var all: [Gender] {
         return [.unknown, .male, .female, .neutral]
     }
 }
 
-enum Weight: String, Codable {
+public enum Weight: String, Codable {
     case small = "Small"
     case medium = "Medium"
     case large = "Large"
 
-    
-    static var all: [Weight] {
+    public static var all: [Weight] {
         return [.small, .medium, .large]
     }
 }
 
-struct PetDetails: Codable {
-    let type: PetType?
-    let gender: Gender?
-    let breed: String?
-    let dateOfBirth: Date?
-    let registrationId: String?
-    let vetName: String?
-    let vetPhoneNumber: String?
-    let lastVetVisit: Date?
-    let weight: Int?
+public struct PetDetails: Codable {
+    public let type: PetType?
+    public let gender: Gender?
+    public let breed: String?
+    public let dateOfBirth: Date?
+    public let registrationId: String?
+    public let vetName: String?
+    public let vetPhoneNumber: String?
+    public let lastVetVisit: Date?
+    public let weight: Int?
     
-    enum CodingKeys: String, CodingKey {
+    public enum CodingKeys: String, CodingKey {
         case type = "Type"
         case gender = "Gender"
         case breed = "Breed"
@@ -75,7 +74,7 @@ struct PetDetails: Codable {
         case weight = "Weight"
     }
     
-    init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         do {
@@ -96,18 +95,18 @@ struct PetDetails: Codable {
     }
 }
 
-struct PetDetailsUpdate: Codable {
-    var type: PetType? = nil
-    var gender: Gender? = nil
-    var breed: String? = nil
-    var dateOfBirth: Date? = nil
-    var registrationId: String? = nil
-    var vetName: String? = nil
-    var vetPhoneNumber: String? = nil
-    var lastVetVisit: Date? = nil
-    var weight: Int? = 0
+public struct PetDetailsUpdate: Codable {
+    public var type: PetType? = nil
+    public var gender: Gender? = nil
+    public var breed: String? = nil
+    public var dateOfBirth: Date? = nil
+    public var registrationId: String? = nil
+    public var vetName: String? = nil
+    public var vetPhoneNumber: String? = nil
+    public var lastVetVisit: Date? = nil
+    public var weight: Int? = 0
     
-    enum CodingKeys: String, CodingKey {
+    public enum CodingKeys: String, CodingKey {
         case type = "Type"
         case gender = "Gender"
         case breed = "Breed"
@@ -119,7 +118,7 @@ struct PetDetailsUpdate: Codable {
         case weight = "Weight"
     }
     
-    init(petDetails: PetDetails? = nil) {
+    public init(petDetails: PetDetails? = nil) {
         self.init(
             type: petDetails?.type,
             gender: petDetails?.gender,
@@ -133,7 +132,7 @@ struct PetDetailsUpdate: Codable {
         )
     }
     
-    init(type: PetType? = nil,
+    public init(type: PetType? = nil,
          gender: Gender? = nil,
          breed: String? = nil,
          dateOfBirth: Date? = nil,
@@ -154,7 +153,7 @@ struct PetDetailsUpdate: Codable {
         self.weight = weight
     }
 
-    func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         
         try container.encodeIfPresent(self.type, forKey: .type)

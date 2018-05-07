@@ -47,7 +47,7 @@ internal extension ActivityType {
     }
 }
 
-//TODO: to add all possible values
+// TODO: to add all possible values
 public enum NestedActivityType: String, Codable {
     case asset = "Asset"
     case pet = "Pet"

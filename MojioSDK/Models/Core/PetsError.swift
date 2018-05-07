@@ -15,33 +15,33 @@
 
 import Foundation
 
-protocol BaseError: Swift.Error {
+public protocol BaseError: Swift.Error {
     var code: String? {get}
     var message: String? {get}
 }
 
-protocol ErrorList: BaseError {
+public protocol ErrorList: BaseError {
     var errors: [ApiError]? { get }
 }
 
-struct ApiErrorAditional: Codable {
+public struct ApiErrorAditional: Codable {
     let deviceId: String?
 }
 
-struct ApiError: ErrorList, Codable {
-    let code: String?
-    let errors: [ApiError]?
-    let message: String?
-    let additional: ApiErrorAditional?
+public struct ApiError: ErrorList, Codable {
+    public let code: String?
+    public let errors: [ApiError]?
+    public let message: String?
+    public let additional: ApiErrorAditional?
     
-    enum CodingKeys: String, CodingKey {
+    public enum CodingKeys: String, CodingKey {
         case code = "Code"
         case message = "Message"
         case errors = "Errors"
         case additional = "Additional"
     }
     
-    init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         self.code = try container.decodeIfPresent(String.self, forKey: .code)

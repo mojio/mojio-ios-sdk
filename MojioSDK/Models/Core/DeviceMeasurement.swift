@@ -18,7 +18,7 @@ import SwiftDate
 
 // Base Device Measurement
 
-enum DeviceMeasurementCodingKeys: String, CodingKey {
+public enum DeviceMeasurementCodingKeys: String, CodingKey {
     case baseUnit = "BaseUnit"
     case baseValue = "BaseValue"
     case unit = "Unit"
@@ -40,7 +40,7 @@ public protocol DeviceMeasurement: Codable {
     func encode(with encoder: Encoder) throws
 }
 
-extension DeviceMeasurement {
+public extension DeviceMeasurement {
     
     public init(from decoder: Decoder) throws {
         
