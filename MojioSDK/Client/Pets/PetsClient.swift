@@ -48,10 +48,12 @@ open class PetsClient: RestClient {
         super.init(clientEnvironment: clientEnvironment, sessionManager: sessionManager, keychainManager: keychainManager)
     }
     
-    open func activities() -> Self {
+    open func activities(_ assetId: String) -> Self {
         self.requestEntity = PetsEndpoint.activities.rawValue
-        self.requestUrl = self.requestUrl! + self.requestEntity
-        
+        self.requestEntityId = assetId
+        self.appendRequestUrlEntity(PetsEndpoint.activities.rawValue, asFinal: true)
+        self.appendRequestUrlEntity(PetsEndpoint.assets.rawValue, asFinal: true)
+        self.requestUrl = self.requestUrl! + assetId
         return self
     }
     
