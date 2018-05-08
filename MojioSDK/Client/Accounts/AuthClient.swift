@@ -98,7 +98,7 @@ open class AuthClient: AuthControllerDelegate {
     open var loginFailure: ((_ response: Any?) -> Void)? = nil
     open var authController: AuthViewController?
     
-    open var requestHeaders: [String:String] = ClientHeaders().defaultRequestHeaders
+    open var requestHeaders: [String: String] = ClientHeaders().defaultRequestHeaders
     
     // Default to global concurrent queue with default priority
     public static var defaultDispatchQueue = DispatchQueue.global()

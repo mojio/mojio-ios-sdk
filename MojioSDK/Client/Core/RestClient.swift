@@ -27,7 +27,7 @@ open class ClientHeaders {
     public init(languages: [String] = NSLocale.preferredLanguages) {
         self.languages = languages
     }
-    open var defaultRequestHeaders: [String: String] {
+    open var defaultRequestHeaders: [String:String] {
         // Accept-Language HTTP Header; see https://tools.ietf.org/html/rfc7231#section-5.3.5
         let acceptLanguage = self.languages
             .prefix(self.languageWeights.count)
@@ -43,6 +43,19 @@ open class ClientHeaders {
             .joined(separator: ", ")
         
         return ["Accept-Language": languages.count > 0 ? acceptLanguage : "en"]
+    }
+}
+
+public struct MimeType {
+    public enum Image: String, Codable {
+        case jpeg = "image/jpeg"
+        case png = "image/png"
+        case gif = "image/gif"
+        case bmp = "image/bmp"
+    }
+    
+    public enum Application: String, Codable {
+        case json = "application/json"
     }
 }
 
@@ -64,7 +77,7 @@ open class RestClient {
     open var pushUrl: String?
     open var requestUrl: String?
     open var requestV1Url: String?
-    open var requestParams: [String: Codable] = [:]
+    open var requestParams: Parameters = [:]
     open var requestEntity: String = RestEndpoint.base.rawValue
     open var requestEntityId: String?
     
@@ -212,7 +225,7 @@ open class RestClient {
 
     open func query(top: String? = nil, skip: String? = nil, filter: String? = nil, select: String? = nil, orderby: String? = nil, count: String? = nil, since: Date? = nil, before: Date? = nil, fields: [String]? = nil) -> Self {
         
-        var requestParams: [String:Codable] = [:]
+        var requestParams: Parameters = [:]
         
         if let top = top {
             requestParams["top"] = top
@@ -267,10 +280,16 @@ open class RestClient {
         self.run(completion: {response, headers in completion(response)}, failure: failure)
     }
 
-    internal func run(completion: @escaping (_ response: Codable?, _ headers: [String : Any?]) -> Void, failure: @escaping (_ error: Any?) -> Void) {
+    internal func run(completion: @escaping (_ response: Codable?, _ headers: [String:String]) -> Void, failure: @escaping (_ error: Any?) -> Void) {
         
-        let request = self.sessionManager.request(self.requestUrl!, method: self.requestMethod, parameters: self.requestParams, encoding: URLEncoding(destination: .methodDependent), headers: self.defaultHeaders).responseData(queue: self.dispatchQueue) {response in
-            self.handleResponse(response, completion: completion, failure: failure)
+        let request = self.sessionManager.request(
+            self.requestUrl!,
+            method: self.requestMethod,
+            parameters: self.requestParams,
+            encoding: URLEncoding(destination: .methodDependent),
+            headers: self.defaultHeaders)
+            .responseData(queue: self.dispatchQueue) {response in
+                self.handleResponse(response, completion: completion, failure: failure)
         }
         
         #if DEBUG
@@ -294,7 +313,7 @@ open class RestClient {
         }
     }
     
-    open var defaultHeaders: [String: String] {
+    open var defaultHeaders: [String:String] {
         var headers = ClientHeaders().defaultRequestHeaders
         
         headers.update(["Content-Type": "application/json", "Accept": "application/json"])
@@ -311,10 +330,16 @@ open class RestClient {
         self.runStringBody(string: string, completion: {response, headers in completion(response)}, failure: failure)
     }
 
-    internal func runStringBody(string: String, completion: @escaping (_ response: Codable?, _ headers: [String : Any?]) -> Void, failure: @escaping (_ error: Any?) -> Void) {
+    internal func runStringBody(string: String, completion: @escaping (_ response: Codable?, _ headers: [String:String]) -> Void, failure: @escaping (_ error: Any?) -> Void) {
         
-        let request = self.sessionManager.request(self.requestUrl!, method: self.requestMethod, parameters: [:], encoding: CustomStringEncoding(customString: string), headers: self.defaultHeaders).responseData(queue: self.dispatchQueue) {response in
-            self.handleResponse(response, completion: completion, failure: failure)
+        let request = self.sessionManager.request(
+            self.requestUrl!,
+            method: self.requestMethod,
+            parameters: [:],
+            encoding: CustomStringEncoding(customString: string),
+            headers: self.defaultHeaders)
+            .responseData(queue: self.dispatchQueue) {response in
+                self.handleResponse(response, completion: completion, failure: failure)
         }
         
         #if DEBUG
@@ -322,18 +347,74 @@ open class RestClient {
         #endif
     }
     
-    open func runEncodeJSON(jsonObject: [String: Any], completion: @escaping (_ response: Codable?) -> Void, failure: @escaping (_ error: Any?) -> Void) {
+    open func runEncodeJSON(jsonObject: [String: Codable], completion: @escaping (_ response: Codable?) -> Void, failure: @escaping (_ error: Any?) -> Void) {
         self.runEncodeJSON(jsonObject: jsonObject, completion: {response, headers in completion(response)}, failure: failure)
     }
 
-    internal func runEncodeJSON(jsonObject: [String: Any], completion: @escaping (_ response: Codable?, _ headers: [String : Any?]) -> Void, failure: @escaping (_ error: Any?) -> Void) {
+    internal func runEncodeJSON(jsonObject: [String: Codable], completion: @escaping (_ response: Codable?, _ headers: [String:String]) -> Void, failure: @escaping (_ error: Any?) -> Void) {
         
-        let request = self.sessionManager.request(self.requestUrl!, method: self.requestMethod, parameters: jsonObject, encoding: JSONEncoding.default, headers: self.defaultHeaders).responseData(queue: self.dispatchQueue) {response in
-            self.handleResponse(response, completion: completion, failure: failure)
+        let request = self.sessionManager.request(
+            self.requestUrl!,
+            method: self.requestMethod,
+            parameters: jsonObject,
+            encoding: JSONEncoding.default,
+            headers: self.defaultHeaders)
+            .responseData(queue: self.dispatchQueue) {response in
+                self.handleResponse(response, completion: completion, failure: failure)
         }
 
         #if DEBUG
             print(request.debugDescription)
+        #endif
+    }
+    
+    fileprivate class CodableJSONEncoding<T: Encodable>: ParameterEncoding {
+        
+        private let codableObject: T
+        
+        init(codableObject: T) {
+            self.codableObject = codableObject
+        }
+        
+        func encode(_ urlRequest: URLRequestConvertible, with parameters: Parameters?) throws -> URLRequest {
+            var urlRequest = urlRequest.urlRequest
+            
+            do {
+                let encoder = JSONEncoder()
+                if #available(iOS 10.0, *) {
+                    encoder.dateEncodingStrategy = .iso8601
+                }
+                else {
+                    encoder.dateEncodingStrategy = .millisecondsSince1970
+                }
+                let data = try encoder.encode(self.codableObject)
+                urlRequest?.httpBody = data
+                urlRequest?.addValue(MimeType.Application.json.rawValue, forHTTPHeaderField: "Content-Type")
+            }
+            catch {}
+            
+            return urlRequest!
+        }
+    }
+    
+    open func runEncodeJSON<T: Codable>(codableObject: T, completion: @escaping (_ response: Codable?) -> Void, failure: @escaping (_ error: Any?) -> Void) {
+        self.runEncodeJSON(codableObject: codableObject, completion: {response, headers in completion(response)}, failure: failure)
+    }
+    
+    internal func runEncodeJSON<T: Codable>(codableObject: T, completion: @escaping (_ response: Codable?, _ headers: [String:String]) -> Void, failure: @escaping (_ error: Any?) -> Void) {
+        
+        let request = self.sessionManager.request(
+            self.requestUrl!,
+            method: self.requestMethod,
+            parameters: self.requestParams,
+            encoding: CodableJSONEncoding<T>(codableObject: codableObject),
+            headers: self.defaultHeaders)
+            .responseData(queue: self.dispatchQueue) {response in
+                self.handleResponse(response, completion: completion, failure: failure)
+        }
+        
+        #if DEBUG
+        print(request.debugDescription)
         #endif
     }
     
@@ -341,7 +422,7 @@ open class RestClient {
         self.runEncodeUrl(parameters, completion: {response, headers in completion(response) }, failure: failure)
     }
 
-    internal func runEncodeUrl(_ parameters: [String: Any], completion: @escaping (_ response: Codable?, _ headers: [String : Any?]) -> Void, failure: @escaping (_ error: Any?) -> Void) {
+    internal func runEncodeUrl(_ parameters: [String: Any], completion: @escaping (_ response: Codable?, _ headers: [String:String]) -> Void, failure: @escaping (_ error: Any?) -> Void) {
         
         // Before every request, make sure access token exists
         var headers: [String:String] = [:]
@@ -350,8 +431,14 @@ open class RestClient {
             headers["Authorization"] = "Bearer " + accessToken
         }
         
-        let request = self.sessionManager.request(self.requestUrl!, method: self.requestMethod, parameters: parameters, encoding: URLEncoding(destination: .methodDependent), headers: headers).responseData(queue: self.dispatchQueue) {response in
-            self.handleResponse(response, completion: completion, failure: failure)
+        let request = self.sessionManager.request(
+            self.requestUrl!,
+            method: self.requestMethod,
+            parameters: parameters,
+            encoding: URLEncoding(destination: .methodDependent),
+            headers: headers)
+            .responseData(queue: self.dispatchQueue) {response in
+                self.handleResponse(response, completion: completion, failure: failure)
         }
         
         #if DEBUG
@@ -359,13 +446,16 @@ open class RestClient {
         #endif
     }
     
-    open func handleResponse(_ response: DataResponse<Data>, completion: @escaping (_ response: Codable?, _ headers: [String : Any?]) -> Void, failure: @escaping (_ error: Any?) -> Void){
+    open func handleResponse(_ response: DataResponse<Data>, completion: @escaping (_ response: Codable?, _ headers: [String:String]) -> Void, failure: @escaping (_ error: Any?) -> Void){
 
         // Purpose?
-        let headers: [String : Any?] = [
-            "ResponseDate" : (response.response?.allHeaderFields["Date"] as? String)?.toDate,
-            "LocalDate" : Date()
-        ]
+        var headers: [String:String] = [:]
+        
+        headers["LocalDate"] = Date().iso8601()
+        
+        if let respDateStr = (response.response?.allHeaderFields["Date"] as? String), let _ = respDateStr.toDate {
+            headers["ResponseDate"] = respDateStr
+        }
         
         if
             response.response?.statusCode == 200 || response.response?.statusCode == 201,

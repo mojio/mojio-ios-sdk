@@ -64,7 +64,7 @@ open class ImagesClient: RestClient {
         return self.uploadImage(imageData, mimeType: mimeType, completion: {response, headers in completion(response as? Image)}, failure: failure)
     }
     
-    internal func uploadImage(_ imageData: Data, mimeType: MimeType.Image, completion: @escaping (_ response: Codable?, _ headers: [String : Any?]) -> Void, failure: @escaping (_ error: Any?) -> Void) {
+    internal func uploadImage(_ imageData: Data, mimeType: MimeType.Image, completion: @escaping (_ response: Codable?, _ headers: [String : String]) -> Void, failure: @escaping (_ error: Any?) -> Void) {
         
         guard let requestUrl = self.requestUrl else {
             failure(nil)

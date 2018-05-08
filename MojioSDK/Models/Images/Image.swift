@@ -16,19 +16,6 @@
 import Foundation
 import Alamofire
 
-public struct MimeType {
-    public enum Image: String, Codable {
-        case jpeg = "image/jpeg"
-        case png = "image/png"
-        case gif = "image/gif"
-        case bmp = "image/bmp"
-    }
-    
-    public enum Application: String, Codable {
-        case json = "application/json"
-    }
-}
-
 public struct Image: Codable {
     public let id: String
     public let ownerId: String?
