@@ -15,6 +15,7 @@
 
 import Foundation
 import Alamofire
+import MojioCore
 
 public struct Image: Codable {
     public let id: String
