@@ -99,7 +99,7 @@ public protocol ActivityBase: Codable, PrimaryKey {
     var summary: String? { get }
     var summaryMap: Dictionary<String, String>?  { get }
     
-    var publishedTime: Date? { get }
+    var published: Date? { get }
     var icon: Dictionary<String, String>? {get}
 }
 
@@ -126,7 +126,7 @@ public struct Activity: ActivityBase {
     public let summary: String?
     public let summaryMap: Dictionary<String, String>?
     
-    public let publishedTime: Date?
+    public let published: Date?
     public let icon: Dictionary<String, String>?
     
     enum CodingKeys: String, CodingKey {
@@ -141,7 +141,7 @@ public struct Activity: ActivityBase {
         case context = "Context"
         case summary = "Summary"
         case summaryMap = "SummaryMap"
-        case publishedTime = "PublishedTime"
+        case published = "Published"
         case icon = "Icon"
     }
 }
@@ -180,7 +180,7 @@ public struct RootActivity: RootActivityBase {
     public let summary: String?
     public let summaryMap: Dictionary<String, String>?
     
-    public let publishedTime: Date?
+    public let published: Date?
     public let icon: Dictionary<String, String>?
     
     public let actor: A?
@@ -204,7 +204,7 @@ public struct RootActivity: RootActivityBase {
         case context = "Context"
         case summary = "Summary"
         case summaryMap = "SummaryMap"
-        case publishedTime = "PublishedTime"
+        case published = "Published"
         case icon = "Icon"
         case actor = "Actor"
         case target = "Target"
