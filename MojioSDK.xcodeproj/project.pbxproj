@@ -124,12 +124,11 @@
 		BCC2EFBB1CBED4E6004D2759 /* Vehicles.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCC2EFB11CBED4E6004D2759 /* Vehicles.framework */; };
 		BCC8A4A01D19EABF00E14E2B /* WSVehiclesClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC8A49F1D19EABF00E14E2B /* WSVehiclesClient.swift */; };
 		BCF2DE4A1D454B8D00EDD376 /* Geofence.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF2DE491D454B8D00EDD376 /* Geofence.swift */; };
+		BCF6A0AB20A92191001D0600 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC590626208E566200A098A3 /* Activity.swift */; };
 		BCFCEB041F019FF20096C9B4 /* HarshEventState.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCFCEB031F019FF20096C9B4 /* HarshEventState.swift */; };
 		BCFCEB061F01A2C70096C9B4 /* IdleEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCFCEB051F01A2C70096C9B4 /* IdleEvent.swift */; };
 		BCFE57DE20910AB900B89104 /* MojioVehicles.h in Headers */ = {isa = PBXBuildFile; fileRef = BCFE57D920910AB100B89104 /* MojioVehicles.h */; };
 		BCFE57DF20910ABD00B89104 /* MojioPets.h in Headers */ = {isa = PBXBuildFile; fileRef = BCFE57DA20910AB100B89104 /* MojioPets.h */; };
-		BCFE58D3209AF70B00B89104 /* BaseActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884FCE5E1EB13ECD00DDCE3F /* BaseActivity.swift */; };
-		BCFE58D4209AF70B00B89104 /* BaseActivityLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC31E3D11D419F5D001649A7 /* BaseActivityLocation.swift */; };
 		BCFE58D5209AF70B00B89104 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B8D1CBF000A00F9177B /* KeychainManager.swift */; };
 		BCFE58D6209AF70B00B89104 /* PetsError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC590622208E566200A098A3 /* PetsError.swift */; };
 		BCFE58DA209AF70B00B89104 /* TimeIntervalExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2278359D1FB60291002D24F9 /* TimeIntervalExt.swift */; };
@@ -140,10 +139,8 @@
 		BCFE58E0209AF70B00B89104 /* WebSocketProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF12CC1FB9D90D00F068B2 /* WebSocketProvider.swift */; };
 		BCFE58E2209AF70B00B89104 /* StringExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2278359B1FB60253002D24F9 /* StringExt.swift */; };
 		BCFE58E3209AF70B00B89104 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B451CBEFFDD00F9177B /* Address.swift */; };
-		BCFE58E4209AF70B00B89104 /* VehicleActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC31E3CF1D419F5D001649A7 /* VehicleActivity.swift */; };
 		BCFE58E5209AF70B00B89104 /* DeviceMeasurement.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC3C66411DA8196A00179344 /* DeviceMeasurement.swift */; };
 		BCFE58E8209AF70B00B89104 /* KeychainStorageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED946EF1FA9ED8E00132568 /* KeychainStorageProvider.swift */; };
-		BCFE58EA209AF70B00B89104 /* RootActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC31E3D21D419F5D001649A7 /* RootActivity.swift */; };
 		BCFE58EB209AF70B00B89104 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06C95681D25CA2A006AECBB /* Result.swift */; };
 		BCFE58EC209AF70B00B89104 /* SwiftWebSocketProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF12D21FB9E70100F068B2 /* SwiftWebSocketProvider.swift */; };
 		BCFE58EE209AF70B00B89104 /* MojioError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC8A49C1D19EAAD00E14E2B /* MojioError.swift */; };
@@ -153,7 +150,6 @@
 		BCFE58F3209AF70B00B89104 /* SwiftWebSocketFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF12D01FB9E0D700F068B2 /* SwiftWebSocketFactory.swift */; };
 		BCFE58F4209AF70B00B89104 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B521CBEFFDD00F9177B /* Location.swift */; };
 		BCFE58F5209AF70B00B89104 /* ClientEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B8C1CBF000A00F9177B /* ClientEnvironment.swift */; };
-		BCFE58F7209AF70B00B89104 /* ActivityLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC31E3D01D419F5D001649A7 /* ActivityLocation.swift */; };
 		BCFE58F9209AF70B00B89104 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 75F77F0D1D19F504000CC2B4 /* libz.tbd */; };
 		BCFE5906209AF84E00B89104 /* Core.plist in Resources */ = {isa = PBXBuildFile; fileRef = BCFE5905209AF84E00B89104 /* Core.plist */; };
 		BCFE5907209AF8E600B89104 /* AccountsClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6036E8208F9C7400D855DE /* AccountsClient.swift */; };
@@ -169,7 +165,6 @@
 		BCFE5913209AF92500B89104 /* StringExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2278359B1FB60253002D24F9 /* StringExt.swift */; };
 		BCFE5915209AF99000B89104 /* MojioCore.h in Headers */ = {isa = PBXBuildFile; fileRef = BCFE5914209AF99000B89104 /* MojioCore.h */; };
 		BCFE5916209AF9BE00B89104 /* MojioAccounts.h in Headers */ = {isa = PBXBuildFile; fileRef = BCFE57D820910AB100B89104 /* MojioAccounts.h */; };
-		BCFE5918209B01DE00B89104 /* PetsActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC590626208E566200A098A3 /* PetsActivity.swift */; };
 		BCFE5DC520A063B500B89104 /* Stats.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCFE5DC420A063B500B89104 /* Stats.swift */; };
 		BCFE5DCB20A0679400B89104 /* StringExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2278359B1FB60253002D24F9 /* StringExt.swift */; };
 		BCFE5DCF20A0679400B89104 /* TimeIntervalExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2278359D1FB60291002D24F9 /* TimeIntervalExt.swift */; };
@@ -267,7 +262,6 @@
 		75F77F0D1D19F504000CC2B4 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		82379D5AA78EB8C45A6589E6 /* Pods-Images.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Images.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Images/Pods-Images.debug.xcconfig"; sourceTree = "<group>"; };
 		8808C2341EB1483A00A41A8B /* PrimaryKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimaryKey.swift; sourceTree = "<group>"; };
-		884FCE5E1EB13ECD00DDCE3F /* BaseActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseActivity.swift; sourceTree = "<group>"; };
 		887014781DA833CA00EFEC6D /* VehicleStatistics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VehicleStatistics.swift; sourceTree = "<group>"; };
 		9980F32E31CB2E846A417B2C /* Pods_Core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Core.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		99F172CDA9C69F9BF12B704A /* Pods_MojioSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MojioSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -278,10 +272,6 @@
 		B05A25508E7E57D8DB8C6D24 /* Pods-Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Tests/Pods-Tests.release.xcconfig"; sourceTree = "<group>"; };
 		BB935783B8EEA97833A0CF69 /* Pods-Accounts.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Accounts.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Accounts/Pods-Accounts.debug.xcconfig"; sourceTree = "<group>"; };
 		BC31E3CD1D419E80001649A7 /* Distance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Distance.swift; sourceTree = "<group>"; };
-		BC31E3CF1D419F5D001649A7 /* VehicleActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VehicleActivity.swift; sourceTree = "<group>"; };
-		BC31E3D01D419F5D001649A7 /* ActivityLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityLocation.swift; sourceTree = "<group>"; };
-		BC31E3D11D419F5D001649A7 /* BaseActivityLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseActivityLocation.swift; sourceTree = "<group>"; };
-		BC31E3D21D419F5D001649A7 /* RootActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootActivity.swift; sourceTree = "<group>"; };
 		BC3C66411DA8196A00179344 /* DeviceMeasurement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceMeasurement.swift; sourceTree = "<group>"; };
 		BC3D7C7A2087F3B000659A92 /* Pets.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pets.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC3D7C7E2087F5E700659A92 /* VehiclesClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehiclesClient.swift; sourceTree = "<group>"; };
@@ -293,7 +283,7 @@
 		BC590623208E566200A098A3 /* Links.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Links.swift; sourceTree = "<group>"; };
 		BC590624208E566200A098A3 /* Device.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
 		BC590625208E566200A098A3 /* PhoneNumber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneNumber.swift; sourceTree = "<group>"; };
-		BC590626208E566200A098A3 /* PetsActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PetsActivity.swift; path = ../../Pets/PetsActivity.swift; sourceTree = "<group>"; };
+		BC590626208E566200A098A3 /* Activity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
 		BC590627208E566200A098A3 /* Email.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Email.swift; sourceTree = "<group>"; };
 		BC590629208E566200A098A3 /* PetDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetDetails.swift; sourceTree = "<group>"; };
 		BC59062A208E566200A098A3 /* NotificationToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationToken.swift; sourceTree = "<group>"; };
@@ -653,6 +643,7 @@
 		BC59065C208E7B1200A098A3 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				BC590626208E566200A098A3 /* Activity.swift */,
 				BC59062C208E566200A098A3 /* AuthToken.swift */,
 				BC879B451CBEFFDD00F9177B /* Address.swift */,
 				BC3C66411DA8196A00179344 /* DeviceMeasurement.swift */,
@@ -664,7 +655,6 @@
 				8808C2341EB1483A00A41A8B /* PrimaryKey.swift */,
 				BC590657208E7ACC00A098A3 /* ResponseArray.swift */,
 				E06C95681D25CA2A006AECBB /* Result.swift */,
-				E0E63D2D1D21DF3200DDF336 /* ActivityStreams */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -824,20 +814,6 @@
 				BC59062B208E566200A098A3 /* Image.swift */,
 			);
 			path = Images;
-			sourceTree = "<group>";
-		};
-		E0E63D2D1D21DF3200DDF336 /* ActivityStreams */ = {
-			isa = PBXGroup;
-			children = (
-				BC31E3CF1D419F5D001649A7 /* VehicleActivity.swift */,
-				BC590626208E566200A098A3 /* PetsActivity.swift */,
-				BC31E3D01D419F5D001649A7 /* ActivityLocation.swift */,
-				884FCE5E1EB13ECD00DDCE3F /* BaseActivity.swift */,
-				BC31E3D11D419F5D001649A7 /* BaseActivityLocation.swift */,
-				BC31E3D21D419F5D001649A7 /* RootActivity.swift */,
-			);
-			name = ActivityStreams;
-			path = "Activity Streams";
 			sourceTree = "<group>";
 		};
 		E740F257DF43595AE6A06564 /* Pods */ = {
@@ -1264,7 +1240,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BCFE5918209B01DE00B89104 /* PetsActivity.swift in Sources */,
 				BCFE5DC520A063B500B89104 /* Stats.swift in Sources */,
 				BC3D7C84208816BB00659A92 /* PetsClient.swift in Sources */,
 				BCFE5912209AF92500B89104 /* TimeIntervalExt.swift in Sources */,
@@ -1416,8 +1391,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BCFE58D3209AF70B00B89104 /* BaseActivity.swift in Sources */,
-				BCFE58D4209AF70B00B89104 /* BaseActivityLocation.swift in Sources */,
 				BCFE58D5209AF70B00B89104 /* KeychainManager.swift in Sources */,
 				BCFE58D6209AF70B00B89104 /* PetsError.swift in Sources */,
 				BCFE58DA209AF70B00B89104 /* TimeIntervalExt.swift in Sources */,
@@ -1428,10 +1401,8 @@
 				BCFE58E0209AF70B00B89104 /* WebSocketProvider.swift in Sources */,
 				BCFE58E2209AF70B00B89104 /* StringExt.swift in Sources */,
 				BCFE58E3209AF70B00B89104 /* Address.swift in Sources */,
-				BCFE58E4209AF70B00B89104 /* VehicleActivity.swift in Sources */,
 				BCFE58E5209AF70B00B89104 /* DeviceMeasurement.swift in Sources */,
 				BCFE58E8209AF70B00B89104 /* KeychainStorageProvider.swift in Sources */,
-				BCFE58EA209AF70B00B89104 /* RootActivity.swift in Sources */,
 				BCFE58EB209AF70B00B89104 /* Result.swift in Sources */,
 				BCFE58EC209AF70B00B89104 /* SwiftWebSocketProvider.swift in Sources */,
 				BCFE58EE209AF70B00B89104 /* MojioError.swift in Sources */,
@@ -1440,8 +1411,8 @@
 				BCFE58F2209AF70B00B89104 /* ResponseArray.swift in Sources */,
 				BCFE58F3209AF70B00B89104 /* SwiftWebSocketFactory.swift in Sources */,
 				BCFE58F4209AF70B00B89104 /* Location.swift in Sources */,
+				BCF6A0AB20A92191001D0600 /* Activity.swift in Sources */,
 				BCFE58F5209AF70B00B89104 /* ClientEnvironment.swift in Sources */,
-				BCFE58F7209AF70B00B89104 /* ActivityLocation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
