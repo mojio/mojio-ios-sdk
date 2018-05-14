@@ -16,26 +16,22 @@
 import Foundation
 import MojioCore
 
-public protocol GeneralIdleEvent {
-    
-    associatedtype I: GeneralIdleState
-    associatedtype L: GeneralLocation
-    
-    var eventState: I? { get }
-    var eventLocation: L? { get }
+public protocol GeneralSettingsGeofence {
+    var id: String { get }
+    var enableEnterActivity: Bool { get }
+    var enableExitActivity: Bool { get }
 }
 
-public struct IdleEvent: Codable, GeneralIdleEvent {
+public struct SettingsGeofence: Codable, PrimaryKey, GeneralSettingsGeofence {
     
-    public typealias I = IdleState
-    public typealias L = Location
-    
-    public var eventState: I? = nil
-    public var eventLocation: L? = nil
+    public let id: String
+    public let enableEnterActivity: Bool
+    public let enableExitActivity: Bool
     
     public enum CodingKeys: String, CodingKey {
-        case eventState = "IdleState"
-        case eventLocation = "Location"
+        case id = "Id"
+        case enableEnterActivity = "EnableEnterActivity"
+        case enableExitActivity = "EnableExitActivity"
     }
     
     public init(from decoder: Decoder) throws {
@@ -43,16 +39,13 @@ public struct IdleEvent: Codable, GeneralIdleEvent {
         do {
             let container = try decoder.container(keyedBy: CodingKeys.self)
             
-            self.eventState = try container.decodeIfPresent(IdleState.self, forKey: .eventState)
-            self.eventLocation = try container.decodeIfPresent(Location.self, forKey: .eventLocation) 
+            self.id = try container.decode(String.self, forKey: .id)
+            self.enableEnterActivity = try container.decode(Bool.self, forKey: .enableEnterActivity)
+            self.enableExitActivity = try container.decode(Bool.self, forKey: .enableExitActivity)
         }
         catch {
             debugPrint(error)
             throw error
         }
-    }
-    
-    public func encode(to encoder: Encoder) throws {
-        
     }
 }

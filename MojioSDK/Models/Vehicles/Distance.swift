@@ -16,7 +16,11 @@
 import Foundation
 import MojioCore
 
-public struct Distance: DeviceMeasurement {
+public protocol GeneralDistance: DeviceMeasurement {
+    
+}
+
+public struct Distance: GeneralDistance {
     
     // DeviceMeasurement
     public let baseUnit: String?
@@ -24,22 +28,6 @@ public struct Distance: DeviceMeasurement {
     public let unit: String?
     public let value: Double
     public let timestamp: Date?
-    
-//    public func jsonDict() -> [String:Any] {
-//        var map: [String:Any] = [:]
-//        
-//        if let baseUnit = self.baseUnit {
-//            map["baseUnit"] = baseUnit as AnyObject?
-//            map["baseValue"] = self.baseValue as AnyObject?
-//        }
-//        
-//        if let unit = self.unit {
-//            map["Unit"] = unit as AnyObject?
-//            map["Value"] = self.value as AnyObject?
-//        }
-//
-//        return map
-//    }
 }
 
 extension Distance {

@@ -15,8 +15,24 @@
 
 import Foundation
 
-public struct NextServiceSchedule: Codable {
+public protocol GeneralNextServiceSchedule {
+    
+    associatedtype P: GeneralPlatformServiceSchedule
+    
+    var timeStamp: String? { get }
+    var odometer: Double { get }
+    var ageInMonths: Int? { get }
+    var timeUnits: String? { get }
+    var timeValue: Double { get }
+    var distanceUnits: String? { get }
+    var distanceValue: Double { get }
+    var services: [P] { get }
+}
 
+public struct NextServiceSchedule: Codable, GeneralNextServiceSchedule {
+    
+    public typealias P = PlatformServiceSchedule
+    
     public var timeStamp: String? = nil
     public var odometer: Double = 0
     public var ageInMonths: Int? = nil
@@ -24,7 +40,7 @@ public struct NextServiceSchedule: Codable {
     public var timeValue: Double = 0
     public var distanceUnits: String? = nil
     public var distanceValue: Double = 0
-    public var services: [PlatformServiceSchedule] = []
+    public var services: [P] = []
     
     public enum CodingKeys: String, CodingKey {
         case timeStamp = "TimeStamp"

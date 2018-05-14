@@ -15,11 +15,22 @@
 
 import Foundation
 
-public struct ServiceSchedule: Codable {
+public protocol GeneralServiceSchedule {
+    
+    associatedtype S: GeneralServiceScheduleItem
+    
+    var vin: String? { get }
+    var isDefault: Bool? { get }
+    var items: [S] { get }
+}
+
+public struct ServiceSchedule: Codable, GeneralServiceSchedule {
+    
+    public typealias S = ServiceScheduleItem
     
     public var vin: String? = nil
     public var isDefault: Bool? = nil
-    public var items: [ServiceScheduleItem] = []
+    public var items: [S] = []
     
     public enum CodingKeys: String, CodingKey {
         case vin = "VIN"

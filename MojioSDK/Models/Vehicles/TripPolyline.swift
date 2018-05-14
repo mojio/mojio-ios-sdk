@@ -16,7 +16,15 @@
 import Foundation
 import MojioCore
 
-public struct Polyline: Codable, PrimaryKey {
+public protocol GeneralTripPolyline {
+    var id: String { get }
+    var polyline: String? { get }
+    var createdOn: Date? { get }
+    var lastModified: Date? { get }
+    var deleted: Bool { get }
+}
+
+public struct Polyline: Codable, PrimaryKey, GeneralTripPolyline {
     
     public let id: String
     public let polyline: String?

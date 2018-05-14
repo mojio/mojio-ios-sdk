@@ -15,7 +15,18 @@
 
 import Foundation
 
-public struct DiagnosticCode: Codable {
+public protocol GeneralDiagnosticCode {
+    var ignored: Bool { get }
+    var code: String? { get }
+    var description: String? { get }
+    var timestamp: Date? { get }
+    var severity: String? { get }
+    var instructions: String? { get }
+    var stateType: String? { get }
+    var diagnosticCodeType: String? { get }
+}
+
+public struct DiagnosticCode: Codable, GeneralDiagnosticCode {
     
     public var ignored: Bool = false
     public var code: String? = nil

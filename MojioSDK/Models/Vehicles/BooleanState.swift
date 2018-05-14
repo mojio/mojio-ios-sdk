@@ -15,7 +15,12 @@
 
 import Foundation
 
-public struct BooleanState: Codable {
+public protocol GeneralBooleanState {
+    var timestamp: Date? { get }
+    var value: Bool { get }
+}
+
+public struct BooleanState: Codable, GeneralBooleanState {
     
     public let timestamp: Date?
     public let value: Bool

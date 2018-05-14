@@ -15,7 +15,26 @@
 
 import Foundation
 
-public struct MeasurementStatistics: Codable {
+public protocol GeneralMeasurementStatistics {
+    
+    associatedtype S: GeneralScore
+    
+    var numOfSamples: Double { get }
+    var average: Double { get }
+    var variance: Double { get }
+    var stdDev: Double { get }
+    var indexOfDispersion: Double { get }
+    var coeffOfVariation: Double { get }
+    var m2: Double { get }
+    var min: Double { get }
+    var max: Double { get }
+    var standardScore: S? { get }
+    var minMaxScore: S? { get }
+}
+
+public struct MeasurementStatistics: Codable, GeneralMeasurementStatistics {
+    
+    public typealias S = Score
     
     public let numOfSamples: Double
     public let average: Double
@@ -26,8 +45,8 @@ public struct MeasurementStatistics: Codable {
     public let m2: Double
     public let min: Double
     public let max: Double
-    public let standardScore: Score?
-    public let minMaxScore: Score?
+    public let standardScore: S?
+    public let minMaxScore: S?
     
     public enum CodingKeys: String, CodingKey {
         case numOfSamples = "NumOfSamples"

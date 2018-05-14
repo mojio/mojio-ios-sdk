@@ -63,9 +63,31 @@ public enum LocationStatus: String {
     case previousValidState = "PreviousValidState"
 }
 
-public struct Location: Codable {
+public protocol GeneralLocation {
     
-    public let locationAddress: Address?
+    associatedtype A: GeneralAddress
+    associatedtype H: GeneralHeading
+    
+    var locationAddress: A? { get }
+    var timestamp: Date? { get }
+    var lat: Double { get }
+    var lng: Double { get }
+    var radius: Double { get }
+    
+    var status: String? { get }
+    var dilution: Double { get }
+    var altitude: Double { get }
+    var geoHash: String? { get }
+    
+    var locationHeading: H? { get }
+}
+
+public struct Location: Codable, GeneralLocation {
+    
+    public typealias A = Address
+    public typealias H = Heading
+    
+    public let locationAddress: A?
     public let timestamp: Date?
     public let lat: Double
     public let lng: Double
@@ -78,7 +100,7 @@ public struct Location: Codable {
     public let geoHash: String?
     
     // Heading
-    public let locationHeading: Heading? 
+    public let locationHeading: H?
     
     public enum CodingKeys: String, CodingKey {
         case locationAddress = "Address"
