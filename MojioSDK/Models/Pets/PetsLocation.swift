@@ -21,7 +21,19 @@ public enum LocationType: String, Codable {
     case activityLocation = "ActivityLocation"
 }
 
-public struct PetsLocation: Codable {
+public protocol GeneralPetsLocation {
+    var latitude: Double? { get }
+    var longitude: Double? { get }
+    var altitude: Double? { get }
+    var timestamp: Date? { get }
+    var heading: Double? { get }
+    var hError: Double? { get }
+    var vError: Double? { get }
+    var type: LocationType? { get }
+    var name: String? { get }
+}
+
+public struct PetsLocation: Codable, GeneralPetsLocation {
     public let latitude: Double?
     public let longitude: Double?
     public let altitude: Double?

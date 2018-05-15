@@ -16,7 +16,14 @@
 import Foundation
 import CoreLocation
 
-public struct Stats: Codable {
+public protocol GeneralStats {
+    var id: String? { get }
+    var date: Date? { get }
+    var steps: Int? { get }
+    var activeMinutes: Int? { get }
+}
+
+public struct Stats: Codable, GeneralStats {
     public let id: String?
     public let date: Date?
     public let steps: Int?

@@ -22,7 +22,7 @@ public protocol GeneralImage {
     var ownerId: String? { get }
     var url: URL? { get }
     var mimeType: MimeType.Image? { get }
-    var deleted: Bool?
+    var deleted: Bool? { get }
 }
 
 public struct Image: Codable, GeneralImage {
