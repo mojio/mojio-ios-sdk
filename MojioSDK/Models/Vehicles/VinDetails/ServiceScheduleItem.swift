@@ -15,7 +15,25 @@
 
 import Foundation
 
-public struct ServiceScheduleItem: Codable {
+public protocol ServiceScheduleItemModel: Codable {
+    
+    associatedtype I: ServiceIntervalModel
+    associatedtype E: ServiceEventModel
+    
+    var transNotes: String? { get }
+    var scheduleName: String? { get }
+    var scheduleDescription: String? { get }
+    var maintenanceCategory: String? { get }
+    var maintenanceName: String? { get }
+    var maintenanceNotes: String? { get }
+    var intervals: [I] { get }
+    var events: [E] { get }
+}
+
+public struct ServiceScheduleItem: ServiceScheduleItemModel {
+    
+    public typealias I = ServiceInterval
+    public typealias E = ServiceEvent
     
     public let transNotes: String?
     public let scheduleName: String?
@@ -23,8 +41,8 @@ public struct ServiceScheduleItem: Codable {
     public let maintenanceCategory: String?
     public let maintenanceName: String?
     public let maintenanceNotes: String?
-    public let intervals: [ServiceInterval]
-    public let events: [ServiceEvent]
+    public let intervals: [I]
+    public let events: [E]
     
     public enum CodingKeys: String, CodingKey {
         case transNotes = "TransNotes"

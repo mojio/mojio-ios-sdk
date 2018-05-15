@@ -14,14 +14,30 @@
  *******************************************************************************/
 
 import Foundation
+import MojioCore
 
-public struct Accelerometer: Codable {
+public protocol AccelerometerModel: Codable {
     
-    public var x: ProperAcceleration? = nil
-    public var y: ProperAcceleration? = nil
-    public var z: ProperAcceleration? = nil
-    public var magnitude: ProperAcceleration? = nil
-    public var samplingInterval: TimePeriod? = nil
+    associatedtype A: ProperAccelerationModel
+    associatedtype T: TimePeriodModel
+    
+    var x: A? { get }
+    var y: A? { get }
+    var z: A? { get }
+    var magnitude: A? { get }
+    var samplingInterval: T? { get }
+}
+
+public struct Accelerometer: AccelerometerModel {
+    
+    public typealias A = ProperAcceleration
+    public typealias T = TimePeriod
+
+    public var x: A? = nil
+    public var y: A? = nil
+    public var z: A? = nil
+    public var magnitude: A? = nil
+    public var samplingInterval: T? = nil
     
     public enum CodingKeys: String, CodingKey {
         case x = "X"

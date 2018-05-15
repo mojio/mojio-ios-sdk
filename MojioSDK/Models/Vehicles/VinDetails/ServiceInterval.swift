@@ -15,7 +15,16 @@
 
 import Foundation
 
-public struct ServiceInterval: Codable {
+public protocol ServiceIntervalModel: Codable {
+    var operatingParameter: String? { get }
+    var operatingParameterNotes: String? { get }
+    var intervalType: String? { get }
+    var value: Double { get }
+    var units: String? { get }
+    var initialValue: Double { get }
+}
+
+public struct ServiceInterval: ServiceIntervalModel {
     
     public let operatingParameter: String?
     public let operatingParameterNotes: String?

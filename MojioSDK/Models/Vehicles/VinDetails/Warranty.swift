@@ -15,7 +15,14 @@
 
 import Foundation
 
-public struct Warranty: Codable {
+public protocol WarrantyModel: Codable {
+    var name: String? { get }
+    var type: String? { get }
+    var months: String? { get }
+    var km: Double? { get }
+}
+
+public struct Warranty: WarrantyModel {
     
     public let name: String?
     public let type: String?

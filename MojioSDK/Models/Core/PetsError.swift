@@ -15,24 +15,24 @@
 
 import Foundation
 
-public protocol BaseError: Swift.Error {
+public protocol ErrorModel: Swift.Error {
     var code: String? {get}
     var message: String? {get}
 }
 
-public protocol ErrorList: BaseError {
+public protocol ErrorListModel: ErrorModel {
     var errors: [ApiError]? { get }
 }
 
-public struct ApiErrorAditional: Codable {
+public struct ApiErrorAdditional: Codable {
     let deviceId: String?
 }
 
-public struct ApiError: ErrorList, Codable {
+public struct ApiError: ErrorListModel, Codable {
     public let code: String?
     public let errors: [ApiError]?
     public let message: String?
-    public let additional: ApiErrorAditional?
+    public let additional: ApiErrorAdditional?
     
     public enum CodingKeys: String, CodingKey {
         case code = "Code"
@@ -47,6 +47,6 @@ public struct ApiError: ErrorList, Codable {
         self.code = try container.decodeIfPresent(String.self, forKey: .code)
         self.message = try container.decodeIfPresent(String.self, forKey: .message)
         self.errors = try container.decodeIfPresent([ApiError].self, forKey: .errors)
-        self.additional = try container.decodeIfPresent(ApiErrorAditional.self, forKey: .additional)
+        self.additional = try container.decodeIfPresent(ApiErrorAdditional.self, forKey: .additional)
     }
 }

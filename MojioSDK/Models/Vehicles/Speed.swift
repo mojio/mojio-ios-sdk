@@ -16,8 +16,10 @@
 import Foundation
 import MojioCore
 
+public typealias SpeedModel = DeviceMeasurement
+
 // Units in SpeedUnits
-public struct Speed: DeviceMeasurement {
+public struct Speed: SpeedModel {
     
     // DeviceMeasurement
     public let baseUnit: String?

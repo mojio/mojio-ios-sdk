@@ -22,14 +22,38 @@ public enum AssetType: String, Codable {
     case other = "Other"
 }
 
-public struct Asset: Codable, PrimaryKey {
+public protocol AssetModel: Codable, PrimaryKey {
+    
+    associatedtype L: PetsLocationModel
+    associatedtype D: PetDetailsModel
+    
+    var id: String { get }
+    var name: String? { get }
+    var deviceId: String? { get }
+    var location: L? { get }
+    var speed: Double? { get }
+    var type: AssetType? { get }
+    var pet: D? { get }
+    var ownerId: String? { get }
+    var profileImageId: String? { get }
+    var profileImageUri: URL? { get }
+    var deleted: Bool? { get }
+    var createdOn: Date? { get }
+    var lastModified: Date? { get }
+}
+
+public struct Asset: AssetModel {
+    
+    public typealias L = PetsLocation
+    public typealias D = PetDetails
+    
     public let id: String
     public let name: String?
     public let deviceId: String?
-    public let location: PetsLocation?
+    public let location: L?
     public let speed: Double?
     public let type: AssetType?
-    public let pet: PetDetails?
+    public let pet: D?
     public let ownerId: String?
     public let profileImageId: String?
     public let profileImageUri: URL?

@@ -16,8 +16,12 @@
 import Foundation
 import MojioCore
 
+public protocol OdometerModel: DeviceMeasurement {
+    var rolloverValue: Double { get }
+}
+
 // Units in DistanceUnits
-public struct Odometer: DeviceMeasurement {
+public struct Odometer: OdometerModel {
     
     // DeviceMeasurement
     public let baseUnit: String?

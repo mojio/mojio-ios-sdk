@@ -15,11 +15,25 @@
 
 import Foundation
 
-public struct ResponseArray<T: Codable>: Codable {
+public protocol ResponseArrayModel: Codable {
+    
+    associatedtype T: Codable
+    associatedtype L: LinksModel
+    
+    var data: [T] { get }
+    var results: Int? { get }
+    var totalCount: Int? { get }
+    var links: L? { get }
+}
+
+public struct ResponseArray<T: Codable>: ResponseArrayModel {
+    
+    public typealias L = Links
+    
     public let data: [T]
     public let results: Int?
     public let totalCount: Int?
-    public let links: Links?
+    public let links: L?
     
     public enum CodingKeys: String, CodingKey {
         case data = "Data"
@@ -29,7 +43,16 @@ public struct ResponseArray<T: Codable>: Codable {
     }
 }
 
-public struct RangeResponse<E: Codable> {
+public protocol RangeResponseModel {
+    
+    associatedtype E: Codable
+    
+    var response: ResponseArray<E> { get }
+    var offset: Int? { get }
+    var limit: Int? { get }
+}
+
+public struct RangeResponse<E: Codable>: RangeResponseModel {
     public let response: ResponseArray<E>
     public let offset: Int?
     public let limit: Int?

@@ -15,7 +15,23 @@
 
 import Foundation
 
-public struct PlatformServiceSchedule: Codable {
+public protocol PlatformServiceScheduleModel: Codable {
+    var initialValue: Double { get }
+    var intervalType: String? { get }
+    var maintenanceCategory: String? { get }
+    var maintenanceName: String? { get }
+    var maintenanceNotes: String? { get }
+    var operatingParameter: String? { get }
+    var operatingParameterNotes: String? { get }
+    var scheduleDescription: String? { get }
+    var scheduleName: String? { get }
+    var serviceEvent: String? { get }
+    var transNotes: String? { get }
+    var units: String? { get }
+    var value: Double { get }
+}
+
+public struct PlatformServiceSchedule: PlatformServiceScheduleModel {
     
     public let initialValue: Double
     public let intervalType: String?

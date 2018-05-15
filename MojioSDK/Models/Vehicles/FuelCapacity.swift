@@ -16,8 +16,10 @@
 import Foundation
 import MojioCore
 
+public typealias FuelCapacityModel = DeviceMeasurement
+
 // Units in FuelCapacityUnits
-public struct FuelCapacity: DeviceMeasurement {
+public struct FuelCapacity: FuelCapacityModel {
 
     // DeviceMeasurement
     public let baseUnit: String?

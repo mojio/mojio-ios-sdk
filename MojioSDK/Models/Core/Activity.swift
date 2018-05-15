@@ -53,7 +53,7 @@ internal extension ActivityType {
     }
 }
 
-public protocol ActivityLocationBase: Codable {
+public protocol ActivityLocationModel: Codable {
     var type: ActivityType? {get}
     var name: String? {get}
     var latitude: Double {get}
@@ -62,7 +62,7 @@ public protocol ActivityLocationBase: Codable {
     var radius: Double {get}
 }
 
-public struct ActivityLocation: ActivityLocationBase {
+public struct ActivityLocation: ActivityLocationModel {
     public let type: ActivityType?
     public let name: String?
     public let latitude: Double
@@ -80,9 +80,9 @@ public struct ActivityLocation: ActivityLocationBase {
     }
 }
 
-public protocol ActivityBase: Codable, PrimaryKey {
+public protocol ActivityModel: Codable, PrimaryKey {
     
-    associatedtype L: ActivityLocationBase
+    associatedtype L: ActivityLocationModel
     
     var id: String { get }
     var type: ActivityType? { get }
@@ -103,11 +103,11 @@ public protocol ActivityBase: Codable, PrimaryKey {
     var icon: Dictionary<String, String>? {get}
 }
 
-public func ==<A: ActivityBase>(lhs: A, rhs: A) -> Bool {
+public func ==<A: ActivityModel>(lhs: A, rhs: A) -> Bool {
     return lhs.id == rhs.id
 }
 
-public struct Activity: ActivityBase {
+public struct Activity: ActivityModel {
     
     public typealias L = ActivityLocation
 
@@ -146,9 +146,9 @@ public struct Activity: ActivityBase {
     }
 }
 
-public protocol RootActivityBase: ActivityBase {
+public protocol RootActivityModel: ActivityModel {
     
-    associatedtype A: ActivityBase
+    associatedtype A: ActivityModel
 
     var actor: A? { get }
     var target: A? { get }
@@ -160,7 +160,7 @@ public protocol RootActivityBase: ActivityBase {
     var audience: A? { get }
 }
 
-public struct RootActivity: RootActivityBase {
+public struct RootActivity: RootActivityModel {
     
     public typealias L = ActivityLocation
     public typealias A = Activity

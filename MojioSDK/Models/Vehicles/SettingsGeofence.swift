@@ -16,28 +16,22 @@
 import Foundation
 import MojioCore
 
-public protocol TripPolylineModel: Codable, PrimaryKey {
+public protocol SettingsGeofenceModel: Codable, PrimaryKey {
     var id: String { get }
-    var polyline: String? { get }
-    var createdOn: Date? { get }
-    var lastModified: Date? { get }
-    var deleted: Bool { get }
+    var enableEnterActivity: Bool { get }
+    var enableExitActivity: Bool { get }
 }
 
-public struct Polyline: TripPolylineModel {
+public struct SettingsGeofence: SettingsGeofenceModel {
     
     public let id: String
-    public let polyline: String?
-    public let createdOn: Date?
-    public let lastModified: Date?
-    public let deleted: Bool
+    public let enableEnterActivity: Bool
+    public let enableExitActivity: Bool
     
     public enum CodingKeys: String, CodingKey {
         case id = "Id"
-        case polyline = "Polyline"
-        case createdOn = "CreatedOn"
-        case lastModified = "LastModified"
-        case deleted = "Deleted"
+        case enableEnterActivity = "EnableEnterActivity"
+        case enableExitActivity = "EnableExitActivity"
     }
     
     public init(from decoder: Decoder) throws {
@@ -46,18 +40,12 @@ public struct Polyline: TripPolylineModel {
             let container = try decoder.container(keyedBy: CodingKeys.self)
             
             self.id = try container.decode(String.self, forKey: .id)
-            self.polyline = try container.decodeIfPresent(String.self, forKey: .polyline)
-            self.createdOn = try container.decodeIfPresent(String.self, forKey: .createdOn).flatMap { $0.dateFromIso8601 }
-            self.lastModified = try container.decodeIfPresent(String.self, forKey: .lastModified).flatMap { $0.dateFromIso8601 }
-            self.deleted = try container.decodeIfPresent(Bool.self, forKey: .deleted) ?? false
+            self.enableEnterActivity = try container.decode(Bool.self, forKey: .enableEnterActivity)
+            self.enableExitActivity = try container.decode(Bool.self, forKey: .enableExitActivity)
         }
         catch {
             debugPrint(error)
             throw error
         }
-    }
-    
-    public func encode(to encoder: Encoder) throws {
-        
     }
 }

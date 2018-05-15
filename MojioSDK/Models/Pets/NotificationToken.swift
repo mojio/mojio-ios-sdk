@@ -15,8 +15,13 @@
 
 import Foundation
 
+public protocol NotificationTokenModel: Codable {
+    var id: String { get }
+    var platform: String? { get }
+    var token: String? { get }
+}
 
-public struct NotificationToken: Codable {
+public struct NotificationToken: NotificationTokenModel {
     public let id: String
     public let platform: String?
     public let token: String?

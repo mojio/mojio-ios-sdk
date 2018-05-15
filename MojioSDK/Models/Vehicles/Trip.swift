@@ -16,7 +16,63 @@
 import Foundation
 import MojioCore
 
-public struct Trip: Codable, PrimaryKey {
+public protocol TripModel: Codable, PrimaryKey {
+    
+    associatedtype O: OdometerModel
+    associatedtype L: LocationModel
+    associatedtype H: HarshEventModel
+    associatedtype I: IdleEventState
+    associatedtype FL: FuelLevelModel
+    associatedtype FE: FuelEfficiencyModel
+    associatedtype D: DistanceModel
+    associatedtype S: SpeedModel
+    associatedtype R: RPMModel
+    associatedtype A: AccelerationModel
+    
+    var id: String { get }
+    var vehicleId: String? { get }
+    var name: String? { get }
+    var mojioId: String? { get }
+    var ownerId: String? { get }
+    var completed: Bool? { get }
+    var duration: TimeInterval? { get }
+    var distance: D? { get }
+    var startTimestamp: Date? { get }
+    var endTimestamp: Date? { get }
+    var startOdometer: O? { get }
+    var endOdometer: O? { get }
+    var startLocation: L? { get }
+    var endLocation: L? { get }
+    var maxSpeed: S? { get }
+    var maxRPM: R? { get }
+    var maxAcceleration: A? { get }
+    var maxDeceleration: A? { get }
+    var polyline: String? { get }
+    var harshEvents: [H] { get }
+    var idleEvents: [I] { get }
+    var fuelEfficiency: FE? { get }
+    var startFuelLevel: FL? { get }
+    var endFuelLevel: FL? { get }
+    var idlingCount: Int? { get }
+    var harshAccelCount: Int? { get }
+    var harshDecelCount: Int? { get }
+    var tags: [String] { get }
+    var createdOn: Date? { get }
+    var lastModified: Date? { get }
+}
+
+public struct Trip: TripModel {
+    
+    public typealias O = Odometer
+    public typealias L = Location
+    public typealias H = HarshEvent
+    public typealias I = IdleEvent
+    public typealias FL = FuelLevel
+    public typealias FE = FuelEfficiency
+    public typealias D = Distance
+    public typealias S = Speed
+    public typealias R = RPM
+    public typealias A = Acceleration
     
     public let id: String
     public let vehicleId: String?
@@ -25,23 +81,23 @@ public struct Trip: Codable, PrimaryKey {
     public let ownerId: String?
     public let completed: Bool?
     public let duration: TimeInterval?
-    public let distance: Distance?
+    public let distance: D?
     public let startTimestamp: Date?
     public let endTimestamp: Date?
-    public let startOdometer: Odometer?
-    public let endOdometer: Odometer?
-    public let startLocation: Location?
-    public let endLocation: Location?
-    public let maxSpeed: Speed?
-    public let maxRPM: RPM?
-    public let maxAcceleration: Acceleration?
-    public let maxDeceleration: Acceleration?
+    public let startOdometer: O?
+    public let endOdometer: O?
+    public let startLocation: L?
+    public let endLocation: L?
+    public let maxSpeed: S?
+    public let maxRPM: R?
+    public let maxAcceleration: A?
+    public let maxDeceleration: A?
     public let polyline: String?
-    public let harshEvents: [HarshEvent]
-    public let idleEvents: [IdleEvent]
-    public let fuelEfficiency: FuelEfficiency?
-    public let startFuelLevel: FuelLevel?
-    public let endFuelLevel: FuelLevel?
+    public let harshEvents: [H]
+    public let idleEvents: [I]
+    public let fuelEfficiency: FE?
+    public let startFuelLevel: FL?
+    public let endFuelLevel: FL?
     public let idlingCount: Int?
     public let harshAccelCount: Int?
     public let harshDecelCount: Int?

@@ -14,8 +14,32 @@
  *******************************************************************************/
 
 import Foundation
+import MojioCore
 
-public struct VinDetails: Codable {
+public protocol VinDetailsModel: Codable {
+    
+    associatedtype F: FuelCapacityModel
+    
+    var timestamp: Date? { get }
+    var vin: String? { get }
+    var year: Int { get }
+    var make: String? { get }
+    var model: String? { get }
+    var engine: String? { get }
+    var cylinders: Int? { get }
+    var totalFuelCapacity: F? { get }
+    var fuelType: String? { get }
+    var cityFuelEfficiency: Double { get }
+    var highwayFuelEfficiency: Double { get }
+    var combinedFuelEfficiency: Double { get }
+    var transmission: String? { get }
+    var message: String? { get }
+    var success: Bool? { get }
+}
+
+public struct VinDetails: VinDetailsModel {
+    
+    public typealias F = FuelCapacity
     
     public let timestamp: Date?
     public let vin: String?
@@ -24,7 +48,7 @@ public struct VinDetails: Codable {
     public let model: String?
     public let engine: String?
     public let cylinders: Int?
-    public let totalFuelCapacity: FuelCapacity?
+    public let totalFuelCapacity: F?
     public let fuelType: String?
     public let cityFuelEfficiency: Double
     public let highwayFuelEfficiency: Double

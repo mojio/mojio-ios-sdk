@@ -16,8 +16,10 @@
 import Foundation
 import MojioCore
 
+public typealias RPMModel = DeviceMeasurement
+
 // Units in RPMUnits
-public struct RPM: DeviceMeasurement {
+public struct RPM: RPMModel {
     
     // DeviceMeasurement
     public let baseUnit: String?

@@ -15,7 +15,18 @@
 
 import Foundation
 
-public struct Engine: Codable {
+public protocol EngineModel: Codable {
+    var name: String? { get }
+    var cylinders: String? { get }
+    var displacement: Double { get }
+    var fuelInduction: String? { get }
+    var fuelQuality: String? { get }
+    var fuelType: String? { get }
+    var maxHp: String? { get }
+    var maxHpAt: String? { get }
+}
+
+public struct Engine: EngineModel {
     
     public let name: String?
     public let cylinders: String?

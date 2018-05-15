@@ -14,13 +14,26 @@
  *******************************************************************************/
 
 import Foundation
+import MojioCore
 
-public struct IdleState: Codable {
+public protocol IdleStateModel: Codable {
+    
+    associatedtype T: TimePeriodModel
+    
+    var timestamp: Date? { get }
+    var value: Bool { get }
+    var startTime: String? { get }
+    var duration: T? { get }
+}
+
+public struct IdleState: IdleStateModel {
+    
+    public typealias T = TimePeriod
     
     public var timestamp: Date? = nil
     public var value: Bool = false
     public var startTime: String? = nil
-    public var duration: TimePeriod? = nil
+    public var duration: T? = nil
     
     public enum CodingKeys: String, CodingKey {
         case timestamp = "Timestamp"

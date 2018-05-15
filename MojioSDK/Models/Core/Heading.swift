@@ -19,7 +19,12 @@ public enum HeadingUnit: String {
     case degree = "Degree"
 }
 
-public struct Heading: DeviceMeasurement {
+public protocol HeadingModel: DeviceMeasurement {
+    var direction: String? { get }
+    var leftTurn: Bool { get }
+}
+
+public struct Heading: HeadingModel {
     
     // DeviceMeasurement
     public let baseUnit: String?

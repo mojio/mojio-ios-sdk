@@ -16,8 +16,10 @@
 import Foundation
 import MojioCore
 
+public typealias TimePeriodModel = DeviceMeasurement
+
 // Units in TimePeriodUnits
-public struct TimePeriod: DeviceMeasurement {
+public struct TimePeriod: TimePeriodModel {
     
     // DeviceMeasurement
     public let baseUnit: String?

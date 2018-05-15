@@ -16,8 +16,20 @@
 import Foundation
 import MojioCore
 
+public protocol BatteryModel: DeviceMeasurement {
+    
+    associatedtype T: TimePeriodModel
+    
+    var connected: Bool { get }
+    var riskSeverity: String? { get }
+    var lowVoltageDuration: T? { get }
+    var highVoltageDuration: T? { get }
+}
+
 // Units in BatteryVoltageUnits
-public struct Battery: DeviceMeasurement {
+public struct Battery: BatteryModel {
+    
+    public typealias T = TimePeriod
     
     //DeviceMeasurement
     public let baseUnit: String?
@@ -30,8 +42,8 @@ public struct Battery: DeviceMeasurement {
     
     // RiskSeverity
     public var riskSeverity: String? = nil
-    public var lowVoltageDuration: TimePeriod? = nil
-    public var highVoltageDuration: TimePeriod? = nil
+    public var lowVoltageDuration: T? = nil
+    public var highVoltageDuration: T? = nil
     
     public enum CodingKeys: String, CodingKey {
         case connected = "Connected"

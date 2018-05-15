@@ -16,11 +16,39 @@
 import Foundation
 import MojioCore
 
-protocol VinProtocol {
+public protocol VinModel: Codable {
     
+    associatedtype E: EngineModel
+    associatedtype T: TransmissionModel
+    associatedtype W: WarrantyModel
+    associatedtype R: RecallModel
+    associatedtype S: ServiceBulletinModel
+    
+    var vin: String { get }
+    var timestamp: Date? { get }
+    var market: String? { get }
+    var year: Int { get }
+    var make: String? { get }
+    var model: String? { get }
+    var vehicleType: String? { get }
+    var bodyType: String? { get }
+    var driveType: String? { get }
+    var fuelTankSize: Double { get }
+    var epaFuelEfficiency: Double { get }
+    var vehicleEngine: E? { get }
+    var vehicleTransmission: T? { get }
+    var warranties: [W] { get }
+    var recalls: [R] { get }
+    var serviceBulletins: [S] { get }
 }
 
-public struct Vin: Codable {
+public struct Vin: VinModel {
+    
+    public typealias E = Engine
+    public typealias T = Transmission
+    public typealias W = Warranty
+    public typealias R = Recall
+    public typealias S = ServiceBulletin
     
     public let vin: String
     public let timestamp: Date?
@@ -33,11 +61,11 @@ public struct Vin: Codable {
     public let driveType: String?
     public let fuelTankSize: Double
     public let epaFuelEfficiency: Double
-    public let vehicleEngine: Engine?
-    public let vehicleTransmission: Transmission?
-    public let warranties: [Warranty]
-    public let recalls: [Recall]
-    public let serviceBulletins: [ServiceBulletin]
+    public let vehicleEngine: E?
+    public let vehicleTransmission: T?
+    public let warranties: [W]
+    public let recalls: [R]
+    public let serviceBulletins: [S]
     
     enum CodingKeys: String, CodingKey {
         case vin = "VIN"

@@ -16,11 +16,29 @@
 import UIKit
 import MojioCore
 
-public struct Group: Codable, PrimaryKey {
+public protocol GroupModel: Codable, PrimaryKey {
+    
+    associatedtype U: UserModel
+    
+    var id: String { get }
+    var name: String? { get }
+    var description: String? { get }
+    var users: [U] { get }
+    var tags: [String] { get }
+    var ownerId: String? { get }
+    var deleted: Bool? { get }
+    var createdOn: String? { get }
+    var lastModified: String? { get }
+}
+
+public struct Group: GroupModel {
+    
+    public typealias U = User
+    
     public let id: String
     public let name: String?
     public let description: String?
-    public let users: [User]
+    public let users: [U]
     public let tags: [String]
     public let ownerId: String?
     public let deleted: Bool?

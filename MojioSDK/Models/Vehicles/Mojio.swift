@@ -16,7 +16,36 @@
 import Foundation
 import MojioCore
 
-public struct Mojio: Codable, PrimaryKey {
+public protocol MojioModel: Codable, PrimaryKey {
+    
+    associatedtype L: LocationModel
+    associatedtype W: WifiRadioModel
+    associatedtype B: BooleanStateModel
+    
+    var id: String { get }
+    var name: String? { get }
+    var imei: String? { get }
+    var lastContactTime: Date? { get }
+    var gatewayTime: Date? { get }
+    var vehicleId: String? { get }
+    var location: L? { get }
+    var tags: [String] { get }
+    var wifi: W? { get }
+    var connectedState: B? { get }
+    var createdOn: Date? { get }
+    var lastModified: Date? { get }
+    var deleted: Bool { get }
+    var msisdn: String? { get }
+    var iccid: String? { get }
+}
+
+public struct Mojio: MojioModel {
+    
+    public typealias L = Location
+    
+    public typealias W = WifiRadio
+    
+    public typealias B = BooleanState
     
     public let id: String
     public let name: String?
@@ -24,10 +53,10 @@ public struct Mojio: Codable, PrimaryKey {
     public let lastContactTime: Date?
     public let gatewayTime: Date?
     public let vehicleId: String?
-    public let location: Location?
+    public let location: L?
     public let tags: [String]
-    public let wifi: WifiRadio?
-    public let connectedState: BooleanState?
+    public let wifi: W?
+    public let connectedState: B?
     public let createdOn: Date?
     public let lastModified: Date?
     public let deleted: Bool

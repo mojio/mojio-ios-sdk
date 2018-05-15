@@ -16,7 +16,26 @@
 import Foundation
 import MojioCore
 
-public struct App: Codable, PrimaryKey {
+public protocol AppModel: Codable, PrimaryKey {
+    
+    associatedtype I: ImageModel
+    
+    var id: String { get }
+    var name: String? { get }
+    var description: String? { get }
+    var downloads: Int? { get }
+    var redirectUris: [String] { get }
+    var tags: [String] { get }
+    var ownerId: String? { get }
+    var deleted: Bool? { get }
+    var image: I? { get }
+    var createdOn: Date? { get }
+    var lastModified: Date? { get }
+}
+
+public struct App: AppModel {
+    
+    public typealias I = Image
     
     public let id: String
     public let name: String?
@@ -26,7 +45,7 @@ public struct App: Codable, PrimaryKey {
     public let tags: [String]
     public let ownerId: String?
     public let deleted: Bool?
-    public let image: Image?
+    public let image: I?
     public let createdOn: Date?
     public let lastModified: Date?
     

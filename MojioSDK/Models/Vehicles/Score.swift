@@ -28,7 +28,14 @@ public enum ScoreMethods: String, Codable {
     }
 }
 
-public struct Score: Codable {
+public protocol ScoreModel: Codable {
+    var scoringMethod: ScoreMethods? { get }
+    var value: Double { get }
+    var percentile: Double { get }
+    var average: Double { get }
+}
+
+public struct Score: ScoreModel {
     
     // ScoreMethods
     public let scoringMethod: ScoreMethods?

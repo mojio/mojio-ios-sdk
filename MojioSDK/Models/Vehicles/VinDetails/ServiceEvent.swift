@@ -15,7 +15,12 @@
 
 import Foundation
 
-public struct ServiceEvent: Codable {
+public protocol ServiceEventModel: Codable {
+    var computerCode: String? { get }
+    var event: String? { get }
+}
+
+public struct ServiceEvent: ServiceEventModel {
     
     public let computerCode: String?
     public let event: String?

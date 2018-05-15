@@ -42,7 +42,7 @@ DEPENDENCIES:
   - SwiftyJSON
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://github.com/cocoapods/specs.git:
     - Alamofire
     - AlamofireImage
     - KeychainSwift
@@ -74,4 +74,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 6b2a94183639127f6e76fec7e6ed97c7b75afdce
 
-COCOAPODS: 1.5.0
+COCOAPODS: 1.5.2

@@ -51,7 +51,19 @@ public enum Weight: String, Codable {
     }
 }
 
-public struct PetDetails: Codable {
+public protocol PetDetailsModel: Codable {
+    var type: PetType? { get }
+    var gender: Gender? { get }
+    var breed: String? { get }
+    var dateOfBirth: Date? { get }
+    var registrationId: String? { get }
+    var vetName: String? { get }
+    var vetPhoneNumber: String? { get }
+    var lastVetVisit: Date? { get }
+    var weight: Int? { get }
+}
+
+public struct PetDetails: PetDetailsModel {
     public let type: PetType?
     public let gender: Gender?
     public let breed: String?
