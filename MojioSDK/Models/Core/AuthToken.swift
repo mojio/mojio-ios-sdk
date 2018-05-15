@@ -15,7 +15,14 @@
 
 import Foundation
 
-public struct AuthToken: Codable  {
+public protocol GeneralAuthToken {
+    var accessToken: String { get }
+    var expiry: Date { get }
+    var refreshToken: String? { get }
+    var uniqueId: String? { get }
+}
+
+public struct AuthToken: Codable, GeneralAuthToken {
     public var accessToken: String = String.empty
     public var expiry: Date = Date()
     public var refreshToken: String? = nil

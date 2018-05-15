@@ -15,7 +15,15 @@
 
 import Foundation
 
-public struct Links: Codable {
+public protocol GeneralLinks {
+    var linkSelf: URL? { get }
+    var permission: URL? { get }
+    var permissions: URL? { get }
+    var first: URL? { get }
+    var next: URL? { get }
+}
+
+public struct Links: Codable, GeneralLinks {
     public let linkSelf: URL?
     public let permission: URL?
     public let permissions: URL?
