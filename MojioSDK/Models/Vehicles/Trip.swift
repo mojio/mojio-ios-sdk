@@ -16,18 +16,18 @@
 import Foundation
 import MojioCore
 
-public protocol GeneralTrip {
+public protocol TripModel: Codable, PrimaryKey {
     
-    associatedtype O: GeneralOdometer
-    associatedtype L: GeneralLocation
-    associatedtype H: GeneralHarshEvent
-    associatedtype I: GeneralIdleEvent
-    associatedtype FL: GeneralFuelLevel
-    associatedtype FE: GeneralFuelEfficiency
-    associatedtype D: GeneralDistance
-    associatedtype S: GeneralSpeed
-    associatedtype R: GeneralRPM
-    associatedtype A: GeneralAcceleration
+    associatedtype O: OdometerModel
+    associatedtype L: LocationModel
+    associatedtype H: HarshEventModel
+    associatedtype I: IdleEventState
+    associatedtype FL: FuelLevelModel
+    associatedtype FE: FuelEfficiencyModel
+    associatedtype D: DistanceModel
+    associatedtype S: SpeedModel
+    associatedtype R: RPMModel
+    associatedtype A: AccelerationModel
     
     var id: String { get }
     var vehicleId: String? { get }
@@ -61,7 +61,7 @@ public protocol GeneralTrip {
     var lastModified: Date? { get }
 }
 
-public struct Trip: Codable, PrimaryKey, GeneralTrip {
+public struct Trip: TripModel {
     
     public typealias O = Odometer
     public typealias L = Location

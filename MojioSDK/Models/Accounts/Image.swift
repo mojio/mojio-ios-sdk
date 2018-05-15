@@ -15,13 +15,13 @@
 
 import Foundation
 
-public protocol GeneralImage {
+public protocol ImageModel: Codable {
     var source: URL? { get }
     var normal: URL? { get }
     var thumbnail: URL? { get }
 }
 
-public struct Image: Codable, GeneralImage  {
+public struct Image: ImageModel  {
     public let source: URL?
     public let normal: URL?
     public let thumbnail: URL?

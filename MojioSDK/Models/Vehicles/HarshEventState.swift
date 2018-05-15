@@ -39,14 +39,14 @@ public enum HarshEventTurnType: String, Codable {
     }
 }
 
-public protocol GeneralHarshEventState {
+public protocol HarshEventStateModel: Codable {
     var timestamp: Date? { get }
     var value: Bool { get }
     var eventType: HarshEventType? { get }
     var turnType: HarshEventTurnType? { get }
 }
 
-public struct HarshEventState: Codable, GeneralHarshEventState {
+public struct HarshEventState: HarshEventStateModel {
     
     public let timestamp: Date?
     public let value: Bool

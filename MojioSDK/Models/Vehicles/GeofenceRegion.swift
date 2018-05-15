@@ -27,9 +27,9 @@ public enum GeofenceRegionType: String, Codable {
     }
 }
 
-public protocol GeneralGeofenceRegion {
+public protocol GeofenceRegionModel: Codable {
     
-    associatedtype D: GeneralDistance
+    associatedtype D: DistanceModel
     
     var type: GeofenceRegionType? { get }
     var lat: Double? { get }
@@ -37,7 +37,7 @@ public protocol GeneralGeofenceRegion {
     var radius: D? { get }
 }
 
-public struct GeofenceRegion: Codable, GeneralGeofenceRegion {
+public struct GeofenceRegion: GeofenceRegionModel {
     
     public typealias D = Distance
     

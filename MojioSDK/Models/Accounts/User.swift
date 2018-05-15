@@ -16,10 +16,10 @@
 import Foundation
 import MojioCore
 
-public protocol GeneralUser {
+public protocol UserModel: Codable, PrimaryKey {
     
-    associatedtype E: GeneralEmail
-    associatedtype P: GeneralPhoneNumber
+    associatedtype E: EmailModel
+    associatedtype P: PhoneNumberModel
     
     var id: String { get }
     var firstName: String? { get }
@@ -34,7 +34,7 @@ public protocol GeneralUser {
     var lastModified: Date? { get }
 }
 
-public struct User: Codable, PrimaryKey, GeneralUser {
+public struct User: UserModel {
     
     public typealias E = Email
     public typealias P = PhoneNumber

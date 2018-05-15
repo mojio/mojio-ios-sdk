@@ -15,12 +15,12 @@
 
 import Foundation
 
-public protocol GeneralServiceEvent {
+public protocol ServiceEventModel: Codable {
     var computerCode: String? { get }
     var event: String? { get }
 }
 
-public struct ServiceEvent: Codable, GeneralServiceEvent {
+public struct ServiceEvent: ServiceEventModel {
     
     public let computerCode: String?
     public let event: String?

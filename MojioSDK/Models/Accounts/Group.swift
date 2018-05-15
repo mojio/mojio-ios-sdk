@@ -16,9 +16,9 @@
 import UIKit
 import MojioCore
 
-public protocol GeneralGroup {
+public protocol GroupModel: Codable, PrimaryKey {
     
-    associatedtype U: GeneralUser
+    associatedtype U: UserModel
     
     var id: String { get }
     var name: String? { get }
@@ -31,7 +31,7 @@ public protocol GeneralGroup {
     var lastModified: String? { get }
 }
 
-public struct Group: Codable, PrimaryKey, GeneralGroup {
+public struct Group: GroupModel {
     
     public typealias U = User
     

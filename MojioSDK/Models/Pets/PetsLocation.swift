@@ -21,7 +21,7 @@ public enum LocationType: String, Codable {
     case activityLocation = "ActivityLocation"
 }
 
-public protocol GeneralPetsLocation {
+public protocol PetsLocationModel: Codable {
     var latitude: Double? { get }
     var longitude: Double? { get }
     var altitude: Double? { get }
@@ -33,7 +33,7 @@ public protocol GeneralPetsLocation {
     var name: String? { get }
 }
 
-public struct PetsLocation: Codable, GeneralPetsLocation {
+public struct PetsLocation: PetsLocationModel {
     public let latitude: Double?
     public let longitude: Double?
     public let altitude: Double?

@@ -15,10 +15,10 @@
 
 import Foundation
 
-public protocol GeneralServiceScheduleItem {
+public protocol ServiceScheduleItemModel: Codable {
     
-    associatedtype I: GeneralServiceInterval
-    associatedtype E: GeneralServiceEvent
+    associatedtype I: ServiceIntervalModel
+    associatedtype E: ServiceEventModel
     
     var transNotes: String? { get }
     var scheduleName: String? { get }
@@ -30,7 +30,7 @@ public protocol GeneralServiceScheduleItem {
     var events: [E] { get }
 }
 
-public struct ServiceScheduleItem: Codable, GeneralServiceScheduleItem {
+public struct ServiceScheduleItem: ServiceScheduleItemModel {
     
     public typealias I = ServiceInterval
     public typealias E = ServiceEvent

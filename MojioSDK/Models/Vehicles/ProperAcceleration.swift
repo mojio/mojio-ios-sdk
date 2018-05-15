@@ -16,12 +16,10 @@
 import Foundation
 import MojioCore
 
-public protocol GeneralProperAcceleration: DeviceMeasurement {
-    
-}
+public typealias ProperAccelerationModel = DeviceMeasurement
 
 // Units in AccelerometerUnits
-public struct ProperAcceleration: GeneralProperAcceleration {
+public struct ProperAcceleration: ProperAccelerationModel {
     
     // DeviceMeasurement
     public let baseUnit: String?

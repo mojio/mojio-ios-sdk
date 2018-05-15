@@ -21,7 +21,7 @@ public enum TransactionState: String {
     case failure = "Failure"
 }
 
-public protocol GeneralWifiRadio {
+public protocol WifiRadioModel: Codable {
     var timestamp: Date? { get }
     var ssid: String? { get }
     var password: String? { get }
@@ -30,7 +30,7 @@ public protocol GeneralWifiRadio {
     var strength: Double? { get }
 }
 
-public protocol GeneralWifiRadioUpdate {
+public protocol WifiRadioUpdateModel: Codable {
     var ssid: String? { get }
     var password: String? { get }
     var status: String? { get }
@@ -50,7 +50,7 @@ public enum WifiRadioStatus: String, Codable {
     }
 }
 
-public struct WifiRadio: Codable, GeneralWifiRadio {
+public struct WifiRadio: WifiRadioModel {
     
     public enum CodingKeys: String, CodingKey {
         case timestamp = "Timestamp"
@@ -87,7 +87,7 @@ public struct WifiRadio: Codable, GeneralWifiRadio {
 }
 
 // TODO: Update to handle TTL, etc. - see below
-public struct WifiRadioUpdate: Codable, GeneralWifiRadioUpdate {
+public struct WifiRadioUpdate: WifiRadioUpdateModel {
     public var ssid: String? = nil
     public var password: String? = nil
     public var status: String? = nil

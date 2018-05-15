@@ -31,9 +31,9 @@ public enum GeofenceNotificationType: String, Codable {
     }
 }
 
-public protocol GeneralGeofence {
+public protocol GeofenceModel: Codable, PrimaryKey {
     
-    associatedtype G: GeneralGeofenceRegion
+    associatedtype G: GeofenceRegionModel
     
     var id: String { get }
     var ownerId: String? { get }
@@ -49,7 +49,7 @@ public protocol GeneralGeofence {
     var lastModified: Date? { get }
 }
 
-public struct Geofence: Codable, PrimaryKey, GeneralGeofence {
+public struct Geofence: GeofenceModel {
     
     public typealias G = GeofenceRegion
     

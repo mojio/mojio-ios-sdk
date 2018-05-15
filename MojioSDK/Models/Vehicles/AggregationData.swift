@@ -19,7 +19,7 @@ public enum AggregationDataMeasurementType: String {
     case measureBattery = "battery"
 }
 
-public protocol GeneralAggregationData {
+public protocol AggregationDataModel: Codable {
     var total: Double { get }
     var average: Double { get }
     var max: Double { get }
@@ -31,7 +31,7 @@ public protocol GeneralAggregationData {
     var tripCount: Int { get }
 }
 
-public struct AggregationData: Codable, GeneralAggregationData {
+public struct AggregationData: AggregationDataModel {
     
     public let total        : Double
     public let average      : Double

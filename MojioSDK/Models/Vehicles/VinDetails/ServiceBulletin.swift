@@ -15,7 +15,7 @@
 
 import Foundation
 
-public protocol GeneralServiceBulletin {
+public protocol ServiceBulletinModel: Codable {
     var itemNumber: String? { get }
     var bulletinNumber: String? { get }
     var replacementBulletinNumber: String? { get }
@@ -25,7 +25,7 @@ public protocol GeneralServiceBulletin {
     var summary: String? { get }
 }
 
-public struct ServiceBulletin: Codable, GeneralServiceBulletin {
+public struct ServiceBulletin: ServiceBulletinModel {
     
     public let itemNumber: String?
     public let bulletinNumber: String?

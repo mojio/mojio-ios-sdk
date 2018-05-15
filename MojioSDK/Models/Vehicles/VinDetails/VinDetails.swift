@@ -16,9 +16,9 @@
 import Foundation
 import MojioCore
 
-public protocol GeneralVinDetails {
+public protocol VinDetailsModel: Codable {
     
-    associatedtype F: GeneralFuelCapacity
+    associatedtype F: FuelCapacityModel
     
     var timestamp: Date? { get }
     var vin: String? { get }
@@ -37,7 +37,7 @@ public protocol GeneralVinDetails {
     var success: Bool? { get }
 }
 
-public struct VinDetails: Codable, GeneralVinDetails {
+public struct VinDetails: VinDetailsModel {
     
     public typealias F = FuelCapacity
     

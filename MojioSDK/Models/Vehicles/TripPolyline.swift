@@ -16,7 +16,7 @@
 import Foundation
 import MojioCore
 
-public protocol GeneralTripPolyline {
+public protocol TripPolylineModel: Codable, PrimaryKey {
     var id: String { get }
     var polyline: String? { get }
     var createdOn: Date? { get }
@@ -24,7 +24,7 @@ public protocol GeneralTripPolyline {
     var deleted: Bool { get }
 }
 
-public struct Polyline: Codable, PrimaryKey, GeneralTripPolyline {
+public struct Polyline: TripPolylineModel {
     
     public let id: String
     public let polyline: String?

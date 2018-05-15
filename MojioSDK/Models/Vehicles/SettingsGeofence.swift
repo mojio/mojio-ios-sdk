@@ -16,13 +16,13 @@
 import Foundation
 import MojioCore
 
-public protocol GeneralSettingsGeofence {
+public protocol SettingsGeofenceModel: Codable, PrimaryKey {
     var id: String { get }
     var enableEnterActivity: Bool { get }
     var enableExitActivity: Bool { get }
 }
 
-public struct SettingsGeofence: Codable, PrimaryKey, GeneralSettingsGeofence {
+public struct SettingsGeofence: SettingsGeofenceModel {
     
     public let id: String
     public let enableEnterActivity: Bool

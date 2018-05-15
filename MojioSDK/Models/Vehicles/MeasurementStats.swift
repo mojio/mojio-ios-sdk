@@ -15,9 +15,9 @@
 
 import Foundation
 
-public protocol GeneralMeasurementStatistics {
+public protocol MeasurementStatsModel: Codable {
     
-    associatedtype S: GeneralScore
+    associatedtype S: ScoreModel
     
     var numOfSamples: Double { get }
     var average: Double { get }
@@ -32,7 +32,7 @@ public protocol GeneralMeasurementStatistics {
     var minMaxScore: S? { get }
 }
 
-public struct MeasurementStatistics: Codable, GeneralMeasurementStatistics {
+public struct MeasurementStats: MeasurementStatsModel {
     
     public typealias S = Score
     

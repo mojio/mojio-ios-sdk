@@ -16,9 +16,9 @@
 import Foundation
 import MojioCore
 
-public protocol GeneralBattery: DeviceMeasurement {
+public protocol BatteryModel: DeviceMeasurement {
     
-    associatedtype T: GeneralTimePeriod
+    associatedtype T: TimePeriodModel
     
     var connected: Bool { get }
     var riskSeverity: String? { get }
@@ -27,7 +27,7 @@ public protocol GeneralBattery: DeviceMeasurement {
 }
 
 // Units in BatteryVoltageUnits
-public struct Battery: GeneralBattery {
+public struct Battery: BatteryModel {
     
     public typealias T = TimePeriod
     

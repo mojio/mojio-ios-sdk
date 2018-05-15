@@ -15,7 +15,7 @@
 
 import Foundation
 
-public protocol GeneralAddress {
+public protocol AddressModel: Codable {
     var houseNumber: String? { get }
     var road: String? { get }
     var neighbourhood: String? { get }
@@ -29,7 +29,7 @@ public protocol GeneralAddress {
     var formattedAddress: String? { get }
 }
 
-public struct Address: Codable, GeneralAddress {
+public struct Address: AddressModel {
     
     public let houseNumber: String?
     public let road: String?

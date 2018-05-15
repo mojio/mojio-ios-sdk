@@ -28,13 +28,13 @@ public enum VehicleCompatibilityLevel: String, Codable {
     }
 }
 
-public protocol GeneralVehicleCompatibilityDetails {
+public protocol CompatibilityDetailsModel: Codable {
     var level: VehicleCompatibilityLevel? { get }
     var changed: Bool { get }
     var lastChecked: Date? { get }
 }
 
-public struct CompatibilityDetails: Codable, GeneralVehicleCompatibilityDetails {
+public struct CompatibilityDetails: CompatibilityDetailsModel {
     
     public let level: VehicleCompatibilityLevel?
     public let changed: Bool

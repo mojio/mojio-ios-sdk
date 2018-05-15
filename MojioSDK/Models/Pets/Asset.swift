@@ -22,10 +22,10 @@ public enum AssetType: String, Codable {
     case other = "Other"
 }
 
-public protocol GeneralAsset {
+public protocol AssetModel: Codable, PrimaryKey {
     
-    associatedtype L: GeneralPetsLocation
-    associatedtype D: GeneralPetDetails
+    associatedtype L: PetsLocationModel
+    associatedtype D: PetDetailsModel
     
     var id: String { get }
     var name: String? { get }
@@ -42,7 +42,7 @@ public protocol GeneralAsset {
     var lastModified: Date? { get }
 }
 
-public struct Asset: Codable, PrimaryKey, GeneralAsset {
+public struct Asset: AssetModel {
     
     public typealias L = PetsLocation
     public typealias D = PetDetails

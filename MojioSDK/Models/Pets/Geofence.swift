@@ -20,13 +20,13 @@ public enum GeofenceRegionType: String, Codable {
     case circle = "Circle"
 }
 
-public protocol GeneralGeofenceCircleRegion {
+public protocol GeofenceCircleRegionModel: Codable {
     var latitude: Double? { get }
     var longitude: Double? { get }
     var radius: Double? { get }
 }
 
-public struct GeofenceCircleRegion: Codable, GeneralGeofenceCircleRegion {
+public struct GeofenceCircleRegion: GeofenceCircleRegionModel {
     
     public let latitude: Double?
     public let longitude: Double?
@@ -53,9 +53,9 @@ public struct GeofenceCircleRegion: Codable, GeneralGeofenceCircleRegion {
     }
 }
 
-public protocol GeneralGeofence {
+public protocol GeofenceModel: Codable, PrimaryKey {
     
-    associatedtype G: GeneralGeofenceCircleRegion
+    associatedtype G: GeofenceCircleRegionModel
     
     var id: String { get }
     var name: String? { get }
@@ -70,7 +70,7 @@ public protocol GeneralGeofence {
     var createdOn: Date? { get }
 }
 
-public struct Geofence: Codable, PrimaryKey, GeneralGeofence {
+public struct Geofence: GeofenceModel {
     
     public typealias G = GeofenceCircleRegion
     

@@ -23,11 +23,11 @@ public enum PowerStatus: String, Codable {
     case normal = "Normal"
 }
 
-public protocol GeneralDevice {
+public protocol DeviceModel: Codable, PrimaryKey {
     
-    associatedtype L: GeneralPetsLocation
-    associatedtype T: GeneralDeviceType
-    associatedtype B: GeneralBattery
+    associatedtype L: PetsLocationModel
+    associatedtype T: DeviceTypeModel
+    associatedtype B: BatteryModel
     
     var imei: String { get }
     var deviceId: String { get }
@@ -49,7 +49,7 @@ public protocol GeneralDevice {
     var gatewayTime: Date? { get }
 }
 
-public struct Device: Codable, PrimaryKey, GeneralDevice {
+public struct Device: DeviceModel {
     
     public typealias L = PetsLocation
     public typealias T = DeviceType

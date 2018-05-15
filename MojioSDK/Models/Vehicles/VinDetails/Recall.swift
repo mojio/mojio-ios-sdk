@@ -15,7 +15,7 @@
 
 import Foundation
 
-public protocol GeneralRecall {
+public protocol RecallModel: Codable {
     var title: String? { get }
     var nhtsaCampaignNumber: String? { get }
     var mfrCampaignNumber: String? { get }
@@ -39,7 +39,7 @@ public protocol GeneralRecall {
     var recalledComponentId: String? { get }
 }
 
-public struct Recall: Codable, GeneralRecall {
+public struct Recall: RecallModel {
     
     public var title: String?
     public var nhtsaCampaignNumber: String?

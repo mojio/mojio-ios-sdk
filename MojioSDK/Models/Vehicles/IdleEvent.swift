@@ -16,16 +16,16 @@
 import Foundation
 import MojioCore
 
-public protocol GeneralIdleEvent {
+public protocol IdleEventState: Codable {
     
-    associatedtype I: GeneralIdleState
-    associatedtype L: GeneralLocation
+    associatedtype I: IdleStateModel
+    associatedtype L: LocationModel
     
     var eventState: I? { get }
     var eventLocation: L? { get }
 }
 
-public struct IdleEvent: Codable, GeneralIdleEvent {
+public struct IdleEvent: IdleEventState {
     
     public typealias I = IdleState
     public typealias L = Location

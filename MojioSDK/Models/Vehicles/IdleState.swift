@@ -16,9 +16,9 @@
 import Foundation
 import MojioCore
 
-public protocol GeneralIdleState {
+public protocol IdleStateModel: Codable {
     
-    associatedtype T: GeneralTimePeriod
+    associatedtype T: TimePeriodModel
     
     var timestamp: Date? { get }
     var value: Bool { get }
@@ -26,7 +26,7 @@ public protocol GeneralIdleState {
     var duration: T? { get }
 }
 
-public struct IdleState: Codable, GeneralIdleState {
+public struct IdleState: IdleStateModel {
     
     public typealias T = TimePeriod
     

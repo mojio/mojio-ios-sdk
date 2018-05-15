@@ -16,16 +16,16 @@
 import Foundation
 import MojioCore
 
-public protocol GeneralHarshEvent {
+public protocol HarshEventModel: Codable {
     
-    associatedtype H: GeneralHarshEventState
-    associatedtype L: GeneralLocation
+    associatedtype H: HarshEventStateModel
+    associatedtype L: LocationModel
     
     var eventState: H? { get }
     var eventLocation: L? { get }
 }
 
-public struct HarshEvent: Codable, GeneralHarshEvent {
+public struct HarshEvent: HarshEventModel {
     
     public typealias H = HarshEventState
     

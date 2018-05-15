@@ -17,7 +17,7 @@ import Foundation
 import Alamofire
 import MojioCore
 
-public protocol GeneralImage {
+public protocol ImageModel: Codable {
     var id: String { get }
     var ownerId: String? { get }
     var url: URL? { get }
@@ -25,7 +25,7 @@ public protocol GeneralImage {
     var deleted: Bool? { get }
 }
 
-public struct Image: Codable, GeneralImage {
+public struct Image: ImageModel {
     public let id: String
     public let ownerId: String?
     public let url: URL?

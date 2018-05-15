@@ -22,12 +22,12 @@ public enum BatteryStatus: String, Codable {
     case normal = "Normal"
 }
 
-public protocol GeneralBattery {
+public protocol BatteryModel: Codable {
     var level: Double? { get }
     var status: BatteryStatus? { get }
 }
 
-public struct Battery: Codable, GeneralBattery {
+public struct Battery: BatteryModel {
     
     public let level: Double?
     public let status: BatteryStatus?

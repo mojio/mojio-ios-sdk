@@ -13,7 +13,9 @@
  * forbidden unless prior written permission is obtained from Moj.io Inc.
  *******************************************************************************/
 
-public protocol GeneralDeviceType {
+import MojioCore
+
+public protocol DeviceTypeModel: Codable, PrimaryKey {
     var id: String { get }
     var make: String? { get }
     var model: String? { get }
@@ -22,7 +24,7 @@ public protocol GeneralDeviceType {
     var firmwareVersion: String? { get }
 }
 
-public struct DeviceType: Codable, GeneralDeviceType {
+public struct DeviceType: DeviceTypeModel {
     public let id: String
     public let make: String?
     public let model: String?

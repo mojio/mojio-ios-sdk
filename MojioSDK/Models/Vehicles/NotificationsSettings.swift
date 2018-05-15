@@ -33,10 +33,10 @@ public enum DisturbanceThreshold: String, Codable {
     }
 }
 
-public protocol GeneralNotificationSettings {
+public protocol NotificationSettingsModel: Codable {
     
-    associatedtype D: GeneralSpeed
-    associatedtype S: GeneralSettingsGeofence
+    associatedtype D: SpeedModel
+    associatedtype S: SettingsGeofenceModel
     
     var speedThreshold: D? { get }
     var enableTripCompletedActivity: Bool { get }
@@ -66,7 +66,7 @@ public protocol GeneralNotificationSettings {
     var geofences: [S] { get }
 }
 
-public struct NotificationsSettings: Codable, GeneralNotificationSettings {
+public struct NotificationsSettings: NotificationSettingsModel {
     
     public typealias D = Speed
     

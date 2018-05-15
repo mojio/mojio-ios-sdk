@@ -16,10 +16,10 @@
 import Foundation
 import MojioCore
 
-public protocol GeneralAccelerometer {
+public protocol AccelerometerModel: Codable {
     
-    associatedtype A: GeneralProperAcceleration
-    associatedtype T: GeneralTimePeriod
+    associatedtype A: ProperAccelerationModel
+    associatedtype T: TimePeriodModel
     
     var x: A? { get }
     var y: A? { get }
@@ -28,7 +28,7 @@ public protocol GeneralAccelerometer {
     var samplingInterval: T? { get }
 }
 
-public struct Accelerometer: Codable, GeneralAccelerometer {
+public struct Accelerometer: AccelerometerModel {
     
     public typealias A = ProperAcceleration
     public typealias T = TimePeriod

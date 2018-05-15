@@ -15,10 +15,10 @@
 
 import Foundation
 
-public protocol GeneralResponseArray {
+public protocol ResponseArrayModel: Codable {
     
     associatedtype T: Codable
-    associatedtype L: GeneralLinks
+    associatedtype L: LinksModel
     
     var data: [T] { get }
     var results: Int? { get }
@@ -26,7 +26,7 @@ public protocol GeneralResponseArray {
     var links: L? { get }
 }
 
-public struct ResponseArray<T: Codable>: Codable, GeneralResponseArray {
+public struct ResponseArray<T: Codable>: ResponseArrayModel {
     
     public typealias L = Links
     
@@ -43,7 +43,7 @@ public struct ResponseArray<T: Codable>: Codable, GeneralResponseArray {
     }
 }
 
-public protocol GeneralRangeResponse {
+public protocol RangeResponseModel {
     
     associatedtype E: Codable
     
@@ -52,7 +52,7 @@ public protocol GeneralRangeResponse {
     var limit: Int? { get }
 }
 
-public struct RangeResponse<E: Codable>: GeneralRangeResponse {
+public struct RangeResponse<E: Codable>: RangeResponseModel {
     public let response: ResponseArray<E>
     public let offset: Int?
     public let limit: Int?

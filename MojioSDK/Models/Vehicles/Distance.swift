@@ -16,11 +16,9 @@
 import Foundation
 import MojioCore
 
-public protocol GeneralDistance: DeviceMeasurement {
-    
-}
+public typealias DistanceModel = DeviceMeasurement
 
-public struct Distance: GeneralDistance {
+public struct Distance: DistanceModel {
     
     // DeviceMeasurement
     public let baseUnit: String?

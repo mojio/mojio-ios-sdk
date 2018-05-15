@@ -16,9 +16,9 @@
 import Foundation
 import MojioCore
 
-public protocol GeneralApp {
+public protocol AppModel: Codable, PrimaryKey {
     
-    associatedtype I: GeneralImage
+    associatedtype I: ImageModel
     
     var id: String { get }
     var name: String? { get }
@@ -33,7 +33,7 @@ public protocol GeneralApp {
     var lastModified: Date? { get }
 }
 
-public struct App: Codable, PrimaryKey, GeneralApp {
+public struct App: AppModel {
     
     public typealias I = Image
     

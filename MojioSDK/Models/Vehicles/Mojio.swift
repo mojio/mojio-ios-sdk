@@ -16,11 +16,11 @@
 import Foundation
 import MojioCore
 
-public protocol GeneralMojio {
+public protocol MojioModel: Codable, PrimaryKey {
     
-    associatedtype L: GeneralLocation
-    associatedtype W: GeneralWifiRadio
-    associatedtype B: GeneralBooleanState
+    associatedtype L: LocationModel
+    associatedtype W: WifiRadioModel
+    associatedtype B: BooleanStateModel
     
     var id: String { get }
     var name: String? { get }
@@ -39,7 +39,7 @@ public protocol GeneralMojio {
     var iccid: String? { get }
 }
 
-public struct Mojio: Codable, PrimaryKey, GeneralMojio {
+public struct Mojio: MojioModel {
     
     public typealias L = Location
     

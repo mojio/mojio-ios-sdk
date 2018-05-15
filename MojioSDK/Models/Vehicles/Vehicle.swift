@@ -16,25 +16,25 @@
 import Foundation
 import MojioCore
 
-public protocol GeneralVehicle {
+public protocol VehicleModel: Codable, PrimaryKey {
     
-    associatedtype C: GeneralVehicleCompatibilityDetails
-    associatedtype D: GeneralDiagnosticCode
-    associatedtype AR: GeneralAccelerometer
-    associatedtype AN: GeneralAcceleration
-    associatedtype O: GeneralOdometer
-    associatedtype FL: GeneralFuelLevel
-    associatedtype FE: GeneralFuelEfficiency
-    associatedtype FV: GeneralFuelVolume
-    associatedtype HS: GeneralHarshEventState
-    associatedtype IS: GeneralIdleState
-    associatedtype BS: GeneralBooleanState
-    associatedtype L: GeneralLocation
-    associatedtype V: GeneralVinDetails
-    associatedtype B: GeneralBattery
-    associatedtype H: GeneralHeading
-    associatedtype S: GeneralSpeed
-    associatedtype R: GeneralRPM
+    associatedtype C: CompatibilityDetailsModel
+    associatedtype D: DiagnosticCodeModel
+    associatedtype AR: AccelerometerModel
+    associatedtype AN: AccelerationModel
+    associatedtype O: OdometerModel
+    associatedtype FL: FuelLevelModel
+    associatedtype FE: FuelEfficiencyModel
+    associatedtype FV: FuelVolumeModel
+    associatedtype HS: HarshEventStateModel
+    associatedtype IS: IdleStateModel
+    associatedtype BS: BooleanStateModel
+    associatedtype L: LocationModel
+    associatedtype V: VinDetailsModel
+    associatedtype B: BatteryModel
+    associatedtype H: HeadingModel
+    associatedtype S: SpeedModel
+    associatedtype R: RPMModel
     
     var id: String { get }
     var name: String? { get }
@@ -78,7 +78,7 @@ public protocol GeneralVehicle {
     var lastModified: Date? { get }
 }
 
-public struct Vehicle: Codable, PrimaryKey, GeneralVehicle {
+public struct Vehicle: VehicleModel {
     
     public typealias B = Battery
     public typealias H = Heading

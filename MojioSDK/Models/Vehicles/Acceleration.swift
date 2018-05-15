@@ -16,11 +16,11 @@
 import Foundation
 import MojioCore
 
-public protocol GeneralAcceleration: DeviceMeasurement {
+public protocol AccelerationModel: DeviceMeasurement {
     
 }
 // Units are in AccelerationUnits
-public struct Acceleration: GeneralAcceleration {
+public struct Acceleration: AccelerationModel {
 
     // DeviceMeasurement
     public let baseUnit: String?

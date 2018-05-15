@@ -111,7 +111,7 @@
 		BC879B691CBEFFDD00F9177B /* FuelCapacity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B4C1CBEFFDD00F9177B /* FuelCapacity.swift */; };
 		BC879B6A1CBEFFDD00F9177B /* FuelEfficiency.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B4D1CBEFFDD00F9177B /* FuelEfficiency.swift */; };
 		BC879B6B1CBEFFDD00F9177B /* FuelLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B4E1CBEFFDD00F9177B /* FuelLevel.swift */; };
-		BC879B701CBEFFDD00F9177B /* MeasurementStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B531CBEFFDD00F9177B /* MeasurementStatistics.swift */; };
+		BC879B701CBEFFDD00F9177B /* MeasurementStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B531CBEFFDD00F9177B /* MeasurementStats.swift */; };
 		BC879B711CBEFFDD00F9177B /* Mojio.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B541CBEFFDD00F9177B /* Mojio.swift */; };
 		BC879B721CBEFFDD00F9177B /* Odometer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B551CBEFFDD00F9177B /* Odometer.swift */; };
 		BC879B741CBEFFDD00F9177B /* ProperAcceleration.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B571CBEFFDD00F9177B /* ProperAcceleration.swift */; };
@@ -336,7 +336,7 @@
 		BC879B4F1CBEFFDD00F9177B /* Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		BC879B501CBEFFDD00F9177B /* Heading.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Heading.swift; sourceTree = "<group>"; };
 		BC879B521CBEFFDD00F9177B /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
-		BC879B531CBEFFDD00F9177B /* MeasurementStatistics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeasurementStatistics.swift; sourceTree = "<group>"; };
+		BC879B531CBEFFDD00F9177B /* MeasurementStats.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeasurementStats.swift; sourceTree = "<group>"; };
 		BC879B541CBEFFDD00F9177B /* Mojio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mojio.swift; sourceTree = "<group>"; };
 		BC879B551CBEFFDD00F9177B /* Odometer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Odometer.swift; sourceTree = "<group>"; };
 		BC879B571CBEFFDD00F9177B /* ProperAcceleration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProperAcceleration.swift; sourceTree = "<group>"; };
@@ -595,7 +595,7 @@
 				BCFCEB031F019FF20096C9B4 /* HarshEventState.swift */,
 				BCFCEB051F01A2C70096C9B4 /* IdleEvent.swift */,
 				F9623AAD1D935D74005C10F2 /* IdleState.swift */,
-				BC879B531CBEFFDD00F9177B /* MeasurementStatistics.swift */,
+				BC879B531CBEFFDD00F9177B /* MeasurementStats.swift */,
 				BC879B541CBEFFDD00F9177B /* Mojio.swift */,
 				E06C95671D25CA2A006AECBB /* NotificationsSettings.swift */,
 				BC879B551CBEFFDD00F9177B /* Odometer.swift */,
@@ -901,7 +901,6 @@
 				BC3D7C6E2087F3B000659A92 /* Frameworks */,
 				BC3D7C712087F3B000659A92 /* Headers */,
 				BC3D7C742087F3B000659A92 /* Resources */,
-				3A0960F6BC28CC3FD10578F8 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -921,7 +920,6 @@
 				BC603720208FA9CD00D855DE /* Frameworks */,
 				BC603724208FA9CD00D855DE /* Headers */,
 				BC603727208FA9CD00D855DE /* Resources */,
-				57D17B450174EDA929D2D86E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -941,7 +939,6 @@
 				BCC2EFAD1CBED4E6004D2759 /* Frameworks */,
 				BCC2EFAE1CBED4E6004D2759 /* Headers */,
 				BCC2EFAF1CBED4E6004D2759 /* Resources */,
-				ECB99EEE3CC74F41A55B6AA2 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -961,7 +958,6 @@
 				BCC2EFB71CBED4E6004D2759 /* Frameworks */,
 				BCC2EFB81CBED4E6004D2759 /* Resources */,
 				B2D9CDB2789AA386709AE5D2 /* [CP] Embed Pods Frameworks */,
-				D50CDE5707A1809A7F1BD6C0 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -982,7 +978,6 @@
 				BCFE58F8209AF70B00B89104 /* Frameworks */,
 				BCFE58FB209AF70B00B89104 /* Headers */,
 				BCFE58FE209AF70B00B89104 /* Resources */,
-				3C0B25F16A9AF5927878D013 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1002,7 +997,6 @@
 				BCFE5DD520A0679400B89104 /* Frameworks */,
 				BCFE5DD820A0679400B89104 /* Headers */,
 				BCFE5DDA20A0679400B89104 /* Resources */,
-				B399F6313067B61410B3AF5F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1107,36 +1101,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		3A0960F6BC28CC3FD10578F8 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Pets/Pods-Pets-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		3C0B25F16A9AF5927878D013 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Core/Pods-Core-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		50FFDE671998939CEF683AFB /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1153,21 +1117,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		57D17B450174EDA929D2D86E /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Accounts/Pods-Accounts-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		74E1E50A295582D6CD87F8FD /* [CP] Check Pods Manifest.lock */ = {
@@ -1216,21 +1165,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Tests/Pods-Tests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B399F6313067B61410B3AF5F /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Images/Pods-Images-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		BC3D7C1E2087F3B000659A92 /* [CP] Check Pods Manifest.lock */ = {
@@ -1285,36 +1219,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D50CDE5707A1809A7F1BD6C0 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Tests/Pods-Tests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		ECB99EEE3CC74F41A55B6AA2 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Vehicles/Pods-Vehicles-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F85F99627B16836D043D0440 /* [CP] Check Pods Manifest.lock */ = {
@@ -1385,7 +1289,7 @@
 				BC8ECA501D226690009C6164 /* WifiRadio.swift in Sources */,
 				BC3D7C7F2087F5E700659A92 /* VehiclesClient.swift in Sources */,
 				BC879B771CBEFFDD00F9177B /* Speed.swift in Sources */,
-				BC879B701CBEFFDD00F9177B /* MeasurementStatistics.swift in Sources */,
+				BC879B701CBEFFDD00F9177B /* MeasurementStats.swift in Sources */,
 				644214DE1D9E6500005A86C5 /* AggregationData.swift in Sources */,
 				375206FE20AAFD1600102273 /* SettingsGeofence.swift in Sources */,
 				BC879B641CBEFFDD00F9177B /* Battery.swift in Sources */,

@@ -16,13 +16,13 @@
 import Foundation
 import MojioCore
 
-public protocol GeneralVin {
+public protocol VinModel: Codable {
     
-    associatedtype E: GeneralEngine
-    associatedtype T: GeneralTransmission
-    associatedtype W: GeneralWarranty
-    associatedtype R: GeneralRecall
-    associatedtype S: GeneralServiceBulletin
+    associatedtype E: EngineModel
+    associatedtype T: TransmissionModel
+    associatedtype W: WarrantyModel
+    associatedtype R: RecallModel
+    associatedtype S: ServiceBulletinModel
     
     var vin: String { get }
     var timestamp: Date? { get }
@@ -42,7 +42,7 @@ public protocol GeneralVin {
     var serviceBulletins: [S] { get }
 }
 
-public struct Vin: Codable, GeneralVin {
+public struct Vin: VinModel {
     
     public typealias E = Engine
     public typealias T = Transmission

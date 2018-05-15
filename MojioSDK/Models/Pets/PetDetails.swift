@@ -51,7 +51,7 @@ public enum Weight: String, Codable {
     }
 }
 
-public protocol GeneralPetDetails {
+public protocol PetDetailsModel: Codable {
     var type: PetType? { get }
     var gender: Gender? { get }
     var breed: String? { get }
@@ -63,7 +63,7 @@ public protocol GeneralPetDetails {
     var weight: Int? { get }
 }
 
-public struct PetDetails: Codable, GeneralPetDetails {
+public struct PetDetails: PetDetailsModel {
     public let type: PetType?
     public let gender: Gender?
     public let breed: String?

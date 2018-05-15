@@ -15,16 +15,16 @@
 
 import Foundation
 
-public protocol GeneralServiceSchedule {
+public protocol ServiceScheduleModel: Codable {
     
-    associatedtype S: GeneralServiceScheduleItem
+    associatedtype S: ServiceScheduleItemModel
     
     var vin: String? { get }
     var isDefault: Bool? { get }
     var items: [S] { get }
 }
 
-public struct ServiceSchedule: Codable, GeneralServiceSchedule {
+public struct ServiceSchedule: ServiceScheduleModel {
     
     public typealias S = ServiceScheduleItem
     

@@ -15,9 +15,9 @@
 
 import Foundation
 
-public protocol GeneralNextServiceSchedule {
+public protocol NextServiceScheduleModel: Codable {
     
-    associatedtype P: GeneralPlatformServiceSchedule
+    associatedtype P: PlatformServiceScheduleModel
     
     var timeStamp: String? { get }
     var odometer: Double { get }
@@ -29,7 +29,7 @@ public protocol GeneralNextServiceSchedule {
     var services: [P] { get }
 }
 
-public struct NextServiceSchedule: Codable, GeneralNextServiceSchedule {
+public struct NextServiceSchedule: NextServiceScheduleModel {
     
     public typealias P = PlatformServiceSchedule
     

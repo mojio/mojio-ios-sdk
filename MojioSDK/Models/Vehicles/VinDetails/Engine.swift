@@ -15,7 +15,7 @@
 
 import Foundation
 
-public protocol GeneralEngine {
+public protocol EngineModel: Codable {
     var name: String? { get }
     var cylinders: String? { get }
     var displacement: Double { get }
@@ -26,7 +26,7 @@ public protocol GeneralEngine {
     var maxHpAt: String? { get }
 }
 
-public struct Engine: Codable, GeneralEngine {
+public struct Engine: EngineModel {
     
     public let name: String?
     public let cylinders: String?

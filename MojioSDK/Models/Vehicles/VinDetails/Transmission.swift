@@ -15,14 +15,14 @@
 
 import Foundation
 
-public protocol GeneralTransmission {
+public protocol TransmissionModel: Codable {
     var name: String? { get }
     var type: String? { get }
     var detailType: String? { get }
     var gears: String? { get }
 }
 
-public struct Transmission: Codable, GeneralTransmission {
+public struct Transmission: TransmissionModel {
     
     public let name: String?
     public let type: String?

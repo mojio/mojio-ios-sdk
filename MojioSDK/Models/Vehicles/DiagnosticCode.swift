@@ -15,7 +15,7 @@
 
 import Foundation
 
-public protocol GeneralDiagnosticCode {
+public protocol DiagnosticCodeModel: Codable {
     var ignored: Bool { get }
     var code: String? { get }
     var description: String? { get }
@@ -26,7 +26,7 @@ public protocol GeneralDiagnosticCode {
     var diagnosticCodeType: String? { get }
 }
 
-public struct DiagnosticCode: Codable, GeneralDiagnosticCode {
+public struct DiagnosticCode: DiagnosticCodeModel {
     
     public var ignored: Bool = false
     public var code: String? = nil

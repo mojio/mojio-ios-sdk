@@ -16,12 +16,12 @@
 
 import Foundation
 
-public protocol GeneralResult {
+public protocol ResultModel {
     var totalCount: Int? { get }
     var data: [Any]? { get }
 }
 
-public struct Result: GeneralResult {
+public struct Result: ResultModel {
     public let totalCount: Int?
     public let data: [Any]?
 }

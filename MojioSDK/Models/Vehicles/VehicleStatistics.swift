@@ -16,7 +16,22 @@
 import Foundation
 import MojioCore
 
-public struct VehicleStatistics: Codable {
+public protocol VehicleStatsModel: Codable {
+    
+    associatedtype FL: FuelLevelModel
+    associatedtype FV: FuelVolumeModel
+    associatedtype FE: FuelEfficiencyModel
+    associatedtype D: DistanceModel
+    
+    var estimatedFuelLevel: FL? { get }
+    var estimatedFuelVolume: FV? { get }
+    var averageFuelEfficiency: FE? { get }
+    var totalRange: D? { get }
+    var currentRange: D? { get }
+    var lastFillUpDate: Date? { get }
+}
+
+public struct VehicleStatistics: VehicleStatsModel {
     
     public let estimatedFuelLevel: FuelLevel?
     public let estimatedFuelVolume: FuelVolume?

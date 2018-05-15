@@ -63,10 +63,10 @@ public enum LocationStatus: String {
     case previousValidState = "PreviousValidState"
 }
 
-public protocol GeneralLocation {
+public protocol LocationModel: Codable {
     
-    associatedtype A: GeneralAddress
-    associatedtype H: GeneralHeading
+    associatedtype A: AddressModel
+    associatedtype H: HeadingModel
     
     var locationAddress: A? { get }
     var timestamp: Date? { get }
@@ -82,7 +82,7 @@ public protocol GeneralLocation {
     var locationHeading: H? { get }
 }
 
-public struct Location: Codable, GeneralLocation {
+public struct Location: LocationModel {
     
     public typealias A = Address
     public typealias H = Heading

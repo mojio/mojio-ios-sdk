@@ -16,12 +16,10 @@
 import Foundation
 import MojioCore
 
-public protocol GeneralFuelVolume: DeviceMeasurement {
-    
-}
+public typealias FuelVolumeModel = DeviceMeasurement
 
 // Units in FuelVolumeUnits
-public struct FuelVolume: GeneralFuelVolume {
+public struct FuelVolume: FuelVolumeModel {
 
     // DeviceMeasurement
     public let baseUnit: String?
