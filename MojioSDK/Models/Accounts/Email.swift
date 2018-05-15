@@ -15,7 +15,12 @@
 
 import Foundation
 
-public struct Email: Codable {
+public protocol GeneralEmail {
+    var verified: Bool? { get }
+    var address: String? { get }
+}
+
+public struct Email: Codable, GeneralEmail {
     public let verified: Bool?
     public let address: String?
     

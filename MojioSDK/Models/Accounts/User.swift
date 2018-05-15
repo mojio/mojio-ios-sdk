@@ -16,15 +16,36 @@
 import Foundation
 import MojioCore
 
-public struct User: Codable, PrimaryKey {
+public protocol GeneralUser {
+    
+    associatedtype E: GeneralEmail
+    associatedtype P: GeneralPhoneNumber
+    
+    var id: String { get }
+    var firstName: String? { get }
+    var lastName: String? { get }
+    var userName: String? { get }
+    var jurisdiction: String? { get }
+    var emails: [E]? { get }
+    var phoneNumbers: [P]? { get }
+    var tags: [String]? { get }
+    var defaultLanguage: String? { get }
+    var createdOn: Date? { get }
+    var lastModified: Date? { get }
+}
+
+public struct User: Codable, PrimaryKey, GeneralUser {
+    
+    public typealias E = Email
+    public typealias P = PhoneNumber
     
     public let id: String
     public let firstName: String?
     public let lastName: String?
     public let userName: String?
     public let jurisdiction: String?
-    public let emails: [Email]?
-    public let phoneNumbers: [PhoneNumber]?
+    public let emails: [E]?
+    public let phoneNumbers: [P]?
     public let tags: [String]?
     public let defaultLanguage: String?
     public let createdOn: Date?

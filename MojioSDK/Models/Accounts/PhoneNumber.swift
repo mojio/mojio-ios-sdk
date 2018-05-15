@@ -15,7 +15,13 @@
 
 import Foundation
 
-public struct PhoneNumber: Codable {
+public protocol GeneralPhoneNumber {
+    var phoneNumber: String? { get }
+    var verified: Bool? { get }
+}
+
+public struct PhoneNumber: Codable, GeneralPhoneNumber {
+    
     public let phoneNumber: String?
     public let verified: Bool?
     
