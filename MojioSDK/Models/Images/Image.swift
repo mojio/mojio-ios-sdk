@@ -17,7 +17,15 @@ import Foundation
 import Alamofire
 import MojioCore
 
-public struct Image: Codable {
+public protocol GeneralImage {
+    var id: String { get }
+    var ownerId: String? { get }
+    var url: URL? { get }
+    var mimeType: MimeType.Image? { get }
+    var deleted: Bool? { get }
+}
+
+public struct Image: Codable, GeneralImage {
     public let id: String
     public let ownerId: String?
     public let url: URL?

@@ -16,7 +16,12 @@
 
 import Foundation
 
-public struct Result {
+public protocol GeneralResult {
+    var totalCount: Int? { get }
+    var data: [Any]? { get }
+}
+
+public struct Result: GeneralResult {
     public let totalCount: Int?
     public let data: [Any]?
 }

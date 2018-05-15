@@ -16,26 +16,41 @@
 import Foundation
 import MojioCore
 
-public protocol GeneralIdleEvent {
+public enum GeofenceRegionType: String, Codable {
     
-    associatedtype I: GeneralIdleState
-    associatedtype L: GeneralLocation
+    case circle = "Circle"
+    case unknown
     
-    var eventState: I? { get }
-    var eventLocation: L? { get }
+    public init(from decoder: Decoder) throws {
+        let label = try decoder.singleValueContainer().decode(String.self)
+        self = GeofenceRegionType(rawValue: label) ?? .unknown
+    }
 }
 
-public struct IdleEvent: Codable, GeneralIdleEvent {
+public protocol GeneralGeofenceRegion {
     
-    public typealias I = IdleState
-    public typealias L = Location
+    associatedtype D: GeneralDistance
     
-    public var eventState: I? = nil
-    public var eventLocation: L? = nil
+    var type: GeofenceRegionType? { get }
+    var lat: Double? { get }
+    var lng: Double? { get }
+    var radius: D? { get }
+}
+
+public struct GeofenceRegion: Codable, GeneralGeofenceRegion {
+    
+    public typealias D = Distance
+    
+    public var type: GeofenceRegionType? = nil
+    public var lat: Double? = 0
+    public var lng: Double? = 0
+    public var radius: D? = nil
     
     public enum CodingKeys: String, CodingKey {
-        case eventState = "IdleState"
-        case eventLocation = "Location"
+        case type = "Type"
+        case lat = "Lat"
+        case lng = "Lng"
+        case radius = "Radius"
     }
     
     public init(from decoder: Decoder) throws {
@@ -43,8 +58,10 @@ public struct IdleEvent: Codable, GeneralIdleEvent {
         do {
             let container = try decoder.container(keyedBy: CodingKeys.self)
             
-            self.eventState = try container.decodeIfPresent(IdleState.self, forKey: .eventState)
-            self.eventLocation = try container.decodeIfPresent(Location.self, forKey: .eventLocation) 
+            self.type = try container.decodeIfPresent(GeofenceRegionType.self, forKey: .type)
+            self.lat = try container.decodeIfPresent(Double.self, forKey: .lat)
+            self.lng = try container.decodeIfPresent(Double.self, forKey: .lng)
+            self.radius = try container.decodeIfPresent(D.self, forKey: .radius)
         }
         catch {
             debugPrint(error)
@@ -56,3 +73,4 @@ public struct IdleEvent: Codable, GeneralIdleEvent {
         
     }
 }
+

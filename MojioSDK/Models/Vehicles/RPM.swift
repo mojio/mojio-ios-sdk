@@ -16,8 +16,12 @@
 import Foundation
 import MojioCore
 
+public protocol GeneralRPM: DeviceMeasurement {
+    
+}
+
 // Units in RPMUnits
-public struct RPM: DeviceMeasurement {
+public struct RPM: GeneralRPM {
     
     // DeviceMeasurement
     public let baseUnit: String?

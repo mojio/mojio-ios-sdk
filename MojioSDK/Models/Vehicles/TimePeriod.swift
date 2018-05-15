@@ -16,8 +16,12 @@
 import Foundation
 import MojioCore
 
+public protocol GeneralTimePeriod: DeviceMeasurement {
+    
+}
+
 // Units in TimePeriodUnits
-public struct TimePeriod: DeviceMeasurement {
+public struct TimePeriod: GeneralTimePeriod {
     
     // DeviceMeasurement
     public let baseUnit: String?

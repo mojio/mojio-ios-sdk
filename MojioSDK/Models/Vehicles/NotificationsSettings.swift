@@ -33,37 +33,46 @@ public enum DisturbanceThreshold: String, Codable {
     }
 }
 
-public struct SettingsGeofence: Codable, PrimaryKey {
+public protocol GeneralNotificationSettings {
     
-    public let id: String
-    public let enableEnterActivity: Bool
-    public let enableExitActivity: Bool
+    associatedtype D: GeneralSpeed
+    associatedtype S: GeneralSettingsGeofence
     
-    public enum CodingKeys: String, CodingKey {
-        case id = "Id"
-        case enableEnterActivity = "EnableEnterActivity"
-        case enableExitActivity = "EnableExitActivity"
-    }
+    var speedThreshold: D? { get }
+    var enableTripCompletedActivity: Bool { get }
+    var enableTripStartActivity: Bool { get }
     
-    public init(from decoder: Decoder) throws {
-        
-        do {
-            let container = try decoder.container(keyedBy: CodingKeys.self)
-            
-            self.id = try container.decode(String.self, forKey: .id)
-            self.enableEnterActivity = try container.decode(Bool.self, forKey: .enableEnterActivity)
-            self.enableExitActivity = try container.decode(Bool.self, forKey: .enableExitActivity)
-        }
-        catch {
-            debugPrint(error)
-            throw error
-        }
-    }
+    var enableLowFuelActivity: Bool { get }
+    var enableLowBatteryActivity: Bool { get }
+    var enableSpeedActivity: Bool { get }
+    var enableDtcActivity: Bool { get }
+    var enableCheckEngineActivity: Bool { get }
+    
+    var enableTowActivity: Bool { get }
+    var enableMaintenanceActivity: Bool { get }
+    var enableRecallActivity: Bool { get }
+    var enableServiceBulletinActivity: Bool { get }
+    var enableDisturbanceActivity: Bool { get }
+    var disturbanceThreshold: DisturbanceThreshold? { get }
+    var enableAccidentActivity: Bool { get }
+    var enableDeviceUnpluggedActivity: Bool { get }
+    
+    var enableVehicleConnectedActivity: Bool { get }
+    var enableDeviceUpdatedActivity: Bool { get }
+    var enableSMSActivity: Bool { get }
+    var enableVehicleCompatibilityActivity: Bool { get }
+    
+    var enableGeofenceActivity: Bool { get }
+    var geofences: [S] { get }
 }
 
-public struct NotificationsSettings: Codable {
+public struct NotificationsSettings: Codable, GeneralNotificationSettings {
     
-    public let speedThreshold: Speed?
+    public typealias D = Speed
+    
+    public typealias S = SettingsGeofence
+    
+    public let speedThreshold: D?
     public let enableTripCompletedActivity: Bool
     public let enableTripStartActivity: Bool
     
@@ -88,7 +97,7 @@ public struct NotificationsSettings: Codable {
     public let enableVehicleCompatibilityActivity: Bool
     
     public let enableGeofenceActivity: Bool
-    public let geofences: [SettingsGeofence]
+    public let geofences: [S]
     
     public enum CodingKeys: String, CodingKey {
         case speedThreshold = "SpeedThreshold"

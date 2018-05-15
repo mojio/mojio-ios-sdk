@@ -16,8 +16,12 @@
 import Foundation
 import MojioCore
 
+public protocol GeneralFuelLevel: DeviceMeasurement {
+    var riskSeverity: String? { get }
+}
+
 // Units are in PercentageUnits
-public struct FuelLevel: DeviceMeasurement {
+public struct FuelLevel: GeneralFuelLevel {
     
     // DeviceMeasurement
     public let baseUnit: String?

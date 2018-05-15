@@ -15,7 +15,17 @@
 
 import Foundation
 
-public struct ServiceBulletin: Codable {
+public protocol GeneralServiceBulletin {
+    var itemNumber: String? { get }
+    var bulletinNumber: String? { get }
+    var replacementBulletinNumber: String? { get }
+    var dateAdded: Date? { get }
+    var component: String? { get }
+    var bulletinDate: Date? { get }
+    var summary: String? { get }
+}
+
+public struct ServiceBulletin: Codable, GeneralServiceBulletin {
     
     public let itemNumber: String?
     public let bulletinNumber: String?

@@ -23,17 +23,48 @@ public enum PowerStatus: String, Codable {
     case normal = "Normal"
 }
 
-public struct Device: Codable, PrimaryKey {
+public protocol GeneralDevice {
+    
+    associatedtype L: GeneralPetsLocation
+    associatedtype T: GeneralDeviceType
+    associatedtype B: GeneralBattery
+    
+    var imei: String { get }
+    var deviceId: String { get }
+    var name: String? { get }
+    var assetId: String? { get }
+    var location: L? { get }
+    var speed: Double? { get }
+    var airplaneMode: Bool? { get }
+    var deviceType: T? { get }
+    var powerStatus: PowerStatus? { get }
+    var battery: B? { get }
+    var firmwareVersion: String? { get }
+    var color: String? { get }
+    var tenantId: String? { get }
+    var ownerId: String? { get }
+    var createdOn: Date? { get }
+    var deleted: Bool? { get }
+    var lastModified: Date? { get }
+    var gatewayTime: Date? { get }
+}
+
+public struct Device: Codable, PrimaryKey, GeneralDevice {
+    
+    public typealias L = PetsLocation
+    public typealias T = DeviceType
+    public typealias B = Battery
+    
     public let imei: String
     public let deviceId: String
     public let name: String?
     public let assetId: String?
-    public let location: PetsLocation?
+    public let location: L?
     public let speed: Double?
     public let airplaneMode: Bool?
-    public let deviceType: DeviceType?
+    public let deviceType: T?
     public let powerStatus: PowerStatus?
-    public let battery: Battery?
+    public let battery: B?
     public let firmwareVersion: String?
     public let color: String?
     public let tenantId: String?

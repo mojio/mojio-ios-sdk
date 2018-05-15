@@ -15,7 +15,31 @@
 
 import Foundation
 
-public struct Recall: Codable {
+public protocol GeneralRecall {
+    var title: String? { get }
+    var nhtsaCampaignNumber: String? { get }
+    var mfrCampaignNumber: String? { get }
+    var componentDescription: String? { get }
+    var reportManufacturer: String? { get }
+    var manufacturingStartDate: Date? { get }
+    var manufacturingEndDate: Date? { get }
+    var recallTypeCode: String? { get }
+    var potentialUnitsAffected: String? { get }
+    var ownerNotificationDate: Date? { get }
+    var recallInitiator: String? { get }
+    var productManufacturer: String? { get }
+    var reportReceivedDate: Date? { get }
+    var recordCreationDate: Date? { get }
+    var regulationPartNumber: String? { get }
+    var fmvvsNumber: String? { get }
+    var defectSummary: String? { get }
+    var consequenceSummary: String? { get }
+    var correctiveAction: String? { get }
+    var notes: String? { get }
+    var recalledComponentId: String? { get }
+}
+
+public struct Recall: Codable, GeneralRecall {
     
     public var title: String?
     public var nhtsaCampaignNumber: String?

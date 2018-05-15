@@ -16,10 +16,24 @@
 import Foundation
 import MojioCore
 
-public struct HarshEvent: Codable {
+public protocol GeneralHarshEvent {
     
-    public var eventState: HarshEventState? = nil
-    public var eventLocation: Location? = nil
+    associatedtype H: GeneralHarshEventState
+    associatedtype L: GeneralLocation
+    
+    var eventState: H? { get }
+    var eventLocation: L? { get }
+}
+
+public struct HarshEvent: Codable, GeneralHarshEvent {
+    
+    public typealias H = HarshEventState
+    
+    public typealias L = Location
+    
+    
+    public var eventState: H? = nil
+    public var eventLocation: L? = nil
     
     public enum CodingKeys: String, CodingKey {
         case eventState = "HarshEventState"

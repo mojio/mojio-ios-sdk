@@ -16,7 +16,87 @@
 import Foundation
 import MojioCore
 
-public struct Vehicle: Codable, PrimaryKey {
+public protocol GeneralVehicle {
+    
+    associatedtype C: GeneralVehicleCompatibilityDetails
+    associatedtype D: GeneralDiagnosticCode
+    associatedtype AR: GeneralAccelerometer
+    associatedtype AN: GeneralAcceleration
+    associatedtype O: GeneralOdometer
+    associatedtype FL: GeneralFuelLevel
+    associatedtype FE: GeneralFuelEfficiency
+    associatedtype FV: GeneralFuelVolume
+    associatedtype HS: GeneralHarshEventState
+    associatedtype IS: GeneralIdleState
+    associatedtype BS: GeneralBooleanState
+    associatedtype L: GeneralLocation
+    associatedtype V: GeneralVinDetails
+    associatedtype B: GeneralBattery
+    associatedtype H: GeneralHeading
+    associatedtype S: GeneralSpeed
+    associatedtype R: GeneralRPM
+    
+    var id: String { get }
+    var name: String? { get }
+    var licensePlate: String? { get }
+    var vin: String? { get }
+    var detectedVIN: String? { get }
+    var overrideVIN: String? { get }
+    var compatDetails: C? { get }
+    var currentTrip: String? { get }
+    var mojioId: String? { get }
+    var milStatus: Bool { get }
+    var lastContactTime: Date? { get }
+    var diagnosticCodes: [D] { get }
+    var accelerometer: AR? { get }
+    var acceleration: AN? { get }
+    var deceleration: AN? { get }
+    var speed: S? { get }
+    var odometer: O? { get }
+    var virtualOdometer: O? { get }
+    var rpm: R? { get }
+    var fuelEfficiency: FE? { get }
+    var fuelEfficiencyCalculationMethod: FuelEfficiencyCalculationMethod? { get }
+    var fuelLevel: FL? { get }
+    var fuelVolume: FV? { get }
+    var fuelType: FuelType? { get }
+    var gatewayTime: Date? { get }
+    var harshEventState: HS? { get }
+    var idleState: IS? { get }
+    var ignitionState: BS? { get }
+    var battery: B? { get }
+    var heading: H? { get }
+    var location: L? { get }
+    var accidentState: BS? { get }
+    var vinDetails: V? { get }
+    var towState: BS? { get }
+    var parkedState: BS? { get }
+    var tags: [String] { get }
+    var ownerGroups: [String] { get }
+    var deleted: Bool { get }
+    var createdOn: Date? { get }
+    var lastModified: Date? { get }
+}
+
+public struct Vehicle: Codable, PrimaryKey, GeneralVehicle {
+    
+    public typealias B = Battery
+    public typealias H = Heading
+    public typealias AR = Accelerometer
+    public typealias AN = Acceleration
+    public typealias FL = FuelLevel
+    public typealias FE = FuelEfficiency
+    public typealias FV = FuelVolume
+    public typealias HS = HarshEventState
+    public typealias IS = IdleState
+    public typealias BS = BooleanState
+    public typealias S = Speed
+    public typealias R = RPM
+    public typealias C = CompatibilityDetails
+    public typealias D = DiagnosticCode
+    public typealias O = Odometer
+    public typealias V = VinDetails
+    public typealias L = Location
     
     public var id: String
     public var name: String?
@@ -24,35 +104,35 @@ public struct Vehicle: Codable, PrimaryKey {
     public var vin: String?
     public var detectedVIN: String?
     public var overrideVIN: String?
-    public var compatDetails: CompatibilityDetails?
+    public var compatDetails: C?
     public var currentTrip: String?
     public var mojioId: String?
     public var milStatus: Bool
     public var lastContactTime: Date?
-    public var diagnosticCodes: [DiagnosticCode]
-    public var accelerometer: Accelerometer?
-    public var acceleration: Acceleration?
-    public var deceleration: Acceleration?
-    public var speed: Speed?
-    public var odometer: Odometer?
-    public var virtualOdometer: Odometer?
-    public var rpm: RPM?
-    public var fuelEfficiency: FuelEfficiency?
+    public var diagnosticCodes: [D]
+    public var accelerometer: AR?
+    public var acceleration: AN?
+    public var deceleration: AN?
+    public var speed: S?
+    public var odometer: O?
+    public var virtualOdometer: O?
+    public var rpm: R?
+    public var fuelEfficiency: FE?
     public var fuelEfficiencyCalculationMethod: FuelEfficiencyCalculationMethod?
-    public var fuelLevel: FuelLevel?
-    public var fuelVolume: FuelVolume?
+    public var fuelLevel: FL?
+    public var fuelVolume: FV?
     public var fuelType: FuelType?
     public var gatewayTime: Date?
-    public var harshEventState: HarshEventState?
-    public var idleState: IdleState?
-    public var ignitionState: BooleanState?
-    public var battery: Battery?
-    public var heading: Heading?
-    public var location: Location?
-    public var accidentState: BooleanState?
-    public var vinDetails: VinDetails?
-    public var towState: BooleanState?
-    public var parkedState: BooleanState?
+    public var harshEventState: HS?
+    public var idleState: IS?
+    public var ignitionState: BS?
+    public var battery: B?
+    public var heading: H?
+    public var location: L?
+    public var accidentState: BS?
+    public var vinDetails: V?
+    public var towState: BS?
+    public var parkedState: BS?
     public var tags: [String]
     public var ownerGroups: [String]
     public var deleted: Bool
