@@ -18,7 +18,7 @@ public enum HarshEventType: String, Codable {
     case accident = "Accident"
     case postAccident = "PostAccident"
     
-    case unknown
+    case unknown = "Unknown"
     
     public init(from decoder: Decoder) throws {
         let label = try decoder.singleValueContainer().decode(String.self)
@@ -31,7 +31,7 @@ public enum HarshEventTurnType: String, Codable {
     case left = "Left"
     case right = "Right"
     
-    case unknown
+    case unknown = "Unknown"
     
     public init(from decoder: Decoder) throws {
         let label = try decoder.singleValueContainer().decode(String.self)

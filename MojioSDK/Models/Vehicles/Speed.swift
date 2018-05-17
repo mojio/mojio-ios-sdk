@@ -18,13 +18,14 @@ import MojioCore
 
 public typealias SpeedModel = DeviceMeasurement
 
-// Units in SpeedUnits
 public struct Speed: SpeedModel {
     
+    public typealias U = SpeedUnit
+    
     // DeviceMeasurement
-    public let baseUnit: String?
+    public let baseUnit: U
     public let baseValue: Double
-    public let unit: String?
+    public let unit: U
     public let value: Double
     public let timestamp: Date?
 }
@@ -33,7 +34,7 @@ extension Speed {
     
     public init(from decoder: Decoder, with deviceMeasurements: DeviceMeasurements) throws {
         
-        self.init(baseUnit: deviceMeasurements.baseUnit, baseValue: deviceMeasurements.baseValue, unit: deviceMeasurements.unit, value: deviceMeasurements.value, timestamp: deviceMeasurements.timestamp)
+        self.init(baseUnit: deviceMeasurements.baseUnit ?? .unknown, baseValue: deviceMeasurements.baseValue, unit: deviceMeasurements.unit ?? .unknown, value: deviceMeasurements.value, timestamp: deviceMeasurements.timestamp)
     }
     
     public func encode(with encoder: Encoder) throws {

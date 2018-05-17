@@ -17,7 +17,6 @@ import Foundation
 import SwiftDate
 
 // Base Device Measurement
-
 public enum DeviceMeasurementCodingKeys: String, CodingKey {
     case baseUnit = "BaseUnit"
     case baseValue = "BaseValue"
@@ -28,11 +27,14 @@ public enum DeviceMeasurementCodingKeys: String, CodingKey {
 
 public protocol DeviceMeasurement: Codable {
     
-    typealias DeviceMeasurements = (baseUnit: String?, baseValue: Double, unit: String?, value: Double, timestamp: Date?)
+    associatedtype U: RawRepresentable, Codable
     
-    var baseUnit: String? { get }
+    typealias DeviceMeasurements = (baseUnit: U?, baseValue: Double, unit: U?, value: Double, timestamp: Date?)
+    
+    var baseUnit: U { get }
+    var unit: U { get }
+    
     var baseValue: Double  { get }
-    var unit: String? { get }
     var value: Double { get }
     var timestamp: Date? { get }
     
@@ -46,11 +48,14 @@ public extension DeviceMeasurement {
         
         let container = try decoder.container(keyedBy: DeviceMeasurementCodingKeys.self)
         
-        let baseUnit = try container.decodeIfPresent(String.self, forKey: .baseUnit)
+        
         let baseValue = try container.decodeIfPresent(Double.self, forKey: .baseValue) ?? 0.0
-        let unit = try container.decodeIfPresent(String.self, forKey: .unit)
+        
         let value = try container.decodeIfPresent(Double.self, forKey: .value) ?? 0.0
         let timestamp = try container.decodeIfPresent(String.self, forKey: .timestamp).flatMap { $0.dateFromIso8601 }
+        
+        let baseUnit = try container.decodeIfPresent(U.self, forKey: .baseUnit)
+        let unit = try container.decodeIfPresent(U.self, forKey: .unit)
         
         let deviceMeasurements = DeviceMeasurements(baseUnit: baseUnit, baseValue: baseValue, unit: unit, value: value, timestamp: timestamp)
         
@@ -61,9 +66,12 @@ public extension DeviceMeasurement {
         
         var container = encoder.container(keyedBy: DeviceMeasurementCodingKeys.self)
         
-        try container.encode(self.baseUnit, forKey: .baseUnit)
+        let baseUnit = self.baseUnit.rawValue as? String ?? ""
+        let unit = self.unit.rawValue as? String ?? ""
+        
+        try container.encode(baseUnit, forKey: .baseUnit)
         try container.encode(self.baseValue, forKey: .baseValue)
-        try container.encode(self.unit, forKey: .unit)
+        try container.encode(unit, forKey: .unit)
         try container.encode(self.value, forKey: .value)
         try container.encode(self.timestamp, forKey: .timestamp)
         

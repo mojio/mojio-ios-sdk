@@ -42,7 +42,7 @@ public enum WifiRadioStatus: String, Codable {
     case roaming = "Roaming"
     case disconnected = "Disconnected"
     
-    case unknown
+    case unknown = "Unknown"
     
     public init(from decoder: Decoder) throws {
         let label = try decoder.singleValueContainer().decode(String.self)

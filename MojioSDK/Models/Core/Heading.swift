@@ -15,8 +15,15 @@
 
 import Foundation
 
-public enum HeadingUnit: String {
+//Heading
+public enum HeadingUnit: String, Codable {
     case degree = "Degree"
+    case unknown = "Unknown"
+    
+    public init(from decoder: Decoder) throws {
+        let label = try decoder.singleValueContainer().decode(String.self)
+        self = HeadingUnit(rawValue: label) ?? .unknown
+    }
 }
 
 public protocol HeadingModel: DeviceMeasurement {
@@ -26,10 +33,12 @@ public protocol HeadingModel: DeviceMeasurement {
 
 public struct Heading: HeadingModel {
     
+    public typealias U = HeadingUnit
+    
     // DeviceMeasurement
-    public let baseUnit: String?
+    public let baseUnit: U
     public let baseValue: Double
-    public let unit: String?
+    public let unit: U
     public let value: Double
     public let timestamp: Date?
     
@@ -39,27 +48,6 @@ public struct Heading: HeadingModel {
     public enum CodingKeys: String, CodingKey {
         case direction = "Direction"
         case leftTurn = "LeftTurn"
-    }
-}
-
-public extension Heading {
-
-    public var baseHeadingUnit: HeadingUnit? {
-        
-        if let unit = self.baseUnit {
-            return HeadingUnit(rawValue: unit)
-        }
-        
-        return nil
-    }
-    
-    public var headingUnit: HeadingUnit? {
-        
-        if let unit = self.unit {
-            return HeadingUnit(rawValue: unit)
-        }
-        
-        return nil
     }
 }
 
@@ -74,9 +62,9 @@ public extension Heading  {
         let leftTurn = try container.decodeIfPresent(Bool.self, forKey: .leftTurn) ?? false
         
         self.init(
-            baseUnit: deviceMeasurements.baseUnit,
+            baseUnit: deviceMeasurements.baseUnit ?? .unknown,
             baseValue: deviceMeasurements.baseValue,
-            unit: deviceMeasurements.unit,
+            unit: deviceMeasurements.unit ?? .unknown,
             value: deviceMeasurements.value,
             timestamp: deviceMeasurements.timestamp,
             direction: direction,

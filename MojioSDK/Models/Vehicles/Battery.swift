@@ -21,27 +21,27 @@ public protocol BatteryModel: DeviceMeasurement {
     associatedtype T: TimePeriodModel
     
     var connected: Bool { get }
-    var riskSeverity: String? { get }
+    var riskSeverity: RiskSeverity? { get }
     var lowVoltageDuration: T? { get }
     var highVoltageDuration: T? { get }
 }
 
-// Units in BatteryVoltageUnits
 public struct Battery: BatteryModel {
     
     public typealias T = TimePeriod
+    public typealias U = BatteryVoltageUnit
     
     //DeviceMeasurement
-    public let baseUnit: String?
+    public let baseUnit: U
     public let baseValue: Double
-    public let unit: String?
+    public let unit: U
     public let value: Double
     public let timestamp: Date?
     
     public var connected: Bool = false
     
     // RiskSeverity
-    public var riskSeverity: String? = nil
+    public var riskSeverity: RiskSeverity? = nil
     public var lowVoltageDuration: T? = nil
     public var highVoltageDuration: T? = nil
     
@@ -60,11 +60,11 @@ extension Battery {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         let connected = try container.decodeIfPresent(Bool.self, forKey: .connected) ?? false
-        let riskSeverity = try container.decodeIfPresent(String.self, forKey: .riskSeverity)
+        let riskSeverity = try container.decodeIfPresent(RiskSeverity.self, forKey: .riskSeverity)
         let lowVoltageDuration = try container.decodeIfPresent(TimePeriod.self, forKey: .lowVoltageDuration)
         let highVoltageDuration = try container.decodeIfPresent(TimePeriod.self, forKey: .highVoltageDuration)
         
-        self.init(baseUnit: deviceMeasurements.baseUnit, baseValue: deviceMeasurements.baseValue, unit: deviceMeasurements.unit, value: deviceMeasurements.value, timestamp: deviceMeasurements.timestamp, connected: connected, riskSeverity: riskSeverity, lowVoltageDuration: lowVoltageDuration, highVoltageDuration: highVoltageDuration)
+        self.init(baseUnit: deviceMeasurements.baseUnit ?? .unknown, baseValue: deviceMeasurements.baseValue, unit: deviceMeasurements.unit ?? .unknown, value: deviceMeasurements.value, timestamp: deviceMeasurements.timestamp, connected: connected, riskSeverity: riskSeverity, lowVoltageDuration: lowVoltageDuration, highVoltageDuration: highVoltageDuration)
     }
     
     public func encode(with encoder: Encoder) throws {
