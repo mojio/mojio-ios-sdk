@@ -20,13 +20,14 @@ public protocol OdometerModel: DeviceMeasurement {
     var rolloverValue: Double { get }
 }
 
-// Units in DistanceUnits
 public struct Odometer: OdometerModel {
     
+    public typealias U = DistanceUnit
+    
     // DeviceMeasurement
-    public let baseUnit: String?
+    public let baseUnit: U
     public let baseValue: Double
-    public let unit: String?
+    public let unit: U
     public let value: Double
     public let timestamp: Date?
 
@@ -45,7 +46,7 @@ extension Odometer {
         
         let rolloverValue = try container.decodeIfPresent(Double.self, forKey: .rolloverValue) ?? 0
         
-        self.init(baseUnit: deviceMeasurements.baseUnit, baseValue: deviceMeasurements.baseValue, unit: deviceMeasurements.unit, value: deviceMeasurements.value, timestamp: deviceMeasurements.timestamp, rolloverValue: rolloverValue)
+        self.init(baseUnit: deviceMeasurements.baseUnit ?? .unknown , baseValue: deviceMeasurements.baseValue, unit: deviceMeasurements.unit ?? .unknown, value: deviceMeasurements.value, timestamp: deviceMeasurements.timestamp, rolloverValue: rolloverValue)
     }
     
     public func encode(with encoder: Encoder) throws {

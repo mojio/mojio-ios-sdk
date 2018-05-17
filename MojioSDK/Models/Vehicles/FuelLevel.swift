@@ -17,20 +17,21 @@ import Foundation
 import MojioCore
 
 public protocol FuelLevelModel: DeviceMeasurement {
-    var riskSeverity: String? { get }
+    var riskSeverity: RiskSeverity? { get }
 }
 
-// Units are in PercentageUnits
 public struct FuelLevel: FuelLevelModel {
     
+    public typealias U = PercentageUnit
+    
     // DeviceMeasurement
-    public let baseUnit: String?
+    public let baseUnit: U
     public let baseValue: Double
-    public let unit: String?
+    public let unit: U
     public let value: Double
     public let timestamp: Date?
     
-    public var riskSeverity: String? = nil
+    public var riskSeverity: RiskSeverity? = nil
     
     public enum CodingKeys: String, CodingKey {
         case riskSeverity = "RiskSeverity"
@@ -43,9 +44,9 @@ extension FuelLevel {
         
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
-        let riskSeverity = try container.decodeIfPresent(String.self, forKey: .riskSeverity)
+        let riskSeverity = try container.decodeIfPresent(RiskSeverity.self, forKey: .riskSeverity)
         
-        self.init(baseUnit: deviceMeasurements.baseUnit, baseValue: deviceMeasurements.baseValue, unit: deviceMeasurements.unit, value: deviceMeasurements.value, timestamp: deviceMeasurements.timestamp, riskSeverity: riskSeverity)
+        self.init(baseUnit: deviceMeasurements.baseUnit ?? .unknown, baseValue: deviceMeasurements.baseValue, unit: deviceMeasurements.unit ?? .unknown, value: deviceMeasurements.value, timestamp: deviceMeasurements.timestamp, riskSeverity: riskSeverity)
     }
     
     public func encode(with encoder: Encoder) throws {
