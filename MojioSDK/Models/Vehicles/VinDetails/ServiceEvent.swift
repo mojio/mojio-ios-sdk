@@ -45,5 +45,9 @@ public struct ServiceEvent: ServiceEventModel {
     
     public func encode(to encoder: Encoder) throws {
         
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        try container.encodeIfPresent(self.computerCode, forKey: .computerCode)
+        try container.encodeIfPresent(self.event, forKey: .event)
     }
 }

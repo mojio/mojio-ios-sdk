@@ -192,5 +192,38 @@ public struct Trip: TripModel {
     
     public func encode(to encoder: Encoder) throws {
         
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        try container.encodeIfPresent(self.id, forKey: .id)
+        try container.encodeIfPresent(self.vehicleId, forKey: .vehicleId)
+        try container.encodeIfPresent(self.name, forKey: .name)
+        try container.encodeIfPresent(self.mojioId, forKey: .mojioId)
+        try container.encodeIfPresent(self.ownerId, forKey: .ownerId)
+        try container.encodeIfPresent(self.completed, forKey: .completed)
+        try container.encodeIfPresent(self.distance, forKey: .distance)
+        try container.encodeIfPresent(self.startTimestamp, forKey: .startTimestamp)
+        try container.encodeIfPresent(self.endTimestamp, forKey: .endTimestamp)
+        try container.encodeIfPresent(self.startOdometer, forKey: .startOdometer)
+        try container.encodeIfPresent(self.endOdometer, forKey: .endOdometer)
+        try container.encodeIfPresent(self.startLocation, forKey: .startLocation)
+        try container.encodeIfPresent(self.endLocation, forKey: .endLocation)
+        try container.encodeIfPresent(self.maxSpeed, forKey: .maxSpeed)
+        try container.encodeIfPresent(self.maxRPM, forKey: .maxRPM)
+        try container.encodeIfPresent(self.maxAcceleration, forKey: .maxAcceleration)
+        try container.encodeIfPresent(self.maxDeceleration, forKey: .maxDeceleration)
+        try container.encodeIfPresent(self.polyline, forKey: .polyline)
+        try container.encodeIfPresent(self.harshEvents, forKey: .harshEvents)
+        try container.encodeIfPresent(self.idleEvents, forKey: .idleEvents)
+        try container.encodeIfPresent(self.fuelEfficiency, forKey: .fuelEfficiency)
+        try container.encodeIfPresent(self.startFuelLevel, forKey: .startFuelLevel)
+        try container.encodeIfPresent(self.endFuelLevel, forKey: .endFuelLevel)
+        try container.encodeIfPresent(self.idlingCount, forKey: .idlingCount)
+        try container.encodeIfPresent(self.harshAccelCount, forKey: .harshAccelCount)
+        try container.encodeIfPresent(self.harshDecelCount, forKey: .harshDecelCount)
+        try container.encodeIfPresent(self.tags, forKey: .tags)
+        try container.encodeIfPresent(self.createdOn, forKey: .createdOn)
+        try container.encodeIfPresent(self.lastModified, forKey: .lastModified)
+        
+        try container.encodeIfPresent(self.duration, forKey: .duration)
     }
 }

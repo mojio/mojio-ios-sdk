@@ -53,5 +53,11 @@ public struct Transmission: TransmissionModel {
     
     public func encode(to encoder: Encoder) throws {
         
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        try container.encodeIfPresent(self.name, forKey: .name)
+        try container.encodeIfPresent(self.type, forKey: .type)
+        try container.encodeIfPresent(self.detailType, forKey: .detailType)
+        try container.encodeIfPresent(self.gears, forKey: .gears)
     }
 }

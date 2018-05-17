@@ -31,7 +31,6 @@ public struct HarshEvent: HarshEventModel {
     
     public typealias L = Location
     
-    
     public var eventState: H? = nil
     public var eventLocation: L? = nil
     
@@ -56,5 +55,9 @@ public struct HarshEvent: HarshEventModel {
     
     public func encode(to encoder: Encoder) throws {
         
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        try container.encodeIfPresent(self.eventState, forKey: .eventState)
+        try container.encodeIfPresent(self.eventLocation, forKey: .eventLocation)
     }
 }

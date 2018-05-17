@@ -35,11 +35,33 @@ class ScoreTests: XCTestCase {
     }
     
     func testScoreModelDecoding() {
-        XCTAssertNotNil(model)
-        XCTAssertEqual(model?.scoringMethod, .zScore)
-        XCTAssertEqual(model?.value, 10.0)
-        XCTAssertEqual(model?.percentile, 0.5)
-        XCTAssertEqual(model?.average, 20.0)
+        self.helperMethod(_model: self.model)
+    }
+    
+    func testScoreModelEncoding() {
+        do {
+            let encoder = JSONEncoder()
+            encoder.dateEncodingStrategy = .iso8601
+            let encodedModelData = try encoder.encode(self.model)
+            
+            XCTAssertNotNil(encodedModelData)
+            
+            let modelDecodedAgain = try JSONDecoder().decode(Score.self, from: encodedModelData)
+            
+            self.helperMethod(_model: modelDecodedAgain)
+        } catch let error {
+            print(error)
+        }
+    }
+    
+    func helperMethod(_model: Score?) {
+        if let model = _model {
+            XCTAssertNotNil(model)
+            XCTAssertEqual(model.scoringMethod, .zScore)
+            XCTAssertEqual(model.value, 10.0)
+            XCTAssertEqual(model.percentile, 0.5)
+            XCTAssertEqual(model.average, 20.0)
+        }
     }
 }
 
@@ -47,10 +69,10 @@ extension ScoreTests {
     var jsonString: String {
         return """
         {
-        "ScoringMethod": "ZScore",
-        "Value": 10.0,
-        "Percentile": 0.5,
-        "Average": 20.0
+            "ScoringMethod": "ZScore",
+            "Value": 10.0,
+            "Percentile": 0.5,
+            "Average": 20.0
         }
         """
     }

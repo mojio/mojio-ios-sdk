@@ -34,14 +34,35 @@ class AccelerometerTests: XCTestCase {
         self.model = nil
     }
     
-    //MARK: - TO EXTEND WITH NOT ONLY NIL
-    func testAccelerometerModelDecoding() {
-        XCTAssertNotNil(model)
-        XCTAssertNotNil(model?.x)
-        XCTAssertNotNil(model?.y)
-        XCTAssertNotNil(model?.z)
-        XCTAssertNotNil(model?.magnitude)
-        XCTAssertNotNil(model?.samplingInterval)
+    func testAccelerationModelDecoding() {
+        self.helperMethod(_model: self.model)
+    }
+    
+    func testAccelerometerModelEncoding() {
+        do {
+            let encoder = JSONEncoder()
+            encoder.dateEncodingStrategy = .iso8601
+            let encodedModelData = try encoder.encode(self.model)
+            
+            XCTAssertNotNil(encodedModelData)
+            
+            let modelDecodedAgain = try JSONDecoder().decode(Accelerometer.self, from: encodedModelData)
+            
+            self.helperMethod(_model: modelDecodedAgain)
+        } catch let error {
+            print(error)
+        }
+    }
+    
+    func helperMethod(_model: Accelerometer?) {
+        if let model = _model {
+            XCTAssertNotNil(model)
+            XCTAssertNotNil(model.x)
+            XCTAssertNotNil(model.y)
+            XCTAssertNotNil(model.z)
+            XCTAssertNotNil(model.magnitude)
+            XCTAssertNotNil(model.samplingInterval)
+        }
     }
 }
 
@@ -49,41 +70,41 @@ extension AccelerometerTests {
     var jsonString: String {
         return """
         {
-        "X": {
-        "BaseUnit": "MilliGUnits",
-        "Timestamp": "2017-11-09T07:16:58.072Z",
-        "BaseValue": 0,
-        "Unit": "MilliGUnits",
-        "Value": 0
-        },
-        "Y": {
-        "BaseUnit": "MilliGUnits",
-        "Timestamp": "2017-11-09T07:16:58.072Z",
-        "BaseValue": 0,
-        "Unit": "MilliGUnits",
-        "Value": 0
-        },
-        "Z": {
-        "BaseUnit": "MilliGUnits",
-        "Timestamp": "2017-11-09T07:16:58.072Z",
-        "BaseValue": 0,
-        "Unit": "MilliGUnits",
-        "Value": 0
-        },
-        "Magnitude": {
-        "BaseUnit": "MilliGUnits",
-        "Timestamp": "2017-11-09T07:16:58.072Z",
-        "BaseValue": 0,
-        "Unit": "MilliGUnits",
-        "Value": 0
-        },
-        "SamplingInterval": {
-        "BaseUnit": "MilliGUnits",
-        "Timestamp": "2017-11-09T07:16:58.072Z",
-        "BaseValue": 0,
-        "Unit": "MilliGUnits",
-        "Value": 0
-        }
+            "X": {
+                "BaseUnit": "MilliGUnits",
+                "Timestamp": "2017-11-09T07:16:58.072Z",
+                "BaseValue": 0,
+                "Unit": "MilliGUnits",
+                "Value": 0
+            },
+            "Y": {
+                "BaseUnit": "MilliGUnits",
+                "Timestamp": "2017-11-09T07:16:58.072Z",
+                "BaseValue": 0,
+                "Unit": "MilliGUnits",
+                "Value": 0
+            },
+            "Z": {
+                "BaseUnit": "MilliGUnits",
+                "Timestamp": "2017-11-09T07:16:58.072Z",
+                "BaseValue": 0,
+                "Unit": "MilliGUnits",
+                "Value": 0
+            },
+            "Magnitude": {
+                "BaseUnit": "MilliGUnits",
+                "Timestamp": "2017-11-09T07:16:58.072Z",
+                "BaseValue": 0,
+                "Unit": "MilliGUnits",
+                "Value": 0
+            },
+            "SamplingInterval": {
+                "BaseUnit": "Minutes",
+                "Timestamp": "2017-11-09T07:16:58.072Z",
+                "BaseValue": 0,
+                "Unit": "Minutes",
+                "Value": 0
+            }
         }
         """
     }

@@ -63,5 +63,15 @@ public struct ServiceInterval: ServiceIntervalModel {
     
     public func encode(to encoder: Encoder) throws {
         
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        try container.encodeIfPresent(self.operatingParameter, forKey: .operatingParameter)
+        try container.encodeIfPresent(self.operatingParameterNotes, forKey: .operatingParameterNotes)
+        
+        try container.encodeIfPresent(self.intervalType, forKey: .intervalType)
+        try container.encodeIfPresent(self.value, forKey: .value)
+        
+        try container.encodeIfPresent(self.units, forKey: .units)
+        try container.encodeIfPresent(self.initialValue, forKey: .initialValue)
     }
 }

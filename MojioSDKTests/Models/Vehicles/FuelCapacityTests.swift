@@ -35,11 +35,33 @@ class FuelCapacityTests: XCTestCase {
     }
     
     func testFuelCapacityModelDecoding() {
-        XCTAssertNotNil(model)
-        XCTAssertEqual(model?.baseUnit, "MetersPerSecondPerSecond")
-        XCTAssertEqual(model?.baseValue, 10)
-        XCTAssertEqual(model?.unit, "MetersPerSecondPerSecond")
-        XCTAssertEqual(model?.value, 20)
+        helperMethod(_model: model)
+    }
+    
+    func testFuelCapacityModelEncoding() {
+        do {
+            let encoder = JSONEncoder()
+            encoder.dateEncodingStrategy = .iso8601
+            let encodedModelData = try encoder.encode(self.model)
+            
+            XCTAssertNotNil(encodedModelData)
+            
+            let modelDecodedAgain = try JSONDecoder().decode(FuelCapacity.self, from: encodedModelData)
+            
+            helperMethod(_model: modelDecodedAgain)
+        } catch let error {
+            print(error)
+        }
+    }
+    
+    func helperMethod(_model: FuelCapacity?) {
+        if let model = _model {
+            XCTAssertNotNil(model)
+            XCTAssertEqual(model.baseUnit, .unknown)
+            XCTAssertEqual(model.baseValue, 10)
+            XCTAssertEqual(model.unit, .gallons)
+            XCTAssertEqual(model.value, 20)
+        }
     }
 }
 
@@ -47,11 +69,11 @@ extension FuelCapacityTests {
     var jsonString: String {
         return """
         {
-        "BaseUnit": "MetersPerSecondPerSecond",
-        "BaseValue": 10,
-        "Unit": "MetersPerSecondPerSecond",
-        "Value": 20,
-        "Timestamp": "2017-11-09T07:16:58.072Z"
+            "BaseUnit": "GGGG",
+            "BaseValue": 10,
+            "Unit": "Gallons",
+            "Value": 20,
+            "Timestamp": "2017-11-09T07:16:58.072Z"
         }
         """
     }

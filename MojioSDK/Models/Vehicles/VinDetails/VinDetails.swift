@@ -112,5 +112,31 @@ public struct VinDetails: VinDetailsModel {
     
     public func encode(to encoder: Encoder) throws {
         
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        try container.encodeIfPresent(self.timestamp, forKey: .timestamp)
+        
+        try container.encodeIfPresent(self.vin, forKey: .vin)
+        try container.encodeIfPresent(self.year, forKey: .year)
+        try container.encodeIfPresent(self.make, forKey: .make)
+        try container.encodeIfPresent(self.model, forKey: .model)
+        
+        try container.encodeIfPresent(self.engine, forKey: .engine)
+        try container.encodeIfPresent(self.cylinders, forKey: .cylinders)
+        try container.encodeIfPresent(self.totalFuelCapacity, forKey: .totalFuelCapacity)
+        
+        try container.encodeIfPresent(self.fuelType, forKey: .fuelType)
+        
+        try container.encodeIfPresent(self.cityFuelEfficiency, forKey: .cityFuelEfficiency)
+        
+        try container.encodeIfPresent(self.highwayFuelEfficiency, forKey: .highwayFuelEfficiency)
+        
+        try container.encodeIfPresent(self.combinedFuelEfficiency, forKey: .combinedFuelEfficiency)
+        
+        try container.encodeIfPresent(self.transmission, forKey: .transmission)
+        
+        try container.encodeIfPresent(self.message, forKey: .message)
+        
+        try container.encodeIfPresent(self.success, forKey: .success)
     }
 }

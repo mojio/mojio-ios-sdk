@@ -167,5 +167,33 @@ public struct NotificationsSettings: NotificationSettingsModel {
     
     public func encode(to encoder: Encoder) throws {
         
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        try container.encodeIfPresent(self.speedThreshold, forKey: .speedThreshold)
+        try container.encodeIfPresent(self.enableTripCompletedActivity, forKey: .enableTripCompletedActivity)
+        try container.encodeIfPresent(self.enableTripStartActivity, forKey: .enableTripStartActivity)
+        
+        try container.encodeIfPresent(self.enableLowFuelActivity, forKey: .enableLowFuelActivity)
+        try container.encodeIfPresent(self.enableLowBatteryActivity, forKey: .enableLowBatteryActivity)
+        try container.encodeIfPresent(self.enableSpeedActivity, forKey: .enableSpeedActivity)
+        try container.encodeIfPresent(self.enableDtcActivity, forKey: .enableDtcActivity)
+        try container.encodeIfPresent(self.enableCheckEngineActivity, forKey: .enableCheckEngineActivity)
+        
+        try container.encodeIfPresent(self.enableTowActivity, forKey: .enableTowActivity)
+        try container.encodeIfPresent(self.enableMaintenanceActivity, forKey: .enableMaintenanceActivity)
+        try container.encodeIfPresent(self.enableRecallActivity, forKey: .enableRecallActivity)
+        try container.encodeIfPresent(self.enableServiceBulletinActivity, forKey: .enableServiceBulletinActivity)
+        try container.encodeIfPresent(self.enableDisturbanceActivity, forKey: .enableDisturbanceActivity)
+        try container.encodeIfPresent(self.disturbanceThreshold, forKey: .disturbanceThreshold)
+        try container.encodeIfPresent(self.enableAccidentActivity, forKey: .enableAccidentActivity)
+        try container.encodeIfPresent(self.enableDeviceUnpluggedActivity, forKey: .enableDeviceUnpluggedActivity)
+        
+        try container.encodeIfPresent(self.enableVehicleConnectedActivity, forKey: .enableVehicleConnectedActivity)
+        try container.encodeIfPresent(self.enableDeviceUpdatedActivity, forKey: .enableDeviceUpdatedActivity)
+        try container.encodeIfPresent(self.enableSMSActivity, forKey: .enableSMSActivity)
+        try container.encodeIfPresent(self.enableVehicleCompatibilityActivity, forKey: .enableVehicleCompatibilityActivity)
+        
+        try container.encodeIfPresent(self.enableGeofenceActivity, forKey: .enableGeofenceActivity)
+        try container.encodeIfPresent(self.geofences, forKey: .geofences)
     }
 }

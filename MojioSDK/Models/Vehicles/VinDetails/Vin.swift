@@ -123,6 +123,32 @@ public struct Vin: VinModel {
     
     public func encode(to encoder: Encoder) throws {
         
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        try container.encodeIfPresent(self.vin, forKey: .vin)
+        try container.encodeIfPresent(self.timestamp, forKey: .timestamp)
+        
+        try container.encodeIfPresent(self.market, forKey: .market)
+        try container.encodeIfPresent(self.year, forKey: .year)
+        try container.encodeIfPresent(self.make, forKey: .make)
+        try container.encodeIfPresent(self.model, forKey: .model)
+        
+        try container.encodeIfPresent(self.vehicleType, forKey: .vehicleType)
+        try container.encodeIfPresent(self.bodyType, forKey: .bodyType)
+        try container.encodeIfPresent(self.driveType, forKey: .driveType)
+        
+        try container.encodeIfPresent(self.fuelTankSize, forKey: .fuelTankSize)
+        try container.encodeIfPresent(self.epaFuelEfficiency, forKey: .epaFuelEfficiency)
+        
+        try container.encodeIfPresent(self.vehicleEngine, forKey: .vehicleEngine)
+        
+        try container.encodeIfPresent(self.vehicleTransmission, forKey: .vehicleTransmission)
+        
+        try container.encodeIfPresent(self.warranties, forKey: .warranties)
+        
+        try container.encodeIfPresent(self.recalls, forKey: .recalls)
+        
+        try container.encodeIfPresent(self.serviceBulletins, forKey: .serviceBulletins)
     }
 }
 

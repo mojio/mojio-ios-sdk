@@ -35,9 +35,31 @@ class ServiceEventTests: XCTestCase {
     }
     
     func testServiceEventModelDecoding() {
-        XCTAssertNotNil(model)
-        XCTAssertEqual(model?.computerCode, "string")
-        XCTAssertEqual(model?.event, "string")
+        self.helperMethod(_model: self.model)
+    }
+    
+    func testServiceEventModelEncoding() {
+        do {
+            let encoder = JSONEncoder()
+            encoder.dateEncodingStrategy = .iso8601
+            let encodedModelData = try encoder.encode(self.model)
+            
+            XCTAssertNotNil(encodedModelData)
+            
+            let modelDecodedAgain = try JSONDecoder().decode(ServiceEvent.self, from: encodedModelData)
+            
+            self.helperMethod(_model: modelDecodedAgain)
+        } catch let error {
+            print(error)
+        }
+    }
+    
+    func helperMethod(_model: ServiceEvent?) {
+        if let model = _model {
+            XCTAssertNotNil(model)
+            XCTAssertEqual(model.computerCode, "string")
+            XCTAssertEqual(model.event, "string")
+        }
     }
 }
 
@@ -45,8 +67,8 @@ extension ServiceEventTests {
     var jsonString: String {
         return """
         {
-        "ComputerCode": "string",
-        "Event": "string"
+            "ComputerCode": "string",
+            "Event": "string"
         }
         """
     }

@@ -35,11 +35,33 @@ class FuelEfficiencyTests: XCTestCase {
     }
     
     func testFuelEfficiencyModelDecoding() {
-        XCTAssertNotNil(model)
-        XCTAssertEqual(model?.baseUnit, "MetersPerSecondPerSecond")
-        XCTAssertEqual(model?.baseValue, 10)
-        XCTAssertEqual(model?.unit, "MetersPerSecondPerSecond")
-        XCTAssertEqual(model?.value, 20)
+        self.helperMethod(_model: model)
+    }
+    
+    func testFuelEfficiencyModelEncoding() {
+        do {
+            let encoder = JSONEncoder()
+            encoder.dateEncodingStrategy = .iso8601
+            let encodedModelData = try encoder.encode(self.model)
+            
+            XCTAssertNotNil(encodedModelData)
+            
+            let modelDecodedAgain = try JSONDecoder().decode(FuelEfficiency.self, from: encodedModelData)
+            
+            self.helperMethod(_model: modelDecodedAgain)
+        } catch let error {
+            print(error)
+        }
+    }
+    
+    func helperMethod(_model: FuelEfficiency?) {
+        if let model = _model {
+            XCTAssertNotNil(model)
+            XCTAssertEqual(model.baseUnit, .kilometerPerLiter)
+            XCTAssertEqual(model.baseValue, 10)
+            XCTAssertEqual(model.unit, .unknown)
+            XCTAssertEqual(model.value, 20)
+        }
     }
 }
 
@@ -47,11 +69,11 @@ extension FuelEfficiencyTests {
     var jsonString: String {
         return """
         {
-        "BaseUnit": "MetersPerSecondPerSecond",
-        "BaseValue": 10,
-        "Unit": "MetersPerSecondPerSecond",
-        "Value": 20,
-        "Timestamp": "2017-11-09T07:16:58.072Z"
+            "BaseUnit": "KilometerPerLiter",
+            "BaseValue": 10,
+            "Unit": "MetersPerSecondPerSecond",
+            "Value": 20,
+            "Timestamp": "2017-11-09T07:16:58.072Z"
         }
         """
     }

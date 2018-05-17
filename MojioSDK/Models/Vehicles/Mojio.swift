@@ -102,6 +102,25 @@ public struct Mojio: MojioModel {
     }
     
     public func encode(to encoder: Encoder) throws {
-
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        try container.encodeIfPresent(self.id, forKey: .id)
+        try container.encodeIfPresent(self.name, forKey: .name)
+        try container.encodeIfPresent(self.imei, forKey: .imei)
+        try container.encodeIfPresent(self.lastContactTime, forKey: .lastContactTime)
+        
+        try container.encodeIfPresent(self.wifi, forKey: .wifi)
+        try container.encodeIfPresent(self.gatewayTime, forKey: .gatewayTime)
+        try container.encodeIfPresent(self.vehicleId, forKey: .vehicleId)
+        try container.encodeIfPresent(self.location, forKey: .location)
+        
+        try container.encodeIfPresent(self.connectedState, forKey: .connectedState)
+        try container.encodeIfPresent(self.createdOn, forKey: .createdOn)
+        try container.encodeIfPresent(self.lastModified, forKey: .lastModified)
+        
+        try container.encodeIfPresent(self.tags, forKey: .tags)
+        try container.encodeIfPresent(self.deleted, forKey: .deleted)
+        try container.encodeIfPresent(self.msisdn, forKey: .msisdn)
+        try container.encodeIfPresent(self.iccid, forKey: .iccid)
     }
 }

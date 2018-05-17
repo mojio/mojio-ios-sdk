@@ -35,11 +35,33 @@ class FuelVolumeTests: XCTestCase {
     }
     
     func testFuelVolumeModelDecoding() {
-        XCTAssertNotNil(model)
-        XCTAssertEqual(model?.baseUnit, "Percentage")
-        XCTAssertEqual(model?.baseValue, 10)
-        XCTAssertEqual(model?.unit, "Percentage")
-        XCTAssertEqual(model?.value, 20)
+        helperMethod(_model: model)
+    }
+    
+    func testFuelVolumeModelEncoding() {
+        do {
+            let encoder = JSONEncoder()
+            encoder.dateEncodingStrategy = .iso8601
+            let encodedModelData = try encoder.encode(self.model)
+            
+            XCTAssertNotNil(encodedModelData)
+            
+            let modelDecodedAgain = try JSONDecoder().decode(FuelVolume.self, from: encodedModelData)
+            
+            helperMethod(_model: modelDecodedAgain)
+        } catch let error {
+            print(error)
+        }
+    }
+    
+    func helperMethod(_model: FuelVolume?) {
+        if let model = _model {
+            XCTAssertNotNil(model)
+            XCTAssertEqual(model.baseUnit, .milliliter)
+            XCTAssertEqual(model.baseValue, 10)
+            XCTAssertEqual(model.unit, .unknown)
+            XCTAssertEqual(model.value, 20)
+        }
     }
 }
 
@@ -47,11 +69,11 @@ extension FuelVolumeTests {
     var jsonString: String {
         return """
         {
-        "BaseUnit": "Percentage",
-        "Timestamp": "2017-11-09T07:16:58.072Z",
-        "BaseValue": 10,
-        "Unit": "Percentage",
-        "Value": 20
+            "BaseUnit": "Milliliter",
+            "Timestamp": "2017-11-09T07:16:58.072Z",
+            "BaseValue": 10,
+            "Unit": "Percentage",
+            "Value": 20
         }
         """
     }

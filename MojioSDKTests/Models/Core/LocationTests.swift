@@ -35,15 +35,37 @@ class LocationTests: XCTestCase {
     }
     
     func testLocationModelDecoding() {
-        XCTAssertNotNil(model)
-        XCTAssertNotNil(model?.locationAddress)
-        XCTAssertNotNil(model?.locationHeading)
-        XCTAssertEqual(model?.lat, 23.0)
-        XCTAssertEqual(model?.lng, 51.0)
-        XCTAssertEqual(model?.status, "Unknown")
-        XCTAssertEqual(model?.dilution, 30.0)
-        XCTAssertEqual(model?.altitude, 35.0)
-        XCTAssertEqual(model?.geoHash, "string")
+        helperMethod(_model: model)
+    }
+    
+    func testLocationModelEncoding() {
+        do {
+            let encoder = JSONEncoder()
+            encoder.dateEncodingStrategy = .iso8601
+            let encodedModelData = try encoder.encode(self.model)
+            
+            XCTAssertNotNil(encodedModelData)
+            
+            let modelDecodedAgain = try JSONDecoder().decode(Location.self, from: encodedModelData)
+            
+            helperMethod(_model: modelDecodedAgain)
+        } catch let error {
+            print(error)
+        }
+    }
+    
+    func helperMethod(_model: Location?) {
+        if let model = _model {
+            XCTAssertNotNil(model)
+            XCTAssertNotNil(model.locationAddress)
+            XCTAssertNotNil(model.locationHeading)
+            XCTAssertEqual(model.lat, 23.0)
+            XCTAssertEqual(model.lng, 51.0)
+            XCTAssertEqual(model.status, "Unknown")
+            XCTAssertEqual(model.dilution, 30.0)
+            XCTAssertEqual(model.altitude, 35.0)
+            XCTAssertEqual(model.geoHash, "string")
+        }
     }
 }
 
@@ -51,43 +73,36 @@ extension LocationTests {
     var jsonString: String {
         return """
         {
-        "Timestamp": "2017-11-09T07:16:57.388Z",
-        "Lat": 23.0,
-        "Lng": 51.0,
-        "Status": "Unknown",
-        "Dilution": 30.0,
-        "Altitude": 35.0,
-        "GeoHash": "string",
-        "Radius": 15,
-        "Accuracy": {
-        "baseUnit": "Meters",
-        "timestamp": "2017-11-09T07:16:57.388Z",
-        "baseValue": 0,
-        "unit": "Meters",
-        "value": 0
-        },
-        "Heading": {
-        "baseUnit": "Degree",
-        "Direction": "string",
-        "LeftTurn": true,
-        "timestamp": "2017-11-09T07:16:57.388Z",
-        "baseValue": 0,
-        "unit": "Degree",
-        "value": 0
-        },
-        "Address": {
-        "HouseNumber": "string",
-        "Road": "string",
-        "Neighbourhood": "string",
-        "Suburb": "string",
-        "City": "string",
-        "County": "string",
-        "State": "string",
-        "PostCode": "string",
-        "Country": "string",
-        "CountryCode": "string",
-        "FormattedAddress": "string"
-        }
+            "Timestamp": "2017-11-09T07:16:57.388Z",
+            "Lat": 23.0,
+            "Lng": 51.0,
+            "Status": "Unknown",
+            "Dilution": 30.0,
+            "Altitude": 35.0,
+            "GeoHash": "string",
+            "Radius": 15,
+            "Heading": {
+                "BaseUnit": "Degree",
+                "Direction": "string",
+                "LeftTurn": true,
+                "Timestamp": "2017-11-09T07:16:57.388Z",
+                "BaseValue": 0,
+                "Unit": "Degree",
+                "Value": 0
+            },
+            "Address": {
+                "HouseNumber": "string",
+                "Road": "string",
+                "Neighbourhood": "string",
+                "Suburb": "string",
+                "City": "string",
+                "County": "string",
+                "State": "string",
+                "PostCode": "string",
+                "Country": "string",
+                "CountryCode": "string",
+                "FormattedAddress": "string"
+            }
         }
         """
     }

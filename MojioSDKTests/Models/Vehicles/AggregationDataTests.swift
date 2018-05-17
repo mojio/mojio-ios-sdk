@@ -36,16 +36,36 @@ class AggregationDataTests: XCTestCase {
     
     //MARK: - CHECK DATE
     func testAggregationDataDecoding() {
-        XCTAssertNotNil(model)
-        XCTAssertEqual(model?.total, 12)
-        XCTAssertEqual(model?.average, 15)
-        XCTAssertEqual(model?.max, 21)
-        XCTAssertEqual(model?.min, 1)
-        XCTAssertEqual(model?.units, "MetersPerSecondPerSecond")
-        //XCTAssertEqual(model?.date, "2017-11-09T07:16:58.072Z")
-        //XCTAssertEqual(model?.endDate, "2017-11-09T07:16:58.072Z")
-        XCTAssertEqual(model?.count, 31)
-        XCTAssertEqual(model?.tripCount, 5)
+        self.helperMethod(_model: self.model)
+    }
+    
+    func testAggregationDataModelEncoding() {
+        do {
+            let encoder = JSONEncoder()
+            encoder.dateEncodingStrategy = .iso8601
+            let encodedModelData = try encoder.encode(self.model)
+            
+            XCTAssertNotNil(encodedModelData)
+            
+            let modelDecodedAgain = try JSONDecoder().decode(AggregationData.self, from: encodedModelData)
+            
+            self.helperMethod(_model: modelDecodedAgain)
+        } catch let error {
+            print(error)
+        }
+    }
+    
+    func helperMethod(_model: AggregationData?) {
+        if let model = _model {
+            XCTAssertNotNil(model)
+            XCTAssertEqual(model.total, 12)
+            XCTAssertEqual(model.average, 15)
+            XCTAssertEqual(model.max, 21)
+            XCTAssertEqual(model.min, 1)
+            XCTAssertEqual(model.units, "MetersPerSecondPerSecond")
+            XCTAssertEqual(model.count, 31)
+            XCTAssertEqual(model.tripCount, 5)
+        }
     }
 }
 
@@ -53,15 +73,15 @@ extension AggregationDataTests {
     var jsonString: String {
         return """
         {
-        "Total": 12,
-        "Average": 15,
-        "Max": 21,
-        "Min": 1,
-        "Units": "MetersPerSecondPerSecond",
-        "Date": "2017-11-09T07:16:58.072Z",
-        "EndDate": "2017-11-09T07:16:58.072Z",
-        "Count": 31,
-        "TripCount": 5
+            "Total": 12,
+            "Average": 15,
+            "Max": 21,
+            "Min": 1,
+            "Units": "MetersPerSecondPerSecond",
+            "Date": "2017-11-09T07:16:58.072Z",
+            "EndDate": "2017-11-09T07:16:58.072Z",
+            "Count": 31,
+            "TripCount": 5
         }
         """
     }

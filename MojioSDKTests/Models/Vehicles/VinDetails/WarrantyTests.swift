@@ -35,11 +35,33 @@ class WarrantyTests: XCTestCase {
     }
     
     func testWarrantyModelDecoding() {
-        XCTAssertNotNil(model)
-        XCTAssertEqual(model?.name, "string")
-        XCTAssertEqual(model?.type, "string")
-        XCTAssertEqual(model?.months, "string")
-        XCTAssertEqual(model?.km, 0)
+        self.helperMethod(_model: self.model)
+    }
+    
+    func testWarrantyModelEncoding() {
+        do {
+            let encoder = JSONEncoder()
+            encoder.dateEncodingStrategy = .iso8601
+            let encodedModelData = try encoder.encode(self.model)
+            
+            XCTAssertNotNil(encodedModelData)
+            
+            let modelDecodedAgain = try JSONDecoder().decode(Warranty.self, from: encodedModelData)
+            
+            self.helperMethod(_model: modelDecodedAgain)
+        } catch let error {
+            print(error)
+        }
+    }
+    
+    func helperMethod(_model: Warranty?) {
+        if let model = _model {
+            XCTAssertNotNil(model)
+            XCTAssertEqual(model.name, "string")
+            XCTAssertEqual(model.type, "string")
+            XCTAssertEqual(model.months, "string")
+            XCTAssertEqual(model.km, 0)
+        }
     }
 }
 
@@ -47,10 +69,10 @@ extension WarrantyTests {
     var jsonString: String {
         return """
         {
-        "Name": "string",
-        "Type": "string",
-        "Months": "string",
-        "Km": 0
+            "Name": "string",
+            "Type": "string",
+            "Months": "string",
+            "Km": 0
         }
         """
     }

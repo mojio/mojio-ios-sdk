@@ -35,12 +35,34 @@ class FuelLevelTests: XCTestCase {
     }
     
     func testFuelLevelModelDecoding() {
-        XCTAssertNotNil(model)
-        XCTAssertEqual(model?.baseUnit, "Percentage")
-        XCTAssertEqual(model?.baseValue, 10)
-        XCTAssertEqual(model?.unit, "Percentage")
-        XCTAssertEqual(model?.value, 20)
-        XCTAssertEqual(model?.riskSeverity, "Unknown")
+        self.helperMethod(_model: model)
+    }
+    
+    func testFuelLevelModelEncoding() {
+        do {
+            let encoder = JSONEncoder()
+            encoder.dateEncodingStrategy = .iso8601
+            let encodedModelData = try encoder.encode(self.model)
+            
+            XCTAssertNotNil(encodedModelData)
+            
+            let modelDecodedAgain = try JSONDecoder().decode(FuelLevel.self, from: encodedModelData)
+            
+            self.helperMethod(_model: modelDecodedAgain)
+        } catch let error {
+            print(error)
+        }
+    }
+    
+    func helperMethod(_model: FuelLevel?) {
+        if let model = _model {
+            XCTAssertNotNil(model)
+            XCTAssertEqual(model.baseUnit, .percentage)
+            XCTAssertEqual(model.baseValue, 10)
+            XCTAssertEqual(model.unit, .unknown)
+            XCTAssertEqual(model.value, 20)
+            XCTAssertEqual(model.riskSeverity, .high)
+        }
     }
 }
 
@@ -48,12 +70,12 @@ extension FuelLevelTests {
     var jsonString: String {
         return """
         {
-        "BaseUnit": "Percentage",
-        "RiskSeverity": "Unknown",
-        "Timestamp": "2017-11-09T07:16:58.072Z",
-        "BaseValue": 10,
-        "Unit": "Percentage",
-        "Value": 20
+            "BaseUnit": "Percentage",
+            "RiskSeverity": "High",
+            "Timestamp": "2017-11-09T07:16:58.072Z",
+            "BaseValue": 10,
+            "Unit": "Percen",
+            "Value": 20
         }
         """
     }

@@ -50,8 +50,4 @@ public struct Warranty: WarrantyModel {
             throw error
         }
     }
-    
-    public func encode(to encoder: Encoder) throws {
-        
-    }
 }

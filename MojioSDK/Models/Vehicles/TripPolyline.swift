@@ -59,5 +59,12 @@ public struct Polyline: TripPolylineModel {
     
     public func encode(to encoder: Encoder) throws {
         
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        try container.encodeIfPresent(self.id, forKey: .id)
+        try container.encodeIfPresent(self.polyline, forKey: .polyline)
+        try container.encodeIfPresent(self.createdOn, forKey: .createdOn)
+        try container.encodeIfPresent(self.lastModified, forKey: .lastModified)
+        try container.encodeIfPresent(self.deleted, forKey: .deleted)
     }
 }

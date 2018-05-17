@@ -35,13 +35,35 @@ class ServiceIntervalTests: XCTestCase {
     }
     
     func testServiceIntervalModelDecoding() {
-        XCTAssertNotNil(model)
-        XCTAssertEqual(model?.operatingParameter, "string")
-        XCTAssertEqual(model?.operatingParameterNotes, "string")
-        XCTAssertEqual(model?.intervalType, "string")
-        XCTAssertEqual(model?.value, 0)
-        XCTAssertEqual(model?.units, "string")
-        XCTAssertEqual(model?.initialValue, 0)
+        self.helperMethod(_model: self.model)
+    }
+    
+    func testServiceIntervalModelEncoding() {
+        do {
+            let encoder = JSONEncoder()
+            encoder.dateEncodingStrategy = .iso8601
+            let encodedModelData = try encoder.encode(self.model)
+            
+            XCTAssertNotNil(encodedModelData)
+            
+            let modelDecodedAgain = try JSONDecoder().decode(ServiceInterval.self, from: encodedModelData)
+            
+            self.helperMethod(_model: modelDecodedAgain)
+        } catch let error {
+            print(error)
+        }
+    }
+    
+    func helperMethod(_model: ServiceInterval?) {
+        if let model = _model {
+            XCTAssertNotNil(model)
+            XCTAssertEqual(model.operatingParameter, "string")
+            XCTAssertEqual(model.operatingParameterNotes, "string")
+            XCTAssertEqual(model.intervalType, "string")
+            XCTAssertEqual(model.value, 0)
+            XCTAssertEqual(model.units, "string")
+            XCTAssertEqual(model.initialValue, 0)
+        }
     }
 }
 
@@ -49,12 +71,12 @@ extension ServiceIntervalTests {
     var jsonString: String {
         return """
         {
-        "OperatingParameter": "string",
-        "OperatingParameterNotes": "string",
-        "IntervalType": "string",
-        "Value": 0,
-        "Units": "string",
-        "InitialValue": 0
+            "OperatingParameter": "string",
+            "OperatingParameterNotes": "string",
+            "IntervalType": "string",
+            "Value": 0,
+            "Units": "string",
+            "InitialValue": 0
         }
         """
     }

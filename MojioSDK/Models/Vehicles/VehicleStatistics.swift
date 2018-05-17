@@ -69,5 +69,14 @@ public struct VehicleStatistics: VehicleStatsModel {
     
     public func encode(to encoder: Encoder) throws {
         
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        try container.encodeIfPresent(self.estimatedFuelLevel, forKey: .estimatedFuelLevel)
+        try container.encodeIfPresent(self.estimatedFuelVolume, forKey: .estimatedFuelVolume)
+        try container.encodeIfPresent(self.averageFuelEfficiency, forKey: .averageFuelEfficiency)
+        
+        try container.encodeIfPresent(self.totalRange, forKey: .totalRange)
+        try container.encodeIfPresent(self.currentRange, forKey: .currentRange)
+        try container.encodeIfPresent(self.lastFillUpDate, forKey: .lastFillUpDate)
     }
 }

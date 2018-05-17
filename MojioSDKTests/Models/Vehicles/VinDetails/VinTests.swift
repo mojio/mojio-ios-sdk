@@ -35,22 +35,44 @@ class VinTests: XCTestCase {
     }
     
     func testVinModelDecoding() {
-        XCTAssertNotNil(model)
-        XCTAssertEqual(model?.vin, "string")
-        XCTAssertEqual(model?.market, "string")
-        XCTAssertEqual(model?.year, 0)
-        XCTAssertEqual(model?.make, "string")
-        XCTAssertEqual(model?.model, "string")
-        XCTAssertEqual(model?.vehicleType, "string")
-        XCTAssertEqual(model?.bodyType, "string")
-        XCTAssertEqual(model?.driveType, "string")
-        XCTAssertEqual(model?.fuelTankSize, 0)
-        XCTAssertEqual(model?.epaFuelEfficiency, 0)
-        XCTAssertNotNil(model?.vehicleEngine)
-        XCTAssertNotNil(model?.vehicleTransmission)
-        XCTAssertNotNil(model?.warranties)
-        XCTAssertNotNil(model?.recalls)
-        XCTAssertNotNil(model?.serviceBulletins)
+        self.helperMethod(_model: self.model)
+    }
+    
+    func testVinModelEncoding() {
+        do {
+            let encoder = JSONEncoder()
+            encoder.dateEncodingStrategy = .iso8601
+            let encodedModelData = try encoder.encode(self.model)
+            
+            XCTAssertNotNil(encodedModelData)
+            
+            let modelDecodedAgain = try JSONDecoder().decode(Vin.self, from: encodedModelData)
+            
+            self.helperMethod(_model: modelDecodedAgain)
+        } catch let error {
+            print(error)
+        }
+    }
+    
+    func helperMethod(_model: Vin?) {
+        if let model = _model {
+            XCTAssertNotNil(model)
+            XCTAssertEqual(model.vin, "string")
+            XCTAssertEqual(model.market, "string")
+            XCTAssertEqual(model.year, 0)
+            XCTAssertEqual(model.make, "string")
+            XCTAssertEqual(model.model, "string")
+            XCTAssertEqual(model.vehicleType, "string")
+            XCTAssertEqual(model.bodyType, "string")
+            XCTAssertEqual(model.driveType, "string")
+            XCTAssertEqual(model.fuelTankSize, 0)
+            XCTAssertEqual(model.epaFuelEfficiency, 0)
+            XCTAssertNotNil(model.vehicleEngine)
+            XCTAssertNotNil(model.vehicleTransmission)
+            XCTAssertNotNil(model.warranties)
+            XCTAssertNotNil(model.recalls)
+            XCTAssertNotNil(model.serviceBulletins)
+        }
     }
 }
 
@@ -58,77 +80,71 @@ extension VinTests {
     var jsonString: String {
         return """
         {
-        "VIN": "string",
-        "Timestamp": "2017-11-10T07:07:45.359Z",
-        "Market": "string",
-        "Year": 0,
-        "Make": "string",
-        "Model": "string",
-        "VehicleType": "string",
-        "BodyType": "string",
-        "DriveType": "string",
-        "FuelTankSize": 0,
-        "EPAFuelEfficiency": 0,
-        "Engine": {
-        "Name": "string",
-        "Cylinders": "string",
-        "Displacement": 0,
-        "FuelInduction": "string",
-        "FuelQuality": "string",
-        "FuelType": "string",
-        "MaxHp": "string",
-        "MaxHpAt": "string"
-        },
-        "Transmission": {
-        "Name": "string",
-        "Type": "string",
-        "DetailType": "string",
-        "Gears": "string"
-        },
-        "Warranties": [
-        {
-        "Name": "string",
-        "Type": "string",
-        "Months": "string",
-        "Km": 0
-        }
-        ],
-        "Recalls": [
-        {
-        "Title": "string",
-        "NHTSACampaignNumber": "string",
-        "MFRCampaignNumber": "string",
-        "ComponentDescription": "string",
-        "ReportManufacturer": "string",
-        "ManufacturingStartDate": "string",
-        "ManufacturingEndDate": "string",
-        "RecallTypeCode": "string",
-        "PotentialUnitsAffected": "string",
-        "OwnerNotificationDate": "string",
-        "RecallInitiator": "string",
-        "ProductManufacturer": "string",
-        "ReportReceivedDate": "string",
-        "RecordCreationDate": "string",
-        "RegulationPartNumber": "string",
-        "FMVVSNumber": "string",
-        "DefectSummary": "string",
-        "ConsequenceSummary": "string",
-        "CorrectiveAction": "string",
-        "Notes": "string",
-        "RecalledComponentId": "string"
-        }
-        ],
-        "ServiceBulletins": [
-        {
-        "ItemNumber": "string",
-        "BulletinNumber": "string",
-        "ReplacementBulletinNumber": "string",
-        "DateAdded": "string",
-        "Component": "string",
-        "BulletinDate": "string",
-        "Summary": "string"
-        }
-        ]
+            "VIN": "string",
+            "Timestamp": "2017-11-10T07:07:45.359Z",
+            "Market": "string",
+            "Year": 0,
+            "Make": "string",
+            "Model": "string",
+            "VehicleType": "string",
+            "BodyType": "string",
+            "DriveType": "string",
+            "FuelTankSize": 0,
+            "EPAFuelEfficiency": 0,
+            "Engine": {
+                "Name": "string",
+                "Cylinders": "string",
+                "Displacement": 0,
+                "FuelInduction": "string",
+                "FuelQuality": "string",
+                "FuelType": "string",
+                "MaxHp": "string",
+                "MaxHpAt": "string"
+            },
+            "Transmission": {
+                "Name": "string",
+                "Type": "string",
+                "DetailType": "string",
+                "Gears": "string"
+            },
+            "Warranties": [{
+                "Name": "string",
+                "Type": "string",
+                "Months": "string",
+                "Km": 0
+            }],
+            "Recalls": [{
+                "Title": "string",
+                "NHTSACampaignNumber": "string",
+                "MFRCampaignNumber": "string",
+                "ComponentDescription": "string",
+                "ReportManufacturer": "string",
+                "ManufacturingStartDate": "string",
+                "ManufacturingEndDate": "string",
+                "RecallTypeCode": "string",
+                "PotentialUnitsAffected": "string",
+                "OwnerNotificationDate": "string",
+                "RecallInitiator": "string",
+                "ProductManufacturer": "string",
+                "ReportReceivedDate": "string",
+                "RecordCreationDate": "string",
+                "RegulationPartNumber": "string",
+                "FMVVSNumber": "string",
+                "DefectSummary": "string",
+                "ConsequenceSummary": "string",
+                "CorrectiveAction": "string",
+                "Notes": "string",
+                "RecalledComponentId": "string"
+            }],
+            "ServiceBulletins": [{
+                "ItemNumber": "string",
+                "BulletinNumber": "string",
+                "ReplacementBulletinNumber": "string",
+                "DateAdded": "string",
+                "Component": "string",
+                "BulletinDate": "string",
+                "Summary": "string"
+            }]
         }
         """
     }

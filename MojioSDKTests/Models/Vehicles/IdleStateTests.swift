@@ -35,10 +35,32 @@ class IdleStateTests: XCTestCase {
     }
     
     func testIdleStateModelDecoding() {
-        XCTAssertNotNil(model)
-        XCTAssertEqual(model?.value, true)
-        XCTAssertEqual(model?.startTime, "2017-11-09T07:15:16.084Z")
-        XCTAssertNotNil(model?.duration)
+        helperMethod(_model: model)
+    }
+    
+    func testIdleStateModelEncoding() {
+        do {
+            let encoder = JSONEncoder()
+            encoder.dateEncodingStrategy = .iso8601
+            let encodedModelData = try encoder.encode(self.model)
+            
+            XCTAssertNotNil(encodedModelData)
+            
+            let modelDecodedAgain = try JSONDecoder().decode(IdleState.self, from: encodedModelData)
+            
+            helperMethod(_model: modelDecodedAgain)
+        } catch let error {
+            print(error)
+        }
+    }
+    
+    func helperMethod(_model: IdleState?) {
+        if let model = _model {
+            XCTAssertNotNil(model)
+            XCTAssertEqual(model.value, true)
+            XCTAssertEqual(model.startTime, "2017-11-09T07:15:16.084Z")
+            XCTAssertNotNil(model.duration)
+        }
     }
 }
 
@@ -46,16 +68,16 @@ extension IdleStateTests {
     var jsonString: String {
         return """
         {
-        "Timestamp": "2017-11-09T07:15:16.084Z",
-        "Value": true,
-        "StartTime": "2017-11-09T07:15:16.084Z",
-        "Duration": {
-        "BaseUnit": "Ticks",
-        "Timestamp": "2017-11-09T07:15:16.084Z",
-        "BaseValue": 0,
-        "Unit": "Ticks",
-        "Value": 0
-        }
+            "Timestamp": "2017-11-09T07:15:16.084Z",
+            "Value": true,
+            "StartTime": "2017-11-09T07:15:16.084Z",
+            "Duration": {
+                "BaseUnit": "Ticks",
+                "Timestamp": "2017-11-09T07:15:16.084Z",
+                "BaseValue": 0,
+                "Unit": "Ticks",
+                "Value": 0
+            }
         }
         
         """

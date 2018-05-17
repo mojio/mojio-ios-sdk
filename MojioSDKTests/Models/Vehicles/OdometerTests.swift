@@ -35,12 +35,34 @@ class OdometerTests: XCTestCase {
     }
     
     func testOdometerModelDecoding() {
-        XCTAssertNotNil(model)
-        XCTAssertEqual(model?.rolloverValue, 10)
-        XCTAssertEqual(model?.baseUnit, "Meters")
-        XCTAssertEqual(model?.baseValue, 20)
-        XCTAssertEqual(model?.unit, "Meters")
-        XCTAssertEqual(model?.value, 30)
+        self.helperMethod(_model: self.model)
+    }
+    
+    func testOdometerModelModelEncoding() {
+        do {
+            let encoder = JSONEncoder()
+            encoder.dateEncodingStrategy = .iso8601
+            let encodedModelData = try encoder.encode(self.model)
+            
+            XCTAssertNotNil(encodedModelData)
+            
+            let modelDecodedAgain = try JSONDecoder().decode(Odometer.self, from: encodedModelData)
+            
+            self.helperMethod(_model: modelDecodedAgain)
+        } catch let error {
+            print(error)
+        }
+    }
+    
+    func helperMethod(_model: Odometer?) {
+        if let model = _model {
+            XCTAssertNotNil(model)
+            XCTAssertEqual(model.rolloverValue, 10)
+            XCTAssertEqual(model.baseUnit, .kilometers)
+            XCTAssertEqual(model.baseValue, 20)
+            XCTAssertEqual(model.unit, .unknown)
+            XCTAssertEqual(model.value, 30)
+        }
     }
 }
 
@@ -48,12 +70,12 @@ extension OdometerTests {
     var jsonString: String {
         return """
         {
-        "RolloverValue": 10,
-        "BaseUnit": "Meters",
-        "Timestamp": "2017-11-10T07:07:45.030Z",
-        "BaseValue": 20,
-        "Unit": "Meters",
-        "Value": 30
+            "RolloverValue": 10,
+            "BaseUnit": "Kilometers",
+            "Timestamp": "2017-11-10T07:07:45.030Z",
+            "BaseValue": 20,
+            "Unit": "jjjjj",
+            "Value": 30
         }
         """
     }

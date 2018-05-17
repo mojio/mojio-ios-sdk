@@ -35,10 +35,32 @@ class ServiceScheduleTests: XCTestCase {
     }
     
     func testServiceScheduleModelDecoding() {
-        XCTAssertNotNil(model)
-        XCTAssertEqual(model?.vin, "string")
-        XCTAssertEqual(model?.isDefault, true)
-        XCTAssertNotNil(model?.items)
+        self.helperMethod(_model: self.model)
+    }
+    
+    func testServiceScheduleModelEncoding() {
+        do {
+            let encoder = JSONEncoder()
+            encoder.dateEncodingStrategy = .iso8601
+            let encodedModelData = try encoder.encode(self.model)
+            
+            XCTAssertNotNil(encodedModelData)
+            
+            let modelDecodedAgain = try JSONDecoder().decode(ServiceSchedule.self, from: encodedModelData)
+            
+            self.helperMethod(_model: modelDecodedAgain)
+        } catch let error {
+            print(error)
+        }
+    }
+    
+    func helperMethod(_model: ServiceSchedule?) {
+        if let model = _model {
+            XCTAssertNotNil(model)
+            XCTAssertEqual(model.vin, "string")
+            XCTAssertEqual(model.isDefault, true)
+            XCTAssertNotNil(model.items)
+        }
     }
 }
 
@@ -46,27 +68,27 @@ extension ServiceScheduleTests {
     var jsonString: String {
         return """
         {
-        "VIN": "string",
-        "IsDefault": true,
-        "Items": [{
-        "TransNotes": "string",
-        "ScheduleName": "string",
-        "ScheduleDescription": "string",
-        "MaintenanceCategory": "string",
-        "MaintenanceName": "string",
-        "MaintenanceNotes": "string",
-        "Intervals": [{
-        "OperatingParameter": "string",
-        "OperatingParameterNotes": "string",
-        "IntervalType": "string",
-        "value": 0,
-        "Units": "string",
-        "InitialValue": 0
-        }],
-        "Events": [{
-        "ComputerCode": "string",
-        "Event": "string"
-        }]}]
+            "VIN": "string",
+            "IsDefault": true,
+            "Items": [{
+                "TransNotes": "string",
+                "ScheduleName": "string",
+                "ScheduleDescription": "string",
+                "MaintenanceCategory": "string",
+                "MaintenanceName": "string",
+                "MaintenanceNotes": "string",
+                "Intervals": [{
+                    "OperatingParameter": "string",
+                    "OperatingParameterNotes": "string",
+                    "IntervalType": "string",
+                    "Value": 0,
+                    "Units": "string",
+                    "InitialValue": 0
+                }],
+                "Events": [{
+                    "ComputerCode": "string",
+                    "Event": "string"
+                }]}]
         }
         """
     }

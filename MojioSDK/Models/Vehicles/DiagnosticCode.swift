@@ -76,5 +76,15 @@ public struct DiagnosticCode: DiagnosticCodeModel {
     
     public func encode(to encoder: Encoder) throws {
         
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        try container.encodeIfPresent(self.ignored, forKey: .ignored)
+        try container.encodeIfPresent(self.code, forKey: .code)
+        try container.encodeIfPresent(self.description, forKey: .description)
+        try container.encodeIfPresent(self.timestamp, forKey: .timestamp)
+        try container.encodeIfPresent(self.severity, forKey: .severity)
+        try container.encodeIfPresent(self.instructions, forKey: .instructions)
+        try container.encodeIfPresent(self.stateType, forKey: .stateType)
+        try container.encodeIfPresent(self.diagnosticCodeType, forKey: .diagnosticCodeType)
     }
 }

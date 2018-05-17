@@ -35,11 +35,34 @@ class GeofenceRegionTests: XCTestCase {
     }
     
     func testGeofenceRegionModelDecoding() {
-        XCTAssertNotNil(model)
-        XCTAssertEqual(model?.type, .circle)
-        XCTAssertEqual(model?.lat, 24.1)
-        XCTAssertEqual(model?.lng, 51.2)
-        XCTAssertNotNil(model?.radius)
+        helperMethod(_model: model)
+    }
+    
+    func testGeofenceRegionModelEncoding() {
+        do {
+            let encoder = JSONEncoder()
+            encoder.dateEncodingStrategy = .iso8601
+            let encodedModelData = try encoder.encode(self.model)
+            
+            XCTAssertNotNil(encodedModelData)
+            
+            let modelDecodedAgain = try JSONDecoder().decode(GeofenceRegion.self, from: encodedModelData)
+            
+            helperMethod(_model: modelDecodedAgain)
+        } catch let error {
+            print(error)
+        }
+    }
+    
+    func helperMethod(_model: GeofenceRegion?) {
+        if let model = _model {
+            XCTAssertNotNil(model)
+            XCTAssertEqual(model.type, .circle)
+            XCTAssertEqual(model.radius?.baseUnit, .meters)
+            XCTAssertEqual(model.lat, 24.1)
+            XCTAssertEqual(model.lng, 51.2)
+            XCTAssertNotNil(model.radius)
+        }
     }
 }
 
@@ -47,16 +70,16 @@ extension GeofenceRegionTests {
     var jsonString: String {
         return """
         {
-        "Type": "Circle",
-        "Lat": 24.1,
-        "Lng": 51.2,
-        "Radius": {
-        "BaseUnit": "Meters",
-        "Timestamp": "2017-11-09T07:16:57.840Z",
-        "BaseValue": 0,
-        "Unit": "Meters",
-        "Value": 0
-        }
+            "Type": "Circle",
+            "Lat": 24.1,
+            "Lng": 51.2,
+            "Radius": {
+                "BaseUnit": "Meters",
+                "Timestamp": "2017-11-09T07:16:57.840Z",
+                "BaseValue": 0,
+                "Unit": "Meters",
+                    "Value": 0
+            }
         }
         """
     }

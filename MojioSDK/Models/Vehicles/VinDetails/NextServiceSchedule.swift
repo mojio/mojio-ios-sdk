@@ -73,6 +73,16 @@ public struct NextServiceSchedule: NextServiceScheduleModel {
     }
     
     public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
         
+        try container.encodeIfPresent(self.timeStamp, forKey: .timeStamp)
+        try container.encodeIfPresent(self.odometer, forKey: .odometer)
+        try container.encodeIfPresent(self.ageInMonths, forKey: .ageInMonths)
+        try container.encodeIfPresent(self.timeUnits, forKey: .timeUnits)
+        
+        try container.encodeIfPresent(self.timeValue, forKey: .timeValue)
+        try container.encodeIfPresent(self.distanceUnits, forKey: .distanceUnits)
+        try container.encodeIfPresent(self.distanceValue, forKey: .distanceValue)
+        try container.encodeIfPresent(self.services, forKey: .services)
     }
 }

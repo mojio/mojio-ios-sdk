@@ -35,11 +35,33 @@ class SpeedTests: XCTestCase {
     }
     
     func testSpeedModelDecoding() {
-        XCTAssertNotNil(model)
-        XCTAssertEqual(model?.baseUnit, "KilometersPerHour")
-        XCTAssertEqual(model?.baseValue, 10)
-        XCTAssertEqual(model?.unit, "KilometersPerHour")
-        XCTAssertEqual(model?.value, 20)
+        self.helperMethod(_model: self.model)
+    }
+    
+    func testSpeedModelEncoding() {
+        do {
+            let encoder = JSONEncoder()
+            encoder.dateEncodingStrategy = .iso8601
+            let encodedModelData = try encoder.encode(self.model)
+            
+            XCTAssertNotNil(encodedModelData)
+            
+            let modelDecodedAgain = try JSONDecoder().decode(Speed.self, from: encodedModelData)
+            
+            self.helperMethod(_model: modelDecodedAgain)
+        } catch let error {
+            print(error)
+        }
+    }
+    
+    func helperMethod(_model: Speed?) {
+        if let model = _model {
+            XCTAssertNotNil(model)
+            XCTAssertEqual(model.baseUnit, .milesPerHour)
+            XCTAssertEqual(model.baseValue, 10)
+            XCTAssertEqual(model.unit, .unknown)
+            XCTAssertEqual(model.value, 20)
+        }
     }
 }
 
@@ -47,11 +69,11 @@ extension SpeedTests {
     var jsonString: String {
         return """
         {
-        "BaseUnit": "KilometersPerHour",
-        "Timestamp": "2017-11-10T07:07:42.740Z",
-        "BaseValue": 10,
-        "Unit": "KilometersPerHour",
-        "Value": 20
+            "BaseUnit": "MilesPerHour",
+            "Timestamp": "2017-11-10T07:07:42.740Z",
+            "BaseValue": 10,
+            "Unit": "Kilometers",
+            "Value": 20
         }
         """
     }
