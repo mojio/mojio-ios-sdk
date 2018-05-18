@@ -35,15 +35,35 @@ class HeadingTests: XCTestCase {
     }
     
     func testHeadingModelDecoding() {
-        XCTAssertNotNil(model)
-        XCTAssertEqual(model?.direction, "string")
-        XCTAssertEqual(model?.leftTurn, true)
-        XCTAssertEqual(model?.baseUnit, "Degree")
-        XCTAssertEqual(model?.unit, "Degree")
-        XCTAssertEqual(model?.baseValue, 10)
-        XCTAssertEqual(model?.value, 20)
-        XCTAssertEqual(model?.baseHeadingUnit, .degree)
-        XCTAssertEqual(model?.headingUnit, .degree)
+        helperMethod(_model: model)
+    }
+    
+    func testHeadingModelEncoding() {
+        do {
+            let encoder = JSONEncoder()
+            encoder.dateEncodingStrategy = .iso8601
+            let encodedModelData = try encoder.encode(self.model)
+            
+            XCTAssertNotNil(encodedModelData)
+            
+            let modelDecodedAgain = try JSONDecoder().decode(Heading.self, from: encodedModelData)
+            
+            helperMethod(_model: modelDecodedAgain)
+        } catch let error {
+            print(error)
+        }
+    }
+    
+    func helperMethod(_model: Heading?) {
+        if let model = _model {
+            XCTAssertNotNil(model)
+            XCTAssertEqual(model.direction, "string")
+            XCTAssertEqual(model.leftTurn, true)
+            XCTAssertEqual(model.baseUnit, .degree)
+            XCTAssertEqual(model.unit, .unknown)
+            XCTAssertEqual(model.baseValue, 10)
+            XCTAssertEqual(model.value, 20)
+        }
     }
 }
 
@@ -51,13 +71,13 @@ extension HeadingTests {
     var jsonString: String {
         return """
         {
-        "BaseUnit": "Degree",
-        "Direction": "string",
-        "LeftTurn": true,
-        "Timestamp": "2017-11-09T07:15:16.084Z",
-        "BaseValue": 10,
-        "Unit": "Degree",
-        "Value": 20
+            "BaseUnit": "Degree",
+            "Direction": "string",
+            "LeftTurn": true,
+            "Timestamp": "2017-11-09T07:15:16.084Z",
+            "BaseValue": 10,
+            "Unit": "Degr",
+            "Value": 20
         }
         """
     }

@@ -78,5 +78,11 @@ public struct HarshEventState: HarshEventStateModel {
     
     public func encode(to encoder: Encoder) throws {
         
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        try container.encodeIfPresent(self.timestamp, forKey: .timestamp)
+        try container.encodeIfPresent(self.value, forKey: .value)
+        try container.encodeIfPresent(self.eventType, forKey: .eventType)
+        try container.encodeIfPresent(self.turnType, forKey: .turnType)
     }
 }

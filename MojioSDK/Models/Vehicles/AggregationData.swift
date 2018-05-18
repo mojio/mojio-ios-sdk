@@ -78,6 +78,18 @@ public struct AggregationData: AggregationDataModel {
     }
     
     public func encode(to encoder: Encoder) throws {
-        //MARK: - TO DO/TO CHECK
+        
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        try container.encodeIfPresent(self.total, forKey: .total)
+        try container.encodeIfPresent(self.average, forKey: .average)
+        
+        try container.encodeIfPresent(self.max, forKey: .max)
+        try container.encodeIfPresent(self.min, forKey: .min)
+        try container.encodeIfPresent(self.units, forKey: .units)
+        try container.encodeIfPresent(self.date, forKey: .date)
+        try container.encodeIfPresent(self.endDate, forKey: .endDate)
+        try container.encodeIfPresent(self.count, forKey: .count)
+        try container.encodeIfPresent(self.tripCount, forKey: .tripCount)
     }
 }

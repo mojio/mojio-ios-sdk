@@ -35,11 +35,33 @@ class TransmissionTests: XCTestCase {
     }
     
     func testTransmissionModelDecoding() {
-        XCTAssertNotNil(model)
-        XCTAssertEqual(model?.name, "string")
-        XCTAssertEqual(model?.type, "string")
-        XCTAssertEqual(model?.detailType, "string")
-        XCTAssertEqual(model?.gears, "string")
+        self.helperMethod(_model: self.model)
+    }
+    
+    func testTransmissionModelEncoding() {
+        do {
+            let encoder = JSONEncoder()
+            encoder.dateEncodingStrategy = .iso8601
+            let encodedModelData = try encoder.encode(self.model)
+            
+            XCTAssertNotNil(encodedModelData)
+            
+            let modelDecodedAgain = try JSONDecoder().decode(Transmission.self, from: encodedModelData)
+            
+            self.helperMethod(_model: modelDecodedAgain)
+        } catch let error {
+            print(error)
+        }
+    }
+    
+    func helperMethod(_model: Transmission?) {
+        if let model = _model {
+            XCTAssertNotNil(model)
+            XCTAssertEqual(model.name, "string")
+            XCTAssertEqual(model.type, "string")
+            XCTAssertEqual(model.detailType, "string")
+            XCTAssertEqual(model.gears, "string")
+        }
     }
 }
 
@@ -47,10 +69,10 @@ extension TransmissionTests {
     var jsonString: String {
         return """
         {
-        "Name": "string",
-        "Type": "string",
-        "DetailType": "string",
-        "Gears": "string"
+            "Name": "string",
+            "Type": "string",
+            "DetailType": "string",
+            "Gears": "string"
         }
         """
     }

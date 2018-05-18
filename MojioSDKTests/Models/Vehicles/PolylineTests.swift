@@ -35,10 +35,32 @@ class PolylineTests: XCTestCase {
     }
     
     func testPolylineModelDecoding() {
-        XCTAssertNotNil(model)
-        XCTAssertEqual(model?.id, "00000000-0000-0000-0000-000000000000")
-        XCTAssertEqual(model?.polyline, "string")
-        XCTAssertEqual(model?.deleted, true)
+        self.helperMethod(_model: self.model)
+    }
+    
+    func testPolylineModelModelEncoding() {
+        do {
+            let encoder = JSONEncoder()
+            encoder.dateEncodingStrategy = .iso8601
+            let encodedModelData = try encoder.encode(self.model)
+            
+            XCTAssertNotNil(encodedModelData)
+            
+            let modelDecodedAgain = try JSONDecoder().decode(Polyline.self, from: encodedModelData)
+            
+            self.helperMethod(_model: modelDecodedAgain)
+        } catch let error {
+            print(error)
+        }
+    }
+    
+    func helperMethod(_model: Polyline?) {
+        if let model = _model {
+            XCTAssertNotNil(model)
+            XCTAssertEqual(model.id, "00000000-0000-0000-0000-000000000000")
+            XCTAssertEqual(model.polyline, "string")
+            XCTAssertEqual(model.deleted, true)
+        }
     }
 }
 
@@ -46,11 +68,11 @@ extension PolylineTests {
     var jsonString: String {
         return """
         {
-        "Polyline": "string",
-        "Id": "00000000-0000-0000-0000-000000000000",
-        "CreatedOn": "2017-11-10T07:07:42.040Z",
-        "LastModified": "2017-11-10T07:07:42.040Z",
-        "Deleted": true
+            "Polyline": "string",
+            "Id": "00000000-0000-0000-0000-000000000000",
+            "CreatedOn": "2017-11-10T07:07:42.040Z",
+            "LastModified": "2017-11-10T07:07:42.040Z",
+            "Deleted": true
         }
         """
     }

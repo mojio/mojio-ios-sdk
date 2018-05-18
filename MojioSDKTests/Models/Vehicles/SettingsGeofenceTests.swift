@@ -35,10 +35,32 @@ class SettingsGeofenceTests: XCTestCase {
     }
     
     func testSettingsGeofenceModelDecoding() {
-        XCTAssertNotNil(model)
-        XCTAssertEqual(model?.id, "alsdkalksdlaksd")
-        XCTAssertEqual(model?.enableEnterActivity, true)
-        XCTAssertEqual(model?.enableExitActivity, true)
+        self.helperMethod(_model: self.model)
+    }
+    
+    func testSettingsGeofenceModelEncoding() {
+        do {
+            let encoder = JSONEncoder()
+            encoder.dateEncodingStrategy = .iso8601
+            let encodedModelData = try encoder.encode(self.model)
+            
+            XCTAssertNotNil(encodedModelData)
+            
+            let modelDecodedAgain = try JSONDecoder().decode(SettingsGeofence.self, from: encodedModelData)
+            
+            self.helperMethod(_model: modelDecodedAgain)
+        } catch let error {
+            print(error)
+        }
+    }
+    
+    func helperMethod(_model: SettingsGeofence?) {
+        if let model = _model {
+            XCTAssertNotNil(model)
+            XCTAssertEqual(model.id, "alsdkalksdlaksd")
+            XCTAssertEqual(model.enableEnterActivity, true)
+            XCTAssertEqual(model.enableExitActivity, true)
+        }
     }
 }
 
@@ -46,9 +68,9 @@ extension SettingsGeofenceTests {
     var jsonString: String {
         return """
         {
-        "Id": "alsdkalksdlaksd",
-        "EnableEnterActivity": true,
-        "EnableExitActivity": true
+            "Id": "alsdkalksdlaksd",
+            "EnableEnterActivity": true,
+            "EnableExitActivity": true
         }
         """
     }

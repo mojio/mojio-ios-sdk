@@ -18,12 +18,12 @@ import XCTest
 
 class MeasurementStatisticsTests: XCTestCase {
     
-    var model: MeasurementStatistics!
+    var model: MeasurementStats!
     
     override func setUp() {
         do {
             let data = self.jsonString.data(using: .utf8)
-            self.model = try JSONDecoder().decode(MeasurementStatistics.self, from: data!)
+            self.model = try JSONDecoder().decode(MeasurementStats.self, from: data!)
         } catch let error {
             print(error)
         }
@@ -35,18 +35,40 @@ class MeasurementStatisticsTests: XCTestCase {
     }
     
     func testMeasurementStatisticsModelDecoding() {
-        XCTAssertNotNil(model)
-        XCTAssertEqual(model?.numOfSamples, 1.0)
-        XCTAssertEqual(model?.average, 2.0)
-        XCTAssertEqual(model?.variance, 3.0)
-        XCTAssertEqual(model?.stdDev, 4.0)
-        XCTAssertEqual(model?.indexOfDispersion, 5.0)
-        XCTAssertEqual(model?.coeffOfVariation, 6.0)
-        XCTAssertEqual(model?.m2, 7.0)
-        XCTAssertEqual(model?.min, 8.0)
-        XCTAssertEqual(model?.max, 9.0)
-        XCTAssertNotNil(model?.minMaxScore)
-        XCTAssertNotNil(model?.standardScore)
+        helperMethod(_model: model)
+    }
+    
+    func testMeasurementStatisticsModelEncoding() {
+        do {
+            let encoder = JSONEncoder()
+            encoder.dateEncodingStrategy = .iso8601
+            let encodedModelData = try encoder.encode(self.model)
+            
+            XCTAssertNotNil(encodedModelData)
+            
+            let modelDecodedAgain = try JSONDecoder().decode(MeasurementStats.self, from: encodedModelData)
+            
+            helperMethod(_model: modelDecodedAgain)
+        } catch let error {
+            print(error)
+        }
+    }
+    
+    func helperMethod(_model: MeasurementStats?) {
+        if let model = _model {
+            XCTAssertNotNil(model)
+            XCTAssertEqual(model.numOfSamples, 1.0)
+            XCTAssertEqual(model.average, 2.0)
+            XCTAssertEqual(model.variance, 3.0)
+            XCTAssertEqual(model.stdDev, 4.0)
+            XCTAssertEqual(model.indexOfDispersion, 5.0)
+            XCTAssertEqual(model.coeffOfVariation, 6.0)
+            XCTAssertEqual(model.m2, 7.0)
+            XCTAssertEqual(model.min, 8.0)
+            XCTAssertEqual(model.max, 9.0)
+            XCTAssertNotNil(model.minMaxScore)
+            XCTAssertNotNil(model.standardScore)
+        }
     }
 }
 
@@ -54,27 +76,27 @@ extension MeasurementStatisticsTests {
     var jsonString: String {
         return """
         {
-        "NumOfSamples": 1,
-        "Average": 2,
-        "Variance": 3,
-        "StdDev": 4,
-        "IndexOfDispersion": 5,
-        "CoeffOfVariation": 6,
-        "M2": 7,
-        "Min": 8,
-        "Max": 9,
-        "StandardScore": {
-        "ScoringMethod": "string",
-        "Value": 0,
-        "Percentile": 0,
-        "Average": 0
-        },
-        "MinMaxScore": {
-        "ScoringMethod": "string",
-        "Value": 0,
-        "Percentile": 0,
-        "Average": 0
-        }
+            "NumOfSamples": 1,
+            "Average": 2,
+            "Variance": 3,
+            "StdDev": 4,
+            "IndexOfDispersion": 5,
+            "CoeffOfVariation": 6,
+            "M2": 7,
+            "Min": 8,
+            "Max": 9,
+            "StandardScore": {
+                "ScoringMethod": "string",
+                "Value": 0,
+                "Percentile": 0,
+                "Average": 0
+            },
+            "MinMaxScore": {
+                "ScoringMethod": "string",
+                "Value": 0,
+                "Percentile": 0,
+                "Average": 0
+            }
         }
         """
     }

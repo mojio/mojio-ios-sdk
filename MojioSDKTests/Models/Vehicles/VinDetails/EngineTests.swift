@@ -35,15 +35,37 @@ class EngineTests: XCTestCase {
     }
     
     func testEngineModelDecoding() {
-        XCTAssertNotNil(model)
-        XCTAssertEqual(model?.name, "string")
-        XCTAssertEqual(model?.cylinders, "string")
-        XCTAssertEqual(model?.displacement, 0)
-        XCTAssertEqual(model?.fuelInduction, "string")
-        XCTAssertEqual(model?.fuelQuality, "string")
-        XCTAssertEqual(model?.fuelType, "string")
-        XCTAssertEqual(model?.maxHp, "string")
-        XCTAssertEqual(model?.maxHpAt, "string")
+        self.helperMethod(_model: model)
+    }
+    
+    func testEngineModelEncoding() {
+        do {
+            let encoder = JSONEncoder()
+            
+            let encodedModelData = try encoder.encode(self.model)
+            
+            XCTAssertNotNil(encodedModelData)
+            
+            let modelDecodedAgain = try JSONDecoder().decode(Engine.self, from: encodedModelData)
+            
+            self.helperMethod(_model: modelDecodedAgain)
+        } catch let error {
+            print(error)
+        }
+    }
+    
+    func helperMethod(_model: Engine?) {
+        if let model = _model {
+            XCTAssertNotNil(model)
+            XCTAssertEqual(model.name, "string")
+            XCTAssertEqual(model.cylinders, "string")
+            XCTAssertEqual(model.displacement, 0)
+            XCTAssertEqual(model.fuelInduction, "string")
+            XCTAssertEqual(model.fuelQuality, "string")
+            XCTAssertEqual(model.fuelType, "string")
+            XCTAssertEqual(model.maxHp, "string")
+            XCTAssertEqual(model.maxHpAt, "string")
+        }
     }
 }
 
@@ -51,14 +73,14 @@ extension EngineTests {
     var jsonString: String {
         return """
         {
-        "Name": "string",
-        "Cylinders": "string",
-        "Displacement": 0,
-        "FuelInduction": "string",
-        "FuelQuality": "string",
-        "FuelType": "string",
-        "MaxHp": "string",
-        "MaxHpAt": "string"
+            "Name": "string",
+            "Cylinders": "string",
+            "Displacement": 0,
+            "FuelInduction": "string",
+            "FuelQuality": "string",
+            "FuelType": "string",
+            "MaxHp": "string",
+            "MaxHpAt": "string"
         }
         """
     }

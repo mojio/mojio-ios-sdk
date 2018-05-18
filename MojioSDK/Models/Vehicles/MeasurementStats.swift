@@ -87,5 +87,20 @@ public struct MeasurementStats: MeasurementStatsModel {
     
     public func encode(to encoder: Encoder) throws {
         
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        try container.encodeIfPresent(self.numOfSamples, forKey: .numOfSamples)
+        try container.encodeIfPresent(self.average, forKey: .average)
+        try container.encodeIfPresent(self.variance, forKey: .variance)
+        try container.encodeIfPresent(self.stdDev, forKey: .stdDev)
+        
+        try container.encodeIfPresent(self.indexOfDispersion, forKey: .indexOfDispersion)
+        try container.encodeIfPresent(self.coeffOfVariation, forKey: .coeffOfVariation)
+        try container.encodeIfPresent(self.m2, forKey: .m2)
+        try container.encodeIfPresent(self.min, forKey: .min)
+        
+        try container.encodeIfPresent(self.max, forKey: .max)
+        try container.encodeIfPresent(self.standardScore, forKey: .standardScore)
+        try container.encodeIfPresent(self.minMaxScore, forKey: .minMaxScore)
     }
 }

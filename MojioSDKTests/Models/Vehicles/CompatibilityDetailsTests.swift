@@ -22,7 +22,7 @@ class CompatibilityDetailsTests: XCTestCase {
     
     override func setUp() {
         do {
-            let data = self.strangeLevelString.data(using: .utf8)
+            let data = self.jsonString.data(using: .utf8)
             self.model = try JSONDecoder().decode(CompatibilityDetails.self, from: data!)
         } catch let error {
             print(error)
@@ -34,16 +34,32 @@ class CompatibilityDetailsTests: XCTestCase {
         self.model = nil
     }
     
-//    func testCompatibilityDetailsModelDecoding() {
-//        XCTAssertNotNil(model)
-//        XCTAssertEqual(model?.changed, true)
-//        XCTAssertEqual(model?.level, .full)
-//    }
-    
     func testCompatibilityDetailsModelDecoding() {
-        XCTAssertNotNil(model)
-        XCTAssertEqual(model?.changed, true)
-        XCTAssertEqual(model?.level, .unknown)
+        self.helperMethod(_model: model)
+    }
+    
+    func testCompatibilityDetailsModelEncoding() {
+        do {
+            let encoder = JSONEncoder()
+            encoder.dateEncodingStrategy = .iso8601
+            let encodedModelData = try encoder.encode(self.model)
+            
+            XCTAssertNotNil(encodedModelData)
+            
+            let modelDecodedAgain = try JSONDecoder().decode(CompatibilityDetails.self, from: encodedModelData)
+            
+            self.helperMethod(_model: modelDecodedAgain)
+        } catch let error {
+            print(error)
+        }
+    }
+    
+    func helperMethod(_model: CompatibilityDetails?) {
+        if let model = _model {
+            XCTAssertNotNil(model)
+            XCTAssertEqual(model.changed, true)
+            XCTAssertEqual(model.level, .full)
+        }
     }
 }
 
@@ -51,19 +67,9 @@ extension CompatibilityDetailsTests {
     var jsonString: String {
         return """
         {
-        "Level": "Full",
-        "Changed": true,
-        "LastChecked": "2017-11-09T07:16:58.073Z"
-        }
-        """
-    }
-    
-    var strangeLevelString: String {
-        return """
-        {
-        "Level": "Strange",
-        "Changed": true,
-        "LastChecked": "2017-11-09T07:16:58.073Z"
+            "Level": "Full",
+            "Changed": true,
+            "LastChecked": "2017-11-09T07:16:58.073Z"
         }
         """
     }

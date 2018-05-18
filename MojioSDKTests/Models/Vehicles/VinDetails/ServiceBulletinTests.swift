@@ -35,12 +35,34 @@ class ServiceBulletinTests: XCTestCase {
     }
     
     func testServiceBulletinModelDecoding() {
-        XCTAssertNotNil(model)
-        XCTAssertEqual(model?.itemNumber, "string")
-        XCTAssertEqual(model?.bulletinNumber, "string")
-        XCTAssertEqual(model?.replacementBulletinNumber, "string")
-        XCTAssertEqual(model?.component, "string")
-        XCTAssertEqual(model?.summary, "string")
+        self.helperMethod(_model: self.model)
+    }
+    
+    func testServiceBulletinModelEncoding() {
+        do {
+            let encoder = JSONEncoder()
+            encoder.dateEncodingStrategy = .iso8601
+            let encodedModelData = try encoder.encode(self.model)
+            
+            XCTAssertNotNil(encodedModelData)
+            
+            let modelDecodedAgain = try JSONDecoder().decode(ServiceBulletin.self, from: encodedModelData)
+            
+            self.helperMethod(_model: modelDecodedAgain)
+        } catch let error {
+            print(error)
+        }
+    }
+    
+    func helperMethod(_model: ServiceBulletin?) {
+        if let model = _model {
+            XCTAssertNotNil(model)
+            XCTAssertEqual(model.itemNumber, "string")
+            XCTAssertEqual(model.bulletinNumber, "string")
+            XCTAssertEqual(model.replacementBulletinNumber, "string")
+            XCTAssertEqual(model.component, "string")
+            XCTAssertEqual(model.summary, "string")
+        }
     }
 }
 
@@ -48,13 +70,13 @@ extension ServiceBulletinTests {
     var jsonString: String {
         return """
         {
-        "ItemNumber": "string",
-        "BulletinNumber": "string",
-        "ReplacementBulletinNumber": "string",
-        "DateAdded": "string",
-        "Component": "string",
-        "BulletinDate": "string",
-        "Summary": "string"
+            "ItemNumber": "string",
+            "BulletinNumber": "string",
+            "ReplacementBulletinNumber": "string",
+            "DateAdded": "string",
+            "Component": "string",
+            "BulletinDate": "string",
+            "Summary": "string"
         }
         """
     }

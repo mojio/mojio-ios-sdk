@@ -56,5 +56,10 @@ public struct ServiceSchedule: ServiceScheduleModel {
     
     public func encode(to encoder: Encoder) throws {
         
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        try container.encodeIfPresent(self.vin, forKey: .vin)
+        try container.encodeIfPresent(self.isDefault, forKey: .isDefault)
+        try container.encodeIfPresent(self.items, forKey: .items)
     }
 }

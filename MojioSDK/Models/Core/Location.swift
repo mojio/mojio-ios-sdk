@@ -142,5 +142,19 @@ public struct Location: LocationModel {
     
     public func encode(to encoder: Encoder) throws {
         
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        try container.encodeIfPresent(self.locationAddress, forKey: .locationAddress)
+        try container.encodeIfPresent(self.timestamp, forKey: .timestamp)
+        try container.encodeIfPresent(self.lat, forKey: .lat)
+        try container.encodeIfPresent(self.lng, forKey: .lng)
+        
+        try container.encodeIfPresent(self.radius, forKey: .radius)
+        try container.encodeIfPresent(self.status, forKey: .status)
+        try container.encodeIfPresent(self.dilution, forKey: .dilution)
+        try container.encodeIfPresent(self.altitude, forKey: .altitude)
+        
+        try container.encodeIfPresent(self.geoHash, forKey: .geoHash)
+        try container.encodeIfPresent(self.locationHeading, forKey: .locationHeading)
     }
 }

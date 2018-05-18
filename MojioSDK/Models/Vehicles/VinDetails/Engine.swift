@@ -68,6 +68,15 @@ public struct Engine: EngineModel {
     }
     
     public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
         
+        try container.encodeIfPresent(self.name, forKey: .name)
+        try container.encodeIfPresent(self.cylinders, forKey: .cylinders)
+        try container.encodeIfPresent(self.displacement, forKey: .displacement)
+        try container.encodeIfPresent(self.fuelInduction, forKey: .fuelInduction)
+        try container.encodeIfPresent(self.fuelQuality, forKey: .fuelQuality)
+        try container.encodeIfPresent(self.fuelType, forKey: .fuelType)
+        try container.encodeIfPresent(self.maxHp, forKey: .maxHp)
+        try container.encodeIfPresent(self.maxHpAt, forKey: .maxHpAt)
     }
 }

@@ -66,6 +66,13 @@ public struct Accelerometer: AccelerometerModel {
     }
     
     public func encode(to encoder: Encoder) throws {
-        //MARK: - TO DO/TO CHECK
+        
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        try container.encodeIfPresent(self.x, forKey: .x)
+        try container.encodeIfPresent(self.y, forKey: .y)
+        try container.encodeIfPresent(self.z, forKey: .z)
+        try container.encodeIfPresent(self.magnitude, forKey: .magnitude)
+        try container.encodeIfPresent(self.samplingInterval, forKey: .samplingInterval)
     }
 }

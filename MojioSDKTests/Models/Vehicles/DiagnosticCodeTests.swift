@@ -35,14 +35,36 @@ class DiagnosticCodeTests: XCTestCase {
     }
     
     func testDiagnosticCodeModelDecoding() {
-        XCTAssertNotNil(model)
-        XCTAssertEqual(model?.code, "string")
-        XCTAssertEqual(model?.description, "string")
-        XCTAssertEqual(model?.diagnosticCodeType, "Standard")
-        XCTAssertEqual(model?.stateType, "Current")
-        XCTAssertEqual(model?.severity, "Unknown")
-        XCTAssertEqual(model?.instructions, "string")
-        XCTAssertEqual(model?.ignored, true)
+        self.helperMethod(_model: self.model)
+    }
+    
+    func testDiagnosticCodeModelEncoding() {
+        do {
+            let encoder = JSONEncoder()
+            encoder.dateEncodingStrategy = .iso8601
+            let encodedModelData = try encoder.encode(self.model)
+            
+            XCTAssertNotNil(encodedModelData)
+            
+            let modelDecodedAgain = try JSONDecoder().decode(DiagnosticCode.self, from: encodedModelData)
+            
+            self.helperMethod(_model: modelDecodedAgain)
+        } catch let error {
+            print(error)
+        }
+    }
+    
+    func helperMethod(_model: DiagnosticCode?) {
+        if let model = _model {
+            XCTAssertNotNil(model)
+            XCTAssertEqual(model.code, "string")
+            XCTAssertEqual(model.description, "string")
+            XCTAssertEqual(model.diagnosticCodeType, "Standard")
+            XCTAssertEqual(model.stateType, "Current")
+            XCTAssertEqual(model.severity, "Unknown")
+            XCTAssertEqual(model.instructions, "string")
+            XCTAssertEqual(model.ignored, true)
+        }
     }
 }
 
@@ -50,14 +72,14 @@ extension DiagnosticCodeTests {
     var jsonString: String {
         return """
         {
-        "timestamp": "2017-11-09T07:16:58.072Z",
-        "Code": "string",
-        "Description": "string",
-        "Type": "Standard",
-        "StateType": "Current",
-        "Severity": "Unknown",
-        "Instructions": "string",
-        "Ignored": true
+            "Timestamp": "2017-11-09T07:16:58.072Z",
+            "Code": "string",
+            "Description": "string",
+            "Type": "Standard",
+            "StateType": "Current",
+            "Severity": "Unknown",
+            "Instructions": "string",
+            "Ignored": true
         }
         """
     }

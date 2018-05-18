@@ -35,12 +35,34 @@ class VehicleStatisticsTests: XCTestCase {
     }
     
     func testVehicleStatisticsModelDecoding() {
-        XCTAssertNotNil(model)
-        XCTAssertNotNil(model?.estimatedFuelLevel)
-        XCTAssertNotNil(model?.estimatedFuelVolume)
-        XCTAssertNotNil(model?.averageFuelEfficiency)
-        XCTAssertNotNil(model?.totalRange)
-        XCTAssertNotNil(model?.currentRange)
+        self.helperMethod(_model: self.model)
+    }
+    
+    func testVehicleStatisticsModelEncoding() {
+        do {
+            let encoder = JSONEncoder()
+            encoder.dateEncodingStrategy = .iso8601
+            let encodedModelData = try encoder.encode(self.model)
+            
+            XCTAssertNotNil(encodedModelData)
+            
+            let modelDecodedAgain = try JSONDecoder().decode(VehicleStatistics.self, from: encodedModelData)
+            
+            self.helperMethod(_model: modelDecodedAgain)
+        } catch let error {
+            print(error)
+        }
+    }
+    
+    func helperMethod(_model: VehicleStatistics?) {
+        if let model = _model {
+            XCTAssertNotNil(model)
+            XCTAssertNotNil(model.estimatedFuelLevel)
+            XCTAssertNotNil(model.estimatedFuelVolume)
+            XCTAssertNotNil(model.averageFuelEfficiency)
+            XCTAssertNotNil(model.totalRange)
+            XCTAssertNotNil(model.currentRange)
+        }
     }
 }
 
@@ -48,41 +70,41 @@ extension VehicleStatisticsTests {
     var jsonString: String {
         return """
         {
-        "EstimatedFuelLevel": {
-        "BaseUnit": "string",
-        "BaseValue": 10,
-        "Unit": "string",
-        "Value": 20,
-        "Timestamp": "2017-11-09T07:16:58.072Z"
-        },
-        "EstimatedFuelVolume": {
-        "BaseUnit": "string",
-        "BaseValue": 10,
-        "Unit": "string",
-        "Value": 20,
-        "Timestamp": "2017-11-09T07:16:58.072Z"
-        },
-        "AverageFuelEfficiency": {
-        "BaseUnit": "string",
-        "BaseValue": 10,
-        "Unit": "string",
-        "Value": 20,
-        "Timestamp": "2017-11-09T07:16:58.072Z"
-        },
-        "TotalRange": {
-        "BaseUnit": "string",
-        "Unit": "string",
-        "Value": 20,
-        "Timestamp": "2017-11-09T07:16:58.072Z"
-        },
-        "CurrentRange": {
-        "BaseUnit": "string",
-        "BaseValue": 10,
-        "Unit": "string",
-        "Value": 20,
-        "Timestamp": "2017-11-09T07:16:58.072Z"
-        },
-        "LastFillUpDate": "2017-11-09T07:16:58.072Z"
+            "EstimatedFuelLevel": {
+                "BaseUnit": "string",
+                "BaseValue": 10,
+                "Unit": "string",
+                "Value": 20,
+                "Timestamp": "2017-11-09T07:16:58.072Z"
+            },
+            "EstimatedFuelVolume": {
+                "BaseUnit": "string",
+                "BaseValue": 10,
+                "Unit": "string",
+                "Value": 20,
+                "Timestamp": "2017-11-09T07:16:58.072Z"
+            },
+            "AverageFuelEfficiency": {
+                "BaseUnit": "string",
+                "BaseValue": 10,
+                "Unit": "string",
+                "Value": 20,
+                "Timestamp": "2017-11-09T07:16:58.072Z"
+            },
+            "TotalRange": {
+                "BaseUnit": "string",
+                "Unit": "string",
+                "Value": 20,
+                "Timestamp": "2017-11-09T07:16:58.072Z"
+            },
+            "CurrentRange": {
+                "BaseUnit": "string",
+                "BaseValue": 10,
+                "Unit": "string",
+                "Value": 20,
+                "Timestamp": "2017-11-09T07:16:58.072Z"
+            },
+            "LastFillUpDate": "2017-11-09T07:16:58.072Z"
         }
         """
     }

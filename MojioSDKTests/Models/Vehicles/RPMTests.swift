@@ -35,11 +35,33 @@ class RPMTests: XCTestCase {
     }
     
     func testRPMModelDecoding() {
-        XCTAssertNotNil(model)
-        XCTAssertEqual(model?.baseUnit, "RevolutionsPerMinute")
-        XCTAssertEqual(model?.baseValue, 10)
-        XCTAssertEqual(model?.unit, "RevolutionsPerMinute")
-        XCTAssertEqual(model?.value, 20)
+        self.helperMethod(_model: self.model)
+    }
+    
+    func testRPMModelEncoding() {
+        do {
+            let encoder = JSONEncoder()
+            encoder.dateEncodingStrategy = .iso8601
+            let encodedModelData = try encoder.encode(self.model)
+            
+            XCTAssertNotNil(encodedModelData)
+            
+            let modelDecodedAgain = try JSONDecoder().decode(RPM.self, from: encodedModelData)
+            
+            self.helperMethod(_model: modelDecodedAgain)
+        } catch let error {
+            print(error)
+        }
+    }
+    
+    func helperMethod(_model: RPM?) {
+        if let model = _model {
+            XCTAssertNotNil(model)
+            XCTAssertEqual(model.baseUnit, .revolutionsPerMinute)
+            XCTAssertEqual(model.baseValue, 10)
+            XCTAssertEqual(model.unit, .unknown)
+            XCTAssertEqual(model.value, 20)
+        }
     }
 }
 
@@ -47,11 +69,11 @@ extension RPMTests {
     var jsonString: String {
         return """
         {
-        "BaseUnit": "RevolutionsPerMinute",
-        "Timestamp": "2017-11-10T07:07:45.030Z",
-        "BaseValue": 10,
-        "Unit": "RevolutionsPerMinute",
-        "Value": 20
+            "BaseUnit": "RevolutionsPerMinute",
+            "Timestamp": "2017-11-10T07:07:45.030Z",
+            "BaseValue": 10,
+            "Unit": "RevolutionsPer",
+            "Value": 20
         }
         """
     }

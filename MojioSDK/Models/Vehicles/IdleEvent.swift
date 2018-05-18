@@ -54,5 +54,9 @@ public struct IdleEvent: IdleEventState {
     
     public func encode(to encoder: Encoder) throws {
         
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        try container.encodeIfPresent(self.eventState, forKey: .eventState)
+        try container.encodeIfPresent(self.eventLocation, forKey: .eventLocation)
     }
 }

@@ -78,5 +78,17 @@ public struct ServiceScheduleItem: ServiceScheduleItemModel {
     
     public func encode(to encoder: Encoder) throws {
         
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        try container.encodeIfPresent(self.transNotes, forKey: .transNotes)
+        try container.encodeIfPresent(self.scheduleName, forKey: .scheduleName)
+        try container.encodeIfPresent(self.scheduleDescription, forKey: .scheduleDescription)
+        
+        try container.encodeIfPresent(self.maintenanceCategory, forKey: .maintenanceCategory)
+        try container.encodeIfPresent(self.maintenanceName, forKey: .maintenanceName)
+        try container.encodeIfPresent(self.maintenanceNotes, forKey: .maintenanceNotes)
+        
+        try container.encodeIfPresent(self.intervals, forKey: .intervals)
+        try container.encodeIfPresent(self.events, forKey: .events)
     }
 }

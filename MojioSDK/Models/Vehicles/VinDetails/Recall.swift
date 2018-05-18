@@ -127,5 +127,34 @@ public struct Recall: RecallModel {
     
     public func encode(to encoder: Encoder) throws {
         
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        try container.encodeIfPresent(self.title, forKey: .title)
+        try container.encodeIfPresent(self.nhtsaCampaignNumber, forKey: .nhtsaCampaignNumber)
+        try container.encodeIfPresent(self.mfrCampaignNumber, forKey: .mfrCampaignNumber)
+        try container.encodeIfPresent(self.componentDescription, forKey: .componentDescription)
+        try container.encodeIfPresent(self.reportManufacturer, forKey: .reportManufacturer)
+        try container.encodeIfPresent(self.manufacturingStartDate, forKey: .manufacturingStartDate)
+        try container.encodeIfPresent(self.manufacturingEndDate, forKey: .manufacturingEndDate)
+        try container.encodeIfPresent(self.recallTypeCode, forKey: .recallTypeCode)
+        
+        try container.encodeIfPresent(self.potentialUnitsAffected, forKey: .potentialUnitsAffected)
+        try container.encodeIfPresent(self.ownerNotificationDate, forKey: .ownerNotificationDate)
+        try container.encodeIfPresent(self.recallInitiator, forKey: .recallInitiator)
+        
+        try container.encodeIfPresent(self.componentDescription, forKey: .componentDescription)
+        try container.encodeIfPresent(self.reportManufacturer, forKey: .reportManufacturer)
+        try container.encodeIfPresent(self.productManufacturer, forKey: .productManufacturer)
+        try container.encodeIfPresent(self.reportReceivedDate, forKey: .reportReceivedDate)
+        try container.encodeIfPresent(self.recordCreationDate, forKey: .recordCreationDate)
+        
+        try container.encodeIfPresent(self.regulationPartNumber, forKey: .regulationPartNumber)
+        try container.encodeIfPresent(self.fmvvsNumber, forKey: .fmvvsNumber)
+        try container.encodeIfPresent(self.defectSummary, forKey: .defectSummary)
+        try container.encodeIfPresent(self.consequenceSummary, forKey: .consequenceSummary)
+        try container.encodeIfPresent(self.correctiveAction, forKey: .correctiveAction)
+        
+        try container.encodeIfPresent(self.notes, forKey: .notes)
+        try container.encodeIfPresent(self.recalledComponentId, forKey: .recalledComponentId)
     }
 }

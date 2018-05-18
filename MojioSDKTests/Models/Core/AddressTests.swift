@@ -35,18 +35,38 @@ class AddressTests: XCTestCase {
     }
     
     func testAddressModelDecoding() {
-        XCTAssertNotNil(model)
-        XCTAssertEqual(model?.houseNumber, "string")
-        XCTAssertEqual(model?.road, "string")
-        XCTAssertEqual(model?.neighbourhood, "string")
-        XCTAssertEqual(model?.suburb, "string")
-        XCTAssertEqual(model?.city, "string")
-        XCTAssertEqual(model?.county, "string")
-        XCTAssertEqual(model?.state, "string")
-        XCTAssertEqual(model?.postCode, "string")
-        XCTAssertEqual(model?.country, "string")
-        XCTAssertEqual(model?.countryCode, "string")
-        XCTAssertEqual(model?.formattedAddress, "string")
+        self.helperMethod(_model: self.model)
+    }
+    
+    func testAddressModelEncoding() {
+        do {
+            let encoder = JSONEncoder()
+    
+            let encodedModelData = try encoder.encode(self.model)
+            
+            XCTAssertNotNil(encodedModelData)
+            
+            let modelDecodedAgain = try JSONDecoder().decode(Address.self, from: encodedModelData)
+            
+            self.helperMethod(_model: modelDecodedAgain)
+        } catch let error {
+            print(error)
+        }
+    }
+    
+    func helperMethod(_model: Address?) {
+        if let model = _model {
+            XCTAssertNotNil(model)
+            XCTAssertEqual(model.houseNumber, "string")
+            XCTAssertEqual(model.road, "string")
+            XCTAssertEqual(model.neighbourhood, "string")
+            XCTAssertEqual(model.suburb, "string")
+            XCTAssertEqual(model.city, "string")
+            XCTAssertEqual(model.county, "string")
+            XCTAssertEqual(model.state, "string")
+            XCTAssertEqual(model.postCode, "string")
+            XCTAssertEqual(model.country, "string")
+        }
     }
 }
 
@@ -54,17 +74,15 @@ extension AddressTests {
     var jsonString: String {
         return """
         {
-        "HouseNumber": "string",
-        "Road": "string",
-        "Neighbourhood": "string",
-        "Suburb": "string",
-        "City": "string",
-        "County": "string",
-        "State": "string",
-        "PostCode": "string",
-        "Country": "string",
-        "CountryCode": "string",
-        "FormattedAddress": "string"
+            "HouseNumber": "string",
+            "Road": "string",
+            "Neighbourhood": "string",
+            "Suburb": "string",
+            "City": "string",
+            "County": "string",
+            "State": "string",
+            "PostCode": "string",
+            "Country": "string"
         }
         """
     }

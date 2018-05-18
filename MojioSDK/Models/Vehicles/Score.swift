@@ -68,5 +68,11 @@ public struct Score: ScoreModel {
     
     public func encode(to encoder: Encoder) throws {
         
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        try container.encodeIfPresent(self.scoringMethod, forKey: .scoringMethod)
+        try container.encodeIfPresent(self.value, forKey: .value)
+        try container.encodeIfPresent(self.percentile, forKey: .percentile)
+        try container.encodeIfPresent(self.average, forKey: .average)
     }
 }

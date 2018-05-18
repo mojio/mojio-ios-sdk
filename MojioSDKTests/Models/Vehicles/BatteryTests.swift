@@ -35,15 +35,37 @@ class BatteryTests: XCTestCase {
     }
     
     func testBatteryModelDecoding() {
-        XCTAssertNotNil(model)
-        XCTAssertEqual(model?.connected, true)
-        XCTAssertEqual(model?.riskSeverity, "Unknown")
-        XCTAssertNotNil(model?.lowVoltageDuration)
-        XCTAssertNotNil(model?.highVoltageDuration)
-        XCTAssertEqual(model?.baseUnit, "MilliVolts")
-        XCTAssertEqual(model?.unit, "MilliVolts")
-        XCTAssertEqual(model?.baseValue, 10)
-        XCTAssertEqual(model?.value, 20)
+        self.helperMethod(_model: self.model)
+    }
+    
+    func testBatteryDataModelEncoding() {
+        do {
+            let encoder = JSONEncoder()
+            encoder.dateEncodingStrategy = .iso8601
+            let encodedModelData = try encoder.encode(self.model)
+            
+            XCTAssertNotNil(encodedModelData)
+            
+            let modelDecodedAgain = try JSONDecoder().decode(Battery.self, from: encodedModelData)
+            
+            self.helperMethod(_model: modelDecodedAgain)
+        } catch let error {
+            print(error)
+        }
+    }
+    
+    func helperMethod(_model: Battery?) {
+        if let model = _model {
+            XCTAssertNotNil(model)
+            XCTAssertEqual(model.connected, true)
+            XCTAssertEqual(model.riskSeverity, .low)
+            XCTAssertNotNil(model.lowVoltageDuration)
+            XCTAssertNotNil(model.highVoltageDuration)
+            XCTAssertEqual(model.baseUnit, .milliVolts)
+            XCTAssertEqual(model.unit, .unknown)
+            XCTAssertEqual(model.baseValue, 10)
+            XCTAssertEqual(model.value, 20)
+        }
     }
 }
 
@@ -51,27 +73,27 @@ extension BatteryTests {
     var jsonString: String {
         return """
         {
-        "Connected": true,
-        "RiskSeverity": "Unknown",
-        "LowVoltageDuration": {
-        "BaseUnit": "Ticks",
-        "Timestamp": "2017-11-09T07:16:58.073Z",
-        "BaseValue": 0,
-        "Unit": "Ticks",
-        "Value": 0
-        },
-        "HighVoltageDuration": {
-        "BaseUnit": "Ticks",
-        "Timestamp": "2017-11-09T07:16:58.073Z",
-        "BaseValue": 0,
-        "Unit": "Ticks",
-        "Value": 0
-        },
-        "BaseUnit": "MilliVolts",
-        "Timestamp": "2017-11-09T07:16:58.073Z",
-        "BaseValue": 10,
-        "Unit": "MilliVolts",
-        "Value": 20
+            "Connected": true,
+            "RiskSeverity": "Low",
+            "LowVoltageDuration": {
+                "BaseUnit": "Ticks",
+                "Timestamp": "2017-11-09T07:16:58.073Z",
+                "BaseValue": 0,
+                "Unit": "Ticks",
+                "Value": 0
+            },
+            "HighVoltageDuration": {
+                "BaseUnit": "Ticks",
+                "Timestamp": "2017-11-09T07:16:58.073Z",
+                "BaseValue": 0,
+                "Unit": "Ticks",
+                "Value": 0
+            },
+            "BaseUnit": "MilliVolts",
+            "Timestamp": "2017-11-09T07:16:58.073Z",
+            "BaseValue": 10,
+            "Unit": "Milli",
+            "Value": 20
         }
         """
     }

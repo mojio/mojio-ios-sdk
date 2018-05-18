@@ -93,5 +93,24 @@ public struct PlatformServiceSchedule: PlatformServiceScheduleModel {
     
     public func encode(to encoder: Encoder) throws {
         
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        try container.encodeIfPresent(self.initialValue, forKey: .initialValue)
+        
+        try container.encodeIfPresent(self.intervalType, forKey: .intervalType)
+        
+        try container.encodeIfPresent(self.maintenanceCategory, forKey: .maintenanceName)
+        try container.encodeIfPresent(self.maintenanceCategory, forKey: .maintenanceCategory)
+        try container.encodeIfPresent(self.maintenanceNotes, forKey: .maintenanceNotes)
+        
+        try container.encodeIfPresent(self.operatingParameter, forKey: .operatingParameter)
+        try container.encodeIfPresent(self.operatingParameterNotes, forKey: .operatingParameterNotes)
+        
+        try container.encodeIfPresent(self.scheduleDescription, forKey: .scheduleDescription)
+        try container.encodeIfPresent(self.scheduleName, forKey: .scheduleName)
+        try container.encodeIfPresent(self.serviceEvent, forKey: .serviceEvent)
+        try container.encodeIfPresent(self.transNotes, forKey: .transNotes)
+        try container.encodeIfPresent(self.units, forKey: .units)
+        try container.encodeIfPresent(self.value, forKey: .value)
     }
 }

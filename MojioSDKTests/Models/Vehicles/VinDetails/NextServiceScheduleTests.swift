@@ -35,14 +35,36 @@ class NextServiceScheduleTests: XCTestCase {
     }
     
     func testNextServiceScheduleModelDecoding() {
-        XCTAssertNotNil(model)
-        XCTAssertEqual(model?.odometer, 0)
-        XCTAssertEqual(model?.ageInMonths, 0)
-        XCTAssertEqual(model?.timeUnits, "string")
-        XCTAssertEqual(model?.timeValue, 0)
-        XCTAssertEqual(model?.distanceUnits, "string")
-        XCTAssertEqual(model?.distanceValue, 0)
-        XCTAssertNotNil(model?.services)
+        helperMethod(_model: model)
+    }
+    
+    func testNextServiceScheduleModelEncoding() {
+        do {
+            let encoder = JSONEncoder()
+            encoder.dateEncodingStrategy = .iso8601
+            let encodedModelData = try encoder.encode(self.model)
+            
+            XCTAssertNotNil(encodedModelData)
+            
+            let modelDecodedAgain = try JSONDecoder().decode(NextServiceSchedule.self, from: encodedModelData)
+            
+            helperMethod(_model: modelDecodedAgain)
+        } catch let error {
+            print(error)
+        }
+    }
+    
+    func helperMethod(_model: NextServiceSchedule?) {
+        if let model = _model {
+            XCTAssertNotNil(model)
+            XCTAssertEqual(model.odometer, 0)
+            XCTAssertEqual(model.ageInMonths, 0)
+            XCTAssertEqual(model.timeUnits, "string")
+            XCTAssertEqual(model.timeValue, 0)
+            XCTAssertEqual(model.distanceUnits, "string")
+            XCTAssertEqual(model.distanceValue, 0)
+            XCTAssertNotNil(model.services)
+        }
     }
 }
 
@@ -50,22 +72,22 @@ extension NextServiceScheduleTests {
     var jsonString: String {
         return """
         {
-        "VIN": "string",
-        "TimeStamp": "2017-11-10T07:07:45.398Z",
-        "Odometer": 0,
-        "AgeInMonths": 0,
-        "TimeUnits": "string",
-        "TimeValue": 0,
-        "DistanceUnits": "string",
-        "DistanceValue": 0,
-        "Items": [{
-        "TransNotes": "string",
-        "ScheduleName": "string",
-        "ScheduleDescription": "string",
-        "MaintenanceCategory": "string",
-        "MaintenanceName": "string",
-        "MaintenanceNotes": "string"
-        }]
+            "VIN": "string",
+            "TimeStamp": "2017-11-10T07:07:45.398Z",
+            "Odometer": 0,
+            "AgeInMonths": 0,
+            "TimeUnits": "string",
+            "TimeValue": 0,
+            "DistanceUnits": "string",
+            "DistanceValue": 0,
+            "Items": [{
+                "TransNotes": "string",
+                "ScheduleName": "string",
+                "ScheduleDescription": "string",
+                "MaintenanceCategory": "string",
+                "MaintenanceName": "string",
+                "MaintenanceNotes": "string"
+            }]
         }
         """
     }

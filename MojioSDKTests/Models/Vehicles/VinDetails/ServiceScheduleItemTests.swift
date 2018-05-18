@@ -35,15 +35,37 @@ class ServiceScheduleItemTests: XCTestCase {
     }
     
     func testServiceScheduleItemModelDecoding() {
-        XCTAssertNotNil(model)
-        XCTAssertEqual(model?.transNotes, "string")
-        XCTAssertEqual(model?.scheduleName, "string")
-        XCTAssertEqual(model?.scheduleDescription, "string")
-        XCTAssertEqual(model?.maintenanceCategory, "string")
-        XCTAssertEqual(model?.maintenanceName, "string")
-        XCTAssertEqual(model?.maintenanceNotes, "string")
-        XCTAssertNotNil(model?.intervals)
-        XCTAssertNotNil(model?.events)
+        self.helperMethod(_model: self.model)
+    }
+    
+    func testServiceIntervalModelEncoding() {
+        do {
+            let encoder = JSONEncoder()
+            encoder.dateEncodingStrategy = .iso8601
+            let encodedModelData = try encoder.encode(self.model)
+            
+            XCTAssertNotNil(encodedModelData)
+            
+            let modelDecodedAgain = try JSONDecoder().decode(ServiceScheduleItem.self, from: encodedModelData)
+            
+            self.helperMethod(_model: modelDecodedAgain)
+        } catch let error {
+            print(error)
+        }
+    }
+    
+    func helperMethod(_model: ServiceScheduleItem?) {
+        if let model = _model {
+            XCTAssertNotNil(model)
+            XCTAssertEqual(model.transNotes, "string")
+            XCTAssertEqual(model.scheduleName, "string")
+            XCTAssertEqual(model.scheduleDescription, "string")
+            XCTAssertEqual(model.maintenanceCategory, "string")
+            XCTAssertEqual(model.maintenanceName, "string")
+            XCTAssertEqual(model.maintenanceNotes, "string")
+            XCTAssertNotNil(model.intervals)
+            XCTAssertNotNil(model.events)
+        }
     }
 }
 
@@ -51,24 +73,24 @@ extension ServiceScheduleItemTests {
     var jsonString: String {
         return """
         {
-        "TransNotes": "string",
-        "ScheduleName": "string",
-        "ScheduleDescription": "string",
-        "MaintenanceCategory": "string",
-        "MaintenanceName": "string",
-        "MaintenanceNotes": "string",
-        "Intervals": [{
-        "OperatingParameter": "string",
-        "OperatingParameterNotes": "string",
-        "IntervalType": "string",
-        "value": 0,
-        "Units": "string",
-        "InitialValue": 0
-        }],
-        "Events": [{
-        "ComputerCode": "string",
-        "Event": "string"
-        }]
+            "TransNotes": "string",
+            "ScheduleName": "string",
+            "ScheduleDescription": "string",
+            "MaintenanceCategory": "string",
+            "MaintenanceName": "string",
+            "MaintenanceNotes": "string",
+            "Intervals": [{
+                "OperatingParameter": "string",
+                "OperatingParameterNotes": "string",
+                "IntervalType": "string",
+                "Value": 0,
+                "Units": "string",
+                "InitialValue": 0
+            }],
+            "Events": [{
+                "ComputerCode": "string",
+                "Event": "string"
+            }]
         }
         """
     }

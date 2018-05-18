@@ -65,5 +65,14 @@ public struct ServiceBulletin: ServiceBulletinModel {
     
     public func encode(to encoder: Encoder) throws {
         
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        try container.encodeIfPresent(self.itemNumber, forKey: .itemNumber)
+        try container.encodeIfPresent(self.bulletinNumber, forKey: .bulletinNumber)
+        try container.encodeIfPresent(self.replacementBulletinNumber, forKey: .replacementBulletinNumber)
+        try container.encodeIfPresent(self.dateAdded, forKey: .dateAdded)
+        try container.encodeIfPresent(self.component, forKey: .component)
+        try container.encodeIfPresent(self.bulletinDate, forKey: .bulletinDate)
+        try container.encodeIfPresent(self.summary, forKey: .summary)
     }
 }

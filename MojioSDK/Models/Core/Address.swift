@@ -83,5 +83,19 @@ public struct Address: AddressModel {
     
     public func encode(to encoder: Encoder) throws {
         
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        try container.encodeIfPresent(self.houseNumber, forKey: .houseNumber)
+        try container.encodeIfPresent(self.road, forKey: .road)
+        
+        try container.encodeIfPresent(self.neighbourhood, forKey: .neighbourhood)
+        try container.encodeIfPresent(self.suburb, forKey: .suburb)
+        try container.encodeIfPresent(self.city, forKey: .city)
+        try container.encodeIfPresent(self.county, forKey: .county)
+        try container.encodeIfPresent(self.state, forKey: .state)
+        try container.encodeIfPresent(self.postCode, forKey: .postCode)
+        try container.encodeIfPresent(self.country, forKey: .country)
+        try container.encodeIfPresent(self.countryCode, forKey: .countryCode)
+        try container.encodeIfPresent(self.formattedAddress, forKey: .formattedAddress)
     }
 }

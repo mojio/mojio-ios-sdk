@@ -107,5 +107,19 @@ public struct Geofence: GeofenceModel {
     
     public func encode(to encoder: Encoder) throws {
         
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        try container.encodeIfPresent(self.id, forKey: .id)
+        try container.encodeIfPresent(self.ownerId, forKey: .ownerId)
+        try container.encodeIfPresent(self.name, forKey: .name)
+        try container.encodeIfPresent(self.description, forKey: .description)
+        try container.encodeIfPresent(self.region, forKey: .region)
+        try container.encodeIfPresent(self.notificationSetting, forKey: .notificationSetting)
+        try container.encodeIfPresent(self.enabled, forKey: .enabled)
+        try container.encodeIfPresent(self.vehicleIds, forKey: .vehicleIds)
+        try container.encodeIfPresent(self.tags, forKey: .tags)
+        try container.encodeIfPresent(self.deleted, forKey: .deleted)
+        try container.encodeIfPresent(self.createdOn, forKey: .createdOn)
+        try container.encodeIfPresent(self.lastModified, forKey: .lastModified)
     }
 }

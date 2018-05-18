@@ -35,12 +35,34 @@ class WifiRadioTests: XCTestCase {
     }
     
     func testWifiRadioModelDecoding() {
-        XCTAssertNotNil(model)
-        XCTAssertEqual(model?.ssid, "string")
-        XCTAssertEqual(model?.password, "string")
-        XCTAssertEqual(model?.allowRoaming, true)
-        XCTAssertEqual(model?.status, .roaming)
-        XCTAssertEqual(model?.strength, 0)
+        self.helperMethod(_model: self.model)
+    }
+    
+    func testWifiRadioModelEncoding() {
+        do {
+            let encoder = JSONEncoder()
+            encoder.dateEncodingStrategy = .iso8601
+            let encodedModelData = try encoder.encode(self.model)
+            
+            XCTAssertNotNil(encodedModelData)
+            
+            let modelDecodedAgain = try JSONDecoder().decode(WifiRadio.self, from: encodedModelData)
+            
+            self.helperMethod(_model: modelDecodedAgain)
+        } catch let error {
+            print(error)
+        }
+    }
+    
+    func helperMethod(_model: WifiRadio?) {
+        if let model = _model {
+            XCTAssertNotNil(model)
+            XCTAssertEqual(model.ssid, "string")
+            XCTAssertEqual(model.password, "string")
+            XCTAssertEqual(model.allowRoaming, true)
+            XCTAssertEqual(model.status, .roaming)
+            XCTAssertEqual(model.strength, 0)
+        }
     }
 }
 
@@ -48,12 +70,12 @@ extension WifiRadioTests {
     var jsonString: String {
         return """
         {
-        "Timestamp": "2017-11-10T07:07:42.736Z",
-        "SSID": "string",
-        "Password": "string",
-        "AllowRoaming": true,
-        "Status": "Roaming",
-        "Strength": 0
+            "Timestamp": "2017-11-10T07:07:42.736Z",
+            "SSID": "string",
+            "Password": "string",
+            "AllowRoaming": true,
+            "Status": "Roaming",
+            "Strength": 0
         }
         """
     }

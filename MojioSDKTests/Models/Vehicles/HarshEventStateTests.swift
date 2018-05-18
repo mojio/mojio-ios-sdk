@@ -35,10 +35,32 @@ class HarshEventStateTests: XCTestCase {
     }
     
     func testHarshEventStateModelDecoding() {
-        XCTAssertNotNil(model)
-        XCTAssertEqual(model?.value, true)
-        XCTAssertEqual(model?.eventType, .acceleration)
-        XCTAssertEqual(model?.turnType, .left)
+        helperMethod(_model: model)
+    }
+    
+    func testHarshEventStateModelEncoding() {
+        do {
+            let encoder = JSONEncoder()
+            encoder.dateEncodingStrategy = .iso8601
+            let encodedModelData = try encoder.encode(self.model)
+            
+            XCTAssertNotNil(encodedModelData)
+            
+            let modelDecodedAgain = try JSONDecoder().decode(HarshEventState.self, from: encodedModelData)
+            
+            helperMethod(_model: modelDecodedAgain)
+        } catch let error {
+            print(error)
+        }
+    }
+    
+    func helperMethod(_model: HarshEventState?) {
+        if let model = _model {
+            XCTAssertNotNil(model)
+            XCTAssertEqual(model.value, true)
+            XCTAssertEqual(model.eventType, .acceleration)
+            XCTAssertEqual(model.turnType, .left)
+        }
     }
 }
 
@@ -46,10 +68,10 @@ extension HarshEventStateTests {
     var jsonString: String {
         return """
         {
-        "Timestamp": "2017-11-09T07:15:16.084Z",
-        "Value": true,
-        "EventType": "Acceleration",
-        "TurnType": "Left"
+            "Timestamp": "2017-11-09T07:15:16.084Z",
+            "Value": true,
+            "EventType": "Acceleration",
+            "TurnType": "Left"
         }
         
         """
