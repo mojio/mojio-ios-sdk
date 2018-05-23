@@ -59,6 +59,7 @@ public enum MojioEndpoint {
     case wsPush
     case myMojio
     case identity
+    case tracker
 }
 
 open class ClientEnvironment {
@@ -69,6 +70,7 @@ open class ClientEnvironment {
         .wsPush: "%@api.moj.io",
         .myMojio: "%@my.moj.io",
         .identity: "%@identity.moj.io",
+        .tracker: "%@tracker-api.moj.io",
         ]
     
     open func domainFromMojioEndpoint(_ endpoint: MojioEndpoint) -> String {
@@ -88,6 +90,7 @@ open class ClientEnvironment {
         case pushWSEndpoint = "wss://%@api.moj.io/v2/"
         case myMojioEndpoint = "https://%@my.moj.io/"
         case identityEndpoint = "https://%@identity.moj.io/"
+        case trackerEndpoint = "https://%@tracker-api.moj.io/v1/"
     }
     
     fileprivate var region: MojioRegion = MojioRegion()
@@ -98,6 +101,7 @@ open class ClientEnvironment {
     fileprivate var pushWSEndpoint: String?
     fileprivate var myMojioEndpoint: String?
     fileprivate var identityEndpoint: String?
+    fileprivate var trackerEndpoint: String?
     
     public init() {
         self.updateEndPoints()
@@ -139,6 +143,19 @@ open class ClientEnvironment {
         self.identityEndpoint = String(
             format: ClientEnvironment.EndPointFormat.identityEndpoint.rawValue,
             arguments: [self.region.description])
+        
+        if self.region.regionType == MojioRegion.RegionType.staging {
+            self.trackerEndpoint = "http://tracker-api-staging.moj.io/v1/"
+            self.identityEndpoint = String(
+                format: ClientEnvironment.EndPointFormat.identityEndpoint.rawValue,
+                arguments: [self.region.description]
+            )
+        }
+        else {
+            self.trackerEndpoint = String(
+                format: ClientEnvironment.EndPointFormat.trackerEndpoint.rawValue,
+                arguments: [self.region.description])
+        }
     }
     
     open func setDefaultRegion () {
@@ -167,5 +184,9 @@ open class ClientEnvironment {
     
     open func getIdentityEndpoint () -> String {
         return self.identityEndpoint!
+    }
+    
+    open func getTrackerEndpoint () -> String {
+        return self.trackerEndpoint!
     }
 }

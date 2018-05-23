@@ -160,7 +160,7 @@ open class RestClient {
     }
     
     open func sortBy(field: String, direction: SortDirection) -> Self {
-        self.requestParams["orderby"] = String(format: "%s %s", field, direction.rawValue)
+        self.requestParams["orderby"] = "\(field) \(direction.rawValue)"
         return self
     }
     
