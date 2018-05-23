@@ -261,6 +261,7 @@ open class AuthClient: AuthControllerDelegate {
                     uniqueId: self.clientEnvironment.getRegion().regionType.rawValue)
                 
                 if authToken.isValid {
+                    self.authToken = authToken
                     completion(authToken)
                 }
                 else {

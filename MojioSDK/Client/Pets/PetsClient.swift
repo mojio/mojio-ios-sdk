@@ -46,6 +46,7 @@ open class PetsClient: RestClient {
         keychainManager: KeychainManager? = nil) {
 
         super.init(clientEnvironment: clientEnvironment, sessionManager: sessionManager, keychainManager: keychainManager)
+        self.requestUrl = clientEnvironment.getTrackerEndpoint()
     }
     
     open func activities(_ assetId: String) -> Self {
