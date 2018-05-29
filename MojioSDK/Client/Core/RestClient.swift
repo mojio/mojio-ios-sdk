@@ -471,17 +471,9 @@ open class RestClient {
                 failure(response)
             }
         }
-        else if let responseData = response.data, let parsedData = self.parseData(responseData) {
-                
-                var errorInfo : [String : Any] = [RestClient.RestClientResponseStatusCodeKey : response.response?.statusCode ?? 0]
-                if let responseDict = parsedData as? Dictionary<String, Any> {
-                    errorInfo.update(responseDict)
-                }
-                else if let responseError = response.result.error as NSError? {
-                    errorInfo.update(responseError.userInfo)
-                }
-                
-                failure (errorInfo)
+        else if let responseData = response.data {
+            let parsedData = self.parseError(responseData, statusCode: response.response?.statusCode)
+            failure (parsedData)
         }
         else {
             failure(response)
@@ -490,6 +482,10 @@ open class RestClient {
     
     open func parseData(_ responseData: Data) -> Codable? {
         return nil
+    }
+    
+    open func parseError(_ responseData: Data, statusCode: Int?) -> Error {
+        return MojioError(code: nil)
     }
     
     open func accessToken() -> String? {
