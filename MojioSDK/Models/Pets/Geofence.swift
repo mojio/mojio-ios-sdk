@@ -18,24 +18,28 @@ import MojioCore
 
 public enum GeofenceRegionType: String, Codable {
     case circle = "Circle"
+    case polygon = "Polygon"
 }
 
-public protocol GeofenceCircleRegionModel: Codable {
+public protocol GeofenceRegionModel: Codable {
     var latitude: Double? { get }
     var longitude: Double? { get }
     var radius: Double? { get }
+    var polygon: String?  { get }
 }
 
-public struct GeofenceCircleRegion: GeofenceCircleRegionModel {
+public struct GeofenceRegion: GeofenceRegionModel {
     
     public let latitude: Double?
     public let longitude: Double?
     public let radius: Double?
+    public let polygon: String?
     
     public enum CodingKeys: String, CodingKey {
         case latitude = "Latitude"
         case longitude = "Longitude"
         case radius = "Radius"
+        case polygon = "Polygon"
     }
 
     public init(from decoder: Decoder) throws {
@@ -45,6 +49,7 @@ public struct GeofenceCircleRegion: GeofenceCircleRegionModel {
             self.latitude = try container.decodeIfPresent(Double.self, forKey: .latitude)
             self.longitude = try container.decodeIfPresent(Double.self, forKey: .longitude)
             self.radius = try container.decodeIfPresent(Double.self, forKey: .radius)
+            self.polygon = try container.decodeIfPresent(String.self, forKey: .polygon)
         }
         catch {
             debugPrint(error)
@@ -55,7 +60,7 @@ public struct GeofenceCircleRegion: GeofenceCircleRegionModel {
 
 public protocol GeofenceModel: Codable, PrimaryKey {
     
-    associatedtype G: GeofenceCircleRegionModel
+    associatedtype G: GeofenceRegionModel
     
     var id: String { get }
     var name: String? { get }
@@ -72,7 +77,7 @@ public protocol GeofenceModel: Codable, PrimaryKey {
 
 public struct Geofence: GeofenceModel {
     
-    public typealias G = GeofenceCircleRegion
+    public typealias G = GeofenceRegion
     
     public let id: String
     public let name: String?
@@ -107,7 +112,7 @@ public struct Geofence: GeofenceModel {
             self.id = try container.decode(String.self, forKey: .id)
             self.name = try container.decodeIfPresent(String.self, forKey: .name)
             self.description = try container.decodeIfPresent(String.self, forKey: .description)
-            self.region = try container.decodeIfPresent(GeofenceCircleRegion.self, forKey: .region)
+            self.region = try container.decodeIfPresent(GeofenceRegion.self, forKey: .region)
             self.geofenceEnterNotification = try container.decodeIfPresent(Bool.self, forKey: .geofenceEnterNotification)
             self.geofenceExitNotification = try container.decodeIfPresent(Bool.self, forKey: .geofenceExitNotification)
             self.assetIds = try container.decodeIfPresent([String].self, forKey: .assetIds)
@@ -130,7 +135,7 @@ public func ==(lhs: Geofence, rhs: Geofence) -> Bool {
 public struct GeofenceUpdate: Codable {
     public var name: String? = nil
     public var description: String? = nil
-    public var region: GeofenceCircleRegion? = nil
+    public var region: GeofenceRegion? = nil
     public var geofenceEnterNotification: Bool? = nil
     public var geofenceExitNotification: Bool? = nil
     public var assetIds: [String]? = nil
