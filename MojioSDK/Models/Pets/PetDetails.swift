@@ -60,7 +60,7 @@ public protocol PetDetailsModel: Codable {
     var vetName: String? { get }
     var vetPhoneNumber: String? { get }
     var lastVetVisit: Date? { get }
-    var weight: Int? { get }
+    var weight: Double? { get }
 }
 
 public struct PetDetails: PetDetailsModel {
@@ -72,7 +72,7 @@ public struct PetDetails: PetDetailsModel {
     public let vetName: String?
     public let vetPhoneNumber: String?
     public let lastVetVisit: Date?
-    public let weight: Int?
+    public let weight: Double?
     
     public enum CodingKeys: String, CodingKey {
         case type = "Type"
@@ -98,7 +98,7 @@ public struct PetDetails: PetDetailsModel {
             self.vetName = try container.decodeIfPresent(String.self, forKey: .vetName)
             self.vetPhoneNumber = try container.decodeIfPresent(String.self, forKey: .vetPhoneNumber)
             self.lastVetVisit = try container.decodeIfPresent(String.self, forKey: .lastVetVisit).flatMap { $0.dateFromIso8601 }
-            self.weight = try container.decodeIfPresent(Int.self, forKey: .weight)
+            self.weight = try container.decodeIfPresent(Double.self, forKey: .weight)
         }
         catch {
             debugPrint(error)
@@ -116,7 +116,7 @@ public struct PetDetailsUpdate: Codable {
     public var vetName: String? = nil
     public var vetPhoneNumber: String? = nil
     public var lastVetVisit: Date? = nil
-    public var weight: Int? = 0
+    public var weight: Double? = 0
     
     public enum CodingKeys: String, CodingKey {
         case type = "Type"
@@ -152,7 +152,7 @@ public struct PetDetailsUpdate: Codable {
          vetName: String? = nil,
          vetPhoneNumber: String? = nil,
          lastVetVisit: Date? = nil,
-         weight: Int? = 0) {
+         weight: Double? = 0) {
         
         self.type = type
         self.gender = gender
