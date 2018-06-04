@@ -137,7 +137,8 @@ open class PetsClient: RestClient {
     open override func parseData(_ responseData: Data) -> Codable? {
         do {
             switch PetsEndpoint(rawValue: self.requestEntity) ?? .base {
-            case .devices:
+            case .devices,
+                 .claim:
                 do {
                     return try JSONDecoder().decode(ResponseArray<Device>.self, from: responseData)
                 }
