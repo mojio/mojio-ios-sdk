@@ -75,8 +75,8 @@ open class PetsClient: RestClient {
     
     open func stats(_ from: String? = nil) -> Self {
         self.requestEntity = PetsEndpoint.stats.rawValue
+        self.requestEntityId = from
         self.appendRequestUrlEntityId()
-        self.requestUrl = self.requestUrl! + self.requestEntity
         
         return self
     }
@@ -179,6 +179,13 @@ open class PetsClient: RestClient {
                 }
                 catch {
                     return try JSONDecoder().decode(NotificationToken.self, from: responseData)
+                }
+            case .stats:
+                do {
+                    return try JSONDecoder().decode(ResponseArray<Stats>.self, from: responseData)
+                }
+                catch {
+                    return try JSONDecoder().decode(Stats.self, from: responseData)
                 }
             default:
                 return nil
