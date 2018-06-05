@@ -14,7 +14,6 @@
  *******************************************************************************/
 
 import UIKit
-import CoreLocation
 
 public enum LocationStatus: String {
     // Status not known
@@ -159,28 +158,3 @@ public struct Location: LocationModel {
         try container.encodeIfPresent(self.locationHeading, forKey: .locationHeading)
     }
 }
-
-extension Location {
-    public init(coreLocation: CLLocation, coreHeading: CLHeading? = nil) {
-        self.lat = coreLocation.coordinate.latitude
-        self.lng = coreLocation.coordinate.longitude
-        self.altitude = coreLocation.altitude
-        let heading = coreHeading?.trueHeading ?? 0
-        self.locationHeading = Heading(baseUnit: .degree, baseValue: 0.0, unit: .degree, value: heading, timestamp: nil, direction: nil, leftTurn: false)
-        self.timestamp = coreLocation.timestamp
-        
-        self.radius = 0
-        self.dilution = 0
-        
-        self.locationAddress = nil
-        self.status = ""
-        self.geoHash = ""
-    }
-}
-
-extension Location {
-    var coordinate: CLLocationCoordinate2D? {
-        return CLLocationCoordinate2D(latitude: self.lat, longitude: self.lng)
-    }
-}
-
