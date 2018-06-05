@@ -60,6 +60,7 @@ public enum MojioEndpoint {
     case myMojio
     case identity
     case tracker
+    case image
 }
 
 open class ClientEnvironment {
@@ -71,6 +72,7 @@ open class ClientEnvironment {
         .myMojio: "%@my.moj.io",
         .identity: "%@identity.moj.io",
         .tracker: "%@tracker-api.moj.io",
+        .image: "%@image.moj.io/"
         ]
     
     open func domainFromMojioEndpoint(_ endpoint: MojioEndpoint) -> String {
@@ -91,6 +93,7 @@ open class ClientEnvironment {
         case myMojioEndpoint = "https://%@my.moj.io/"
         case identityEndpoint = "https://%@identity.moj.io/"
         case trackerEndpoint = "https://%@tracker-api.moj.io/v1/"
+        case imageEndpoint = "https://%@image.moj.io/"
     }
     
     fileprivate var region: MojioRegion = MojioRegion()
@@ -102,7 +105,8 @@ open class ClientEnvironment {
     fileprivate var myMojioEndpoint: String?
     fileprivate var identityEndpoint: String?
     fileprivate var trackerEndpoint: String?
-    
+    fileprivate var imageEndpoint: String?
+
     public init() {
         self.updateEndPoints()
     }
@@ -150,10 +154,14 @@ open class ClientEnvironment {
                 format: ClientEnvironment.EndPointFormat.identityEndpoint.rawValue,
                 arguments: [self.region.description]
             )
+            self.imageEndpoint = self.trackerEndpoint
         }
         else {
             self.trackerEndpoint = String(
                 format: ClientEnvironment.EndPointFormat.trackerEndpoint.rawValue,
+                arguments: [self.region.description])
+            self.imageEndpoint = String(
+                format: ClientEnvironment.EndPointFormat.imageEndpoint.rawValue,
                 arguments: [self.region.description])
         }
     }
@@ -188,5 +196,9 @@ open class ClientEnvironment {
     
     open func getTrackerEndpoint () -> String {
         return self.trackerEndpoint!
+    }
+
+    open func getImageEndpoint () -> String {
+        return self.imageEndpoint!
     }
 }

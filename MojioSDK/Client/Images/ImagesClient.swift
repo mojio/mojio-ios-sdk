@@ -43,6 +43,7 @@ open class ImagesClient: RestClient {
         keychainManager: KeychainManager? = nil) {
         
         super.init(clientEnvironment: clientEnvironment, sessionManager: sessionManager, keychainManager: keychainManager)
+        self.requestUrl = clientEnvironment.getImageEndpoint()
     }
     
     open func images(_ imageId: String? = nil) -> Self {
