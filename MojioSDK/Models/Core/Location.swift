@@ -168,13 +168,11 @@ extension Location {
         let heading = coreHeading?.trueHeading ?? 0
         self.locationHeading = Heading(baseUnit: .degree, baseValue: 0.0, unit: .degree, value: heading, timestamp: nil, direction: nil, leftTurn: false)
         self.timestamp = coreLocation.timestamp
-        
         self.radius = 0
         self.dilution = 0
-        
         self.locationAddress = nil
-        self.status = ""
-        self.geoHash = ""
+        self.status = String.empty
+        self.geoHash = String.empty
     }
 }
 
