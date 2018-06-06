@@ -22,10 +22,32 @@ public enum AssetType: String, Codable {
     case other = "Other"
 }
 
+public protocol DisplayDetailModel: Codable {
+    var showOnMap: Bool { get }
+    var color: String { get }
+    var icon: String { get }
+    var profileImage: String? { get }
+}
+
+public struct DisplayDetail: DisplayDetailModel {
+    public let showOnMap: Bool
+    public let color: String
+    public let icon: String
+    public let profileImage: String?
+    
+    public enum CodingKeys: String, CodingKey {
+        case showOnMap = "ShowOnMap"
+        case color = "Color"
+        case icon = "Icon"
+        case profileImage = "ProfileImage"
+    }
+}
+
 public protocol AssetModel: Codable, PrimaryKey {
     
     associatedtype L: PetsLocationModel
     associatedtype D: PetDetailsModel
+    associatedtype A: DisplayDetailModel
     
     var id: String { get }
     var name: String? { get }
@@ -34,8 +56,8 @@ public protocol AssetModel: Codable, PrimaryKey {
     var speed: Double? { get }
     var type: AssetType? { get }
     var pet: D? { get }
+    var displayDetail: A? { get }
     var ownerId: String? { get }
-    var profileImageId: String? { get }
     var profileImageUri: URL? { get }
     var deleted: Bool? { get }
     var createdOn: Date? { get }
@@ -46,6 +68,7 @@ public struct Asset: AssetModel {
     
     public typealias L = PetsLocation
     public typealias D = PetDetails
+    public typealias A = DisplayDetail
     
     public let id: String
     public let name: String?
@@ -54,6 +77,7 @@ public struct Asset: AssetModel {
     public let speed: Double?
     public let type: AssetType?
     public let pet: D?
+    public let displayDetail: A?
     public let ownerId: String?
     public let profileImageId: String?
     public let profileImageUri: URL?
@@ -69,6 +93,7 @@ public struct Asset: AssetModel {
         case speed = "Speed"
         case type = "Type"
         case pet = "PetDetails"
+        case displayDetail = ""
         case ownerId = "OwnerId"
         case profileImageId = "ProfileImageId"
         case profileImageUri = "ProfileImageUri"
@@ -88,6 +113,7 @@ public struct Asset: AssetModel {
             self.speed = try container.decodeIfPresent(Double.self, forKey: .speed)
             self.type = try container.decodeIfPresent(String.self, forKey: .type).flatMap { AssetType(rawValue: $0) }
             self.pet = try container.decodeIfPresent(PetDetails.self, forKey: .pet)
+            self.displayDetail = try container.decodeIfPresent(DisplayDetail.self, forKey: .displayDetail)
             self.ownerId = try container.decodeIfPresent(String.self, forKey: .ownerId)
             self.profileImageId = try container.decodeIfPresent(String.self, forKey: .profileImageId)
             self.profileImageUri = try container.decodeIfPresent(URL.self, forKey: .profileImageUri)

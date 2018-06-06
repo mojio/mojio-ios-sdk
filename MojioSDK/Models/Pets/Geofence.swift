@@ -58,16 +58,34 @@ public struct GeofenceRegion: GeofenceRegionModel {
     }
 }
 
+public protocol GeofenceNotificationModel: Codable {
+    var onEnter: Bool { get }
+    var onExit: Bool { get }
+    var sound: String { get }
+}
+
+public struct GeofenceNotification: GeofenceNotificationModel {
+    public let onEnter: Bool
+    public let onExit: Bool
+    public let sound: String
+    
+    public enum CodingKeys: String, CodingKey {
+        case onEnter = "OnEnter"
+        case onExit = "OnExit"
+        case sound = "Sound"
+    }
+}
+
 public protocol GeofenceModel: Codable, PrimaryKey {
     
     associatedtype G: GeofenceRegionModel
+    associatedtype N: GeofenceNotificationModel
     
     var id: String { get }
     var name: String? { get }
     var description: String? { get }
     var region: G? { get }
-    var geofenceEnterNotification: Bool? { get }
-    var geofenceExitNotification: Bool? { get }
+    var notification: N? { get }
     var assetIds: [String]? { get }
     var ownerId: String? { get }
     var deleted: Bool? { get }
@@ -78,13 +96,13 @@ public protocol GeofenceModel: Codable, PrimaryKey {
 public struct Geofence: GeofenceModel {
     
     public typealias G = GeofenceRegion
+    public typealias N = GeofenceNotification
     
     public let id: String
     public let name: String?
     public let description: String?
     public let region: G?
-    public let geofenceEnterNotification: Bool?
-    public let geofenceExitNotification: Bool?
+    public let notification: N?
     public let assetIds: [String]?
     public let ownerId: String?
     public let deleted: Bool?
@@ -96,8 +114,7 @@ public struct Geofence: GeofenceModel {
         case name = "Name"
         case description = "Description"
         case region = "Region"
-        case geofenceEnterNotification = "GeofenceEnterNotification"
-        case geofenceExitNotification = "GeofenceExitNotification"
+        case notification = "Notification"
         case assetIds = "AssetIds"
         case ownerId = "OwnerId"
         case deleted = "Deleted"
@@ -113,8 +130,7 @@ public struct Geofence: GeofenceModel {
             self.name = try container.decodeIfPresent(String.self, forKey: .name)
             self.description = try container.decodeIfPresent(String.self, forKey: .description)
             self.region = try container.decodeIfPresent(GeofenceRegion.self, forKey: .region)
-            self.geofenceEnterNotification = try container.decodeIfPresent(Bool.self, forKey: .geofenceEnterNotification)
-            self.geofenceExitNotification = try container.decodeIfPresent(Bool.self, forKey: .geofenceExitNotification)
+            self.notification = try container.decodeIfPresent(GeofenceNotification.self, forKey: .notification)
             self.assetIds = try container.decodeIfPresent([String].self, forKey: .assetIds)
             self.ownerId = try container.decodeIfPresent(String.self, forKey: .ownerId)
             self.deleted = try container.decodeIfPresent(Bool.self, forKey: .deleted)
