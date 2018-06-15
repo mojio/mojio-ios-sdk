@@ -58,6 +58,13 @@ public struct GeofenceRegion: GeofenceRegionModel {
     }
 }
 
+public extension GeofenceRegion {
+    var coordinate: CLLocationCoordinate2D? {
+        guard let latitude = self.latitude, let longitude = self.longitude else { return nil }
+        return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+    }
+}
+
 public struct GeofenceRegionUpdate: Codable {
     
     public var latitude: Double?
