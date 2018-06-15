@@ -15,6 +15,7 @@
 
 import Foundation
 import MojioCore
+import CoreLocation
 
 public enum GeofenceRegionType: String, Codable {
     case circle = "Circle"
