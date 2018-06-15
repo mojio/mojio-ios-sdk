@@ -15,6 +15,7 @@
 
 import Foundation
 import MojioCore
+import CoreLocation
 
 public enum GeofenceRegionType: String, Codable {
     case circle = "Circle"
@@ -55,6 +56,13 @@ public struct GeofenceRegion: GeofenceRegionModel {
             debugPrint(error)
             throw error
         }
+    }
+}
+
+public extension GeofenceRegion {
+    var coordinate: CLLocationCoordinate2D? {
+        guard let latitude = self.latitude, let longitude = self.longitude else { return nil }
+        return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
     }
 }
 
