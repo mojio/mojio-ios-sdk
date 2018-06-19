@@ -75,7 +75,7 @@ public struct Device: DeviceModel {
     public let gatewayTime: Date?
     
     public var id: String {
-        return self.imei
+        return self.deviceId
     }
     
     public enum CodingKeys: String, CodingKey {
