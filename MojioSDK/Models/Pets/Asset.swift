@@ -22,14 +22,14 @@ public enum AssetType: String, Codable {
     case other = "Other"
 }
 
-public protocol DisplayDetailsModel: Codable {
+public protocol DisplayDetailModel: Codable {
     var showOnMap: Bool { get }
     var color: String { get }
     var icon: String { get }
     var profileImage: String? { get }
 }
 
-public struct DisplayDetails: DisplayDetailsModel {
+public struct DisplayDetail: DisplayDetailModel {
     public let showOnMap: Bool
     public let color: String
     public let icon: String
@@ -47,7 +47,7 @@ public protocol AssetModel: Codable, PrimaryKey {
     
     associatedtype L: PetsLocationModel
     associatedtype D: PetDetailsModel
-    associatedtype A: DisplayDetailsModel
+    associatedtype A: DisplayDetailModel
     
     var id: String { get }
     var name: String? { get }
@@ -56,8 +56,9 @@ public protocol AssetModel: Codable, PrimaryKey {
     var speed: Double? { get }
     var type: AssetType? { get }
     var pet: D? { get }
-    var displayDetails: A? { get }
+    var displayDetail: A? { get }
     var ownerId: String? { get }
+    var profileImageUri: URL? { get }
     var deleted: Bool? { get }
     var createdOn: Date? { get }
     var lastModified: Date? { get }
@@ -67,7 +68,7 @@ public struct Asset: AssetModel {
     
     public typealias L = PetsLocation
     public typealias D = PetDetails
-    public typealias A = DisplayDetails
+    public typealias A = DisplayDetail
     
     public let id: String
     public let name: String?
@@ -76,7 +77,7 @@ public struct Asset: AssetModel {
     public let speed: Double?
     public let type: AssetType?
     public let pet: D?
-    public let displayDetails: A?
+    public let displayDetail: A?
     public let ownerId: String?
     public let profileImageId: String?
     public let profileImageUri: URL?
@@ -92,7 +93,7 @@ public struct Asset: AssetModel {
         case speed = "Speed"
         case type = "Type"
         case pet = "PetDetails"
-        case displayDetails = "DisplayDetails"
+        case displayDetail = ""
         case ownerId = "OwnerId"
         case profileImageId = "ProfileImageId"
         case profileImageUri = "ProfileImageUri"
@@ -112,7 +113,7 @@ public struct Asset: AssetModel {
             self.speed = try container.decodeIfPresent(Double.self, forKey: .speed)
             self.type = try container.decodeIfPresent(String.self, forKey: .type).flatMap { AssetType(rawValue: $0) }
             self.pet = try container.decodeIfPresent(PetDetails.self, forKey: .pet)
-            self.displayDetails = try container.decodeIfPresent(DisplayDetails.self, forKey: .displayDetails)
+            self.displayDetail = try container.decodeIfPresent(DisplayDetail.self, forKey: .displayDetail)
             self.ownerId = try container.decodeIfPresent(String.self, forKey: .ownerId)
             self.profileImageId = try container.decodeIfPresent(String.self, forKey: .profileImageId)
             self.profileImageUri = try container.decodeIfPresent(URL.self, forKey: .profileImageUri)
@@ -131,34 +132,12 @@ public func ==(lhs: Asset, rhs: Asset) -> Bool {
     return lhs.id == rhs.id
 }
 
-public struct DisplayDetailsUpdate: Codable {
-    var showOnMap: Bool = false
-    var color: String = "default"
-    var icon: String = "Sedan"
-    var profileImage: String? = nil
-    
-    public enum CodingKeys: String, CodingKey {
-        case showOnMap = "ShowOnMap"
-        case color = "Color"
-        case icon = "Icon"
-        case profileImage = "ProfileImage"
-    }
-    
-    public init(displayDetails: DisplayDetails? = nil) {
-        self.showOnMap = displayDetails?.showOnMap ?? false
-        self.color = displayDetails?.color ?? "default"
-        self.icon = displayDetails?.icon ?? "Sedan"
-        self.profileImage = displayDetails?.profileImage
-    }
-}
-
 public struct AssetUpdate: Codable {
     public var name: String? = nil
     public var type: AssetType? = nil
     public var profileImageId: String? = nil
     public var profileImageUri: URL? = nil
     public var pet: PetDetailsUpdate? = nil
-    public var displayDetails: DisplayDetailsUpdate? = nil
     
     public enum CodingKeys: String, CodingKey {
         case name = "Name"
@@ -166,7 +145,6 @@ public struct AssetUpdate: Codable {
         case profileImageId = "ProfileImageId"
         case profileImageUri = "ProfileImageUri"
         case pet = "PetDetails"
-        case displayDetails = "DisplayDetails"
     }
     
     public init(asset: Asset? = nil) {
@@ -175,7 +153,8 @@ public struct AssetUpdate: Codable {
             location: asset?.location,
             type: asset?.type,
             pet: PetDetailsUpdate(petDetails: asset?.pet),
-            displayDetails: DisplayDetailsUpdate(displayDetails: asset?.displayDetails)
+            profileImageId: asset?.profileImageId,
+            profileImageUri: asset?.profileImageUri
         )
     }
 
@@ -184,12 +163,14 @@ public struct AssetUpdate: Codable {
         location: PetsLocation? = nil,
         type: AssetType? = nil,
         pet: PetDetailsUpdate? = nil,
-        displayDetails: DisplayDetailsUpdate? = nil) {
+        profileImageId: String? = nil,
+        profileImageUri: URL? = nil) {
         
         self.name = name
         self.type = type
         self.pet = pet
-        self.displayDetails = displayDetails
+        self.profileImageId = profileImageId
+        self.profileImageUri = profileImageUri
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -200,6 +181,5 @@ public struct AssetUpdate: Codable {
         try container.encodeIfPresent(self.profileImageId, forKey: .profileImageId)
         try container.encodeIfPresent(self.profileImageUri, forKey: .profileImageUri)
         try container.encodeIfPresent(self.pet, forKey: .pet)
-        try container.encodeIfPresent(self.displayDetails, forKey: .displayDetails)
     }
 }
