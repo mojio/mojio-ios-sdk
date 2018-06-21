@@ -22,17 +22,17 @@ public enum AssetType: String, Codable {
     case other = "Other"
 }
 
-public protocol DisplayDetailModel: Codable {
-    var showOnMap: Bool { get }
-    var color: String { get }
-    var icon: String { get }
+public protocol DisplayDetailsModel: Codable {
+    var showOnMap: Bool? { get }
+    var color: String? { get }
+    var icon: String? { get }
     var profileImage: String? { get }
 }
 
-public struct DisplayDetail: DisplayDetailModel {
-    public let showOnMap: Bool
-    public let color: String
-    public let icon: String
+public struct DisplayDetails: DisplayDetailsModel {
+    public let showOnMap: Bool?
+    public let color: String?
+    public let icon: String?
     public let profileImage: String?
     
     public enum CodingKeys: String, CodingKey {
@@ -43,11 +43,54 @@ public struct DisplayDetail: DisplayDetailModel {
     }
 }
 
+public struct DisplayDetailsUpdate: Codable {
+    public var showOnMap: Bool?
+    public var color: String?
+    public var icon: String?
+    public var profileImage: String?
+    
+    public enum CodingKeys: String, CodingKey {
+        case showOnMap = "ShowOnMap"
+        case color = "Color"
+        case icon = "Icon"
+        case profileImage = "ProfileImage"
+    }
+    
+    public init(from displayDetailsModel: DisplayDetailsModel? = nil) {
+        self.init(
+            showOnMap: displayDetailsModel?.showOnMap,
+            color: displayDetailsModel?.color,
+            icon: displayDetailsModel?.icon,
+            profileImage: displayDetailsModel?.profileImage
+        )
+    }
+    
+    public init(
+        showOnMap: Bool? = nil,
+        color: String? = nil,
+        icon: String? = nil,
+        profileImage: String? = nil) {
+        
+        self.showOnMap = showOnMap
+        self.color = color
+        self.icon = icon
+        self.profileImage = profileImage
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        try container.encodeIfPresent(self.showOnMap, forKey: .showOnMap)
+        try container.encodeIfPresent(self.color, forKey: .color)
+        try container.encodeIfPresent(self.icon, forKey: .icon)
+        try container.encodeIfPresent(self.profileImage, forKey: .profileImage)
+    }
+}
 public protocol AssetModel: Codable, PrimaryKey {
     
     associatedtype L: PetsLocationModel
     associatedtype D: PetDetailsModel
-    associatedtype A: DisplayDetailModel
+    associatedtype A: DisplayDetailsModel
     
     var id: String { get }
     var name: String? { get }
@@ -56,9 +99,8 @@ public protocol AssetModel: Codable, PrimaryKey {
     var speed: Double? { get }
     var type: AssetType? { get }
     var pet: D? { get }
-    var displayDetail: A? { get }
+    var displayDetails: A? { get }
     var ownerId: String? { get }
-    var profileImageUri: URL? { get }
     var deleted: Bool? { get }
     var createdOn: Date? { get }
     var lastModified: Date? { get }
@@ -68,7 +110,7 @@ public struct Asset: AssetModel {
     
     public typealias L = PetsLocation
     public typealias D = PetDetails
-    public typealias A = DisplayDetail
+    public typealias A = DisplayDetails
     
     public let id: String
     public let name: String?
@@ -77,10 +119,8 @@ public struct Asset: AssetModel {
     public let speed: Double?
     public let type: AssetType?
     public let pet: D?
-    public let displayDetail: A?
+    public let displayDetails: A?
     public let ownerId: String?
-    public let profileImageId: String?
-    public let profileImageUri: URL?
     public let deleted: Bool?
     public let createdOn: Date?
     public let lastModified: Date?
@@ -93,15 +133,13 @@ public struct Asset: AssetModel {
         case speed = "Speed"
         case type = "Type"
         case pet = "PetDetails"
-        case displayDetail = ""
+        case displayDetails = "DisplayDetails"
         case ownerId = "OwnerId"
-        case profileImageId = "ProfileImageId"
-        case profileImageUri = "ProfileImageUri"
         case deleted = "Deleted"
         case createdOn = "CreatedOn"
         case lastModified = "LastModified"
     }
-
+    
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
@@ -113,10 +151,8 @@ public struct Asset: AssetModel {
             self.speed = try container.decodeIfPresent(Double.self, forKey: .speed)
             self.type = try container.decodeIfPresent(String.self, forKey: .type).flatMap { AssetType(rawValue: $0) }
             self.pet = try container.decodeIfPresent(PetDetails.self, forKey: .pet)
-            self.displayDetail = try container.decodeIfPresent(DisplayDetail.self, forKey: .displayDetail)
+            self.displayDetails = try container.decodeIfPresent(DisplayDetails.self, forKey: .displayDetails)
             self.ownerId = try container.decodeIfPresent(String.self, forKey: .ownerId)
-            self.profileImageId = try container.decodeIfPresent(String.self, forKey: .profileImageId)
-            self.profileImageUri = try container.decodeIfPresent(URL.self, forKey: .profileImageUri)
             self.deleted = try container.decodeIfPresent(Bool.self, forKey: .deleted)
             self.createdOn = try container.decodeIfPresent(String.self, forKey: .createdOn).flatMap { $0.dateFromIso8601 }
             self.lastModified = try container.decodeIfPresent(String.self, forKey: .lastModified).flatMap { $0.dateFromIso8601 }
@@ -135,15 +171,13 @@ public func ==(lhs: Asset, rhs: Asset) -> Bool {
 public struct AssetUpdate: Codable {
     public var name: String? = nil
     public var type: AssetType? = nil
-    public var profileImageId: String? = nil
-    public var profileImageUri: URL? = nil
+    public var displayDetails: DisplayDetailsUpdate? = nil
     public var pet: PetDetailsUpdate? = nil
     
     public enum CodingKeys: String, CodingKey {
         case name = "Name"
         case type = "Type"
-        case profileImageId = "ProfileImageId"
-        case profileImageUri = "ProfileImageUri"
+        case displayDetails = "DisplayDetails"
         case pet = "PetDetails"
     }
     
@@ -152,34 +186,31 @@ public struct AssetUpdate: Codable {
             name: asset?.name,
             location: asset?.location,
             type: asset?.type,
-            pet: PetDetailsUpdate(petDetails: asset?.pet),
-            profileImageId: asset?.profileImageId,
-            profileImageUri: asset?.profileImageUri
+            displayDetails: DisplayDetailsUpdate(from: asset?.displayDetails),
+            pet: PetDetailsUpdate(petDetails: asset?.pet)
         )
     }
-
+    
     public init(
         name: String? = nil,
         location: PetsLocation? = nil,
         type: AssetType? = nil,
-        pet: PetDetailsUpdate? = nil,
-        profileImageId: String? = nil,
-        profileImageUri: URL? = nil) {
+        displayDetails: DisplayDetailsUpdate? = nil,
+        pet: PetDetailsUpdate? = nil) {
         
         self.name = name
         self.type = type
+        self.displayDetails = displayDetails
         self.pet = pet
-        self.profileImageId = profileImageId
-        self.profileImageUri = profileImageUri
+        
     }
-
+    
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         
         try container.encodeIfPresent(self.name, forKey: .name)
         try container.encodeIfPresent(self.type, forKey: .type)
-        try container.encodeIfPresent(self.profileImageId, forKey: .profileImageId)
-        try container.encodeIfPresent(self.profileImageUri, forKey: .profileImageUri)
+        try container.encodeIfPresent(self.displayDetails, forKey: .displayDetails)
         try container.encodeIfPresent(self.pet, forKey: .pet)
     }
 }
