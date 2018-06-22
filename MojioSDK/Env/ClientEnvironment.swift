@@ -28,6 +28,7 @@ open class MojioRegion: MojioRegionPrefix {
         case trial = "trial-"
         case develop = "develop-"
         case load = "load-"
+        case custom = "custom-"
     }
     
     open var defaultRegionType: RegionType {
@@ -64,6 +65,18 @@ public enum MojioEndpoint {
 }
 
 open class ClientEnvironment {
+    
+    public typealias CustomEndpoints = (
+        apiEndpoint: String?,
+        apiV1Endpoint: String?,
+        pushApnsEndpoint: String?,
+        pushWSEndpoint: String?,
+        myMojioEndpoint: String?,
+        identityEndpoint: String?,
+        trackerEndpoint: String?,
+        imageEndpoint: String?
+    )
+    public static var customEndpoints: CustomEndpoints?
     
     private static let endpointDomainFormats: [MojioEndpoint: String] = [
         .api: "%@api.moj.io",
@@ -124,6 +137,20 @@ open class ClientEnvironment {
     }
     
     private func updateEndPoints() {
+        if case .custom = self.region.regionType {
+            ClientEnvironment.customEndpoints.map { customEndpoints in
+                self.apiEndpoint = customEndpoints.apiEndpoint
+                self.apiV1Endpoint = customEndpoints.apiV1Endpoint
+                self.pushApnsEndpoint = customEndpoints.pushApnsEndpoint
+                self.pushWSEndpoint = customEndpoints.pushWSEndpoint
+                self.myMojioEndpoint = customEndpoints.myMojioEndpoint
+                self.identityEndpoint = customEndpoints.identityEndpoint
+                self.trackerEndpoint = customEndpoints.trackerEndpoint
+                self.imageEndpoint = customEndpoints.trackerEndpoint
+            }
+            return
+        }
+        
         self.apiEndpoint = String(
             format: ClientEnvironment.EndPointFormat.apiEndpoint.rawValue,
             arguments: [self.region.description])
