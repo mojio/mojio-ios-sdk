@@ -182,6 +182,8 @@
 		E06C95691D25CA2A006AECBB /* NotificationsSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06C95671D25CA2A006AECBB /* NotificationsSettings.swift */; };
 		F9623AAE1D935D74005C10F2 /* IdleState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9623AAD1D935D74005C10F2 /* IdleState.swift */; };
 		F9E9FDAE1D93122A00DCB690 /* HarshEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E9FDAD1D93122A00DCB690 /* HarshEvent.swift */; };
+		FCE43DA820DCDABC004A2E89 /* EntityAppearanceColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE43DA720DCDABC004A2E89 /* EntityAppearanceColor.swift */; };
+		FCE43DAE20DCFA22004A2E89 /* DisplayDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE43DAD20DCFA22004A2E89 /* DisplayDetails.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -380,6 +382,8 @@
 		F28CBD045B5B77B3EC893BCA /* Pods_Vehicles.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Vehicles.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9623AAD1D935D74005C10F2 /* IdleState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdleState.swift; sourceTree = "<group>"; };
 		F9E9FDAD1D93122A00DCB690 /* HarshEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HarshEvent.swift; sourceTree = "<group>"; };
+		FCE43DA720DCDABC004A2E89 /* EntityAppearanceColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityAppearanceColor.swift; sourceTree = "<group>"; };
+		FCE43DAD20DCFA22004A2E89 /* DisplayDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayDetails.swift; sourceTree = "<group>"; };
 		FD6C559B5319E02322A50549 /* Pods-Vehicles.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vehicles.release.xcconfig"; path = "Pods/Target Support Files/Pods-Vehicles/Pods-Vehicles.release.xcconfig"; sourceTree = "<group>"; };
 		FFF8A4C690D0895A4D10A904 /* Pods-MojioSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MojioSDK.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MojioSDK/Pods-MojioSDK.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -629,6 +633,7 @@
 				BC59062A208E566200A098A3 /* NotificationToken.swift */,
 				BC590629208E566200A098A3 /* PetDetails.swift */,
 				BCFE5DC420A063B500B89104 /* Stats.swift */,
+				FCE43DAD20DCFA22004A2E89 /* DisplayDetails.swift */,
 			);
 			path = Pets;
 			sourceTree = "<group>";
@@ -661,6 +666,7 @@
 				8808C2341EB1483A00A41A8B /* PrimaryKey.swift */,
 				BC590657208E7ACC00A098A3 /* ResponseArray.swift */,
 				E06C95681D25CA2A006AECBB /* Result.swift */,
+				FCE43DA720DCDABC004A2E89 /* EntityAppearanceColor.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -1253,6 +1259,7 @@
 				BC60374B208FB20F00D855DE /* NotificationToken.swift in Sources */,
 				BC60374C208FB20F00D855DE /* PetDetails.swift in Sources */,
 				BC603742208FB20F00D855DE /* Asset.swift in Sources */,
+				FCE43DAE20DCFA22004A2E89 /* DisplayDetails.swift in Sources */,
 				BC590656208E783A00A098A3 /* WSPetsClient.swift in Sources */,
 				BC60374A208FB20F00D855DE /* PetsLocation.swift in Sources */,
 				BC603744208FB20F00D855DE /* Device.swift in Sources */,
@@ -1400,6 +1407,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BCFE58D5209AF70B00B89104 /* KeychainManager.swift in Sources */,
+				FCE43DA820DCDABC004A2E89 /* EntityAppearanceColor.swift in Sources */,
 				BCFE58D6209AF70B00B89104 /* PetsError.swift in Sources */,
 				BCFE58DA209AF70B00B89104 /* TimeIntervalExt.swift in Sources */,
 				BCFE58DB209AF70B00B89104 /* AuthToken.swift in Sources */,
