@@ -389,7 +389,7 @@ open class RestClient {
                 }
                 let data = try encoder.encode(self.codableObject)
                 urlRequest?.httpBody = data
-                urlRequest?.addValue(MimeType.Application.json.rawValue, forHTTPHeaderField: "Content-Type")
+                urlRequest?.setValue(MimeType.Application.json.rawValue, forHTTPHeaderField: "Content-Type")
             }
             catch {}
             
