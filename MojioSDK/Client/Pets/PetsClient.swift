@@ -23,6 +23,7 @@ public enum PetsEndpoint: String {
     case base = "/"
     case activities = "activities/"
     case assets = "assets/"
+    case asset = "asset/"
     case locations = "locations/"
     case stats = "stats/"
     case devices = "devices/"
@@ -65,7 +66,15 @@ open class PetsClient: RestClient {
         
         return self
     }
-    
+
+    open func asset(_ assetId: String? = nil) -> Self {
+        self.requestEntity = PetsEndpoint.asset.rawValue
+        self.requestEntityId = assetId
+        self.appendRequestUrlEntityId()
+        
+        return self
+    }
+
     open func locations() -> Self {
         self.requestEntity = PetsEndpoint.locations.rawValue
         self.requestUrl = self.requestUrl! + self.requestEntity
