@@ -65,7 +65,15 @@ open class PetsClient: RestClient {
         
         return self
     }
-    
+
+    open func asset(_ assetId: String? = nil) -> Self {
+        guard let assetId = assetId else { return self }
+        self.appendRequestUrlEntity("asset/\(assetId)", asFinal: true)
+        
+        return self
+    }
+   
+
     open func locations() -> Self {
         self.requestEntity = PetsEndpoint.locations.rawValue
         self.requestUrl = self.requestUrl! + self.requestEntity
