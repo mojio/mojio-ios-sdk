@@ -154,7 +154,7 @@ open class PetsClient: RestClient {
                 catch {
                     return try JSONDecoder().decode(Device.self, from: responseData)
                 }
-            case .assets:
+            case .assets, .asset:
                 do {
                     return try JSONDecoder().decode(ResponseArray<Asset>.self, from: responseData)
                 }
