@@ -29,4 +29,11 @@ public enum EntityAppearanceColor: String, Codable {
     case tan = "Tan"
     case brown = "Brown"
     case unplugged = "Unplugged"
+    case red = "Red"
+    case lightBlue = "Light blue"
+    case darkBlue = "Dark blue"
+    
+    public init(from decoder: Decoder) throws {
+        do { self = try decoder.singleValueContainer().decode(EntityAppearanceColor.self) } catch { self = .default }
+    }
 }
