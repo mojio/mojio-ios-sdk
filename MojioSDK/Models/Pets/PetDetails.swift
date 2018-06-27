@@ -90,7 +90,7 @@ public struct PetDetails: PetDetailsModel {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         do {
-            self.type = try container.decodeIfPresent(PetType.self, forKey: .type)
+            do { self.type = try container.decodeIfPresent(PetType.self, forKey: .type) } catch { self.type = .other }
             self.gender = try container.decodeIfPresent(Gender.self, forKey: .gender)
             self.breed = try container.decodeIfPresent(String.self, forKey: .breed)
             self.dateOfBirth = try container.decodeIfPresent(String.self, forKey: .dateOfBirth).flatMap { $0.dateFromIso8601 }
