@@ -20,7 +20,7 @@ public protocol MojioRegionPrefix {
 }
 
 open class MojioRegion: MojioRegionPrefix {
-
+    
     public enum RegionType: String {
         case production = ""
         case preProd = "preprod-"
@@ -42,7 +42,7 @@ open class MojioRegion: MojioRegionPrefix {
     open var description: String {
         return self.regionPrefix + self.regionType.rawValue
     }
-
+    
     open private(set) var regionType: RegionType = .production
     
     public init() {
@@ -86,7 +86,7 @@ open class ClientEnvironment {
         .identity: "%@identity.moj.io",
         .tracker: "%@tracker-api.moj.io",
         .image: "%@image.moj.io/"
-        ]
+    ]
     
     open func domainFromMojioEndpoint(_ endpoint: MojioEndpoint) -> String {
         if let endpointFormat = ClientEnvironment.endpointDomainFormats[endpoint] {
@@ -119,7 +119,7 @@ open class ClientEnvironment {
     fileprivate var identityEndpoint: String?
     fileprivate var trackerEndpoint: String?
     fileprivate var imageEndpoint: String?
-
+    
     public init() {
         self.updateEndPoints()
     }
@@ -129,7 +129,7 @@ open class ClientEnvironment {
     }
     
     /**
-        Letting an app developer ovveride the default environment. This should be used only for development purposes to test the functionality of the app in different continents
+     Letting an app developer ovveride the default environment. This should be used only for development purposes to test the functionality of the app in different continents
      */
     open func setRegion (_ region: MojioRegion) {
         self.region = region
@@ -175,7 +175,16 @@ open class ClientEnvironment {
             format: ClientEnvironment.EndPointFormat.identityEndpoint.rawValue,
             arguments: [self.region.description])
         
-        if self.region.regionType == MojioRegion.RegionType.staging {
+        // TEMPORARY: for TMUS FUT
+        if self.region.regionType == MojioRegion.RegionType.production {
+            self.trackerEndpoint = "https://tmobile-us-prd0fut-trackerapi.moj.io/v1/"
+            self.identityEndpoint = String(
+                format: ClientEnvironment.EndPointFormat.identityEndpoint.rawValue,
+                arguments: [self.region.description]
+            )
+            self.imageEndpoint = self.trackerEndpoint
+        }
+        else if self.region.regionType == MojioRegion.RegionType.staging {
             self.trackerEndpoint = "http://tracker-api-staging.moj.io/v1/"
             self.identityEndpoint = String(
                 format: ClientEnvironment.EndPointFormat.identityEndpoint.rawValue,
@@ -224,7 +233,7 @@ open class ClientEnvironment {
     open func getTrackerEndpoint () -> String {
         return self.trackerEndpoint!
     }
-
+    
     open func getImageEndpoint () -> String {
         return self.imageEndpoint!
     }
