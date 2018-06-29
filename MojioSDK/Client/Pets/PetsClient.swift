@@ -72,7 +72,15 @@ open class PetsClient: RestClient {
         
         return self
     }
-   
+    
+    open func registerNotifications(registerId: String, deviceToken: String) -> Self {
+        self.requestEntity = PetsEndpoint.notifications.rawValue
+        self.requestEntityId = registerId
+        self.appendRequestUrlEntity(PetsEndpoint.notifications.rawValue, asFinal: true)
+        
+        return self
+    }
+
 
     open func locations() -> Self {
         self.requestEntity = PetsEndpoint.locations.rawValue
