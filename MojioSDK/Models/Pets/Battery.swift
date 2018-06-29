@@ -34,7 +34,7 @@ public struct Battery: BatteryModel {
     
     public enum CodingKeys: String, CodingKey {
         case level = "Level"
-        case status = "Status"
+        case status = "BatteryStatus"
     }
 
     public init(from decoder: Decoder) throws {
