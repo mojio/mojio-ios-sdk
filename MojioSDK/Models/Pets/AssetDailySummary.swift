@@ -18,7 +18,7 @@ import Foundation
 public protocol AssetDailySummaryModel: Codable {
     var id: String { get }
     var assetId: String { get }
-    var lastModified: Date? { get }
+    var date: Date? { get }
     var steps: Int? { get }
     var activeMinutes: Int? { get }
     var encodedPolyline: String? { get }
@@ -27,7 +27,7 @@ public protocol AssetDailySummaryModel: Codable {
 public struct AssetDailySummary: AssetDailySummaryModel {
     public let id: String
     public let assetId: String
-    public let lastModified: Date?
+    public let date: Date?
     public let steps: Int?
     public let activeMinutes: Int?
     public let encodedPolyline: String?
@@ -35,7 +35,7 @@ public struct AssetDailySummary: AssetDailySummaryModel {
     public enum CodingKeys: String, CodingKey {
         case id = "Id"
         case assetId = "AssetId"
-        case lastModified = "LastModified"
+        case date = "Date"
         case steps = "Steps"
         case activeMinutes = "ActiveMinutes"
         case encodedPolyline = "EncodedPolyline"
@@ -56,7 +56,7 @@ public struct AssetDailySummary: AssetDailySummaryModel {
             }
             
             self.activeMinutes = try container.decodeIfPresent(Int.self, forKey: .activeMinutes)
-            self.lastModified = try container.decodeIfPresent(String.self, forKey: .lastModified).flatMap { $0.dateFromIso8601 }
+            self.date = try container.decodeIfPresent(String.self, forKey: .date).flatMap { $0.dateFromIso8601 }
             self.encodedPolyline = try container.decodeIfPresent(String.self, forKey: .encodedPolyline)
         }
         catch {
