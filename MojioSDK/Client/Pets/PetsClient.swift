@@ -213,7 +213,7 @@ open class PetsClient: RestClient {
                 }
             case .summaries:
                 do {
-                    return try JSONDecoder().decode(ResponseArray<AssetDailySummary>.self, from: responseData)
+                    return try JSONDecoder().decode([AssetDailySummary].self, from: responseData)
                 }
                 catch {
                     return try JSONDecoder().decode(AssetDailySummary.self, from: responseData)
