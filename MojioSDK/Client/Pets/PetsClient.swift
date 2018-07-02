@@ -44,7 +44,7 @@ open class PetsClient: RestClient {
         clientEnvironment: ClientEnvironment,
         sessionManager: SessionManager = SessionManager.default,
         keychainManager: KeychainManager? = nil) {
-
+        
         super.init(clientEnvironment: clientEnvironment, sessionManager: sessionManager, keychainManager: keychainManager)
         self.requestUrl = clientEnvironment.getTrackerEndpoint()
     }
@@ -65,7 +65,7 @@ open class PetsClient: RestClient {
         
         return self
     }
-
+    
     open func asset(_ assetId: String? = nil) -> Self {
         guard let assetId = assetId else { return self }
         self.appendRequestUrlEntity("asset/\(assetId)", asFinal: true)
@@ -77,11 +77,15 @@ open class PetsClient: RestClient {
         self.requestEntity = PetsEndpoint.notifications.rawValue
         self.requestEntityId = registerId
         self.appendRequestUrlEntity(PetsEndpoint.notifications.rawValue, asFinal: true)
+        self.appendRequestUrlEntity(registerId, asFinal: true)
+        
+        print(self.requestUrl ?? String.empty)
+        print(self.requestParams)
         
         return self
     }
-
-
+    
+    
     open func locations() -> Self {
         self.requestEntity = PetsEndpoint.locations.rawValue
         self.requestUrl = self.requestUrl! + self.requestEntity
