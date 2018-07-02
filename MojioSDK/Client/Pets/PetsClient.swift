@@ -32,6 +32,7 @@ public enum PetsEndpoint: String {
     case imageMetadata = "metadata/"
     case notifications = "notifications/"
     case message = "message/"
+    case summaries = "summaries/"
 }
 
 open class PetsClient: RestClient {
@@ -150,6 +151,13 @@ open class PetsClient: RestClient {
         return self
     }
     
+    open func summaries() -> Self {
+        self.requestEntity = PetsEndpoint.summaries.rawValue
+        self.requestUrl = self.requestUrl! + self.requestEntity
+        
+        return self
+    }
+    
     open override func parseData(_ responseData: Data) -> Codable? {
         do {
             switch PetsEndpoint(rawValue: self.requestEntity) ?? .base {
@@ -202,6 +210,13 @@ open class PetsClient: RestClient {
                 }
                 catch {
                     return try JSONDecoder().decode(Stats.self, from: responseData)
+                }
+            case .summaries:
+                do {
+                    return try JSONDecoder().decode(ResponseArray<AssetDailySummary>.self, from: responseData)
+                }
+                catch {
+                    return try JSONDecoder().decode(AssetDailySummary.self, from: responseData)
                 }
             default:
                 return nil

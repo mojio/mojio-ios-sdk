@@ -125,6 +125,7 @@
 		BC94271B1F01E17D00B7424A /* TripPolyline.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC94271A1F01E17D00B7424A /* TripPolyline.swift */; };
 		BCC2EFBB1CBED4E6004D2759 /* Vehicles.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCC2EFB11CBED4E6004D2759 /* Vehicles.framework */; };
 		BCC8A4A01D19EABF00E14E2B /* WSVehiclesClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC8A49F1D19EABF00E14E2B /* WSVehiclesClient.swift */; };
+		BCF23D0320EA0B9A009FE79C /* AssetDailySummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF23D0220EA0B9A009FE79C /* AssetDailySummary.swift */; };
 		BCF2DE4A1D454B8D00EDD376 /* Geofence.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF2DE491D454B8D00EDD376 /* Geofence.swift */; };
 		BCF6A0AB20A92191001D0600 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC590626208E566200A098A3 /* Activity.swift */; };
 		BCFCEB041F019FF20096C9B4 /* HarshEventState.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCFCEB031F019FF20096C9B4 /* HarshEventState.swift */; };
@@ -357,6 +358,7 @@
 		BCC2EFC11CBED4E6004D2759 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BCC8A49C1D19EAAD00E14E2B /* MojioError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MojioError.swift; sourceTree = "<group>"; };
 		BCC8A49F1D19EABF00E14E2B /* WSVehiclesClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WSVehiclesClient.swift; sourceTree = "<group>"; };
+		BCF23D0220EA0B9A009FE79C /* AssetDailySummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetDailySummary.swift; sourceTree = "<group>"; };
 		BCF2DE491D454B8D00EDD376 /* Geofence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Geofence.swift; sourceTree = "<group>"; };
 		BCFCEB031F019FF20096C9B4 /* HarshEventState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HarshEventState.swift; sourceTree = "<group>"; };
 		BCFCEB051F01A2C70096C9B4 /* IdleEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdleEvent.swift; sourceTree = "<group>"; };
@@ -634,6 +636,7 @@
 				BC590629208E566200A098A3 /* PetDetails.swift */,
 				BCFE5DC420A063B500B89104 /* Stats.swift */,
 				FCE43DAD20DCFA22004A2E89 /* DisplayDetails.swift */,
+				BCF23D0220EA0B9A009FE79C /* AssetDailySummary.swift */,
 			);
 			path = Pets;
 			sourceTree = "<group>";
@@ -1258,6 +1261,7 @@
 				BCFE5913209AF92500B89104 /* StringExt.swift in Sources */,
 				BC60374B208FB20F00D855DE /* NotificationToken.swift in Sources */,
 				BC60374C208FB20F00D855DE /* PetDetails.swift in Sources */,
+				BCF23D0320EA0B9A009FE79C /* AssetDailySummary.swift in Sources */,
 				BC603742208FB20F00D855DE /* Asset.swift in Sources */,
 				FCE43DAE20DCFA22004A2E89 /* DisplayDetails.swift in Sources */,
 				BC590656208E783A00A098A3 /* WSPetsClient.swift in Sources */,
