@@ -33,6 +33,7 @@ public enum PetsEndpoint: String {
     case notifications = "notifications/"
     case message = "message/"
     case summaries = "summaries/"
+    case settings = "settings"
 }
 
 open class PetsClient: RestClient {
@@ -45,17 +46,14 @@ open class PetsClient: RestClient {
         clientEnvironment: ClientEnvironment,
         sessionManager: SessionManager = SessionManager.default,
         keychainManager: KeychainManager? = nil) {
-
+        
         super.init(clientEnvironment: clientEnvironment, sessionManager: sessionManager, keychainManager: keychainManager)
         self.requestUrl = clientEnvironment.getTrackerEndpoint()
     }
     
-    open func activities(_ assetId: String) -> Self {
+    open func activities() -> Self {
         self.requestEntity = PetsEndpoint.activities.rawValue
-        self.requestEntityId = assetId
         self.appendRequestUrlEntity(PetsEndpoint.activities.rawValue, asFinal: true)
-        self.appendRequestUrlEntity(PetsEndpoint.assets.rawValue, asFinal: true)
-        self.requestUrl = self.requestUrl! + assetId
         return self
     }
     
@@ -66,7 +64,7 @@ open class PetsClient: RestClient {
         
         return self
     }
-
+    
     open func asset(_ assetId: String? = nil) -> Self {
         guard let assetId = assetId else { return self }
         self.appendRequestUrlEntity("asset/\(assetId)", asFinal: true)
@@ -78,11 +76,15 @@ open class PetsClient: RestClient {
         self.requestEntity = PetsEndpoint.notifications.rawValue
         self.requestEntityId = registerId
         self.appendRequestUrlEntity(PetsEndpoint.notifications.rawValue, asFinal: true)
+        self.appendRequestUrlEntity(registerId, asFinal: true)
+        
+        print(self.requestUrl ?? String.empty)
+        print(self.requestParams)
         
         return self
     }
-
-
+    
+    
     open func locations() -> Self {
         self.requestEntity = PetsEndpoint.locations.rawValue
         self.requestUrl = self.requestUrl! + self.requestEntity
@@ -154,7 +156,12 @@ open class PetsClient: RestClient {
     open func summaries() -> Self {
         self.requestEntity = PetsEndpoint.summaries.rawValue
         self.requestUrl = self.requestUrl! + self.requestEntity
-        
+        return self
+    }       
+
+    open func settings() -> Self {
+        self.requestEntity = PetsEndpoint.settings.rawValue
+        self.appendRequestUrlEntity(PetsEndpoint.settings.rawValue, asFinal: true)
         return self
     }
     
@@ -217,6 +224,13 @@ open class PetsClient: RestClient {
                 }
                 catch {
                     return try JSONDecoder().decode(AssetDailySummary.self, from: responseData)
+                }
+            case .settings:
+                do {
+                    return try JSONDecoder().decode(ResponseArray<ActivitySettings>.self, from: responseData)
+                }
+                catch {
+                    return try JSONDecoder().decode(ActivitySettings.self, from: responseData)
                 }
             default:
                 return nil
