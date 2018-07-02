@@ -32,6 +32,7 @@ public enum PetsEndpoint: String {
     case imageMetadata = "metadata/"
     case notifications = "notifications/"
     case message = "message/"
+    case settings = "settings"
 }
 
 open class PetsClient: RestClient {
@@ -49,12 +50,9 @@ open class PetsClient: RestClient {
         self.requestUrl = clientEnvironment.getTrackerEndpoint()
     }
     
-    open func activities(_ assetId: String) -> Self {
+    open func activities() -> Self {
         self.requestEntity = PetsEndpoint.activities.rawValue
-        self.requestEntityId = assetId
         self.appendRequestUrlEntity(PetsEndpoint.activities.rawValue, asFinal: true)
-        self.appendRequestUrlEntity(PetsEndpoint.assets.rawValue, asFinal: true)
-        self.requestUrl = self.requestUrl! + assetId
         return self
     }
     
@@ -150,6 +148,12 @@ open class PetsClient: RestClient {
         return self
     }
     
+    open func settings() -> Self {
+        self.requestEntity = PetsEndpoint.settings.rawValue
+        self.appendRequestUrlEntity(PetsEndpoint.settings.rawValue, asFinal: true)
+        return self
+    }
+    
     open override func parseData(_ responseData: Data) -> Codable? {
         do {
             switch PetsEndpoint(rawValue: self.requestEntity) ?? .base {
@@ -202,6 +206,13 @@ open class PetsClient: RestClient {
                 }
                 catch {
                     return try JSONDecoder().decode(Stats.self, from: responseData)
+                }
+            case .settings:
+                do {
+                    return try JSONDecoder().decode(ResponseArray<ActivitySettings>.self, from: responseData)
+                }
+                catch {
+                    return try JSONDecoder().decode(ActivitySettings.self, from: responseData)
                 }
             default:
                 return nil
