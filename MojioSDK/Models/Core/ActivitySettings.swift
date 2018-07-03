@@ -16,18 +16,18 @@
 import Foundation
 
 public protocol ActivitySettingsContainerModel: Codable {
-    associatedtype S = ActivitySettingsModel
+    associatedtype S = ActivitySettingsNotificationModel
     
     var lowBattery: S? { get }
 }
 
-public protocol ActivitySettingsModel: Codable {
+public protocol ActivitySettingsNotificationModel: Codable {
     var enabled: Bool { get }
     var sound: String? { get }
 }
 
 public struct ActivitySettingsContainer: ActivitySettingsContainerModel {
-    public typealias S = ActivitySettings
+    public typealias S = ActivitySettingsNotification
     
     public var lowBattery: S?
     
@@ -36,7 +36,7 @@ public struct ActivitySettingsContainer: ActivitySettingsContainerModel {
     }
 }
 
-public struct ActivitySettings: ActivitySettingsModel {
+public struct ActivitySettingsNotification: ActivitySettingsNotificationModel {
     public var enabled: Bool
     public var sound: String?
     
