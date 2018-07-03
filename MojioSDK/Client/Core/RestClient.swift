@@ -17,6 +17,7 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import KeychainSwift
+import SwiftDate
 
 open class NextDone {}
 
@@ -489,7 +490,7 @@ open class RestClient {
         // Purpose?
         var headers: [String:String] = [:]
         
-        headers["LocalDate"] = Date().iso8601()
+        headers["LocalDate"] = Date().toISO(.withInternetDateTime)
         
         if let respDateStr = (response.response?.allHeaderFields["Date"] as? String), let _ = respDateStr.toDate {
             headers["ResponseDate"] = respDateStr

@@ -120,13 +120,13 @@
 		BC879B771CBEFFDD00F9177B /* Speed.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B5A1CBEFFDD00F9177B /* Speed.swift */; };
 		BC879B791CBEFFDD00F9177B /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B5C1CBEFFDD00F9177B /* Trip.swift */; };
 		BC879B7B1CBEFFDD00F9177B /* Vehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B5E1CBEFFDD00F9177B /* Vehicle.swift */; };
+		BC8DFC0720EC450D006B99E6 /* ActivitySettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3682365F20EAA54E00E21086 /* ActivitySettings.swift */; };
 		BC8ECA501D226690009C6164 /* WifiRadio.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC8ECA4F1D226690009C6164 /* WifiRadio.swift */; };
 		BC92329B1E7FC52900BD4038 /* CompatibilityDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC92329A1E7FC52900BD4038 /* CompatibilityDetails.swift */; };
 		BC94271B1F01E17D00B7424A /* TripPolyline.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC94271A1F01E17D00B7424A /* TripPolyline.swift */; };
 		BCC2EFBB1CBED4E6004D2759 /* Vehicles.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCC2EFB11CBED4E6004D2759 /* Vehicles.framework */; };
 		BCC8A4A01D19EABF00E14E2B /* WSVehiclesClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC8A49F1D19EABF00E14E2B /* WSVehiclesClient.swift */; };
 		BCF23D0320EA0B9A009FE79C /* AssetDailySummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF23D0220EA0B9A009FE79C /* AssetDailySummary.swift */; };
-		BCF23D0420EAD319009FE79C /* ActivitySettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3682365F20EAA54E00E21086 /* ActivitySettings.swift */; };
 		BCF2DE4A1D454B8D00EDD376 /* Geofence.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF2DE491D454B8D00EDD376 /* Geofence.swift */; };
 		BCF6A0AB20A92191001D0600 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC590626208E566200A098A3 /* Activity.swift */; };
 		BCFCEB041F019FF20096C9B4 /* HarshEventState.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCFCEB031F019FF20096C9B4 /* HarshEventState.swift */; };
@@ -1273,7 +1273,7 @@
 				BC603743208FB20F00D855DE /* Battery.swift in Sources */,
 				BC603745208FB20F00D855DE /* DeviceType.swift in Sources */,
 				BC603747208FB20F00D855DE /* Geofence.swift in Sources */,
-				BCF23D0420EAD319009FE79C /* ActivitySettings.swift in Sources */,
+				BC8DFC0720EC450D006B99E6 /* ActivitySettings.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
