@@ -190,6 +190,44 @@ open class RestClient {
         self.requestParams["before"] = self.sinceBeforeFormatter.string(from: beforeDate)
         return self
     }
+
+    open func top(top: String) -> Self {
+        self.requestParams["top"] = top
+        return self
+    }
+    
+    open func skip(skip: String) -> Self {
+        self.requestParams["skip"] = skip
+        return self
+    }
+    
+    open func filter(filter: String) -> Self {
+        self.requestParams["filter"] = filter
+        return self
+    }
+    
+    open func select(select: String) -> Self {
+        self.requestParams["select"] = select
+        return self
+    }
+    
+    open func orderby(orderby: String) -> Self {
+        self.requestParams["orderby"] = orderby
+        return self
+    }
+    
+    open func count(count: String) -> Self {
+        self.requestParams["count"] = count
+        return self
+    }
+    
+    open func fields(fields: [String]) -> Self {
+        if fields.count > 0 {
+            self.requestParams["fields"] = fields.joined(separator: ",")
+        }
+        
+        return self
+    }
     
     open func continueNext() -> Self {
         self.doNext = true

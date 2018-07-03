@@ -32,6 +32,7 @@ public enum PetsEndpoint: String {
     case imageMetadata = "metadata/"
     case notifications = "notifications/"
     case message = "message/"
+    case summaries = "summaries/"
     case settings = "settings"
 }
 
@@ -152,6 +153,12 @@ open class PetsClient: RestClient {
         return self
     }
     
+    open func summaries() -> Self {
+        self.requestEntity = PetsEndpoint.summaries.rawValue
+        self.requestUrl = self.requestUrl! + self.requestEntity
+        return self
+    }       
+
     open func settings() -> Self {
         self.requestEntity = PetsEndpoint.settings.rawValue
         self.appendRequestUrlEntity(PetsEndpoint.settings.rawValue, asFinal: true)
@@ -210,6 +217,13 @@ open class PetsClient: RestClient {
                 }
                 catch {
                     return try JSONDecoder().decode(Stats.self, from: responseData)
+                }
+            case .summaries:
+                do {
+                    return try JSONDecoder().decode([AssetDailySummary].self, from: responseData)
+                }
+                catch {
+                    return try JSONDecoder().decode(AssetDailySummary.self, from: responseData)
                 }
             case .settings:
                 do {
