@@ -227,10 +227,10 @@ open class PetsClient: RestClient {
                 }
             case .settings:
                 do {
-                    return try JSONDecoder().decode(ResponseArray<ActivitySettings>.self, from: responseData)
+                    return try JSONDecoder().decode(ResponseArray<ActivitySettingsContainer>.self, from: responseData)
                 }
                 catch {
-                    return try JSONDecoder().decode(ActivitySettings.self, from: responseData)
+                    return try JSONDecoder().decode(ActivitySettingsContainer.self, from: responseData)
                 }
             default:
                 return nil
