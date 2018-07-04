@@ -628,6 +628,7 @@
 		BC59061E208E55CF00A098A3 /* Pets */ = {
 			isa = PBXGroup;
 			children = (
+				3682365F20EAA54E00E21086 /* ActivitySettings.swift */,
 				BC59061F208E566100A098A3 /* Asset.swift */,
 				BC59062F208E566200A098A3 /* Battery.swift */,
 				BC590624208E566200A098A3 /* Device.swift */,
@@ -659,7 +660,6 @@
 		BC59065C208E7B1200A098A3 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				3682365F20EAA54E00E21086 /* ActivitySettings.swift */,
 				BC590626208E566200A098A3 /* Activity.swift */,
 				BC59062C208E566200A098A3 /* AuthToken.swift */,
 				BC879B451CBEFFDD00F9177B /* Address.swift */,
