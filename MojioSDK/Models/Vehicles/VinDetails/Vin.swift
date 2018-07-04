@@ -91,7 +91,7 @@ public struct Vin: VinModel {
             let container = try decoder.container(keyedBy: CodingKeys.self)
             
             self.vin = try container.decodeIfPresent(String.self, forKey: .vin) ?? String.empty
-            self.timestamp = try container.decodeIfPresent(String.self, forKey: .timestamp).flatMap { $0.dateFromIso8601 }
+            self.timestamp = try container.decodeIfPresent(String.self, forKey: .timestamp).flatMap { $0.dateFromISO }
             
             self.market = try container.decodeIfPresent(String.self, forKey: .market)
             self.year = try container.decodeIfPresent(Int.self, forKey: .year) ?? 0

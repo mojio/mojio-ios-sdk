@@ -79,8 +79,8 @@ public struct User: UserModel {
             self.tags = try container.decodeIfPresent([String].self, forKey: .tags)
             self.defaultLanguage = try container.decodeIfPresent(String.self, forKey: .defaultLanguage)
             
-            self.createdOn = try container.decodeIfPresent(String.self, forKey: .createdOn).flatMap { $0.dateFromIso8601 }
-            self.lastModified = try container.decodeIfPresent(String.self, forKey: .lastModified).flatMap { $0.dateFromIso8601 }
+            self.createdOn = try container.decodeIfPresent(String.self, forKey: .createdOn).flatMap { $0.dateFromISO }
+            self.lastModified = try container.decodeIfPresent(String.self, forKey: .lastModified).flatMap { $0.dateFromISO }
         }
         catch let error {
             debugPrint(error)

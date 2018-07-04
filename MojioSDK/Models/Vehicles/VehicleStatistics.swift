@@ -59,7 +59,7 @@ public struct VehicleStatistics: VehicleStatsModel {
             
             self.totalRange = try container.decodeIfPresent(Distance.self, forKey: .totalRange)
             self.currentRange = try container.decodeIfPresent(Distance.self, forKey: .currentRange)
-            self.lastFillUpDate = try container.decodeIfPresent(String.self, forKey: .lastFillUpDate).flatMap { $0.dateFromIso8601 }
+            self.lastFillUpDate = try container.decodeIfPresent(String.self, forKey: .lastFillUpDate).flatMap { $0.dateFromISO }
         }
         catch {
             debugPrint(error)

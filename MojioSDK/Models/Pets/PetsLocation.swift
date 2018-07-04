@@ -63,7 +63,7 @@ public struct PetsLocation: PetsLocationModel {
             self.latitude = try container.decodeIfPresent(Double.self, forKey: .latitude)
             self.longitude = try container.decodeIfPresent(Double.self, forKey: .longitude)
             self.altitude = try container.decodeIfPresent(Double.self, forKey: .altitude)
-            self.timestamp = try container.decodeIfPresent(String.self, forKey: .timestamp).flatMap { $0.dateFromIso8601 }
+            self.timestamp = try container.decodeIfPresent(String.self, forKey: .timestamp).flatMap { $0.dateFromISO }
             self.heading = try container.decodeIfPresent(Double.self, forKey: .heading)
             self.hError = try container.decodeIfPresent(Double.self, forKey: .hError)
             self.vError = try container.decodeIfPresent(Double.self, forKey: .vError)

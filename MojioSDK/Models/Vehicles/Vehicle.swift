@@ -197,7 +197,7 @@ public struct Vehicle: VehicleModel {
             self.currentTrip = try container.decodeIfPresent(String.self, forKey: .currentTrip)
             self.milStatus = try container.decodeIfPresent(Bool.self, forKey: .milStatus) ?? false
             self.diagnosticCodes = try container.decodeIfPresent([DiagnosticCode].self, forKey: .diagnosticCodes) ?? []
-            self.lastContactTime = try container.decodeIfPresent(String.self, forKey: .lastContactTime).flatMap { $0.dateFromIso8601 }
+            self.lastContactTime = try container.decodeIfPresent(String.self, forKey: .lastContactTime).flatMap { $0.dateFromISO }
             self.accelerometer = try container.decodeIfPresent(Accelerometer.self, forKey: .accelerometer)
             self.acceleration = try container.decodeIfPresent(Acceleration.self, forKey: .acceleration)
             self.deceleration = try container.decodeIfPresent(Acceleration.self, forKey: .deceleration)
@@ -211,7 +211,7 @@ public struct Vehicle: VehicleModel {
             self.fuelLevel = try container.decodeIfPresent(FuelLevel.self, forKey: .fuelLevel)
             self.fuelVolume = try container.decodeIfPresent(FuelVolume.self, forKey: .fuelVolume)
             self.fuelType = try container.decodeIfPresent(FuelType.self, forKey: .fuelType)
-            self.gatewayTime = try container.decodeIfPresent(String.self, forKey: .gatewayTime).flatMap { $0.dateFromIso8601 }
+            self.gatewayTime = try container.decodeIfPresent(String.self, forKey: .gatewayTime).flatMap { $0.dateFromISO }
             self.harshEventState = try container.decodeIfPresent(HarshEventState.self, forKey: .harshEventState)
             self.idleState = try container.decodeIfPresent(IdleState.self, forKey: .idleState)
             self.ignitionState = try container.decodeIfPresent(BooleanState.self, forKey: .ignitionState)
@@ -225,8 +225,8 @@ public struct Vehicle: VehicleModel {
             self.ownerGroups = try container.decodeIfPresent([String].self, forKey: .ownerGroups) ?? []
             self.tags = try container.decodeIfPresent([String].self, forKey: .tags) ?? []
             self.deleted = try container.decodeIfPresent(Bool.self, forKey: .deleted) ?? false
-            self.createdOn = try container.decodeIfPresent(String.self, forKey: .createdOn).flatMap { $0.dateFromIso8601 }
-            self.lastModified = try container.decodeIfPresent(String.self, forKey: .lastModified).flatMap { $0.dateFromIso8601 }
+            self.createdOn = try container.decodeIfPresent(String.self, forKey: .createdOn).flatMap { $0.dateFromISO }
+            self.lastModified = try container.decodeIfPresent(String.self, forKey: .lastModified).flatMap { $0.dateFromISO }
         }
         catch {
             debugPrint(error)

@@ -96,19 +96,19 @@ public struct Recall: RecallModel {
             self.mfrCampaignNumber = try container.decodeIfPresent(String.self, forKey: .mfrCampaignNumber)
             self.componentDescription = try container.decodeIfPresent(String.self, forKey: .componentDescription)
             self.reportManufacturer = try container.decodeIfPresent(String.self, forKey: .reportManufacturer)
-            self.manufacturingStartDate = try container.decodeIfPresent(String.self, forKey: .manufacturingStartDate).flatMap { $0.dateFromIso8601 }
-            self.manufacturingEndDate = try container.decodeIfPresent(String.self, forKey: .manufacturingEndDate).flatMap { $0.dateFromIso8601 }
+            self.manufacturingStartDate = try container.decodeIfPresent(String.self, forKey: .manufacturingStartDate).flatMap { $0.dateFromISO }
+            self.manufacturingEndDate = try container.decodeIfPresent(String.self, forKey: .manufacturingEndDate).flatMap { $0.dateFromISO }
             self.recallTypeCode = try container.decodeIfPresent(String.self, forKey: .recallTypeCode)
             
             self.potentialUnitsAffected = try container.decodeIfPresent(String.self, forKey: .potentialUnitsAffected)
-            self.ownerNotificationDate = try container.decodeIfPresent(String.self, forKey: .ownerNotificationDate).flatMap { $0.dateFromIso8601 }
+            self.ownerNotificationDate = try container.decodeIfPresent(String.self, forKey: .ownerNotificationDate).flatMap { $0.dateFromISO }
             self.recallInitiator = try container.decodeIfPresent(String.self, forKey: .recallInitiator)
             
             self.componentDescription = try container.decodeIfPresent(String.self, forKey: .componentDescription)
             self.reportManufacturer = try container.decodeIfPresent(String.self, forKey: .reportManufacturer)
             self.productManufacturer = try container.decodeIfPresent(String.self, forKey: .productManufacturer)
-            self.reportReceivedDate = try container.decodeIfPresent(String.self, forKey: .reportReceivedDate).flatMap { $0.dateFromIso8601 }
-            self.recordCreationDate = try container.decodeIfPresent(String.self, forKey: .recordCreationDate).flatMap { $0.dateFromIso8601 }
+            self.reportReceivedDate = try container.decodeIfPresent(String.self, forKey: .reportReceivedDate).flatMap { $0.dateFromISO }
+            self.recordCreationDate = try container.decodeIfPresent(String.self, forKey: .recordCreationDate).flatMap { $0.dateFromISO }
             
             self.regulationPartNumber = try container.decodeIfPresent(String.self, forKey: .regulationPartNumber)
             self.fmvvsNumber = try container.decodeIfPresent(String.self, forKey: .fmvvsNumber)

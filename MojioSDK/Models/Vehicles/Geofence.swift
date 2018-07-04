@@ -96,8 +96,8 @@ public struct Geofence: GeofenceModel {
             self.vehicleIds = try container.decodeIfPresent([String].self, forKey: .vehicleIds) ?? []
             self.tags = try container.decodeIfPresent([String].self, forKey: .tags) ?? []
             self.deleted = try container.decodeIfPresent(Bool.self, forKey: .deleted)
-            self.createdOn = try container.decodeIfPresent(String.self, forKey: .createdOn).flatMap { $0.dateFromIso8601 }
-            self.lastModified = try container.decodeIfPresent(String.self, forKey: .lastModified).flatMap { $0.dateFromIso8601 }
+            self.createdOn = try container.decodeIfPresent(String.self, forKey: .createdOn).flatMap { $0.dateFromISO }
+            self.lastModified = try container.decodeIfPresent(String.self, forKey: .lastModified).flatMap { $0.dateFromISO }
         }
         catch {
             debugPrint(error)

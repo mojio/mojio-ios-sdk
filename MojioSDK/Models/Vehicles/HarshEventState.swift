@@ -65,7 +65,7 @@ public struct HarshEventState: HarshEventStateModel {
         do {
             let container = try decoder.container(keyedBy: CodingKeys.self)
             
-            self.timestamp = try container.decodeIfPresent(String.self, forKey: .timestamp).flatMap { $0.dateFromIso8601 }
+            self.timestamp = try container.decodeIfPresent(String.self, forKey: .timestamp).flatMap { $0.dateFromISO }
             self.value = try container.decodeIfPresent(Bool.self, forKey: .value) ?? false
             self.eventType = try container.decodeIfPresent(HarshEventType.self, forKey: .eventType)
             self.turnType = try container.decodeIfPresent(HarshEventTurnType.self, forKey: .turnType)

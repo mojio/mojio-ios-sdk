@@ -149,8 +149,8 @@ public struct Trip: TripModel {
             self.ownerId = try container.decodeIfPresent(String.self, forKey: .ownerId)
             self.completed = try container.decodeIfPresent(Bool.self, forKey: .completed) ?? false
             self.distance = try container.decodeIfPresent(Distance.self, forKey: .distance)
-            self.startTimestamp = try container.decodeIfPresent(String.self, forKey: .startTimestamp).flatMap { $0.dateFromIso8601 }
-            self.endTimestamp = try container.decodeIfPresent(String.self, forKey: .endTimestamp).flatMap { $0.dateFromIso8601 }
+            self.startTimestamp = try container.decodeIfPresent(String.self, forKey: .startTimestamp).flatMap { $0.dateFromISO }
+            self.endTimestamp = try container.decodeIfPresent(String.self, forKey: .endTimestamp).flatMap { $0.dateFromISO }
             self.startOdometer = try container.decodeIfPresent(Odometer.self, forKey: .startOdometer)
             self.endOdometer = try container.decodeIfPresent(Odometer.self, forKey: .endOdometer)
             self.startLocation = try container.decodeIfPresent(Location.self, forKey: .startLocation)
@@ -169,8 +169,8 @@ public struct Trip: TripModel {
             self.harshAccelCount = try container.decodeIfPresent(Int.self, forKey: .harshAccelCount)
             self.harshDecelCount = try container.decodeIfPresent(Int.self, forKey: .harshDecelCount)
             self.tags = try container.decodeIfPresent([String].self, forKey: .tags) ?? []
-            self.createdOn = try container.decodeIfPresent(String.self, forKey: .createdOn).flatMap { $0.dateFromIso8601 }
-            self.lastModified = try container.decodeIfPresent(String.self, forKey: .lastModified).flatMap { $0.dateFromIso8601 }
+            self.createdOn = try container.decodeIfPresent(String.self, forKey: .createdOn).flatMap { $0.dateFromISO }
+            self.lastModified = try container.decodeIfPresent(String.self, forKey: .lastModified).flatMap { $0.dateFromISO }
             
             if
                 let duration = try container.decodeIfPresent(String.self, forKey: .duration),

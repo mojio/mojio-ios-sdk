@@ -42,7 +42,7 @@ internal extension String {
         return nil
     }
 
-    internal var dateFromIso8601: Date? {
+    internal var dateFromISO: Date? {
         if let date : Date = self.toDate(ISOFormatter.Options.withInternetDateTime.dateFormat, region: Region.ISO)?.date {
             return date
         }

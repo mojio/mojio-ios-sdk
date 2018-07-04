@@ -50,7 +50,7 @@ public struct Stats: StatsModel {
             }
             
             self.activeMinutes = try container.decodeIfPresent(Int.self, forKey: .activeMinutes)
-            self.date = try container.decodeIfPresent(String.self, forKey: .date).flatMap { $0.dateFromIso8601 }
+            self.date = try container.decodeIfPresent(String.self, forKey: .date).flatMap { $0.dateFromISO }
         }
         catch {
             debugPrint(error)

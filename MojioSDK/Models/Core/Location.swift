@@ -122,7 +122,7 @@ public struct Location: LocationModel {
             let container = try decoder.container(keyedBy: CodingKeys.self)
             
             self.locationAddress = try container.decodeIfPresent(Address.self, forKey: .locationAddress)
-            self.timestamp = try container.decodeIfPresent(String.self, forKey: .timestamp).flatMap { $0.dateFromIso8601 }
+            self.timestamp = try container.decodeIfPresent(String.self, forKey: .timestamp).flatMap { $0.dateFromISO }
             
             self.lat = try container.decodeIfPresent(Double.self, forKey: .lat) ?? 0
             self.lng = try container.decodeIfPresent(Double.self, forKey: .lng) ?? 0

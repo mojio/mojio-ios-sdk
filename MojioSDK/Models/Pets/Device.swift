@@ -117,10 +117,10 @@ public struct Device: DeviceModel {
             self.color = try container.decodeIfPresent(String.self, forKey: .color)
             self.tenantId = try container.decodeIfPresent(String.self, forKey: .tenantId)
             self.ownerId = try container.decodeIfPresent(String.self, forKey: .ownerId)
-            self.createdOn = try container.decodeIfPresent(String.self, forKey: .createdOn).flatMap { $0.dateFromIso8601 }
+            self.createdOn = try container.decodeIfPresent(String.self, forKey: .createdOn).flatMap { $0.dateFromISO }
             self.deleted = try container.decodeIfPresent(Bool.self, forKey: .deleted)
-            self.lastModified = try container.decodeIfPresent(String.self, forKey: .lastModified).flatMap { $0.dateFromIso8601 }
-            self.gatewayTime = try container.decodeIfPresent(String.self, forKey: .gatewayTime).flatMap { $0.dateFromIso8601 }
+            self.lastModified = try container.decodeIfPresent(String.self, forKey: .lastModified).flatMap { $0.dateFromISO }
+            self.gatewayTime = try container.decodeIfPresent(String.self, forKey: .gatewayTime).flatMap { $0.dateFromISO }
         }
         catch {
             debugPrint(error)

@@ -35,7 +35,7 @@ public struct BooleanState: BooleanStateModel {
         do {
             let container = try decoder.container(keyedBy: CodingKeys.self)
             
-            self.timestamp = try container.decodeIfPresent(String.self, forKey: .timestamp).flatMap { $0.dateFromIso8601 }
+            self.timestamp = try container.decodeIfPresent(String.self, forKey: .timestamp).flatMap { $0.dateFromISO }
             self.value = try container.decode(Bool.self, forKey: .value)
         }
         catch {

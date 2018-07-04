@@ -52,7 +52,7 @@ public extension DeviceMeasurement {
         let baseValue = try container.decodeIfPresent(Double.self, forKey: .baseValue) ?? 0.0
         
         let value = try container.decodeIfPresent(Double.self, forKey: .value) ?? 0.0
-        let timestamp = try container.decodeIfPresent(String.self, forKey: .timestamp).flatMap { $0.dateFromIso8601 }
+        let timestamp = try container.decodeIfPresent(String.self, forKey: .timestamp).flatMap { $0.dateFromISO }
         
         let baseUnit = try container.decodeIfPresent(U.self, forKey: .baseUnit)
         let unit = try container.decodeIfPresent(U.self, forKey: .unit)

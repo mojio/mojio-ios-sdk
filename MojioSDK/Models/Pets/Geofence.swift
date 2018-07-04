@@ -222,8 +222,8 @@ public struct Geofence: GeofenceModel {
             self.assetIds = try container.decodeIfPresent([String].self, forKey: .assetIds)
             self.ownerId = try container.decodeIfPresent(String.self, forKey: .ownerId)
             self.deleted = try container.decodeIfPresent(Bool.self, forKey: .deleted)
-            self.lastModified = try container.decodeIfPresent(String.self, forKey: .lastModified).flatMap { $0.dateFromIso8601 }
-            self.createdOn = try container.decodeIfPresent(String.self, forKey: .createdOn).flatMap { $0.dateFromIso8601 }
+            self.lastModified = try container.decodeIfPresent(String.self, forKey: .lastModified).flatMap { $0.dateFromISO }
+            self.createdOn = try container.decodeIfPresent(String.self, forKey: .createdOn).flatMap { $0.dateFromISO }
         }
         catch {
             debugPrint(error)

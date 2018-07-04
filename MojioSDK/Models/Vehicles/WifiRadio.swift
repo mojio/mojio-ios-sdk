@@ -72,7 +72,7 @@ public struct WifiRadio: WifiRadioModel {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         do {
-            self.timestamp = try container.decodeIfPresent(String.self, forKey: .timestamp).flatMap { $0.dateFromIso8601 }
+            self.timestamp = try container.decodeIfPresent(String.self, forKey: .timestamp).flatMap { $0.dateFromISO }
             self.ssid = try container.decodeIfPresent(String.self, forKey: .ssid)
             self.password = try container.decodeIfPresent(String.self, forKey: .password)
             self.allowRoaming = try container.decodeIfPresent(Bool.self, forKey: .allowRoaming)

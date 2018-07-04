@@ -52,9 +52,9 @@ public struct ServiceBulletin: ServiceBulletinModel {
             self.itemNumber = try container.decodeIfPresent(String.self, forKey: .itemNumber)
             self.bulletinNumber = try container.decodeIfPresent(String.self, forKey: .bulletinNumber)
             self.replacementBulletinNumber = try container.decodeIfPresent(String.self, forKey: .replacementBulletinNumber)
-            self.dateAdded = try container.decodeIfPresent(String.self, forKey: .dateAdded).flatMap { $0.dateFromIso8601 }
+            self.dateAdded = try container.decodeIfPresent(String.self, forKey: .dateAdded).flatMap { $0.dateFromISO }
             self.component = try container.decodeIfPresent(String.self, forKey: .component)
-            self.bulletinDate = try container.decodeIfPresent(String.self, forKey: .bulletinDate).flatMap { $0.dateFromIso8601 }
+            self.bulletinDate = try container.decodeIfPresent(String.self, forKey: .bulletinDate).flatMap { $0.dateFromISO }
             self.summary = try container.decodeIfPresent(String.self, forKey: .summary)
         }
         catch {

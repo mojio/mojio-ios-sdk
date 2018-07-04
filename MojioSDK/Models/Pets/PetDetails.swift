@@ -93,11 +93,11 @@ public struct PetDetails: PetDetailsModel {
             do { self.type = try container.decodeIfPresent(PetType.self, forKey: .type) } catch { self.type = .other }
             self.gender = try container.decodeIfPresent(Gender.self, forKey: .gender)
             self.breed = try container.decodeIfPresent(String.self, forKey: .breed)
-            self.dateOfBirth = try container.decodeIfPresent(String.self, forKey: .dateOfBirth).flatMap { $0.dateFromIso8601 }
+            self.dateOfBirth = try container.decodeIfPresent(String.self, forKey: .dateOfBirth).flatMap { $0.dateFromISO }
             self.registrationId = try container.decodeIfPresent(String.self, forKey: .registrationId)
             self.vetName = try container.decodeIfPresent(String.self, forKey: .vetName)
             self.vetPhoneNumber = try container.decodeIfPresent(String.self, forKey: .vetPhoneNumber)
-            self.lastVetVisit = try container.decodeIfPresent(String.self, forKey: .lastVetVisit).flatMap { $0.dateFromIso8601 }
+            self.lastVetVisit = try container.decodeIfPresent(String.self, forKey: .lastVetVisit).flatMap { $0.dateFromISO }
             self.weight = try container.decodeIfPresent(Double.self, forKey: .weight)
         }
         catch {
