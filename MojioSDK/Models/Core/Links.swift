@@ -16,19 +16,19 @@
 import Foundation
 
 public protocol LinksModel: Codable {
-    var linkSelf: URL? { get }
-    var permission: URL? { get }
-    var permissions: URL? { get }
-    var first: URL? { get }
-    var next: URL? { get }
+    var linkSelf: String? { get }
+    var permission: String? { get }
+    var permissions: String? { get }
+    var first: String? { get }
+    var next: String? { get }
 }
 
 public struct Links: LinksModel {
-    public let linkSelf: URL?
-    public let permission: URL?
-    public let permissions: URL?
-    public let first: URL?
-    public let next: URL?
+    public let linkSelf: String?
+    public let permission: String?
+    public let permissions: String?
+    public let first: String?
+    public let next: String?
     
     public enum CodingKeys: String, CodingKey {
         case linkSelf = "Self"
@@ -42,11 +42,11 @@ public struct Links: LinksModel {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         do {
-            self.linkSelf = try container.decodeIfPresent(URL.self, forKey: .linkSelf)
-            self.permission = try container.decodeIfPresent(URL.self, forKey: .permission)
-            self.permissions = try container.decodeIfPresent(URL.self, forKey: .permissions)
-            self.first = try container.decodeIfPresent(URL.self, forKey: .first)
-            self.next = try container.decodeIfPresent(URL.self, forKey: .next)
+            self.linkSelf = try container.decodeIfPresent(String.self, forKey: .linkSelf)
+            self.permission = try container.decodeIfPresent(String.self, forKey: .permission)
+            self.permissions = try container.decodeIfPresent(String.self, forKey: .permissions)
+            self.first = try container.decodeIfPresent(String.self, forKey: .first)
+            self.next = try container.decodeIfPresent(String.self, forKey: .next)
         }
         catch {
             debugPrint(error)
