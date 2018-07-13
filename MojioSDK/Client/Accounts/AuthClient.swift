@@ -109,7 +109,7 @@ open class AuthClient: AuthControllerDelegate {
     
     private var keychainManager: KeychainManager
     
-    public init(clientEnvironment: ClientEnvironment, clientId: String, clientSecretKey: String, clientRedirectURI: String, sessionManager: SessionManager = SessionManager.default, keychainManager: KeychainManager = KeychainManager()) {
+    public init(clientEnvironment: ClientEnvironment, clientId: String, clientSecretKey: String, clientRedirectURI: String, sessionManager: SessionManager = SessionManager.default, keychainManager: KeychainManager = KeychainManager.sharedInstance) {
         self.clientEnvironment = clientEnvironment
         self.sessionManager = sessionManager
         
