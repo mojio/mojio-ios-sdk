@@ -31,7 +31,7 @@ open class WSVehiclesClient: VehiclesClient {
     internal init(
         clientEnvironment: ClientEnvironment,
         sessionManager: SessionManager = SessionManager.default,
-        keychainManager: KeychainManager = KeychainManager()
+        keychainManager: KeychainManager = KeychainManager.sharedInstance
     ) {
         self.webSocketFactory = SwiftWebSocketFactory()
         

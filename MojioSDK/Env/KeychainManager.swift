@@ -1,6 +1,6 @@
 /******************************************************************************
  * Moj.io Inc. CONFIDENTIAL
- * 2017 Copyright Moj.io Inc.
+ * 2018 Copyright Moj.io Inc.
  * All Rights Reserved.
  *
  * NOTICE:  All information contained herein is, and remains, the property of
@@ -36,63 +36,88 @@ public final class KeychainManager: AuthTokenManager {
     
     public static var sharedInstance = KeychainManager()
     
-    public init() {}
+    private init() {
+        self.encoder.outputFormat = .binary
+        
+        if let authToken = self.deprecatedAuthToken {
+            self.authToken = authToken
+            self.deleteDeprecatedTokenFromKeychain()
+        }
+    }
+    
+    private let keychainSwift = KeychainSwift()
+    private let encoder = PropertyListEncoder()
+    private let decoder = PropertyListDecoder()
+    private let lock = NSLock()
+    private var authTokenCache: AuthToken? // Cache for the tocken's value to reduce reading operations
     
     public var authToken: AuthToken? {
         get {
-            guard let authTokenData = KeychainSwift().getData(KeychainKey.authToken.rawValue) else {
-                guard
-                    let accessToken = KeychainSwift().get(by: DeprecatedKeychainKey.accessToken.rawValue),
-                    let expiryTime = KeychainSwift().get(by: DeprecatedKeychainKey.accessTokenExpiry.rawValue),
-                    let expiryInterval = Double(expiryTime),
-                    let refreshToken = KeychainSwift().get(by: DeprecatedKeychainKey.refreshToken.rawValue),
-                    let uniqueId = KeychainSwift().get(by: DeprecatedKeychainKey.uniqueId.rawValue) else {
-                        return nil
-                }
-
-                let authToken = AuthToken(
-                    accessToken: accessToken,
-                    expiry: Date(timeIntervalSince1970: expiryInterval),
-                    refreshToken: refreshToken,
-                    uniqueId: uniqueId)
-
-                self.authToken = authToken
-                return authToken
-            }
+            self.lock.lock()
+            defer { self.lock.unlock() }
             
-            do {
-                return try PropertyListDecoder().decode(AuthToken.self, from: authTokenData)
+            if self.authTokenCache == nil {
+                self.authTokenCache = self.readToken()
             }
-            catch let error {
-                debugPrint(error)
-            }
-            
-            return nil
+            return self.authTokenCache
         }
         set {
-            // Need to delete the tokens from the keychain before saving (cannot overwrite)
-            KeychainSwift().delete(KeychainKey.authToken.rawValue)
+            self.lock.lock()
+            defer { self.lock.unlock() }
             
-            let encoder = PropertyListEncoder()
-            encoder.outputFormat = .binary
-            
-            if let authToken = newValue {
-                do {
-                    KeychainSwift().set(try encoder.encode(authToken), forKey: KeychainKey.authToken.rawValue)
-                }
-                catch let error {
-                    debugPrint(error)
-                }
-            }
+            self.saveToken(newValue)
+            self.authTokenCache = newValue
         }
     }
     
     public var authorizationKey: String? {
-        guard let accessToken = self.authToken?.accessToken else { return nil }
-        return "Bearer \(accessToken)"
+        return self.authToken.map{ "Bearer \($0.accessToken)" }
     }
     
-    private func deleteTokenFromKeychain() {
+    // save/read token
+    private func readToken() -> AuthToken? {
+        guard let authTokenData = self.keychainSwift.getData(KeychainKey.authToken.rawValue) else { return nil }
+        do {
+            return try PropertyListDecoder().decode(AuthToken.self, from: authTokenData)
+        }
+        catch let error {
+            debugPrint(error)
+            return nil
+        }
+    }
+    
+    private func saveToken(_ authToken: AuthToken?) {
+        // Need to delete the tokens from the keychain before saving (cannot overwrite)
+        self.keychainSwift.delete(KeychainKey.authToken.rawValue)
+        
+        guard let authToken = authToken else { return }
+        do {
+            self.keychainSwift.set(try self.encoder.encode(authToken), forKey: KeychainKey.authToken.rawValue, withAccess: .accessibleAlwaysThisDeviceOnly)
+        }
+        catch let error {
+            debugPrint(error)
+        }
+    }
+    
+    // Supporting deprecated keys
+    var deprecatedAuthToken: AuthToken? {
+        if
+            let accessToken = KeychainSwift().get(by: DeprecatedKeychainKey.accessToken.rawValue),
+            let expiryTime = KeychainSwift().get(by: DeprecatedKeychainKey.accessTokenExpiry.rawValue),
+            let expiryInterval = Double(expiryTime),
+            let refreshToken = KeychainSwift().get(by: DeprecatedKeychainKey.refreshToken.rawValue),
+            let uniqueId = KeychainSwift().get(by: DeprecatedKeychainKey.uniqueId.rawValue) {
+            
+            return AuthToken(
+                accessToken: accessToken,
+                expiry: Date(timeIntervalSince1970: expiryInterval),
+                refreshToken: refreshToken,
+                uniqueId: uniqueId)
+        }
+        return nil
+    }
+    
+    private func deleteDeprecatedTokenFromKeychain() {
         KeychainSwift().delete(by: DeprecatedKeychainKey.accessToken.rawValue)
         KeychainSwift().delete(by: DeprecatedKeychainKey.refreshToken.rawValue)
         KeychainSwift().delete(by: DeprecatedKeychainKey.accessTokenExpiry.rawValue)
