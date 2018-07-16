@@ -219,7 +219,7 @@ public struct Geofence: GeofenceModel {
             self.description = try container.decodeIfPresent(String.self, forKey: .description)
             self.region = try container.decodeIfPresent(G.self, forKey: .region)
             self.notification = try container.decodeIfPresent(N.self, forKey: .notification)
-            self.assetIds = try container.decodeIfPresent([String].self, forKey: .assetIds)
+            self.assetIds = try container.decodeIfPresent([String].self, forKey: .assetIds) ?? []
             self.ownerId = try container.decodeIfPresent(String.self, forKey: .ownerId)
             self.deleted = try container.decodeIfPresent(Bool.self, forKey: .deleted)
             self.lastModified = try container.decodeIfPresent(String.self, forKey: .lastModified).flatMap { $0.dateFromISO }

@@ -17,14 +17,8 @@ import Foundation
 import MojioCore
 
 public enum GeofenceRegionType: String, Codable {
-    
     case circle = "Circle"
-    case unknown
-    
-    public init(from decoder: Decoder) throws {
-        let label = try decoder.singleValueContainer().decode(String.self)
-        self = GeofenceRegionType(rawValue: label) ?? .unknown
-    }
+    case polygon = "Polygon"
 }
 
 public protocol GeofenceRegionModel: Codable {
@@ -35,22 +29,25 @@ public protocol GeofenceRegionModel: Codable {
     var lat: Double? { get }
     var lng: Double? { get }
     var radius: D? { get }
+    var polygon: String?  { get }
 }
 
 public struct GeofenceRegion: GeofenceRegionModel {
     
     public typealias D = Distance
     
-    public var type: GeofenceRegionType? = nil
-    public var lat: Double? = 0
-    public var lng: Double? = 0
-    public var radius: D? = nil
+    public let type: GeofenceRegionType?
+    public let lat: Double?
+    public let lng: Double?
+    public let radius: D?
+    public let polygon: String?
     
     public enum CodingKeys: String, CodingKey {
         case type = "Type"
         case lat = "Lat"
         case lng = "Lng"
         case radius = "Radius"
+        case polygon = "Polygon"
     }
     
     public init(from decoder: Decoder) throws {
@@ -62,6 +59,7 @@ public struct GeofenceRegion: GeofenceRegionModel {
             self.lat = try container.decodeIfPresent(Double.self, forKey: .lat)
             self.lng = try container.decodeIfPresent(Double.self, forKey: .lng)
             self.radius = try container.decodeIfPresent(D.self, forKey: .radius)
+            self.polygon = try container.decodeIfPresent(String.self, forKey: .polygon)
         }
         catch {
             debugPrint(error)
@@ -77,6 +75,47 @@ public struct GeofenceRegion: GeofenceRegionModel {
         try container.encodeIfPresent(self.lat, forKey: .lat)
         try container.encodeIfPresent(self.lng, forKey: .lng)
         try container.encodeIfPresent(self.radius, forKey: .radius)
+        try container.encodeIfPresent(self.polygon, forKey: .polygon)
     }
 }
 
+public struct GeofenceRegionUpdate: Codable {
+    
+    public var type: GeofenceRegionType?
+    public var lat: Double?
+    public var lng: Double?
+    public var radius: Double?
+    public var polygon: String?
+    
+    public enum CodingKeys: String, CodingKey {
+        case type = "Type"
+        case lat = "Lat"
+        case lng = "Lng"
+        case radius = "Radius"
+        case polygon = "Polygon"
+    }
+    
+    public init(
+        type: GeofenceRegionType? = nil,
+        lat: Double? = nil,
+        lng: Double? = nil,
+        radius: Double? = nil,
+        polygon: String? = nil) {
+        
+        self.type = type
+        self.lat = lat
+        self.lng = lng
+        self.radius = radius
+        self.polygon = polygon
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        try container.encodeIfPresent(self.type, forKey: .type)
+        try container.encodeIfPresent(self.lat, forKey: .lat)
+        try container.encodeIfPresent(self.lng, forKey: .lng)
+        try container.encodeIfPresent(self.radius, forKey: .radius)
+        try container.encodeIfPresent(self.polygon, forKey: .polygon)
+    }
+}
