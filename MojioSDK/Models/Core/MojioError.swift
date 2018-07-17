@@ -14,13 +14,13 @@
  *******************************************************************************/
 
 public struct MojioError: Error {
-    public var dictionary: [String:Any]?
+    public var dictionary: [String:Any]
     public var message: String?
     public var code: String?
     
     public init(code: String?, message: String? = nil, dictionary: [String:Any]? = nil) {
         self.message = message
         self.code = code
-        self.dictionary = dictionary
+        self.dictionary = dictionary ?? [:]
     }
 }

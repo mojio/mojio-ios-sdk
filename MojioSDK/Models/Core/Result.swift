@@ -18,10 +18,10 @@ import Foundation
 
 public protocol ResultModel {
     var totalCount: Int? { get }
-    var data: [Any]? { get }
+    var data: [Any] { get }
 }
 
 public struct Result: ResultModel {
     public let totalCount: Int?
-    public let data: [Any]?
+    public let data: [Any]
 }

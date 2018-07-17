@@ -174,7 +174,7 @@ public protocol GeofenceModel: Codable, PrimaryKey {
     var description: String? { get }
     var region: G? { get }
     var notification: N? { get }
-    var assetIds: [String]? { get }
+    var assetIds: [String] { get }
     var ownerId: String? { get }
     var deleted: Bool? { get }
     var lastModified: Date? { get }
@@ -191,7 +191,7 @@ public struct Geofence: GeofenceModel {
     public let description: String?
     public let region: G?
     public let notification: N?
-    public let assetIds: [String]?
+    public let assetIds: [String]
     public let ownerId: String?
     public let deleted: Bool?
     public let lastModified: Date?
@@ -241,14 +241,14 @@ public struct GeofenceUpdate: Codable {
     public var description: String? = nil
     public var region: GeofenceRegionUpdate? = nil
     public var notification: GeofenceNotificationUpdate? = nil
-    public var assetIds: [String]? = nil
+    public var assetIds: [String] = []
     
     public init(
         name: String? = nil,
         description: String? = nil,
         region: GeofenceRegionUpdate? = nil,
         notification: GeofenceNotificationUpdate? = nil,
-        assetIds: [String]? = nil) {
+        assetIds: [String] = []) {
         
         self.name = name
         self.description = description

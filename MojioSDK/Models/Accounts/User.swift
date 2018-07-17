@@ -26,9 +26,9 @@ public protocol UserModel: Codable, PrimaryKey {
     var lastName: String? { get }
     var userName: String? { get }
     var jurisdiction: String? { get }
-    var emails: [E]? { get }
-    var phoneNumbers: [P]? { get }
-    var tags: [String]? { get }
+    var emails: [E] { get }
+    var phoneNumbers: [P] { get }
+    var tags: [String] { get }
     var defaultLanguage: String? { get }
     var createdOn: Date? { get }
     var lastModified: Date? { get }
@@ -44,9 +44,9 @@ public struct User: UserModel {
     public let lastName: String?
     public let userName: String?
     public let jurisdiction: String?
-    public let emails: [E]?
-    public let phoneNumbers: [P]?
-    public let tags: [String]?
+    public let emails: [E]
+    public let phoneNumbers: [P]
+    public let tags: [String]
     public let defaultLanguage: String?
     public let createdOn: Date?
     public let lastModified: Date?
@@ -74,9 +74,9 @@ public struct User: UserModel {
             self.lastName = try container.decodeIfPresent(String.self, forKey: .lastName)
             self.userName = try container.decodeIfPresent(String.self, forKey: .userName)
             self.jurisdiction = try container.decodeIfPresent(String.self, forKey: .jurisdiction)
-            self.emails = try container.decodeIfPresent([Email].self, forKey: .emails)
-            self.phoneNumbers = try container.decodeIfPresent([PhoneNumber].self, forKey: .phoneNumbers)
-            self.tags = try container.decodeIfPresent([String].self, forKey: .tags)
+            self.emails = try container.decodeIfPresent([Email].self, forKey: .emails) ?? []
+            self.phoneNumbers = try container.decodeIfPresent([PhoneNumber].self, forKey: .phoneNumbers) ?? []
+            self.tags = try container.decodeIfPresent([String].self, forKey: .tags) ?? []
             self.defaultLanguage = try container.decodeIfPresent(String.self, forKey: .defaultLanguage)
             
             self.createdOn = try container.decodeIfPresent(String.self, forKey: .createdOn).flatMap { $0.dateFromISO }
