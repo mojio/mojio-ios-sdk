@@ -39,6 +39,7 @@ public enum VehiclesEndpoint: String {
     case statistics = "statistics/"
     case diagnosticCodes = "diagnosticcodes/"
     case polyline = "polyline/"
+    case settings = "settings/"
     
     // Storage
     // Parameters: Type, Id, Key
@@ -218,6 +219,13 @@ open class VehiclesClient: RestClient {
         return self
     }
     
+    public func settings() -> Self {
+        self.requestEntity = VehiclesEndpoint.settings.rawValue
+        self.requestUrl = self.requestUrl! + self.requestEntity
+        
+        return self
+    }
+    
     open override func parseData(_ responseData: Data) -> Codable? {
         
         do {
@@ -317,6 +325,14 @@ open class VehiclesClient: RestClient {
                 // Returns Transaction State
                 let response = try JSONDecoder().decode([String: String].self, from: responseData)
                 return response["State"]
+                
+            case .settings:
+                do {
+                    return try JSONDecoder().decode(ResponseArray<VehicleActivitySettings>.self, from: responseData)
+                }
+                catch {
+                    return try JSONDecoder().decode(VehicleActivitySettings.self, from: responseData)
+                }
             
             default:
                 return nil
