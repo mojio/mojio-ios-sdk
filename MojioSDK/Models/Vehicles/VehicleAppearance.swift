@@ -16,19 +16,12 @@
 import Foundation
 import MojioCore
 
-public protocol VehicleAppearanceModel: Codable, PrimaryKey {
-    var vehicleId: String { get }
-    var color: EntityAppearanceColor? { get }
-    var icon: VehicleAppearanceStyle? { get }
-    var showOnMap: Bool? { get }
-}
-
-public struct VehicleAppearance: VehicleAppearanceModel {
+public struct VehicleAppearance: Codable {
     
-    public let vehicleId: String
-    public let color: EntityAppearanceColor?
-    public let icon: VehicleAppearanceStyle?
-    public let showOnMap: Bool?
+    public var vehicleId: String = String.empty
+    public var color: String?
+    public var icon: String?
+    public var showOnMap: Bool?
     
     public enum CodingKeys: String, CodingKey {
         case vehicleId = "VehicleId"
@@ -37,39 +30,43 @@ public struct VehicleAppearance: VehicleAppearanceModel {
         case showOnMap = "ShowOnMap"
     }
     
-    public static func defaultAppearence(id: String, showOnMap: Bool = false) -> VehicleAppearance {
-        return VehicleAppearance(
-            vehicleId: id,
-            color: .default,
-            icon: VehicleAppearanceStyle.defaultStyle,
-            showOnMap: showOnMap)
+    public init() {}
+    
+    public init(vehicleId: String, color: String?, icon: String?, showOnMap: Bool?) {
+        
+        self.vehicleId = vehicleId
+        self.color = color
+        self.icon = icon
+        self.showOnMap = showOnMap
     }
     
-    public var id: String {
-        return vehicleId
+    public var Id: String? {
+        get {
+            return vehicleId
+        }
+        set {
+            vehicleId = newValue ?? String.empty
+        }
     }
 }
 
-public extension VehicleAppearance {
+extension VehicleAppearance: Equatable {
     public static func == (lhs: VehicleAppearance, rhs: VehicleAppearance) -> Bool {
-        return lhs.vehicleId == rhs.vehicleId
+        return lhs.vehicleId == rhs.vehicleId && lhs.color == rhs.color &&
+            lhs.icon == rhs.icon && lhs.showOnMap == rhs.showOnMap
     }
 }
 
-public protocol VehicleAppearanceCollectionModel: Codable {
-    
-    associatedtype AppearanceType: VehicleAppearanceModel
-    
-    var appearances: [AppearanceType]? { get }
-}
 
-public struct VehicleAppearanceCollection: VehicleAppearanceCollectionModel {
+public struct VehicleAppearanceStorageData: Codable {
     
-    public typealias AppearanceType = VehicleAppearance
-    
-    public let appearances: [VehicleAppearance]?
+    public var vehicleAppearances: [VehicleAppearance]?
     
     public enum CodingKeys: String, CodingKey {
-        case appearances = "Data"
+        case vehicleAppearances = "Data"
+    }
+    
+    public init(vehicleAppearances: [VehicleAppearance]?) {
+        self.vehicleAppearances = vehicleAppearances
     }
 }
