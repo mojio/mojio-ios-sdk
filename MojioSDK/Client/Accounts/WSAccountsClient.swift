@@ -31,7 +31,7 @@ open class WSAccountsClient: AccountsClient {
     internal init(
         clientEnvironment: ClientEnvironment,
         sessionManager: SessionManager = SessionManager.default,
-        keychainManager: KeychainManager = KeychainManager()
+        keychainManager: KeychainManager = KeychainManager.sharedInstance
         ) {
         self.webSocketFactory = SwiftWebSocketFactory()
         
@@ -41,7 +41,7 @@ open class WSAccountsClient: AccountsClient {
     public init(
         clientEnvironment: ClientEnvironment,
         sessionManager: SessionManager = SessionManager.default,
-        keychainManager: KeychainManager = KeychainManager(),
+        keychainManager: KeychainManager = KeychainManager.sharedInstance,
         publicKeys: [SecKey]? = nil,
         webSocketFactory: WebSocketFactory = SwiftWebSocketFactory()
         ) {

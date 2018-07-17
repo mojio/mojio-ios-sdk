@@ -56,19 +56,19 @@ internal extension ActivityType {
 public protocol ActivityLocationModel: Codable {
     var type: ActivityType? {get}
     var name: String? {get}
-    var latitude: Double {get}
-    var longitude: Double {get}
-    var altitude: Double {get}
-    var radius: Double {get}
+    var latitude: Double? {get}
+    var longitude: Double? {get}
+    var altitude: Double? {get}
+    var radius: Double? {get}
 }
 
 public struct ActivityLocation: ActivityLocationModel {
     public let type: ActivityType?
     public let name: String?
-    public let latitude: Double
-    public let longitude: Double
-    public let altitude: Double
-    public let radius: Double
+    public let latitude: Double?
+    public let longitude: Double?
+    public let altitude: Double?
+    public let radius: Double?
     
     enum CodingKeys: String, CodingKey {
         case type = "Type"
@@ -89,7 +89,7 @@ public protocol ActivityModel: Codable, PrimaryKey {
     var href: String? { get }
     var name: String? { get }
     var nameMap: Dictionary<String, String>? { get }
-
+    
     var location: L? {get}
     
     var startTime: Date? { get }
@@ -110,7 +110,7 @@ public func ==<A: ActivityModel>(lhs: A, rhs: A) -> Bool {
 public struct Activity: ActivityModel {
     
     public typealias L = ActivityLocation
-
+    
     public let id: String
     public let type: ActivityType?
     public let href: String?
@@ -149,7 +149,7 @@ public struct Activity: ActivityModel {
 public protocol RootActivityModel: ActivityModel {
     
     associatedtype A: ActivityModel
-
+    
     var actor: A? { get }
     var target: A? { get }
     var result: A? { get }
