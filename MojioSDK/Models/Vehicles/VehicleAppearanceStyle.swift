@@ -15,7 +15,7 @@
 
 import Foundation
 
-enum VehicleAppearanceStyle: String, Codable {
+public enum VehicleAppearanceStyle: String, Codable {
     case sedan = "Sedan",
     hatchback = "Hatchback",
     smart = "Smart",

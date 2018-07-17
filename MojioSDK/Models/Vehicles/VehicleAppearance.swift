@@ -16,28 +16,28 @@
 import Foundation
 import MojioCore
 
-protocol VehicleAppearanceModel: Codable, PrimaryKey {
+public protocol VehicleAppearanceModel: Codable, PrimaryKey {
     var vehicleId: String { get }
     var color: EntityAppearanceColor? { get }
     var icon: VehicleAppearanceStyle? { get }
     var showOnMap: Bool? { get }
 }
 
-struct VehicleAppearance: VehicleAppearanceModel {
+public struct VehicleAppearance: VehicleAppearanceModel {
     
-    let vehicleId: String
-    let color: EntityAppearanceColor?
-    let icon: VehicleAppearanceStyle?
-    let showOnMap: Bool?
+    public let vehicleId: String
+    public let color: EntityAppearanceColor?
+    public let icon: VehicleAppearanceStyle?
+    public let showOnMap: Bool?
     
-    enum CodingKeys: String, CodingKey {
+    public enum CodingKeys: String, CodingKey {
         case vehicleId = "VehicleId"
         case color = "Color"
         case icon = "Icon"
         case showOnMap = "ShowOnMap"
     }
     
-    static func defaultAppearence(id: String, showOnMap: Bool = false) -> VehicleAppearance {
+    public static func defaultAppearence(id: String, showOnMap: Bool = false) -> VehicleAppearance {
         return VehicleAppearance(
             vehicleId: id,
             color: .default,
@@ -45,31 +45,31 @@ struct VehicleAppearance: VehicleAppearanceModel {
             showOnMap: showOnMap)
     }
     
-    var id: String {
+    public var id: String {
         return vehicleId
     }
 }
 
-extension VehicleAppearance {
-    static func == (lhs: VehicleAppearance, rhs: VehicleAppearance) -> Bool {
+public extension VehicleAppearance {
+    public static func == (lhs: VehicleAppearance, rhs: VehicleAppearance) -> Bool {
         return lhs.vehicleId == rhs.vehicleId
     }
 }
 
-protocol VehicleAppearanceCollectionModel: Codable {
+public protocol VehicleAppearanceCollectionModel: Codable {
     
     associatedtype AppearanceType: VehicleAppearanceModel
     
     var appearances: [AppearanceType]? { get }
 }
 
-struct VehicleAppearanceCollection: VehicleAppearanceCollectionModel {
+public struct VehicleAppearanceCollection: VehicleAppearanceCollectionModel {
     
-    typealias AppearanceType = VehicleAppearance
+    public typealias AppearanceType = VehicleAppearance
     
-    let appearances: [VehicleAppearance]?
+    public let appearances: [VehicleAppearance]?
     
-    enum CodingKeys: String, CodingKey {
+    public enum CodingKeys: String, CodingKey {
         case appearances = "Data"
     }
 }
