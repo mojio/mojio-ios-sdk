@@ -21,7 +21,7 @@ public protocol ErrorModel: Swift.Error {
 }
 
 public protocol ErrorListModel: ErrorModel {
-    var errors: [ApiError]? { get }
+    var errors: [ApiError] { get }
 }
 
 public struct ApiErrorAdditional: Codable {
@@ -30,7 +30,7 @@ public struct ApiErrorAdditional: Codable {
 
 public struct ApiError: ErrorListModel, Codable {
     public let code: String?
-    public let errors: [ApiError]?
+    public let errors: [ApiError]
     public let message: String?
     public let additional: ApiErrorAdditional?
     
@@ -46,7 +46,7 @@ public struct ApiError: ErrorListModel, Codable {
         
         self.code = try container.decodeIfPresent(String.self, forKey: .code)
         self.message = try container.decodeIfPresent(String.self, forKey: .message)
-        self.errors = try container.decodeIfPresent([ApiError].self, forKey: .errors)
+        self.errors = try container.decodeIfPresent([ApiError].self, forKey: .errors) ?? []
         self.additional = try container.decodeIfPresent(ApiErrorAdditional.self, forKey: .additional)
     }
 }

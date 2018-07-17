@@ -16,19 +16,11 @@
 import Foundation
 import MojioCore
 
-public enum GeofenceNotificationType: String, Codable {
-    
+public enum GeofenceNotificationType: String, Codable {    
     case onEnter = "OnEnter"
     case onExit = "OnExit"
     case always = "Always"
     case never = "Never"
-    
-    case unknown
-    
-    public init(from decoder: Decoder) throws {
-        let label = try decoder.singleValueContainer().decode(String.self)
-        self = GeofenceNotificationType(rawValue: label) ?? .unknown
-    }
 }
 
 public protocol GeofenceModel: Codable, PrimaryKey {
@@ -121,5 +113,49 @@ public struct Geofence: GeofenceModel {
         try container.encodeIfPresent(self.deleted, forKey: .deleted)
         try container.encodeIfPresent(self.createdOn, forKey: .createdOn)
         try container.encodeIfPresent(self.lastModified, forKey: .lastModified)
+    }
+}
+
+public func ==(lhs: Geofence, rhs: Geofence) -> Bool {
+    return lhs.id == rhs.id
+}
+
+public struct GeofenceUpdate: Codable {
+    public var name: String? = nil
+    public var description: String? = nil
+    public var region: GeofenceRegionUpdate? = nil
+    public var notificationSetting: GeofenceNotificationType? = nil
+    public var vehicleIds: [String] = []
+    
+    public init(
+        name: String? = nil,
+        description: String? = nil,
+        region: GeofenceRegionUpdate? = nil,
+        notificationSetting: GeofenceNotificationType? = nil,
+        vehicleIds: [String] = []) {
+        
+        self.name = name
+        self.description = description
+        self.region = region
+        self.notificationSetting = notificationSetting
+        self.vehicleIds = vehicleIds
+    }
+    
+    public enum CodingKeys: String, CodingKey {
+        case name = "Name"
+        case description = "Description"
+        case region = "Region"
+        case notificationSetting = "NotificationSetting"
+        case vehicleIds = "VehicleIds"
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        try container.encodeIfPresent(self.name, forKey: .name)
+        try container.encodeIfPresent(self.description, forKey: .description)
+        try container.encodeIfPresent(self.region, forKey: .region)
+        try container.encodeIfPresent(self.notificationSetting, forKey: .notificationSetting)
+        try container.encodeIfPresent(self.vehicleIds, forKey: .vehicleIds)
     }
 }
