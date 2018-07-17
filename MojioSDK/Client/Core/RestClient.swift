@@ -507,15 +507,11 @@ open class RestClient {
                 completion(true, headers)
             }
             else {
-                failure(response)
+                failure(self.parseError(response))
             }
         }
-        else if let responseData = response.data {
-            let parsedData = self.parseError(responseData, statusCode: response.response?.statusCode)
-            failure (parsedData)
-        }
         else {
-            failure(response)
+            failure(self.parseError(response))
         }
     }
     
@@ -579,7 +575,7 @@ open class RestClient {
         return nil
     }
     
-    open func parseError(_ responseData: Data, statusCode: Int?) -> Error {
+    open func parseError(_ response: DataResponse<Data>) -> Error {
         return MojioError(code: nil)
     }
     
