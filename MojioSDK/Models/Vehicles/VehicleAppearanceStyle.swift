@@ -27,9 +27,9 @@ public enum VehicleAppearanceStyle: String, Codable {
     deliveryTruck = "DeliveryTruck",
     sports = "Sports"
     
-    static var defaultStyle: VehicleAppearanceStyle { return .sedan }
+    public static var defaultStyle: VehicleAppearanceStyle { return .sedan }
     
-    static var all: [VehicleAppearanceStyle] {
+    public static var all: [VehicleAppearanceStyle] {
         return [
             .sedan,
             .hatchback,
