@@ -124,3 +124,16 @@ public struct Mojio: MojioModel {
         try container.encodeIfPresent(self.iccid, forKey: .iccid)
     }
 }
+
+public struct MojioUpdate: Codable {
+    public var name: String? = nil
+    
+    public enum CodingKeys: String, CodingKey {
+        case name = "Name"
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(self.name, forKey: .name)
+    }
+}
