@@ -45,7 +45,7 @@ public protocol VehicleActivitySettingsModel: Codable {
     var enableDeviceUpdatedActivity: Bool { get }
     var enableSMSActivity: Bool { get }
     var enableVehicleCompatibilityActivity: Bool { get }
-    var speedThreshold: S { get }
+    var speedThreshold: S? { get }
 }
 
 public struct SpeedThreshold: SpeedThresholdModel {
@@ -86,7 +86,7 @@ public struct VehicleActivitySettings: VehicleActivitySettingsModel {
     public let enableDeviceUpdatedActivity: Bool
     public let enableSMSActivity: Bool
     public let enableVehicleCompatibilityActivity: Bool
-    public let speedThreshold: SpeedThreshold
+    public let speedThreshold: S?
     
     public enum CodingKeys: String, CodingKey {
         case enableTripStartActivity = "EnableTripStartActivity"
