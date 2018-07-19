@@ -16,13 +16,13 @@
 import Foundation
 import MojioCore
 
-public protocol ImageType: Codable {
+public protocol VehicleImageType: Codable {
     var src: String { get }
     var normal: String { get }
     var thumbnail: String { get }
 }
 
-public struct Image: ImageType {
+public struct VehicleImage: VehicleImageType {
     public var src: String
     public var normal: String
     public var thumbnail: String
@@ -53,7 +53,7 @@ public protocol VehicleModel: Codable, PrimaryKey {
     associatedtype H: HeadingModel
     associatedtype S: SpeedModel
     associatedtype R: RPMModel
-    associatedtype I: ImageType
+    associatedtype I: VehicleImageType
     
     var id: String { get }
     var name: String? { get }
@@ -117,7 +117,7 @@ public struct Vehicle: VehicleModel {
     public typealias O = Odometer
     public typealias V = VinDetails
     public typealias L = Location
-    public typealias I = Image
+    public typealias I = VehicleImage
     
     public var id: String
     public var name: String?
