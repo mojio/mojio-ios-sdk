@@ -204,6 +204,105 @@ public struct Vehicle: VehicleModel {
         case lastModified = "LastModified"
         case image = "Image"
     }
+    
+    public init(from decoder: Decoder) throws {
+        do {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            
+            self.id = try container.decode(String.self, forKey: .id)
+            self.name = try container.decodeIfPresent(String.self, forKey: .name)
+            self.licensePlate = try container.decodeIfPresent(String.self, forKey: .licensePlate)
+            self.vin = try container.decodeIfPresent(String.self, forKey: .vin)
+            self.detectedVIN = try container.decodeIfPresent(String.self, forKey: .detectedVIN)
+            self.overrideVIN = try container.decodeIfPresent(String.self, forKey: .overrideVIN)
+            self.mojioId = try container.decodeIfPresent(String.self, forKey: .mojioId)
+            self.compatDetails = try container.decodeIfPresent(CompatibilityDetails.self, forKey: .compatDetails)
+            self.currentTrip = try container.decodeIfPresent(String.self, forKey: .currentTrip)
+            self.milStatus = try container.decodeIfPresent(Bool.self, forKey: .milStatus) ?? false
+            self.diagnosticCodes = try container.decodeIfPresent([DiagnosticCode].self, forKey: .diagnosticCodes) ?? []
+            self.lastContactTime = try container.decodeIfPresent(String.self, forKey: .lastContactTime).flatMap { $0.dateFromISO }
+            self.accelerometer = try container.decodeIfPresent(Accelerometer.self, forKey: .accelerometer)
+            self.acceleration = try container.decodeIfPresent(Acceleration.self, forKey: .acceleration)
+            self.deceleration = try container.decodeIfPresent(Acceleration.self, forKey: .deceleration)
+            
+            self.speed = try container.decodeIfPresent(Speed.self, forKey: .speed)
+            self.odometer = try container.decodeIfPresent(Odometer.self, forKey: .odometer)
+            self.virtualOdometer = try container.decodeIfPresent(Odometer.self, forKey: .virtualOdometer)
+            self.rpm = try container.decodeIfPresent(RPM.self, forKey: .rpm)
+            self.fuelEfficiency = try container.decodeIfPresent(FuelEfficiency.self, forKey: .fuelEfficiency)
+            self.fuelEfficiencyCalculationMethod = try container.decodeIfPresent(FuelEfficiencyCalculationMethod.self, forKey: .fuelEfficiencyCalculationMethod)
+            self.fuelLevel = try container.decodeIfPresent(FuelLevel.self, forKey: .fuelLevel)
+            self.fuelVolume = try container.decodeIfPresent(FuelVolume.self, forKey: .fuelVolume)
+            self.fuelType = try container.decodeIfPresent(FuelType.self, forKey: .fuelType)
+            self.gatewayTime = try container.decodeIfPresent(String.self, forKey: .gatewayTime).flatMap { $0.dateFromISO }
+            self.harshEventState = try container.decodeIfPresent(HarshEventState.self, forKey: .harshEventState)
+            self.idleState = try container.decodeIfPresent(IdleState.self, forKey: .idleState)
+            self.ignitionState = try container.decodeIfPresent(BooleanState.self, forKey: .ignitionState)
+            self.battery = try container.decodeIfPresent(Battery.self, forKey: .battery)
+            self.heading = try container.decodeIfPresent(Heading.self, forKey: .heading)
+            self.location = try container.decodeIfPresent(Location.self, forKey: .location)
+            self.accidentState = try container.decodeIfPresent(BooleanState.self, forKey: .accidentState)
+            self.vinDetails = try container.decodeIfPresent(VinDetails.self, forKey: .vinDetails)
+            self.towState = try container.decodeIfPresent(BooleanState.self, forKey: .towState)
+            self.parkedState = try container.decodeIfPresent(BooleanState.self, forKey: .parkedState)
+            self.ownerGroups = try container.decodeIfPresent([String].self, forKey: .ownerGroups) ?? []
+            self.tags = try container.decodeIfPresent([String].self, forKey: .tags) ?? []
+            self.deleted = try container.decodeIfPresent(Bool.self, forKey: .deleted) ?? false
+            self.createdOn = try container.decodeIfPresent(String.self, forKey: .createdOn).flatMap { $0.dateFromISO }
+            self.lastModified = try container.decodeIfPresent(String.self, forKey: .lastModified).flatMap { $0.dateFromISO }
+        }
+        catch {
+            debugPrint(error)
+            throw error
+        }
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        try container.encodeIfPresent(self.id, forKey: .id)
+        try container.encodeIfPresent(self.name, forKey: .name)
+        try container.encodeIfPresent(self.licensePlate, forKey: .licensePlate)
+        try container.encodeIfPresent(self.vin, forKey: .vin)
+        try container.encodeIfPresent(self.detectedVIN, forKey: .detectedVIN)
+        try container.encodeIfPresent(self.overrideVIN, forKey: .overrideVIN)
+        try container.encodeIfPresent(self.mojioId, forKey: .mojioId)
+        try container.encodeIfPresent(self.compatDetails, forKey: .compatDetails)
+        try container.encodeIfPresent(self.currentTrip, forKey: .currentTrip)
+        try container.encodeIfPresent(self.milStatus, forKey: .milStatus)
+        try container.encodeIfPresent(self.diagnosticCodes, forKey: .diagnosticCodes)
+        try container.encodeIfPresent(self.lastContactTime, forKey: .lastContactTime)
+        try container.encodeIfPresent(self.accelerometer, forKey: .accelerometer)
+        try container.encodeIfPresent(self.acceleration, forKey: .acceleration)
+        try container.encodeIfPresent(self.deceleration, forKey: .deceleration)
+        
+        try container.encodeIfPresent(self.speed, forKey: .speed)
+        try container.encodeIfPresent(self.odometer, forKey: .odometer)
+        try container.encodeIfPresent(self.virtualOdometer, forKey: .virtualOdometer)
+        try container.encodeIfPresent(self.rpm, forKey: .rpm)
+        try container.encodeIfPresent(self.fuelEfficiency, forKey: .fuelEfficiency)
+        try container.encodeIfPresent(self.fuelEfficiencyCalculationMethod, forKey: .fuelEfficiencyCalculationMethod)
+        try container.encodeIfPresent(self.fuelLevel, forKey: .fuelLevel)
+        try container.encodeIfPresent(self.fuelVolume, forKey: .fuelVolume)
+        try container.encodeIfPresent(self.fuelType, forKey: .fuelType)
+        try container.encodeIfPresent(self.gatewayTime, forKey: .gatewayTime)
+        try container.encodeIfPresent(self.harshEventState, forKey: .harshEventState)
+        try container.encodeIfPresent(self.idleState, forKey: .idleState)
+        try container.encodeIfPresent(self.ignitionState, forKey: .ignitionState)
+        try container.encodeIfPresent(self.battery, forKey: .battery)
+        try container.encodeIfPresent(self.heading, forKey: .heading)
+        try container.encodeIfPresent(self.location, forKey: .location)
+        try container.encodeIfPresent(self.accidentState, forKey: .accidentState)
+        try container.encodeIfPresent(self.vinDetails, forKey: .vinDetails)
+        try container.encodeIfPresent(self.towState, forKey: .towState)
+        try container.encodeIfPresent(self.parkedState, forKey: .parkedState)
+        try container.encodeIfPresent(self.ownerGroups, forKey: .ownerGroups)
+        try container.encodeIfPresent(self.tags, forKey: .tags)
+        try container.encodeIfPresent(self.deleted, forKey: .deleted)
+        try container.encodeIfPresent(self.createdOn, forKey: .createdOn)
+        try container.encodeIfPresent(self.lastModified, forKey: .lastModified)
+    }
+    
 }
 
 public func ==(lhs: Vehicle, rhs: Vehicle) -> Bool {
