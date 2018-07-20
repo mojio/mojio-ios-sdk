@@ -102,7 +102,7 @@ public struct Vin: VinModel {
             self.bodyType = try container.decodeIfPresent(String.self, forKey: .bodyType)
             self.driveType = try container.decodeIfPresent(String.self, forKey: .driveType)
             
-            self.fuelTankSize = try container.decodeIfPresent(Double.self, forKey: .fuelTankSize) ?? 0
+            self.fuelTankSize = Double(try container.decodeIfPresent(String.self, forKey: .fuelTankSize) ?? "") ?? 0
             self.epaFuelEfficiency = try container.decodeIfPresent(Double.self, forKey: .epaFuelEfficiency) ?? 0
             
             self.vehicleEngine = try container.decodeIfPresent(Engine.self, forKey: .vehicleEngine)
