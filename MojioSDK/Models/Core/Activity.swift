@@ -43,6 +43,7 @@ public enum ActivityType : String, Codable {
     case updateDevice = "UpdateDevice"
     case user = "User"
     case vehicle = "Vehicle"
+    case place = "Place"
     case unkonwn
 }
 

@@ -41,6 +41,38 @@ public struct ResponseArray<T: Codable>: ResponseArrayModel {
         case totalCount = "TotalCount"
         case links = "Links"
     }
+    
+    public enum CamelCodingKeys: String, CodingKey {
+        case data = "data"
+        case results = "results"
+        case totalCount = "totalCount"
+        case links = "links"
+    }
+    
+    public init(from decoder: Decoder) throws {
+        
+        do {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            
+            if let response = try container.decodeIfPresent([T].self, forKey: CodingKeys.data) {
+                self.data = response
+                self.results = try container.decodeIfPresent(Int.self, forKey: CodingKeys.results)
+                self.totalCount = try container.decodeIfPresent(Int.self, forKey: CodingKeys.totalCount)
+                self.links = try container.decodeIfPresent(L.self, forKey: CodingKeys.links)
+            }
+            else {
+                let container = try decoder.container(keyedBy: CamelCodingKeys.self)
+                
+                self.data = try container.decodeIfPresent([T].self, forKey: CamelCodingKeys.data) ?? []
+                self.results = try container.decodeIfPresent(Int.self, forKey: CamelCodingKeys.results)
+                self.totalCount = try container.decodeIfPresent(Int.self, forKey: CamelCodingKeys.totalCount)
+                self.links = try container.decodeIfPresent(L.self, forKey: CamelCodingKeys.links)
+            }
+        }
+        catch {
+            throw error
+        }
+    }
 }
 
 public protocol RangeResponseModel {

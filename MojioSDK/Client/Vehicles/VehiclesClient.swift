@@ -40,7 +40,8 @@ public enum VehiclesEndpoint: String {
     case diagnosticCodes = "diagnosticcodes/"
     case polyline = "polyline/"
     case settings = "settings/"
-    
+    case timeline = "timeline/assets/"
+
     // Storage
     // Parameters: Type, Id, Key
     // e.g. trips/{id}/store/{key}
@@ -212,6 +213,14 @@ open class VehiclesClient: RestClient {
         return self
     }
     
+    open func timeline(_ vehicleId: String) -> Self {
+        
+        self.requestEntity = VehiclesEndpoint.timeline.rawValue
+        self.requestUrl = self.requestV3Url! + self.requestEntity + vehicleId + "/"
+        
+        return self
+    }
+
     public func polyline() -> Self {
         self.requestEntity = VehiclesEndpoint.polyline.rawValue
         self.requestUrl = self.requestUrl! + self.requestEntity
@@ -316,6 +325,15 @@ open class VehiclesClient: RestClient {
                 catch {
                     return try JSONDecoder().decode(RootActivity.self, from: responseData)
                 }
+                
+            case .timeline:  // conformance to be implemented
+                do {
+                    return try JSONDecoder().decode(ResponseArray<Timeline.RootActivity>.self, from: responseData)
+                }
+                catch {
+                    return try JSONDecoder().decode(Timeline.RootActivity.self, from: responseData)
+                }
+
             case .wifiRadio:
                 // Returns Transaction Id
                 let response = try JSONDecoder().decode([String: String].self, from: responseData)
