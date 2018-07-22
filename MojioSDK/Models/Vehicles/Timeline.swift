@@ -53,10 +53,37 @@ public struct Timeline {
         }
     }
     
+    public struct ActivityLocation: Codable {
+        public let type: ActivityType?
+        public let name: String?
+        public let latitude: Double?
+        public let longitude: Double?
+        public let altitude: Double?
+        
+        public enum CodingKeys: String, CodingKey {
+            case type
+            case name
+            case latitude
+            case longitude
+            case altitude
+        }
+    }
+    
+    public struct ActivityActor: Codable {
+        
+        public let id: String?
+        public let type: ActivityType?
+        
+        public enum CodingKeys: String, CodingKey {
+            case id
+            case type
+        }
+    }
+    
     public struct RootActivity: Codable {
         
         public typealias L = ActivityLocation
-        public typealias A = Activity
+        public typealias A = ActivityActor
         public typealias R = ActivityResult
 
         public let id: String
