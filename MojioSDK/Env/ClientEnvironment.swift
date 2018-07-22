@@ -69,6 +69,7 @@ open class ClientEnvironment {
     public typealias CustomEndpoints = (
         apiEndpoint: String?,
         apiV1Endpoint: String?,
+        apiV3Endpoint: String?,
         pushApnsEndpoint: String?,
         pushWSEndpoint: String?,
         myMojioEndpoint: String?,
@@ -101,6 +102,7 @@ open class ClientEnvironment {
     private enum EndPointFormat: String {
         case apiEndpoint = "https://%@api.moj.io/v2/"
         case apiV1Endpoint = "https://%@api.moj.io/v1/"
+        case apiV3Endpoint = "https://%@api.moj.io/v3/"
         case pushApnsEndpoint = "https://%@push.moj.io/v2/"
         case pushWSEndpoint = "wss://%@api.moj.io/v2/"
         case myMojioEndpoint = "https://%@my.moj.io/"
@@ -113,6 +115,7 @@ open class ClientEnvironment {
     
     fileprivate var apiEndpoint: String?
     fileprivate var apiV1Endpoint: String?
+    fileprivate var apiV3Endpoint: String?
     fileprivate var pushApnsEndpoint: String?
     fileprivate var pushWSEndpoint: String?
     fileprivate var myMojioEndpoint: String?
@@ -141,6 +144,7 @@ open class ClientEnvironment {
             ClientEnvironment.customEndpoints.map { customEndpoints in
                 self.apiEndpoint = customEndpoints.apiEndpoint
                 self.apiV1Endpoint = customEndpoints.apiV1Endpoint
+                self.apiV3Endpoint = customEndpoints.apiV3Endpoint
                 self.pushApnsEndpoint = customEndpoints.pushApnsEndpoint
                 self.pushWSEndpoint = customEndpoints.pushWSEndpoint
                 self.myMojioEndpoint = customEndpoints.myMojioEndpoint
@@ -157,6 +161,10 @@ open class ClientEnvironment {
         
         self.apiV1Endpoint = String(
             format: ClientEnvironment.EndPointFormat.apiV1Endpoint.rawValue,
+            arguments: [self.region.description])
+        
+        self.apiV3Endpoint = String(
+            format: ClientEnvironment.EndPointFormat.apiV3Endpoint.rawValue,
             arguments: [self.region.description])
         
         self.pushApnsEndpoint = String(
@@ -212,6 +220,10 @@ open class ClientEnvironment {
     
     open func getV1ApiEndpoint () -> String {
         return self.apiV1Endpoint!
+    }
+    
+    open func getV3ApiEndpoint () -> String {
+        return self.apiV3Endpoint!
     }
     
     open func getPushApnsEndpoint () -> String {
