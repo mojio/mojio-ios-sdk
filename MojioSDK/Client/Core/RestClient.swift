@@ -121,7 +121,7 @@ open class RestClient {
 
         self.requestUrl = clientEnvironment.getApiEndpoint()
         self.requestV1Url = clientEnvironment.getV1ApiEndpoint()
-        self.requestV3Url = clientEnvironment.getV1ApiEndpoint()
+        self.requestV3Url = clientEnvironment.getV3ApiEndpoint()
         self.pushUrl = clientEnvironment.getPushWSEndpoint()
         self.sessionManager = sessionManager
         self.keychainManager = keychainManager ?? KeychainManager.sharedInstance
