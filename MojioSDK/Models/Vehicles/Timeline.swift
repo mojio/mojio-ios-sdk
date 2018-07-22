@@ -16,8 +16,8 @@
 import Foundation
 import MojioCore
 
-struct Timeline {
-    enum TimelineActivityType: String, Codable {
+public struct Timeline {
+    public enum TimelineActivityType: String, Codable {
         case tripCompleted = "TripCompleted"
         case tripStarted = "TripStarted"
         case enteredGeofence = "EnteredGeofence"
@@ -36,15 +36,15 @@ struct Timeline {
         case serviceMessage = "Service Message"
     }
     
-    struct ActivityResult: Codable {
+    public struct ActivityResult: Codable {
         
-        let id: String?
-        let type: ActivityType?
-        let duration: String?
-        let polyline: String?
-        let tags: Array<String>?
+        public let id: String?
+        public let type: ActivityType?
+        public let duration: String?
+        public let polyline: String?
+        public let tags: Array<String>?
         
-        enum CodingKeys: String, CodingKey {
+        public enum CodingKeys: String, CodingKey {
             case id
             case type
             case duration
@@ -53,27 +53,27 @@ struct Timeline {
         }
     }
     
-    struct RootActivity: Codable {
+    public struct RootActivity: Codable {
         
-        typealias L = ActivityLocation
-        typealias A = Activity
-        typealias R = ActivityResult
+        public typealias L = ActivityLocation
+        public typealias A = Activity
+        public typealias R = ActivityResult
 
-        let id: String
-        let type: ActivityType?
-        let timelineType: TimelineActivityType?
-        let name: String?
+        public let id: String
+        public let type: ActivityType?
+        public let timelineType: TimelineActivityType?
+        public let name: String?
         
-        let actor: A?
-        let origin: L?
-        let target: L?
-        let location: L?
-        let result: R?
+        public let actor: A?
+        public let origin: L?
+        public let target: L?
+        public let location: L?
+        public let result: R?
 
-        let startTime: Date?
-        let published: Date?
+        public let startTime: Date?
+        public let published: Date?
 
-        enum CodingKeys: String, CodingKey {
+        public enum CodingKeys: String, CodingKey {
             case id
             case type
             case timelineType
