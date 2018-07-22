@@ -214,8 +214,10 @@ open class VehiclesClient: RestClient {
     }
     
     open func timeline(_ vehicleId: String) -> Self {
+        
+        return self
         self.requestEntity = VehiclesEndpoint.timeline.rawValue
-        self.requestUrl = self.requestUrl! + self.requestEntity + vehicleId + "/"
+        self.requestUrl = self.requestV3Url! + self.requestEntity + vehicleId + "/"
         
         return self
     }
