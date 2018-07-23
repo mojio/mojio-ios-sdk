@@ -287,7 +287,7 @@ public enum TimelineActivityType: String, Codable {
     case exitedGeofence = "ExitedGeofence"
     case deviceUnplugged = "DeviceUnplugged"
     case newVehicleConnected = "NewVehicleConnected"
-    case NewAssetConnected = "NewAssetConnected"
+    case newAssetConnected = "NewAssetConnected"
     case recallNotice = "RecallNotice"
     case lowFuel = "LowFuel"
     case dtcDetected = "DTCDetected"
