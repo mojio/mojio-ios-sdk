@@ -40,6 +40,7 @@ public enum ActivityType : String, Codable {
     case recall = "Recall"
     case remove = "Remove"
     case speedLimit = "SpeedLimit"
+    case tenant = "Tenant"
     case trip = "Trip"
     case updateDevice = "UpdateDevice"
     case user = "User"
