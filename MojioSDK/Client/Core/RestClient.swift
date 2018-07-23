@@ -77,7 +77,6 @@ open class RestClient {
 
     open var pushUrl: String?
     open var requestUrl: String?
-    open var requestV1Url: String?
     open var requestParams: Parameters = [:]
     open var requestEntity: String = RestEndpoint.base.rawValue
     open var requestEntityId: String?
@@ -119,7 +118,6 @@ open class RestClient {
         keychainManager: KeychainManager? = nil) {
 
         self.requestUrl = clientEnvironment.getApiEndpoint()
-        self.requestV1Url = clientEnvironment.getV1ApiEndpoint()
         self.pushUrl = clientEnvironment.getPushWSEndpoint()
         self.sessionManager = sessionManager
         self.keychainManager = keychainManager ?? KeychainManager.sharedInstance
@@ -147,6 +145,21 @@ open class RestClient {
     
     open func delete() -> Self {
         self.requestMethod = .delete
+        return self
+    }
+    
+    open func v1() -> Self {
+        self.requestUrl = self.requestUrl! + "v1/"
+        return self
+    }
+    
+    open func v2() -> Self {
+        self.requestUrl = self.requestUrl! + "v2/"
+        return self
+    }
+    
+    open func v3() -> Self {
+        self.requestUrl = self.requestUrl! + "v3/"
         return self
     }
     

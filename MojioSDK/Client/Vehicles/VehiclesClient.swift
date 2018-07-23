@@ -40,6 +40,8 @@ public enum VehiclesEndpoint: String {
     case diagnosticCodes = "diagnosticcodes/"
     case polyline = "polyline/"
     case settings = "settings/"
+    case assets = "assets/"
+    case timeline = "timeline/"
     
     // Storage
     // Parameters: Type, Id, Key
@@ -149,7 +151,7 @@ open class VehiclesClient: RestClient {
     open func storage(_ key: String) -> Self {
         
         if let requestEntityId = self.requestEntityId {
-            self.requestUrl = self.requestV1Url! + String(format: VehiclesEndpoint.storage.rawValue, self.requestEntity, requestEntityId, key)
+            self.requestUrl = self.requestUrl! + String(format: VehiclesEndpoint.storage.rawValue, self.requestEntity, requestEntityId, key)
         }
         
         return self
@@ -222,6 +224,16 @@ open class VehiclesClient: RestClient {
     public func settings() -> Self {
         self.requestEntity = VehiclesEndpoint.settings.rawValue
         self.requestUrl = self.requestUrl! + self.requestEntity
+        
+        return self
+    }
+    
+    open func timeline(assetId: String) -> Self {
+        self.requestEntity = VehiclesEndpoint.timeline.rawValue
+        self.appendRequestUrlEntity(self.requestEntity, asFinal: false)
+        self.appendRequestUrlEntity(VehiclesEndpoint.assets.rawValue, asFinal: false)
+        self.requestEntityId = assetId
+        self.appendRequestUrlEntityId(asFinal: true)
         
         return self
     }
@@ -309,6 +321,8 @@ open class VehiclesClient: RestClient {
                     return try JSONDecoder().decode(DiagnosticCode.self, from: responseData)
                 }
 
+            case .timeline:
+                fallthrough
             case .activities:  // conformance to be implemented
                 do {
                     return try JSONDecoder().decode(ResponseArray<RootActivity>.self, from: responseData)

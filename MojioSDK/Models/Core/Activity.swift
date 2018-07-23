@@ -34,6 +34,7 @@ public enum ActivityType : String, Codable {
     case parkingEndingSoon = "ParkingEndingSoon"
     case parkingEnded = "ParkingEnded"
     case person = "Person"
+    case place = "Place"
     case asset = "Asset"
     case pet = "Pet"
     case recall = "Recall"
@@ -70,7 +71,7 @@ public struct ActivityLocation: ActivityLocationModel {
     public let altitude: Double?
     public let radius: Double?
     
-    enum CodingKeys: String, CodingKey {
+    enum CodingKeysPascal: String, CodingKey {
         case type = "Type"
         case name = "Name"
         case latitude = "Latitude"
@@ -78,17 +79,63 @@ public struct ActivityLocation: ActivityLocationModel {
         case altitude = "Altitude"
         case radius = "Radius"
     }
+    
+    enum CodingKeysCamel: String, CodingKey {
+        case type = "type"
+        case name = "name"
+        case latitude = "latitude"
+        case longitude = "longitude"
+        case altitude = "altitude"
+        case radius = "radius"
+    }
+    
+    private init(container: KeyedDecodingContainer<CodingKeysPascal>) throws {
+        self.type = try container.decodeIfPresent(ActivityType.self, forKey: .type)
+        self.name = try container.decodeIfPresent(String.self, forKey: .name)
+        self.latitude = try container.decodeIfPresent(Double.self, forKey: .latitude)
+        self.longitude = try container.decodeIfPresent(Double.self, forKey: .longitude)
+        self.altitude = try container.decodeIfPresent(Double.self, forKey: .altitude)
+        self.radius = try container.decodeIfPresent(Double.self, forKey: .radius)
+    }
+    
+    private init(container: KeyedDecodingContainer<CodingKeysCamel>) throws {
+        self.type = try container.decodeIfPresent(ActivityType.self, forKey: .type)
+        self.name = try container.decodeIfPresent(String.self, forKey: .name)
+        self.latitude = try container.decodeIfPresent(Double.self, forKey: .latitude)
+        self.longitude = try container.decodeIfPresent(Double.self, forKey: .longitude)
+        self.altitude = try container.decodeIfPresent(Double.self, forKey: .altitude)
+        self.radius = try container.decodeIfPresent(Double.self, forKey: .radius)
+    }
+    
+    public init(from decoder: Decoder) throws {
+        do {
+            let container = try decoder.container(keyedBy: CodingKeysPascal.self)
+            _ = try container.decode(String.self, forKey: .type)
+            try self.init(container: container)
+        }
+        catch {
+            do {
+                try self.init(container: try decoder.container(keyedBy: CodingKeysCamel.self))
+            }
+            catch let error {
+                debugPrint(error)
+                throw error
+            }
+        }
+    }
 }
 
 public protocol ActivityModel: Codable, PrimaryKey {
     
     associatedtype L: ActivityLocationModel
+    typealias S = [String: String]
+    typealias T = [String]
     
     var id: String { get }
     var type: ActivityType? { get }
     var href: String? { get }
     var name: String? { get }
-    var nameMap: Dictionary<String, String>? { get }
+    var nameMap: S { get }
     
     var location: L? {get}
     
@@ -97,10 +144,14 @@ public protocol ActivityModel: Codable, PrimaryKey {
     
     var context: String? { get }
     var summary: String? { get }
-    var summaryMap: Dictionary<String, String>?  { get }
+    var summaryMap: S  { get }
     
     var published: Date? { get }
-    var icon: Dictionary<String, String>? {get}
+    var icon: S {get}
+    
+    var duration: String? {get}
+    var polyline: String? {get}
+    var tags: T {get}
 }
 
 public func ==<A: ActivityModel>(lhs: A, rhs: A) -> Bool {
@@ -115,7 +166,7 @@ public struct Activity: ActivityModel {
     public let type: ActivityType?
     public let href: String?
     public let name: String?
-    public let nameMap: Dictionary<String, String>?
+    public let nameMap: S
     
     public let location: L?
     
@@ -124,12 +175,16 @@ public struct Activity: ActivityModel {
     
     public let context: String?
     public let summary: String?
-    public let summaryMap: Dictionary<String, String>?
+    public let summaryMap: S
     
     public let published: Date?
-    public let icon: Dictionary<String, String>?
+    public let icon: S
     
-    enum CodingKeys: String, CodingKey {
+    public let duration: String?
+    public let polyline: String?
+    public let tags: T
+    
+    enum CodingKeysPascal: String, CodingKey {
         case id = "Id"
         case type = "Type"
         case href = "Href"
@@ -143,13 +198,112 @@ public struct Activity: ActivityModel {
         case summaryMap = "SummaryMap"
         case published = "Published"
         case icon = "Icon"
+        case duration = "Duration"
+        case polyline = "Polyline"
+        case tags = "Tags"
     }
+    
+    enum CodingKeysCamel: String, CodingKey {
+        case id = "id"
+        case type = "type"
+        case href = "href"
+        case name = "name"
+        case nameMap = "nameMap"
+        case location = "location"
+        case startTime = "startTime"
+        case endTime = "endTime"
+        case context = "context"
+        case summary = "summary"
+        case summaryMap = "summaryMap"
+        case published = "published"
+        case icon = "icon"
+        case duration = "duration"
+        case polyline = "polyline"
+        case tags = "tags"
+    }
+    
+    private init(container: KeyedDecodingContainer<CodingKeysPascal>) throws {
+        self.id = try container.decode(String.self, forKey: .id)
+        self.type = try container.decodeIfPresent(ActivityType.self, forKey: .type)
+        self.href = try container.decodeIfPresent(String.self, forKey: .href)
+        self.name = try container.decodeIfPresent(String.self, forKey: .name)
+        self.nameMap = try container.decodeIfPresent(S.self, forKey: .nameMap) ?? [:]
+        self.location = try container.decodeIfPresent(L.self, forKey: .location)
+        self.startTime = try container.decodeIfPresent(String.self, forKey: .startTime).flatMap { $0.dateFromISO }
+        self.endTime = try container.decodeIfPresent(String.self, forKey: .endTime).flatMap { $0.dateFromISO }
+        self.context = try container.decodeIfPresent(String.self, forKey: .context)
+        self.summary = try container.decodeIfPresent(String.self, forKey: .summary)
+        self.summaryMap = try container.decodeIfPresent(S.self, forKey: .summaryMap) ?? [:]
+        self.published = try container.decodeIfPresent(String.self, forKey: .published).flatMap { $0.dateFromISO }
+        self.icon = try container.decodeIfPresent(S.self, forKey: .summaryMap) ?? [:]
+        self.duration = try container.decodeIfPresent(String.self, forKey: .duration)
+        self.polyline = try container.decodeIfPresent(String.self, forKey: .polyline)
+        self.tags = try container.decodeIfPresent(T.self, forKey: .tags) ?? []
+    }
+    
+    private init(container: KeyedDecodingContainer<CodingKeysCamel>) throws {
+        self.id = try container.decode(String.self, forKey: .id)
+        self.type = try container.decodeIfPresent(ActivityType.self, forKey: .type)
+        self.href = try container.decodeIfPresent(String.self, forKey: .href)
+        self.name = try container.decodeIfPresent(String.self, forKey: .name)
+        self.nameMap = try container.decodeIfPresent(S.self, forKey: .nameMap) ?? [:]
+        self.location = try container.decodeIfPresent(L.self, forKey: .location)
+        self.startTime = try container.decodeIfPresent(String.self, forKey: .startTime).flatMap { $0.dateFromISO }
+        self.endTime = try container.decodeIfPresent(String.self, forKey: .endTime).flatMap { $0.dateFromISO }
+        self.context = try container.decodeIfPresent(String.self, forKey: .context)
+        self.summary = try container.decodeIfPresent(String.self, forKey: .summary)
+        self.summaryMap = try container.decodeIfPresent(S.self, forKey: .summaryMap) ?? [:]
+        self.published = try container.decodeIfPresent(String.self, forKey: .published).flatMap { $0.dateFromISO }
+        self.icon = try container.decodeIfPresent(S.self, forKey: .summaryMap) ?? [:]
+        self.duration = try container.decodeIfPresent(String.self, forKey: .duration)
+        self.polyline = try container.decodeIfPresent(String.self, forKey: .polyline)
+        self.tags = try container.decodeIfPresent(T.self, forKey: .tags) ?? []
+    }
+    
+    public init(from decoder: Decoder) throws {
+        
+        do {
+            let container = try decoder.container(keyedBy: CodingKeysPascal.self)
+            _ = try container.decode(String.self, forKey: .id)
+            try self.init(container: container)
+        }
+        catch {
+            do {
+                try self.init(container: try decoder.container(keyedBy: CodingKeysCamel.self))
+            }
+            catch let error {
+                debugPrint(error)
+                throw error
+            }
+        }
+    }
+}
+
+public enum TimelineActivityType: String, Codable {
+    case tripCompleted = "TripCompleted"
+    case tripStarted = "TripStarted"
+    case enteredGeofence = "EnteredGeofence"
+    case exitedGeofence = "ExitedGeofence"
+    case deviceUnplugged = "DeviceUnplugged"
+    case newVehicleConnected = "NewVehicleConnected"
+    case recallNotice = "RecallNotice"
+    case lowFuel = "LowFuel"
+    case dtcDetected = "DTCDetected"
+    case lowBattery = "LowBattery"
+    case exceededSpeedLimit = "ExceededSpeedLimit"
+    case tow = "Tow"
+    case disturbance = "Disturbance"
+    case milStatus = "MILStatus"
+    case accident = "Accident"
+    case serviceMessage = "Service Message"
 }
 
 public protocol RootActivityModel: ActivityModel {
     
     associatedtype A: ActivityModel
     
+    var timelineType: TimelineActivityType? { get }
+
     var actor: A? { get }
     var target: A? { get }
     var result: A? { get }
@@ -169,7 +323,7 @@ public struct RootActivity: RootActivityModel {
     public let type: ActivityType?
     public let href: String?
     public let name: String?
-    public let nameMap: Dictionary<String, String>?
+    public let nameMap: S
     
     public let location: L?
     
@@ -178,10 +332,16 @@ public struct RootActivity: RootActivityModel {
     
     public let context: String?
     public let summary: String?
-    public let summaryMap: Dictionary<String, String>?
+    public let summaryMap: S
     
     public let published: Date?
-    public let icon: Dictionary<String, String>?
+    public let icon: S
+    
+    public let duration: String?
+    public let polyline: String?
+    public let tags: T
+    
+    public let timelineType: TimelineActivityType?
     
     public let actor: A?
     public let target: A?
@@ -192,7 +352,7 @@ public struct RootActivity: RootActivityModel {
     
     public let audience: A?
     
-    enum CodingKeys: String, CodingKey {
+    enum CodingKeysPascal: String, CodingKey {
         case id = "Id"
         case type = "Type"
         case href = "Href"
@@ -206,6 +366,10 @@ public struct RootActivity: RootActivityModel {
         case summaryMap = "SummaryMap"
         case published = "Published"
         case icon = "Icon"
+        case duration = "Duration"
+        case polyline = "Polyline"
+        case tags = "Tags"
+        case timelineType = "TimelineType"
         case actor = "Actor"
         case target = "Target"
         case result = "Result"
@@ -213,5 +377,108 @@ public struct RootActivity: RootActivityModel {
         case origin = "Origin"
         case attributedTo = "AttributedTo"
         case audience = "Audience"
+    }
+    
+    enum CodingKeysCamel: String, CodingKey {
+        case id = "id"
+        case type = "type"
+        case href = "href"
+        case name = "name"
+        case nameMap = "nameMap"
+        case location = "Location"
+        case startTime = "startTime"
+        case endTime = "endTime"
+        case context = "context"
+        case summary = "summary"
+        case summaryMap = "summaryMap"
+        case published = "published"
+        case icon = "icon"
+        case duration = "duration"
+        case polyline = "polyline"
+        case tags = "tags"
+        case timelineType = "timelineType"
+        case actor = "actor"
+        case target = "target"
+        case result = "result"
+        case object = "object"
+        case origin = "origin"
+        case attributedTo = "attributedTo"
+        case audience = "audience"
+    }
+    
+    private init(container: KeyedDecodingContainer<CodingKeysPascal>) throws {
+        self.id = try container.decode(String.self, forKey: .id)
+        self.type = try container.decodeIfPresent(ActivityType.self, forKey: .type)
+        self.href = try container.decodeIfPresent(String.self, forKey: .href)
+        self.name = try container.decodeIfPresent(String.self, forKey: .name)
+        self.nameMap = try container.decodeIfPresent(S.self, forKey: .nameMap) ?? [:]
+        self.location = try container.decodeIfPresent(L.self, forKey: .location)
+        self.startTime = try container.decodeIfPresent(String.self, forKey: .startTime).flatMap { $0.dateFromISO }
+        self.endTime = try container.decodeIfPresent(String.self, forKey: .endTime).flatMap { $0.dateFromISO }
+        self.context = try container.decodeIfPresent(String.self, forKey: .context)
+        self.summary = try container.decodeIfPresent(String.self, forKey: .summary)
+        self.summaryMap = try container.decodeIfPresent(S.self, forKey: .summaryMap) ?? [:]
+        self.published = try container.decodeIfPresent(String.self, forKey: .published).flatMap { $0.dateFromISO }
+        self.icon = try container.decodeIfPresent(S.self, forKey: .summaryMap) ?? [:]
+        
+        self.duration = try container.decodeIfPresent(String.self, forKey: .duration)
+        self.polyline = try container.decodeIfPresent(String.self, forKey: .polyline)
+        self.tags = try container.decodeIfPresent(T.self, forKey: .tags) ?? []
+        
+        self.timelineType = try container.decodeIfPresent(TimelineActivityType.self, forKey: .timelineType)
+        self.actor = try container.decodeIfPresent(A.self, forKey: .actor)
+        self.target = try container.decodeIfPresent(A.self, forKey: .target)
+        self.result = try container.decodeIfPresent(A.self, forKey: .result)
+        self.object = try container.decodeIfPresent(A.self, forKey: .object)
+        self.origin = try container.decodeIfPresent(A.self, forKey: .origin)
+        self.attributedTo = try container.decodeIfPresent(A.self, forKey: .attributedTo)
+        self.audience = try container.decodeIfPresent(A.self, forKey: .audience)
+    }
+    
+    private init(container: KeyedDecodingContainer<CodingKeysCamel>) throws {
+        self.id = try container.decode(String.self, forKey: .id)
+        self.type = try container.decodeIfPresent(ActivityType.self, forKey: .type)
+        self.href = try container.decodeIfPresent(String.self, forKey: .href)
+        self.name = try container.decodeIfPresent(String.self, forKey: .name)
+        self.nameMap = try container.decodeIfPresent(S.self, forKey: .nameMap) ?? [:]
+        self.location = try container.decodeIfPresent(L.self, forKey: .location)
+        self.startTime = try container.decodeIfPresent(String.self, forKey: .startTime).flatMap { $0.dateFromISO }
+        self.endTime = try container.decodeIfPresent(String.self, forKey: .endTime).flatMap { $0.dateFromISO }
+        self.context = try container.decodeIfPresent(String.self, forKey: .context)
+        self.summary = try container.decodeIfPresent(String.self, forKey: .summary)
+        self.summaryMap = try container.decodeIfPresent(S.self, forKey: .summaryMap) ?? [:]
+        self.published = try container.decodeIfPresent(String.self, forKey: .published).flatMap { $0.dateFromISO }
+        self.icon = try container.decodeIfPresent(S.self, forKey: .summaryMap) ?? [:]
+        
+        self.duration = try container.decodeIfPresent(String.self, forKey: .duration)
+        self.polyline = try container.decodeIfPresent(String.self, forKey: .polyline)
+        self.tags = try container.decodeIfPresent(T.self, forKey: .tags) ?? []
+        
+        self.timelineType = try container.decodeIfPresent(TimelineActivityType.self, forKey: .timelineType)
+        self.actor = try container.decodeIfPresent(A.self, forKey: .actor)
+        self.target = try container.decodeIfPresent(A.self, forKey: .target)
+        self.result = try container.decodeIfPresent(A.self, forKey: .result)
+        self.object = try container.decodeIfPresent(A.self, forKey: .object)
+        self.origin = try container.decodeIfPresent(A.self, forKey: .origin)
+        self.attributedTo = try container.decodeIfPresent(A.self, forKey: .attributedTo)
+        self.audience = try container.decodeIfPresent(A.self, forKey: .audience)
+    }
+    
+    public init(from decoder: Decoder) throws {
+        
+        do {
+            let container = try decoder.container(keyedBy: CodingKeysPascal.self)
+            _ = try container.decode(String.self, forKey: .id)
+            try self.init(container: container)
+        }
+        catch {
+            do {
+                try self.init(container: try decoder.container(keyedBy: CodingKeysCamel.self))
+            }
+            catch let error {
+                debugPrint(error)
+                throw error
+            }
+        }
     }
 }
