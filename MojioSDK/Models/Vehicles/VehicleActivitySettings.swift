@@ -14,13 +14,32 @@
  *******************************************************************************/
 
 import Foundation
+import MojioCore
 
-public protocol SpeedThresholdModel: Codable {
-    var baseUnit: String { get }
-    var timestamp: String { get }
-    var baseValue: Double { get }
-    var unit: String { get }
-    var value: Double { get }
+public typealias SpeedThresholdModel = DeviceMeasurement
+
+public struct SpeedThreshold: SpeedThresholdModel {
+    
+    public typealias U = SpeedUnit
+    
+    // DeviceMeasurement
+    public let baseUnit: U
+    public let baseValue: Double
+    public let unit: U
+    public let value: Double
+    public let timestamp: Date?
+}
+
+extension SpeedThreshold {
+    
+    public init(from decoder: Decoder, with deviceMeasurements: DeviceMeasurements) throws {
+        
+        self.init(baseUnit: deviceMeasurements.baseUnit ?? .unknown, baseValue: deviceMeasurements.baseValue, unit: deviceMeasurements.unit ?? .unknown, value: deviceMeasurements.value, timestamp: deviceMeasurements.timestamp)
+    }
+    
+    public func encode(with encoder: Encoder) throws {
+        
+    }
 }
 
 public protocol VehicleActivitySettingsModel: Codable {
@@ -46,22 +65,6 @@ public protocol VehicleActivitySettingsModel: Codable {
     var enableSMSActivity: Bool { get }
     var enableVehicleCompatibilityActivity: Bool { get }
     var speedThreshold: S? { get }
-}
-
-public struct SpeedThreshold: SpeedThresholdModel {
-    public let baseUnit: String
-    public let timestamp: String
-    public let baseValue: Double
-    public let unit: String
-    public let value: Double
-    
-    public enum CodingKeys: String, CodingKey {
-        case baseUnit = "BaseUnit"
-        case timestamp = "Timestamp"
-        case baseValue = "BaseValue"
-        case unit = "Unit"
-        case value = "Value"
-    }
 }
 
 public struct VehicleActivitySettings: VehicleActivitySettingsModel {
