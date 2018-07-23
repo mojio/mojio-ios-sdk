@@ -40,8 +40,7 @@ public enum VehiclesEndpoint: String {
     case diagnosticCodes = "diagnosticcodes/"
     case polyline = "polyline/"
     case settings = "settings/"
-    case assets = "assets/"
-    case timeline = "timeline/"
+    case timeline = "timeline/assets/"
 
     // Storage
     // Parameters: Type, Id, Key
@@ -230,11 +229,9 @@ open class VehiclesClient: RestClient {
     
     open func timeline(assetId: String) -> Self {
         self.requestEntity = VehiclesEndpoint.timeline.rawValue
-        self.appendRequestUrlEntity(self.requestEntity, asFinal: false)
-        self.appendRequestUrlEntity(VehiclesEndpoint.assets.rawValue, asFinal: false)
         self.requestEntityId = assetId
         self.appendRequestUrlEntityId(asFinal: true)
-        
+
         return self
     }
     
