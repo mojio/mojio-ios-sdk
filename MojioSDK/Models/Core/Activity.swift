@@ -287,6 +287,7 @@ public enum TimelineActivityType: String, Codable {
     case exitedGeofence = "ExitedGeofence"
     case deviceUnplugged = "DeviceUnplugged"
     case newVehicleConnected = "NewVehicleConnected"
+    case NewAssetConnected = "NewAssetConnected"
     case recallNotice = "RecallNotice"
     case lowFuel = "LowFuel"
     case dtcDetected = "DTCDetected"
@@ -296,7 +297,7 @@ public enum TimelineActivityType: String, Codable {
     case disturbance = "Disturbance"
     case milStatus = "MILStatus"
     case accident = "Accident"
-    case serviceMessage = "Service Message"
+    case serviceMessage = "ServiceMessage"
 }
 
 public protocol RootActivityModel: ActivityModelBase, PrimaryKey {
