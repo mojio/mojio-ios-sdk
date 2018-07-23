@@ -18,9 +18,9 @@ import Foundation
 public protocol SpeedThresholdModel: Codable {
     var baseUnit: String { get }
     var timestamp: String { get }
-    var baseValue: Int { get }
+    var baseValue: Double { get }
     var unit: String { get }
-    var value: Int { get }
+    var value: Double { get }
 }
 
 public protocol VehicleActivitySettingsModel: Codable {
@@ -51,9 +51,9 @@ public protocol VehicleActivitySettingsModel: Codable {
 public struct SpeedThreshold: SpeedThresholdModel {
     public let baseUnit: String
     public let timestamp: String
-    public let baseValue: Int
+    public let baseValue: Double
     public let unit: String
-    public let value: Int
+    public let value: Double
     
     public enum CodingKeys: String, CodingKey {
         case baseUnit = "BaseUnit"
