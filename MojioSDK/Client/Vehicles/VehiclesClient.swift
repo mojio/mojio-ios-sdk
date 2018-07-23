@@ -230,10 +230,10 @@ open class VehiclesClient: RestClient {
     
     open func timeline(assetId: String) -> Self {
         self.requestEntity = VehiclesEndpoint.timeline.rawValue
-        self.appendRequestUrlEntity(self.requestEntity, asFinal: false)
-        self.appendRequestUrlEntity(VehiclesEndpoint.assets.rawValue, asFinal: false)
+        self.appendRequestUrlEntity(self.requestEntity, asFinal: true)
+        self.appendRequestUrlEntity(VehiclesEndpoint.assets.rawValue, asFinal: true)
         self.requestEntityId = assetId
-        self.appendRequestUrlEntityId(asFinal: true)
+        self.requestUrl = self.requestUrl! + assetId + "/"
         
         return self
     }
@@ -324,11 +324,13 @@ open class VehiclesClient: RestClient {
             case .timeline:
                 fallthrough
             case .activities:  // conformance to be implemented
+                let decoder = JSONDecoder()
+                decoder.dateDecodingStrategy = .formatted(VehiclesClient.dateFormatterIso8601)
                 do {
-                    return try JSONDecoder().decode(ResponseArray<RootActivity>.self, from: responseData)
+                    return try decoder.decode(ResponseArray<RootActivity>.self, from: responseData)
                 }
                 catch {
-                    return try JSONDecoder().decode(RootActivity.self, from: responseData)
+                    return try decoder.decode(RootActivity.self, from: responseData)
                 }
 
             case .wifiRadio:
@@ -358,4 +360,12 @@ open class VehiclesClient: RestClient {
             return nil
         }
     }
+    
+    static let dateFormatterIso8601: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.calendar = Calendar(identifier: .iso8601)
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXXXX"
+        return formatter
+    }()
 }
