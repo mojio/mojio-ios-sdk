@@ -14,7 +14,7 @@
  *******************************************************************************/
 
 public struct MojioError: Error {
-    public var dictionary: [String:Any]
+    public var dictionary: [String: Any]
     public var message: String?
     public var code: String?
     

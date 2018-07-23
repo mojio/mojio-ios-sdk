@@ -35,42 +35,48 @@ public struct ResponseArray<T: Codable>: ResponseArrayModel {
     public let totalCount: Int?
     public let links: L?
     
-    public enum CodingKeys: String, CodingKey {
+    public enum CodingKeysPascal: String, CodingKey {
         case data = "Data"
         case results = "Results"
         case totalCount = "TotalCount"
         case links = "Links"
     }
     
-    public enum CamelCodingKeys: String, CodingKey {
+    public enum CodingKeysCamel: String, CodingKey {
         case data = "data"
         case results = "results"
         case totalCount = "totalCount"
         case links = "links"
     }
     
+    private init(container: KeyedDecodingContainer<CodingKeysPascal>) throws {
+        self.data = try container.decodeIfPresent([T].self, forKey: .data) ?? []
+        self.results = try container.decodeIfPresent(Int.self, forKey: .results)
+        self.totalCount = try container.decodeIfPresent(Int.self, forKey: .totalCount)
+        self.links = try container.decodeIfPresent(Links.self, forKey: .links)
+    }
+    
+    private init(container: KeyedDecodingContainer<CodingKeysCamel>) throws {
+        self.data = try container.decodeIfPresent([T].self, forKey: .data) ?? []
+        self.results = try container.decodeIfPresent(Int.self, forKey: .results)
+        self.totalCount = try container.decodeIfPresent(Int.self, forKey: .totalCount)
+        self.links = try container.decodeIfPresent(Links.self, forKey: .links)
+    }
+    
     public init(from decoder: Decoder) throws {
-        
         do {
-            let container = try decoder.container(keyedBy: CodingKeys.self)
-            
-            if let response = try container.decodeIfPresent([T].self, forKey: CodingKeys.data) {
-                self.data = response
-                self.results = try container.decodeIfPresent(Int.self, forKey: CodingKeys.results)
-                self.totalCount = try container.decodeIfPresent(Int.self, forKey: CodingKeys.totalCount)
-                self.links = try container.decodeIfPresent(L.self, forKey: CodingKeys.links)
-            }
-            else {
-                let container = try decoder.container(keyedBy: CamelCodingKeys.self)
-                
-                self.data = try container.decodeIfPresent([T].self, forKey: CamelCodingKeys.data) ?? []
-                self.results = try container.decodeIfPresent(Int.self, forKey: CamelCodingKeys.results)
-                self.totalCount = try container.decodeIfPresent(Int.self, forKey: CamelCodingKeys.totalCount)
-                self.links = try container.decodeIfPresent(L.self, forKey: CamelCodingKeys.links)
-            }
+            let container = try decoder.container(keyedBy: CodingKeysPascal.self)
+            _ = try container.decode(Int.self, forKey: .results)
+            try self.init(container: container)
         }
         catch {
-            throw error
+            do {
+                try self.init(container: try decoder.container(keyedBy: CodingKeysCamel.self))
+            }
+            catch let error {
+                debugPrint(error)
+                throw error
+            }
         }
     }
 }

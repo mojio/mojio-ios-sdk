@@ -69,7 +69,6 @@
 		644214DE1D9E6500005A86C5 /* AggregationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644214DD1D9E6500005A86C5 /* AggregationData.swift */; };
 		68CF7CDEA225012F8E872CEE /* Pods_Images.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCEF188E65189732E37C36FD /* Pods_Images.framework */; };
 		75F77F0E1D19F504000CC2B4 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 75F77F0D1D19F504000CC2B4 /* libz.tbd */; };
-		85CCD503210481F300C2E57B /* Timeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85CCD5012104802D00C2E57B /* Timeline.swift */; };
 		887014791DA833CA00EFEC6D /* VehicleStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887014781DA833CA00EFEC6D /* VehicleStatistics.swift */; };
 		BC31E3CE1D419E80001649A7 /* Distance.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC31E3CD1D419E80001649A7 /* Distance.swift */; };
 		BC3D7C6F2087F3B000659A92 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 75F77F0D1D19F504000CC2B4 /* libz.tbd */; };
@@ -277,7 +276,6 @@
 		704FA7BB4426F78E7857D7EF /* Pods-Accounts.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Accounts.release.xcconfig"; path = "Pods/Target Support Files/Pods-Accounts/Pods-Accounts.release.xcconfig"; sourceTree = "<group>"; };
 		75F77F0D1D19F504000CC2B4 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		82379D5AA78EB8C45A6589E6 /* Pods-Images.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Images.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Images/Pods-Images.debug.xcconfig"; sourceTree = "<group>"; };
-		85CCD5012104802D00C2E57B /* Timeline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timeline.swift; sourceTree = "<group>"; };
 		8808C2341EB1483A00A41A8B /* PrimaryKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimaryKey.swift; sourceTree = "<group>"; };
 		887014781DA833CA00EFEC6D /* VehicleStatistics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VehicleStatistics.swift; sourceTree = "<group>"; };
 		9980F32E31CB2E846A417B2C /* Pods_Core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Core.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -619,7 +617,6 @@
 				BC879B581CBEFFDD00F9177B /* RPM.swift */,
 				BC879B591CBEFFDD00F9177B /* Score.swift */,
 				BC879B5A1CBEFFDD00F9177B /* Speed.swift */,
-				85CCD5012104802D00C2E57B /* Timeline.swift */,
 				BC879B4A1CBEFFDD00F9177B /* TimePeriod.swift */,
 				BC879B5C1CBEFFDD00F9177B /* Trip.swift */,
 				BC94271A1F01E17D00B7424A /* TripPolyline.swift */,
@@ -1355,7 +1352,6 @@
 				BC879B751CBEFFDD00F9177B /* RPM.swift in Sources */,
 				E06C95691D25CA2A006AECBB /* NotificationsSettings.swift in Sources */,
 				BC879B3C1CBEFFC000F9177B /* Recall.swift in Sources */,
-				85CCD503210481F300C2E57B /* Timeline.swift in Sources */,
 				BC879B421CBEFFC000F9177B /* Warranty.swift in Sources */,
 				BC879B611CBEFFDD00F9177B /* Accelerometer.swift in Sources */,
 				BC31E3CE1D419E80001649A7 /* Distance.swift in Sources */,
