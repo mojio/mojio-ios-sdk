@@ -115,7 +115,9 @@ public struct ActivityLocation: ActivityLocationModel {
         }
         catch {
             do {
-                try self.init(container: try decoder.container(keyedBy: CodingKeysCamel.self))
+                let container = try decoder.container(keyedBy: CodingKeysCamel.self)
+                _ = try container.decode(String.self, forKey: .type)
+                try self.init(container: container)
             }
             catch let error {
                 debugPrint(error)
@@ -391,7 +393,7 @@ public struct RootActivity: RootActivityModel {
         case href = "href"
         case name = "name"
         case nameMap = "nameMap"
-        case location = "Location"
+        case location = "location"
         case startTime = "startTime"
         case endTime = "endTime"
         case context = "context"
@@ -440,7 +442,7 @@ public struct RootActivity: RootActivityModel {
         
         // Timeline workaround for location set in target
         do {
-            self.location = try container.decodeIfPresent(L.self, forKey: .target)
+            self.location = try container.decode(L.self, forKey: .target)
             self.target = nil
         }
         catch {
@@ -477,7 +479,7 @@ public struct RootActivity: RootActivityModel {
         
         // Timeline workaround for location set in target
         do {
-            self.location = try container.decodeIfPresent(L.self, forKey: .target)
+            self.location = try container.decode(L.self, forKey: .target)
             self.target = nil
         }
         catch {
