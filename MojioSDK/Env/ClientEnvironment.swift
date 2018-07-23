@@ -150,7 +150,7 @@ open class ClientEnvironment {
         self.apiEndpoint = String(
             format: ClientEnvironment.EndPointFormat.apiEndpoint.rawValue,
             arguments: [self.region.description])
-        
+
         self.pushApnsEndpoint = String(
             format: ClientEnvironment.EndPointFormat.pushApnsEndpoint.rawValue,
             arguments: [self.region.description])
@@ -201,7 +201,7 @@ open class ClientEnvironment {
     open func getApiEndpoint () -> String {
         return self.apiEndpoint!
     }
-    
+
     open func getPushApnsEndpoint () -> String {
         return self.pushApnsEndpoint!
     }

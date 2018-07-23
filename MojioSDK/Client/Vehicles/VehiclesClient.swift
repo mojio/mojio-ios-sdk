@@ -42,7 +42,7 @@ public enum VehiclesEndpoint: String {
     case settings = "settings/"
     case assets = "assets/"
     case timeline = "timeline/"
-    
+
     // Storage
     // Parameters: Type, Id, Key
     // e.g. trips/{id}/store/{key}
@@ -213,7 +213,7 @@ open class VehiclesClient: RestClient {
         
         return self
     }
-    
+
     public func polyline() -> Self {
         self.requestEntity = VehiclesEndpoint.polyline.rawValue
         self.requestUrl = self.requestUrl! + self.requestEntity
@@ -330,6 +330,7 @@ open class VehiclesClient: RestClient {
                 catch {
                     return try JSONDecoder().decode(RootActivity.self, from: responseData)
                 }
+
             case .wifiRadio:
                 // Returns Transaction Id
                 let response = try JSONDecoder().decode([String: String].self, from: responseData)
