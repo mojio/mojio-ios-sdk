@@ -327,11 +327,13 @@ open class VehiclesClient: RestClient {
                 }
                 
             case .timeline:  // conformance to be implemented
+                let decoder = JSONDecoder()
+                decoder.dateDecodingStrategy = .formatted(VehiclesClient.iso8601)
                 do {
-                    return try JSONDecoder().decode(ResponseArray<Timeline.RootActivity>.self, from: responseData)
+                    return try decoder.decode(ResponseArray<Timeline.RootActivity>.self, from: responseData)
                 }
                 catch {
-                    return try JSONDecoder().decode(Timeline.RootActivity.self, from: responseData)
+                    return try decoder.decode(Timeline.RootActivity.self, from: responseData)
                 }
 
             case .wifiRadio:
@@ -361,4 +363,12 @@ open class VehiclesClient: RestClient {
             return nil
         }
     }
+    
+    static let iso8601: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.calendar = Calendar(identifier: .iso8601)
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXXXX"
+        return formatter
+    }()
 }
