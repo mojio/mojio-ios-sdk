@@ -125,13 +125,12 @@ public struct ActivityLocation: ActivityLocationModel {
     }
 }
 
-public protocol ActivityModel: Codable, PrimaryKey {
+public protocol ActivityModelBase: Codable {
     
     associatedtype L: ActivityLocationModel
     typealias S = [String: String]
     typealias T = [String]
     
-    var id: String { get }
     var type: ActivityType? { get }
     var href: String? { get }
     var name: String? { get }
@@ -154,15 +153,15 @@ public protocol ActivityModel: Codable, PrimaryKey {
     var tags: T {get}
 }
 
-public func ==<A: ActivityModel>(lhs: A, rhs: A) -> Bool {
-    return lhs.id == rhs.id
+public protocol ActivityModel: ActivityModelBase {
+    var id: String? { get }
 }
 
 public struct Activity: ActivityModel {
     
     public typealias L = ActivityLocation
     
-    public let id: String
+    public let id: String?
     public let type: ActivityType?
     public let href: String?
     public let name: String?
@@ -223,7 +222,7 @@ public struct Activity: ActivityModel {
     }
     
     private init(container: KeyedDecodingContainer<CodingKeysPascal>) throws {
-        self.id = try container.decode(String.self, forKey: .id)
+        self.id = try container.decodeIfPresent(String.self, forKey: .id)
         self.type = try container.decodeIfPresent(ActivityType.self, forKey: .type)
         self.href = try container.decodeIfPresent(String.self, forKey: .href)
         self.name = try container.decodeIfPresent(String.self, forKey: .name)
@@ -242,7 +241,7 @@ public struct Activity: ActivityModel {
     }
     
     private init(container: KeyedDecodingContainer<CodingKeysCamel>) throws {
-        self.id = try container.decode(String.self, forKey: .id)
+        self.id = try container.decodeIfPresent(String.self, forKey: .id)
         self.type = try container.decodeIfPresent(ActivityType.self, forKey: .type)
         self.href = try container.decodeIfPresent(String.self, forKey: .href)
         self.name = try container.decodeIfPresent(String.self, forKey: .name)
@@ -298,12 +297,14 @@ public enum TimelineActivityType: String, Codable {
     case serviceMessage = "Service Message"
 }
 
-public protocol RootActivityModel: ActivityModel {
+public protocol RootActivityModel: ActivityModelBase, PrimaryKey {
     
     associatedtype A: ActivityModel
     
+    var id: String { get }
+    
     var timelineType: TimelineActivityType? { get }
-
+    
     var actor: A? { get }
     var target: A? { get }
     var result: A? { get }
@@ -313,6 +314,11 @@ public protocol RootActivityModel: ActivityModel {
     
     var audience: A? { get }
 }
+
+public func ==<A: RootActivityModel>(lhs: A, rhs: A) -> Bool {
+    return lhs.id == rhs.id
+}
+
 
 public struct RootActivity: RootActivityModel {
     
@@ -412,7 +418,6 @@ public struct RootActivity: RootActivityModel {
         self.href = try container.decodeIfPresent(String.self, forKey: .href)
         self.name = try container.decodeIfPresent(String.self, forKey: .name)
         self.nameMap = try container.decodeIfPresent(S.self, forKey: .nameMap) ?? [:]
-        self.location = try container.decodeIfPresent(L.self, forKey: .location)
         self.startTime = try container.decodeIfPresent(String.self, forKey: .startTime).flatMap { $0.dateFromISO }
         self.endTime = try container.decodeIfPresent(String.self, forKey: .endTime).flatMap { $0.dateFromISO }
         self.context = try container.decodeIfPresent(String.self, forKey: .context)
@@ -427,12 +432,21 @@ public struct RootActivity: RootActivityModel {
         
         self.timelineType = try container.decodeIfPresent(TimelineActivityType.self, forKey: .timelineType)
         self.actor = try container.decodeIfPresent(A.self, forKey: .actor)
-        self.target = try container.decodeIfPresent(A.self, forKey: .target)
         self.result = try container.decodeIfPresent(A.self, forKey: .result)
         self.object = try container.decodeIfPresent(A.self, forKey: .object)
         self.origin = try container.decodeIfPresent(A.self, forKey: .origin)
         self.attributedTo = try container.decodeIfPresent(A.self, forKey: .attributedTo)
         self.audience = try container.decodeIfPresent(A.self, forKey: .audience)
+        
+        // Timeline workaround for location set in target
+        do {
+            self.location = try container.decodeIfPresent(L.self, forKey: .target)
+            self.target = nil
+        }
+        catch {
+            self.location = try container.decodeIfPresent(L.self, forKey: .location)
+            self.target = try container.decodeIfPresent(A.self, forKey: .target)
+        }
     }
     
     private init(container: KeyedDecodingContainer<CodingKeysCamel>) throws {
@@ -441,7 +455,6 @@ public struct RootActivity: RootActivityModel {
         self.href = try container.decodeIfPresent(String.self, forKey: .href)
         self.name = try container.decodeIfPresent(String.self, forKey: .name)
         self.nameMap = try container.decodeIfPresent(S.self, forKey: .nameMap) ?? [:]
-        self.location = try container.decodeIfPresent(L.self, forKey: .location)
         self.startTime = try container.decodeIfPresent(String.self, forKey: .startTime).flatMap { $0.dateFromISO }
         self.endTime = try container.decodeIfPresent(String.self, forKey: .endTime).flatMap { $0.dateFromISO }
         self.context = try container.decodeIfPresent(String.self, forKey: .context)
@@ -456,12 +469,21 @@ public struct RootActivity: RootActivityModel {
         
         self.timelineType = try container.decodeIfPresent(TimelineActivityType.self, forKey: .timelineType)
         self.actor = try container.decodeIfPresent(A.self, forKey: .actor)
-        self.target = try container.decodeIfPresent(A.self, forKey: .target)
         self.result = try container.decodeIfPresent(A.self, forKey: .result)
         self.object = try container.decodeIfPresent(A.self, forKey: .object)
         self.origin = try container.decodeIfPresent(A.self, forKey: .origin)
         self.attributedTo = try container.decodeIfPresent(A.self, forKey: .attributedTo)
         self.audience = try container.decodeIfPresent(A.self, forKey: .audience)
+        
+        // Timeline workaround for location set in target
+        do {
+            self.location = try container.decodeIfPresent(L.self, forKey: .target)
+            self.target = nil
+        }
+        catch {
+            self.location = try container.decodeIfPresent(L.self, forKey: .location)
+            self.target = try container.decodeIfPresent(A.self, forKey: .target)
+        }
     }
     
     public init(from decoder: Decoder) throws {
