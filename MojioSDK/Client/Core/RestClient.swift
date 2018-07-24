@@ -351,7 +351,7 @@ open class RestClient {
         }
         
         #if DEBUG
-        debugPrint(request.debugDescription)
+        print(request.debugDescription)
         #endif
     }
     
@@ -401,7 +401,7 @@ open class RestClient {
         }
         
         #if DEBUG
-        debugPrint(request.debugDescription)
+        print(request.debugDescription)
         #endif
     }
     
@@ -422,7 +422,7 @@ open class RestClient {
         }
         
         #if DEBUG
-        debugPrint(request.debugDescription)
+        print(request.debugDescription)
         #endif
     }
     
@@ -472,7 +472,7 @@ open class RestClient {
         }
         
         #if DEBUG
-        debugPrint(request.debugDescription)
+        print(request.debugDescription)
         #endif
     }
     
@@ -500,7 +500,7 @@ open class RestClient {
         }
         
         #if DEBUG
-        debugPrint(request)
+        print(request.debugDescription)
         #endif
     }
     
@@ -545,7 +545,7 @@ open class RestClient {
         }
         
         #if DEBUG
-        debugPrint(request.debugDescription)
+        print(request.debugDescription)
         #endif
     }
     
@@ -571,7 +571,7 @@ open class RestClient {
         }
         
         #if DEBUG
-        debugPrint(request.debugDescription)
+        print(request.debugDescription)
         #endif
     }
     

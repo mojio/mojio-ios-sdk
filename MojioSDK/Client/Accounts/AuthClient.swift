@@ -282,7 +282,7 @@ open class AuthClient: AuthControllerDelegate {
         }
         
         #if DEBUG
-            debugPrint(request)
+            print(request.debugDescription)
         #endif
     }
     
@@ -342,7 +342,7 @@ open class AuthClient: AuthControllerDelegate {
         }
         
         #if DEBUG
-            debugPrint(request)
+            print(request.debugDescription)
         #endif
     }
     
@@ -386,7 +386,7 @@ open class AuthClient: AuthControllerDelegate {
         }
         
         #if DEBUG
-            debugPrint(request)
+            print(request.debugDescription)
         #endif
     }
     
@@ -437,7 +437,7 @@ open class AuthClient: AuthControllerDelegate {
         }
         
         #if DEBUG
-            debugPrint(request)
+            print(request.debugDescription)
         #endif
     }
     
@@ -459,7 +459,7 @@ open class AuthClient: AuthControllerDelegate {
         }
         
         #if DEBUG
-            debugPrint(request)
+            print(request.debugDescription)
         #endif
     }
     
@@ -485,7 +485,7 @@ open class AuthClient: AuthControllerDelegate {
             }
         
         #if DEBUG
-            debugPrint(request)
+            print(request.debugDescription)
         #endif
     }
     
@@ -511,7 +511,7 @@ open class AuthClient: AuthControllerDelegate {
             }
         
         #if DEBUG
-            debugPrint(request)
+            print(request.debugDescription)
         #endif
     }
     
