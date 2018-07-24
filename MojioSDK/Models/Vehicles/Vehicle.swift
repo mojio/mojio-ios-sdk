@@ -289,7 +289,7 @@ public struct VehicleUpdate: Codable {
     public var name: String?
     public var licensePlate: String?
     public var vin: String?
-    public var odometer: Odometer? = nil
+    public var odometer: Odometer?
     
     public enum CodingKeys: String, CodingKey {
         case name = "Name"
