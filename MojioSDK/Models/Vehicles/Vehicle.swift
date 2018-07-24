@@ -284,3 +284,47 @@ public struct Vehicle: VehicleModel {
 public func ==(lhs: Vehicle, rhs: Vehicle) -> Bool {
     return lhs.id == rhs.id
 }
+
+public struct VehicleUpdate: Codable {
+    public var name: String?
+    public var licensePlate: String?
+    public var vin: String?
+    public var odometer: Odometer?
+    
+    public enum CodingKeys: String, CodingKey {
+        case name = "Name"
+        case licensePlate = "LicensePlate"
+        case vin = "VIN"
+        case odometer = "Odometer"
+    }
+    
+    public init(vehicle: Vehicle? = nil) {
+        self.init(
+            name: vehicle?.name,
+            licensePlate: vehicle?.licensePlate,
+            vin: vehicle?.vin,
+            odometer: vehicle?.odometer
+        )
+    }
+    
+    public init(
+        name: String? = nil,
+        licensePlate: String? = nil,
+        vin: String? = nil,
+        odometer: Odometer? = nil) {
+        
+        self.name = name
+        self.licensePlate = licensePlate
+        self.vin = vin
+        self.odometer = odometer
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        try container.encodeIfPresent(self.name, forKey: .name)
+        try container.encodeIfPresent(self.licensePlate, forKey: .licensePlate)
+        try container.encodeIfPresent(self.vin, forKey: .vin)
+        try container.encodeIfPresent(self.odometer, forKey: .odometer)
+    }
+}
