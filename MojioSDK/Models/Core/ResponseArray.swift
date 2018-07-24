@@ -50,14 +50,14 @@ public struct ResponseArray<T: Codable>: ResponseArrayModel {
     }
     
     private init(container: KeyedDecodingContainer<CodingKeysPascal>) throws {
-        self.data = try container.decodeIfPresent([T].self, forKey: .data) ?? []
+        self.data = try container.decode([T].self, forKey: .data)
         self.results = try container.decodeIfPresent(Int.self, forKey: .results)
         self.totalCount = try container.decodeIfPresent(Int.self, forKey: .totalCount)
         self.links = try container.decodeIfPresent(Links.self, forKey: .links)
     }
     
     private init(container: KeyedDecodingContainer<CodingKeysCamel>) throws {
-        self.data = try container.decodeIfPresent([T].self, forKey: .data) ?? []
+        self.data = try container.decode([T].self, forKey: .data)
         self.results = try container.decodeIfPresent(Int.self, forKey: .results)
         self.totalCount = try container.decodeIfPresent(Int.self, forKey: .totalCount)
         self.links = try container.decodeIfPresent(Links.self, forKey: .links)
@@ -74,7 +74,10 @@ public struct ResponseArray<T: Codable>: ResponseArrayModel {
                 try self.init(container: try decoder.container(keyedBy: CodingKeysCamel.self))
             }
             catch let error {
+                #if DEBUG
                 debugPrint(error)
+                #endif
+                
                 throw error
             }
         }
