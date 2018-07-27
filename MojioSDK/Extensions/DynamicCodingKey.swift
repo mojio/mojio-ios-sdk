@@ -15,7 +15,9 @@
 
 import Foundation
 
-extension Array: Error { }
+struct MultipleError: Error {
+    let errors: [Error]
+}
 
 class DynamicCodingKey: CodingKey {
     var stringValue: String
@@ -48,7 +50,7 @@ extension KeyedDecodingContainer where Key == DynamicCodingKey {
             }
             catch {
                 errors.append(error)
-                throw errors
+                throw MultipleError(errors: errors)
             }
         }
     }
@@ -74,7 +76,7 @@ extension KeyedDecodingContainer where Key == DynamicCodingKey {
         }
         
         if errors.count > 0 {
-            throw errors
+            throw MultipleError(errors: errors)
         }
         
         return result
