@@ -92,7 +92,7 @@ public struct GeofenceRegionUpdate: Codable {
     public var type: GeofenceRegionType?
     public var latitude: Double?
     public var longitude: Double?
-    public var radius: Double?
+    public var radius: Distance?
     public var polygon: String?
     
     public enum CodingKeys: String, CodingKey {
@@ -107,7 +107,7 @@ public struct GeofenceRegionUpdate: Codable {
         type: GeofenceRegionType? = nil,
         latitude: Double? = nil,
         longitude: Double? = nil,
-        radius: Double? = nil,
+        radius: Distance? = nil,
         polygon: String? = nil) {
         
         self.type = type

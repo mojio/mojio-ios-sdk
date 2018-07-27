@@ -16,7 +16,9 @@
 import Foundation
 import MojioCore
 
-public typealias DistanceModel = DeviceMeasurement
+public protocol DistanceModel: DeviceMeasurement {
+    init(baseUnit: U?, baseValue: Double, unit: U?, value: Double, timestamp: Date?)
+}
 
 public struct Distance: DistanceModel {
     
@@ -31,6 +33,14 @@ public struct Distance: DistanceModel {
 }
 
 extension Distance {
+    
+    public init(baseUnit: U?, baseValue: Double, unit: U?, value: Double, timestamp: Date?) {
+        self.baseUnit = baseUnit ?? .unknown
+        self.baseValue = baseValue
+        self.unit = unit ?? .unknown
+        self.value = value
+        self.timestamp = timestamp
+    }
     
     public init(from decoder: Decoder, with deviceMeasurements: DeviceMeasurements) throws {
         
