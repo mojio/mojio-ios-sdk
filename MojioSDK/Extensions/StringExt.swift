@@ -58,3 +58,13 @@ internal extension String {
         return nil
     }
 }
+
+extension String {
+    var capitalizedFirstCharacter: String {
+        return prefix(1).uppercased() + dropFirst()
+    }
+    
+    var decapitalizedFirstCharacter: String {
+        return prefix(1).lowercased() + dropFirst()
+    }
+}
