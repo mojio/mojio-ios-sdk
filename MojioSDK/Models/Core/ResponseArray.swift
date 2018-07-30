@@ -35,52 +35,20 @@ public struct ResponseArray<T: Codable>: ResponseArrayModel {
     public let totalCount: Int?
     public let links: L?
     
-    public enum CodingKeysPascal: String, CodingKey {
+    public enum CodingKeys: String, CodingKey, CompoundWordStyle {
         case data = "Data"
         case results = "Results"
         case totalCount = "TotalCount"
         case links = "Links"
     }
     
-    public enum CodingKeysCamel: String, CodingKey {
-        case data = "data"
-        case results = "results"
-        case totalCount = "totalCount"
-        case links = "links"
-    }
-    
-    private init(container: KeyedDecodingContainer<CodingKeysPascal>) throws {
-        self.data = try container.decode([T].self, forKey: .data)
-        self.results = try container.decodeIfPresent(Int.self, forKey: .results)
-        self.totalCount = try container.decodeIfPresent(Int.self, forKey: .totalCount)
-        self.links = try container.decodeIfPresent(Links.self, forKey: .links)
-    }
-    
-    private init(container: KeyedDecodingContainer<CodingKeysCamel>) throws {
-        self.data = try container.decode([T].self, forKey: .data)
-        self.results = try container.decodeIfPresent(Int.self, forKey: .results)
-        self.totalCount = try container.decodeIfPresent(Int.self, forKey: .totalCount)
-        self.links = try container.decodeIfPresent(Links.self, forKey: .links)
-    }
-    
     public init(from decoder: Decoder) throws {
-        do {
-            let container = try decoder.container(keyedBy: CodingKeysPascal.self)
-            _ = try container.decode(Int.self, forKey: .results)
-            try self.init(container: container)
-        }
-        catch {
-            do {
-                try self.init(container: try decoder.container(keyedBy: CodingKeysCamel.self))
-            }
-            catch let error {
-                #if DEBUG
-                debugPrint(error)
-                #endif
-                
-                throw error
-            }
-        }
+        let container = try decoder.container(keyedBy: DynamicCodingKey.self)
+        
+        self.data = try container.decodeIgnoringCase([T].self, forKey: CodingKeys.data)
+        self.results = try container.decodeIfPresentIgnoringCase(Int.self, forKey: CodingKeys.results)
+        self.totalCount = try container.decodeIfPresentIgnoringCase(Int.self, forKey: CodingKeys.totalCount)
+        self.links = try container.decodeIfPresentIgnoringCase(Links.self, forKey: CodingKeys.links)
     }
 }
 
