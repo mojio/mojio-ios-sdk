@@ -356,7 +356,7 @@ public struct RootActivity: RootActivityModel {
         }
         else {
             self.target = nil
-            self.location = nil
+            self.location = try container.decodeIfPresentIgnoringCase(L.self, forKey: CodingKeys.location)
         }
     }
 }

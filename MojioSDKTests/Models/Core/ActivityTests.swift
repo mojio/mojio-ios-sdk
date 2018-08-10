@@ -72,6 +72,15 @@ class ActivityTests: XCTestCase {
         XCTAssertNil(event.target)
     }
     
+    
+    func testParseTripStartedTimelineActivity() {
+        let data = Fixtures.startTripTimelineActivity.data(using: .utf8)!
+        let decoder = JSONDecoder()
+        let event = try! decoder.decode(RootActivity.self, from: data)
+        
+        XCTAssertNotNil(event.location)
+    }
+    
     struct Fixtures {
         static let disturbanceEvent = """
 {
@@ -199,6 +208,32 @@ class ActivityTests: XCTestCase {
   },
   "startTime": "2018-07-24T13:14:36.000Z",
   "published": "2018-07-24T13:14:36.000Z"
+}
+"""
+        static let startTripTimelineActivity = """
+{
+  "id": "8c13607d-075d-9b89-47a3-1f4d632ae2a4",
+  "type": "Leave",
+  "timelineType": "TripStarted",
+  "name": "Trip Started",
+  "summary": "Your vehicle has just started a trip from Canada.",
+  "actor": {
+    "type": "Vehicle",
+    "id": "3d803c23-c499-4f65-95cf-56c4b617fdbd"
+  },
+  "location": {
+    "latitude": 45,
+    "longitude": -73,
+    "altitude": 69,
+    "type": "Place",
+    "name": "Canada"
+  },
+  "result": {
+    "type": "Trip",
+    "id": "6eed2bf1-aa6f-4cad-984a-7a5d2a734b9e"
+  },
+  "startTime": "2018-08-09T13:39:16.000Z",
+  "published": "2018-08-09T13:39:16.000Z"
 }
 """
     }
