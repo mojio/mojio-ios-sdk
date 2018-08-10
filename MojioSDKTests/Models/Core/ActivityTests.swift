@@ -69,6 +69,7 @@ class ActivityTests: XCTestCase {
         
         XCTAssertNotNil(event.location)
         XCTAssertTrue(event.location!.hasCoordinate)
+        XCTAssertNil(event.target)
     }
     
     struct Fixtures {
