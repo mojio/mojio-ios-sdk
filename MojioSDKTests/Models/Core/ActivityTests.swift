@@ -62,6 +62,25 @@ class ActivityTests: XCTestCase {
         XCTAssertNotNil(event.type)
     }
     
+    func testParseTargetAsLocation() {
+        let data = Fixtures.targetAsLocation.data(using: .utf8)!
+        let decoder = JSONDecoder()
+        let event = try! decoder.decode(RootActivity.self, from: data)
+        
+        XCTAssertNotNil(event.location)
+        XCTAssertTrue(event.location!.hasCoordinate)
+        XCTAssertNil(event.target)
+    }
+    
+    
+    func testParseTripStartedTimelineActivity() {
+        let data = Fixtures.startTripTimelineActivity.data(using: .utf8)!
+        let decoder = JSONDecoder()
+        let event = try! decoder.decode(RootActivity.self, from: data)
+        
+        XCTAssertNotNil(event.location)
+    }
+    
     struct Fixtures {
         static let disturbanceEvent = """
 {
@@ -153,6 +172,68 @@ class ActivityTests: XCTestCase {
     "altitude": 0,
     "name": "686 Sunbird Trail, Pickering, ON L1X 2X6, Canada",
     "type": "Location"
+}
+"""
+        static let targetAsLocation = """
+{
+  "id": "9e5b42a5-77b7-e3df-8a3f-a5c0a6717ab4",
+  "type": "Arrive",
+  "timelineType": "TripCompleted",
+  "name": "Trip Completed",
+  "summary": "Your vehicle has just completed a trip from М12, Khmel'nyts'ka oblast, Ukraine to Unnamed Road, Kyiv, Ukraine, 02000.",
+  "actor": {
+    "type": "Vehicle",
+    "id": "1f77bfa5-ea88-4692-a3c7-18e1df01db4c"
+  },
+  "origin": {
+    "latitude": 49.36207,
+    "longitude": 27.03641,
+    "altitude": 0,
+    "type": "Place",
+    "name": "М12, Khmel'nyts'ka oblast, Ukraine"
+  },
+  "target": {
+    "latitude": 50.4518,
+    "longitude": 30.55403,
+    "altitude": 0,
+    "type": "Place",
+    "name": "Unnamed Road, Kyiv, Ukraine, 02000"
+  },
+  "result": {
+    "duration": "01:08:39.6600000",
+    "polyline": "",
+    "tags": [],
+    "type": "Trip",
+    "id": "0d30c0bb-0dfd-444b-8edc-7bf838185747"
+  },
+  "startTime": "2018-07-24T13:14:36.000Z",
+  "published": "2018-07-24T13:14:36.000Z"
+}
+"""
+        static let startTripTimelineActivity = """
+{
+  "id": "8c13607d-075d-9b89-47a3-1f4d632ae2a4",
+  "type": "Leave",
+  "timelineType": "TripStarted",
+  "name": "Trip Started",
+  "summary": "Your vehicle has just started a trip from Canada.",
+  "actor": {
+    "type": "Vehicle",
+    "id": "3d803c23-c499-4f65-95cf-56c4b617fdbd"
+  },
+  "location": {
+    "latitude": 45,
+    "longitude": -73,
+    "altitude": 69,
+    "type": "Place",
+    "name": "Canada"
+  },
+  "result": {
+    "type": "Trip",
+    "id": "6eed2bf1-aa6f-4cad-984a-7a5d2a734b9e"
+  },
+  "startTime": "2018-08-09T13:39:16.000Z",
+  "published": "2018-08-09T13:39:16.000Z"
 }
 """
     }
