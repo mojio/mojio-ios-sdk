@@ -66,6 +66,12 @@ public protocol ActivityLocationModel: Codable {
     var radius: Double? {get}
 }
 
+extension ActivityLocationModel {
+    public var hasCoordinate: Bool {
+        return self.latitude != nil && self.longitude != nil
+    }
+}
+
 public struct ActivityLocation: ActivityLocationModel {
     public let type: ActivityType?
     public let name: String?
@@ -332,7 +338,14 @@ public struct RootActivity: RootActivityModel {
         self.attributedTo = try container.decodeIfPresentIgnoringCase(A.self, forKey: CodingKeys.attributedTo)
         self.audience = try container.decodeIfPresentIgnoringCase(A.self, forKey: CodingKeys.audience)
         
-        if let target = try container.decodeIfPresentIgnoringCase(A.self, forKey: CodingKeys.target) {
+        if
+            let location = try container.decodeIfPresentIgnoringCase(L.self, forKey: CodingKeys.target),
+            location.hasCoordinate
+        {
+            self.location = location
+            self.target = nil
+        }
+        else if let target = try container.decodeIfPresentIgnoringCase(A.self, forKey: CodingKeys.target) {
             self.target = target
             if let location = try container.decodeIfPresentIgnoringCase(L.self, forKey: CodingKeys.location) {
                 self.location = location
@@ -342,8 +355,8 @@ public struct RootActivity: RootActivityModel {
             }
         }
         else {
-            self.location =  try container.decodeIfPresentIgnoringCase(L.self, forKey: CodingKeys.target)
             self.target = nil
+            self.location = nil
         }
     }
 }
