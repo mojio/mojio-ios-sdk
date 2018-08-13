@@ -562,3 +562,63 @@ open class AuthClient: AuthControllerDelegate {
         }
     }
 }
+
+extension AuthClient {
+    public func deleteUserToken(with userName: String, password: String, completion: @escaping (AuthToken) -> (), failure: @escaping (Error) -> () ) {
+        let parameters = [
+            "username": userName,
+            "password": password,
+            "client_id": self.clientId,
+            "client_secret": self.clientSecretKey,
+            "scope": "full restricted,delete:user",
+            "grant_type": "password"
+        ]
+        
+        var headers = [
+            "Accept": "application/json"
+        ]
+        
+        if let accessToken = self.authToken?.accessToken {
+            headers["Authorization"] = "Bearer " + accessToken
+        }
+        
+        Alamofire
+            .request(self.clientEnvironment.getIdentityEndpoint() + AuthClientEndpoint.token.rawValue,
+                     method: .post,
+                     parameters: parameters,
+                     encoding: URLEncoding.default,
+                     headers: headers)
+            .responseJSON { response in
+                switch response.result {
+                case .success(let object):
+                    if
+                        let dict = object as? [String: Any],
+                        let error = dict["error"] as? String,
+                        let errorValue = dict["error_description"] as? String {
+                        
+                        failure(MojioError(code: error.replacingOccurrences(of: " ", with: ""), message: errorValue, dictionary : dict))
+                    }
+                    else if let dict = object as? [String: Any] {
+                        
+                        if let expiry: Double = dict["expires_in"] as? Double {
+                            let authToken = AuthToken(
+                                accessToken: (dict["access_token"] as? String) ?? String.empty,
+                                expiry: Date.init(timeIntervalSinceNow: expiry),
+                                refreshToken: String(Date.init(timeIntervalSinceNow: expiry).timeIntervalSince1970),
+                                uniqueId: self.clientEnvironment.getRegion().regionType.rawValue)
+                            
+                            if authToken.isValid {
+                                completion(authToken)
+                            }
+                            else {
+                                failure(MojioError(code: "FailedToParseAuthToken"))
+                            }
+                        }
+                    }
+                case .failure(let error):
+                    failure(error)
+                }
+                
+            }
+    }
+}
