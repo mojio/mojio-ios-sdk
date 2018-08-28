@@ -596,7 +596,9 @@ open class AuthClient: AuthControllerDelegate {
     }
     
     open func getTokenUrl() -> String {
-        return self.clientEnvironment.getIdentityEndpoint() + AuthClientEndpoint.token.rawValue
+        //OVERRIDE option for ios-monitor
+        let endpoint = self.loginURL != nil ? self.loginURL.absoluteString : self.clientEnvironment.getIdentityEndpoint()
+        return endpoint + AuthClientEndpoint.token.rawValue
     }
     
     open func getTokenUrl(_ redirectUri: String, clientId: String) -> String {
