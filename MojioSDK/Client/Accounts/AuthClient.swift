@@ -564,7 +564,7 @@ open class AuthClient: AuthControllerDelegate {
 }
 
 extension AuthClient {
-    public func deleteUserToken(with userName: String, password: String, completion: @escaping (AuthToken) -> (), failure: @escaping (Error) -> () ) {
+    public func deleteUserToken(with userName: String, password: String, completion: @escaping (AuthToken) -> Void, failure: @escaping (_ response: [String: Any]?) -> Void)  {
         let parameters = [
             "username": userName,
             "password": password,
@@ -588,37 +588,34 @@ extension AuthClient {
                      parameters: parameters,
                      encoding: URLEncoding.default,
                      headers: headers)
-            .responseJSON { response in
-                switch response.result {
-                case .success(let object):
-                    if
-                        let dict = object as? [String: Any],
-                        let error = dict["error"] as? String,
-                        let errorValue = dict["error_description"] as? String {
+            .responseJSON(queue: self.dispatchQueue, options: .allowFragments) {response in
+                if response.response?.statusCode == 200 {
+                    if let dict = response.result.value as? [String: Any],
+                        let expiry: Double = dict["expires_in"] as? Double {
+                        let authToken = AuthToken(
+                            accessToken: (dict["access_token"] as? String) ?? String.empty,
+                            expiry: Date.init(timeIntervalSinceNow: expiry),
+                            refreshToken: String(Date.init(timeIntervalSinceNow: expiry).timeIntervalSince1970),
+                            uniqueId: self.clientEnvironment.getRegion().regionType.rawValue)
                         
-                        failure(MojioError(code: error.replacingOccurrences(of: " ", with: ""), message: errorValue, dictionary : dict))
-                    }
-                    else if let dict = object as? [String: Any] {
-                        
-                        if let expiry: Double = dict["expires_in"] as? Double {
-                            let authToken = AuthToken(
-                                accessToken: (dict["access_token"] as? String) ?? String.empty,
-                                expiry: Date.init(timeIntervalSinceNow: expiry),
-                                refreshToken: String(Date.init(timeIntervalSinceNow: expiry).timeIntervalSince1970),
-                                uniqueId: self.clientEnvironment.getRegion().regionType.rawValue)
-                            
-                            if authToken.isValid {
-                                completion(authToken)
-                            }
-                            else {
-                                failure(MojioError(code: "FailedToParseAuthToken"))
-                            }
+                        if authToken.isValid {
+                            completion(authToken)
+                        }
+                        else {
+                            failure(nil)
                         }
                     }
-                case .failure(let error):
-                    failure(error)
                 }
-                
-            }
+                else if let responseDict = response.result.value as? [String : Any] {
+                    failure(responseDict)
+                }
+                else if let responseError = response.result.error as NSError? {
+                    failure(responseError.userInfo)
+                }
+                else {
+                    return failure(nil)
+                }
+        }
     }
 }
+
