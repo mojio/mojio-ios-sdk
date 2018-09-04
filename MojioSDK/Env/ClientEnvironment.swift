@@ -83,7 +83,7 @@ open class ClientEnvironment {
         .wsPush: "%@api.moj.io",
         .myMojio: "%@my.moj.io",
         .identity: "%@identity.moj.io",
-        .tracker: "%@tracker-api.moj.io",
+        .tracker: "%@trackerapi.moj.io",
         .image: "%@image.moj.io"
     ]
     
@@ -103,7 +103,7 @@ open class ClientEnvironment {
         case pushWSEndpoint = "wss://%@api.moj.io/"
         case myMojioEndpoint = "https://%@my.moj.io/"
         case identityEndpoint = "https://%@identity.moj.io/"
-        case trackerEndpoint = "https://%@tracker-api.moj.io/"
+        case trackerEndpoint = "https://%@trackerapi.moj.io/"
         case imageEndpoint = "https://%@image.moj.io/"
     }
     
@@ -150,7 +150,7 @@ open class ClientEnvironment {
         self.apiEndpoint = String(
             format: ClientEnvironment.EndPointFormat.apiEndpoint.rawValue,
             arguments: [self.region.description])
-
+        
         self.pushApnsEndpoint = String(
             format: ClientEnvironment.EndPointFormat.pushApnsEndpoint.rawValue,
             arguments: [self.region.description])
@@ -167,31 +167,13 @@ open class ClientEnvironment {
             format: ClientEnvironment.EndPointFormat.identityEndpoint.rawValue,
             arguments: [self.region.description])
         
-        // TEMPORARY: for TMUS FUT
-        if self.region.regionType == MojioRegion.RegionType.production {
-            self.trackerEndpoint = "https://tmobile-us-prd0fut-trackerapi.moj.io/"
-            self.identityEndpoint = String(
-                format: ClientEnvironment.EndPointFormat.identityEndpoint.rawValue,
-                arguments: [self.region.description]
-            )
-            self.imageEndpoint = self.trackerEndpoint
-        }
-        else if self.region.regionType == MojioRegion.RegionType.staging {
-            self.trackerEndpoint = "http://tracker-api-staging.moj.io/"
-            self.identityEndpoint = String(
-                format: ClientEnvironment.EndPointFormat.identityEndpoint.rawValue,
-                arguments: [self.region.description]
-            )
-            self.imageEndpoint = self.trackerEndpoint
-        }
-        else {
-            self.trackerEndpoint = String(
-                format: ClientEnvironment.EndPointFormat.trackerEndpoint.rawValue,
-                arguments: [self.region.description])
-            self.imageEndpoint = String(
-                format: ClientEnvironment.EndPointFormat.imageEndpoint.rawValue,
-                arguments: [self.region.description])
-        }
+        self.trackerEndpoint = String(
+            format: ClientEnvironment.EndPointFormat.trackerEndpoint.rawValue,
+            arguments: [self.region.description])
+        
+        self.imageEndpoint = String(
+            format: ClientEnvironment.EndPointFormat.imageEndpoint.rawValue,
+            arguments: [self.region.description])
     }
     
     open func setDefaultRegion () {
@@ -201,7 +183,7 @@ open class ClientEnvironment {
     open func getApiEndpoint () -> String {
         return self.apiEndpoint!
     }
-
+    
     open func getPushApnsEndpoint () -> String {
         return self.pushApnsEndpoint!
     }
