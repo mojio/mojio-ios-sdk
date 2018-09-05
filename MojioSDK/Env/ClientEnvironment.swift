@@ -22,12 +22,12 @@ public protocol MojioRegionPrefix {
 open class MojioRegion: MojioRegionPrefix {
     
     public enum RegionType: String {
-        case production = ""
-        case preProd = "preprod-"
+        case production = "production-"
+        case fut = "fut-"
         case staging = "staging-"
-        case trial = "trial-"
-        case develop = "develop-"
         case load = "load-"
+        case develop = "develop-"
+        case ci = "ci-"
         case custom = "custom-"
     }
     
@@ -105,6 +105,7 @@ open class ClientEnvironment {
         case identityEndpoint = "https://%@identity.moj.io/"
         case trackerEndpoint = "https://%@trackerapi.moj.io/"
         case imageEndpoint = "https://%@image.moj.io/"
+        case services = "https://%@services.moj.io/"
     }
     
     fileprivate var region: MojioRegion = MojioRegion()
