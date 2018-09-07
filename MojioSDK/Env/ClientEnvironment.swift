@@ -62,6 +62,7 @@ public enum MojioEndpoint {
     case identity
     case tracker
     case image
+    case services
 }
 
 open class ClientEnvironment {
@@ -73,7 +74,8 @@ open class ClientEnvironment {
         myMojioEndpoint: String?,
         identityEndpoint: String?,
         trackerEndpoint: String?,
-        imageEndpoint: String?
+        imageEndpoint: String?,
+        servicesEndpoint: String?
     )
     public static var customEndpoints: CustomEndpoints?
     
@@ -84,7 +86,8 @@ open class ClientEnvironment {
         .myMojio: "%@my.moj.io",
         .identity: "%@identity.moj.io",
         .tracker: "%@trackerapi.moj.io",
-        .image: "%@image.moj.io"
+        .image: "%@image.moj.io",
+        .services: "%@services.moj.io"
     ]
     
     open func domainFromMojioEndpoint(_ endpoint: MojioEndpoint) -> String {
@@ -105,7 +108,7 @@ open class ClientEnvironment {
         case identityEndpoint = "https://%@identity.moj.io/"
         case trackerEndpoint = "https://%@trackerapi.moj.io/"
         case imageEndpoint = "https://%@image.moj.io/"
-        case services = "https://%@services.moj.io/"
+        case servicesEndpoint = "https://%@services.moj.io/"
     }
     
     fileprivate var region: MojioRegion = MojioRegion()
@@ -117,6 +120,7 @@ open class ClientEnvironment {
     fileprivate var identityEndpoint: String?
     fileprivate var trackerEndpoint: String?
     fileprivate var imageEndpoint: String?
+    fileprivate var servicesEndpoint: String?
     
     public init() {
         self.updateEndPoints()
@@ -144,6 +148,7 @@ open class ClientEnvironment {
                 self.identityEndpoint = customEndpoints.identityEndpoint
                 self.trackerEndpoint = customEndpoints.trackerEndpoint
                 self.imageEndpoint = customEndpoints.trackerEndpoint
+                self.servicesEndpoint = customEndpoints.servicesEndpoint
             }
             return
         }
@@ -174,6 +179,10 @@ open class ClientEnvironment {
         
         self.imageEndpoint = String(
             format: ClientEnvironment.EndPointFormat.imageEndpoint.rawValue,
+            arguments: [self.region.description])
+        
+        self.servicesEndpoint = String(
+            format: ClientEnvironment.EndPointFormat.servicesEndpoint.rawValue,
             arguments: [self.region.description])
     }
     
@@ -207,5 +216,9 @@ open class ClientEnvironment {
     
     open func getImageEndpoint () -> String {
         return self.imageEndpoint!
+    }
+    
+    open func getServicesEndpoint () -> String {
+        return self.servicesEndpoint!
     }
 }
