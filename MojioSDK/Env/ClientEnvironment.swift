@@ -86,7 +86,7 @@ open class ClientEnvironment {
         .myMojio: "%@my.moj.io",
         .identity: "%@identity.moj.io",
         .tracker: "%@trackerapi.moj.io",
-        .image: "%@image.moj.io",
+        .image: "%@trackerapi.moj.io",
         .services: "%@services.moj.io"
     ]
     
@@ -107,7 +107,6 @@ open class ClientEnvironment {
         case myMojioEndpoint = "https://%@my.moj.io/"
         case identityEndpoint = "https://%@identity.moj.io/"
         case trackerEndpoint = "https://%@trackerapi.moj.io/"
-        case imageEndpoint = "https://%@image.moj.io/"
         case servicesEndpoint = "https://%@services.moj.io/"
     }
     
@@ -178,7 +177,7 @@ open class ClientEnvironment {
             arguments: [self.region.description])
         
         self.imageEndpoint = String(
-            format: ClientEnvironment.EndPointFormat.imageEndpoint.rawValue,
+            format: ClientEnvironment.EndPointFormat.trackerEndpoint.rawValue,
             arguments: [self.region.description])
         
         self.servicesEndpoint = String(
