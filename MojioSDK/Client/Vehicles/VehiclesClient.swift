@@ -345,7 +345,9 @@ open class VehiclesClient: RestClient {
                 catch {
                     return try JSONDecoder().decode(VehicleActivitySettings.self, from: responseData)
                 }
-            
+            case .tags:
+                return try JSONDecoder().decode(Array<String>.self, from: responseData)
+                
             default:
                 return nil
             }
