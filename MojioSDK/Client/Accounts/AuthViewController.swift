@@ -43,7 +43,7 @@ open class AuthViewController: UIViewController, UIWebViewDelegate {
     
     //MARK: webview delegate methods
     
-    open func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+    open func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebView.NavigationType) -> Bool {
         self.delegate?.authControllerLoadURLRequest(request);
         return true;
     }
