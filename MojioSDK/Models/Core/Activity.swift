@@ -58,6 +58,7 @@ internal extension ActivityType {
 }
 
 public protocol ActivityLocationModel: Codable {
+    var id: String? {get}
     var type: ActivityType? {get}
     var name: String? {get}
     var latitude: Double? {get}
@@ -73,6 +74,7 @@ extension ActivityLocationModel {
 }
 
 public struct ActivityLocation: ActivityLocationModel {
+    public let id: String?
     public let type: ActivityType?
     public let name: String?
     public let latitude: Double?
@@ -81,6 +83,7 @@ public struct ActivityLocation: ActivityLocationModel {
     public let radius: Double?
     
     enum CodingKeys: String, CodingKey, CompoundWordStyle {
+        case id = "Id"
         case type = "Type"
         case name = "Name"
         case latitude = "Latitude"
@@ -92,6 +95,7 @@ public struct ActivityLocation: ActivityLocationModel {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DynamicCodingKey.self)
         
+        self.id = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.id)
         self.type = try container.decodeIfPresentIgnoringCase(ActivityType.self, forKey: CodingKeys.type)
         self.name = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.name)
         self.latitude = try container.decodeIfPresentIgnoringCase(Double.self.self, forKey: CodingKeys.latitude)
