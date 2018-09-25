@@ -58,7 +58,7 @@ public struct AssetDailySummary: AssetDailySummaryModel {
             self.activeMinutes = try container.decodeIfPresent(Int.self, forKey: .activeMinutes)
             /// PHIOS-1123: Trim time+timezone from the string and properly convert it to the date
             self.date = try container.decodeIfPresent(String.self, forKey: .date)
-                .flatMap { String($0.prefix(while: { $0 != "T" })) }
+//                .flatMap { String($0.prefix(while: { $0 != "T" })) }
                 .flatMap { $0.toDate }
             self.encodedPolyline = try container.decodeIfPresent(String.self, forKey: .encodedPolyline)
         }
