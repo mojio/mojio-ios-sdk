@@ -36,6 +36,9 @@ public protocol MojioModel: Codable, PrimaryKey {
     var lastModified: Date? { get }
     var deleted: Bool { get }
     var msisdn: String? { get }
+    var vendor: String? { get }
+    var firmwareVersion: String? { get }
+    var hardwareVersion: String? { get }
     var iccid: String? { get }
 }
 
@@ -61,6 +64,9 @@ public struct Mojio: MojioModel {
     public let lastModified: Date?
     public let deleted: Bool
     public let msisdn: String?
+    public let vendor: String?
+    public let firmwareVersion: String?
+    public let hardwareVersion: String?
     public let iccid: String?
     
     public enum CodingKeys: String, CodingKey {
@@ -78,6 +84,9 @@ public struct Mojio: MojioModel {
         case tags = "Tags"
         case deleted = "Deleted"
         case msisdn = "MSISDN"
+        case vendor = "Vendor"
+        case firmwareVersion = "FirmwareVersion"
+        case hardwareVersion = "HardwareVersion"
         case iccid = "ICCID"
     }
     
@@ -98,6 +107,9 @@ public struct Mojio: MojioModel {
         self.tags = try container.decodeIfPresent([String].self, forKey: .tags) ?? []
         self.deleted = try container.decodeIfPresent(Bool.self, forKey: .deleted) ?? false
         self.msisdn = try container.decodeIfPresent(String.self, forKey: .msisdn)
+        self.vendor = try container.decodeIfPresent(String.self, forKey: .vendor)
+        self.firmwareVersion = try container.decodeIfPresent(String.self, forKey: .firmwareVersion)
+        self.hardwareVersion = try container.decodeIfPresent(String.self, forKey: .hardwareVersion)
         self.iccid = try container.decodeIfPresent(String.self, forKey: .iccid)
     }
     
@@ -121,6 +133,9 @@ public struct Mojio: MojioModel {
         try container.encodeIfPresent(self.tags, forKey: .tags)
         try container.encodeIfPresent(self.deleted, forKey: .deleted)
         try container.encodeIfPresent(self.msisdn, forKey: .msisdn)
+        try container.encodeIfPresent(self.vendor, forKey: .vendor)
+        try container.encodeIfPresent(self.firmwareVersion, forKey: .firmwareVersion)
+        try container.encodeIfPresent(self.hardwareVersion, forKey: .hardwareVersion)
         try container.encodeIfPresent(self.iccid, forKey: .iccid)
     }
 }

@@ -112,7 +112,8 @@ public final class KeychainManager: AuthTokenManager {
                 accessToken: accessToken,
                 expiry: Date(timeIntervalSince1970: expiryInterval),
                 refreshToken: refreshToken,
-                uniqueId: uniqueId)
+                // PHIOS-1188: Unique name changed for production
+                uniqueId: uniqueId.count == 0 ? MojioRegion.RegionType.production.rawValue : uniqueId)
         }
         return nil
     }
