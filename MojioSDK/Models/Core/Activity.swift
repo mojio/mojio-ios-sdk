@@ -368,7 +368,7 @@ public struct RootActivity: RootActivityModel {
 public struct Icon: Codable {
     
     public let name: String?
-    public let type: TimelineActivityIconType?
+    public let type: String?
     
     enum CodingKeys: String, CodingKey, CompoundWordStyle {
         case name = "Name"
@@ -379,11 +379,6 @@ public struct Icon: Codable {
         let container = try decoder.container(keyedBy: DynamicCodingKey.self)
         
         self.name = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.name)
-        self.type = try container.decodeIfPresentIgnoringCase(TimelineActivityIconType.self, forKey: CodingKeys.type)
+        self.type = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.type)
     }
-}
-
-public enum TimelineActivityIconType: String, Codable {
-    case warning = "warning"
-    case alert = "alert"
 }
