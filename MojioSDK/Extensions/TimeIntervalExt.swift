@@ -15,8 +15,8 @@
 
 import Foundation
 
-extension TimeInterval {
-    static func from(_ string: String?, pattern: String? = nil, multipliers: [Double]? = nil) -> TimeInterval? {
+internal extension TimeInterval {
+    internal static func from(_ string: String?, pattern: String? = nil, multipliers: [Double]? = nil) -> TimeInterval? {
         guard let string = string else { return nil }
         let pattern = pattern ?? "^(\\d+)?\\.?(\\d{2}):(\\d{2}):(\\d{2})(\\.\\d+)?$"
         let secondsPerMinute = 60.0

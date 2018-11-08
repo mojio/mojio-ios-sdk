@@ -1,55 +1,77 @@
 PODS:
-  - Alamofire (4.5.1)
-  - KeychainSwift (10.0.0)
-  - ObjectMapper (3.0.0)
-  - OHHTTPStubs (6.0.0):
-    - OHHTTPStubs/Default (= 6.0.0)
-  - OHHTTPStubs/Core (6.0.0)
-  - OHHTTPStubs/Default (6.0.0):
+  - Alamofire (4.7.3)
+  - AlamofireImage (3.3.1):
+    - Alamofire (~> 4.5)
+  - KeychainSwift (11.0.0)
+  - MojioCore (3.0.0):
+    - Alamofire
+    - KeychainSwift
+    - OHHTTPStubs
+    - OHHTTPStubs/Swift
+    - SwiftDate
+    - SwiftWebSocket
+    - SwiftyJSON
+  - OHHTTPStubs (6.1.0):
+    - OHHTTPStubs/Default (= 6.1.0)
+  - OHHTTPStubs/Core (6.1.0)
+  - OHHTTPStubs/Default (6.1.0):
     - OHHTTPStubs/Core
     - OHHTTPStubs/JSON
     - OHHTTPStubs/NSURLSession
     - OHHTTPStubs/OHPathHelpers
-  - OHHTTPStubs/JSON (6.0.0):
+  - OHHTTPStubs/JSON (6.1.0):
     - OHHTTPStubs/Core
-  - OHHTTPStubs/NSURLSession (6.0.0):
+  - OHHTTPStubs/NSURLSession (6.1.0):
     - OHHTTPStubs/Core
-  - OHHTTPStubs/OHPathHelpers (6.0.0)
-  - OHHTTPStubs/Swift (6.0.0):
+  - OHHTTPStubs/OHPathHelpers (6.1.0)
+  - OHHTTPStubs/Swift (6.1.0):
     - OHHTTPStubs/Default
-  - SwiftDate (4.4.2)
-  - SwiftWebSocket (2.6.5)
-  - SwiftyJSON (3.1.4)
+  - SwiftDate (5.0.7)
+  - SwiftWebSocket (2.7.0)
+  - SwiftyJSON (4.1.0)
 
 DEPENDENCIES:
   - Alamofire
+  - AlamofireImage
   - KeychainSwift
-  - ObjectMapper
+  - MojioCore (from `.`)
   - OHHTTPStubs
   - OHHTTPStubs/Swift
   - SwiftDate
-  - SwiftWebSocket (from `https://github.com/mojio/SwiftWebSocket`, branch `master`)
+  - SwiftWebSocket (from `https://github.com/mojio/SwiftWebSocket`, commit `d39576a`)
   - SwiftyJSON
 
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Alamofire
+    - AlamofireImage
+    - KeychainSwift
+    - OHHTTPStubs
+    - SwiftDate
+    - SwiftyJSON
+
 EXTERNAL SOURCES:
+  MojioCore:
+    :path: "."
   SwiftWebSocket:
-    :branch: master
+    :commit: d39576a
     :git: https://github.com/mojio/SwiftWebSocket
 
 CHECKOUT OPTIONS:
   SwiftWebSocket:
-    :commit: f23abf3d867ea679d6d6ba3a114b389288a4278a
+    :commit: d39576a
     :git: https://github.com/mojio/SwiftWebSocket
 
 SPEC CHECKSUMS:
-  Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
-  KeychainSwift: f9f7910449a0c0fd2cabc889121530dd2c477c33
-  ObjectMapper: 92230db59bf8f341a5c3a3cf0b9fbdde3cf0d87f
-  OHHTTPStubs: 752f9b11fd810a15162d50f11c06ff94f8e012eb
-  SwiftDate: 131cf2f09b390f0a07f0099e36005ffe2fbf4c7e
-  SwiftWebSocket: 1ef8a0efb023544643bdf480c1ec4a62b204f293
-  SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
+  Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
+  AlamofireImage: 3b35b586853abaf94ca1250f4e94cff3c21a4c0d
+  KeychainSwift: bea6bd9f98af7b8d7ca4aa79fe105c00fab532db
+  MojioCore: e58c9e9de92070138cbab401c390e5c8f26ad116
+  OHHTTPStubs: 1e21c7d2c084b8153fc53d48400d8919d2d432d0
+  SwiftDate: f053fb89250c59af5eff777f3b832d2b9dd57403
+  SwiftWebSocket: 612c9729fd503cb6b0b8b45390c788686dac306f
+  SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
 
-PODFILE CHECKSUM: f3969519b77cdcb8f8b03243ff6190f4cb950d81
+PODFILE CHECKSUM: 430f0345ab58a4928269ebd790cfd76b53fcd079
 
-COCOAPODS: 1.3.1
+COCOAPODS: 1.5.3

@@ -20,14 +20,15 @@ public protocol MojioRegionPrefix {
 }
 
 open class MojioRegion: MojioRegionPrefix {
-
+    
     public enum RegionType: String {
-        case production = ""
-        case preProd = "preprod-"
+        case production = "production-"
+        case fut = "fut-"
         case staging = "staging-"
-        case trial = "trial-"
-        case develop = "develop-"
         case load = "load-"
+        case develop = "develop-"
+        case ci = "ci-"
+        case custom = "custom-"
     }
     
     open var defaultRegionType: RegionType {
@@ -41,7 +42,7 @@ open class MojioRegion: MojioRegionPrefix {
     open var description: String {
         return self.regionPrefix + self.regionType.rawValue
     }
-
+    
     open private(set) var regionType: RegionType = .production
     
     public init() {
@@ -59,9 +60,24 @@ public enum MojioEndpoint {
     case wsPush
     case myMojio
     case identity
+    case tracker
+    case image
+    case services
 }
 
 open class ClientEnvironment {
+    
+    public typealias CustomEndpoints = (
+        apiEndpoint: String?,
+        pushApnsEndpoint: String?,
+        pushWSEndpoint: String?,
+        myMojioEndpoint: String?,
+        identityEndpoint: String?,
+        trackerEndpoint: String?,
+        imageEndpoint: String?,
+        servicesEndpoint: String?
+    )
+    public static var customEndpoints: CustomEndpoints?
     
     private static let endpointDomainFormats: [MojioEndpoint: String] = [
         .api: "%@api.moj.io",
@@ -69,7 +85,10 @@ open class ClientEnvironment {
         .wsPush: "%@api.moj.io",
         .myMojio: "%@my.moj.io",
         .identity: "%@identity.moj.io",
-        ]
+        .tracker: "%@trackerapi.moj.io",
+        .image: "%@trackerapi.moj.io",
+        .services: "%@services.moj.io"
+    ]
     
     open func domainFromMojioEndpoint(_ endpoint: MojioEndpoint) -> String {
         if let endpointFormat = ClientEnvironment.endpointDomainFormats[endpoint] {
@@ -82,22 +101,25 @@ open class ClientEnvironment {
     }
     
     private enum EndPointFormat: String {
-        case apiEndpoint = "https://%@api.moj.io/v2/"
-        case apiV1Endpoint = "https://%@api.moj.io/v1/"
-        case pushApnsEndpoint = "https://%@push.moj.io/v2/"
-        case pushWSEndpoint = "wss://%@api.moj.io/v2/"
+        case apiEndpoint = "https://%@api.moj.io/"
+        case pushApnsEndpoint = "https://%@push.moj.io/"
+        case pushWSEndpoint = "wss://%@api.moj.io/"
         case myMojioEndpoint = "https://%@my.moj.io/"
         case identityEndpoint = "https://%@identity.moj.io/"
+        case trackerEndpoint = "https://%@trackerapi.moj.io/"
+        case servicesEndpoint = "https://%@services.moj.io/"
     }
     
     fileprivate var region: MojioRegion = MojioRegion()
     
     fileprivate var apiEndpoint: String?
-    fileprivate var apiV1Endpoint: String?
     fileprivate var pushApnsEndpoint: String?
     fileprivate var pushWSEndpoint: String?
     fileprivate var myMojioEndpoint: String?
     fileprivate var identityEndpoint: String?
+    fileprivate var trackerEndpoint: String?
+    fileprivate var imageEndpoint: String?
+    fileprivate var servicesEndpoint: String?
     
     public init() {
         self.updateEndPoints()
@@ -108,7 +130,7 @@ open class ClientEnvironment {
     }
     
     /**
-        Letting an app developer ovveride the default environment. This should be used only for development purposes to test the functionality of the app in different continents
+     Letting an app developer ovveride the default environment. This should be used only for development purposes to test the functionality of the app in different continents
      */
     open func setRegion (_ region: MojioRegion) {
         self.region = region
@@ -116,12 +138,22 @@ open class ClientEnvironment {
     }
     
     private func updateEndPoints() {
+        if case .custom = self.region.regionType {
+            ClientEnvironment.customEndpoints.map { customEndpoints in
+                self.apiEndpoint = customEndpoints.apiEndpoint
+                self.pushApnsEndpoint = customEndpoints.pushApnsEndpoint
+                self.pushWSEndpoint = customEndpoints.pushWSEndpoint
+                self.myMojioEndpoint = customEndpoints.myMojioEndpoint
+                self.identityEndpoint = customEndpoints.identityEndpoint
+                self.trackerEndpoint = customEndpoints.trackerEndpoint
+                self.imageEndpoint = customEndpoints.trackerEndpoint
+                self.servicesEndpoint = customEndpoints.servicesEndpoint
+            }
+            return
+        }
+        
         self.apiEndpoint = String(
             format: ClientEnvironment.EndPointFormat.apiEndpoint.rawValue,
-            arguments: [self.region.description])
-        
-        self.apiV1Endpoint = String(
-            format: ClientEnvironment.EndPointFormat.apiV1Endpoint.rawValue,
             arguments: [self.region.description])
         
         self.pushApnsEndpoint = String(
@@ -139,6 +171,18 @@ open class ClientEnvironment {
         self.identityEndpoint = String(
             format: ClientEnvironment.EndPointFormat.identityEndpoint.rawValue,
             arguments: [self.region.description])
+        
+        self.trackerEndpoint = String(
+            format: ClientEnvironment.EndPointFormat.trackerEndpoint.rawValue,
+            arguments: [self.region.description])
+        
+        self.imageEndpoint = String(
+            format: ClientEnvironment.EndPointFormat.trackerEndpoint.rawValue,
+            arguments: [self.region.description])
+        
+        self.servicesEndpoint = String(
+            format: ClientEnvironment.EndPointFormat.servicesEndpoint.rawValue,
+            arguments: [self.region.description])
     }
     
     open func setDefaultRegion () {
@@ -147,10 +191,6 @@ open class ClientEnvironment {
     
     open func getApiEndpoint () -> String {
         return self.apiEndpoint!
-    }
-    
-    open func getV1ApiEndpoint () -> String {
-        return self.apiV1Endpoint!
     }
     
     open func getPushApnsEndpoint () -> String {
@@ -167,5 +207,17 @@ open class ClientEnvironment {
     
     open func getIdentityEndpoint () -> String {
         return self.identityEndpoint!
+    }
+    
+    open func getTrackerEndpoint () -> String {
+        return self.trackerEndpoint!
+    }
+    
+    open func getImageEndpoint () -> String {
+        return self.imageEndpoint!
+    }
+    
+    open func getServicesEndpoint () -> String {
+        return self.servicesEndpoint!
     }
 }
