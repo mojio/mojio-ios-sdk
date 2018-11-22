@@ -126,7 +126,7 @@ public protocol ActivityModelBase: Codable {
     var summaryMap: S  { get }
     
     var published: Date? { get }
-    var icon: S {get}
+    var icon: Icon? {get}
     
     var duration: String? {get}
     var polyline: String? {get}
@@ -157,7 +157,7 @@ public struct Activity: ActivityModel {
     public let summaryMap: S
     
     public let published: Date?
-    public let icon: S
+    public let icon: Icon?
     
     public let duration: String?
     public let polyline: String?
@@ -198,7 +198,7 @@ public struct Activity: ActivityModel {
         self.summary = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.summary)
         self.summaryMap = try container.decodeIfPresentIgnoringCase(S.self, forKey: CodingKeys.summaryMap) ?? [:]
         self.published = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.published).flatMap { $0.dateFromISO }
-        self.icon = try container.decodeIfPresentIgnoringCase(S.self, forKey: CodingKeys.summaryMap) ?? [:]
+        self.icon = try container.decodeIfPresentIgnoringCase(Icon.self, forKey: CodingKeys.icon)
         self.duration = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.duration)
         self.polyline = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.polyline)
         self.tags = try container.decodeIfPresentIgnoringCase(T.self, forKey: CodingKeys.tags) ?? []
@@ -269,7 +269,7 @@ public struct RootActivity: RootActivityModel {
     public let summaryMap: S
     
     public let published: Date?
-    public let icon: S
+    public let icon: Icon?
     
     public let duration: String?
     public let polyline: String?
@@ -328,7 +328,7 @@ public struct RootActivity: RootActivityModel {
         self.summary = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.summary)
         self.summaryMap = try container.decodeIfPresentIgnoringCase(S.self, forKey: CodingKeys.summaryMap) ?? [:]
         self.published = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.published).flatMap { $0.dateFromISO }
-        self.icon = try container.decodeIfPresentIgnoringCase(S.self, forKey: CodingKeys.summaryMap) ?? [:]
+        self.icon = try container.decodeIfPresentIgnoringCase(Icon.self, forKey: CodingKeys.icon)
         
         self.duration = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.duration)
         self.polyline = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.polyline)
@@ -362,5 +362,23 @@ public struct RootActivity: RootActivityModel {
             self.target = nil
             self.location = try container.decodeIfPresentIgnoringCase(L.self, forKey: CodingKeys.location)
         }
+    }
+}
+
+public struct Icon: Codable {
+    
+    public let name: String?
+    public let type: String?
+    
+    enum CodingKeys: String, CodingKey, CompoundWordStyle {
+        case name = "Name"
+        case type = "Type"
+    }
+    
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: DynamicCodingKey.self)
+        
+        self.name = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.name)
+        self.type = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.type)
     }
 }
