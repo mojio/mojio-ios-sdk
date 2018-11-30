@@ -47,11 +47,11 @@ public class KeychainManager: AuthTokenManager {
         }
     }
     
-    private let keychainSwift = KeychainSwift()
-    private let encoder = PropertyListEncoder()
-    private let decoder = PropertyListDecoder()
-    private let lock = NSLock()
-    private var authTokenCache: AuthToken? // Cache for the tocken's value to reduce reading operations
+    public let keychainSwift = KeychainSwift()
+    public let encoder = PropertyListEncoder()
+    public let decoder = PropertyListDecoder()
+    public let lock = NSLock()
+    public var authTokenCache: AuthToken? // Cache for the token's value to reduce reading operations
     
     public var authToken: AuthToken? {
         get {
