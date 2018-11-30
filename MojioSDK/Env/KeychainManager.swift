@@ -38,7 +38,7 @@ public class KeychainManager: AuthTokenManager {
     // allow for multiple instances by exposing init()
     public static var sharedInstance = KeychainManager()
     
-    init() {
+    public init() {
         self.encoder.outputFormat = .binary
         
         if let authToken = self.deprecatedAuthToken {
