@@ -77,7 +77,7 @@ public class KeychainManager: AuthTokenManager {
     }
     
     // save/read token
-    private func readToken() -> AuthToken? {
+    public func readToken() -> AuthToken? {
         guard let authTokenData = self.keychainSwift.getData(KeychainKey.authToken.rawValue) else { return nil }
         do {
             return try PropertyListDecoder().decode(AuthToken.self, from: authTokenData)
@@ -88,7 +88,7 @@ public class KeychainManager: AuthTokenManager {
         }
     }
     
-    private func saveToken(_ authToken: AuthToken?) {
+    public func saveToken(_ authToken: AuthToken?) {
         // Need to delete the tokens from the keychain before saving (cannot overwrite)
         self.keychainSwift.delete(KeychainKey.authToken.rawValue)
         
@@ -102,7 +102,7 @@ public class KeychainManager: AuthTokenManager {
     }
     
     // Supporting deprecated keys
-    var deprecatedAuthToken: AuthToken? {
+    public var deprecatedAuthToken: AuthToken? {
         if
             let accessToken = KeychainSwift().get(by: DeprecatedKeychainKey.accessToken.rawValue),
             let expiryTime = KeychainSwift().get(by: DeprecatedKeychainKey.accessTokenExpiry.rawValue),
@@ -120,7 +120,7 @@ public class KeychainManager: AuthTokenManager {
         return nil
     }
     
-    private func deleteDeprecatedTokenFromKeychain() {
+    public func deleteDeprecatedTokenFromKeychain() {
         KeychainSwift().delete(by: DeprecatedKeychainKey.accessToken.rawValue)
         KeychainSwift().delete(by: DeprecatedKeychainKey.refreshToken.rawValue)
         KeychainSwift().delete(by: DeprecatedKeychainKey.accessTokenExpiry.rawValue)
