@@ -32,11 +32,13 @@ protocol AuthTokenManager {
     var authorizationKey: String? {get}
 }
 
-public final class KeychainManager: AuthTokenManager {
+public class KeychainManager: AuthTokenManager {
     
+    // iOS Monitor uses separate instances of KeychainManager; please ensure all future merges into ios-monitor branch
+    // allow for multiple instances by exposing init()
     public static var sharedInstance = KeychainManager()
     
-    private init() {
+    init() {
         self.encoder.outputFormat = .binary
         
         if let authToken = self.deprecatedAuthToken {
