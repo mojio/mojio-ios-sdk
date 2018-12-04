@@ -106,8 +106,6 @@ public struct ActivityLocation: ActivityLocationModel {
 }
 
 public protocol ActivityModelBase: Codable {
-    
-    associatedtype L: ActivityLocationModel
     typealias S = [String: String]
     typealias T = [String]
     
@@ -116,7 +114,7 @@ public protocol ActivityModelBase: Codable {
     var name: String? { get }
     var nameMap: S { get }
     
-    var location: L? {get}
+    var location: ActivityLocationModel? {get}
     
     var startTime: Date? { get }
     var endTime: Date? { get }
@@ -126,11 +124,12 @@ public protocol ActivityModelBase: Codable {
     var summaryMap: S  { get }
     
     var published: Date? { get }
-    var icon: S {get}
+    var icon: Icon? {get}
     
     var duration: String? {get}
     var polyline: String? {get}
     var tags: T {get}
+    var attributedTo: ActivityModel? {get}
 }
 
 public protocol ActivityModel: ActivityModelBase {
@@ -138,16 +137,13 @@ public protocol ActivityModel: ActivityModelBase {
 }
 
 public struct Activity: ActivityModel {
-    
-    public typealias L = ActivityLocation
-    
     public let id: String?
     public let type: ActivityType?
     public let href: String?
     public let name: String?
     public let nameMap: S
     
-    public let location: L?
+    public let location: ActivityLocationModel?
     
     public let startTime: Date?
     public let endTime: Date?
@@ -157,11 +153,13 @@ public struct Activity: ActivityModel {
     public let summaryMap: S
     
     public let published: Date?
-    public let icon: S
+    public let icon: Icon?
     
     public let duration: String?
     public let polyline: String?
     public let tags: T
+    
+    public let attributedTo: ActivityModel?
     
     enum CodingKeys: String, CodingKey, CompoundWordStyle {
         case id = "Id"
@@ -180,6 +178,7 @@ public struct Activity: ActivityModel {
         case duration = "Duration"
         case polyline = "Polyline"
         case tags = "Tags"
+        case attributedTo = "AttributedTo"
     }
     
     public init(from decoder: Decoder) throws {
@@ -191,17 +190,40 @@ public struct Activity: ActivityModel {
         self.href = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.href)
         self.name = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.name)
         self.nameMap = try container.decodeIfPresentIgnoringCase(S.self, forKey: CodingKeys.nameMap) ?? [:]
-        self.location = try container.decodeIfPresentIgnoringCase(L.self, forKey: CodingKeys.location)
+        self.location = try container.decodeIfPresentIgnoringCase(ActivityLocation.self, forKey: CodingKeys.location)
         self.startTime = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.startTime).flatMap { $0.dateFromISO }
         self.endTime = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.endTime).flatMap { $0.dateFromISO }
         self.context = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.context)
         self.summary = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.summary)
         self.summaryMap = try container.decodeIfPresentIgnoringCase(S.self, forKey: CodingKeys.summaryMap) ?? [:]
         self.published = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.published).flatMap { $0.dateFromISO }
-        self.icon = try container.decodeIfPresentIgnoringCase(S.self, forKey: CodingKeys.summaryMap) ?? [:]
+        self.icon = try container.decodeIfPresentIgnoringCase(Icon.self, forKey: CodingKeys.icon)
         self.duration = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.duration)
         self.polyline = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.polyline)
         self.tags = try container.decodeIfPresentIgnoringCase(T.self, forKey: CodingKeys.tags) ?? []
+        self.attributedTo = try container.decodeIfPresentIgnoringCase(Activity.self, forKey: CodingKeys.attributedTo)
+    }
+    
+    public func encode (to encoder: Encoder) throws
+    {
+        var container = encoder.container (keyedBy: CodingKeys.self)
+        try container.encode (self.id, forKey: .id)
+        try container.encode (self.type, forKey: .type)
+        try container.encode (self.href, forKey: .href)
+        try container.encode (self.name, forKey: .name)
+        try container.encode (self.nameMap, forKey: .nameMap)
+        try container.encode ((self.location as? ActivityLocation), forKey: .location)
+        try container.encode (self.startTime, forKey: .startTime)
+        try container.encode (self.endTime, forKey: .endTime)
+        try container.encode (self.context, forKey: .context)
+        try container.encode (self.summary, forKey: .summary)
+        try container.encode (self.summaryMap, forKey: .summaryMap)
+        try container.encode (self.published, forKey: .published)
+        try container.encode (self.icon, forKey: .icon)
+        try container.encode (self.duration, forKey: .duration)
+        try container.encode (self.polyline, forKey: .polyline)
+        try container.encode (self.tags, forKey: .tags)
+        try container.encode ((self.attributedTo as? Activity), forKey: .attributedTo)
     }
 }
 
@@ -238,8 +260,6 @@ public protocol RootActivityModel: ActivityModelBase, PrimaryKey {
     var result: A? { get }
     var object: A? { get }
     var origin: A? { get }
-    var attributedTo: A? {get}
-    
     var audience: A? { get }
 }
 
@@ -250,7 +270,6 @@ public func ==<A: RootActivityModel>(lhs: A, rhs: A) -> Bool {
 
 public struct RootActivity: RootActivityModel {
     
-    public typealias L = ActivityLocation
     public typealias A = Activity
     
     public let id: String
@@ -259,7 +278,7 @@ public struct RootActivity: RootActivityModel {
     public let name: String?
     public let nameMap: S
     
-    public let location: L?
+    public let location: ActivityLocationModel?
     
     public let startTime: Date?
     public let endTime: Date?
@@ -269,12 +288,12 @@ public struct RootActivity: RootActivityModel {
     public let summaryMap: S
     
     public let published: Date?
-    public let icon: S
+    public let icon: Icon?
     
     public let duration: String?
     public let polyline: String?
     public let tags: T
-    
+    public let attributedTo: ActivityModel?
     public let timelineType: TimelineActivityType?
     
     public let actor: A?
@@ -282,8 +301,6 @@ public struct RootActivity: RootActivityModel {
     public let result: A?
     public let object: A?
     public let origin: A?
-    public let attributedTo: A?
-    
     public let audience: A?
     
     enum CodingKeys: String, CodingKey, CompoundWordStyle {
@@ -328,22 +345,22 @@ public struct RootActivity: RootActivityModel {
         self.summary = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.summary)
         self.summaryMap = try container.decodeIfPresentIgnoringCase(S.self, forKey: CodingKeys.summaryMap) ?? [:]
         self.published = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.published).flatMap { $0.dateFromISO }
-        self.icon = try container.decodeIfPresentIgnoringCase(S.self, forKey: CodingKeys.summaryMap) ?? [:]
+        self.icon = try container.decodeIfPresentIgnoringCase(Icon.self, forKey: CodingKeys.icon)
         
         self.duration = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.duration)
         self.polyline = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.polyline)
         self.tags = try container.decodeIfPresentIgnoringCase(T.self, forKey: CodingKeys.tags) ?? []
-        
+        self.attributedTo = try container.decodeIfPresentIgnoringCase(Activity.self, forKey: CodingKeys.attributedTo)
         self.timelineType = try container.decodeIfPresentIgnoringCase(TimelineActivityType.self, forKey: CodingKeys.timelineType)
+        
         self.actor = try container.decodeIfPresentIgnoringCase(A.self, forKey: CodingKeys.actor)
         self.result = try container.decodeIfPresentIgnoringCase(A.self, forKey: CodingKeys.result)
         self.object = try container.decodeIfPresentIgnoringCase(A.self, forKey: CodingKeys.object)
         self.origin = try container.decodeIfPresentIgnoringCase(A.self, forKey: CodingKeys.origin)
-        self.attributedTo = try container.decodeIfPresentIgnoringCase(A.self, forKey: CodingKeys.attributedTo)
         self.audience = try container.decodeIfPresentIgnoringCase(A.self, forKey: CodingKeys.audience)
         
         if
-            let location = try container.decodeIfPresentIgnoringCase(L.self, forKey: CodingKeys.target),
+            let location = try container.decodeIfPresentIgnoringCase(ActivityLocation.self, forKey: CodingKeys.target),
             location.hasCoordinate
         {
             self.location = location
@@ -351,7 +368,7 @@ public struct RootActivity: RootActivityModel {
         }
         else if let target = try container.decodeIfPresentIgnoringCase(A.self, forKey: CodingKeys.target) {
             self.target = target
-            if let location = try container.decodeIfPresentIgnoringCase(L.self, forKey: CodingKeys.location) {
+            if let location = try container.decodeIfPresentIgnoringCase(ActivityLocation.self, forKey: CodingKeys.location) {
                 self.location = location
             }
             else {
@@ -360,7 +377,54 @@ public struct RootActivity: RootActivityModel {
         }
         else {
             self.target = nil
-            self.location = try container.decodeIfPresentIgnoringCase(L.self, forKey: CodingKeys.location)
+            self.location = try container.decodeIfPresentIgnoringCase(ActivityLocation.self, forKey: CodingKeys.location)
         }
+    }
+    
+    public func encode (to encoder: Encoder) throws
+    {
+        var container = encoder.container (keyedBy: CodingKeys.self)
+        try container.encode (self.id, forKey: .id)
+        try container.encode (self.type, forKey: .type)
+        try container.encode (self.href, forKey: .href)
+        try container.encode (self.name, forKey: .name)
+        try container.encode (self.nameMap, forKey: .nameMap)
+        try container.encode ((self.location as? ActivityLocation), forKey: .location)
+        try container.encode (self.startTime, forKey: .startTime)
+        try container.encode (self.endTime, forKey: .endTime)
+        try container.encode (self.context, forKey: .context)
+        try container.encode (self.summary, forKey: .summary)
+        try container.encode (self.summaryMap, forKey: .summaryMap)
+        try container.encode (self.published, forKey: .published)
+        try container.encode (self.icon, forKey: .icon)
+        try container.encode (self.duration, forKey: .duration)
+        try container.encode (self.polyline, forKey: .polyline)
+        try container.encode (self.tags, forKey: .tags)
+        try container.encode ((self.attributedTo as? Activity), forKey: .attributedTo)
+        try container.encode ((self.timelineType), forKey: .timelineType)
+        
+        try container.encode ((self.actor), forKey: .actor)
+        try container.encode ((self.result), forKey: .result)
+        try container.encode ((self.object), forKey: .object)
+        try container.encode ((self.origin), forKey: .origin)
+        try container.encode ((self.audience), forKey: .audience)
+    }
+}
+
+public struct Icon: Codable {
+    
+    public let name: String?
+    public let type: String?
+    
+    enum CodingKeys: String, CodingKey, CompoundWordStyle {
+        case name = "Name"
+        case type = "Type"
+    }
+    
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: DynamicCodingKey.self)
+        
+        self.name = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.name)
+        self.type = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.type)
     }
 }
