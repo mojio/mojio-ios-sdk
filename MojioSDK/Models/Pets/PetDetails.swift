@@ -15,18 +15,33 @@
 
 import Foundation
 
-public enum PetType: String, Codable {
-    case other = "Other"
-    case cat = "Cat"
-    case dog = "Dog"
+public enum PetType: CustomStringConvertible {
+    case cat
+    case dog
+    case custom(String)
     
-    public static var all: [PetType] {
-        return [.cat, .dog, .other]
-    }
-
     /// Creates a new instance by using the specified string value with non case sensitive comparison.
     public init?(stringValue: String) {
-        self.init(rawValue: stringValue.capitalized)
+        switch stringValue {
+        case "Cat":
+            self = .cat
+        case "Dog":
+            self = .dog
+        default:
+            self = .custom(stringValue)
+            
+        }
+    }
+    
+    public var description: String {
+        switch self {
+        case .cat:
+            return "Cat"
+        case .dog:
+            return "Dog"
+        case .custom(let type):
+            return type
+        }
     }
 }
 
@@ -90,7 +105,14 @@ public struct PetDetails: PetDetailsModel {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         do {
-            do { self.type = try container.decodeIfPresent(PetType.self, forKey: .type) } catch { self.type = .other }
+            do {
+                let petType = try container.decode(String.self, forKey: .type)
+                self.type = PetType(stringValue: petType)
+            }
+            catch {
+                self.type = PetType(stringValue: "Other")
+            }
+
             self.gender = try container.decodeIfPresent(Gender.self, forKey: .gender)
             self.breed = try container.decodeIfPresent(String.self, forKey: .breed)
             self.dateOfBirth = try container.decodeIfPresent(String.self, forKey: .dateOfBirth).flatMap { $0.dateFromISO }
@@ -104,6 +126,20 @@ public struct PetDetails: PetDetailsModel {
             debugPrint(error)
             throw error
         }
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        try container.encodeIfPresent(self.type?.description, forKey: .type)
+        try container.encodeIfPresent(self.gender, forKey: .gender)
+        try container.encodeIfPresent(self.breed, forKey: .breed)
+        try container.encodeIfPresent(self.dateOfBirth, forKey: .dateOfBirth)
+        try container.encodeIfPresent(self.registrationId, forKey: .registrationId)
+        try container.encodeIfPresent(self.vetName, forKey: .vetName)
+        try container.encodeIfPresent(self.vetPhoneNumber, forKey: .vetPhoneNumber)
+        try container.encodeIfPresent(self.lastVetVisit, forKey: .lastVetVisit)
+        try container.encodeIfPresent(self.weight, forKey: .weight)
     }
 }
 
@@ -164,11 +200,38 @@ public struct PetDetailsUpdate: Codable {
         self.lastVetVisit = lastVetVisit
         self.weight = weight
     }
+    
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        do {
+            do {
+                let petType = try container.decode(String.self, forKey: .type)
+                self.type = PetType(stringValue: petType)
+            }
+            catch {
+                self.type = PetType(stringValue: "Other")
+            }
+            
+            self.gender = try container.decodeIfPresent(Gender.self, forKey: .gender)
+            self.breed = try container.decodeIfPresent(String.self, forKey: .breed)
+            self.dateOfBirth = try container.decodeIfPresent(String.self, forKey: .dateOfBirth).flatMap { $0.dateFromISO }
+            self.registrationId = try container.decodeIfPresent(String.self, forKey: .registrationId)
+            self.vetName = try container.decodeIfPresent(String.self, forKey: .vetName)
+            self.vetPhoneNumber = try container.decodeIfPresent(String.self, forKey: .vetPhoneNumber)
+            self.lastVetVisit = try container.decodeIfPresent(String.self, forKey: .lastVetVisit).flatMap { $0.dateFromISO }
+            self.weight = try container.decodeIfPresent(Double.self, forKey: .weight)
+        }
+        catch {
+            debugPrint(error)
+            throw error
+        }
+    }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         
-        try container.encodeIfPresent(self.type, forKey: .type)
+        try container.encodeIfPresent(self.type?.description, forKey: .type)
         try container.encodeIfPresent(self.gender, forKey: .gender)
         try container.encodeIfPresent(self.breed, forKey: .breed)
         try container.encodeIfPresent(self.dateOfBirth, forKey: .dateOfBirth)
