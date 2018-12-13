@@ -225,7 +225,7 @@ open class AuthClient: AuthControllerDelegate {
     open func login(_ username: String, password: String, completion: @escaping (_ authToken: AuthToken) -> Void, failure: @escaping (_ response: [String: Any]?) -> Void) {
         
         // The token endpoint is used for the resource owner flow
-        let loginEndpoint = self.tokenUrl
+        let loginEndpoint = self.getTokenUrl()
         
         self.requestHeaders.update(["Authorization": self.generateBasicAuthHeader()])
         
@@ -287,7 +287,7 @@ open class AuthClient: AuthControllerDelegate {
     }
     
     open func refreshAuthToken(_ completion: @escaping (_ authToken: AuthToken) -> Void, failure: @escaping (_ response: [String: Any]?) -> Void) {
-        let authorizeEndpoint = self.tokenUrl
+        let authorizeEndpoint = self.getTokenUrl()
         
         guard let refreshToken = self.keychainManager.authToken?.refreshToken else {
             failure(nil)
@@ -393,7 +393,7 @@ open class AuthClient: AuthControllerDelegate {
     // Verify Phone
     open func verifyMobilePhone(_ mobile: String, pin: String, completion: @escaping (_ authToken: AuthToken) -> Void, failure: @escaping (_ response: [String: Any]?) -> Void) {
         
-        let verifyEndpoint = self.tokenUrl
+        let verifyEndpoint = self.getTokenUrl()
         
         self.requestHeaders.update(["Accept": "application/json", "Authorization": self.generateBasicAuthHeader()])
         
@@ -525,9 +525,7 @@ open class AuthClient: AuthControllerDelegate {
     }
     
     open func getTokenUrl() -> String {
-//        return self.clientEnvironment.getIdentityEndpoint() + AuthClientEndpoint.token.rawValue
-
-        //OVERRIDE option for ios-monitor
+        // OVERRIDE option for ios-monitor
         let endpoint = self.loginURL != nil ? self.loginURL.absoluteString : self.clientEnvironment.getIdentityEndpoint()
         return endpoint + AuthClientEndpoint.token.rawValue
     }
