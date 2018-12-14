@@ -103,6 +103,17 @@ public struct ActivityLocation: ActivityLocationModel {
         self.altitude = try container.decodeIfPresentIgnoringCase(Double.self, forKey: CodingKeys.altitude)
         self.radius = try container.decodeIfPresentIgnoringCase(Double.self, forKey: CodingKeys.radius)
     }
+    
+    public init(latitude: Double, longitude: Double, altitude: Double) {
+        self.id = nil
+        self.type = nil
+        self.name = nil
+        self.radius = nil
+        
+        self.latitude = latitude
+        self.longitude = longitude
+        self.altitude = altitude
+    }
 }
 
 public protocol ActivityModelBase: Codable {
@@ -179,6 +190,9 @@ public struct Activity: ActivityModel {
         case polyline = "Polyline"
         case tags = "Tags"
         case attributedTo = "AttributedTo"
+        case latitude = "Latitude"
+        case longitude = "Longitude"
+        case altitude = "Altitude"
     }
     
     public init(from decoder: Decoder) throws {
@@ -190,7 +204,6 @@ public struct Activity: ActivityModel {
         self.href = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.href)
         self.name = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.name)
         self.nameMap = try container.decodeIfPresentIgnoringCase(S.self, forKey: CodingKeys.nameMap) ?? [:]
-        self.location = try container.decodeIfPresentIgnoringCase(ActivityLocation.self, forKey: CodingKeys.location)
         self.startTime = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.startTime).flatMap { $0.dateFromISO }
         self.endTime = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.endTime).flatMap { $0.dateFromISO }
         self.context = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.context)
@@ -202,6 +215,19 @@ public struct Activity: ActivityModel {
         self.polyline = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.polyline)
         self.tags = try container.decodeIfPresentIgnoringCase(T.self, forKey: CodingKeys.tags) ?? []
         self.attributedTo = try container.decodeIfPresentIgnoringCase(Activity.self, forKey: CodingKeys.attributedTo)
+        
+        
+        var encodedLocation = try container.decodeIfPresentIgnoringCase(ActivityLocation.self, forKey: CodingKeys.location)
+        
+        if encodedLocation == nil,
+            let latitude = try container.decodeIfPresentIgnoringCase(Double.self, forKey: CodingKeys.latitude),
+            let longitude = try container.decodeIfPresentIgnoringCase(Double.self, forKey: CodingKeys.longitude),
+            let altitude = try container.decodeIfPresentIgnoringCase(Double.self, forKey: CodingKeys.altitude)
+        {
+            encodedLocation = ActivityLocation(latitude: latitude, longitude: longitude, altitude: altitude)
+        }
+        
+        self.location = encodedLocation
     }
     
     public func encode (to encoder: Encoder) throws
