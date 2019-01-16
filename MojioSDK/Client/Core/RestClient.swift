@@ -161,6 +161,7 @@ open class RestClient {
     }
     
     open func v3() -> Self {
+        self.requestUrl = self.requestUrl! + "v3/"
         self.versionHeader = "2018-09-01"
         return self
     }
