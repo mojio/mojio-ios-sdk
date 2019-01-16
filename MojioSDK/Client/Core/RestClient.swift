@@ -28,6 +28,7 @@ open class ClientHeaders {
     public init(languages: [String] = NSLocale.preferredLanguages) {
         self.languages = languages
     }
+
     open var defaultRequestHeaders: [String:String] {
         // Accept-Language HTTP Header; see https://tools.ietf.org/html/rfc7231#section-5.3.5
         let acceptLanguage = self.languages
@@ -80,6 +81,7 @@ open class RestClient {
     open var requestParams: Parameters = [:]
     open var requestEntity: String = RestEndpoint.base.rawValue
     open var requestEntityId: String?
+    fileprivate var versionHeader: String? = nil
     
     internal var doNext: Bool = false
     internal var nextUrl: String? = nil
@@ -159,7 +161,7 @@ open class RestClient {
     }
     
     open func v3() -> Self {
-        self.requestUrl = self.requestUrl! + "v3/"
+        self.versionHeader = "2018-09-01"
         return self
     }
     
@@ -379,6 +381,11 @@ open class RestClient {
         // Before every request, make sure access token exists
         if let accessToken: String = self.accessToken() {
             headers["Authorization"] = "Bearer " + accessToken
+        }
+        
+        // Add version header if needed
+        if let versionHeader = self.versionHeader {
+            headers["x-mojio-version"] = "2018-09-01"
         }
         
         return headers
