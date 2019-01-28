@@ -135,6 +135,10 @@ open class ImagesClient: RestClient {
             return nil
         }
     }
+    
+    override open func parseError(_ response: DataResponse<Data>) -> Error {
+        return response.error ?? MojioError(code: nil)
+    }
 }
 
 extension ImagesClient: MimeVersion {
