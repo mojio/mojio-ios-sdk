@@ -252,7 +252,13 @@ open class AuthClient: AuthControllerDelegate {
     }
     
     // Login
-    open func login(_ token: String, firstName: String? = nil, lastName: String? = nil, email: String? = nil, completion: @escaping (_ authToken: AuthToken) -> Void, failure: @escaping (_ response: [String: Any]?) -> Void) {
+    open func login(_ token: String,
+                    firstName: String? = nil,
+                    lastName: String? = nil,
+                    email: String? = nil,
+                    customParameters: [String: Any]? = nil,
+                    completion: @escaping (_ authToken: AuthToken) -> Void,
+                    failure: @escaping (_ response: [String: Any]?) -> Void) {
         
         // The token endpoint is used for the resource owner flow
         let loginEndpoint = self.tokenUrl
@@ -260,12 +266,12 @@ open class AuthClient: AuthControllerDelegate {
         self.requestHeaders.update(["Authorization": self.generateBasicAuthHeader()])
         
         var parameters: Parameters = [:]
-        parameters["grant_type"] = "ext_idp"
+        if let extraParams = customParameters {
+            extraParams.forEach { parameters.updateValue($1, forKey: $0) }
+        }
         parameters["token"] = token
         parameters["client_id"] = self.clientId
         parameters["client_secret"] = self.clientSecretKey
-        parameters["provider"] = "tmobile-us-uat" // TODO: update to production
-        parameters["scope"] = "full offline_access"
         
         if let first = firstName {
             parameters["first_name"] = first
