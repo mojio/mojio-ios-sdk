@@ -61,6 +61,7 @@ public enum MojioEndpoint {
     case myMojio
     case identity
     case tracker
+    case trackerImage
     case image
     case services
 }
@@ -74,7 +75,7 @@ open class ClientEnvironment {
         myMojioEndpoint: String?,
         identityEndpoint: String?,
         trackerEndpoint: String?,
-        imageEndpoint: String?,
+        trackerImageEndpoint: String?,
         servicesEndpoint: String?
     )
     public static var customEndpoints: CustomEndpoints?
@@ -86,7 +87,7 @@ open class ClientEnvironment {
         .myMojio: "%@my.moj.io",
         .identity: "%@identity.moj.io",
         .tracker: "%@trackerapi.moj.io",
-        .image: "%@trackerapi.moj.io",
+        .trackerImage: "%@trackerapi.moj.io",
         .services: "%@services.moj.io"
     ]
     
@@ -107,6 +108,7 @@ open class ClientEnvironment {
         case myMojioEndpoint = "https://%@my.moj.io/"
         case identityEndpoint = "https://%@identity.moj.io/"
         case trackerEndpoint = "https://%@trackerapi.moj.io/"
+        case imageEndpoint = "https://%@images.moj.io/"
         case servicesEndpoint = "https://%@services.moj.io/"
     }
     
@@ -118,6 +120,7 @@ open class ClientEnvironment {
     fileprivate var myMojioEndpoint: String?
     fileprivate var identityEndpoint: String?
     fileprivate var trackerEndpoint: String?
+    fileprivate var trackerImageEndpoint: String?
     fileprivate var imageEndpoint: String?
     fileprivate var servicesEndpoint: String?
     
@@ -146,7 +149,7 @@ open class ClientEnvironment {
                 self.myMojioEndpoint = customEndpoints.myMojioEndpoint
                 self.identityEndpoint = customEndpoints.identityEndpoint
                 self.trackerEndpoint = customEndpoints.trackerEndpoint
-                self.imageEndpoint = customEndpoints.trackerEndpoint
+                self.trackerImageEndpoint = customEndpoints.trackerEndpoint
                 self.servicesEndpoint = customEndpoints.servicesEndpoint
             }
             return
@@ -176,9 +179,14 @@ open class ClientEnvironment {
             format: ClientEnvironment.EndPointFormat.trackerEndpoint.rawValue,
             arguments: [self.region.description])
         
-        self.imageEndpoint = String(
+        self.trackerImageEndpoint = String(
             format: ClientEnvironment.EndPointFormat.trackerEndpoint.rawValue,
             arguments: [self.region.description])
+
+        self.imageEndpoint = String(
+            format: ClientEnvironment.EndPointFormat.imageEndpoint.rawValue,
+            arguments: [self.region.description]
+        )
         
         self.servicesEndpoint = String(
             format: ClientEnvironment.EndPointFormat.servicesEndpoint.rawValue,
@@ -212,7 +220,11 @@ open class ClientEnvironment {
     open func getTrackerEndpoint () -> String {
         return self.trackerEndpoint!
     }
-    
+
+    open func getTrackerImageEndpoint() -> String {
+        return self.trackerImageEndpoint!
+    }
+
     open func getImageEndpoint () -> String {
         return self.imageEndpoint!
     }

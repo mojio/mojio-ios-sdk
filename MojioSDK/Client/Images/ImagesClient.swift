@@ -43,7 +43,7 @@ open class ImagesClient: RestClient {
         keychainManager: KeychainManager? = nil) {
         
         super.init(clientEnvironment: clientEnvironment, sessionManager: sessionManager, keychainManager: keychainManager)
-        self.requestUrl = clientEnvironment.getImageEndpoint()
+        self.requestUrl = clientEnvironment.getTrackerImageEndpoint()
     }
     
     open func images(_ imageId: String? = nil) -> Self {
@@ -134,6 +134,10 @@ open class ImagesClient: RestClient {
         catch {
             return nil
         }
+    }
+    
+    override open func parseError(_ response: DataResponse<Data>) -> Error {
+        return response.error ?? MojioError(code: nil)
     }
 }
 
