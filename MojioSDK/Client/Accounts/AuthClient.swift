@@ -30,6 +30,8 @@ public enum AccountClientEndpoint: String {
     case forgot = "account/forgot-password"
     case reset = "account/reset-password"
     case resendPin = "account/signin/phone"
+    case sendVerifictionPhone = "devices"
+    case devicesVerify = "devices/verify"
 }
 
 public enum RegisterError: String {
