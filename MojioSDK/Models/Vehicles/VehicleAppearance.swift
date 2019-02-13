@@ -22,12 +22,24 @@ public struct VehicleAppearance: Codable {
     public var color: String?
     public var icon: String?
     public var showOnMap: Bool?
+    public var vehicleImage: VehicleImage?
+
+    public struct VehicleImage: Codable {
+        public let url: String
+        public let hexColor: String
+
+        public init(url: String, hexColor: String) {
+            self.url = url
+            self.hexColor = hexColor
+        }
+    }
     
     public enum CodingKeys: String, CodingKey {
         case vehicleId = "VehicleId"
         case color = "Color"
         case icon = "Icon"
         case showOnMap = "ShowOnMap"
+        case vehicleImage = "VehicleImage"
     }
     
     public init() {}
