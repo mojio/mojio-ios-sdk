@@ -16,6 +16,24 @@
 import Foundation
 import MojioCore
 
+public protocol VehicleImageType: Codable {
+    var src: String { get }
+    var normal: String { get }
+    var thumbnail: String { get }
+}
+
+public struct VehicleImage: VehicleImageType {
+    public var src: String
+    public var normal: String
+    public var thumbnail: String
+    
+    public enum CodingKeys: String, CodingKey {
+        case src = "Src"
+        case normal = "Normal"
+        case thumbnail = "Thumbnail"
+    }
+}
+
 public protocol VehicleModel: Codable, PrimaryKey {
     
     associatedtype C: CompatibilityDetailsModel
@@ -35,6 +53,7 @@ public protocol VehicleModel: Codable, PrimaryKey {
     associatedtype H: HeadingModel
     associatedtype S: SpeedModel
     associatedtype R: RPMModel
+    associatedtype I: VehicleImageType
     
     var id: String { get }
     var name: String? { get }
@@ -76,6 +95,7 @@ public protocol VehicleModel: Codable, PrimaryKey {
     var deleted: Bool { get }
     var createdOn: Date? { get }
     var lastModified: Date? { get }
+    var image: I? { get }
 }
 
 public struct Vehicle: VehicleModel {
@@ -97,6 +117,7 @@ public struct Vehicle: VehicleModel {
     public typealias O = Odometer
     public typealias V = VinDetails
     public typealias L = Location
+    public typealias I = VehicleImage
     
     public var id: String
     public var name: String?
@@ -138,6 +159,7 @@ public struct Vehicle: VehicleModel {
     public var deleted: Bool
     public var createdOn: Date?
     public var lastModified: Date?
+    public var image: I?
     
     public enum CodingKeys: String, CodingKey {
         case id = "Id"
@@ -180,6 +202,7 @@ public struct Vehicle: VehicleModel {
         case deleted = "Deleted"
         case createdOn = "CreatedOn"
         case lastModified = "LastModified"
+        case image = "Image"
     }
     
     public init(from decoder: Decoder) throws {
@@ -279,6 +302,7 @@ public struct Vehicle: VehicleModel {
         try container.encodeIfPresent(self.createdOn, forKey: .createdOn)
         try container.encodeIfPresent(self.lastModified, forKey: .lastModified)
     }
+    
 }
 
 public func ==(lhs: Vehicle, rhs: Vehicle) -> Bool {

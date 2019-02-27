@@ -14,32 +14,13 @@
  *******************************************************************************/
 
 import Foundation
-import MojioCore
 
-public typealias SpeedThresholdModel = DeviceMeasurement
-
-public struct SpeedThreshold: SpeedThresholdModel {
-    
-    public typealias U = SpeedUnit
-    
-    // DeviceMeasurement
-    public let baseUnit: U
-    public let baseValue: Double
-    public let unit: U
-    public let value: Double
-    public let timestamp: Date?
-}
-
-extension SpeedThreshold {
-    
-    public init(from decoder: Decoder, with deviceMeasurements: DeviceMeasurements) throws {
-        
-        self.init(baseUnit: deviceMeasurements.baseUnit ?? .unknown, baseValue: deviceMeasurements.baseValue, unit: deviceMeasurements.unit ?? .unknown, value: deviceMeasurements.value, timestamp: deviceMeasurements.timestamp)
-    }
-    
-    public func encode(with encoder: Encoder) throws {
-        
-    }
+public protocol SpeedThresholdModel: Codable {
+    var baseUnit: String { get }
+    var timestamp: String { get }
+    var baseValue: Int { get }
+    var unit: String { get }
+    var value: Int { get }
 }
 
 public protocol VehicleActivitySettingsModel: Codable {
@@ -67,6 +48,22 @@ public protocol VehicleActivitySettingsModel: Codable {
     var speedThreshold: S? { get }
 }
 
+public struct SpeedThreshold: SpeedThresholdModel {
+    public let baseUnit: String
+    public let timestamp: String
+    public let baseValue: Int
+    public let unit: String
+    public let value: Int
+    
+    public enum CodingKeys: String, CodingKey {
+        case baseUnit = "BaseUnit"
+        case timestamp = "Timestamp"
+        case baseValue = "BaseValue"
+        case unit = "Unit"
+        case value = "Value"
+    }
+}
+
 public struct VehicleActivitySettings: VehicleActivitySettingsModel {
     public typealias S = SpeedThreshold
     
@@ -89,7 +86,7 @@ public struct VehicleActivitySettings: VehicleActivitySettingsModel {
     public let enableDeviceUpdatedActivity: Bool
     public let enableSMSActivity: Bool
     public let enableVehicleCompatibilityActivity: Bool
-    public let speedThreshold: SpeedThreshold?
+    public let speedThreshold: S?
     
     public enum CodingKeys: String, CodingKey {
         case enableTripStartActivity = "EnableTripStartActivity"
