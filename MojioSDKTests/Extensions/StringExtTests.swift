@@ -1,6 +1,6 @@
 /******************************************************************************
  * Moj.io Inc. CONFIDENTIAL
- * 2017 Copyright Moj.io Inc.
+ * 2018 Copyright Moj.io Inc.
  * All Rights Reserved.
  *
  * NOTICE:  All information contained herein is, and remains, the property of
@@ -13,14 +13,23 @@
  * forbidden unless prior written permission is obtained from Moj.io Inc.
  *******************************************************************************/
 
-public struct MojioError: Error {
-    public var dictionary: [String: Any]
-    public var message: String?
-    public var code: String?
+import XCTest
+import Foundation
+
+class StringExtTests: XCTestCase {
+    func testCapitalizedFirstCharacter() {
+        let string = "foo"
+        let capitalizedString = string.capitalizedFirstCharacter
+        
+        XCTAssertNotEqual(capitalizedString, string)
+        XCTAssertEqual(capitalizedString, "Foo")
+    }
     
-    public init(code: String?, message: String? = nil, dictionary: [String:Any]? = nil) {
-        self.message = message
-        self.code = code
-        self.dictionary = dictionary ?? [:]
+    func testDecapitalizedFirstCharacter() {
+        let string = "FOO"
+        let decapitalizedString = string.decapitalizedFirstCharacter
+        
+        XCTAssertNotEqual(decapitalizedString, string)
+        XCTAssertEqual(decapitalizedString, "fOO")
     }
 }

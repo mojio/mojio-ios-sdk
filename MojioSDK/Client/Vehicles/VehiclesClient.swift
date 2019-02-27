@@ -40,7 +40,8 @@ public enum VehiclesEndpoint: String {
     case diagnosticCodes = "diagnosticcodes/"
     case polyline = "polyline/"
     case settings = "settings/"
-    
+    case timeline = "timeline/assets/"
+
     // Storage
     // Parameters: Type, Id, Key
     // e.g. trips/{id}/store/{key}
@@ -149,7 +150,7 @@ open class VehiclesClient: RestClient {
     open func storage(_ key: String) -> Self {
         
         if let requestEntityId = self.requestEntityId {
-            self.requestUrl = self.requestV1Url! + String(format: VehiclesEndpoint.storage.rawValue, self.requestEntity, requestEntityId, key)
+            self.requestUrl = self.requestUrl! + String(format: VehiclesEndpoint.storage.rawValue, self.requestEntity, requestEntityId, key)
         }
         
         return self
@@ -211,7 +212,7 @@ open class VehiclesClient: RestClient {
         
         return self
     }
-    
+
     public func polyline() -> Self {
         self.requestEntity = VehiclesEndpoint.polyline.rawValue
         self.requestUrl = self.requestUrl! + self.requestEntity
@@ -223,6 +224,14 @@ open class VehiclesClient: RestClient {
         self.requestEntity = VehiclesEndpoint.settings.rawValue
         self.requestUrl = self.requestUrl! + self.requestEntity
         
+        return self
+    }
+    
+    open func timeline(assetId: String) -> Self {
+        self.requestEntity = VehiclesEndpoint.timeline.rawValue
+        self.requestEntityId = assetId
+        self.appendRequestUrlEntityId(asFinal: true)
+
         return self
     }
     
@@ -309,6 +318,8 @@ open class VehiclesClient: RestClient {
                     return try JSONDecoder().decode(DiagnosticCode.self, from: responseData)
                 }
 
+            case .timeline:
+                fallthrough
             case .activities:  // conformance to be implemented
                 do {
                     return try JSONDecoder().decode(ResponseArray<RootActivity>.self, from: responseData)
@@ -316,6 +327,7 @@ open class VehiclesClient: RestClient {
                 catch {
                     return try JSONDecoder().decode(RootActivity.self, from: responseData)
                 }
+
             case .wifiRadio:
                 // Returns Transaction Id
                 let response = try JSONDecoder().decode([String: String].self, from: responseData)
@@ -333,7 +345,9 @@ open class VehiclesClient: RestClient {
                 catch {
                     return try JSONDecoder().decode(VehicleActivitySettings.self, from: responseData)
                 }
-            
+            case .tags:
+                return try JSONDecoder().decode(Array<String>.self, from: responseData)
+                
             default:
                 return nil
             }

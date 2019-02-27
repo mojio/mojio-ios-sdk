@@ -59,8 +59,8 @@ class GeofenceRegionTests: XCTestCase {
             XCTAssertNotNil(model)
             XCTAssertEqual(model.type, .circle)
             XCTAssertEqual(model.radius?.baseUnit, .meters)
-            XCTAssertEqual(model.lat, 24.1)
-            XCTAssertEqual(model.lng, 51.2)
+            XCTAssertEqual(model.latitude, 24.1)
+            XCTAssertEqual(model.longitude, 51.2)
             XCTAssertNotNil(model.radius)
         }
     }

@@ -22,12 +22,24 @@ public struct VehicleAppearance: Codable {
     public var color: String?
     public var icon: String?
     public var showOnMap: Bool?
+    public var vehicleImage: VehicleImage?
+
+    public struct VehicleImage: Codable {
+        public let url: String
+        public let hexColor: String
+
+        public init(url: String, hexColor: String) {
+            self.url = url
+            self.hexColor = hexColor
+        }
+    }
     
     public enum CodingKeys: String, CodingKey {
         case vehicleId = "VehicleId"
         case color = "Color"
         case icon = "Icon"
         case showOnMap = "ShowOnMap"
+        case vehicleImage = "VehicleImage"
     }
     
     public init() {}
@@ -53,7 +65,13 @@ public struct VehicleAppearance: Codable {
 extension VehicleAppearance: Equatable {
     public static func == (lhs: VehicleAppearance, rhs: VehicleAppearance) -> Bool {
         return lhs.vehicleId == rhs.vehicleId && lhs.color == rhs.color &&
-            lhs.icon == rhs.icon && lhs.showOnMap == rhs.showOnMap
+            lhs.icon == rhs.icon && lhs.showOnMap == rhs.showOnMap && lhs.vehicleImage == rhs.vehicleImage
+    }
+}
+
+extension VehicleAppearance.VehicleImage: Equatable {
+    public static func ==(lhs: VehicleAppearance.VehicleImage, rhs: VehicleAppearance.VehicleImage) -> Bool {
+        return lhs.url == rhs.url && lhs.hexColor == rhs.hexColor
     }
 }
 

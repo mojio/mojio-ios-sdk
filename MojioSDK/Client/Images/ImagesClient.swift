@@ -43,7 +43,7 @@ open class ImagesClient: RestClient {
         keychainManager: KeychainManager? = nil) {
         
         super.init(clientEnvironment: clientEnvironment, sessionManager: sessionManager, keychainManager: keychainManager)
-        self.requestUrl = clientEnvironment.getImageEndpoint()
+        self.requestUrl = clientEnvironment.getTrackerImageEndpoint()
     }
     
     open func images(_ imageId: String? = nil) -> Self {
@@ -63,6 +63,10 @@ open class ImagesClient: RestClient {
     
     open func uploadImage(_ imageData: Data, mimeType: MimeType.Image, completion: @escaping (Image?) -> Void, failure: @escaping (Any?) -> Void) {
         return self.uploadImage(imageData, mimeType: mimeType, completion: {response, headers in completion(response as? Image)}, failure: failure)
+    }
+
+    open func uploadImage<I: ImageModel>(_ imageData: Data, mimeType: MimeType.Image, completion: @escaping (I?) -> Void, failure: @escaping (Any?) -> Void) {
+        return self.uploadImage(imageData, mimeType: mimeType, completion: {response, headers in completion(response as? I)}, failure: failure)
     }
     
     internal func uploadImage(_ imageData: Data, mimeType: MimeType.Image, completion: @escaping (_ response: Codable?, _ headers: [String : String]) -> Void, failure: @escaping (_ error: Any?) -> Void) {
@@ -130,6 +134,10 @@ open class ImagesClient: RestClient {
         catch {
             return nil
         }
+    }
+    
+    override open func parseError(_ response: DataResponse<Data>) -> Error {
+        return response.error ?? MojioError(code: nil)
     }
 }
 

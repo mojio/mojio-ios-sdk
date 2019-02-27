@@ -34,6 +34,7 @@ public protocol WifiRadioUpdateModel: Codable {
     var ssid: String? { get }
     var password: String? { get }
     var status: String? { get }
+    var timeToLive: Int? { get }
 }
 
 public enum WifiRadioStatus: String, Codable {
@@ -91,11 +92,63 @@ public struct WifiRadioUpdate: WifiRadioUpdateModel {
     public var ssid: String? = nil
     public var password: String? = nil
     public var status: String? = nil
+    public var timeToLive: Int? = nil
     
     public enum CodingKeys: String, CodingKey {
         case ssid = "SSID"
         case password = "Password"
         case status = "Status"
+        case timeToLive = "TimeToLive"
+    }
+    
+    public init(ssid: String? = nil, password: String? = nil, status: String? = nil, timeToLive: Int? = 30) {
+        
+        self.ssid = ssid
+        self.password = password
+        self.status = status
+        self.timeToLive = timeToLive
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        try container.encodeIfPresent(self.ssid, forKey: .ssid)
+        try container.encodeIfPresent(self.password, forKey: .password)
+        try container.encodeIfPresent(self.status, forKey: .status)
+        
+        if let timeToLive: Int = timeToLive , timeToLive > 0 {
+            let formatter = NumberFormatter()
+            formatter.minimumIntegerDigits = 2
+            formatter.maximumIntegerDigits = 2
+            formatter.minimumFractionDigits = 0
+            formatter.maximumFractionDigits = 0
+            
+            var timespan = ""
+            
+            let seconds = formatter.string(from: NSNumber(value: timeToLive % 60 as Int)) ?? ""
+            if timeToLive < 60 {
+                // Less than 60 seconds
+                timespan = String(format:"00:00:%@", seconds)
+            }
+            else {
+                let minutes = formatter.string(from: NSNumber(value: (timeToLive % 3600) / 60 as Int)) ?? ""
+                if timeToLive < 3600 {
+                    // Less than 1 hour
+                    timespan = String(
+                        format:"00:%@:%@",
+                        minutes,
+                        seconds)
+                }
+                else {
+                    let hours = formatter.string(from: NSNumber(value: timeToLive / 3600 as Int)) ?? ""
+                    timespan = String(format:"%@:%@:%@", hours, minutes, seconds)
+                }
+            }
+            
+            if timespan.count > 0 {
+                try container.encodeIfPresent(timespan, forKey: .timeToLive)
+            }
+        }
     }
 }
 

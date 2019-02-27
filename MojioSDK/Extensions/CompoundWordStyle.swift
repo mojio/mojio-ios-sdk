@@ -1,6 +1,6 @@
 /******************************************************************************
  * Moj.io Inc. CONFIDENTIAL
- * 2017 Copyright Moj.io Inc.
+ * 2018 Copyright Moj.io Inc.
  * All Rights Reserved.
  *
  * NOTICE:  All information contained herein is, and remains, the property of
@@ -13,14 +13,19 @@
  * forbidden unless prior written permission is obtained from Moj.io Inc.
  *******************************************************************************/
 
-public struct MojioError: Error {
-    public var dictionary: [String: Any]
-    public var message: String?
-    public var code: String?
+import Foundation
+
+public protocol CompoundWordStyle {
+    var pascalCase: String { get }
+    var lowerCamelCase: String { get }
+}
+
+public extension RawRepresentable where Self: CompoundWordStyle, RawValue == String {
+    var pascalCase: String {
+        return self.rawValue.capitalizedFirstCharacter
+    }
     
-    public init(code: String?, message: String? = nil, dictionary: [String:Any]? = nil) {
-        self.message = message
-        self.code = code
-        self.dictionary = dictionary ?? [:]
+    var lowerCamelCase: String {
+        return self.rawValue.decapitalizedFirstCharacter
     }
 }

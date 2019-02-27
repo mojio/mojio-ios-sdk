@@ -60,7 +60,7 @@ class GeofenceTests: XCTestCase {
             XCTAssertEqual(model.name, "string")
             XCTAssertEqual(model.description, "string")
             XCTAssertNotNil(model.region)
-            XCTAssertEqual(model.region?.type, .unknown)
+            XCTAssertEqual(model.region?.type, .circle)
             XCTAssertEqual(model.notificationSetting, .always)
             XCTAssertEqual(model.vehicleIds[0], "00000000-0000-0000-0000-000000000000")
             XCTAssertEqual(model.tags[0], "string")

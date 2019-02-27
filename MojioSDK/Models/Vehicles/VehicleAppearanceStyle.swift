@@ -1,6 +1,6 @@
 /******************************************************************************
  * Moj.io Inc. CONFIDENTIAL
- * 2017 Copyright Moj.io Inc.
+ * 2019 Copyright Moj.io Inc.
  * All Rights Reserved.
  *
  * NOTICE:  All information contained herein is, and remains, the property of
@@ -16,16 +16,19 @@
 import Foundation
 
 public enum VehicleAppearanceStyle: String, Codable {
+    
+    // Note: values should be compatible with Android's version
     case sedan = "Sedan",
     hatchback = "Hatchback",
-    smart = "Smart",
+    smart = "Smart car",
     mini = "Mini",
     convertable = "Convertible",
-    suv = "Suv",
-    truck = "Truck",
-    van = "Van",
-    deliveryTruck = "DeliveryTruck",
-    sports = "Sports"
+    sports = "Sports car",
+    wagon = "Wagon",
+    pickup = "Pickup",
+    van = "Full-size van",
+    boxTruck = "Box truck",
+    suv = "Suv"
     
     public static var defaultStyle: VehicleAppearanceStyle { return .sedan }
     
@@ -37,14 +40,34 @@ public enum VehicleAppearanceStyle: String, Codable {
             .mini,
             .convertable,
             .sports,
-            .suv,
-            .truck,
+            .wagon,
+            .pickup,
             .van,
-            .deliveryTruck
+            .boxTruck,
+            .suv
         ]
     }
     
     public init(from decoder: Decoder) throws {
-        do { self = try VehicleAppearanceStyle.init(rawValue: decoder.singleValueContainer().decode(String.self)) ?? .sedan } catch { self = .sedan }
+        let oldStylesDecoder = [
+            "Smart": "Smart car",
+            "Sports": "Sports car",
+            "Truck": "Pickup",
+            "Van": "Full-size van",
+            "DeliveryTruck": "Box truck"]
+        let updateToNewStyle: (String) -> String = { styleValue in
+            if let newStyleValue = oldStylesDecoder[styleValue] {
+                return newStyleValue
+            }
+            return styleValue
+        }
+        
+        do {
+            let styleValue = try updateToNewStyle(decoder.singleValueContainer().decode(String.self))
+            self = VehicleAppearanceStyle.init(rawValue: styleValue) ?? VehicleAppearanceStyle.defaultStyle
+        }
+        catch {
+            self = VehicleAppearanceStyle.defaultStyle
+        }
     }
 }

@@ -35,11 +35,20 @@ public struct ResponseArray<T: Codable>: ResponseArrayModel {
     public let totalCount: Int?
     public let links: L?
     
-    public enum CodingKeys: String, CodingKey {
+    public enum CodingKeys: String, CodingKey, CompoundWordStyle {
         case data = "Data"
         case results = "Results"
         case totalCount = "TotalCount"
         case links = "Links"
+    }
+    
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: DynamicCodingKey.self)
+        
+        self.data = try container.decodeIgnoringCase([T].self, forKey: CodingKeys.data)
+        self.results = try container.decodeIfPresentIgnoringCase(Int.self, forKey: CodingKeys.results)
+        self.totalCount = try container.decodeIfPresentIgnoringCase(Int.self, forKey: CodingKeys.totalCount)
+        self.links = try container.decodeIfPresentIgnoringCase(Links.self, forKey: CodingKeys.links)
     }
 }
 

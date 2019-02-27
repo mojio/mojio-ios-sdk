@@ -30,6 +30,8 @@ public enum AccountClientEndpoint: String {
     case forgot = "account/forgot-password"
     case reset = "account/reset-password"
     case resendPin = "account/signin/phone"
+    case sendVerifictionPhone = "devices"
+    case devicesVerify = "devices/verify"
 }
 
 public enum RegisterError: String {
@@ -272,9 +274,9 @@ open class AuthClient: AuthControllerDelegate {
                 if let dictionary = response.result.value as? [String: Any] {
                     failure(dictionary)
                 }
-                    /*else if let error = response.result.error {
-                     failure(response: error.userInfo)
-                     }*/
+                else if let responseError = response.result.error as NSError? {
+                    failure(responseError.userInfo)
+                }
                 else {
                     failure(nil)
                 }
@@ -282,11 +284,16 @@ open class AuthClient: AuthControllerDelegate {
         }
         
         #if DEBUG
-            debugPrint(request)
+            print(request.debugDescription)
         #endif
     }
+    open func refreshAuthToken(with deviceToken: String, _ completion: @escaping (_ authToken: AuthToken) -> Void, failure: @escaping (_ response: [String: Any]?) -> Void) {
+        let parameters = ["device": deviceToken]
+        
+        self.refreshAuthToken(additionalParameters: parameters, completion, failure: failure)
+    }
     
-    open func refreshAuthToken(_ completion: @escaping (_ authToken: AuthToken) -> Void, failure: @escaping (_ response: [String: Any]?) -> Void) {
+    open func refreshAuthToken(additionalParameters: [String: Any] = [:], _ completion: @escaping (_ authToken: AuthToken) -> Void, failure: @escaping (_ response: [String: Any]?) -> Void) {
         let authorizeEndpoint = self.tokenUrl
         
         guard let refreshToken = self.keychainManager.authToken?.refreshToken else {
@@ -294,13 +301,17 @@ open class AuthClient: AuthControllerDelegate {
             return
         }
         
+        var parameters: [String: Any] = ["grant_type": "refresh_token",
+                                         "refresh_token": refreshToken,
+                                         "client_id": self.clientId,
+                                         "client_secret": self.clientSecretKey,
+                                         "redirect_uri": self.clientRedirectURL]
+        
+        additionalParameters.forEach { parameters[$0] = $1 }
+        
         let request = self.sessionManager.request(authorizeEndpoint,
                                         method: .post,
-                                        parameters: ["grant_type": "refresh_token",
-                                                     "refresh_token": refreshToken,
-                                                     "client_id": self.clientId,
-                                                     "client_secret": self.clientSecretKey,
-                                                     "redirect_uri": self.clientRedirectURL],
+                                        parameters: parameters,
                                         encoding: URLEncoding(destination: .methodDependent))
             .responseJSON(queue: self.dispatchQueue, options: .allowFragments) {response in
                 
@@ -342,7 +353,7 @@ open class AuthClient: AuthControllerDelegate {
         }
         
         #if DEBUG
-            debugPrint(request)
+            print(request.debugDescription)
         #endif
     }
     
@@ -386,7 +397,7 @@ open class AuthClient: AuthControllerDelegate {
         }
         
         #if DEBUG
-            debugPrint(request)
+            print(request.debugDescription)
         #endif
     }
     
@@ -437,7 +448,7 @@ open class AuthClient: AuthControllerDelegate {
         }
         
         #if DEBUG
-            debugPrint(request)
+            print(request.debugDescription)
         #endif
     }
     
@@ -459,7 +470,7 @@ open class AuthClient: AuthControllerDelegate {
         }
         
         #if DEBUG
-            debugPrint(request)
+            print(request.debugDescription)
         #endif
     }
     
@@ -485,7 +496,7 @@ open class AuthClient: AuthControllerDelegate {
             }
         
         #if DEBUG
-            debugPrint(request)
+            print(request.debugDescription)
         #endif
     }
     
@@ -511,7 +522,7 @@ open class AuthClient: AuthControllerDelegate {
             }
         
         #if DEBUG
-            debugPrint(request)
+            print(request.debugDescription)
         #endif
     }
     
@@ -560,5 +571,138 @@ open class AuthClient: AuthControllerDelegate {
         static var expiryFieldIsMissing: [String: Any] {
             return ["Error": "ExpiryFieldIsMissing"];
         }
+    }
+}
+
+extension AuthClient {
+    public func deleteUserToken(with userName: String, password: String, completion: @escaping (AuthToken) -> Void, failure: @escaping (_ response: [String: Any]?) -> Void)  {
+        let parameters = [
+            "username": userName,
+            "password": password,
+            "client_id": self.clientId,
+            "client_secret": self.clientSecretKey,
+            "scope": "full restricted,delete:user",
+            "grant_type": "password"
+        ]
+        
+        var headers = [
+            "Accept": "application/json"
+        ]
+        
+        if let accessToken = self.authToken?.accessToken {
+            headers["Authorization"] = "Bearer " + accessToken
+        }
+        
+        Alamofire
+            .request(self.clientEnvironment.getIdentityEndpoint() + AuthClientEndpoint.token.rawValue,
+                     method: .post,
+                     parameters: parameters,
+                     encoding: URLEncoding.default,
+                     headers: headers)
+            .responseJSON(queue: self.dispatchQueue, options: .allowFragments) {response in
+                if response.response?.statusCode == 200 {
+                    if let dict = response.result.value as? [String: Any],
+                        let expiry: Double = dict["expires_in"] as? Double {
+                        let authToken = AuthToken(
+                            accessToken: (dict["access_token"] as? String) ?? String.empty,
+                            expiry: Date.init(timeIntervalSinceNow: expiry),
+                            refreshToken: String(Date.init(timeIntervalSinceNow: expiry).timeIntervalSince1970),
+                            uniqueId: self.clientEnvironment.getRegion().regionType.rawValue)
+                        
+                        if authToken.isValid {
+                            completion(authToken)
+                        }
+                        else {
+                            failure(nil)
+                        }
+                    }
+                }
+                else if let responseDict = response.result.value as? [String : Any] {
+                    failure(responseDict)
+                }
+                else if let responseError = response.result.error as NSError? {
+                    failure(responseError.userInfo)
+                }
+                else {
+                    return failure(nil)
+                }
+        }
+    }
+}
+
+extension AuthClient {
+    public func sendVerificationCode(to phoneNumber: String, completion: (() -> Void)?, failure: @escaping (_ response: [String: Any]?) -> Void) {
+        let verifyEndpoint = self.clientEnvironment.getIdentityEndpoint() + AccountClientEndpoint.sendVerifictionPhone.rawValue + "?phone=\(phoneNumber)"
+        
+        var headers = [
+            "Accept": "application/json"
+        ]
+        
+        if let accessToken = self.authToken?.accessToken {
+            headers["Authorization"] = "Bearer " + accessToken
+        }
+        
+        let request = self.sessionManager
+            .request(verifyEndpoint, method: .post, headers: headers)
+            .responseJSON(queue: self.dispatchQueue, options: .allowFragments) { response in
+                
+                if response.response?.statusCode == 200 {
+                    completion?()
+                }
+                else if let responseDict = response.result.value as? [String : Any] {
+                    failure(responseDict)
+                }
+                else if let responseError = response.result.error as NSError? {
+                    failure(responseError.userInfo)
+                }
+                else {
+                    return failure(nil)
+                }
+        }
+        
+        #if DEBUG
+        print(request.debugDescription)
+        #endif
+    }
+    
+    public func deviceVerify(with pin: String, phoneNumber: String, deviceToken: String, completion: (() -> Void)?,  failure: @escaping (_ response: [String: Any]?) -> Void) {
+        let endPoint =  self.clientEnvironment.getIdentityEndpoint() + AccountClientEndpoint.devicesVerify.rawValue
+        
+        var headers = [
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        ]
+        
+        if let accessToken = self.authToken?.accessToken {
+            headers["Authorization"] = "Bearer " + accessToken
+        }
+        
+        let parameters = [
+            "pin" : pin,
+            "phoneNumber": phoneNumber,
+            "deviceToken": deviceToken
+        ]
+        
+        let request = self.sessionManager
+            .request(endPoint, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
+            .responseJSON(queue: self.dispatchQueue, options: .allowFragments) { response in
+                
+                if response.response?.statusCode == 200 {
+                    completion?()
+                }
+                else if let responseDict = response.result.value as? [String : Any] {
+                    failure(responseDict)
+                }
+                else if let responseError = response.result.error as NSError? {
+                    failure(responseError.userInfo)
+                }
+                else {
+                    return failure(nil)
+                }
+        }
+        
+        #if DEBUG
+        print(request.debugDescription)
+        #endif
     }
 }

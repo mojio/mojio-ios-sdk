@@ -131,7 +131,7 @@ open class AccountsClient: RestClient {
     open func storage(_ key: String) -> Self {
         
         if let requestEntityId = self.requestEntityId {
-            self.requestUrl = self.requestV1Url! + String(format: AccountsEndpoint.storage.rawValue, self.requestEntity, requestEntityId, key)
+            self.requestUrl = self.requestUrl! + String(format: AccountsEndpoint.storage.rawValue, self.requestEntity, requestEntityId, key)
         }
         
         return self

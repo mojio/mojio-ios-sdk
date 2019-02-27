@@ -28,6 +28,7 @@ open class ClientHeaders {
     public init(languages: [String] = NSLocale.preferredLanguages) {
         self.languages = languages
     }
+
     open var defaultRequestHeaders: [String:String] {
         // Accept-Language HTTP Header; see https://tools.ietf.org/html/rfc7231#section-5.3.5
         let acceptLanguage = self.languages
@@ -74,13 +75,13 @@ open class RestClient {
     open static let RestClientResponseStatusCodeKey = "statusCode"
     
     open var requestMethod: Alamofire.HTTPMethod = .get
-
+    
     open var pushUrl: String?
     open var requestUrl: String?
-    open var requestV1Url: String?
     open var requestParams: Parameters = [:]
     open var requestEntity: String = RestEndpoint.base.rawValue
     open var requestEntityId: String?
+    fileprivate var versionHeader: String? = nil
     
     internal var doNext: Bool = false
     internal var nextUrl: String? = nil
@@ -104,7 +105,7 @@ open class RestClient {
         formatter.locale = Locale(identifier: "en_US_POSIX")
         return formatter
     }()
-
+    
     // Default to global concurrent queue with default priority
     open static var defaultDispatchQueue = DispatchQueue.global()
     
@@ -112,14 +113,13 @@ open class RestClient {
     
     open let sessionManager: SessionManager
     internal var keychainManager: KeychainManager
-
+    
     public init(
         clientEnvironment: ClientEnvironment,
         sessionManager: SessionManager = SessionManager.default,
         keychainManager: KeychainManager? = nil) {
-
+        
         self.requestUrl = clientEnvironment.getApiEndpoint()
-        self.requestV1Url = clientEnvironment.getV1ApiEndpoint()
         self.pushUrl = clientEnvironment.getPushWSEndpoint()
         self.sessionManager = sessionManager
         self.keychainManager = keychainManager ?? KeychainManager.sharedInstance
@@ -147,6 +147,21 @@ open class RestClient {
     
     open func delete() -> Self {
         self.requestMethod = .delete
+        return self
+    }
+    
+    open func v1() -> Self {
+        self.requestUrl = self.requestUrl! + "v1/"
+        return self
+    }
+    
+    open func v2() -> Self {
+        self.requestUrl = self.requestUrl! + "v2/"
+        return self
+    }
+    
+    open func v3() -> Self {
+        self.versionHeader = "2018-09-01"
         return self
     }
     
@@ -191,7 +206,7 @@ open class RestClient {
         self.requestParams["before"] = self.sinceBeforeFormatter.string(from: beforeDate)
         return self
     }
-
+    
     open func top(top: String) -> Self {
         self.requestParams["top"] = top
         return self
@@ -261,7 +276,7 @@ open class RestClient {
             self.pushUrl = self.pushUrl! + self.requestEntity
         }
     }
-
+    
     open func query(top: String? = nil, skip: String? = nil, filter: String? = nil, select: String? = nil, orderby: String? = nil, count: String? = nil, since: Date? = nil, before: Date? = nil, fields: [String]? = nil) -> Self {
         
         var requestParams: Parameters = [:]
@@ -269,19 +284,19 @@ open class RestClient {
         if let top = top {
             requestParams["top"] = top
         }
-
+        
         if let skip = skip {
             requestParams["skip"] = skip
         }
-
+        
         if let filter = filter {
             requestParams["filter"] = filter
         }
-
+        
         if let select = select {
             requestParams["select"] = select
         }
-
+        
         if let orderby = orderby {
             requestParams["orderby"] = orderby
         }
@@ -293,7 +308,7 @@ open class RestClient {
         if let date = since {
             requestParams["since"] = self.sinceBeforeFormatter.string(from: date)
         }
-
+        
         if let date = before {
             requestParams["before"] = self.sinceBeforeFormatter.string(from: date)
         }
@@ -305,7 +320,7 @@ open class RestClient {
         self.requestParams.update(requestParams)
         return self
     }
-
+    
     open func dispatch(queue: DispatchQueue) {
         self.dispatchQueue = queue
     }
@@ -313,18 +328,24 @@ open class RestClient {
     /*
      Don't need this helper function given default values in the other query function
      public func query(top: String?, skip: String?, filter: String?, select: String?, orderby: String?) -> Self {
-        return self.query(top, skip: skip, filter: filter, select: select, orderby: orderby, since: nil, before: nil, fields: nil)
-    }*/
+     return self.query(top, skip: skip, filter: filter, select: select, orderby: orderby, since: nil, before: nil, fields: nil)
+     }*/
     open func run(completion: @escaping (_ response: Codable?) -> Void, failure: @escaping (_ error: Any?) -> Void) {
         self.run(completion: {response, headers in completion(response)}, failure: failure)
     }
-
+    
     internal func run(completion: @escaping (_ response: Codable?, _ headers: [String:String]) -> Void, failure: @escaping (_ error: Any?) -> Void) {
         
         let request = self.sessionManager.request(
             self.requestUrl!,
             method: self.requestMethod,
-            parameters: self.requestParams,
+            parameters: self.requestParams.mapValues {
+                if let boolValue = $0 as? Bool {
+                    return boolValue ? "true" : "false"
+                }
+                
+                return $0
+            },
             encoding: URLEncoding(destination: .methodDependent),
             headers: self.defaultHeaders)
             .responseData(queue: self.dispatchQueue) {response in
@@ -332,7 +353,7 @@ open class RestClient {
         }
         
         #if DEBUG
-            print(request.debugDescription)
+        print(request.debugDescription)
         #endif
     }
     
@@ -362,13 +383,18 @@ open class RestClient {
             headers["Authorization"] = "Bearer " + accessToken
         }
         
+        // Add version header if needed
+        if let versionHeader = self.versionHeader {
+            headers["x-mojio-version"] = "2018-09-01"
+        }
+        
         return headers
     }
     
     open func runStringBody(string: String, completion: @escaping (_ response: Codable?) -> Void, failure: @escaping (_ error: Any?) -> Void) {
         self.runStringBody(string: string, completion: {response, headers in completion(response)}, failure: failure)
     }
-
+    
     internal func runStringBody(string: String, completion: @escaping (_ response: Codable?, _ headers: [String:String]) -> Void, failure: @escaping (_ error: Any?) -> Void) {
         
         let request = self.sessionManager.request(
@@ -382,14 +408,14 @@ open class RestClient {
         }
         
         #if DEBUG
-            print(request.debugDescription)
+        print(request.debugDescription)
         #endif
     }
     
     open func runEncodeJSON(jsonObject: [String: Codable], completion: @escaping (_ response: Codable?) -> Void, failure: @escaping (_ error: Any?) -> Void) {
         self.runEncodeJSON(jsonObject: jsonObject, completion: {response, headers in completion(response)}, failure: failure)
     }
-
+    
     internal func runEncodeJSON(jsonObject: [String: Codable], completion: @escaping (_ response: Codable?, _ headers: [String:String]) -> Void, failure: @escaping (_ error: Any?) -> Void) {
         
         let request = self.sessionManager.request(
@@ -401,9 +427,9 @@ open class RestClient {
             .responseData(queue: self.dispatchQueue) {response in
                 self.handleResponse(response, completion: completion, failure: failure)
         }
-
+        
         #if DEBUG
-            print(request.debugDescription)
+        print(request.debugDescription)
         #endif
     }
     
@@ -460,7 +486,7 @@ open class RestClient {
     open func runEncodeUrl(_ parameters: [String: Any], completion: @escaping (_ response: Codable?) -> Void, failure: @escaping (_ error: Any?) -> Void) {
         self.runEncodeUrl(parameters, completion: {response, headers in completion(response) }, failure: failure)
     }
-
+    
     internal func runEncodeUrl(_ parameters: [String: Any], completion: @escaping (_ response: Codable?, _ headers: [String:String]) -> Void, failure: @escaping (_ error: Any?) -> Void) {
         
         // Before every request, make sure access token exists
@@ -481,12 +507,12 @@ open class RestClient {
         }
         
         #if DEBUG
-            debugPrint(request)
+        print(request.debugDescription)
         #endif
     }
     
     open func handleResponse(_ response: DataResponse<Data>, completion: @escaping (_ response: Codable?, _ headers: [String:String]) -> Void, failure: @escaping (_ error: Any?) -> Void){
-
+        
         // Purpose?
         var headers: [String:String] = [:]
         
@@ -536,12 +562,23 @@ open class RestClient {
     
     open func runCustomJSON(completion: @escaping (_ response: Any, _ headers: [String : Any?]) -> Void, failure: @escaping (_ error: Any?) -> Void) {
         
-        let request = self.sessionManager.request(self.requestUrl!, method: self.requestMethod, parameters: self.requestParams, encoding: URLEncoding(destination: .methodDependent), headers: self.defaultHeaders).responseJSON(queue: self.dispatchQueue, options: .allowFragments) {response in
-            self.handleCustomJSONResponse(response, completion: completion, failure: failure)
+        let request = self.sessionManager.request(
+            self.requestUrl!,
+            method: self.requestMethod,
+            parameters: self.requestParams.mapValues {
+                if let boolValue = $0 as? Bool {
+                    return boolValue ? "true" : "false"
+                }
+                
+                return $0
+            },
+            encoding: URLEncoding(destination: .methodDependent),
+            headers: self.defaultHeaders).responseJSON(queue: self.dispatchQueue, options: .allowFragments) {response in
+                self.handleCustomJSONResponse(response, completion: completion, failure: failure)
         }
         
         #if DEBUG
-            print(request.debugDescription)
+        print(request.debugDescription)
         #endif
     }
     
@@ -581,7 +618,7 @@ open class RestClient {
     
     open func accessToken() -> String? {
         return KeychainManager.sharedInstance.authToken?.accessToken
-    }    
+    }
 }
 
 public extension Dictionary {
