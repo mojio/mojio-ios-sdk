@@ -290,7 +290,7 @@ open class AuthClient: AuthControllerDelegate {
             method: .post,
             parameters: parameters,
             encoding: URLEncoding(destination: .methodDependent),
-            headers: self.self.requestHeaders).responseJSON(queue: self.dispatchQueue, options: .allowFragments) {response in
+            headers: self.requestHeaders).responseJSON(queue: self.dispatchQueue, options: .allowFragments) {response in
                 
                 self.postLogin(response: response, completion: completion, failure: failure)
         }
