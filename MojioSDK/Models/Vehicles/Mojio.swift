@@ -37,6 +37,7 @@ public protocol MojioModel: Codable, PrimaryKey {
     var deleted: Bool { get }
     var msisdn: String? { get }
     var vendor: String? { get }
+    var mainFirmware: String? { get }
     var firmwareVersion: String? { get }
     var hardwareVersion: String? { get }
     var iccid: String? { get }
