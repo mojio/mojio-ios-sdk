@@ -65,6 +65,7 @@ public struct Mojio: MojioModel {
     public let deleted: Bool
     public let msisdn: String?
     public let vendor: String?
+    public let mainFirmware: String?
     public let firmwareVersion: String?
     public let hardwareVersion: String?
     public let iccid: String?
@@ -85,6 +86,7 @@ public struct Mojio: MojioModel {
         case deleted = "Deleted"
         case msisdn = "MSISDN"
         case vendor = "Vendor"
+        case mainFirmware = "MainFirmware"
         case firmwareVersion = "FirmwareVersion"
         case hardwareVersion = "HardwareVersion"
         case iccid = "ICCID"
@@ -108,6 +110,7 @@ public struct Mojio: MojioModel {
         self.deleted = try container.decodeIfPresent(Bool.self, forKey: .deleted) ?? false
         self.msisdn = try container.decodeIfPresent(String.self, forKey: .msisdn)
         self.vendor = try container.decodeIfPresent(String.self, forKey: .vendor)
+        self.mainFirmware = try container.decodeIfPresent(String.self, forKey: .mainFirmware)
         self.firmwareVersion = try container.decodeIfPresent(String.self, forKey: .firmwareVersion)
         self.hardwareVersion = try container.decodeIfPresent(String.self, forKey: .hardwareVersion)
         self.iccid = try container.decodeIfPresent(String.self, forKey: .iccid)
@@ -134,6 +137,7 @@ public struct Mojio: MojioModel {
         try container.encodeIfPresent(self.deleted, forKey: .deleted)
         try container.encodeIfPresent(self.msisdn, forKey: .msisdn)
         try container.encodeIfPresent(self.vendor, forKey: .vendor)
+        try container.encodeIfPresent(self.mainFirmware, forKey: .mainFirmware)
         try container.encodeIfPresent(self.firmwareVersion, forKey: .firmwareVersion)
         try container.encodeIfPresent(self.hardwareVersion, forKey: .hardwareVersion)
         try container.encodeIfPresent(self.iccid, forKey: .iccid)
