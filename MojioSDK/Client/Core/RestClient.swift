@@ -72,7 +72,7 @@ public enum RestEndpoint: String {
 
 open class RestClient {
     
-    open static let RestClientResponseStatusCodeKey = "statusCode"
+    public static let RestClientResponseStatusCodeKey = "statusCode"
     
     open var requestMethod: Alamofire.HTTPMethod = .get
     
@@ -107,11 +107,11 @@ open class RestClient {
     }()
     
     // Default to global concurrent queue with default priority
-    open static var defaultDispatchQueue = DispatchQueue.global()
+    public static var defaultDispatchQueue = DispatchQueue.global()
     
     open var dispatchQueue = RestClient.defaultDispatchQueue
     
-    open let sessionManager: SessionManager
+    public let sessionManager: SessionManager
     internal var keychainManager: KeychainManager
     
     public init(
