@@ -11,7 +11,7 @@ def base_pods
     pod 'KeychainSwift'
     pod 'OHHTTPStubs'
     pod 'OHHTTPStubs/Swift'
-    pod 'SwiftWebSocket', :git => 'https://github.com/mojio/SwiftWebSocket', :commit => 'd39576a'
+    pod 'SwiftWebSocket', :git => 'https://github.com/mojio/SwiftWebSocket', :branch => 'master'
     pod 'SwiftDate'
 end
 

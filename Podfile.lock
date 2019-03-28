@@ -31,8 +31,8 @@ PODS:
   - SwiftyJSON (4.1.0)
 
 DEPENDENCIES:
-  - Alamofire (= 4.8.1)
-  - AlamofireImage (= 3.5.0)
+  - Alamofire
+  - AlamofireImage
   - KeychainSwift
   - MojioCore (from `.`)
   - OHHTTPStubs
@@ -72,6 +72,6 @@ SPEC CHECKSUMS:
   SwiftWebSocket: 612c9729fd503cb6b0b8b45390c788686dac306f
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
 
-PODFILE CHECKSUM: c31f81b427c0215ea2db3be34e22295d10ee974a
+PODFILE CHECKSUM: 64cf1cd43246e84af3582ca30112f1fd56832704
 
 COCOAPODS: 1.6.0
