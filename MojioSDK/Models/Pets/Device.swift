@@ -25,20 +25,28 @@ public enum PowerStatus: String, Codable {
 
 public protocol DeviceModel: Codable, PrimaryKey {
     
-    associatedtype L: PetsLocationModel
+    associatedtype PL: PetsLocationModel
     associatedtype T: DeviceTypeModel
     associatedtype B: BatteryModel
+    associatedtype TA: TemperatureAlarmModel
+    associatedtype L: LightModel
     
     var imei: String { get }
     var deviceId: String { get }
     var name: String? { get }
     var assetId: String? { get }
-    var location: L? { get }
+    var location: PL? { get }
     var speed: Double? { get }
     var airplaneMode: Bool? { get }
     var deviceType: T? { get }
     var powerStatus: PowerStatus? { get }
     var battery: B? { get }
+    var temperature: Double? { get }
+    var highTemperatureAlarm: TA? { get }
+    var lowTemperatureAlarm: TA? { get }
+    var light: L? { get }
+    var online: Bool? { get }
+    var msisdn: String? { get }
     var firmwareVersion: String? { get }
     var color: String? { get }
     var tenantId: String? { get }
@@ -51,21 +59,30 @@ public protocol DeviceModel: Codable, PrimaryKey {
 
 public struct Device: DeviceModel {
     
-    public typealias L = PetsLocation
+    public typealias PL = PetsLocation
     public typealias T = DeviceType
     public typealias B = Battery
+    public typealias TA = TemperatureAlarm
+    public typealias L = Light
     
     public let imei: String
     public let deviceId: String
     public let name: String?
     public let assetId: String?
-    public let location: L?
+    public let location: PL?
     public let speed: Double?
     public let airplaneMode: Bool?
     public let deviceType: T?
     public let powerStatus: PowerStatus?
     public let battery: B?
+    public let temperature: Double?
+    public let highTemperatureAlarm: TA?
+    public let lowTemperatureAlarm: TA?
+    public let light: L?
+    public let online: Bool?
+    public let msisdn: String?
     public let firmwareVersion: String?
+    public let manufacturer: String?
     public let color: String?
     public let tenantId: String?
     public let ownerId: String?
@@ -89,7 +106,14 @@ public struct Device: DeviceModel {
         case deviceType = "DeviceType"
         case powerStatus = "PowerStatus"
         case battery = "Battery"
+        case temperature = "Temperature"
+        case highTemperatureAlarm = "HighTemperatureAlarm"
+        case lowTemperatureAlarm = "LowTemperatureAlarm"
+        case light = "Light"
+        case online = "Online"
+        case msisdn = "MSISDN"
         case firmwareVersion = "FirmwareVersion"
+        case manufacturer = "Manufacturer"
         case color = "Color"
         case tenantId = "TenantId"
         case ownerId = "OwnerId"
@@ -98,7 +122,7 @@ public struct Device: DeviceModel {
         case lastModified = "LastModified"
         case gatewayTime = "GatewayTime"
     }
-
+    
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
@@ -113,7 +137,14 @@ public struct Device: DeviceModel {
             self.deviceType = try container.decodeIfPresent(DeviceType.self, forKey: .deviceType)
             self.powerStatus = try container.decodeIfPresent(PowerStatus.self, forKey: .powerStatus)
             self.battery = try container.decodeIfPresent(Battery.self, forKey: .battery)
+            self.temperature = try container.decodeIfPresent(Double.self, forKey: .temperature)
+            self.highTemperatureAlarm = try container.decodeIfPresent(TemperatureAlarm.self, forKey: .highTemperatureAlarm)
+            self.lowTemperatureAlarm = try container.decodeIfPresent(TemperatureAlarm.self, forKey: .lowTemperatureAlarm)
+            self.light = try container.decodeIfPresent(Light.self, forKey: .light)
+            self.online = try container.decodeIfPresent(Bool.self, forKey: .online)
+            self.msisdn = try container.decodeIfPresent(String.self, forKey: .msisdn)
             self.firmwareVersion = try container.decodeIfPresent(String.self, forKey: .firmwareVersion)
+            self.manufacturer = try container.decodeIfPresent(String.self, forKey: .manufacturer)
             self.color = try container.decodeIfPresent(String.self, forKey: .color)
             self.tenantId = try container.decodeIfPresent(String.self, forKey: .tenantId)
             self.ownerId = try container.decodeIfPresent(String.self, forKey: .ownerId)
@@ -131,17 +162,30 @@ public struct Device: DeviceModel {
 
 public struct DeviceUpdate: Codable {
     public var name: String? = nil
-    public var color: String? = nil
+    public var light: LightUpdate? = nil
+    public var highTemperatureAlarm: TemperatureAlarmUpdate? = nil
+    public var lowTemperatureAlarm: TemperatureAlarmUpdate? = nil
     
     public enum CodingKeys: String, CodingKey {
         case name = "Name"
-        case color = "Color"
+        case light = "Light"
+        case highTemperatureAlarm = "HighTemperatureAlarm"
+        case lowTemperatureAlarm = "LowTemperatureAlarm"
     }
     
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         
         try container.encodeIfPresent(self.name, forKey: .name)
-        try container.encodeIfPresent(self.color, forKey: .color)
+        try container.encodeIfPresent(self.light, forKey: .light)
+        try container.encodeIfPresent(self.highTemperatureAlarm, forKey: .highTemperatureAlarm)
+        try container.encodeIfPresent(self.lowTemperatureAlarm, forKey: .lowTemperatureAlarm)
+    }
+    
+    public init(name: String? = nil, light: LightUpdate? = nil, highTemperatureAlarm: TemperatureAlarmUpdate? = nil, lowTemperatureAlarm: TemperatureAlarmUpdate? = nil) {
+        self.name = name
+        self.light = light
+        self.highTemperatureAlarm = highTemperatureAlarm
+        self.lowTemperatureAlarm = lowTemperatureAlarm
     }
 }

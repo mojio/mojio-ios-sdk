@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		22CF879C2252A62B0085CBF5 /* Light.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CF879B2252A62B0085CBF5 /* Light.swift */; };
+		22CF879E2252A6840085CBF5 /* TemperatureAlarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CF879D2252A6840085CBF5 /* TemperatureAlarm.swift */; };
 		2C58943920FD932000DE18BE /* VehicleAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C58943820FD932000DE18BE /* VehicleAppearance.swift */; };
 		2C58943D20FD968D00DE18BE /* VehicleAppearanceStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C58943C20FD968D00DE18BE /* VehicleAppearanceStyle.swift */; };
 		2E8BC6671FB343FB00A165C3 /* AccelerometerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8BC6661FB343FB00A165C3 /* AccelerometerTests.swift */; };
@@ -216,6 +218,8 @@
 		1EA59F2E2538174F190F6401 /* Pods-Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tests/Pods-Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		2278359B1FB60253002D24F9 /* StringExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExt.swift; sourceTree = "<group>"; };
 		2278359D1FB60291002D24F9 /* TimeIntervalExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalExt.swift; sourceTree = "<group>"; };
+		22CF879B2252A62B0085CBF5 /* Light.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Light.swift; sourceTree = "<group>"; };
+		22CF879D2252A6840085CBF5 /* TemperatureAlarm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperatureAlarm.swift; sourceTree = "<group>"; };
 		2C58943820FD932000DE18BE /* VehicleAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleAppearance.swift; sourceTree = "<group>"; };
 		2C58943C20FD968D00DE18BE /* VehicleAppearanceStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VehicleAppearanceStyle.swift; sourceTree = "<group>"; };
 		2D3D183CD5E1E3D4078EDD6B /* Pods-Core.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Core.release.xcconfig"; path = "Pods/Target Support Files/Pods-Core/Pods-Core.release.xcconfig"; sourceTree = "<group>"; };
@@ -677,6 +681,8 @@
 				BCFE5DC420A063B500B89104 /* Stats.swift */,
 				FCE43DAD20DCFA22004A2E89 /* DisplayDetails.swift */,
 				BCF23D0220EA0B9A009FE79C /* AssetDailySummary.swift */,
+				22CF879B2252A62B0085CBF5 /* Light.swift */,
+				22CF879D2252A6840085CBF5 /* TemperatureAlarm.swift */,
 			);
 			path = Pets;
 			sourceTree = "<group>";
@@ -1305,10 +1311,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22CF879C2252A62B0085CBF5 /* Light.swift in Sources */,
 				BCFE5DC520A063B500B89104 /* Stats.swift in Sources */,
 				BC3D7C84208816BB00659A92 /* PetsClient.swift in Sources */,
 				BCFE5912209AF92500B89104 /* TimeIntervalExt.swift in Sources */,
 				BCFE5913209AF92500B89104 /* StringExt.swift in Sources */,
+				22CF879E2252A6840085CBF5 /* TemperatureAlarm.swift in Sources */,
 				BC60374B208FB20F00D855DE /* NotificationToken.swift in Sources */,
 				BC60374C208FB20F00D855DE /* PetDetails.swift in Sources */,
 				BCF23D0320EA0B9A009FE79C /* AssetDailySummary.swift in Sources */,
