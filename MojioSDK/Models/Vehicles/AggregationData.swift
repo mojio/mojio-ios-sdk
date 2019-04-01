@@ -55,6 +55,19 @@ public struct AggregationData: AggregationDataModel {
         case tripCount = "TripCount"
     }
     
+    public init(total: Double, average: Double, max: Double, min: Double, units: String?, date: Date?, endDate: Date?, count: Int, tripCount: Int) {
+        
+        self.total = total
+        self.average = average
+        self.max = max
+        self.min = min
+        self.units = units
+        self.date = date
+        self.endDate = endDate
+        self.count = count
+        self.tripCount = tripCount
+    }
+    
     public init(from decoder: Decoder) throws {
         
         do {
