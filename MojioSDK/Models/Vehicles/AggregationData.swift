@@ -33,15 +33,15 @@ public protocol AggregationDataModel: Codable {
 
 public struct AggregationData: AggregationDataModel {
     
-    public let total        : Double
-    public let average      : Double
-    public let max          : Double
-    public let min          : Double
-    public let units        : String?
-    public let date         : Date?
-    public let endDate      : Date?
-    public let count        : Int
-    public let tripCount    : Int
+    public let total        : Double = 0
+    public let average      : Double = 0
+    public let max          : Double = 0
+    public let min          : Double = 0
+    public let units        : String? = nil
+    public let date         : Date? = nil
+    public let endDate      : Date? = nil
+    public let count        : Int = 0
+    public let tripCount    : Int = 0
     
     public enum CodingKeys: String, CodingKey {
         case total = "Total"
