@@ -66,6 +66,7 @@ public struct Device: DeviceModel {
     public let powerStatus: PowerStatus?
     public let battery: B?
     public let firmwareVersion: String?
+    public let manufacturer: String?
     public let color: String?
     public let tenantId: String?
     public let ownerId: String?
@@ -90,6 +91,7 @@ public struct Device: DeviceModel {
         case powerStatus = "PowerStatus"
         case battery = "Battery"
         case firmwareVersion = "FirmwareVersion"
+        case manufacturer = "Manufacturer"
         case color = "Color"
         case tenantId = "TenantId"
         case ownerId = "OwnerId"
@@ -114,6 +116,7 @@ public struct Device: DeviceModel {
             self.powerStatus = try container.decodeIfPresent(PowerStatus.self, forKey: .powerStatus)
             self.battery = try container.decodeIfPresent(Battery.self, forKey: .battery)
             self.firmwareVersion = try container.decodeIfPresent(String.self, forKey: .firmwareVersion)
+            self.manufacturer = try container.decodeIfPresent(String.self, forKey: .manufacturer)
             self.color = try container.decodeIfPresent(String.self, forKey: .color)
             self.tenantId = try container.decodeIfPresent(String.self, forKey: .tenantId)
             self.ownerId = try container.decodeIfPresent(String.self, forKey: .ownerId)
