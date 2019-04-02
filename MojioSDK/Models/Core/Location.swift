@@ -103,7 +103,7 @@ public struct Location: LocationModel {
     // Heading
     public let locationHeading: H?
     
-    public enum CodingKeys: String, CodingKey {
+    public enum CodingKeys: String, CodingKey, CompoundWordStyle {
         case locationAddress = "Address"
         case timestamp = "Timestamp"
         case lat = "Lat"
@@ -119,21 +119,21 @@ public struct Location: LocationModel {
     public init(from decoder: Decoder) throws {
         
         do {
-            let container = try decoder.container(keyedBy: CodingKeys.self)
+            let container = try decoder.container(keyedBy: DynamicCodingKey.self)
             
-            self.locationAddress = try container.decodeIfPresent(Address.self, forKey: .locationAddress)
-            self.timestamp = try container.decodeIfPresent(String.self, forKey: .timestamp).flatMap { $0.dateFromISO }
+            self.locationAddress = try container.decodeIfPresentIgnoringCase(Address.self, forKey: CodingKeys.locationAddress)
+            self.timestamp = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.timestamp).flatMap { $0.dateFromISO }
             
-            self.lat = try container.decodeIfPresent(Double.self, forKey: .lat) ?? 0
-            self.lng = try container.decodeIfPresent(Double.self, forKey: .lng) ?? 0
+            self.lat = try container.decodeIfPresentIgnoringCase(Double.self, forKey: CodingKeys.lat) ?? 0
+            self.lng = try container.decodeIfPresentIgnoringCase(Double.self, forKey: CodingKeys.lng) ?? 0
             
-            self.radius = try container.decodeIfPresent(Double.self, forKey: .radius) ?? 0
-            self.status = try container.decodeIfPresent(String.self, forKey: .status)
+            self.radius = try container.decodeIfPresentIgnoringCase(Double.self, forKey: CodingKeys.radius) ?? 0
+            self.status = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.status)
             
-            self.dilution = try container.decodeIfPresent(Double.self, forKey: .dilution) ?? 0
-            self.altitude = try container.decodeIfPresent(Double.self, forKey: .altitude) ?? 0
-            self.geoHash = try container.decodeIfPresent(String.self, forKey: .geoHash)
-            self.locationHeading = try container.decodeIfPresent(Heading.self, forKey: .locationHeading)
+            self.dilution = try container.decodeIfPresentIgnoringCase(Double.self, forKey: CodingKeys.dilution) ?? 0
+            self.altitude = try container.decodeIfPresentIgnoringCase(Double.self, forKey: CodingKeys.altitude) ?? 0
+            self.geoHash = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.geoHash)
+            self.locationHeading = try container.decodeIfPresentIgnoringCase(Heading.self, forKey: CodingKeys.locationHeading)
         }
         catch {
             debugPrint(error)

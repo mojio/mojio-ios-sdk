@@ -64,6 +64,7 @@
 		37318938209CB06400E61E3A /* VehicleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37318937209CB06400E61E3A /* VehicleTests.swift */; };
 		375206FC20AADD3B00102273 /* GeofenceRegion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375206FB20AADD3B00102273 /* GeofenceRegion.swift */; };
 		375206FE20AAFD1600102273 /* SettingsGeofence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375206FD20AAFD1600102273 /* SettingsGeofence.swift */; };
+		3781A95622538F84004E093F /* DynamicCodingKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B3007A210B15B200608978 /* DynamicCodingKey.swift */; };
 		3AE11A9B63EBCDC7B6365890 /* Pods_Vehicles.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F28CBD045B5B77B3EC893BCA /* Pods_Vehicles.framework */; };
 		3C29817EDB59698171B61EF3 /* Pods_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD9B8527DB821719AED94CC4 /* Pods_Tests.framework */; };
 		3D6869BE2149CD45D324016A /* Pods_Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9980F32E31CB2E846A417B2C /* Pods_Core.framework */; };
@@ -1376,6 +1377,7 @@
 				BC879B6B1CBEFFDD00F9177B /* FuelLevel.swift in Sources */,
 				BCFCEB061F01A2C70096C9B4 /* IdleEvent.swift in Sources */,
 				BCFE5910209AF92400B89104 /* TimeIntervalExt.swift in Sources */,
+				3781A95622538F84004E093F /* DynamicCodingKey.swift in Sources */,
 				BC879B791CBEFFDD00F9177B /* Trip.swift in Sources */,
 				BC5F7F031CC58D4000FAB205 /* Units.swift in Sources */,
 				BC92329B1E7FC52900BD4038 /* CompatibilityDetails.swift in Sources */,

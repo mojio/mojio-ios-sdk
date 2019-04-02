@@ -17,7 +17,7 @@ import Foundation
 import SwiftDate
 
 // Base Device Measurement
-public enum DeviceMeasurementCodingKeys: String, CodingKey {
+public enum DeviceMeasurementCodingKeys: String, CodingKey, CompoundWordStyle {
     case baseUnit = "BaseUnit"
     case baseValue = "BaseValue"
     case unit = "Unit"
@@ -46,16 +46,16 @@ public extension DeviceMeasurement {
     
     public init(from decoder: Decoder) throws {
         
-        let container = try decoder.container(keyedBy: DeviceMeasurementCodingKeys.self)
+        let container = try decoder.container(keyedBy: DynamicCodingKey.self)
         
         
-        let baseValue = try container.decodeIfPresent(Double.self, forKey: .baseValue) ?? 0.0
+        let baseValue = try container.decodeIfPresentIgnoringCase(Double.self, forKey: DeviceMeasurementCodingKeys.baseValue) ?? 0.0
         
-        let value = try container.decodeIfPresent(Double.self, forKey: .value) ?? 0.0
-        let timestamp = try container.decodeIfPresent(String.self, forKey: .timestamp).flatMap { $0.dateFromISO }
+        let value = try container.decodeIfPresentIgnoringCase(Double.self, forKey: DeviceMeasurementCodingKeys.value) ?? 0.0
+        let timestamp = try container.decodeIfPresentIgnoringCase(String.self, forKey: DeviceMeasurementCodingKeys.timestamp).flatMap { $0.dateFromISO }
         
-        let baseUnit = try container.decodeIfPresent(U.self, forKey: .baseUnit)
-        let unit = try container.decodeIfPresent(U.self, forKey: .unit)
+        let baseUnit = try container.decodeIfPresentIgnoringCase(U.self, forKey: DeviceMeasurementCodingKeys.baseUnit)
+        let unit = try container.decodeIfPresentIgnoringCase(U.self, forKey: DeviceMeasurementCodingKeys.unit)
         
         let deviceMeasurements = DeviceMeasurements(baseUnit: baseUnit, baseValue: baseValue, unit: unit, value: value, timestamp: timestamp)
         
