@@ -340,7 +340,7 @@ public struct Trip: TripModel {
             
             self.id = try container.decodeIgnoringCase(String.self, forKey: CodingKeys.id)
             
-            self.vehicleId = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.vehicleId as! CompoundWordStyle)
+            self.vehicleId = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.vehicleId)
             
             self.name = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.name)
             
@@ -414,9 +414,25 @@ public struct Trip: TripModel {
                 self.duration = nil
             }
             
-            self.driverScore = try container.decodeIfPresentIgnoringCase(Int.self, forKey: CodingKeys.driverScore)
+            if let driverScore = try container.decodeIfPresentIgnoringCase(Float.self, forKey: CodingKeys.driverScore) {
+                
+                self.driverScore = Int(driverScore * 100)
+            }
+            else {
+                self.driverScore = nil
+            }
             
-            self.averageDriverScore = try container.decodeIfPresentIgnoringCase(Int.self, forKey: CodingKeys.averageDriverScore)
+            if let averageDriverScore = try container.decodeIfPresentIgnoringCase(Float.self, forKey: CodingKeys.averageDriverScore) {
+                
+                self.averageDriverScore = Int(averageDriverScore * 100)
+            }
+            else {
+                self.averageDriverScore = nil
+            }
+            
+            //self.driverScore = try container.decodeIfPresentIgnoringCase(Int.self, forKey: CodingKeys.driverScore)
+            
+            //self.averageDriverScore = try container.decodeIfPresentIgnoringCase(Int.self, forKey: CodingKeys.averageDriverScore)
  
         }
         catch {
