@@ -34,7 +34,7 @@ public struct HarshEvent: HarshEventModel {
     public var eventState: H? = nil
     public var eventLocation: L? = nil
     
-    public enum CodingKeys: String, CodingKey {
+    public enum CodingKeys: String, CodingKey, CompoundWordStyle {
         case eventState = "HarshEventState"
         case eventLocation = "Location"
     }
@@ -42,10 +42,10 @@ public struct HarshEvent: HarshEventModel {
     public init(from decoder: Decoder) throws {
         
         do {
-            let container = try decoder.container(keyedBy: CodingKeys.self)
+            let container = try decoder.container(keyedBy: DynamicCodingKey.self)
             
-            self.eventState = try container.decodeIfPresent(HarshEventState.self, forKey: .eventState)
-            self.eventLocation = try container.decodeIfPresent(Location.self, forKey: .eventLocation)
+            self.eventState = try container.decodeIfPresentIgnoringCase(HarshEventState.self, forKey: CodingKeys.eventState)
+            self.eventLocation = try container.decodeIfPresentIgnoringCase(Location.self, forKey: CodingKeys.eventLocation)
         }
         catch {
             debugPrint(error)

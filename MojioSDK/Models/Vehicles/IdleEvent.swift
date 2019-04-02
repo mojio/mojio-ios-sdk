@@ -33,7 +33,7 @@ public struct IdleEvent: IdleEventState {
     public var eventState: I? = nil
     public var eventLocation: L? = nil
     
-    public enum CodingKeys: String, CodingKey {
+    public enum CodingKeys: String, CodingKey, CompoundWordStyle {
         case eventState = "IdleState"
         case eventLocation = "Location"
     }
@@ -41,10 +41,10 @@ public struct IdleEvent: IdleEventState {
     public init(from decoder: Decoder) throws {
         
         do {
-            let container = try decoder.container(keyedBy: CodingKeys.self)
+            let container = try decoder.container(keyedBy: DynamicCodingKey.self)
             
-            self.eventState = try container.decodeIfPresent(IdleState.self, forKey: .eventState)
-            self.eventLocation = try container.decodeIfPresent(Location.self, forKey: .eventLocation) 
+            self.eventState = try container.decodeIfPresentIgnoringCase(IdleState.self, forKey: CodingKeys.eventState)
+            self.eventLocation = try container.decodeIfPresentIgnoringCase(Location.self, forKey: CodingKeys.eventLocation)
         }
         catch {
             debugPrint(error)

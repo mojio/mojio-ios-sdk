@@ -244,99 +244,9 @@ public struct Trip: TripModel {
     
     public init(from decoder: Decoder) throws {
         
-        //let container = try decoder.container(keyedBy: CodingKeys.self)
-        
         let container = try decoder.container(keyedBy: DynamicCodingKey.self)
         
         do {
-            
-            //            self.id = try container.decode(String.self, forKey: .id)
-            
-            //            self.vehicleId = try container.decodeIfPresent(String.self, forKey: .vehicleId)
-            
-            //            self.name = try container.decodeIfPresent(String.self, forKey: .name)
-            
-            //            self.mojioId = try container.decodeIfPresent(String.self, forKey: .mojioId)
-            
-            //            self.ownerId = try container.decodeIfPresent(String.self, forKey: .ownerId)
-            
-            //            self.completed = try container.decodeIfPresent(Bool.self, forKey: .completed) ?? false
-            
-            //            self.distance = try container.decodeIfPresent(Distance.self, forKey: .distance)
-            
-            //            self.startTimestamp = try container.decodeIfPresent(String.self, forKey: .startTimestamp).flatMap { $0.dateFromISO }
-            
-            //            self.endTimestamp = try container.decodeIfPresent(String.self, forKey: .endTimestamp).flatMap { $0.dateFromISO }
-            
-            //            self.startOdometer = try container.decodeIfPresent(Odometer.self, forKey: .startOdometer)
-            
-            //            self.endOdometer = try container.decodeIfPresent(Odometer.self, forKey: .endOdometer)
-            
-            //            self.startLocation = try container.decodeIfPresent(Location.self, forKey: .startLocation)
-            
-            //            self.endLocation = try container.decodeIfPresent(Location.self, forKey: .endLocation)
-            
-            //            self.maxSpeed = try container.decodeIfPresent(Speed.self, forKey: .maxSpeed)
-            
-            //            self.maxRPM = try container.decodeIfPresent(RPM.self, forKey: .maxRPM)
-            
-            //            self.maxAcceleration = try container.decodeIfPresent(Acceleration.self, forKey: .maxAcceleration)
-            
-            //            self.maxDeceleration = try container.decodeIfPresent(Acceleration.self, forKey: .maxDeceleration)
-            
-            //            self.polyline = try container.decodeIfPresent(String.self, forKey: .polyline)
-            
-            //            self.harshEvents = try container.decodeIfPresent([HarshEvent].self, forKey: .harshEvents) ?? []
-            
-            //            self.idleEvents = try container.decodeIfPresent([IdleEvent].self, forKey: .idleEvents) ?? []
-            
-            //            self.fuelEfficiency = try container.decodeIfPresent(FuelEfficiency.self, forKey: .fuelEfficiency)
-            
-            //            self.startFuelLevel = try container.decodeIfPresent(FuelLevel.self, forKey: .startFuelLevel)
-            
-            //            self.endFuelLevel = try container.decodeIfPresent(FuelLevel.self, forKey: .endFuelLevel)
-            
-            //            self.idlingCount = try container.decodeIfPresent(Int.self, forKey: .idlingCount)
-            
-            //            self.harshAccelCount = try container.decodeIfPresent(Int.self, forKey: .harshAccelCount)
-            
-            //            self.harshDecelCount = try container.decodeIfPresent(Int.self, forKey: .harshDecelCount)
-            
-            //            self.tags = try container.decodeIfPresent([String].self, forKey: .tags) ?? []
-            
-            //            self.createdOn = try container.decodeIfPresent(String.self, forKey: .createdOn).flatMap { $0.dateFromISO }
-            
-            //            self.lastModified = try container.decodeIfPresent(String.self, forKey: .lastModified).flatMap { $0.dateFromISO }
-            
-            //
-            
-            //            if
-            
-            //                let duration = try container.decodeIfPresent(String.self, forKey: .duration),
-            
-            //                let tripDuration = TimeInterval.from(duration) {
-            
-            //                self.duration = tripDuration
-            
-            //            }
-            
-            //            else if let start = self.startTimestamp, let end = self.endTimestamp {
-            
-            //                self.duration = end.timeIntervalSince(start)
-            
-            //            }
-            
-            //            else {
-            
-            //                self.duration = nil
-            
-            //            }
-            
-            //
-            
-            //            self.driverScore = try container.decodeIfPresent(Int.self, forKey: .driverScore)
-            
-            //            self.averageDriverScore = try container.decodeIfPresent(Int.self, forKey: .averageDriverScore)
             
             self.id = try container.decodeIgnoringCase(String.self, forKey: CodingKeys.id)
             
@@ -429,11 +339,6 @@ public struct Trip: TripModel {
             else {
                 self.averageDriverScore = nil
             }
-            
-            //self.driverScore = try container.decodeIfPresentIgnoringCase(Int.self, forKey: CodingKeys.driverScore)
-            
-            //self.averageDriverScore = try container.decodeIfPresentIgnoringCase(Int.self, forKey: CodingKeys.averageDriverScore)
- 
         }
         catch {
             debugPrint(error)

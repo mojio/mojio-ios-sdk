@@ -43,7 +43,7 @@ public struct Address: AddressModel {
     public let countryCode: String?
     public let formattedAddress: String?
     
-    enum CodingKeys: String, CodingKey {
+    enum CodingKeys: String, CodingKey, CompoundWordStyle {
         case houseNumber = "HouseNumber"
         case road = "Road"
         case neighbourhood = "Neighbourhood"
@@ -60,20 +60,20 @@ public struct Address: AddressModel {
     public init(from decoder: Decoder) throws {
         
         do {
-            let container = try decoder.container(keyedBy: CodingKeys.self)
+            let container = try decoder.container(keyedBy: DynamicCodingKey.self)
             
-            self.houseNumber = try container.decodeIfPresent(String.self, forKey: .houseNumber)
-            self.road = try container.decodeIfPresent(String.self, forKey: .road)
+            self.houseNumber = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.houseNumber)
+            self.road = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.road)
             
-            self.neighbourhood = try container.decodeIfPresent(String.self, forKey: .neighbourhood)
-            self.suburb = try container.decodeIfPresent(String.self, forKey: .suburb)
-            self.city = try container.decodeIfPresent(String.self, forKey: .city)
-            self.county = try container.decodeIfPresent(String.self, forKey: .county)
-            self.state = try container.decodeIfPresent(String.self, forKey: .state)
-            self.postCode = try container.decodeIfPresent(String.self, forKey: .postCode)
-            self.country = try container.decodeIfPresent(String.self, forKey: .country)
-            self.countryCode = try container.decodeIfPresent(String.self, forKey: .countryCode)
-            self.formattedAddress = try container.decodeIfPresent(String.self, forKey: .formattedAddress)
+            self.neighbourhood = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.neighbourhood)
+            self.suburb = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.suburb)
+            self.city = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.city)
+            self.county = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.county)
+            self.state = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.state)
+            self.postCode = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.postCode)
+            self.country = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.country)
+            self.countryCode = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.countryCode)
+            self.formattedAddress = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.formattedAddress)
         }
         catch {
             debugPrint(error)

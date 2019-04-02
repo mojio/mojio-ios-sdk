@@ -33,7 +33,7 @@ public struct Odometer: OdometerModel {
 
     public var rolloverValue: Double
     
-    public enum CodingKeys: String, CodingKey {
+    public enum CodingKeys: String, CodingKey, CompoundWordStyle {
         case rolloverValue = "RolloverValue"
     }
 }
@@ -42,9 +42,9 @@ extension Odometer {
     
     public init(from decoder: Decoder, with deviceMeasurements: DeviceMeasurements) throws {
         
-        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let container = try decoder.container(keyedBy: DynamicCodingKey.self)
         
-        let rolloverValue = try container.decodeIfPresent(Double.self, forKey: .rolloverValue) ?? 0
+        let rolloverValue = try container.decodeIfPresentIgnoringCase(Double.self, forKey: CodingKeys.rolloverValue) ?? 0
         
         self.init(baseUnit: deviceMeasurements.baseUnit ?? .unknown , baseValue: deviceMeasurements.baseValue, unit: deviceMeasurements.unit ?? .unknown, value: deviceMeasurements.value, timestamp: deviceMeasurements.timestamp, rolloverValue: rolloverValue)
     }
