@@ -16,27 +16,30 @@
 import Foundation
 
 public protocol ActivitySettingsModel: Codable {
-    associatedtype L = ActivitySettingsLowBatteryModel
+    associatedtype N = NotificationSettingsModel
     
-    var lowBattery: L { get }
+    var lowBattery: N { get }
+    var offline: N { get }
 }
 
-public protocol ActivitySettingsLowBatteryModel: Codable {
+public protocol NotificationSettingsModel: Codable {
     var enabled: Bool { get }
     var sound: String? { get }
 }
 
 public struct ActivitySettings: ActivitySettingsModel {
-    public typealias L = ActivitySettingsLowBattery
+    public typealias N = NotificationSettings
     
-    public var lowBattery: ActivitySettingsLowBattery
+    public var lowBattery: NotificationSettings
+    public var offline: NotificationSettings
     
     enum CodingKeys: String, CodingKey {
         case lowBattery = "LowBattery"
+        case offline = "Offline"
     }
 }
 
-public struct ActivitySettingsLowBattery: ActivitySettingsLowBatteryModel {
+public struct NotificationSettings: NotificationSettingsModel {
     public var enabled: Bool
     public var sound: String?
     
