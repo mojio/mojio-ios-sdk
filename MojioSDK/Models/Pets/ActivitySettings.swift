@@ -37,6 +37,19 @@ public struct ActivitySettings: ActivitySettingsModel {
         case lowBattery = "LowBattery"
         case offline = "Offline"
     }
+    
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        do {
+            self.lowBattery = try container.decode(NotificationSettings.self, forKey: .lowBattery)
+            self.offline = try container.decode(NotificationSettings.self, forKey: .offline)
+        }
+        catch {
+            debugPrint(error)
+            throw error
+        }
+    }
 }
 
 public struct NotificationSettings: NotificationSettingsModel {
@@ -46,6 +59,19 @@ public struct NotificationSettings: NotificationSettingsModel {
     enum CodingKeys: String, CodingKey {
         case enabled = "Enabled"
         case sound = "Sound"
+    }
+    
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        do {
+            self.enabled = try container.decode(Bool.self, forKey: .enabled)
+            self.sound = try container.decodeIfPresent(String.self, forKey: .sound)
+        }
+        catch {
+            debugPrint(error)
+            throw error
+        }
     }
 }
 
