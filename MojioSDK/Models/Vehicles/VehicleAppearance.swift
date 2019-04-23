@@ -1,6 +1,6 @@
 /******************************************************************************
  * Moj.io Inc. CONFIDENTIAL
- * 2017 Copyright Moj.io Inc.
+ * 2019 Copyright Moj.io Inc.
  * All Rights Reserved.
  *
  * NOTICE:  All information contained herein is, and remains, the property of
@@ -23,14 +23,20 @@ public struct VehicleAppearance: Codable {
     public var icon: String?
     public var showOnMap: Bool?
     public var vehicleImage: VehicleImage?
-
+    
     public struct VehicleImage: Codable {
         public let url: String
         public let hexColor: String
-
-        public init(url: String, hexColor: String) {
+        public let year: String?
+        public let model: String?
+        public let make: String?
+        
+        public init(url: String, hexColor: String, year: String?, model: String?, make: String?) {
             self.url = url
             self.hexColor = hexColor
+            self.year = year
+            self.model = model
+            self.make = make
         }
     }
     
@@ -71,7 +77,7 @@ extension VehicleAppearance: Equatable {
 
 extension VehicleAppearance.VehicleImage: Equatable {
     public static func ==(lhs: VehicleAppearance.VehicleImage, rhs: VehicleAppearance.VehicleImage) -> Bool {
-        return lhs.url == rhs.url && lhs.hexColor == rhs.hexColor
+        return lhs.url == rhs.url && lhs.hexColor == rhs.hexColor && lhs.year == rhs.year && lhs.make == rhs.make && lhs.model == rhs.model
     }
 }
 
