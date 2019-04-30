@@ -76,6 +76,7 @@ public protocol PetDetailsModel: Codable {
     var vetPhoneNumber: String? { get }
     var lastVetVisit: Date? { get }
     var weight: Double? { get }
+    var neutered: Bool? { get }
 }
 
 public struct PetDetails: PetDetailsModel {
@@ -88,6 +89,7 @@ public struct PetDetails: PetDetailsModel {
     public let vetPhoneNumber: String?
     public let lastVetVisit: Date?
     public let weight: Double?
+    public let neutered: Bool?
     
     public enum CodingKeys: String, CodingKey {
         case type = "Type"
@@ -99,6 +101,7 @@ public struct PetDetails: PetDetailsModel {
         case vetPhoneNumber = "VeterinarianPhoneNumber"
         case lastVetVisit = "LastVeterinarianVisit"
         case weight = "Weight"
+        case neutered = "Neutered"
     }
     
     public init(from decoder: Decoder) throws {
@@ -121,6 +124,7 @@ public struct PetDetails: PetDetailsModel {
             self.vetPhoneNumber = try container.decodeIfPresent(String.self, forKey: .vetPhoneNumber)
             self.lastVetVisit = try container.decodeIfPresent(String.self, forKey: .lastVetVisit).flatMap { $0.dateFromISO }
             self.weight = try container.decodeIfPresent(Double.self, forKey: .weight)
+            self.neutered = try container.decodeIfPresent(Bool.self, forKey: .neutered)
         }
         catch {
             debugPrint(error)
@@ -140,6 +144,7 @@ public struct PetDetails: PetDetailsModel {
         try container.encodeIfPresent(self.vetPhoneNumber, forKey: .vetPhoneNumber)
         try container.encodeIfPresent(self.lastVetVisit, forKey: .lastVetVisit)
         try container.encodeIfPresent(self.weight, forKey: .weight)
+        try container.encodeIfPresent(self.neutered, forKey: .neutered)
     }
 }
 
@@ -153,6 +158,7 @@ public struct PetDetailsUpdate: Codable {
     public var vetPhoneNumber: String? = nil
     public var lastVetVisit: Date? = nil
     public var weight: Double? = 0
+    public var neutered: Bool? = nil
     
     public enum CodingKeys: String, CodingKey {
         case type = "Type"
@@ -164,6 +170,7 @@ public struct PetDetailsUpdate: Codable {
         case vetPhoneNumber = "VeterinarianPhoneNumber"
         case lastVetVisit = "LastVeterinarianVisit"
         case weight = "Weight"
+        case neutered = "Neutered"
     }
     
     public init(petDetails: PetDetails? = nil) {
@@ -176,7 +183,8 @@ public struct PetDetailsUpdate: Codable {
             vetName: petDetails?.vetName,
             vetPhoneNumber: petDetails?.vetPhoneNumber,
             lastVetVisit: petDetails?.lastVetVisit,
-            weight: petDetails?.weight
+            weight: petDetails?.weight,
+            neutered: petDetails?.neutered
         )
     }
     
@@ -188,7 +196,8 @@ public struct PetDetailsUpdate: Codable {
          vetName: String? = nil,
          vetPhoneNumber: String? = nil,
          lastVetVisit: Date? = nil,
-         weight: Double? = 0) {
+         weight: Double? = 0,
+         neutered: Bool? = nil) {
         
         self.type = type
         self.gender = gender
@@ -199,6 +208,7 @@ public struct PetDetailsUpdate: Codable {
         self.vetPhoneNumber = vetPhoneNumber
         self.lastVetVisit = lastVetVisit
         self.weight = weight
+        self.neutered = neutered
     }
     
     public init(from decoder: Decoder) throws {
@@ -221,6 +231,7 @@ public struct PetDetailsUpdate: Codable {
             self.vetPhoneNumber = try container.decodeIfPresent(String.self, forKey: .vetPhoneNumber)
             self.lastVetVisit = try container.decodeIfPresent(String.self, forKey: .lastVetVisit).flatMap { $0.dateFromISO }
             self.weight = try container.decodeIfPresent(Double.self, forKey: .weight)
+            self.neutered = try container.decodeIfPresent(Bool.self, forKey: .neutered)
         }
         catch {
             debugPrint(error)
@@ -240,5 +251,6 @@ public struct PetDetailsUpdate: Codable {
         try container.encodeIfPresent(self.vetPhoneNumber, forKey: .vetPhoneNumber)
         try container.encodeIfPresent(self.lastVetVisit, forKey: .lastVetVisit)
         try container.encodeIfPresent(self.weight, forKey: .weight)
+        try container.encodeIfPresent(self.neutered, forKey: .neutered)
     }
 }
