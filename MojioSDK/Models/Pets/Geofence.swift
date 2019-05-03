@@ -164,10 +164,75 @@ public struct GeofenceNotificationUpdate: Codable {
     }
 }
 
+public protocol GeofenceWiFiModel: Codable {
+    var ssid: String? { get }
+    var macAddress: String? { get }
+    var signalStrength: Int? { get }
+}
+
+public struct GeofenceWiFi: GeofenceWiFiModel {
+    public let ssid: String?
+    public let macAddress: String?
+    public let signalStrength: Int?
+    
+    public enum CodingKeys: String, CodingKey {
+        case ssid = "Ssid"
+        case macAddress = "MacAddress"
+        case signalStrength = "SignalStrength"
+    }
+    
+    public init(ssid: String, macAddress: String? = nil, signalStrength: Int? = nil) {
+        self.ssid = ssid
+        self.macAddress = macAddress
+        self.signalStrength = signalStrength
+    }
+    
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        do {
+            self.ssid = try container.decodeIfPresent(String.self, forKey: .ssid)
+            self.macAddress = try container.decodeIfPresent(String.self, forKey: .macAddress)
+            self.signalStrength = try container.decodeIfPresent(Int.self, forKey: .signalStrength)
+        }
+        catch {
+            debugPrint(error)
+            throw error
+        }
+    }
+}
+
+public struct GeofenceWiFiUpdate: GeofenceWiFiModel {
+    public let ssid: String?
+    public let macAddress: String?
+    public let signalStrength: Int?
+    
+    public enum CodingKeys: String, CodingKey {
+        case ssid = "Ssid"
+        case macAddress = "MacAddress"
+        case signalStrength = "SignalStrength"
+    }
+    
+    public init(ssid: String, macAddress: String? = nil, signalStrength: Int? = nil) {
+        self.ssid = ssid
+        self.macAddress = macAddress
+        self.signalStrength = signalStrength
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        try container.encodeIfPresent(self.ssid, forKey: .ssid)
+        try container.encodeIfPresent(self.macAddress, forKey: .macAddress)
+        try container.encodeIfPresent(self.signalStrength, forKey: .signalStrength)
+    }
+}
+
 public protocol GeofenceModel: Codable, PrimaryKey {
     
     associatedtype G: GeofenceRegionModel
     associatedtype N: GeofenceNotificationModel
+    associatedtype W: GeofenceWiFiModel
     
     var id: String { get }
     var name: String? { get }
@@ -179,12 +244,15 @@ public protocol GeofenceModel: Codable, PrimaryKey {
     var deleted: Bool? { get }
     var lastModified: Date? { get }
     var createdOn: Date? { get }
+    
+    var wifi: W? { get }
 }
 
 public struct Geofence: GeofenceModel {
     
     public typealias G = GeofenceRegion
     public typealias N = GeofenceNotification
+    public typealias W = GeofenceWiFi
     
     public let id: String
     public let name: String?
@@ -197,6 +265,8 @@ public struct Geofence: GeofenceModel {
     public let lastModified: Date?
     public let createdOn: Date?
     
+    public let wifi: W?
+    
     public enum CodingKeys: String, CodingKey {
         case id = "Id"
         case name = "Name"
@@ -208,6 +278,8 @@ public struct Geofence: GeofenceModel {
         case deleted = "Deleted"
         case lastModified = "LastModified"
         case createdOn = "CreatedOn"
+        
+        case wifi = "Wifi"
     }
     
     public init(from decoder: Decoder) throws {
@@ -224,6 +296,8 @@ public struct Geofence: GeofenceModel {
             self.deleted = try container.decodeIfPresent(Bool.self, forKey: .deleted)
             self.lastModified = try container.decodeIfPresent(String.self, forKey: .lastModified).flatMap { $0.dateFromISO }
             self.createdOn = try container.decodeIfPresent(String.self, forKey: .createdOn).flatMap { $0.dateFromISO }
+            
+            self.wifi = try container.decodeIfPresent(W.self, forKey: .wifi)
         }
         catch {
             debugPrint(error)
@@ -242,12 +316,14 @@ public struct GeofenceUpdate: Codable {
     public var region: GeofenceRegionUpdate? = nil
     public var notification: GeofenceNotificationUpdate? = nil
     public var assetIds: [String] = []
+    public var wifi: GeofenceWiFiUpdate? = nil
     
     public init(
         name: String? = nil,
         description: String? = nil,
         region: GeofenceRegionUpdate? = nil,
         notification: GeofenceNotificationUpdate? = nil,
+        wifi: GeofenceWiFiUpdate? = nil,
         assetIds: [String] = []) {
         
         self.name = name
@@ -255,6 +331,8 @@ public struct GeofenceUpdate: Codable {
         self.region = region
         self.notification = notification
         self.assetIds = assetIds
+        
+        self.wifi = wifi
     }
     
     public enum CodingKeys: String, CodingKey {
@@ -263,6 +341,7 @@ public struct GeofenceUpdate: Codable {
         case region = "Region"
         case notification = "Notification"
         case assetIds = "AssetIds"
+        case wifi = "Wifi"
     }
     
     public func encode(to encoder: Encoder) throws {
@@ -273,5 +352,7 @@ public struct GeofenceUpdate: Codable {
         try container.encodeIfPresent(self.region, forKey: .region)
         try container.encodeIfPresent(self.notification, forKey: .notification)
         try container.encodeIfPresent(self.assetIds, forKey: .assetIds)
+        
+        try container.encodeIfPresent(self.wifi, forKey: .wifi)
     }
 }
