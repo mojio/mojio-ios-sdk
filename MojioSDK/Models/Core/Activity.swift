@@ -105,7 +105,7 @@ public struct ActivityLocation: ActivityLocationModel {
         self.radius = try container.decodeIfPresentIgnoringCase(Double.self, forKey: CodingKeys.radius)
     }
     
-    public init(latitude: Double, longitude: Double, altitude: Double) {
+    public init(latitude: Double, longitude: Double, altitude: Double?) {
         self.id = nil
         self.type = nil
         self.name = nil
@@ -222,9 +222,9 @@ public struct Activity: ActivityModel {
         
         if encodedLocation == nil,
             let latitude = try container.decodeIfPresentIgnoringCase(Double.self, forKey: CodingKeys.latitude),
-            let longitude = try container.decodeIfPresentIgnoringCase(Double.self, forKey: CodingKeys.longitude),
-            let altitude = try container.decodeIfPresentIgnoringCase(Double.self, forKey: CodingKeys.altitude)
+            let longitude = try container.decodeIfPresentIgnoringCase(Double.self, forKey: CodingKeys.longitude)
         {
+            let altitude = try container.decodeIfPresentIgnoringCase(Double.self, forKey: CodingKeys.altitude)
             encodedLocation = ActivityLocation(latitude: latitude, longitude: longitude, altitude: altitude)
         }
         
