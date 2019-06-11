@@ -165,12 +165,18 @@ public struct DeviceUpdate: Codable {
     public var light: LightUpdate? = nil
     public var highTemperatureAlarm: TemperatureAlarmUpdate? = nil
     public var lowTemperatureAlarm: TemperatureAlarmUpdate? = nil
+    public var lostMode: Bool? = nil
+    public var buzzer: BuzzerUpdate? = nil
+    public var skipEgress: Bool? = nil
     
     public enum CodingKeys: String, CodingKey {
         case name = "Name"
         case light = "Light"
         case highTemperatureAlarm = "HighTemperatureAlarm"
         case lowTemperatureAlarm = "LowTemperatureAlarm"
+        case lostMode = "LostMode"
+        case buzzer = "Buzzer"
+        case skipEgress = "SkipEgress"
     }
     
     public func encode(to encoder: Encoder) throws {
@@ -180,12 +186,25 @@ public struct DeviceUpdate: Codable {
         try container.encodeIfPresent(self.light, forKey: .light)
         try container.encodeIfPresent(self.highTemperatureAlarm, forKey: .highTemperatureAlarm)
         try container.encodeIfPresent(self.lowTemperatureAlarm, forKey: .lowTemperatureAlarm)
+        try container.encodeIfPresent(self.lostMode, forKey: .lostMode)
+        try container.encodeIfPresent(self.buzzer, forKey: .buzzer)
+        try container.encodeIfPresent(self.skipEgress, forKey: .skipEgress)
     }
     
-    public init(name: String? = nil, light: LightUpdate? = nil, highTemperatureAlarm: TemperatureAlarmUpdate? = nil, lowTemperatureAlarm: TemperatureAlarmUpdate? = nil) {
+    public init(name: String? = nil,
+                light: LightUpdate? = nil,
+                highTemperatureAlarm: TemperatureAlarmUpdate? = nil,
+                lowTemperatureAlarm: TemperatureAlarmUpdate? = nil,
+                lostMode: Bool? = nil,
+                buzzer: BuzzerUpdate? = nil,
+                skipEgress: Bool? = nil) {
+        
         self.name = name
         self.light = light
         self.highTemperatureAlarm = highTemperatureAlarm
         self.lowTemperatureAlarm = lowTemperatureAlarm
+        self.lostMode = lostMode
+        self.buzzer = buzzer
+        self.skipEgress = skipEgress
     }
 }
