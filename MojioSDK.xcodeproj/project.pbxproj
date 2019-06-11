@@ -82,6 +82,7 @@
 		72B3007B210B15B200608978 /* DynamicCodingKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B3007A210B15B200608978 /* DynamicCodingKey.swift */; };
 		75F77F0E1D19F504000CC2B4 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 75F77F0D1D19F504000CC2B4 /* libz.tbd */; };
 		887014791DA833CA00EFEC6D /* VehicleStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887014781DA833CA00EFEC6D /* VehicleStatistics.swift */; };
+		AE4DB04B22B05DF600B30DBB /* Buzzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4DB04A22B05DF600B30DBB /* Buzzer.swift */; };
 		BC31E3CE1D419E80001649A7 /* Distance.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC31E3CD1D419E80001649A7 /* Distance.swift */; };
 		BC3D7C6F2087F3B000659A92 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 75F77F0D1D19F504000CC2B4 /* libz.tbd */; };
 		BC3D7C7F2087F5E700659A92 /* VehiclesClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC3D7C7E2087F5E700659A92 /* VehiclesClient.swift */; };
@@ -299,6 +300,7 @@
 		A9FF603C57C10DB1F8F755BF /* Pods_Pets.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pets.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB3BB805D64071BFF9C018A0 /* Pods-Images.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Images.release.xcconfig"; path = "Pods/Target Support Files/Pods-Images/Pods-Images.release.xcconfig"; sourceTree = "<group>"; };
 		AE37CC1D524CCDEBA1663048 /* Pods-Vehicles.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vehicles.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Vehicles/Pods-Vehicles.debug.xcconfig"; sourceTree = "<group>"; };
+		AE4DB04A22B05DF600B30DBB /* Buzzer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buzzer.swift; sourceTree = "<group>"; };
 		AF0D505D9B7CEF6E8A9E8FFB /* Pods-Core.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Core.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Core/Pods-Core.debug.xcconfig"; sourceTree = "<group>"; };
 		B05A25508E7E57D8DB8C6D24 /* Pods-Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Tests/Pods-Tests.release.xcconfig"; sourceTree = "<group>"; };
 		BB935783B8EEA97833A0CF69 /* Pods-Accounts.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Accounts.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Accounts/Pods-Accounts.debug.xcconfig"; sourceTree = "<group>"; };
@@ -684,6 +686,7 @@
 				BCF23D0220EA0B9A009FE79C /* AssetDailySummary.swift */,
 				22CF879B2252A62B0085CBF5 /* Light.swift */,
 				22CF879D2252A6840085CBF5 /* TemperatureAlarm.swift */,
+				AE4DB04A22B05DF600B30DBB /* Buzzer.swift */,
 			);
 			path = Pets;
 			sourceTree = "<group>";
@@ -1313,6 +1316,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				22CF879C2252A62B0085CBF5 /* Light.swift in Sources */,
+				AE4DB04B22B05DF600B30DBB /* Buzzer.swift in Sources */,
 				BCFE5DC520A063B500B89104 /* Stats.swift in Sources */,
 				BC3D7C84208816BB00659A92 /* PetsClient.swift in Sources */,
 				BCFE5912209AF92500B89104 /* TimeIntervalExt.swift in Sources */,
