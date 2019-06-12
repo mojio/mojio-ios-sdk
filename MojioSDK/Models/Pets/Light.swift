@@ -65,4 +65,10 @@ public struct LightUpdate: Codable {
         try container.encodeIfPresent(self.enabled, forKey: .enabled)
         try container.encodeIfPresent(self.type, forKey: .type)
     }
+    
+    public init(enabled: Bool? = nil, type: LightType? = nil) {
+        
+        self.enabled = enabled
+        self.type = type
+    }
 }
