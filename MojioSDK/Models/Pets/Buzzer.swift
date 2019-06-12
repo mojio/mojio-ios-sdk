@@ -64,4 +64,10 @@ public struct BuzzerUpdate: Codable {
         try container.encodeIfPresent(self.enabled, forKey: .enabled)
         try container.encodeIfPresent(self.type, forKey: .type)
     }
+    
+    public init(enabled: Bool? = nil, type: BuzzerType? = nil) {
+        
+        self.enabled = enabled
+        self.type = type
+    }
 }
