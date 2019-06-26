@@ -27,6 +27,7 @@ public protocol PetsLocationModel: Codable {
     var altitude: Double? { get }
     var timestamp: Date? { get }
     var heading: Double? { get }
+    var accuracy: Double? { get }
     var hError: Double? { get }
     var vError: Double? { get }
     var type: LocationType? { get }
@@ -39,6 +40,7 @@ public struct PetsLocation: PetsLocationModel {
     public let altitude: Double?
     public let timestamp: Date?
     public let heading: Double?
+    public let accuracy: Double?
     public let hError: Double?
     public let vError: Double?
     public let type: LocationType?
@@ -50,6 +52,7 @@ public struct PetsLocation: PetsLocationModel {
         case altitude = "Altitude"
         case timestamp = "Timestamp"
         case heading = "Heading"
+        case accuracy = "Accuracy"
         case hError = "HError"
         case vError = "VError"
         case type = "Type"
@@ -65,6 +68,7 @@ public struct PetsLocation: PetsLocationModel {
             self.altitude = try container.decodeIfPresent(Double.self, forKey: .altitude)
             self.timestamp = try container.decodeIfPresent(String.self, forKey: .timestamp).flatMap { $0.dateFromISO }
             self.heading = try container.decodeIfPresent(Double.self, forKey: .heading)
+            self.accuracy = try container.decodeIfPresent(Double.self, forKey: .accuracy)
             self.hError = try container.decodeIfPresent(Double.self, forKey: .hError)
             self.vError = try container.decodeIfPresent(Double.self, forKey: .vError)
             self.type = try container.decodeIfPresent(LocationType.self, forKey: .type)
@@ -82,8 +86,9 @@ public extension PetsLocation {
         self.latitude = coreLocation.coordinate.latitude
         self.longitude = coreLocation.coordinate.longitude
         self.altitude = coreLocation.altitude
-        self.heading = coreHeading?.trueHeading ?? 0
         self.timestamp = coreLocation.timestamp
+        self.heading = coreHeading?.trueHeading ?? 0
+        self.accuracy = coreLocation.horizontalAccuracy
         self.hError = coreLocation.horizontalAccuracy
         self.vError = coreLocation.verticalAccuracy
         self.name = nil

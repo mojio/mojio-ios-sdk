@@ -53,7 +53,7 @@ public struct HarshEventState: HarshEventStateModel {
     public let eventType: HarshEventType?
     public let turnType: HarshEventTurnType?
     
-    public enum CodingKeys: String, CodingKey {
+    public enum CodingKeys: String, CodingKey, CompoundWordStyle {
         case timestamp = "Timestamp"
         case value = "Value"
         case eventType = "EventType"
@@ -63,12 +63,12 @@ public struct HarshEventState: HarshEventStateModel {
     public init(from decoder: Decoder) throws {
         
         do {
-            let container = try decoder.container(keyedBy: CodingKeys.self)
+            let container = try decoder.container(keyedBy: DynamicCodingKey.self)
             
-            self.timestamp = try container.decodeIfPresent(String.self, forKey: .timestamp).flatMap { $0.dateFromISO }
-            self.value = try container.decodeIfPresent(Bool.self, forKey: .value) ?? false
-            self.eventType = try container.decodeIfPresent(HarshEventType.self, forKey: .eventType)
-            self.turnType = try container.decodeIfPresent(HarshEventTurnType.self, forKey: .turnType)
+            self.timestamp = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.timestamp).flatMap { $0.dateFromISO }
+            self.value = try container.decodeIfPresentIgnoringCase(Bool.self, forKey: CodingKeys.value) ?? false
+            self.eventType = try container.decodeIfPresentIgnoringCase(HarshEventType.self, forKey: CodingKeys.eventType)
+            self.turnType = try container.decodeIfPresentIgnoringCase(HarshEventTurnType.self, forKey: CodingKeys.turnType)
         }
         catch {
             debugPrint(error)

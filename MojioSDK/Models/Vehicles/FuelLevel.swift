@@ -33,7 +33,7 @@ public struct FuelLevel: FuelLevelModel {
     
     public var riskSeverity: RiskSeverity? = nil
     
-    public enum CodingKeys: String, CodingKey {
+    public enum CodingKeys: String, CodingKey, CompoundWordStyle {
         case riskSeverity = "RiskSeverity"
     }
 }
@@ -42,9 +42,9 @@ extension FuelLevel {
     
     public init(from decoder: Decoder, with deviceMeasurements: DeviceMeasurements) throws {
         
-        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let container = try decoder.container(keyedBy: DynamicCodingKey.self)
         
-        let riskSeverity = try container.decodeIfPresent(RiskSeverity.self, forKey: .riskSeverity)
+        let riskSeverity = try container.decodeIfPresentIgnoringCase(RiskSeverity.self, forKey: CodingKeys.riskSeverity)
         
         self.init(baseUnit: deviceMeasurements.baseUnit ?? .unknown, baseValue: deviceMeasurements.baseValue, unit: deviceMeasurements.unit ?? .unknown, value: deviceMeasurements.value, timestamp: deviceMeasurements.timestamp, riskSeverity: riskSeverity)
     }

@@ -16,47 +16,48 @@
 import Foundation
 import MojioCore
 
-public protocol IdleEventState: Codable {
-    
-    associatedtype I: IdleStateModel
-    associatedtype L: LocationModel
-    
-    var eventState: I? { get }
-    var eventLocation: L? { get }
+public protocol TemperatureAlarmModel: Codable {
+    var enabled: Bool? { get }
+    var threshold: Double? { get }
 }
 
-public struct IdleEvent: IdleEventState {
+public struct TemperatureAlarm: TemperatureAlarmModel {
     
-    public typealias I = IdleState
-    public typealias L = Location
+    public let enabled: Bool?
+    public let threshold: Double?
     
-    public var eventState: I? = nil
-    public var eventLocation: L? = nil
-    
-    public enum CodingKeys: String, CodingKey, CompoundWordStyle {
-        case eventState = "IdleState"
-        case eventLocation = "Location"
+    public enum CodingKeys: String, CodingKey {
+        case enabled = "Enabled"
+        case threshold = "Threshold"
     }
     
     public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
         
         do {
-            let container = try decoder.container(keyedBy: DynamicCodingKey.self)
-            
-            self.eventState = try container.decodeIfPresentIgnoringCase(IdleState.self, forKey: CodingKeys.eventState)
-            self.eventLocation = try container.decodeIfPresentIgnoringCase(Location.self, forKey: CodingKeys.eventLocation)
+            self.enabled = try container.decodeIfPresent(Bool.self, forKey: .enabled)
+            self.threshold = try container.decodeIfPresent(Double.self, forKey: .threshold)
         }
         catch {
             debugPrint(error)
             throw error
         }
     }
+}
+
+public struct TemperatureAlarmUpdate: Codable {
+    public var enabled: Bool?
+    public var threshold: Double?
+    
+    public enum CodingKeys: String, CodingKey {
+        case enabled = "Enabled"
+        case threshold = "Threshold"
+    }
     
     public func encode(to encoder: Encoder) throws {
-        
         var container = encoder.container(keyedBy: CodingKeys.self)
         
-        try container.encodeIfPresent(self.eventState, forKey: .eventState)
-        try container.encodeIfPresent(self.eventLocation, forKey: .eventLocation)
+        try container.encodeIfPresent(self.enabled, forKey: .enabled)
+        try container.encodeIfPresent(self.threshold, forKey: .threshold)
     }
 }

@@ -43,7 +43,7 @@ open class ImagesClient: RestClient {
         keychainManager: KeychainManager? = nil) {
         
         super.init(clientEnvironment: clientEnvironment, sessionManager: sessionManager, keychainManager: keychainManager)
-        self.requestUrl = clientEnvironment.getImageEndpoint()
+        self.requestUrl = clientEnvironment.getTrackerImageEndpoint()
     }
     
     open func images(_ imageId: String? = nil) -> Self {
@@ -61,13 +61,25 @@ open class ImagesClient: RestClient {
         return self
     }
     
-    open func uploadImage(_ imageData: Data, mimeType: MimeType.Image, completion: @escaping (Image?) -> Void, failure: @escaping (Any?) -> Void) {
-        return self.uploadImage(imageData, mimeType: mimeType, completion: {response, headers in completion(response as? Image)}, failure: failure)
+    open func uploadImage(_ imageData: Data,
+                          mimeType: MimeType.Image,
+                          urlParams: [String: Any]? = nil,
+                          completion: @escaping (Image?) -> Void,
+                          failure: @escaping (Any?) -> Void) {
+        return self.uploadImage(imageData, mimeType: mimeType, urlParams: urlParams, completion: {response, headers in completion(response as? Image)}, failure: failure)
+    }
+
+    open func uploadImage<I: ImageModel>(_ imageData: Data,
+                                         mimeType: MimeType.Image,
+                                         urlParams: [String: Any]? = nil,
+                                         completion: @escaping (I?) -> Void,
+                                         failure: @escaping (Any?) -> Void) {
+        return self.uploadImage(imageData, mimeType: mimeType, urlParams: urlParams, completion: {response, headers in completion(response as? I)}, failure: failure)
     }
     
-    internal func uploadImage(_ imageData: Data, mimeType: MimeType.Image, completion: @escaping (_ response: Codable?, _ headers: [String : String]) -> Void, failure: @escaping (_ error: Any?) -> Void) {
+    internal func uploadImage(_ imageData: Data, mimeType: MimeType.Image, urlParams: [String: Any]? = nil, completion: @escaping (_ response: Codable?, _ headers: [String : String]) -> Void, failure: @escaping (_ error: Any?) -> Void) {
         
-        guard let requestUrl = self.requestUrl else {
+        guard let requestUrl = self.requestUrl.flatMap({ URL(string: $0) }) else {
             failure(nil)
             return
         }
@@ -76,11 +88,13 @@ open class ImagesClient: RestClient {
         let name = "ImagesClient.ImageData"
         let fileName = "\(name).\(version)"
         
+        let encodedUrl = (try? URLEncoding(destination: .queryString, boolEncoding: .literal).encode(URLRequest(url: requestUrl), with: urlParams))?.url ?? requestUrl
+        
         self.sessionManager.upload(
             multipartFormData: {multipartFormData in
                 multipartFormData.append(imageData, withName: name, fileName: fileName, mimeType: mimeType.rawValue)
         },
-            to: requestUrl,
+            to: encodedUrl,
             headers: self.defaultHeaders) {result in
                 
                 switch result {
@@ -130,6 +144,10 @@ open class ImagesClient: RestClient {
         catch {
             return nil
         }
+    }
+    
+    override open func parseError(_ response: DataResponse<Data>) -> Error {
+        return response.error ?? MojioError(code: nil)
     }
 }
 

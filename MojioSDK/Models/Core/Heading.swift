@@ -45,7 +45,7 @@ public struct Heading: HeadingModel {
     public let direction: String?
     public let leftTurn: Bool
 
-    public enum CodingKeys: String, CodingKey {
+    public enum CodingKeys: String, CodingKey, CompoundWordStyle {
         case direction = "Direction"
         case leftTurn = "LeftTurn"
     }
@@ -55,11 +55,11 @@ public extension Heading  {
     
     public init(from decoder: Decoder, with deviceMeasurements: DeviceMeasurements) throws {
         
-        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let container = try decoder.container(keyedBy: DynamicCodingKey.self)
         
-        let direction = try container.decodeIfPresent(String.self, forKey: .direction)
+        let direction = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.direction)
         
-        let leftTurn = try container.decodeIfPresent(Bool.self, forKey: .leftTurn) ?? false
+        let leftTurn = try container.decodeIfPresentIgnoringCase(Bool.self, forKey: CodingKeys.leftTurn) ?? false
         
         self.init(
             baseUnit: deviceMeasurements.baseUnit ?? .unknown,
