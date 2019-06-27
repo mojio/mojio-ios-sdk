@@ -1,6 +1,6 @@
 /******************************************************************************
  * Moj.io Inc. CONFIDENTIAL
- * 2017 Copyright Moj.io Inc.
+ * 2019 Copyright Moj.io Inc.
  * All Rights Reserved.
  *
  * NOTICE:  All information contained herein is, and remains, the property of
@@ -42,7 +42,7 @@ public struct GeofenceRegion: GeofenceRegionModel {
         case radius = "Radius"
         case polygon = "Polygon"
     }
-
+    
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
@@ -164,6 +164,55 @@ public struct GeofenceNotificationUpdate: Codable {
     }
 }
 
+public protocol SeparateGeofenceNotificationModel: Codable {
+    var enabled: Bool { get }
+    var sound: String { get }
+}
+
+public struct SeparateGeofenceNotification: SeparateGeofenceNotificationModel {
+    public let enabled: Bool
+    public let sound: String
+    
+    public enum CodingKeys: String, CodingKey {
+        case enabled = "Enabled"
+        case sound = "Sound"
+    }
+    
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        do {
+            self.enabled = try container.decode(Bool.self, forKey: .enabled)
+            self.sound = (try container.decode(String.self, forKey: .sound))
+        }
+        catch {
+            debugPrint(error)
+            throw error
+        }
+    }
+}
+
+public struct SeparateGeofenceNotificationUpdate: Codable {
+    public var enabled: Bool
+    public var sound: String
+    
+    public init(enabled: Bool, sound: String) {
+        self.enabled = enabled
+        self.sound = sound
+    }
+    
+    public enum CodingKeys: String, CodingKey {
+        case enabled = "Enabled"
+        case sound = "Sound"
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(self.enabled, forKey: .enabled)
+        try container.encodeIfPresent(self.sound, forKey: .sound)
+    }
+}
+
 public protocol GeofenceWiFiModel: Codable {
     var ssid: String? { get }
     var macAddress: String? { get }
@@ -233,6 +282,7 @@ public protocol GeofenceModel: Codable, PrimaryKey {
     associatedtype G: GeofenceRegionModel
     associatedtype N: GeofenceNotificationModel
     associatedtype W: GeofenceWiFiModel
+    associatedtype SG: SeparateGeofenceNotificationModel
     
     var id: String { get }
     var name: String? { get }
@@ -246,6 +296,8 @@ public protocol GeofenceModel: Codable, PrimaryKey {
     var createdOn: Date? { get }
     
     var wifi: W? { get }
+    var geofenceEnterNotification: SG? { get }
+    var geofenceExitNotification: SG? { get }
 }
 
 public struct Geofence: GeofenceModel {
@@ -253,6 +305,7 @@ public struct Geofence: GeofenceModel {
     public typealias G = GeofenceRegion
     public typealias N = GeofenceNotification
     public typealias W = GeofenceWiFi
+    public typealias SG = SeparateGeofenceNotification
     
     public let id: String
     public let name: String?
@@ -264,6 +317,10 @@ public struct Geofence: GeofenceModel {
     public let deleted: Bool?
     public let lastModified: Date?
     public let createdOn: Date?
+    
+    public let geofenceEnterNotification: SG?
+    public let geofenceExitNotification: SG?
+    
     
     public let wifi: W?
     
@@ -280,6 +337,10 @@ public struct Geofence: GeofenceModel {
         case createdOn = "CreatedOn"
         
         case wifi = "Wifi"
+        
+        case geofenceEnterNotification = "GeofenceEnterNotification"
+        case geofenceExitNotification = "GeofenceExitNotification"
+        
     }
     
     public init(from decoder: Decoder) throws {
@@ -298,6 +359,10 @@ public struct Geofence: GeofenceModel {
             self.createdOn = try container.decodeIfPresent(String.self, forKey: .createdOn).flatMap { $0.dateFromISO }
             
             self.wifi = try container.decodeIfPresent(W.self, forKey: .wifi)
+            
+            self.geofenceEnterNotification = try container.decodeIfPresent(SG.self, forKey: .geofenceEnterNotification)
+            self.geofenceExitNotification = try container.decodeIfPresent(SG.self, forKey: .geofenceExitNotification)
+            
         }
         catch {
             debugPrint(error)
@@ -315,6 +380,8 @@ public struct GeofenceUpdate: Codable {
     public var description: String? = nil
     public var region: GeofenceRegionUpdate? = nil
     public var notification: GeofenceNotificationUpdate? = nil
+    public var geofenceEnterNotification: SeparateGeofenceNotificationUpdate?
+    public var geofenceExitNotification: SeparateGeofenceNotificationUpdate?
     public var assetIds: [String] = []
     public var wifi: GeofenceWiFiUpdate? = nil
     
@@ -323,13 +390,18 @@ public struct GeofenceUpdate: Codable {
         description: String? = nil,
         region: GeofenceRegionUpdate? = nil,
         notification: GeofenceNotificationUpdate? = nil,
+        geofenceEnterNotification: SeparateGeofenceNotificationUpdate? = nil,
+        geofenceExitNotification: SeparateGeofenceNotificationUpdate? = nil,
         wifi: GeofenceWiFiUpdate? = nil,
         assetIds: [String] = []) {
+        
         
         self.name = name
         self.description = description
         self.region = region
         self.notification = notification
+        self.geofenceEnterNotification = geofenceEnterNotification
+        self.geofenceExitNotification = geofenceExitNotification
         self.assetIds = assetIds
         
         self.wifi = wifi
@@ -342,6 +414,8 @@ public struct GeofenceUpdate: Codable {
         case notification = "Notification"
         case assetIds = "AssetIds"
         case wifi = "Wifi"
+        case geofenceEnterNotification = "GeofenceEnterNotification"
+        case geofenceExitNotification = "GeofenceExitNotification"
     }
     
     public func encode(to encoder: Encoder) throws {
@@ -354,5 +428,8 @@ public struct GeofenceUpdate: Codable {
         try container.encodeIfPresent(self.assetIds, forKey: .assetIds)
         
         try container.encodeIfPresent(self.wifi, forKey: .wifi)
+        
+        try container.encodeIfPresent(self.geofenceEnterNotification, forKey: .geofenceEnterNotification)
+        try container.encodeIfPresent(self.geofenceExitNotification, forKey: .geofenceExitNotification)
     }
 }
