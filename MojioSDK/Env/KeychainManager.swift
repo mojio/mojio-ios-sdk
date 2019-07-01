@@ -32,7 +32,7 @@ protocol AuthTokenManager {
     var authorizationKey: String? {get}
 }
 
-public class KeychainManager: AuthTokenManager {
+open class KeychainManager: AuthTokenManager {
     
     // iOS Monitor uses separate instances of KeychainManager; please ensure all future merges into ios-monitor branch
     // allow for multiple instances by exposing init()
