@@ -37,6 +37,16 @@ public class KeychainManager: AuthTokenManager {
     // iOS Monitor uses separate instances of KeychainManager; please ensure all future merges into ios-monitor branch
     // allow for multiple instances by exposing init()
     public static var sharedInstance = KeychainManager()
+ 
+    public init(customKeychain: KeychainSwift) {
+        self.encoder.outputFormat = .binary
+        self.keychainSwift = customKeychain
+        
+        if let authToken = self.deprecatedAuthToken {
+            self.authToken = authToken
+            self.deleteDeprecatedTokenFromKeychain()
+        }
+    }
     
     public init() {
         self.encoder.outputFormat = .binary
@@ -47,7 +57,7 @@ public class KeychainManager: AuthTokenManager {
         }
     }
     
-    public let keychainSwift = KeychainSwift()
+    public var keychainSwift = KeychainSwift()
     public let encoder = PropertyListEncoder()
     public let decoder = PropertyListDecoder()
     public let lock = NSLock()
