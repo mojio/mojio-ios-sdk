@@ -420,8 +420,18 @@ open class AuthClient: AuthControllerDelegate {
         let registerEndpoint = self.clientEnvironment.getIdentityEndpoint() + AccountClientEndpoint.register.rawValue
         self.requestHeaders.update(["Authorization": self.generateBasicAuthHeader(), "Content-Type": "application/json", "Accept": "application/json"])
         
+        //FIXME: Comment by SV - 02-07-2019
+        var param = ["Email": email, "Password": password, "ConfirmPassword": password]
+        
+        if mobile != ""
+        {
+            param["PhoneNumber"] = mobile
+        }
+        
+        print(param)
+        
         // Step 1: Create an account for the user
-        let request = self.sessionManager.request(registerEndpoint, method: .post, parameters: ["PhoneNumber": mobile, "Email": email, "Password": password, "ConfirmPassword": password], encoding: JSONEncoding.default, headers: self.requestHeaders).responseJSON(queue: self.dispatchQueue, options: .allowFragments) {response in
+        let request = self.sessionManager.request(registerEndpoint, method: .post, parameters: param, encoding: JSONEncoding.default, headers: self.requestHeaders).responseJSON(queue: self.dispatchQueue, options: .allowFragments) {response in
             
             if response.response?.statusCode == 200 {
                 
