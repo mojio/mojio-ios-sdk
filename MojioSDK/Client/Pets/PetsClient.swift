@@ -34,6 +34,8 @@ public enum PetsEndpoint: String {
     case message = "message/"
     case summaries = "summaries/"
     case settings = "settings"
+    case user = "user"
+    case termsandconditions = "termsandconditions"
 }
 
 open class PetsClient: RestClient {
@@ -165,6 +167,18 @@ open class PetsClient: RestClient {
         return self
     }
     
+    open func user() -> Self {
+        self.requestEntity = PetsEndpoint.user.rawValue
+        self.appendRequestUrlEntity(PetsEndpoint.user.rawValue, asFinal: false)
+        return self
+    }
+    
+    open func termsandconditions() -> Self {
+        self.requestEntity = PetsEndpoint.termsandconditions.rawValue
+        self.appendRequestUrlEntity(PetsEndpoint.termsandconditions.rawValue, asFinal: true)
+        return self
+    }
+    
     open override func parseData(_ responseData: Data) -> Codable? {
         do {
             switch PetsEndpoint(rawValue: self.requestEntity) ?? .base {
@@ -231,6 +245,12 @@ open class PetsClient: RestClient {
                 }
                 catch {
                     return try JSONDecoder().decode(ActivitySettings.self, from: responseData)
+                }
+            case .termsandconditions:
+                do {
+                    return try JSONDecoder().decode(ResponseArray<TermsAndConditionsModel>.self, from: responseData)
+                } catch {
+                    return try JSONDecoder().decode(TermsAndConditionsModel.self, from: responseData)
                 }
             default:
                 return nil

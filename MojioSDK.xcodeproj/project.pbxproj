@@ -68,7 +68,7 @@
 		3AE11A9B63EBCDC7B6365890 /* Pods_Vehicles.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F28CBD045B5B77B3EC893BCA /* Pods_Vehicles.framework */; };
 		3C29817EDB59698171B61EF3 /* Pods_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD9B8527DB821719AED94CC4 /* Pods_Tests.framework */; };
 		3D6869BE2149CD45D324016A /* Pods_Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9980F32E31CB2E846A417B2C /* Pods_Core.framework */; };
-		432FA0CCDBE729284225021F /* Pods_Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEFFCAA2C464247F32E3DE5C /* Pods_Accounts.framework */; };
+		432FA0CCDBE729284225021F /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		644214DE1D9E6500005A86C5 /* AggregationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644214DD1D9E6500005A86C5 /* AggregationData.swift */; };
 		68CF7CDEA225012F8E872CEE /* Pods_Images.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCEF188E65189732E37C36FD /* Pods_Images.framework */; };
 		72B3006E210A1AD400608978 /* ActivityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B3006D210A1AD400608978 /* ActivityTests.swift */; };
@@ -201,6 +201,7 @@
 		F9E9FDAE1D93122A00DCB690 /* HarshEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E9FDAD1D93122A00DCB690 /* HarshEvent.swift */; };
 		FCE43DA820DCDABC004A2E89 /* EntityAppearanceColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE43DA720DCDABC004A2E89 /* EntityAppearanceColor.swift */; };
 		FCE43DAE20DCFA22004A2E89 /* DisplayDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE43DAD20DCFA22004A2E89 /* DisplayDetails.swift */; };
+		FCF6B2A622DF65EB00B21DD9 /* TermsAndConditionsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF6B2A522DF65EB00B21DD9 /* TermsAndConditionsModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -409,6 +410,7 @@
 		F9E9FDAD1D93122A00DCB690 /* HarshEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HarshEvent.swift; sourceTree = "<group>"; };
 		FCE43DA720DCDABC004A2E89 /* EntityAppearanceColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityAppearanceColor.swift; sourceTree = "<group>"; };
 		FCE43DAD20DCFA22004A2E89 /* DisplayDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayDetails.swift; sourceTree = "<group>"; };
+		FCF6B2A522DF65EB00B21DD9 /* TermsAndConditionsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndConditionsModel.swift; sourceTree = "<group>"; };
 		FD6C559B5319E02322A50549 /* Pods-Vehicles.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vehicles.release.xcconfig"; path = "Pods/Target Support Files/Pods-Vehicles/Pods-Vehicles.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -427,7 +429,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BC603721208FA9CD00D855DE /* libz.tbd in Frameworks */,
-				432FA0CCDBE729284225021F /* Pods_Accounts.framework in Frameworks */,
+				432FA0CCDBE729284225021F /* (null) in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -683,6 +685,7 @@
 				22CF879B2252A62B0085CBF5 /* Light.swift */,
 				22CF879D2252A6840085CBF5 /* TemperatureAlarm.swift */,
 				AE4DB04A22B05DF600B30DBB /* Buzzer.swift */,
+				FCF6B2A522DF65EB00B21DD9 /* TermsAndConditionsModel.swift */,
 			);
 			path = Pets;
 			sourceTree = "<group>";
@@ -1330,6 +1333,7 @@
 				BC603743208FB20F00D855DE /* Battery.swift in Sources */,
 				BC603745208FB20F00D855DE /* DeviceType.swift in Sources */,
 				BC603747208FB20F00D855DE /* Geofence.swift in Sources */,
+				FCF6B2A622DF65EB00B21DD9 /* TermsAndConditionsModel.swift in Sources */,
 				BC8DFC0720EC450D006B99E6 /* ActivitySettings.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
