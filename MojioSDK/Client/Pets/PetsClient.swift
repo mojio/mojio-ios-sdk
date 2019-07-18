@@ -34,7 +34,7 @@ public enum PetsEndpoint: String {
     case message = "message/"
     case summaries = "summaries/"
     case settings = "settings"
-    case user = "user"
+    case users = "users"
     case termsandconditions = "termsandconditions"
 }
 
@@ -167,9 +167,9 @@ open class PetsClient: RestClient {
         return self
     }
     
-    open func user() -> Self {
-        self.requestEntity = PetsEndpoint.user.rawValue
-        self.appendRequestUrlEntity(PetsEndpoint.user.rawValue, asFinal: false)
+    open func users() -> Self {
+        self.requestEntity = PetsEndpoint.users.rawValue
+        self.appendRequestUrlEntity(PetsEndpoint.users.rawValue, asFinal: false)
         return self
     }
     
