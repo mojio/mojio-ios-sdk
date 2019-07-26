@@ -170,6 +170,7 @@ public struct Device: DeviceModel {
 
 public struct DeviceUpdate: Codable {
     public var name: String? = nil
+    public var bleName: String? = nil
     public var light: LightUpdate? = nil
     public var highTemperatureAlarm: TemperatureAlarmUpdate? = nil
     public var lowTemperatureAlarm: TemperatureAlarmUpdate? = nil
@@ -179,6 +180,7 @@ public struct DeviceUpdate: Codable {
     
     public enum CodingKeys: String, CodingKey {
         case name = "Name"
+        case bleName = "BleName"
         case light = "Light"
         case highTemperatureAlarm = "HighTemperatureAlarm"
         case lowTemperatureAlarm = "LowTemperatureAlarm"
@@ -191,6 +193,7 @@ public struct DeviceUpdate: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         
         try container.encodeIfPresent(self.name, forKey: .name)
+        try container.encodeIfPresent(self.bleName, forKey: .bleName)
         try container.encodeIfPresent(self.light, forKey: .light)
         try container.encodeIfPresent(self.highTemperatureAlarm, forKey: .highTemperatureAlarm)
         try container.encodeIfPresent(self.lowTemperatureAlarm, forKey: .lowTemperatureAlarm)
@@ -200,6 +203,7 @@ public struct DeviceUpdate: Codable {
     }
     
     public init(name: String? = nil,
+                bleName: String? = nil,
                 light: LightUpdate? = nil,
                 highTemperatureAlarm: TemperatureAlarmUpdate? = nil,
                 lowTemperatureAlarm: TemperatureAlarmUpdate? = nil,
@@ -208,6 +212,7 @@ public struct DeviceUpdate: Codable {
                 skipEgress: Bool? = nil) {
         
         self.name = name
+        self.bleName = bleName
         self.light = light
         self.highTemperatureAlarm = highTemperatureAlarm
         self.lowTemperatureAlarm = lowTemperatureAlarm
