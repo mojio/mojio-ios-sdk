@@ -32,10 +32,14 @@ public struct ActivitySettings: ActivitySettingsModel {
     
     public var lowBattery: NotificationSettings
     public var offline: NotificationSettings
+    public var highTemperature: NotificationSettings
+    public var lowTemperature: NotificationSettings
     
     enum CodingKeys: String, CodingKey {
         case lowBattery = "LowBattery"
         case offline = "Offline"
+        case highTemperature = "HighTemperature"
+        case lowTemperature = "LowTemperature"
     }
     
     public init(from decoder: Decoder) throws {
@@ -44,6 +48,8 @@ public struct ActivitySettings: ActivitySettingsModel {
         do {
             self.lowBattery = try container.decode(NotificationSettings.self, forKey: .lowBattery)
             self.offline = try container.decode(NotificationSettings.self, forKey: .offline)
+            self.highTemperature = try container.decode(NotificationSettings.self, forKey: .highTemperature)
+            self.lowTemperature = try container.decode(NotificationSettings.self, forKey: .lowTemperature)
         }
         catch {
             debugPrint(error)
@@ -55,10 +61,12 @@ public struct ActivitySettings: ActivitySettingsModel {
 public struct NotificationSettings: NotificationSettingsModel {
     public var enabled: Bool
     public var sound: String?
+    public var threshold: Double?
     
     enum CodingKeys: String, CodingKey {
         case enabled = "Enabled"
         case sound = "Sound"
+        case threshold = "Threshold"
     }
     
     public init(from decoder: Decoder) throws {
@@ -67,6 +75,7 @@ public struct NotificationSettings: NotificationSettingsModel {
         do {
             self.enabled = try container.decode(Bool.self, forKey: .enabled)
             self.sound = try container.decodeIfPresent(String.self, forKey: .sound)
+            self.threshold = try container.decodeIfPresent(Double.self, forKey: .threshold)
         }
         catch {
             debugPrint(error)
