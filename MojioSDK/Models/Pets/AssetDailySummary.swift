@@ -22,6 +22,7 @@ public protocol AssetDailySummaryModel: Codable {
     var steps: Int? { get }
     var activeMinutes: Int? { get }
     var encodedPolyline: String? { get }
+    var distance: Double? { get }
 }
 
 public struct AssetDailySummary: AssetDailySummaryModel {
@@ -31,6 +32,7 @@ public struct AssetDailySummary: AssetDailySummaryModel {
     public let steps: Int?
     public let activeMinutes: Int?
     public let encodedPolyline: String?
+    public let distance: Double?
     
     public enum CodingKeys: String, CodingKey {
         case id = "Id"
@@ -39,6 +41,7 @@ public struct AssetDailySummary: AssetDailySummaryModel {
         case steps = "Steps"
         case activeMinutes = "ActiveMinutes"
         case encodedPolyline = "EncodedPolyline"
+        case distance = "Distance"
     }
     
     public init(from decoder: Decoder) throws {
@@ -61,6 +64,7 @@ public struct AssetDailySummary: AssetDailySummaryModel {
 //                .flatMap { String($0.prefix(while: { $0 != "T" })) }
                 .flatMap { $0.toDate }
             self.encodedPolyline = try container.decodeIfPresent(String.self, forKey: .encodedPolyline)
+            self.distance = try container.decodeIfPresent(Double.self, forKey: .distance)
         }
         catch {
             debugPrint(error)
