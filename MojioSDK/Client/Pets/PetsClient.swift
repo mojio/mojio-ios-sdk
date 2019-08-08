@@ -35,6 +35,8 @@ public enum PetsEndpoint: String {
     case summaries = "summaries/"
     case settings = "settings"
     case timeline = "timeline/"
+    case users = "users"
+    case termsandconditions = "termsandconditions"
 }
 
 open class PetsClient: RestClient {
@@ -169,7 +171,17 @@ open class PetsClient: RestClient {
     open func timeline() -> Self {
         self.requestEntity = PetsEndpoint.timeline.rawValue
         self.requestUrl = self.requestUrl! + self.requestEntity
-        
+    }
+  
+    open func users() -> Self {
+        self.requestEntity = PetsEndpoint.users.rawValue
+        self.appendRequestUrlEntity(PetsEndpoint.users.rawValue, asFinal: false)
+        return self
+    }
+    
+    open func termsandconditions() -> Self {
+        self.requestEntity = PetsEndpoint.termsandconditions.rawValue
+        self.appendRequestUrlEntity(PetsEndpoint.termsandconditions.rawValue, asFinal: true)
         return self
     }
     
@@ -239,6 +251,12 @@ open class PetsClient: RestClient {
                 }
                 catch {
                     return try JSONDecoder().decode(ActivitySettings.self, from: responseData)
+                }
+            case .termsandconditions:
+                do {
+                    return try JSONDecoder().decode(ResponseArray<TermsAndConditionsModel>.self, from: responseData)
+                } catch {
+                    return try JSONDecoder().decode(TermsAndConditionsModel.self, from: responseData)
                 }
             default:
                 return nil

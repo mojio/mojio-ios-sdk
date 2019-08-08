@@ -51,6 +51,8 @@ public protocol DeviceModel: Codable, PrimaryKey {
     var color: String? { get }
     var tenantId: String? { get }
     var ownerId: String? { get }
+    var bleMacAddress: String? { get }
+    var bleName: String? { get }
     var createdOn: Date? { get }
     var deleted: Bool? { get }
     var lastModified: Date? { get }
@@ -86,6 +88,8 @@ public struct Device: DeviceModel {
     public let color: String?
     public let tenantId: String?
     public let ownerId: String?
+    public let bleMacAddress: String?
+    public let bleName: String?
     public let createdOn: Date?
     public let deleted: Bool?
     public let lastModified: Date?
@@ -117,6 +121,8 @@ public struct Device: DeviceModel {
         case color = "Color"
         case tenantId = "TenantId"
         case ownerId = "OwnerId"
+        case bleMacAddress = "BleMacAddress"
+        case bleName = "BleName"
         case createdOn = "CreatedOn"
         case deleted = "Deleted"
         case lastModified = "LastModified"
@@ -148,6 +154,8 @@ public struct Device: DeviceModel {
             self.color = try container.decodeIfPresent(String.self, forKey: .color)
             self.tenantId = try container.decodeIfPresent(String.self, forKey: .tenantId)
             self.ownerId = try container.decodeIfPresent(String.self, forKey: .ownerId)
+            self.bleMacAddress = try container.decodeIfPresent(String.self, forKey: .bleMacAddress)
+            self.bleName = try container.decodeIfPresent(String.self, forKey: .bleName)
             self.createdOn = try container.decodeIfPresent(String.self, forKey: .createdOn).flatMap { $0.dateFromISO }
             self.deleted = try container.decodeIfPresent(Bool.self, forKey: .deleted)
             self.lastModified = try container.decodeIfPresent(String.self, forKey: .lastModified).flatMap { $0.dateFromISO }
@@ -162,6 +170,7 @@ public struct Device: DeviceModel {
 
 public struct DeviceUpdate: Codable {
     public var name: String? = nil
+    public var bleName: String? = nil
     public var light: LightUpdate? = nil
     public var highTemperatureAlarm: TemperatureAlarmUpdate? = nil
     public var lowTemperatureAlarm: TemperatureAlarmUpdate? = nil
@@ -171,6 +180,7 @@ public struct DeviceUpdate: Codable {
     
     public enum CodingKeys: String, CodingKey {
         case name = "Name"
+        case bleName = "BleName"
         case light = "Light"
         case highTemperatureAlarm = "HighTemperatureAlarm"
         case lowTemperatureAlarm = "LowTemperatureAlarm"
@@ -183,6 +193,7 @@ public struct DeviceUpdate: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         
         try container.encodeIfPresent(self.name, forKey: .name)
+        try container.encodeIfPresent(self.bleName, forKey: .bleName)
         try container.encodeIfPresent(self.light, forKey: .light)
         try container.encodeIfPresent(self.highTemperatureAlarm, forKey: .highTemperatureAlarm)
         try container.encodeIfPresent(self.lowTemperatureAlarm, forKey: .lowTemperatureAlarm)
@@ -192,6 +203,7 @@ public struct DeviceUpdate: Codable {
     }
     
     public init(name: String? = nil,
+                bleName: String? = nil,
                 light: LightUpdate? = nil,
                 highTemperatureAlarm: TemperatureAlarmUpdate? = nil,
                 lowTemperatureAlarm: TemperatureAlarmUpdate? = nil,
@@ -200,6 +212,7 @@ public struct DeviceUpdate: Codable {
                 skipEgress: Bool? = nil) {
         
         self.name = name
+        self.bleName = bleName
         self.light = light
         self.highTemperatureAlarm = highTemperatureAlarm
         self.lowTemperatureAlarm = lowTemperatureAlarm
