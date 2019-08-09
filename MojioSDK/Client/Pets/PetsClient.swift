@@ -171,6 +171,7 @@ open class PetsClient: RestClient {
     open func timeline() -> Self {
         self.requestEntity = PetsEndpoint.timeline.rawValue
         self.requestUrl = self.requestUrl! + self.requestEntity
+        return self
     }
   
     open func users() -> Self {
