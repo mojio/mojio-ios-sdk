@@ -50,7 +50,7 @@ public enum Gender: String, Codable {
     case male = "Male"
     case female = "Female"
     case neutral = "Neutral"
-
+    
     public static var all: [Gender] {
         return [.unknown, .male, .female, .neutral]
     }
@@ -60,7 +60,7 @@ public enum Weight: String, Codable {
     case small = "Small"
     case medium = "Medium"
     case large = "Large"
-
+    
     public static var all: [Weight] {
         return [.small, .medium, .large]
     }
@@ -70,7 +70,7 @@ public protocol PetDetailsModel: Codable {
     var type: PetType? { get }
     var gender: Gender? { get }
     var breed: String? { get }
-    var dateOfBirth: Date? { get }
+    var dateOfBirth: String? { get }
     var registrationId: String? { get }
     var vetName: String? { get }
     var vetPhoneNumber: String? { get }
@@ -83,7 +83,7 @@ public struct PetDetails: PetDetailsModel {
     public let type: PetType?
     public let gender: Gender?
     public let breed: String?
-    public let dateOfBirth: Date?
+    public let dateOfBirth: String?
     public let registrationId: String?
     public let vetName: String?
     public let vetPhoneNumber: String?
@@ -115,10 +115,10 @@ public struct PetDetails: PetDetailsModel {
             catch {
                 self.type = PetType(stringValue: "Other")
             }
-
+            
             self.gender = try container.decodeIfPresent(Gender.self, forKey: .gender)
             self.breed = try container.decodeIfPresent(String.self, forKey: .breed)
-            self.dateOfBirth = try container.decodeIfPresent(String.self, forKey: .dateOfBirth).flatMap { $0.dateFromISO }
+            self.dateOfBirth = try container.decodeIfPresent(String.self, forKey: .dateOfBirth) //.flatMap { $0.dateFromISO }
             self.registrationId = try container.decodeIfPresent(String.self, forKey: .registrationId)
             self.vetName = try container.decodeIfPresent(String.self, forKey: .vetName)
             self.vetPhoneNumber = try container.decodeIfPresent(String.self, forKey: .vetPhoneNumber)
@@ -152,7 +152,7 @@ public struct PetDetailsUpdate: Codable {
     public var type: PetType? = nil
     public var gender: Gender? = nil
     public var breed: String? = nil
-    public var dateOfBirth: Date? = nil
+    public var dateOfBirth: String? = nil
     public var registrationId: String? = nil
     public var vetName: String? = nil
     public var vetPhoneNumber: String? = nil
@@ -189,15 +189,15 @@ public struct PetDetailsUpdate: Codable {
     }
     
     public init(type: PetType? = nil,
-         gender: Gender? = nil,
-         breed: String? = nil,
-         dateOfBirth: Date? = nil,
-         registrationId: String? = nil,
-         vetName: String? = nil,
-         vetPhoneNumber: String? = nil,
-         lastVetVisit: Date? = nil,
-         weight: Double? = 0,
-         neutered: Bool? = nil) {
+                gender: Gender? = nil,
+                breed: String? = nil,
+                dateOfBirth: String? = nil,
+                registrationId: String? = nil,
+                vetName: String? = nil,
+                vetPhoneNumber: String? = nil,
+                lastVetVisit: Date? = nil,
+                weight: Double? = 0,
+                neutered: Bool? = nil) {
         
         self.type = type
         self.gender = gender
@@ -225,7 +225,7 @@ public struct PetDetailsUpdate: Codable {
             
             self.gender = try container.decodeIfPresent(Gender.self, forKey: .gender)
             self.breed = try container.decodeIfPresent(String.self, forKey: .breed)
-            self.dateOfBirth = try container.decodeIfPresent(String.self, forKey: .dateOfBirth).flatMap { $0.dateFromISO }
+            self.dateOfBirth = try container.decodeIfPresent(String.self, forKey: .dateOfBirth) //.flatMap { $0.dateFromISO }
             self.registrationId = try container.decodeIfPresent(String.self, forKey: .registrationId)
             self.vetName = try container.decodeIfPresent(String.self, forKey: .vetName)
             self.vetPhoneNumber = try container.decodeIfPresent(String.self, forKey: .vetPhoneNumber)
@@ -238,7 +238,7 @@ public struct PetDetailsUpdate: Codable {
             throw error
         }
     }
-
+    
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         
