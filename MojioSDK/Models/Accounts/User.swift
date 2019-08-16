@@ -30,8 +30,8 @@ public protocol UserModel: Codable, PrimaryKey {
     var phoneNumbers: [P] { get }
     var tags: [String] { get }
     var defaultLanguage: String? { get }
-    var createdOn: Date? { get }
-    var lastModified: Date? { get }
+    var createdOn: String? { get }
+    var lastModified: String? { get }
 }
 
 public struct User: UserModel {
@@ -48,8 +48,8 @@ public struct User: UserModel {
     public let phoneNumbers: [P]
     public let tags: [String]
     public let defaultLanguage: String?
-    public let createdOn: Date?
-    public let lastModified: Date?
+    public let createdOn: String?
+    public let lastModified: String?
     
     public enum CodingKeys: String, CodingKey {
         case id = "Id"
@@ -79,8 +79,8 @@ public struct User: UserModel {
             self.tags = try container.decodeIfPresent([String].self, forKey: .tags) ?? []
             self.defaultLanguage = try container.decodeIfPresent(String.self, forKey: .defaultLanguage)
             
-            self.createdOn = try container.decodeIfPresent(String.self, forKey: .createdOn).flatMap { $0.dateFromISO }
-            self.lastModified = try container.decodeIfPresent(String.self, forKey: .lastModified).flatMap { $0.dateFromISO }
+            self.createdOn = try container.decodeIfPresent(String.self, forKey: .createdOn) //.flatMap { $0.dateFromISO }
+            self.lastModified = try container.decodeIfPresent(String.self, forKey: .lastModified) //.flatMap { $0.dateFromISO }
         }
         catch let error {
             debugPrint(error)
