@@ -77,6 +77,8 @@ public protocol PetDetailsModel: Codable {
     var lastVetVisit: Date? { get }
     var weight: Double? { get }
     var neutered: Bool? { get }
+    var microchipId: String? { get }
+    var microchipVendor: String? { get }
 }
 
 public struct PetDetails: PetDetailsModel {
@@ -90,6 +92,8 @@ public struct PetDetails: PetDetailsModel {
     public let lastVetVisit: Date?
     public let weight: Double?
     public let neutered: Bool?
+    public let microchipId: String?
+    public let microchipVendor: String?
     
     public enum CodingKeys: String, CodingKey {
         case type = "Type"
@@ -102,6 +106,8 @@ public struct PetDetails: PetDetailsModel {
         case lastVetVisit = "LastVeterinarianVisit"
         case weight = "Weight"
         case neutered = "Neutered"
+        case microchipId = "MicrochipId"
+        case microchipVendor = "MicrochipVendor"
     }
     
     public init(from decoder: Decoder) throws {
@@ -125,6 +131,8 @@ public struct PetDetails: PetDetailsModel {
             self.lastVetVisit = try container.decodeIfPresent(String.self, forKey: .lastVetVisit).flatMap { $0.dateFromISO }
             self.weight = try container.decodeIfPresent(Double.self, forKey: .weight)
             self.neutered = try container.decodeIfPresent(Bool.self, forKey: .neutered)
+            self.microchipId = try container.decodeIfPresent(String.self, forKey: .microchipId)
+            self.microchipVendor = try container.decodeIfPresent(String.self, forKey: .microchipVendor)
         }
         catch {
             debugPrint(error)
@@ -145,6 +153,8 @@ public struct PetDetails: PetDetailsModel {
         try container.encodeIfPresent(self.lastVetVisit, forKey: .lastVetVisit)
         try container.encodeIfPresent(self.weight, forKey: .weight)
         try container.encodeIfPresent(self.neutered, forKey: .neutered)
+        try container.encodeIfPresent(self.microchipId, forKey: .microchipId)
+        try container.encodeIfPresent(self.microchipVendor, forKey: .microchipVendor)
     }
 }
 
@@ -159,6 +169,8 @@ public struct PetDetailsUpdate: Codable {
     public var lastVetVisit: Date? = nil
     public var weight: Double? = 0
     public var neutered: Bool? = nil
+    public var microchipId: String? = nil
+    public var microchipVendor: String? = nil
     
     public enum CodingKeys: String, CodingKey {
         case type = "Type"
@@ -171,6 +183,8 @@ public struct PetDetailsUpdate: Codable {
         case lastVetVisit = "LastVeterinarianVisit"
         case weight = "Weight"
         case neutered = "Neutered"
+        case microchipId = "MicrochipId"
+        case microchipVendor = "MicrochipVendor"
     }
     
     public init(petDetails: PetDetails? = nil) {
@@ -184,7 +198,9 @@ public struct PetDetailsUpdate: Codable {
             vetPhoneNumber: petDetails?.vetPhoneNumber,
             lastVetVisit: petDetails?.lastVetVisit,
             weight: petDetails?.weight,
-            neutered: petDetails?.neutered
+            neutered: petDetails?.neutered,
+            microchipId: petDetails?.microchipId,
+            microchipVendor: petDetails?.microchipVendor
         )
     }
     
@@ -197,7 +213,9 @@ public struct PetDetailsUpdate: Codable {
                 vetPhoneNumber: String? = nil,
                 lastVetVisit: Date? = nil,
                 weight: Double? = 0,
-                neutered: Bool? = nil) {
+                neutered: Bool? = nil,
+                microchipId: String? = nil,
+                microchipVendor: String? = nil) {
         
         self.type = type
         self.gender = gender
@@ -209,6 +227,8 @@ public struct PetDetailsUpdate: Codable {
         self.lastVetVisit = lastVetVisit
         self.weight = weight
         self.neutered = neutered
+        self.microchipId = microchipId
+        self.microchipVendor = microchipVendor
     }
     
     public init(from decoder: Decoder) throws {
@@ -232,6 +252,8 @@ public struct PetDetailsUpdate: Codable {
             self.lastVetVisit = try container.decodeIfPresent(String.self, forKey: .lastVetVisit).flatMap { $0.dateFromISO }
             self.weight = try container.decodeIfPresent(Double.self, forKey: .weight)
             self.neutered = try container.decodeIfPresent(Bool.self, forKey: .neutered)
+            self.microchipId = try container.decodeIfPresent(String.self, forKey: .microchipId)
+            self.microchipVendor = try container.decodeIfPresent(String.self, forKey: .microchipVendor)
         }
         catch {
             debugPrint(error)
@@ -252,5 +274,7 @@ public struct PetDetailsUpdate: Codable {
         try container.encodeIfPresent(self.lastVetVisit, forKey: .lastVetVisit)
         try container.encodeIfPresent(self.weight, forKey: .weight)
         try container.encodeIfPresent(self.neutered, forKey: .neutered)
+        try container.encodeIfPresent(self.microchipId, forKey: .microchipId)
+        try container.encodeIfPresent(self.microchipVendor, forKey: .microchipVendor)
     }
 }

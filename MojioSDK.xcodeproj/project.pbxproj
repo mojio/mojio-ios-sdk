@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0764A1E22306C9EC00DB57B5 /* Asset.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC59061F208E566100A098A3 /* Asset.swift */; };
+		0764A1E92306CF1D00DB57B5 /* PeopleDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0764A1E62306CF1C00DB57B5 /* PeopleDetails.swift */; };
+		0764A1EA2306CF1D00DB57B5 /* BikeDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0764A1E72306CF1D00DB57B5 /* BikeDetails.swift */; };
+		0764A1EB2306CF1D00DB57B5 /* GenericAssetDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0764A1E82306CF1D00DB57B5 /* GenericAssetDetails.swift */; };
 		1A6C2C7F7AA3BDB8B3916C73 /* Pods_Vehicles.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBECCB4E37C032ECAC611DCE /* Pods_Vehicles.framework */; };
 		22CF879C2252A62B0085CBF5 /* Light.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CF879B2252A62B0085CBF5 /* Light.swift */; };
 		22CF879E2252A6840085CBF5 /* TemperatureAlarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CF879D2252A6840085CBF5 /* TemperatureAlarm.swift */; };
@@ -93,7 +97,6 @@
 		BC603717208FA9CD00D855DE /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B4F1CBEFFDD00F9177B /* Group.swift */; };
 		BC60371E208FA9CD00D855DE /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B461CBEFFDD00F9177B /* App.swift */; };
 		BC603721208FA9CD00D855DE /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 75F77F0D1D19F504000CC2B4 /* libz.tbd */; };
-		BC603742208FB20F00D855DE /* Asset.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC59061F208E566100A098A3 /* Asset.swift */; };
 		BC603743208FB20F00D855DE /* Battery.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC59062F208E566200A098A3 /* Battery.swift */; };
 		BC603744208FB20F00D855DE /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC590624208E566200A098A3 /* Device.swift */; };
 		BC603745208FB20F00D855DE /* DeviceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC590620208E566100A098A3 /* DeviceType.swift */; };
@@ -215,6 +218,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0764A1E62306CF1C00DB57B5 /* PeopleDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleDetails.swift; sourceTree = "<group>"; };
+		0764A1E72306CF1D00DB57B5 /* BikeDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BikeDetails.swift; sourceTree = "<group>"; };
+		0764A1E82306CF1D00DB57B5 /* GenericAssetDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericAssetDetails.swift; sourceTree = "<group>"; };
 		0793B3E6D91141939A51F649 /* Pods-Vehicles.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vehicles.debug.xcconfig"; path = "Target Support Files/Pods-Vehicles/Pods-Vehicles.debug.xcconfig"; sourceTree = "<group>"; };
 		0A2F12C90176AFD246E55A87 /* Pods-Pets.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pets.debug.xcconfig"; path = "Target Support Files/Pods-Pets/Pods-Pets.debug.xcconfig"; sourceTree = "<group>"; };
 		0D5E15756B96D0AEF2C4AE0A /* Pods_Accounts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Accounts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -620,7 +626,6 @@
 				0793B3E6D91141939A51F649 /* Pods-Vehicles.debug.xcconfig */,
 				903DF633F6AE7B4E45A13CB1 /* Pods-Vehicles.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -702,6 +707,9 @@
 				22CF879D2252A6840085CBF5 /* TemperatureAlarm.swift */,
 				AE4DB04A22B05DF600B30DBB /* Buzzer.swift */,
 				FCF6B2A522DF65EB00B21DD9 /* TermsAndConditionsModel.swift */,
+				0764A1E72306CF1D00DB57B5 /* BikeDetails.swift */,
+				0764A1E82306CF1D00DB57B5 /* GenericAssetDetails.swift */,
+				0764A1E62306CF1C00DB57B5 /* PeopleDetails.swift */,
 			);
 			path = Pets;
 			sourceTree = "<group>";
@@ -1336,16 +1344,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				22CF879C2252A62B0085CBF5 /* Light.swift in Sources */,
+				0764A1E92306CF1D00DB57B5 /* PeopleDetails.swift in Sources */,
 				AE4DB04B22B05DF600B30DBB /* Buzzer.swift in Sources */,
 				BCFE5DC520A063B500B89104 /* Stats.swift in Sources */,
 				BC3D7C84208816BB00659A92 /* PetsClient.swift in Sources */,
+				0764A1E22306C9EC00DB57B5 /* Asset.swift in Sources */,
 				BCFE5912209AF92500B89104 /* TimeIntervalExt.swift in Sources */,
+				0764A1EA2306CF1D00DB57B5 /* BikeDetails.swift in Sources */,
 				BCFE5913209AF92500B89104 /* StringExt.swift in Sources */,
 				22CF879E2252A6840085CBF5 /* TemperatureAlarm.swift in Sources */,
 				BC60374B208FB20F00D855DE /* NotificationToken.swift in Sources */,
 				BC60374C208FB20F00D855DE /* PetDetails.swift in Sources */,
 				BCF23D0320EA0B9A009FE79C /* AssetDailySummary.swift in Sources */,
-				BC603742208FB20F00D855DE /* Asset.swift in Sources */,
 				72B30078210B139D00608978 /* CompoundWordStyle.swift in Sources */,
 				FCE43DAE20DCFA22004A2E89 /* DisplayDetails.swift in Sources */,
 				BC590656208E783A00A098A3 /* WSPetsClient.swift in Sources */,
@@ -1356,6 +1366,7 @@
 				BC603747208FB20F00D855DE /* Geofence.swift in Sources */,
 				FCF6B2A622DF65EB00B21DD9 /* TermsAndConditionsModel.swift in Sources */,
 				BC8DFC0720EC450D006B99E6 /* ActivitySettings.swift in Sources */,
+				0764A1EB2306CF1D00DB57B5 /* GenericAssetDetails.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
