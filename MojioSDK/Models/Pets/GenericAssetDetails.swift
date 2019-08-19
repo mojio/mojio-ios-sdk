@@ -18,32 +18,39 @@ import MojioCore
 
 public protocol GenericAssetDetailsModel: Codable {
     var color: EntityAppearanceColor? { get }
+    var style: String? { get }
 }
 
 public struct GenericAssetDetails: GenericAssetDetailsModel {
     
     public let color: EntityAppearanceColor?
+    public let style: String?
     
     public enum CodingKeys: String, CodingKey {
         case color = "Color"
+        case style = "Style"
     }
 }
 
 public struct GenericAssetDetailsUpdate: Codable {
     
-    public var color: EntityAppearanceColor?
+    public var color: EntityAppearanceColor? = nil
+    public var style: String? = nil
     
     public enum CodingKeys: String, CodingKey {
         case color = "Color"
+        case style = "Style"
     }
-    public init(from genericAssetDetailsModel: GenericAssetDetailsModel? = nil) {
+    public init(genericAssetDetailsModel: GenericAssetDetailsModel? = nil) {
         self.init(
-            color: genericAssetDetailsModel?.color
+            color: genericAssetDetailsModel?.color,
+            style: genericAssetDetailsModel?.style
         )
     }
     
-    public init(color: EntityAppearanceColor? = nil) {
+    public init(color: EntityAppearanceColor? = nil, style: String? = nil) {
         self.color = color
+        self.style = style
     }
     
     
@@ -51,5 +58,6 @@ public struct GenericAssetDetailsUpdate: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         
         try container.encodeIfPresent(self.color, forKey: .color)
+        try container.encodeIfPresent(self.style, forKey: .style)
     }
 }

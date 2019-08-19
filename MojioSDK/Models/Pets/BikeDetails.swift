@@ -18,14 +18,20 @@ import MojioCore
 
 public protocol BikeDetailsModel: Codable {
     var serialNumber: String? { get }
+    var color: EntityAppearanceColor? { get }
+    var style: String? { get }
 }
 
 public struct BikeDetails: BikeDetailsModel {
     
     public let serialNumber: String?
+    public let color: EntityAppearanceColor?
+    public let style: String?
     
     public enum CodingKeys: String, CodingKey {
         case serialNumber = "SerialNumber"
+        case color = "Color"
+        case style = "Style"
     }
     
     public init(from decoder: Decoder) throws {
@@ -33,6 +39,8 @@ public struct BikeDetails: BikeDetailsModel {
         
         do {
             self.serialNumber = try container.decodeIfPresent(String.self, forKey: .serialNumber)
+            self.color = try container.decodeIfPresent(EntityAppearanceColor.self, forKey: .color)
+            self.style = try container.decodeIfPresent(String.self, forKey: .style)
         }
         catch {
             debugPrint(error)
@@ -44,26 +52,36 @@ public struct BikeDetails: BikeDetailsModel {
         var container = encoder.container(keyedBy: CodingKeys.self)
         
         try container.encodeIfPresent(self.serialNumber, forKey: .serialNumber)
+        try container.encodeIfPresent(self.color, forKey: .color)
+        try container.encodeIfPresent(self.style, forKey: .style)
     }
     
 }
 
 public struct BikeDetailsUpdate: Codable {
-
+    
     public var serialNumber: String? = nil
+    public var color: EntityAppearanceColor? = nil
+    public var style: String? = nil
     
     public enum CodingKeys: String, CodingKey {
         case serialNumber = "SerialNumber"
+        case color = "Color"
+        case style = "Style"
     }
     
     public init(bikeDetails: BikeDetails? = nil) {
         self.init(
-            serialNumber: bikeDetails?.serialNumber
+            serialNumber: bikeDetails?.serialNumber,
+            color: bikeDetails?.color,
+            style: bikeDetails?.style
         )
     }
     
-    public init(serialNumber: String? = nil) {
+    public init(serialNumber: String? = nil, color: EntityAppearanceColor? = nil, style: String? = nil) {
         self.serialNumber = serialNumber
+        self.color = color
+        self.style = style
     }
     
     public init(from decoder: Decoder) throws {
@@ -71,6 +89,8 @@ public struct BikeDetailsUpdate: Codable {
         
         do {
             self.serialNumber = try container.decodeIfPresent(String.self, forKey: .serialNumber)
+            self.color = try container.decodeIfPresent(EntityAppearanceColor.self, forKey: .color)
+            self.style = try container.decodeIfPresent(String.self, forKey: .style)
         }
         catch {
             debugPrint(error)
@@ -80,7 +100,9 @@ public struct BikeDetailsUpdate: Codable {
     
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-    
+        
         try container.encodeIfPresent(self.serialNumber, forKey: .serialNumber)
+        try container.encodeIfPresent(self.color, forKey: .color)
+        try container.encodeIfPresent(self.style, forKey: .style)
     }
 }

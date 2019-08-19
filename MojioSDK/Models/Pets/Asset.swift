@@ -112,8 +112,8 @@ public struct Asset: AssetModel {
             self.deleted = try container.decodeIfPresent(Bool.self, forKey: .deleted)
             self.createdOn = try container.decodeIfPresent(String.self, forKey: .createdOn).flatMap { $0.dateFromISO }
             self.lastModified = try container.decodeIfPresent(String.self, forKey: .lastModified).flatMap { $0.dateFromISO }
-            self.genericAssetDetails = try container.decodeIfPresent(GenericAssetDetails.self, forKey: .pet)
-            self.bike = try container.decodeIfPresent(BikeDetails.self, forKey: .pet)
+            self.genericAssetDetails = try container.decodeIfPresent(GenericAssetDetails.self, forKey: .genericAssetDetails)
+            self.bike = try container.decodeIfPresent(BikeDetails.self, forKey: .bike)
             self.people = try container.decodeIfPresent(PeopleDetails.self, forKey: .people)
         }
         catch {
@@ -154,9 +154,9 @@ public struct AssetUpdate: Codable {
             type: asset?.type,
             displayDetails: DisplayDetailsUpdate(from: asset?.displayDetails),
             pet: PetDetailsUpdate(petDetails: asset?.pet),
-            genericAssetDetails: GenericAssetDetailsUpdate(color: asset?.genericAssetDetails?.color),
+            genericAssetDetails: GenericAssetDetailsUpdate(genericAssetDetailsModel: asset?.genericAssetDetails),
             bike: BikeDetailsUpdate(bikeDetails: asset?.bike),
-            people: PeopleDetailsUpdate(gender: asset?.people?.gender)
+            people: PeopleDetailsUpdate(peopleDetailsModel: asset?.people)
         )
     }
     
@@ -186,8 +186,8 @@ public struct AssetUpdate: Codable {
         try container.encodeIfPresent(self.type, forKey: .type)
         try container.encodeIfPresent(self.displayDetails, forKey: .displayDetails)
         try container.encodeIfPresent(self.pet, forKey: .pet)
-        try container.encodeIfPresent(self.genericAssetDetails, forKey: .bike)
-        try container.encodeIfPresent(self.people, forKey: .genericAssetDetails)
-        try container.encodeIfPresent(self.bike, forKey: .people)
+        try container.encodeIfPresent(self.genericAssetDetails, forKey: .genericAssetDetails)
+        try container.encodeIfPresent(self.people, forKey: .people)
+        try container.encodeIfPresent(self.bike, forKey: .bike)
     }
 }
