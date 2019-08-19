@@ -17,13 +17,13 @@ import Foundation
 import MojioCore
 
 public protocol GenericAssetDetailsModel: Codable {
-    var color: EntityAppearanceColor? { get }
+    var color: String? { get }
     var style: String? { get }
 }
 
 public struct GenericAssetDetails: GenericAssetDetailsModel {
     
-    public let color: EntityAppearanceColor?
+    public let color: String?
     public let style: String?
     
     public enum CodingKeys: String, CodingKey {
@@ -34,7 +34,7 @@ public struct GenericAssetDetails: GenericAssetDetailsModel {
 
 public struct GenericAssetDetailsUpdate: Codable {
     
-    public var color: EntityAppearanceColor? = nil
+    public var color: String? = nil
     public var style: String? = nil
     
     public enum CodingKeys: String, CodingKey {
@@ -48,7 +48,7 @@ public struct GenericAssetDetailsUpdate: Codable {
         )
     }
     
-    public init(color: EntityAppearanceColor? = nil, style: String? = nil) {
+    public init(color: String? = nil, style: String? = nil) {
         self.color = color
         self.style = style
     }

@@ -19,8 +19,8 @@ import MojioCore
 public protocol PeopleDetailsModel: Codable {
     var gender: Gender? { get }
     var dateOfBirth: String? { get }
-    var eyeColor: EntityAppearanceColor? { get }
-    var hairColor: EntityAppearanceColor? { get }
+    var eyeColor: String? { get }
+    var hairColor: String? { get }
     var height: Double? { get }
     var weight: Double? { get }
 }
@@ -29,8 +29,8 @@ public struct PeopleDetails: PeopleDetailsModel {
     
     public let gender: Gender?
     public let dateOfBirth: String?
-    public let eyeColor: EntityAppearanceColor?
-    public let hairColor: EntityAppearanceColor?
+    public let eyeColor: String?
+    public let hairColor: String?
     public let height: Double?
     public let weight: Double?
     
@@ -49,8 +49,8 @@ public struct PeopleDetails: PeopleDetailsModel {
         do {
             self.gender = try container.decodeIfPresent(Gender.self, forKey: .gender)
             self.dateOfBirth = try container.decodeIfPresent(String.self, forKey: .dateOfBirth) //.flatMap { $0.dateFromISO }
-            self.eyeColor = try container.decodeIfPresent(EntityAppearanceColor.self, forKey: .eyeColor)
-            self.hairColor = try container.decodeIfPresent(EntityAppearanceColor.self, forKey: .hairColor)
+            self.eyeColor = try container.decodeIfPresent(String.self, forKey: .eyeColor)
+            self.hairColor = try container.decodeIfPresent(String.self, forKey: .hairColor)
             self.height = try container.decodeIfPresent(Double.self, forKey: .height)
             self.weight = try container.decodeIfPresent(Double.self, forKey: .weight)
         }
@@ -76,8 +76,8 @@ public struct PeopleDetailsUpdate: Codable {
     
     public var gender: Gender? = nil
     public var dateOfBirth: String? = nil
-    public var eyeColor: EntityAppearanceColor? = nil
-    public var hairColor: EntityAppearanceColor? = nil
+    public var eyeColor: String? = nil
+    public var hairColor: String? = nil
     public var height: Double? = nil
     public var weight: Double? = nil
     
@@ -102,8 +102,8 @@ public struct PeopleDetailsUpdate: Codable {
     }
     public init(gender: Gender? = nil,
                 dateOfBirth: String? = nil,
-                eyeColor: EntityAppearanceColor? = nil,
-                hairColor: EntityAppearanceColor? = nil,
+                eyeColor: String? = nil,
+                hairColor: String? = nil,
                 height: Double? = nil,
                 weight: Double? = nil) {
         self.gender = gender
@@ -120,8 +120,8 @@ public struct PeopleDetailsUpdate: Codable {
         do {
             self.gender = try container.decodeIfPresent(Gender.self, forKey: .gender)
             self.dateOfBirth = try container.decodeIfPresent(String.self, forKey: .dateOfBirth) //.flatMap { $0.dateFromISO }
-            self.eyeColor = try container.decodeIfPresent(EntityAppearanceColor.self, forKey: .eyeColor)
-            self.hairColor = try container.decodeIfPresent(EntityAppearanceColor.self, forKey: .hairColor)
+            self.eyeColor = try container.decodeIfPresent(String.self, forKey: .eyeColor)
+            self.hairColor = try container.decodeIfPresent(String.self, forKey: .hairColor)
             self.height = try container.decodeIfPresent(Double.self, forKey: .height)
             self.weight = try container.decodeIfPresent(Double.self, forKey: .weight)
         }

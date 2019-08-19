@@ -18,14 +18,14 @@ import MojioCore
 
 public protocol BikeDetailsModel: Codable {
     var serialNumber: String? { get }
-    var color: EntityAppearanceColor? { get }
+    var color: String? { get }
     var style: String? { get }
 }
 
 public struct BikeDetails: BikeDetailsModel {
     
     public let serialNumber: String?
-    public let color: EntityAppearanceColor?
+    public let color: String?
     public let style: String?
     
     public enum CodingKeys: String, CodingKey {
@@ -39,7 +39,7 @@ public struct BikeDetails: BikeDetailsModel {
         
         do {
             self.serialNumber = try container.decodeIfPresent(String.self, forKey: .serialNumber)
-            self.color = try container.decodeIfPresent(EntityAppearanceColor.self, forKey: .color)
+            self.color = try container.decodeIfPresent(String.self, forKey: .color)
             self.style = try container.decodeIfPresent(String.self, forKey: .style)
         }
         catch {
@@ -61,7 +61,7 @@ public struct BikeDetails: BikeDetailsModel {
 public struct BikeDetailsUpdate: Codable {
     
     public var serialNumber: String? = nil
-    public var color: EntityAppearanceColor? = nil
+    public var color: String? = nil
     public var style: String? = nil
     
     public enum CodingKeys: String, CodingKey {
@@ -78,7 +78,7 @@ public struct BikeDetailsUpdate: Codable {
         )
     }
     
-    public init(serialNumber: String? = nil, color: EntityAppearanceColor? = nil, style: String? = nil) {
+    public init(serialNumber: String? = nil, color: String? = nil, style: String? = nil) {
         self.serialNumber = serialNumber
         self.color = color
         self.style = style
@@ -89,7 +89,7 @@ public struct BikeDetailsUpdate: Codable {
         
         do {
             self.serialNumber = try container.decodeIfPresent(String.self, forKey: .serialNumber)
-            self.color = try container.decodeIfPresent(EntityAppearanceColor.self, forKey: .color)
+            self.color = try container.decodeIfPresent(String.self, forKey: .color)
             self.style = try container.decodeIfPresent(String.self, forKey: .style)
         }
         catch {
