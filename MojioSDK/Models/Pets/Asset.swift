@@ -51,6 +51,7 @@ public protocol AssetModel: Codable, PrimaryKey {
     var genericAssetDetails: G? { get }
     var bike: B? { get }
     var people: PD? { get }
+    var description: String? { get }
 }
 
 public struct Asset: AssetModel {
@@ -77,6 +78,7 @@ public struct Asset: AssetModel {
     public let genericAssetDetails: G?
     public let bike: B?
     public let people: PD?
+    public let description: String?
     
     public enum CodingKeys: String, CodingKey {
         case id = "Id"
@@ -94,6 +96,7 @@ public struct Asset: AssetModel {
         case genericAssetDetails = "GenericAssetDetails"
         case bike = "BikeDetails"
         case people = "PeopleDetails"
+        case description = "Description"
     }
     
     public init(from decoder: Decoder) throws {
@@ -115,6 +118,7 @@ public struct Asset: AssetModel {
             self.genericAssetDetails = try container.decodeIfPresent(GenericAssetDetails.self, forKey: .genericAssetDetails)
             self.bike = try container.decodeIfPresent(BikeDetails.self, forKey: .bike)
             self.people = try container.decodeIfPresent(PeopleDetails.self, forKey: .people)
+            self.description = try container.decodeIfPresent(String.self, forKey: .description)
         }
         catch {
             debugPrint(error)
@@ -135,6 +139,7 @@ public struct AssetUpdate: Codable {
     public var genericAssetDetails: GenericAssetDetailsUpdate? = nil
     public var bike: BikeDetailsUpdate? = nil
     public var people: PeopleDetailsUpdate? = nil
+    public var description: String? = nil
     
     
     public enum CodingKeys: String, CodingKey {
@@ -145,6 +150,7 @@ public struct AssetUpdate: Codable {
         case genericAssetDetails = "GenericAssetDetails"
         case bike = "BikeDetails"
         case people = "PeopleDetails"
+        case description = "Description"
     }
     
     public init(asset: Asset? = nil) {
@@ -156,7 +162,8 @@ public struct AssetUpdate: Codable {
             pet: PetDetailsUpdate(petDetails: asset?.pet),
             genericAssetDetails: GenericAssetDetailsUpdate(genericAssetDetailsModel: asset?.genericAssetDetails),
             bike: BikeDetailsUpdate(bikeDetails: asset?.bike),
-            people: PeopleDetailsUpdate(peopleDetailsModel: asset?.people)
+            people: PeopleDetailsUpdate(peopleDetailsModel: asset?.people),
+            description: asset?.description
         )
     }
     
@@ -168,7 +175,8 @@ public struct AssetUpdate: Codable {
         pet: PetDetailsUpdate? = nil,
         genericAssetDetails: GenericAssetDetailsUpdate? = nil,
         bike: BikeDetailsUpdate? = nil,
-        people: PeopleDetailsUpdate? = nil) {
+        people: PeopleDetailsUpdate? = nil,
+        description: String? = nil) {
         
         self.name = name
         self.type = type
@@ -177,6 +185,7 @@ public struct AssetUpdate: Codable {
         self.genericAssetDetails = genericAssetDetails
         self.bike = bike
         self.people = people
+        self.description = description
     }
     
     public func encode(to encoder: Encoder) throws {
@@ -189,5 +198,6 @@ public struct AssetUpdate: Codable {
         try container.encodeIfPresent(self.genericAssetDetails, forKey: .genericAssetDetails)
         try container.encodeIfPresent(self.people, forKey: .people)
         try container.encodeIfPresent(self.bike, forKey: .bike)
+        try container.encodeIfPresent(self.description, forKey: .description)
     }
 }
