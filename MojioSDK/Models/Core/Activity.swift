@@ -362,7 +362,7 @@ public struct RootActivity: RootActivityModel {
         
         let container = try decoder.container(keyedBy: DynamicCodingKey.self)
         
-        self.id = try container.decodeIgnoringCase(String.self, forKey: CodingKeys.id)
+        self.id = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.id) ?? String.empty
         self.type = try container.decodeIfPresentIgnoringCase(ActivityType.self, forKey: CodingKeys.type)
         self.href = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.href)
         self.name = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.name)
