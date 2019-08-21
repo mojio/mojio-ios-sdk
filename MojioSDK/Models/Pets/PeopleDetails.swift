@@ -17,6 +17,10 @@ import Foundation
 import MojioCore
 
 public protocol PeopleDetailsModel: Codable {
+    
+    associatedtype B: BirthdayModel
+    
+    var birthday: B? { get }
     var gender: Gender? { get }
     var dateOfBirth: String? { get }
     var eyeColor: String? { get }
@@ -27,6 +31,9 @@ public protocol PeopleDetailsModel: Codable {
 
 public struct PeopleDetails: PeopleDetailsModel {
     
+    public typealias B = Birthday
+    
+    public let birthday: B?
     public let gender: Gender?
     public let dateOfBirth: String?
     public let eyeColor: String?
@@ -35,6 +42,8 @@ public struct PeopleDetails: PeopleDetailsModel {
     public let weight: Double?
     
     public enum CodingKeys: String, CodingKey {
+        
+        case birthday = "Birthday"
         case gender = "Gender"
         case dateOfBirth = "DateOfBirth"
         case eyeColor = "EyeColor"
@@ -47,6 +56,7 @@ public struct PeopleDetails: PeopleDetailsModel {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         do {
+            self.birthday = try container.decodeIfPresent(Birthday.self, forKey: .birthday)
             self.gender = try container.decodeIfPresent(Gender.self, forKey: .gender)
             self.dateOfBirth = try container.decodeIfPresent(String.self, forKey: .dateOfBirth) //.flatMap { $0.dateFromISO }
             self.eyeColor = try container.decodeIfPresent(String.self, forKey: .eyeColor)
@@ -63,6 +73,7 @@ public struct PeopleDetails: PeopleDetailsModel {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         
+        try container.encodeIfPresent(self.birthday, forKey: .birthday)
         try container.encodeIfPresent(self.gender, forKey: .gender)
         try container.encodeIfPresent(self.dateOfBirth, forKey: .dateOfBirth)
         try container.encodeIfPresent(self.eyeColor, forKey: .eyeColor)
@@ -74,6 +85,7 @@ public struct PeopleDetails: PeopleDetailsModel {
 
 public struct PeopleDetailsUpdate: Codable {
     
+    public var birthday: BirthdayUpdate?
     public var gender: Gender? = nil
     public var dateOfBirth: String? = nil
     public var eyeColor: String? = nil
@@ -82,6 +94,8 @@ public struct PeopleDetailsUpdate: Codable {
     public var weight: Double? = nil
     
     public enum CodingKeys: String, CodingKey {
+        
+        case birthday = "Birthday"
         case gender = "Gender"
         case dateOfBirth = "DateOfBirth"
         case eyeColor = "EyeColor"
@@ -90,8 +104,9 @@ public struct PeopleDetailsUpdate: Codable {
         case weight = "Weight"
     }
     
-    public init(peopleDetailsModel: PeopleDetailsModel? = nil) {
+    public init(peopleDetailsModel: PeopleDetails? = nil) {
         self.init(
+            birthday: BirthdayUpdate(model: peopleDetailsModel?.birthday),
             gender: peopleDetailsModel?.gender,
             dateOfBirth: peopleDetailsModel?.dateOfBirth,
             eyeColor: peopleDetailsModel?.eyeColor,
@@ -100,12 +115,14 @@ public struct PeopleDetailsUpdate: Codable {
             weight: peopleDetailsModel?.weight
         )
     }
-    public init(gender: Gender? = nil,
+    public init(birthday: BirthdayUpdate? = nil,
+                gender: Gender? = nil,
                 dateOfBirth: String? = nil,
                 eyeColor: String? = nil,
                 hairColor: String? = nil,
                 height: Double? = nil,
                 weight: Double? = nil) {
+        self.birthday = birthday
         self.gender = gender
         self.dateOfBirth = dateOfBirth
         self.eyeColor = eyeColor
@@ -118,6 +135,7 @@ public struct PeopleDetailsUpdate: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         do {
+            self.birthday = try container.decodeIfPresent(BirthdayUpdate.self, forKey: .birthday)
             self.gender = try container.decodeIfPresent(Gender.self, forKey: .gender)
             self.dateOfBirth = try container.decodeIfPresent(String.self, forKey: .dateOfBirth) //.flatMap { $0.dateFromISO }
             self.eyeColor = try container.decodeIfPresent(String.self, forKey: .eyeColor)
@@ -134,6 +152,7 @@ public struct PeopleDetailsUpdate: Codable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         
+        try container.encodeIfPresent(self.birthday, forKey: .birthday)
         try container.encodeIfPresent(self.gender, forKey: .gender)
         try container.encodeIfPresent(self.dateOfBirth, forKey: .dateOfBirth)
         try container.encodeIfPresent(self.eyeColor, forKey: .eyeColor)

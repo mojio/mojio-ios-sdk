@@ -11,6 +11,7 @@
 		0764A1E92306CF1D00DB57B5 /* PeopleDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0764A1E62306CF1C00DB57B5 /* PeopleDetails.swift */; };
 		0764A1EA2306CF1D00DB57B5 /* BikeDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0764A1E72306CF1D00DB57B5 /* BikeDetails.swift */; };
 		0764A1ED2306D4DC00DB57B5 /* GenericAssetDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0764A1EC2306D4DC00DB57B5 /* GenericAssetDetails.swift */; };
+		07BF12C7230D3E3B00691480 /* Birthday.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07BF12C6230D3E3B00691480 /* Birthday.swift */; };
 		1A6C2C7F7AA3BDB8B3916C73 /* Pods_Vehicles.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBECCB4E37C032ECAC611DCE /* Pods_Vehicles.framework */; };
 		22CF879C2252A62B0085CBF5 /* Light.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CF879B2252A62B0085CBF5 /* Light.swift */; };
 		22CF879E2252A6840085CBF5 /* TemperatureAlarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CF879D2252A6840085CBF5 /* TemperatureAlarm.swift */; };
@@ -222,6 +223,7 @@
 		0764A1E72306CF1D00DB57B5 /* BikeDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BikeDetails.swift; sourceTree = "<group>"; };
 		0764A1EC2306D4DC00DB57B5 /* GenericAssetDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericAssetDetails.swift; sourceTree = "<group>"; };
 		0793B3E6D91141939A51F649 /* Pods-Vehicles.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vehicles.debug.xcconfig"; path = "Target Support Files/Pods-Vehicles/Pods-Vehicles.debug.xcconfig"; sourceTree = "<group>"; };
+		07BF12C6230D3E3B00691480 /* Birthday.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Birthday.swift; sourceTree = "<group>"; };
 		0A2F12C90176AFD246E55A87 /* Pods-Pets.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pets.debug.xcconfig"; path = "Target Support Files/Pods-Pets/Pods-Pets.debug.xcconfig"; sourceTree = "<group>"; };
 		0D5E15756B96D0AEF2C4AE0A /* Pods_Accounts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Accounts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F23A2F5856B62CA670D6B4B /* Pods-Core.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Core.debug.xcconfig"; path = "Target Support Files/Pods-Core/Pods-Core.debug.xcconfig"; sourceTree = "<group>"; };
@@ -710,6 +712,7 @@
 				0764A1E72306CF1D00DB57B5 /* BikeDetails.swift */,
 				0764A1E62306CF1C00DB57B5 /* PeopleDetails.swift */,
 				0764A1EC2306D4DC00DB57B5 /* GenericAssetDetails.swift */,
+				07BF12C6230D3E3B00691480 /* Birthday.swift */,
 			);
 			path = Pets;
 			sourceTree = "<group>";
@@ -1343,6 +1346,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07BF12C7230D3E3B00691480 /* Birthday.swift in Sources */,
 				22CF879C2252A62B0085CBF5 /* Light.swift in Sources */,
 				0764A1E92306CF1D00DB57B5 /* PeopleDetails.swift in Sources */,
 				AE4DB04B22B05DF600B30DBB /* Buzzer.swift in Sources */,
