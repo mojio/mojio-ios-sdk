@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		1A6C2C7F7AA3BDB8B3916C73 /* Pods_Vehicles.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBECCB4E37C032ECAC611DCE /* Pods_Vehicles.framework */; };
+		1D5164CB230E838800AF0DB3 /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D5164CA230E838800AF0DB3 /* Debug.swift */; };
+		1D5164CC230E83AC00AF0DB3 /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D5164CA230E838800AF0DB3 /* Debug.swift */; };
+		1D5164CD230E83AD00AF0DB3 /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D5164CA230E838800AF0DB3 /* Debug.swift */; };
+		1D5164CE230E83AE00AF0DB3 /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D5164CA230E838800AF0DB3 /* Debug.swift */; };
+		1D5164CF230E83AE00AF0DB3 /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D5164CA230E838800AF0DB3 /* Debug.swift */; };
 		22CF879C2252A62B0085CBF5 /* Light.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CF879B2252A62B0085CBF5 /* Light.swift */; };
 		22CF879E2252A6840085CBF5 /* TemperatureAlarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CF879D2252A6840085CBF5 /* TemperatureAlarm.swift */; };
 		2C58943920FD932000DE18BE /* VehicleAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C58943820FD932000DE18BE /* VehicleAppearance.swift */; };
@@ -219,6 +224,7 @@
 		0A2F12C90176AFD246E55A87 /* Pods-Pets.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pets.debug.xcconfig"; path = "Target Support Files/Pods-Pets/Pods-Pets.debug.xcconfig"; sourceTree = "<group>"; };
 		0D5E15756B96D0AEF2C4AE0A /* Pods_Accounts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Accounts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F23A2F5856B62CA670D6B4B /* Pods-Core.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Core.debug.xcconfig"; path = "Target Support Files/Pods-Core/Pods-Core.debug.xcconfig"; sourceTree = "<group>"; };
+		1D5164CA230E838800AF0DB3 /* Debug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debug.swift; sourceTree = "<group>"; };
 		2278359B1FB60253002D24F9 /* StringExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExt.swift; sourceTree = "<group>"; };
 		2278359D1FB60291002D24F9 /* TimeIntervalExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalExt.swift; sourceTree = "<group>"; };
 		22CF879B2252A62B0085CBF5 /* Light.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Light.swift; sourceTree = "<group>"; };
@@ -477,6 +483,7 @@
 				2278359B1FB60253002D24F9 /* StringExt.swift */,
 				72B30073210B072A00608978 /* CompoundWordStyle.swift */,
 				72B3007A210B15B200608978 /* DynamicCodingKey.swift */,
+				1D5164CA230E838800AF0DB3 /* Debug.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -620,7 +627,6 @@
 				0793B3E6D91141939A51F649 /* Pods-Vehicles.debug.xcconfig */,
 				903DF633F6AE7B4E45A13CB1 /* Pods-Vehicles.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -1348,6 +1354,7 @@
 				BC603742208FB20F00D855DE /* Asset.swift in Sources */,
 				72B30078210B139D00608978 /* CompoundWordStyle.swift in Sources */,
 				FCE43DAE20DCFA22004A2E89 /* DisplayDetails.swift in Sources */,
+				1D5164CE230E83AE00AF0DB3 /* Debug.swift in Sources */,
 				BC590656208E783A00A098A3 /* WSPetsClient.swift in Sources */,
 				BC60374A208FB20F00D855DE /* PetsLocation.swift in Sources */,
 				BC603744208FB20F00D855DE /* Device.swift in Sources */,
@@ -1368,6 +1375,7 @@
 				72B30075210B139B00608978 /* CompoundWordStyle.swift in Sources */,
 				BCFE5909209AF8E600B89104 /* AuthViewController.swift in Sources */,
 				BCFE590D209AF92200B89104 /* StringExt.swift in Sources */,
+				1D5164CC230E83AC00AF0DB3 /* Debug.swift in Sources */,
 				BC603703208FA9CD00D855DE /* PhoneNumber.swift in Sources */,
 				BC60370A208FA9CD00D855DE /* Email.swift in Sources */,
 				BC603713208FA9CD00D855DE /* User.swift in Sources */,
@@ -1429,6 +1437,7 @@
 				BC879B3C1CBEFFC000F9177B /* Recall.swift in Sources */,
 				72B30077210B139D00608978 /* CompoundWordStyle.swift in Sources */,
 				BC879B421CBEFFC000F9177B /* Warranty.swift in Sources */,
+				1D5164CF230E83AE00AF0DB3 /* Debug.swift in Sources */,
 				BC879B611CBEFFDD00F9177B /* Accelerometer.swift in Sources */,
 				BC31E3CE1D419E80001649A7 /* Distance.swift in Sources */,
 				BC879B691CBEFFDD00F9177B /* FuelCapacity.swift in Sources */,
@@ -1524,6 +1533,7 @@
 				BCFE58EC209AF70B00B89104 /* SwiftWebSocketProvider.swift in Sources */,
 				BCFE58EE209AF70B00B89104 /* MojioError.swift in Sources */,
 				BCFE58F0209AF70B00B89104 /* WebSocketFactory.swift in Sources */,
+				1D5164CB230E838800AF0DB3 /* Debug.swift in Sources */,
 				BCFE58F1209AF70B00B89104 /* Links.swift in Sources */,
 				BCFE58F2209AF70B00B89104 /* ResponseArray.swift in Sources */,
 				BCFE58F3209AF70B00B89104 /* SwiftWebSocketFactory.swift in Sources */,
@@ -1538,6 +1548,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BCFE5DCB20A0679400B89104 /* StringExt.swift in Sources */,
+				1D5164CD230E83AD00AF0DB3 /* Debug.swift in Sources */,
 				BCFE5DEA20A06C3200B89104 /* Image.swift in Sources */,
 				BCFE5DE620A06BB200B89104 /* ImagesClient.swift in Sources */,
 				72B30076210B139C00608978 /* CompoundWordStyle.swift in Sources */,
