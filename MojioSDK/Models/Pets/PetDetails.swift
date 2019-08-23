@@ -46,13 +46,13 @@ public enum PetType: CustomStringConvertible {
 }
 
 public enum Gender: String, Codable {
-    case unknown = "Unknown"
+    //case unknown = "Unknown"
     case male = "Male"
     case female = "Female"
-    case neutral = "Neutral"
+    //case neutral = "Neutral"
     
     public static var all: [Gender] {
-        return [.unknown, .male, .female, .neutral]
+        return [.male, .female] //[.unknown, .male, .female, .neutral] //Removed other type as per the Peerbits QA suggestion
     }
 }
 
