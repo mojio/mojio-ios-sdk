@@ -274,6 +274,7 @@ public enum TimelineActivityType: String, Codable {
     case serviceMessage = "ServiceMessage"
     case serviceSchedule = "ServiceSchedule"
     case seatbelt = "Seatbelt"
+    case oilLevel = "OilLevelWarning"
 }
 
 public protocol RootActivityModel: ActivityModelBase, PrimaryKey {
