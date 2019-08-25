@@ -206,3 +206,14 @@ public enum FuelVolumeUnit: String, Codable {
         self = FuelVolumeUnit(rawValue: label) ?? .unknown
     }
 }
+
+public enum TemperatureUnit: String, Codable {
+    case celsius = "Celsius"
+    case fahrenheit = "Fahrenheit"
+    case unknown = "Unknown"
+    
+    public init(from decoder: Decoder) throws {
+        let label = try decoder.singleValueContainer().decode(String.self)
+        self = TemperatureUnit(rawValue: label) ?? .unknown
+    }
+}

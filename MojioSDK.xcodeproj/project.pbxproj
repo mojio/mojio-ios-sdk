@@ -72,6 +72,8 @@
 		375206FC20AADD3B00102273 /* GeofenceRegion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375206FB20AADD3B00102273 /* GeofenceRegion.swift */; };
 		375206FE20AAFD1600102273 /* SettingsGeofence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375206FD20AAFD1600102273 /* SettingsGeofence.swift */; };
 		3781A95622538F84004E093F /* DynamicCodingKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B3007A210B15B200608978 /* DynamicCodingKey.swift */; };
+		37BC6C8323129E4B0054B420 /* EngineOilTemperature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BC6C8223129E4B0054B420 /* EngineOilTemperature.swift */; };
+		37BC6C862312A1CA0054B420 /* EngineOil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BC6C852312A1CA0054B420 /* EngineOil.swift */; };
 		644214DE1D9E6500005A86C5 /* AggregationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644214DD1D9E6500005A86C5 /* AggregationData.swift */; };
 		72B3006E210A1AD400608978 /* ActivityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B3006D210A1AD400608978 /* ActivityTests.swift */; };
 		72B30071210B061300608978 /* StringExtTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B30070210B061300608978 /* StringExtTests.swift */; };
@@ -292,6 +294,8 @@
 		37318937209CB06400E61E3A /* VehicleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleTests.swift; sourceTree = "<group>"; };
 		375206FB20AADD3B00102273 /* GeofenceRegion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeofenceRegion.swift; sourceTree = "<group>"; };
 		375206FD20AAFD1600102273 /* SettingsGeofence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsGeofence.swift; sourceTree = "<group>"; };
+		37BC6C8223129E4B0054B420 /* EngineOilTemperature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EngineOilTemperature.swift; sourceTree = "<group>"; };
+		37BC6C852312A1CA0054B420 /* EngineOil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EngineOil.swift; sourceTree = "<group>"; };
 		40D9518924C95E0A62FD5395 /* Pods-Core.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Core.release.xcconfig"; path = "Target Support Files/Pods-Core/Pods-Core.release.xcconfig"; sourceTree = "<group>"; };
 		51B6F025112EECB1454551E4 /* Pods-Images.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Images.release.xcconfig"; path = "Target Support Files/Pods-Images/Pods-Images.release.xcconfig"; sourceTree = "<group>"; };
 		5E7E55CCD62DF02D94471614 /* Pods-Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.release.xcconfig"; path = "Target Support Files/Pods-Tests/Pods-Tests.release.xcconfig"; sourceTree = "<group>"; };
@@ -578,6 +582,26 @@
 			path = VinDetails;
 			sourceTree = "<group>";
 		};
+		37BC6C842312A0C00054B420 /* DeviceMeasurements */ = {
+			isa = PBXGroup;
+			children = (
+				BC879B431CBEFFDD00F9177B /* Acceleration.swift */,
+				BC879B471CBEFFDD00F9177B /* Battery.swift */,
+				BC31E3CD1D419E80001649A7 /* Distance.swift */,
+				BC879B4C1CBEFFDD00F9177B /* FuelCapacity.swift */,
+				BC879B4D1CBEFFDD00F9177B /* FuelEfficiency.swift */,
+				BC879B4E1CBEFFDD00F9177B /* FuelLevel.swift */,
+				2EBF12BD1FB986FE00F068B2 /* FuelVolume.swift */,
+				BC879B551CBEFFDD00F9177B /* Odometer.swift */,
+				BC879B571CBEFFDD00F9177B /* ProperAcceleration.swift */,
+				BC879B581CBEFFDD00F9177B /* RPM.swift */,
+				BC879B5A1CBEFFDD00F9177B /* Speed.swift */,
+				BC879B4A1CBEFFDD00F9177B /* TimePeriod.swift */,
+				37BC6C8223129E4B0054B420 /* EngineOilTemperature.swift */,
+			);
+			path = DeviceMeasurements;
+			sourceTree = "<group>";
+		};
 		72B3006F210B05F800608978 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -647,18 +671,12 @@
 		BC3D7C7C2087F41800659A92 /* Vehicles */ = {
 			isa = PBXGroup;
 			children = (
-				BC879B431CBEFFDD00F9177B /* Acceleration.swift */,
+				37BC6C842312A0C00054B420 /* DeviceMeasurements */,
 				BC879B441CBEFFDD00F9177B /* Accelerometer.swift */,
 				644214DD1D9E6500005A86C5 /* AggregationData.swift */,
-				BC879B471CBEFFDD00F9177B /* Battery.swift */,
 				BC879B481CBEFFDD00F9177B /* BooleanState.swift */,
 				BC92329A1E7FC52900BD4038 /* CompatibilityDetails.swift */,
 				BC879B491CBEFFDD00F9177B /* DiagnosticCode.swift */,
-				BC31E3CD1D419E80001649A7 /* Distance.swift */,
-				BC879B4C1CBEFFDD00F9177B /* FuelCapacity.swift */,
-				BC879B4D1CBEFFDD00F9177B /* FuelEfficiency.swift */,
-				BC879B4E1CBEFFDD00F9177B /* FuelLevel.swift */,
-				2EBF12BD1FB986FE00F068B2 /* FuelVolume.swift */,
 				BCF2DE491D454B8D00EDD376 /* Geofence.swift */,
 				F9E9FDAD1D93122A00DCB690 /* HarshEvent.swift */,
 				BCFCEB031F019FF20096C9B4 /* HarshEventState.swift */,
@@ -667,12 +685,7 @@
 				BC879B531CBEFFDD00F9177B /* MeasurementStats.swift */,
 				BC879B541CBEFFDD00F9177B /* Mojio.swift */,
 				E06C95671D25CA2A006AECBB /* NotificationsSettings.swift */,
-				BC879B551CBEFFDD00F9177B /* Odometer.swift */,
-				BC879B571CBEFFDD00F9177B /* ProperAcceleration.swift */,
-				BC879B581CBEFFDD00F9177B /* RPM.swift */,
 				BC879B591CBEFFDD00F9177B /* Score.swift */,
-				BC879B5A1CBEFFDD00F9177B /* Speed.swift */,
-				BC879B4A1CBEFFDD00F9177B /* TimePeriod.swift */,
 				BC879B5C1CBEFFDD00F9177B /* Trip.swift */,
 				BC94271A1F01E17D00B7424A /* TripPolyline.swift */,
 				BC5F7F021CC58D4000FAB205 /* Units.swift */,
@@ -685,6 +698,7 @@
 				375206FD20AAFD1600102273 /* SettingsGeofence.swift */,
 				2C58943820FD932000DE18BE /* VehicleAppearance.swift */,
 				2C58943C20FD968D00DE18BE /* VehicleAppearanceStyle.swift */,
+				37BC6C852312A1CA0054B420 /* EngineOil.swift */,
 			);
 			path = Vehicles;
 			sourceTree = "<group>";
@@ -1403,6 +1417,7 @@
 				BC879B601CBEFFDD00F9177B /* Acceleration.swift in Sources */,
 				BC879B391CBEFFC000F9177B /* Engine.swift in Sources */,
 				BC879B401CBEFFC000F9177B /* Vin.swift in Sources */,
+				37BC6C8323129E4B0054B420 /* EngineOilTemperature.swift in Sources */,
 				F9E9FDAE1D93122A00DCB690 /* HarshEvent.swift in Sources */,
 				BC879B6A1CBEFFDD00F9177B /* FuelEfficiency.swift in Sources */,
 				BCC8A4A01D19EABF00E14E2B /* WSVehiclesClient.swift in Sources */,
@@ -1426,6 +1441,7 @@
 				BC94271B1F01E17D00B7424A /* TripPolyline.swift in Sources */,
 				BC879B661CBEFFDD00F9177B /* DiagnosticCode.swift in Sources */,
 				2C58943D20FD968D00DE18BE /* VehicleAppearanceStyle.swift in Sources */,
+				37BC6C862312A1CA0054B420 /* EngineOil.swift in Sources */,
 				BC879B3D1CBEFFC000F9177B /* ServiceBulletin.swift in Sources */,
 				375206FC20AADD3B00102273 /* GeofenceRegion.swift in Sources */,
 				BC879B3F1CBEFFC000F9177B /* Transmission.swift in Sources */,

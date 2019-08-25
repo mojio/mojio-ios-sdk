@@ -35,6 +35,7 @@ public protocol VehicleModel: Codable, PrimaryKey {
     associatedtype H: HeadingModel
     associatedtype S: SpeedModel
     associatedtype R: RPMModel
+    associatedtype EO: EngineOilModel
     
     var id: String { get }
     var name: String? { get }
@@ -76,6 +77,7 @@ public protocol VehicleModel: Codable, PrimaryKey {
     var deleted: Bool { get }
     var createdOn: Date? { get }
     var lastModified: Date? { get }
+    var engineOil: EO? { get }
 }
 
 public struct Vehicle: VehicleModel {
@@ -97,6 +99,7 @@ public struct Vehicle: VehicleModel {
     public typealias O = Odometer
     public typealias V = VinDetails
     public typealias L = Location
+    public typealias EO = EngineOil
     
     public var id: String
     public var name: String?
@@ -138,6 +141,7 @@ public struct Vehicle: VehicleModel {
     public var deleted: Bool
     public var createdOn: Date?
     public var lastModified: Date?
+    public var engineOil: EO?
     
     public enum CodingKeys: String, CodingKey {
         case id = "Id"
@@ -180,6 +184,7 @@ public struct Vehicle: VehicleModel {
         case deleted = "Deleted"
         case createdOn = "CreatedOn"
         case lastModified = "LastModified"
+        case engineOil = "EngineOil"
     }
     
     public init(from decoder: Decoder) throws {
@@ -227,6 +232,7 @@ public struct Vehicle: VehicleModel {
             self.deleted = try container.decodeIfPresent(Bool.self, forKey: .deleted) ?? false
             self.createdOn = try container.decodeIfPresent(String.self, forKey: .createdOn).flatMap { $0.dateFromISO }
             self.lastModified = try container.decodeIfPresent(String.self, forKey: .lastModified).flatMap { $0.dateFromISO }
+            self.engineOil = try container.decodeIfPresent(EngineOil.self, forKey: .engineOil)
         }
         catch {
             debugPrint(error)
@@ -278,6 +284,7 @@ public struct Vehicle: VehicleModel {
         try container.encodeIfPresent(self.deleted, forKey: .deleted)
         try container.encodeIfPresent(self.createdOn, forKey: .createdOn)
         try container.encodeIfPresent(self.lastModified, forKey: .lastModified)
+        try container.encodeIfPresent(self.engineOil, forKey: .engineOil)
     }
 }
 
