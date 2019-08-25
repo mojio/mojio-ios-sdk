@@ -23,7 +23,7 @@ public enum EngineOilLevelWarning: String, Codable {
     
     public init(from decoder: Decoder) throws {
         let label = try decoder.singleValueContainer().decode(String.self)
-        self = EngineOilLevelWarningType(rawValue: label) ?? .unknown
+        self = EngineOilLevelWarning(rawValue: label) ?? .unknown
     }
 }
 
@@ -46,7 +46,7 @@ public struct EngineOil: EngineOilModel {
     public var pressureLowWarning: Bool?
     public var temperature: EngineOilTemperature? 
     
-    public enum CodingKeys: String, CodingKey {
+    public enum CodingKeys: String, CodingKey, CompoundWordStyle {
         case timestamp = "Timestamp"
         case levelWarning = "EngineOilLevelWarning"
         case pressureLowWarning = "EngineOilPressureLowWarning"
@@ -56,12 +56,12 @@ public struct EngineOil: EngineOilModel {
     public init(from decoder: Decoder) throws {
         
         do {
-            let container = try decoder.container(keyedBy: CodingKeys.self)
+            let container = try decoder.container(keyedBy: DynamicCodingKey.self)
             
-            self.timestamp = try container.decodeIfPresentIgnoringCase(String.self, forKey: .timestamp).flatMap { $0.dateFromISO }
-            self.levelWarning = try container.decodeIfPresent(EngineOilLevelWarning.self, forKey: .levelWarning)
-            self.pressureLowWarning = try container.decodeIfPresent(Bool.self, forKey: .pressureLowWarning)
-            self.temperature = try container.decodeIfPresent(EngineOilTemperature.self, forKey: .temperature)
+            self.timestamp = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.timestamp).flatMap { $0.dateFromISO }
+            self.levelWarning = try container.decodeIfPresent(EngineOilLevelWarning.self, forKey: CodingKeys.levelWarning)
+            self.pressureLowWarning = try container.decodeIfPresent(Bool.self, forKey: CodingKeys.pressureLowWarning)
+            self.temperature = try container.decodeIfPresent(EngineOilTemperature.self, forKey: CodingKeys.temperature)
         }
         catch {
             debugPrint(error)

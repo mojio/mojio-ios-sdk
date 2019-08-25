@@ -20,7 +20,7 @@ public protocol EngineOilTemperatureModel: DeviceMeasurement {
     init(baseUnit: U?, baseValue: Double, unit: U?, value: Double, timestamp: Date?)
 }
 
-public struct EngineOilTemperature: EngineOilModel {
+public struct EngineOilTemperature: EngineOilTemperatureModel {
     
     public typealias U = TemperatureUnit
     
