@@ -41,10 +41,10 @@ public struct EngineOil: EngineOilModel {
     
     public typealias EOT = EngineOilTemperature
     
-    public var timestamp: Date? { get }
-    public var levelWarning: EngineOilLevelWarning? { get }
-    public var pressureLowWarning: Boolean? { get }
-    public var temperature: EngineOilTemperature? { get }
+    public var timestamp: Date?
+    public var levelWarning: EngineOilLevelWarning?
+    public var pressureLowWarning: Bool?
+    public var temperature: EngineOilTemperature? 
     
     public enum CodingKeys: String, CodingKey {
         case timestamp = "Timestamp"
