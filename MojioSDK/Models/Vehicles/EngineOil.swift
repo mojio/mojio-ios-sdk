@@ -59,9 +59,9 @@ public struct EngineOil: EngineOilModel {
             let container = try decoder.container(keyedBy: DynamicCodingKey.self)
             
             self.timestamp = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.timestamp).flatMap { $0.dateFromISO }
-            self.levelWarning = try container.decodeIfPresent(EngineOilLevelWarning.self, forKey: CodingKeys.levelWarning)
-            self.pressureLowWarning = try container.decodeIfPresent(Bool.self, forKey: CodingKeys.pressureLowWarning)
-            self.temperature = try container.decodeIfPresent(EngineOilTemperature.self, forKey: CodingKeys.temperature)
+            self.levelWarning = try container.decodeIfPresentIgnoringCase(EngineOilLevelWarning.self, forKey: CodingKeys.levelWarning)
+            self.pressureLowWarning = try container.decodeIfPresentIgnoringCase(Bool.self, forKey: CodingKeys.pressureLowWarning)
+            self.temperature = try container.decodeIfPresentIgnoringCase(EngineOilTemperature.self, forKey: CodingKeys.temperature)
         }
         catch {
             debugPrint(error)
