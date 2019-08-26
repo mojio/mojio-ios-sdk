@@ -15,7 +15,7 @@
 
 import Foundation
 
-public enum NotificationMediaType: String, Codable {
+/*public enum NotificationMediaType: String, Codable {
     case text = "Text"
     case push = "Push"
     case email = "Email"
@@ -42,7 +42,46 @@ public enum NotificationMediaType: String, Codable {
             return [.text, .push, .email]
         }*/
     }
+}*/
+
+public enum NotificationMediaType: CustomStringConvertible
+{
+    case text
+    case push
+    case email
+    case custom(String)
+    
+    /// Creates a new instance by using the specified string value with non case sensitive comparison.
+    public init?(stringValue: String) {
+        switch stringValue {
+        case "Text":
+            self = .text
+        case "Push":
+            self = .push
+        case "Email":
+            self = .email
+        default:
+            self = .custom(stringValue)
+            
+        }
+    }
+    
+    public var description: String {
+        switch self {
+        case .text:
+            return "Text"
+        case .push:
+            return "Push"
+        case .email:
+            return "Email"
+        case .custom(let type):
+            return type
+        }
+    }
+    
+    
 }
+
 public enum ActiveDaysOfWeek: String, Codable {
     case monday = "Monday"
     case tuesday = "Tuesday"
@@ -112,16 +151,35 @@ public struct ActiveTimeWindow: ActiveTimeWindowModel {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         do {
+            
+            do {
+                let petType = try container.decode(String.self, forKey: .notificationMedia)
+                self.notificationMedia = NotificationMediaType(stringValue: petType)
+            }
+            catch {
+                self.notificationMedia = NotificationMediaType(stringValue: "Unspecified")
+            }
+            
             self.activeTimeWindow = try container.decodeIfPresent(WeekDays.self, forKey: .activeTimeWindow)
             self.activeDaysOfWeek = try container.decodeIfPresent([ActiveDaysOfWeek].self, forKey: .activeDaysOfWeek)
             self.enabled = try container.decodeIfPresent(Bool.self, forKey: .enabled)
             self.sound = try container.decodeIfPresent(String.self, forKey: .sound)
-            self.notificationMedia = try container.decodeIfPresent(NotificationMediaType.self, forKey: .notificationMedia)
+            //self.notificationMedia = try container.decodeIfPresent(NotificationMediaType.self, forKey: .notificationMedia)
         }
         catch {
             debugPrint(error)
             throw error
         }
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        try container.encodeIfPresent(self.activeTimeWindow, forKey: .activeTimeWindow)
+        try container.encodeIfPresent(self.activeDaysOfWeek, forKey: .activeDaysOfWeek)
+        try container.encodeIfPresent(self.enabled, forKey: .enabled)
+        try container.encodeIfPresent(self.sound, forKey: .sound)
+        try container.encodeIfPresent(self.notificationMedia?.description, forKey: .notificationMedia)
     }
 }
 public struct ActiveTimeWindowUpdate: Codable {
@@ -170,6 +228,31 @@ public struct ActiveTimeWindowUpdate: Codable {
         self.rulesType = rulesType
     }
     
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        do {
+            
+            do {
+                let petType = try container.decode(String.self, forKey: .notificationMedia)
+                self.notificationMedia = NotificationMediaType(stringValue: petType)
+            }
+            catch {
+                self.notificationMedia = NotificationMediaType(stringValue: "Unspecified")
+            }
+            
+            self.activeTimeWindow = try container.decodeIfPresent(WeekDaysUpdate.self, forKey: .activeTimeWindow)
+            self.activeDaysOfWeek = try container.decodeIfPresent([ActiveDaysOfWeek].self, forKey: .activeDaysOfWeek)
+            self.enabled = try container.decodeIfPresent(Bool.self, forKey: .enabled)
+            self.sound = try container.decodeIfPresent(String.self, forKey: .sound)
+            //self.notificationMedia = try container.decodeIfPresent(NotificationMediaType.self, forKey: .notificationMedia)
+        }
+        catch {
+            debugPrint(error)
+            throw error
+        }
+    }
+    
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         
@@ -177,7 +260,7 @@ public struct ActiveTimeWindowUpdate: Codable {
         try container.encodeIfPresent(self.activeDaysOfWeek, forKey: .activeDaysOfWeek)
         try container.encodeIfPresent(self.enabled, forKey: .enabled)
         try container.encodeIfPresent(self.sound, forKey: .sound)
-        try container.encodeIfPresent(self.notificationMedia, forKey: .notificationMedia)
+        try container.encodeIfPresent(self.notificationMedia?.description, forKey: .notificationMedia)
     }
 }
 
