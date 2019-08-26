@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0763AA5F2313FCE1008DE32A /* TimeOfDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0763AA5B2313FCE1008DE32A /* TimeOfDay.swift */; };
+		0763AA602313FCE1008DE32A /* ActiveTimeWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0763AA5C2313FCE1008DE32A /* ActiveTimeWindow.swift */; };
+		0763AA612313FCE1008DE32A /* WeekDays.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0763AA5D2313FCE1008DE32A /* WeekDays.swift */; };
+		0763AA622313FCE1008DE32A /* NotificationRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0763AA5E2313FCE1008DE32A /* NotificationRules.swift */; };
 		0764A1E22306C9EC00DB57B5 /* Asset.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC59061F208E566100A098A3 /* Asset.swift */; };
 		0764A1E92306CF1D00DB57B5 /* PeopleDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0764A1E62306CF1C00DB57B5 /* PeopleDetails.swift */; };
 		0764A1EA2306CF1D00DB57B5 /* BikeDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0764A1E72306CF1D00DB57B5 /* BikeDetails.swift */; };
@@ -219,6 +223,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0763AA5B2313FCE1008DE32A /* TimeOfDay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeOfDay.swift; sourceTree = "<group>"; };
+		0763AA5C2313FCE1008DE32A /* ActiveTimeWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActiveTimeWindow.swift; sourceTree = "<group>"; };
+		0763AA5D2313FCE1008DE32A /* WeekDays.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeekDays.swift; sourceTree = "<group>"; };
+		0763AA5E2313FCE1008DE32A /* NotificationRules.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationRules.swift; sourceTree = "<group>"; };
 		0764A1E62306CF1C00DB57B5 /* PeopleDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleDetails.swift; sourceTree = "<group>"; };
 		0764A1E72306CF1D00DB57B5 /* BikeDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BikeDetails.swift; sourceTree = "<group>"; };
 		0764A1EC2306D4DC00DB57B5 /* GenericAssetDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericAssetDetails.swift; sourceTree = "<group>"; };
@@ -478,6 +486,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0763AA5A2313FCE1008DE32A /* RulesNotification */ = {
+			isa = PBXGroup;
+			children = (
+				0763AA5B2313FCE1008DE32A /* TimeOfDay.swift */,
+				0763AA5C2313FCE1008DE32A /* ActiveTimeWindow.swift */,
+				0763AA5D2313FCE1008DE32A /* WeekDays.swift */,
+				0763AA5E2313FCE1008DE32A /* NotificationRules.swift */,
+			);
+			path = RulesNotification;
+			sourceTree = "<group>";
+		};
 		2E5767421FB454FD008F16F6 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -693,6 +712,7 @@
 		BC59061E208E55CF00A098A3 /* Pets */ = {
 			isa = PBXGroup;
 			children = (
+				0763AA5A2313FCE1008DE32A /* RulesNotification */,
 				3682365F20EAA54E00E21086 /* ActivitySettings.swift */,
 				BC59061F208E566100A098A3 /* Asset.swift */,
 				BC59062F208E566200A098A3 /* Battery.swift */,
@@ -1350,6 +1370,7 @@
 				22CF879C2252A62B0085CBF5 /* Light.swift in Sources */,
 				0764A1E92306CF1D00DB57B5 /* PeopleDetails.swift in Sources */,
 				AE4DB04B22B05DF600B30DBB /* Buzzer.swift in Sources */,
+				0763AA5F2313FCE1008DE32A /* TimeOfDay.swift in Sources */,
 				BCFE5DC520A063B500B89104 /* Stats.swift in Sources */,
 				BC3D7C84208816BB00659A92 /* PetsClient.swift in Sources */,
 				0764A1E22306C9EC00DB57B5 /* Asset.swift in Sources */,
@@ -1360,6 +1381,7 @@
 				BC60374B208FB20F00D855DE /* NotificationToken.swift in Sources */,
 				BC60374C208FB20F00D855DE /* PetDetails.swift in Sources */,
 				BCF23D0320EA0B9A009FE79C /* AssetDailySummary.swift in Sources */,
+				0763AA602313FCE1008DE32A /* ActiveTimeWindow.swift in Sources */,
 				72B30078210B139D00608978 /* CompoundWordStyle.swift in Sources */,
 				FCE43DAE20DCFA22004A2E89 /* DisplayDetails.swift in Sources */,
 				BC590656208E783A00A098A3 /* WSPetsClient.swift in Sources */,
@@ -1370,7 +1392,9 @@
 				BC603747208FB20F00D855DE /* Geofence.swift in Sources */,
 				0764A1ED2306D4DC00DB57B5 /* GenericAssetDetails.swift in Sources */,
 				FCF6B2A622DF65EB00B21DD9 /* TermsAndConditionsModel.swift in Sources */,
+				0763AA612313FCE1008DE32A /* WeekDays.swift in Sources */,
 				BC8DFC0720EC450D006B99E6 /* ActivitySettings.swift in Sources */,
+				0763AA622313FCE1008DE32A /* NotificationRules.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

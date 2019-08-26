@@ -80,6 +80,15 @@ public struct GeofenceRegionUpdate: Codable {
         case polygon = "Polygon"
     }
     
+    public init(region: GeofenceRegion? = nil) {
+        self.init(
+            latitude: region?.latitude,
+            longitude: region?.longitude,
+            radius: region?.radius,
+            polygon: region?.polygon
+        )
+    }
+    
     public init(
         latitude: Double? = nil,
         longitude: Double? = nil,
@@ -103,20 +112,38 @@ public struct GeofenceRegionUpdate: Codable {
 }
 
 public protocol GeofenceNotificationModel: Codable {
+    
+    associatedtype W: WeekDaysModel
+    
     var onEnter: Bool { get }
     var onExit: Bool { get }
     var sound: String { get }
+    var activeTimeWindow: W? { get }
+    var activeDaysOfWeek: [ActiveDaysOfWeek]? { get }
+    var notificationMedia: NotificationMediaType? { get }
+    var enabled: Bool? { get }
 }
 
 public struct GeofenceNotification: GeofenceNotificationModel {
+    
+    public typealias W = WeekDays
+    
     public let onEnter: Bool
     public let onExit: Bool
     public let sound: String
+    public let activeTimeWindow: W?
+    public let activeDaysOfWeek: [ActiveDaysOfWeek]?
+    public let notificationMedia: NotificationMediaType?
+    public let enabled: Bool?
     
     public enum CodingKeys: String, CodingKey {
         case onEnter = "OnEnter"
         case onExit = "OnExit"
         case sound = "Sound"
+        case activeTimeWindow = "ActiveTimeWindow"
+        case activeDaysOfWeek = "ActiveDaysOfWeek"
+        case notificationMedia = "NotificationMedia"
+        case enabled = "Enabled"
     }
     
     public init(from decoder: Decoder) throws {
@@ -126,6 +153,10 @@ public struct GeofenceNotification: GeofenceNotificationModel {
             self.onEnter = (try container.decodeIfPresent(Bool.self, forKey: .onEnter)) ?? false
             self.onExit = (try container.decodeIfPresent(Bool.self, forKey: .onExit)) ?? false
             self.sound = (try container.decodeIfPresent(String.self, forKey: .sound)) ?? String.empty
+            self.activeTimeWindow = try container.decodeIfPresent(WeekDays.self, forKey: .activeTimeWindow)
+            self.activeDaysOfWeek = try container.decodeIfPresent([ActiveDaysOfWeek].self, forKey: .activeDaysOfWeek)
+            self.notificationMedia = try container.decodeIfPresent(NotificationMediaType.self, forKey: .notificationMedia)
+            self.enabled = try container.decodeIfPresent(Bool.self, forKey: .enabled)
         }
         catch {
             debugPrint(error)
@@ -138,21 +169,49 @@ public struct GeofenceNotificationUpdate: Codable {
     public let onEnter: Bool
     public let onExit: Bool
     public let sound: String
+    public var activeTimeWindow: WeekDaysUpdate?
+    public var activeDaysOfWeek: [ActiveDaysOfWeek]?
+    public var notificationMedia: NotificationMediaType?
+    public var enabled: Bool?
+    
+    public init(notification: GeofenceNotification? = nil) {
+        self.init(
+            onEnter: notification?.onEnter ?? false,
+            onExit: notification?.onExit ?? false,
+            sound: notification?.sound ?? "",
+            activeTimeWindow: WeekDaysUpdate(model: notification?.activeTimeWindow),
+            activeDaysOfWeek: notification?.activeDaysOfWeek,
+            notificationMedia: notification?.notificationMedia,
+            enabled: notification?.enabled
+        )
+    }
     
     public init(
         onEnter: Bool,
         onExit: Bool,
-        sound: String ) {
+        sound: String,
+        activeTimeWindow: WeekDaysUpdate? = nil,
+        activeDaysOfWeek: [ActiveDaysOfWeek]? = nil,
+        notificationMedia: NotificationMediaType? = nil,
+        enabled: Bool? = nil) {
         
         self.onEnter = onEnter
         self.onExit = onExit
         self.sound = sound
+        self.activeTimeWindow = activeTimeWindow
+        self.activeDaysOfWeek = activeDaysOfWeek
+        self.notificationMedia = notificationMedia
+        self.enabled = enabled
     }
     
     public enum CodingKeys: String, CodingKey {
         case onEnter = "OnEnter"
         case onExit = "OnExit"
         case sound = "Sound"
+        case activeTimeWindow = "ActiveTimeWindow"
+        case activeDaysOfWeek = "ActiveDaysOfWeek"
+        case notificationMedia = "NotificationMedia"
+        case enabled = "Enabled"
     }
     
     public func encode(to encoder: Encoder) throws {
@@ -161,21 +220,38 @@ public struct GeofenceNotificationUpdate: Codable {
         try container.encodeIfPresent(self.onEnter, forKey: .onEnter)
         try container.encodeIfPresent(self.onExit, forKey: .onExit)
         try container.encodeIfPresent(self.sound, forKey: .sound)
+        try container.encodeIfPresent(self.activeTimeWindow, forKey: .activeTimeWindow)
+        try container.encodeIfPresent(self.activeDaysOfWeek, forKey: .activeDaysOfWeek)
+        try container.encodeIfPresent(self.notificationMedia, forKey: .notificationMedia)
+        try container.encodeIfPresent(self.enabled, forKey: .enabled)
     }
 }
 
 public protocol SeparateGeofenceNotificationModel: Codable {
+    associatedtype W: WeekDaysModel
+    
     var enabled: Bool { get }
     var sound: String { get }
+    var activeTimeWindow: W? { get }
+    var activeDaysOfWeek: [ActiveDaysOfWeek]? { get }
+    var notificationMedia: NotificationMediaType? { get }
 }
 
 public struct SeparateGeofenceNotification: SeparateGeofenceNotificationModel {
+    public typealias W = WeekDays
+    
     public let enabled: Bool
     public let sound: String
+    public let activeTimeWindow: W?
+    public let activeDaysOfWeek: [ActiveDaysOfWeek]?
+    public let notificationMedia: NotificationMediaType?
     
     public enum CodingKeys: String, CodingKey {
         case enabled = "Enabled"
         case sound = "Sound"
+        case activeTimeWindow = "ActiveTimeWindow"
+        case activeDaysOfWeek = "ActiveDaysOfWeek"
+        case notificationMedia = "NotificationMedia"
     }
     
     public init(from decoder: Decoder) throws {
@@ -184,6 +260,9 @@ public struct SeparateGeofenceNotification: SeparateGeofenceNotificationModel {
         do {
             self.enabled = try container.decode(Bool.self, forKey: .enabled)
             self.sound = (try container.decode(String.self, forKey: .sound))
+            self.activeTimeWindow = try container.decodeIfPresent(WeekDays.self, forKey: .activeTimeWindow)
+            self.activeDaysOfWeek = try container.decodeIfPresent([ActiveDaysOfWeek].self, forKey: .activeDaysOfWeek)
+            self.notificationMedia = try container.decodeIfPresent(NotificationMediaType.self, forKey: .notificationMedia)
         }
         catch {
             debugPrint(error)
@@ -195,21 +274,47 @@ public struct SeparateGeofenceNotification: SeparateGeofenceNotificationModel {
 public struct SeparateGeofenceNotificationUpdate: Codable {
     public var enabled: Bool
     public var sound: String
+    public var activeTimeWindow: WeekDaysUpdate?
+    public var activeDaysOfWeek: [ActiveDaysOfWeek]?
+    public var notificationMedia: NotificationMediaType?
     
-    public init(enabled: Bool, sound: String) {
+    public init(separateGeofenceNotification: SeparateGeofenceNotification? = nil) {
+        self.init(
+            enabled: separateGeofenceNotification?.enabled ?? false,
+            sound: separateGeofenceNotification?.sound ?? "",
+            activeTimeWindow: WeekDaysUpdate(model: separateGeofenceNotification?.activeTimeWindow),
+            activeDaysOfWeek: separateGeofenceNotification?.activeDaysOfWeek,
+            notificationMedia: separateGeofenceNotification?.notificationMedia
+        )
+    }
+    
+    public init(enabled: Bool,
+                sound: String,
+                activeTimeWindow: WeekDaysUpdate? = nil,
+                activeDaysOfWeek: [ActiveDaysOfWeek]? = nil,
+                notificationMedia: NotificationMediaType? = nil) {
         self.enabled = enabled
         self.sound = sound
+        self.activeTimeWindow = activeTimeWindow
+        self.activeDaysOfWeek = activeDaysOfWeek
+        self.notificationMedia = notificationMedia
     }
     
     public enum CodingKeys: String, CodingKey {
         case enabled = "Enabled"
         case sound = "Sound"
+        case activeTimeWindow = "ActiveTimeWindow"
+        case activeDaysOfWeek = "ActiveDaysOfWeek"
+        case notificationMedia = "NotificationMedia"
     }
     
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(self.enabled, forKey: .enabled)
         try container.encodeIfPresent(self.sound, forKey: .sound)
+        try container.encodeIfPresent(self.activeTimeWindow, forKey: .activeTimeWindow)
+        try container.encodeIfPresent(self.activeDaysOfWeek, forKey: .activeDaysOfWeek)
+        try container.encodeIfPresent(self.notificationMedia, forKey: .notificationMedia)
     }
 }
 
@@ -260,6 +365,14 @@ public struct GeofenceWiFiUpdate: GeofenceWiFiModel {
         case ssid = "Ssid"
         case macAddress = "MacAddress"
         case signalStrength = "SignalStrength"
+    }
+    
+    public init(geofenceWifi: GeofenceWiFi? = nil) {
+        self.init(
+            ssid: geofenceWifi?.ssid ?? "",
+            macAddress: geofenceWifi?.macAddress,
+            signalStrength: geofenceWifi?.signalStrength
+        )
     }
     
     public init(ssid: String, macAddress: String? = nil, signalStrength: Int? = nil) {
@@ -385,6 +498,19 @@ public struct GeofenceUpdate: Codable {
     public var assetIds: [String] = []
     public var wifi: GeofenceWiFiUpdate? = nil
     
+    public init(geofence: Geofence? = nil) {
+        self.init(
+            name: geofence?.name,
+            description: geofence?.description,
+            region: GeofenceRegionUpdate(region: geofence?.region),
+            notification: GeofenceNotificationUpdate(notification: geofence?.notification),
+            geofenceEnterNotification: SeparateGeofenceNotificationUpdate(separateGeofenceNotification: geofence?.geofenceEnterNotification),
+            geofenceExitNotification: SeparateGeofenceNotificationUpdate(separateGeofenceNotification: geofence?.geofenceExitNotification),
+            wifi: GeofenceWiFiUpdate(geofenceWifi: geofence?.wifi),
+            assetIds: geofence?.assetIds ?? []
+        )
+    }
+    
     public init(
         name: String? = nil,
         description: String? = nil,
@@ -394,7 +520,6 @@ public struct GeofenceUpdate: Codable {
         geofenceExitNotification: SeparateGeofenceNotificationUpdate? = nil,
         wifi: GeofenceWiFiUpdate? = nil,
         assetIds: [String] = []) {
-        
         
         self.name = name
         self.description = description
