@@ -79,7 +79,10 @@ public enum NotificationMediaType: CustomStringConvertible
         }
     }
     
-    
+    public static var all: [NotificationMediaType]
+    {
+        return [.text, .push, .email]
+    }
 }
 
 public enum ActiveDaysOfWeek: String, Codable {
