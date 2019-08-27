@@ -127,7 +127,8 @@ public protocol ActiveTimeWindowModel: Codable {
     var enabled: Bool? { get }
     var sound: String? { get }
     var notificationMedia: NotificationMediaType? { get }
-    
+    var level: Int? { get }
+    var threshold: Int? { get }
 }
 
 public struct ActiveTimeWindow: ActiveTimeWindowModel {
@@ -138,6 +139,8 @@ public struct ActiveTimeWindow: ActiveTimeWindowModel {
     public let enabled: Bool?
     public let sound: String?
     public let notificationMedia: NotificationMediaType?
+    public let level: Int?
+    public let threshold: Int?
     
     public var rulesType: RulesType?
     
@@ -148,6 +151,8 @@ public struct ActiveTimeWindow: ActiveTimeWindowModel {
         case enabled = "Enabled"
         case sound = "Sound"
         case notificationMedia = "NotificationMedia"
+        case level = "Level"
+        case threshold = "Threshold"
     }
     
     public init(from decoder: Decoder) throws {
@@ -167,7 +172,8 @@ public struct ActiveTimeWindow: ActiveTimeWindowModel {
             self.activeDaysOfWeek = try container.decodeIfPresent([ActiveDaysOfWeek].self, forKey: .activeDaysOfWeek)
             self.enabled = try container.decodeIfPresent(Bool.self, forKey: .enabled)
             self.sound = try container.decodeIfPresent(String.self, forKey: .sound)
-            //self.notificationMedia = try container.decodeIfPresent(NotificationMediaType.self, forKey: .notificationMedia)
+            self.level = try container.decodeIfPresent(Int.self, forKey: .level)
+            self.threshold = try container.decodeIfPresent(Int.self, forKey: .threshold)
         }
         catch {
             debugPrint(error)
@@ -183,6 +189,8 @@ public struct ActiveTimeWindow: ActiveTimeWindowModel {
         try container.encodeIfPresent(self.enabled, forKey: .enabled)
         try container.encodeIfPresent(self.sound, forKey: .sound)
         try container.encodeIfPresent(self.notificationMedia?.description, forKey: .notificationMedia)
+        try container.encodeIfPresent(self.level, forKey: .level)
+        try container.encodeIfPresent(self.threshold, forKey: .threshold)
     }
 }
 public struct ActiveTimeWindowUpdate: Codable {
@@ -192,6 +200,8 @@ public struct ActiveTimeWindowUpdate: Codable {
     public var enabled: Bool?
     public var sound: String?
     public var notificationMedia: NotificationMediaType?
+    public var level: Int?
+    public var threshold: Int?
     
     public var rulesType: RulesType?
     
@@ -202,6 +212,8 @@ public struct ActiveTimeWindowUpdate: Codable {
         case enabled = "Enabled"
         case sound = "Sound"
         case notificationMedia = "NotificationMedia"
+        case level = "Level"
+        case threshold = "Threshold"
     }
     
     public init(model: ActiveTimeWindow? = nil) {
@@ -211,6 +223,8 @@ public struct ActiveTimeWindowUpdate: Codable {
             enabled: model?.enabled,
             sound: model?.sound,
             notificationMedia: model?.notificationMedia,
+            level: model?.level,
+            threshold: model?.threshold,
             rulesType: model?.rulesType
         )
     }
@@ -220,6 +234,8 @@ public struct ActiveTimeWindowUpdate: Codable {
         enabled: Bool? = nil,
         sound: String? = nil,
         notificationMedia: NotificationMediaType? = nil,
+        level: Int? = nil,
+        threshold: Int? = nil,
         rulesType: RulesType? = nil) {
 
         self.activeTimeWindow = activeTimeWindow
@@ -227,6 +243,8 @@ public struct ActiveTimeWindowUpdate: Codable {
         self.enabled = enabled
         self.sound = sound
         self.notificationMedia = notificationMedia
+        self.level = level
+        self.threshold = threshold
         
         self.rulesType = rulesType
     }
@@ -248,7 +266,8 @@ public struct ActiveTimeWindowUpdate: Codable {
             self.activeDaysOfWeek = try container.decodeIfPresent([ActiveDaysOfWeek].self, forKey: .activeDaysOfWeek)
             self.enabled = try container.decodeIfPresent(Bool.self, forKey: .enabled)
             self.sound = try container.decodeIfPresent(String.self, forKey: .sound)
-            //self.notificationMedia = try container.decodeIfPresent(NotificationMediaType.self, forKey: .notificationMedia)
+            self.level = try container.decodeIfPresent(Int.self, forKey: .level)
+            self.threshold = try container.decodeIfPresent(Int.self, forKey: .threshold)
         }
         catch {
             debugPrint(error)
@@ -264,6 +283,8 @@ public struct ActiveTimeWindowUpdate: Codable {
         try container.encodeIfPresent(self.enabled, forKey: .enabled)
         try container.encodeIfPresent(self.sound, forKey: .sound)
         try container.encodeIfPresent(self.notificationMedia?.description, forKey: .notificationMedia)
+        try container.encodeIfPresent(self.level, forKey: .level)
+        try container.encodeIfPresent(self.threshold, forKey: .threshold)
     }
 }
 
