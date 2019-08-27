@@ -418,7 +418,7 @@ public struct GeofenceWiFi: GeofenceWiFiModel {
         case signalStrength = "SignalStrength"
     }
     
-    public init(ssid: String, macAddress: String? = nil, signalStrength: Int? = nil) {
+    public init(ssid: String? = nil, macAddress: String? = nil, signalStrength: Int? = nil) {
         self.ssid = ssid
         self.macAddress = macAddress
         self.signalStrength = signalStrength
@@ -458,7 +458,7 @@ public struct GeofenceWiFiUpdate: GeofenceWiFiModel {
         )
     }
     
-    public init(ssid: String, macAddress: String? = nil, signalStrength: Int? = nil) {
+    public init(ssid: String? = nil, macAddress: String? = nil, signalStrength: Int? = nil) {
         self.ssid = ssid
         self.macAddress = macAddress
         self.signalStrength = signalStrength
