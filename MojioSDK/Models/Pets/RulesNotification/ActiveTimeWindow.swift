@@ -284,7 +284,7 @@ public struct ActiveTimeWindowUpdate: Codable {
         try container.encodeIfPresent(self.sound, forKey: .sound)
         try container.encodeIfPresent(self.notificationMedia?.description, forKey: .notificationMedia)
         try container.encodeIfPresent(self.level, forKey: .level)
-        try container.encodeIfPresent(self.threshold, forKey: .threshold)
+        //try container.encodeIfPresent(self.threshold, forKey: .threshold)
     }
 }
 
