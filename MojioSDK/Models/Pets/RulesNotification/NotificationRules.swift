@@ -90,7 +90,7 @@ public struct NotificationRules: NotificationRulesModel {
     public var lowBattery: W?
     
     public lazy var arrNotificationRules: [W?] = {
-        return [separation,movement,disturbance,offline,chargedBattery,lowBattery]
+        return [movement,disturbance,offline,lowBattery]
     }()
     
     public enum CodingKeys: String, CodingKey {
@@ -143,9 +143,9 @@ public struct NotificationRules: NotificationRulesModel {
         switch assetType
         {
         case .people, .pet:
-            arrNotificationRules = [separation,offline,chargedBattery,lowBattery]  //According to Call with Adam - 21-08-2019
+            arrNotificationRules = [offline,lowBattery]  //According to Call with Adam - 21-08-2019
         case .asset,.bike, .vehicle, .other, .unknown:
-            arrNotificationRules = [separation,movement,disturbance,offline,chargedBattery,lowBattery]  //According to Call with Adam - 21-08-2019
+            arrNotificationRules = [movement,disturbance,offline,lowBattery]  //According to Call with Adam - 21-08-2019
         }
         
         //All Rules Type
@@ -169,7 +169,7 @@ public struct NotificationRulesUpdate: Codable {
     public var lowBattery: W?
     
     public lazy var arrNotificationRules: [W?] = {
-        return [separation,movement,disturbance,offline,chargedBattery,lowBattery]
+        return [movement,disturbance,offline,lowBattery]
     }()
     
     public enum CodingKeys: String, CodingKey {
@@ -256,11 +256,11 @@ public struct NotificationRulesUpdate: Codable {
         switch assetType
         {
         case .people?, .pet?:
-            arrNotificationRules = [separation,offline,chargedBattery,lowBattery]  //According to Call with Adam - 21-08-2019
+            arrNotificationRules = [offline,lowBattery]  //According to Call with Adam - 21-08-2019
         case .asset?,.bike?, .vehicle?, .other?, .unknown?:
-            arrNotificationRules = [separation,movement,disturbance,offline,chargedBattery,lowBattery]  //According to Call with Adam - 21-08-2019
+            arrNotificationRules = [movement,disturbance,offline,lowBattery]  //According to Call with Adam - 21-08-2019 with Adam - 21-08-2019
         case .none:
-            arrNotificationRules = [separation,movement,disturbance,offline,chargedBattery,lowBattery]  //According to Call with Adam - 21-08-2019
+            arrNotificationRules = [movement,disturbance,offline,lowBattery]  //According to Call with Adam - 21-08-2019
         }
         
         //All Rules Type
