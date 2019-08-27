@@ -48,6 +48,9 @@ public enum ActivityType : String, Codable {
     case vehicle = "Vehicle"
     case vehicleActor = "VehicleActor"
     case location = "Location"
+    case oilLevelWarning = "OilLevelWarning"
+    case oilPressureWarning = "OilPressureWarning"
+    case oilTemperatureWarning = "OilTemperatureWarning"
     case unkonwn
 }
 
@@ -274,6 +277,9 @@ public enum TimelineActivityType: String, Codable {
     case serviceMessage = "ServiceMessage"
     case serviceSchedule = "ServiceSchedule"
     case seatbelt = "Seatbelt"
+    case oilLevelWarning = "OilLevelWarning"
+    case oilPressureWarning = "OilPressureWarning"
+    case oilTemperatureWarning = "OilTemperatureWarning"
 }
 
 public protocol RootActivityModel: ActivityModelBase, PrimaryKey {
