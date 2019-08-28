@@ -452,7 +452,7 @@ public struct GeofenceWiFiUpdate: GeofenceWiFiModel {
     
     public init(geofenceWifi: GeofenceWiFi? = nil) {
         self.init(
-            ssid: geofenceWifi?.ssid ?? "",
+            ssid: geofenceWifi?.ssid,
             macAddress: geofenceWifi?.macAddress,
             signalStrength: geofenceWifi?.signalStrength
         )
