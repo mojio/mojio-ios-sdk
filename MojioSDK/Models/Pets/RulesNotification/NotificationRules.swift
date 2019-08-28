@@ -103,7 +103,7 @@ public struct NotificationRules: NotificationRulesModel {
         case lightOff = "LightOff"
         case highTemperatureNotification = "HighTemperatureNotification"
         case lowTemperatureNotification = "LowTemperatureNotification"
-        case lowBattery = "LowBattery"
+        case lowBattery = "Low Battery"
     }
     
     public init(from decoder: Decoder) throws {
@@ -182,7 +182,7 @@ public struct NotificationRulesUpdate: Codable {
         case lightOff = "LightOff"
         case highTemperatureNotification = "HighTemperatureNotification"
         case lowTemperatureNotification = "LowTemperatureNotification"
-        case lowBattery = "LowBattery"
+        case lowBattery = "Low Battery"
     }
     
     public init(model: NotificationRules? = nil) {
