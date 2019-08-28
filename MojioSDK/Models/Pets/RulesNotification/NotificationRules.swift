@@ -40,17 +40,17 @@ public enum RulesType: String, Codable {
         case .offline:
             return "Offline"
         case .chargedBattery:
-            return "ChargedBattery"
+            return "Charged Battery"
         case .devicePaired:
-            return "DevicePaired"
+            return "Device Paired"
         case .lightOff:
-            return "LightOff"
+            return "Light Off"
         case .highTemperatureNotification:
-            return "HighTemperatureNotification"
+            return "High Temperature Notification"
         case .lowTemperatureNotification:
-            return "LowTemperatureNotification"
+            return "Low Temperature Notification"
         case .lowBattery:
-            return "LowBattery"
+            return "Low Battery"
         default:
             return "Unknown"
             
@@ -103,7 +103,7 @@ public struct NotificationRules: NotificationRulesModel {
         case lightOff = "LightOff"
         case highTemperatureNotification = "HighTemperatureNotification"
         case lowTemperatureNotification = "LowTemperatureNotification"
-        case lowBattery = "Low Battery"
+        case lowBattery = "LowBattery"
     }
     
     public init(from decoder: Decoder) throws {
@@ -182,7 +182,7 @@ public struct NotificationRulesUpdate: Codable {
         case lightOff = "LightOff"
         case highTemperatureNotification = "HighTemperatureNotification"
         case lowTemperatureNotification = "LowTemperatureNotification"
-        case lowBattery = "Low Battery"
+        case lowBattery = "LowBattery"
     }
     
     public init(model: NotificationRules? = nil) {
