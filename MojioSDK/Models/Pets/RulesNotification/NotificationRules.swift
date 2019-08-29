@@ -21,12 +21,12 @@ public enum RulesType: String, Codable {
     case movement = "Movement"
     case disturbance = "Disturbance"
     case offline = "Offline"
-    case chargedBattery = "ChargedBattery"
-    case devicePaired = "DevicePaired"
-    case lightOff = "LightOff"
-    case highTemperatureNotification = "HighTemperatureNotification"
-    case lowTemperatureNotification = "LowTemperatureNotification"
-    case lowBattery = "LowBattery"
+    case chargedBattery = "Charged Battery"
+    case devicePaired = "Device Paired"
+    case lightOff = "Light Off"
+    case highTemperatureNotification = "High Temperature Notification"
+    case lowTemperatureNotification = "Low Temperature Notification"
+    case lowBattery = "Low Battery"
     
     public var description: String {
         switch self {
