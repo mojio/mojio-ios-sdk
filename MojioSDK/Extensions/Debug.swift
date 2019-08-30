@@ -15,13 +15,13 @@
 
 import Foundation
 
-public func print(_ items: Any..., separator: String = " ", terminator: String = "\n") {
+func print(_ items: Any..., separator: String = " ", terminator: String = "\n") {
     #if DEBUG
     Swift.print(items, separator: separator, terminator: terminator)
     #endif
 }
 
-public func debugPrint(_ items: Any..., separator: String = " ", terminator: String = "\n") {
+func debugPrint(_ items: Any..., separator: String = " ", terminator: String = "\n") {
     #if DEBUG
     Swift.debugPrint(items, separator: separator, terminator: terminator)
     #endif
