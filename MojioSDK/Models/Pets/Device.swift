@@ -48,6 +48,7 @@ public protocol DeviceModel: Codable, PrimaryKey {
     var online: Bool? { get }
     var msisdn: String? { get }
     var firmwareVersion: String? { get }
+    var softwareVersion: String? { get }
     var color: String? { get }
     var tenantId: String? { get }
     var ownerId: String? { get }
@@ -84,6 +85,7 @@ public struct Device: DeviceModel {
     public let online: Bool?
     public let msisdn: String?
     public let firmwareVersion: String?
+    public let softwareVersion: String?
     public let manufacturer: String?
     public let color: String?
     public let tenantId: String?
@@ -117,6 +119,7 @@ public struct Device: DeviceModel {
         case online = "Online"
         case msisdn = "MSISDN"
         case firmwareVersion = "FirmwareVersion"
+        case softwareVersion = "SoftwareVersion"
         case manufacturer = "Manufacturer"
         case color = "Color"
         case tenantId = "TenantId"
@@ -150,6 +153,7 @@ public struct Device: DeviceModel {
             self.online = try container.decodeIfPresent(Bool.self, forKey: .online)
             self.msisdn = try container.decodeIfPresent(String.self, forKey: .msisdn)
             self.firmwareVersion = try container.decodeIfPresent(String.self, forKey: .firmwareVersion)
+            self.softwareVersion = try container.decodeIfPresent(String.self, forKey: .softwareVersion)
             self.manufacturer = try container.decodeIfPresent(String.self, forKey: .manufacturer)
             self.color = try container.decodeIfPresent(String.self, forKey: .color)
             self.tenantId = try container.decodeIfPresent(String.self, forKey: .tenantId)
