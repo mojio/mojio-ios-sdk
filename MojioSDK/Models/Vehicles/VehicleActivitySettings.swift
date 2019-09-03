@@ -45,50 +45,50 @@ extension SpeedThreshold {
 public protocol VehicleActivitySettingsModel: Codable {
     associatedtype S: SpeedThresholdModel
     
-    var enableTripStartActivity: Bool { get }
-    var enableTripCompletedActivity: Bool { get }
-    var enableLowFuelActivity: Bool { get }
-    var enableLowBatteryActivity: Bool { get }
-    var enableSpeedActivity: Bool { get }
-    var enableDtcActivity: Bool { get }
-    var enableCheckEngineActivity: Bool { get }
-    var enableTowActivity: Bool { get }
-    var enableMaintenanceActivity: Bool { get }
-    var enableRecallActivity: Bool { get }
-    var enableServiceBulletinActivity: Bool { get }
-    var enableDisturbanceActivity: Bool { get }
-    var disturbanceThreshold: String { get }
-    var enableAccidentActivity: Bool { get }
-    var enableDeviceUnpluggedActivity: Bool { get }
-    var enableVehicleConnectedActivity: Bool { get }
-    var enableDeviceUpdatedActivity: Bool { get }
-    var enableSMSActivity: Bool { get }
-    var enableVehicleCompatibilityActivity: Bool { get }
+    var enableTripStartActivity: Bool? { get }
+    var enableTripCompletedActivity: Bool? { get }
+    var enableLowFuelActivity: Bool? { get }
+    var enableLowBatteryActivity: Bool? { get }
+    var enableSpeedActivity: Bool? { get }
+    var enableDtcActivity: Bool? { get }
+    var enableCheckEngineActivity: Bool? { get }
+    var enableTowActivity: Bool? { get }
+    var enableMaintenanceActivity: Bool? { get }
+    var enableRecallActivity: Bool? { get }
+    var enableServiceBulletinActivity: Bool? { get }
+    var enableDisturbanceActivity: Bool? { get }
+    var disturbanceThreshold: String? { get }
+    var enableAccidentActivity: Bool? { get }
+    var enableDeviceUnpluggedActivity: Bool? { get }
+    var enableVehicleConnectedActivity: Bool? { get }
+    var enableDeviceUpdatedActivity: Bool? { get }
+    var enableSMSActivity: Bool? { get }
+    var enableVehicleCompatibilityActivity: Bool? { get }
     var speedThreshold: S? { get }
 }
 
 public struct VehicleActivitySettings: VehicleActivitySettingsModel {
     public typealias S = SpeedThreshold
     
-    public let enableTripStartActivity: Bool
-    public let enableTripCompletedActivity: Bool
-    public let enableLowFuelActivity: Bool
-    public let enableLowBatteryActivity: Bool
-    public let enableSpeedActivity: Bool
-    public let enableDtcActivity: Bool
-    public let enableCheckEngineActivity: Bool
-    public let enableTowActivity: Bool
-    public let enableMaintenanceActivity: Bool
-    public let enableRecallActivity: Bool
-    public let enableServiceBulletinActivity: Bool
-    public let enableDisturbanceActivity: Bool
-    public let disturbanceThreshold: String
-    public let enableAccidentActivity: Bool
-    public let enableDeviceUnpluggedActivity: Bool
-    public let enableVehicleConnectedActivity: Bool
-    public let enableDeviceUpdatedActivity: Bool
-    public let enableSMSActivity: Bool
-    public let enableVehicleCompatibilityActivity: Bool
+    public let enableTripStartActivity: Bool?
+    public let enableTripCompletedActivity: Bool?
+    public let enableLowFuelActivity: Bool?
+    public let enableLowBatteryActivity: Bool?
+    public let enableSpeedActivity: Bool?
+    public let enableDtcActivity: Bool?
+    public let enableCheckEngineActivity: Bool?
+    public let enableTowActivity: Bool?
+    public let enableMaintenanceActivity: Bool?
+    public let enableRecallActivity: Bool?
+    public let enableServiceBulletinActivity: Bool?
+    public let enableDisturbanceActivity: Bool?
+    public let disturbanceThreshold: String?
+    public let enableAccidentActivity: Bool?
+    public let enableDeviceUnpluggedActivity: Bool?
+    public let enableVehicleConnectedActivity: Bool?
+    public let enableDeviceUpdatedActivity: Bool?
+    public let enableSMSActivity: Bool?
+    public let enableVehicleCompatibilityActivity: Bool?
     public let speedThreshold: SpeedThreshold?
     
     public enum CodingKeys: String, CodingKey {
