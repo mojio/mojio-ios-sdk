@@ -352,7 +352,7 @@ open class RestClient {
                 self.handleResponse(response, completion: completion, failure: failure)
         }
         
-        print(request.debugDescription)
+        print(request)
     }
     
     fileprivate class CustomStringEncoding: ParameterEncoding {
@@ -405,7 +405,7 @@ open class RestClient {
                 self.handleResponse(response, completion: completion, failure: failure)
         }
         
-        print(request.debugDescription)
+        print(request)
     }
     
     open func runEncodeJSON(jsonObject: [String: Codable], completion: @escaping (_ response: Codable?) -> Void, failure: @escaping (_ error: Any?) -> Void) {
@@ -424,7 +424,7 @@ open class RestClient {
                 self.handleResponse(response, completion: completion, failure: failure)
         }
         
-        print(request.debugDescription)
+        print(request)
     }
     
     fileprivate class CodableJSONEncoding<T: Encodable>: ParameterEncoding {
@@ -472,7 +472,7 @@ open class RestClient {
                 self.handleResponse(response, completion: completion, failure: failure)
         }
         
-        print(request.debugDescription)
+        print(request)
     }
     
     open func runEncodeUrl(_ parameters: [String: Any], completion: @escaping (_ response: Codable?) -> Void, failure: @escaping (_ error: Any?) -> Void) {
@@ -498,7 +498,7 @@ open class RestClient {
                 self.handleResponse(response, completion: completion, failure: failure)
         }
         
-        print(request.debugDescription)
+        print(request)
     }
     
     open func handleResponse(_ response: DataResponse<Data>, completion: @escaping (_ response: Codable?, _ headers: [String:String]) -> Void, failure: @escaping (_ error: Any?) -> Void){
@@ -541,7 +541,7 @@ open class RestClient {
             self.handleCustomJSONResponse(response, completion: completion, failure: failure)
         }
         
-        print(request.debugDescription)
+        print(request)
     }
     
     open func runCustomJSON(completion: @escaping (_ response: Any) -> Void, failure: @escaping (_ error: Any?) -> Void) {
@@ -565,7 +565,7 @@ open class RestClient {
                 self.handleCustomJSONResponse(response, completion: completion, failure: failure)
         }
         
-        print(request.debugDescription)
+        print(request)
     }
     
     func handleCustomJSONResponse(_ response: DataResponse<Any>, completion: @escaping (_ response: Any, _ headers: [String : Any?]) -> Void, failure: @escaping (_ error: Any?) -> Void){

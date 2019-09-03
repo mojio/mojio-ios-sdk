@@ -248,7 +248,7 @@ open class AuthClient: AuthControllerDelegate {
                 self.postLogin(response: response, completion: completion, failure: failure)
         }
         
-        print(request.debugDescription)
+        print(request)
     }
     
     // Login
@@ -293,7 +293,7 @@ open class AuthClient: AuthControllerDelegate {
                 self.postLogin(response: response, completion: completion, failure: failure)
         }
         
-        print(request.debugDescription)
+        print(request)
     }
     
     fileprivate func postLogin(response: DataResponse<Any>, completion: @escaping (_ authToken: AuthToken) -> Void, failure: @escaping (_ response: [String: Any]?) -> Void) {
@@ -401,7 +401,7 @@ open class AuthClient: AuthControllerDelegate {
                 }
         }
         
-        print(request.debugDescription)
+        print(request)
     }
      
     open func logout() {
@@ -450,7 +450,7 @@ open class AuthClient: AuthControllerDelegate {
             }
         }
         
-        print(request.debugDescription)
+        print(request)
     }
     
     // Verify Phone
@@ -499,7 +499,7 @@ open class AuthClient: AuthControllerDelegate {
             }
         }
         
-        print(request.debugDescription)
+        print(request)
     }
     
     // Resend Verification Pin
@@ -519,7 +519,7 @@ open class AuthClient: AuthControllerDelegate {
             }
         }
         
-        print(request.debugDescription)
+        print(request)
     }
     
     // Forgot/Reset Password
@@ -543,7 +543,7 @@ open class AuthClient: AuthControllerDelegate {
                 }
         }
         
-        print(request.debugDescription)
+        print(request)
     }
     
     open func resetPassword(_ resetToken: String, password: String, completion: @escaping (_ response: [String: Any]?) -> Void, failure: @escaping (_ response: [String: Any]?) -> Void) {
@@ -567,7 +567,7 @@ open class AuthClient: AuthControllerDelegate {
                 }
         }
         
-        print(request.debugDescription)
+        print(request)
     }
     
     open var authToken: AuthToken? {
@@ -704,7 +704,7 @@ extension AuthClient {
                 }
         }
         
-        print(request.debugDescription)
+        print(request)
     }
     
     public func deviceVerify(with pin: String, phoneNumber: String, deviceToken: String, completion: (() -> Void)?,  failure: @escaping (_ response: [String: Any]?) -> Void) {
@@ -743,6 +743,6 @@ extension AuthClient {
                 }
         }
         
-        print(request.debugDescription)
+        print(request)
     }
 }
