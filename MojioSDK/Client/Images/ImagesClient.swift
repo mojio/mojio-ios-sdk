@@ -125,7 +125,7 @@ open class ImagesClient: RestClient {
                 completion(response.result.value)
         }
         
-        print(request.debugDescription)
+        print(request)
     }
     
     open override func parseData(_ responseData: Data) -> Codable? {
