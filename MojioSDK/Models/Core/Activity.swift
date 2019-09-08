@@ -48,9 +48,10 @@ public enum ActivityType : String, Codable {
     case vehicle = "Vehicle"
     case vehicleActor = "VehicleActor"
     case location = "Location"
-    case oilLevelWarning = "OilLevelWarning"
-    case oilPressureWarning = "OilPressureWarning"
-    case oilTemperatureWarning = "OilTemperatureWarning"
+    case seatbelt = "Seatbelt"
+    case oilLevel = "OilLevel"
+    case oilPressure = "OilPressure"
+    case oilTemperature = "OilTemperature"
     case unkonwn
 }
 
