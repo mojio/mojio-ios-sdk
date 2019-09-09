@@ -52,6 +52,9 @@ public enum ActivityType : String, Codable {
     case oilLevel = "OilLevel"
     case oilPressure = "OilPressure"
     case oilTemperature = "OilTemperature"
+    case oilLevelWarning = "OilLevelWarning"
+    case oilPressureWarning = "OilPressureWarning"
+    case oilTemperatureWarning = "OilTemperatureWarning"
     case unkonwn
 }
 
