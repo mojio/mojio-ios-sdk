@@ -18,17 +18,17 @@ import MojioCore
 
 public protocol DisplayDetailsModel: Codable {
     var showOnMap: Bool? { get }
-    var color: EntityAppearanceColor? { get }
+    var color: String? { get }
     var icon: String? { get }
     var profileImage: String? { get }
 }
 
 public struct DisplayDetails: DisplayDetailsModel {
     public let showOnMap: Bool?
-    public let color: EntityAppearanceColor?
+    public let color: String?
     public let icon: String?
     public let profileImage: String?
-
+    
     public enum CodingKeys: String, CodingKey {
         case showOnMap = "ShowOnMap"
         case color = "Color"
@@ -39,17 +39,17 @@ public struct DisplayDetails: DisplayDetailsModel {
 
 public struct DisplayDetailsUpdate: Codable {
     public var showOnMap: Bool?
-    public var color: EntityAppearanceColor?
+    public var color: String?
     public var icon: String?
     public var profileImage: String?
-
+    
     public enum CodingKeys: String, CodingKey {
         case showOnMap = "ShowOnMap"
         case color = "Color"
         case icon = "Icon"
         case profileImage = "ProfileImage"
     }
-
+    
     public init(from displayDetailsModel: DisplayDetailsModel? = nil) {
         self.init(
             showOnMap: displayDetailsModel?.showOnMap,
@@ -58,22 +58,22 @@ public struct DisplayDetailsUpdate: Codable {
             profileImage: displayDetailsModel?.profileImage
         )
     }
-
+    
     public init(
         showOnMap: Bool? = nil,
-        color: EntityAppearanceColor? = nil,
+        color: String? = nil,
         icon: String? = nil,
         profileImage: String? = nil) {
-
+        
         self.showOnMap = showOnMap
         self.color = color
         self.icon = icon
         self.profileImage = profileImage
     }
-
+    
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-
+        
         try container.encodeIfPresent(self.showOnMap, forKey: .showOnMap)
         try container.encodeIfPresent(self.color, forKey: .color)
         try container.encodeIfPresent(self.icon, forKey: .icon)
