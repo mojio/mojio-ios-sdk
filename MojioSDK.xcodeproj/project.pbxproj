@@ -7,6 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0740EC20232A30A1006BA43B /* Odometer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0740EC13232A30A1006BA43B /* Odometer.swift */; };
+		0740EC21232A30A1006BA43B /* Distance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0740EC14232A30A1006BA43B /* Distance.swift */; };
+		0740EC22232A30A1006BA43B /* TimePeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0740EC15232A30A1006BA43B /* TimePeriod.swift */; };
+		0740EC23232A30A1006BA43B /* Acceleration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0740EC16232A30A1006BA43B /* Acceleration.swift */; };
+		0740EC24232A30A1006BA43B /* RPM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0740EC17232A30A1006BA43B /* RPM.swift */; };
+		0740EC25232A30A1006BA43B /* EngineOilTemperature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0740EC18232A30A1006BA43B /* EngineOilTemperature.swift */; };
+		0740EC26232A30A1006BA43B /* FuelCapacity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0740EC19232A30A1006BA43B /* FuelCapacity.swift */; };
+		0740EC27232A30A1006BA43B /* ProperAcceleration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0740EC1A232A30A1006BA43B /* ProperAcceleration.swift */; };
+		0740EC28232A30A1006BA43B /* Battery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0740EC1B232A30A1006BA43B /* Battery.swift */; };
+		0740EC29232A30A1006BA43B /* FuelLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0740EC1C232A30A1006BA43B /* FuelLevel.swift */; };
+		0740EC2A232A30A1006BA43B /* FuelVolume.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0740EC1D232A30A1006BA43B /* FuelVolume.swift */; };
+		0740EC2B232A30A1006BA43B /* Speed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0740EC1E232A30A1006BA43B /* Speed.swift */; };
+		0740EC2C232A30A1006BA43B /* FuelEfficiency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0740EC1F232A30A1006BA43B /* FuelEfficiency.swift */; };
+		0740EC2E232A3196006BA43B /* EngineOil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0740EC2D232A3195006BA43B /* EngineOil.swift */; };
 		0763AA5F2313FCE1008DE32A /* TimeOfDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0763AA5B2313FCE1008DE32A /* TimeOfDay.swift */; };
 		0763AA602313FCE1008DE32A /* ActiveTimeWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0763AA5C2313FCE1008DE32A /* ActiveTimeWindow.swift */; };
 		0763AA612313FCE1008DE32A /* WeekDays.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0763AA5D2313FCE1008DE32A /* WeekDays.swift */; };
@@ -22,7 +36,6 @@
 		2C58943920FD932000DE18BE /* VehicleAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C58943820FD932000DE18BE /* VehicleAppearance.swift */; };
 		2C58943D20FD968D00DE18BE /* VehicleAppearanceStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C58943C20FD968D00DE18BE /* VehicleAppearanceStyle.swift */; };
 		2E8BC6671FB343FB00A165C3 /* AccelerometerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8BC6661FB343FB00A165C3 /* AccelerometerTests.swift */; };
-		2EBF12BE1FB986FE00F068B2 /* FuelVolume.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF12BD1FB986FE00F068B2 /* FuelVolume.swift */; };
 		32D2EC310E53177F966BBECD /* Pods_Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D5E15756B96D0AEF2C4AE0A /* Pods_Accounts.framework */; };
 		36B0E43D20FE21DA006F897B /* VehicleActivitySettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36B0E43B20FE16A4006F897B /* VehicleActivitySettings.swift */; };
 		373188D6209B363800E61E3A /* ProperAccelerationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373188D5209B363800E61E3A /* ProperAccelerationTests.swift */; };
@@ -90,7 +103,6 @@
 		887014791DA833CA00EFEC6D /* VehicleStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887014781DA833CA00EFEC6D /* VehicleStatistics.swift */; };
 		917178A122C5E29BB3016930 /* Pods_Pets.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 900BE0216536E43DFAA6B957 /* Pods_Pets.framework */; };
 		AE4DB04B22B05DF600B30DBB /* Buzzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4DB04A22B05DF600B30DBB /* Buzzer.swift */; };
-		BC31E3CE1D419E80001649A7 /* Distance.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC31E3CD1D419E80001649A7 /* Distance.swift */; };
 		BC3D7C6F2087F3B000659A92 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 75F77F0D1D19F504000CC2B4 /* libz.tbd */; };
 		BC3D7C7F2087F5E700659A92 /* VehiclesClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC3D7C7E2087F5E700659A92 /* VehiclesClient.swift */; };
 		BC3D7C84208816BB00659A92 /* PetsClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC3D7C83208816BB00659A92 /* PetsClient.swift */; };
@@ -124,22 +136,12 @@
 		BC879B401CBEFFC000F9177B /* Vin.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B361CBEFFC000F9177B /* Vin.swift */; };
 		BC879B411CBEFFC000F9177B /* VinDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B371CBEFFC000F9177B /* VinDetails.swift */; };
 		BC879B421CBEFFC000F9177B /* Warranty.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B381CBEFFC000F9177B /* Warranty.swift */; };
-		BC879B601CBEFFDD00F9177B /* Acceleration.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B431CBEFFDD00F9177B /* Acceleration.swift */; };
 		BC879B611CBEFFDD00F9177B /* Accelerometer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B441CBEFFDD00F9177B /* Accelerometer.swift */; };
-		BC879B641CBEFFDD00F9177B /* Battery.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B471CBEFFDD00F9177B /* Battery.swift */; };
 		BC879B651CBEFFDD00F9177B /* BooleanState.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B481CBEFFDD00F9177B /* BooleanState.swift */; };
 		BC879B661CBEFFDD00F9177B /* DiagnosticCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B491CBEFFDD00F9177B /* DiagnosticCode.swift */; };
-		BC879B671CBEFFDD00F9177B /* TimePeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B4A1CBEFFDD00F9177B /* TimePeriod.swift */; };
-		BC879B691CBEFFDD00F9177B /* FuelCapacity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B4C1CBEFFDD00F9177B /* FuelCapacity.swift */; };
-		BC879B6A1CBEFFDD00F9177B /* FuelEfficiency.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B4D1CBEFFDD00F9177B /* FuelEfficiency.swift */; };
-		BC879B6B1CBEFFDD00F9177B /* FuelLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B4E1CBEFFDD00F9177B /* FuelLevel.swift */; };
 		BC879B701CBEFFDD00F9177B /* MeasurementStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B531CBEFFDD00F9177B /* MeasurementStats.swift */; };
 		BC879B711CBEFFDD00F9177B /* Mojio.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B541CBEFFDD00F9177B /* Mojio.swift */; };
-		BC879B721CBEFFDD00F9177B /* Odometer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B551CBEFFDD00F9177B /* Odometer.swift */; };
-		BC879B741CBEFFDD00F9177B /* ProperAcceleration.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B571CBEFFDD00F9177B /* ProperAcceleration.swift */; };
-		BC879B751CBEFFDD00F9177B /* RPM.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B581CBEFFDD00F9177B /* RPM.swift */; };
 		BC879B761CBEFFDD00F9177B /* Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B591CBEFFDD00F9177B /* Score.swift */; };
-		BC879B771CBEFFDD00F9177B /* Speed.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B5A1CBEFFDD00F9177B /* Speed.swift */; };
 		BC879B791CBEFFDD00F9177B /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B5C1CBEFFDD00F9177B /* Trip.swift */; };
 		BC879B7B1CBEFFDD00F9177B /* Vehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC879B5E1CBEFFDD00F9177B /* Vehicle.swift */; };
 		BC8DFC0720EC450D006B99E6 /* ActivitySettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3682365F20EAA54E00E21086 /* ActivitySettings.swift */; };
@@ -223,6 +225,20 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0740EC13232A30A1006BA43B /* Odometer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Odometer.swift; sourceTree = "<group>"; };
+		0740EC14232A30A1006BA43B /* Distance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Distance.swift; sourceTree = "<group>"; };
+		0740EC15232A30A1006BA43B /* TimePeriod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimePeriod.swift; sourceTree = "<group>"; };
+		0740EC16232A30A1006BA43B /* Acceleration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Acceleration.swift; sourceTree = "<group>"; };
+		0740EC17232A30A1006BA43B /* RPM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RPM.swift; sourceTree = "<group>"; };
+		0740EC18232A30A1006BA43B /* EngineOilTemperature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EngineOilTemperature.swift; sourceTree = "<group>"; };
+		0740EC19232A30A1006BA43B /* FuelCapacity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FuelCapacity.swift; sourceTree = "<group>"; };
+		0740EC1A232A30A1006BA43B /* ProperAcceleration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProperAcceleration.swift; sourceTree = "<group>"; };
+		0740EC1B232A30A1006BA43B /* Battery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Battery.swift; sourceTree = "<group>"; };
+		0740EC1C232A30A1006BA43B /* FuelLevel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FuelLevel.swift; sourceTree = "<group>"; };
+		0740EC1D232A30A1006BA43B /* FuelVolume.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FuelVolume.swift; sourceTree = "<group>"; };
+		0740EC1E232A30A1006BA43B /* Speed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Speed.swift; sourceTree = "<group>"; };
+		0740EC1F232A30A1006BA43B /* FuelEfficiency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FuelEfficiency.swift; sourceTree = "<group>"; };
+		0740EC2D232A3195006BA43B /* EngineOil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EngineOil.swift; sourceTree = "<group>"; };
 		0763AA5B2313FCE1008DE32A /* TimeOfDay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeOfDay.swift; sourceTree = "<group>"; };
 		0763AA5C2313FCE1008DE32A /* ActiveTimeWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActiveTimeWindow.swift; sourceTree = "<group>"; };
 		0763AA5D2313FCE1008DE32A /* WeekDays.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeekDays.swift; sourceTree = "<group>"; };
@@ -243,7 +259,6 @@
 		2C58943C20FD968D00DE18BE /* VehicleAppearanceStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VehicleAppearanceStyle.swift; sourceTree = "<group>"; };
 		2E5767401FB4536A008F16F6 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		2E8BC6661FB343FB00A165C3 /* AccelerometerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccelerometerTests.swift; sourceTree = "<group>"; };
-		2EBF12BD1FB986FE00F068B2 /* FuelVolume.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FuelVolume.swift; sourceTree = "<group>"; };
 		2EBF12CC1FB9D90D00F068B2 /* WebSocketProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocketProvider.swift; sourceTree = "<group>"; };
 		2EBF12CE1FB9DD6F00F068B2 /* WebSocketFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocketFactory.swift; sourceTree = "<group>"; };
 		2EBF12D01FB9E0D700F068B2 /* SwiftWebSocketFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftWebSocketFactory.swift; sourceTree = "<group>"; };
@@ -321,7 +336,6 @@
 		903DF633F6AE7B4E45A13CB1 /* Pods-Vehicles.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vehicles.release.xcconfig"; path = "Target Support Files/Pods-Vehicles/Pods-Vehicles.release.xcconfig"; sourceTree = "<group>"; };
 		AE4DB04A22B05DF600B30DBB /* Buzzer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buzzer.swift; sourceTree = "<group>"; };
 		B5754A1A4B7BF6234D20A179 /* Pods-Images.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Images.debug.xcconfig"; path = "Target Support Files/Pods-Images/Pods-Images.debug.xcconfig"; sourceTree = "<group>"; };
-		BC31E3CD1D419E80001649A7 /* Distance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Distance.swift; sourceTree = "<group>"; };
 		BC3C66411DA8196A00179344 /* DeviceMeasurement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceMeasurement.swift; sourceTree = "<group>"; };
 		BC3D7C7A2087F3B000659A92 /* Pets.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pets.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC3D7C7E2087F5E700659A92 /* VehiclesClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehiclesClient.swift; sourceTree = "<group>"; };
@@ -368,27 +382,17 @@
 		BC879B361CBEFFC000F9177B /* Vin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vin.swift; sourceTree = "<group>"; };
 		BC879B371CBEFFC000F9177B /* VinDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VinDetails.swift; sourceTree = "<group>"; };
 		BC879B381CBEFFC000F9177B /* Warranty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Warranty.swift; sourceTree = "<group>"; };
-		BC879B431CBEFFDD00F9177B /* Acceleration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Acceleration.swift; sourceTree = "<group>"; };
 		BC879B441CBEFFDD00F9177B /* Accelerometer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Accelerometer.swift; sourceTree = "<group>"; };
 		BC879B451CBEFFDD00F9177B /* Address.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
 		BC879B461CBEFFDD00F9177B /* App.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
-		BC879B471CBEFFDD00F9177B /* Battery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Battery.swift; sourceTree = "<group>"; };
 		BC879B481CBEFFDD00F9177B /* BooleanState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BooleanState.swift; sourceTree = "<group>"; };
 		BC879B491CBEFFDD00F9177B /* DiagnosticCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiagnosticCode.swift; sourceTree = "<group>"; };
-		BC879B4A1CBEFFDD00F9177B /* TimePeriod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimePeriod.swift; sourceTree = "<group>"; };
-		BC879B4C1CBEFFDD00F9177B /* FuelCapacity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FuelCapacity.swift; sourceTree = "<group>"; };
-		BC879B4D1CBEFFDD00F9177B /* FuelEfficiency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FuelEfficiency.swift; sourceTree = "<group>"; };
-		BC879B4E1CBEFFDD00F9177B /* FuelLevel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FuelLevel.swift; sourceTree = "<group>"; };
 		BC879B4F1CBEFFDD00F9177B /* Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		BC879B501CBEFFDD00F9177B /* Heading.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Heading.swift; sourceTree = "<group>"; };
 		BC879B521CBEFFDD00F9177B /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		BC879B531CBEFFDD00F9177B /* MeasurementStats.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeasurementStats.swift; sourceTree = "<group>"; };
 		BC879B541CBEFFDD00F9177B /* Mojio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mojio.swift; sourceTree = "<group>"; };
-		BC879B551CBEFFDD00F9177B /* Odometer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Odometer.swift; sourceTree = "<group>"; };
-		BC879B571CBEFFDD00F9177B /* ProperAcceleration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProperAcceleration.swift; sourceTree = "<group>"; };
-		BC879B581CBEFFDD00F9177B /* RPM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RPM.swift; sourceTree = "<group>"; };
 		BC879B591CBEFFDD00F9177B /* Score.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Score.swift; sourceTree = "<group>"; };
-		BC879B5A1CBEFFDD00F9177B /* Speed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Speed.swift; sourceTree = "<group>"; };
 		BC879B5C1CBEFFDD00F9177B /* Trip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
 		BC879B5E1CBEFFDD00F9177B /* Vehicle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vehicle.swift; sourceTree = "<group>"; };
 		BC879B8C1CBF000A00F9177B /* ClientEnvironment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientEnvironment.swift; sourceTree = "<group>"; };
@@ -486,6 +490,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0740EC12232A30A1006BA43B /* DeviceMeasurements */ = {
+			isa = PBXGroup;
+			children = (
+				0740EC13232A30A1006BA43B /* Odometer.swift */,
+				0740EC14232A30A1006BA43B /* Distance.swift */,
+				0740EC15232A30A1006BA43B /* TimePeriod.swift */,
+				0740EC16232A30A1006BA43B /* Acceleration.swift */,
+				0740EC17232A30A1006BA43B /* RPM.swift */,
+				0740EC18232A30A1006BA43B /* EngineOilTemperature.swift */,
+				0740EC19232A30A1006BA43B /* FuelCapacity.swift */,
+				0740EC1A232A30A1006BA43B /* ProperAcceleration.swift */,
+				0740EC1B232A30A1006BA43B /* Battery.swift */,
+				0740EC1C232A30A1006BA43B /* FuelLevel.swift */,
+				0740EC1D232A30A1006BA43B /* FuelVolume.swift */,
+				0740EC1E232A30A1006BA43B /* Speed.swift */,
+				0740EC1F232A30A1006BA43B /* FuelEfficiency.swift */,
+			);
+			path = DeviceMeasurements;
+			sourceTree = "<group>";
+		};
 		0763AA5A2313FCE1008DE32A /* RulesNotification */ = {
 			isa = PBXGroup;
 			children = (
@@ -667,18 +691,13 @@
 		BC3D7C7C2087F41800659A92 /* Vehicles */ = {
 			isa = PBXGroup;
 			children = (
-				BC879B431CBEFFDD00F9177B /* Acceleration.swift */,
+				0740EC12232A30A1006BA43B /* DeviceMeasurements */,
 				BC879B441CBEFFDD00F9177B /* Accelerometer.swift */,
 				644214DD1D9E6500005A86C5 /* AggregationData.swift */,
-				BC879B471CBEFFDD00F9177B /* Battery.swift */,
+				0740EC2D232A3195006BA43B /* EngineOil.swift */,
 				BC879B481CBEFFDD00F9177B /* BooleanState.swift */,
 				BC92329A1E7FC52900BD4038 /* CompatibilityDetails.swift */,
 				BC879B491CBEFFDD00F9177B /* DiagnosticCode.swift */,
-				BC31E3CD1D419E80001649A7 /* Distance.swift */,
-				BC879B4C1CBEFFDD00F9177B /* FuelCapacity.swift */,
-				BC879B4D1CBEFFDD00F9177B /* FuelEfficiency.swift */,
-				BC879B4E1CBEFFDD00F9177B /* FuelLevel.swift */,
-				2EBF12BD1FB986FE00F068B2 /* FuelVolume.swift */,
 				BCF2DE491D454B8D00EDD376 /* Geofence.swift */,
 				F9E9FDAD1D93122A00DCB690 /* HarshEvent.swift */,
 				BCFCEB031F019FF20096C9B4 /* HarshEventState.swift */,
@@ -687,12 +706,7 @@
 				BC879B531CBEFFDD00F9177B /* MeasurementStats.swift */,
 				BC879B541CBEFFDD00F9177B /* Mojio.swift */,
 				E06C95671D25CA2A006AECBB /* NotificationsSettings.swift */,
-				BC879B551CBEFFDD00F9177B /* Odometer.swift */,
-				BC879B571CBEFFDD00F9177B /* ProperAcceleration.swift */,
-				BC879B581CBEFFDD00F9177B /* RPM.swift */,
 				BC879B591CBEFFDD00F9177B /* Score.swift */,
-				BC879B5A1CBEFFDD00F9177B /* Speed.swift */,
-				BC879B4A1CBEFFDD00F9177B /* TimePeriod.swift */,
 				BC879B5C1CBEFFDD00F9177B /* Trip.swift */,
 				BC94271A1F01E17D00B7424A /* TripPolyline.swift */,
 				BC5F7F021CC58D4000FAB205 /* Units.swift */,
@@ -1422,23 +1436,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BC879B671CBEFFDD00F9177B /* TimePeriod.swift in Sources */,
 				BC8ECA501D226690009C6164 /* WifiRadio.swift in Sources */,
 				BC3D7C7F2087F5E700659A92 /* VehiclesClient.swift in Sources */,
-				BC879B771CBEFFDD00F9177B /* Speed.swift in Sources */,
 				BC879B701CBEFFDD00F9177B /* MeasurementStats.swift in Sources */,
 				644214DE1D9E6500005A86C5 /* AggregationData.swift in Sources */,
+				0740EC25232A30A1006BA43B /* EngineOilTemperature.swift in Sources */,
 				375206FE20AAFD1600102273 /* SettingsGeofence.swift in Sources */,
-				BC879B641CBEFFDD00F9177B /* Battery.swift in Sources */,
 				BC717D9C1DA6EFA20052317C /* ServiceScheduleItem.swift in Sources */,
-				BC879B601CBEFFDD00F9177B /* Acceleration.swift in Sources */,
 				BC879B391CBEFFC000F9177B /* Engine.swift in Sources */,
+				0740EC28232A30A1006BA43B /* Battery.swift in Sources */,
 				BC879B401CBEFFC000F9177B /* Vin.swift in Sources */,
 				F9E9FDAE1D93122A00DCB690 /* HarshEvent.swift in Sources */,
-				BC879B6A1CBEFFDD00F9177B /* FuelEfficiency.swift in Sources */,
 				BCC8A4A01D19EABF00E14E2B /* WSVehiclesClient.swift in Sources */,
+				0740EC2E232A3196006BA43B /* EngineOil.swift in Sources */,
 				BCF2DE4A1D454B8D00EDD376 /* Geofence.swift in Sources */,
-				BC879B6B1CBEFFDD00F9177B /* FuelLevel.swift in Sources */,
 				BCFCEB061F01A2C70096C9B4 /* IdleEvent.swift in Sources */,
 				BCFE5910209AF92400B89104 /* TimeIntervalExt.swift in Sources */,
 				3781A95622538F84004E093F /* DynamicCodingKey.swift in Sources */,
@@ -1446,38 +1457,43 @@
 				BC5F7F031CC58D4000FAB205 /* Units.swift in Sources */,
 				BC92329B1E7FC52900BD4038 /* CompatibilityDetails.swift in Sources */,
 				36B0E43D20FE21DA006F897B /* VehicleActivitySettings.swift in Sources */,
+				0740EC23232A30A1006BA43B /* Acceleration.swift in Sources */,
+				0740EC2C232A30A1006BA43B /* FuelEfficiency.swift in Sources */,
 				BC879B411CBEFFC000F9177B /* VinDetails.swift in Sources */,
+				0740EC20232A30A1006BA43B /* Odometer.swift in Sources */,
 				BCFE5911209AF92400B89104 /* StringExt.swift in Sources */,
 				BC717D9B1DA6EFA20052317C /* ServiceInterval.swift in Sources */,
 				BC717D9A1DA6EFA20052317C /* ServiceEvent.swift in Sources */,
 				2C58943920FD932000DE18BE /* VehicleAppearance.swift in Sources */,
 				BC879B711CBEFFDD00F9177B /* Mojio.swift in Sources */,
-				2EBF12BE1FB986FE00F068B2 /* FuelVolume.swift in Sources */,
-				BC879B721CBEFFDD00F9177B /* Odometer.swift in Sources */,
 				BC94271B1F01E17D00B7424A /* TripPolyline.swift in Sources */,
 				BC879B661CBEFFDD00F9177B /* DiagnosticCode.swift in Sources */,
 				2C58943D20FD968D00DE18BE /* VehicleAppearanceStyle.swift in Sources */,
+				0740EC22232A30A1006BA43B /* TimePeriod.swift in Sources */,
 				BC879B3D1CBEFFC000F9177B /* ServiceBulletin.swift in Sources */,
 				375206FC20AADD3B00102273 /* GeofenceRegion.swift in Sources */,
+				0740EC21232A30A1006BA43B /* Distance.swift in Sources */,
 				BC879B3F1CBEFFC000F9177B /* Transmission.swift in Sources */,
 				887014791DA833CA00EFEC6D /* VehicleStatistics.swift in Sources */,
 				BC879B3B1CBEFFC000F9177B /* PlatformServiceSchedule.swift in Sources */,
 				BC879B7B1CBEFFDD00F9177B /* Vehicle.swift in Sources */,
-				BC879B751CBEFFDD00F9177B /* RPM.swift in Sources */,
 				E06C95691D25CA2A006AECBB /* NotificationsSettings.swift in Sources */,
+				0740EC27232A30A1006BA43B /* ProperAcceleration.swift in Sources */,
 				BC879B3C1CBEFFC000F9177B /* Recall.swift in Sources */,
 				72B30077210B139D00608978 /* CompoundWordStyle.swift in Sources */,
 				BC879B421CBEFFC000F9177B /* Warranty.swift in Sources */,
+				0740EC2B232A30A1006BA43B /* Speed.swift in Sources */,
+				0740EC26232A30A1006BA43B /* FuelCapacity.swift in Sources */,
 				BC879B611CBEFFDD00F9177B /* Accelerometer.swift in Sources */,
-				BC31E3CE1D419E80001649A7 /* Distance.swift in Sources */,
-				BC879B691CBEFFDD00F9177B /* FuelCapacity.swift in Sources */,
 				BCFCEB041F019FF20096C9B4 /* HarshEventState.swift in Sources */,
-				BC879B741CBEFFDD00F9177B /* ProperAcceleration.swift in Sources */,
 				F9623AAE1D935D74005C10F2 /* IdleState.swift in Sources */,
 				BC879B3E1CBEFFC000F9177B /* ServiceSchedule.swift in Sources */,
+				0740EC29232A30A1006BA43B /* FuelLevel.swift in Sources */,
 				BC879B651CBEFFDD00F9177B /* BooleanState.swift in Sources */,
 				BC879B3A1CBEFFC000F9177B /* NextServiceSchedule.swift in Sources */,
 				BC879B761CBEFFDD00F9177B /* Score.swift in Sources */,
+				0740EC24232A30A1006BA43B /* RPM.swift in Sources */,
+				0740EC2A232A30A1006BA43B /* FuelVolume.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
