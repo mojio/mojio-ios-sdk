@@ -110,4 +110,11 @@ public struct UserUpdate: Codable {
         try container.encodeIfPresent(self.firstName, forKey: .firstName)
         try container.encodeIfPresent(self.lastName, forKey: .lastName)
     }
+    
+    public init(userName: String? = nil, email: String? = nil, firstName: String? = nil, lastName: String? = nil) {
+        self.userName = userName
+        self.email = email
+        self.firstName = firstName
+        self.lastName = lastName
+    }
 }
