@@ -13,6 +13,7 @@
 		1D5164CD230E83AD00AF0DB3 /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D5164CA230E838800AF0DB3 /* Debug.swift */; };
 		1D5164CE230E83AE00AF0DB3 /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D5164CA230E838800AF0DB3 /* Debug.swift */; };
 		1D5164CF230E83AE00AF0DB3 /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D5164CA230E838800AF0DB3 /* Debug.swift */; };
+		225FD91C232BC8C4001AFCAC /* NotificationSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225FD91B232BC8C4001AFCAC /* NotificationSettings.swift */; };
 		22CF879C2252A62B0085CBF5 /* Light.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CF879B2252A62B0085CBF5 /* Light.swift */; };
 		22CF879E2252A6840085CBF5 /* TemperatureAlarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CF879D2252A6840085CBF5 /* TemperatureAlarm.swift */; };
 		2C58943920FD932000DE18BE /* VehicleAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C58943820FD932000DE18BE /* VehicleAppearance.swift */; };
@@ -227,6 +228,7 @@
 		0D5E15756B96D0AEF2C4AE0A /* Pods_Accounts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Accounts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F23A2F5856B62CA670D6B4B /* Pods-Core.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Core.debug.xcconfig"; path = "Target Support Files/Pods-Core/Pods-Core.debug.xcconfig"; sourceTree = "<group>"; };
 		1D5164CA230E838800AF0DB3 /* Debug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debug.swift; sourceTree = "<group>"; };
+		225FD91B232BC8C4001AFCAC /* NotificationSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettings.swift; sourceTree = "<group>"; };
 		2278359B1FB60253002D24F9 /* StringExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExt.swift; sourceTree = "<group>"; };
 		2278359D1FB60291002D24F9 /* TimeIntervalExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalExt.swift; sourceTree = "<group>"; };
 		22CF879B2252A62B0085CBF5 /* Light.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Light.swift; sourceTree = "<group>"; };
@@ -713,6 +715,7 @@
 				BC590620208E566100A098A3 /* DeviceType.swift */,
 				BC59062D208E566200A098A3 /* Geofence.swift */,
 				BC590621208E566200A098A3 /* PetsLocation.swift */,
+				225FD91B232BC8C4001AFCAC /* NotificationSettings.swift */,
 				BC59062A208E566200A098A3 /* NotificationToken.swift */,
 				BC590629208E566200A098A3 /* PetDetails.swift */,
 				BCFE5DC420A063B500B89104 /* Stats.swift */,
@@ -1363,6 +1366,7 @@
 				BCFE5913209AF92500B89104 /* StringExt.swift in Sources */,
 				22CF879E2252A6840085CBF5 /* TemperatureAlarm.swift in Sources */,
 				BC60374B208FB20F00D855DE /* NotificationToken.swift in Sources */,
+				225FD91C232BC8C4001AFCAC /* NotificationSettings.swift in Sources */,
 				BC60374C208FB20F00D855DE /* PetDetails.swift in Sources */,
 				BCF23D0320EA0B9A009FE79C /* AssetDailySummary.swift in Sources */,
 				BC603742208FB20F00D855DE /* Asset.swift in Sources */,

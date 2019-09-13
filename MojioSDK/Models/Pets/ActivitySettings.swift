@@ -22,11 +22,6 @@ public protocol ActivitySettingsModel: Codable {
     var offline: N { get }
 }
 
-public protocol NotificationSettingsModel: Codable {
-    var enabled: Bool { get }
-    var sound: String? { get }
-}
-
 public struct ActivitySettings: ActivitySettingsModel {
     public typealias N = NotificationSettings
     
@@ -58,30 +53,34 @@ public struct ActivitySettings: ActivitySettingsModel {
     }
 }
 
-public struct NotificationSettings: NotificationSettingsModel {
-    public var enabled: Bool
-    public var sound: String?
-    public var threshold: Double?
+// TODO: Add ActivitySettingsUpdate for update flow
+public struct ActivitySettingsUpdate: ActivitySettingsModel {
+    public typealias N = NotificationSettingsUpdate
+    
+    public var lowBattery: N
+    public var offline: N
+    public var highTemperature: N
+    public var lowTemperature: N
     
     enum CodingKeys: String, CodingKey {
-        case enabled = "Enabled"
-        case sound = "Sound"
-        case threshold = "Threshold"
+        case lowBattery = "LowBattery"
+        case offline = "Offline"
+        case highTemperature = "HighTemperature"
+        case lowTemperature = "LowTemperature"
     }
     
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        
-        do {
-            self.enabled = try container.decode(Bool.self, forKey: .enabled)
-            self.sound = try container.decodeIfPresent(String.self, forKey: .sound)
-            self.threshold = try container.decodeIfPresent(Double.self, forKey: .threshold)
-        }
-        catch {
-            debugPrint(error)
-            throw error
-        }
+    public init(lowBattery: N, offline: N, highTemperature: N, lowTemperature: N) {
+        self.lowBattery = lowBattery
+        self.offline = offline
+        self.highTemperature = highTemperature
+        self.lowTemperature = lowTemperature
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(self.lowBattery, forKey: .lowBattery)
+        try container.encodeIfPresent(self.offline, forKey: .offline)
+        try container.encodeIfPresent(self.highTemperature, forKey: .highTemperature)
+        try container.encodeIfPresent(self.lowTemperature, forKey: .lowTemperature)
     }
 }
-
-// TODO: Add ActivitySettingsUpdate for update flow
