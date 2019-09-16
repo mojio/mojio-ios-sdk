@@ -14,38 +14,41 @@
  *******************************************************************************/
 
 import UIKit
+import WebKit
 
 public protocol AuthControllerDelegate {
     func authControllerLoadURLRequest (_ request: URLRequest);
 }
 
-open class AuthViewController: UIViewController, UIWebViewDelegate {
+open class AuthViewController: UIViewController, WKNavigationDelegate {
     
     open var loginURL: URL!
     open var delegate: AuthControllerDelegate?
 
-    @IBOutlet open var webview: UIWebView?
+    @IBOutlet open var webview: WKWebView?
     
     public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil);
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
     
     public required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder);
+        super.init(coder: aDecoder)
     }
     
     open override func viewDidLoad() {
         super.viewDidLoad()
 
-        let request: URLRequest = URLRequest(url: self.loginURL);
-        self.webview?.loadRequest(request);        
+        self.webview?.navigationDelegate = self
+        let request: URLRequest = URLRequest(url: self.loginURL)
+        self.webview?.load(request)
     }
     
     //MARK: webview delegate methods
     
-    open func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebView.NavigationType) -> Bool {
-        self.delegate?.authControllerLoadURLRequest(request);
-        return true;
+    open func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        
+        self.delegate?.authControllerLoadURLRequest(navigationAction.request);
+        decisionHandler(.allow)
     }
 
     
