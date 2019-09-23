@@ -21,6 +21,7 @@
 		0740EC2B232A30A1006BA43B /* Speed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0740EC1E232A30A1006BA43B /* Speed.swift */; };
 		0740EC2C232A30A1006BA43B /* FuelEfficiency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0740EC1F232A30A1006BA43B /* FuelEfficiency.swift */; };
 		0740EC2E232A3196006BA43B /* EngineOil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0740EC2D232A3195006BA43B /* EngineOil.swift */; };
+		07541D85233891FD0086EB2F /* NotificationSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07541D84233891FD0086EB2F /* NotificationSettings.swift */; };
 		0763AA5F2313FCE1008DE32A /* TimeOfDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0763AA5B2313FCE1008DE32A /* TimeOfDay.swift */; };
 		0763AA602313FCE1008DE32A /* ActiveTimeWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0763AA5C2313FCE1008DE32A /* ActiveTimeWindow.swift */; };
 		0763AA612313FCE1008DE32A /* WeekDays.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0763AA5D2313FCE1008DE32A /* WeekDays.swift */; };
@@ -239,6 +240,7 @@
 		0740EC1E232A30A1006BA43B /* Speed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Speed.swift; sourceTree = "<group>"; };
 		0740EC1F232A30A1006BA43B /* FuelEfficiency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FuelEfficiency.swift; sourceTree = "<group>"; };
 		0740EC2D232A3195006BA43B /* EngineOil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EngineOil.swift; sourceTree = "<group>"; };
+		07541D84233891FD0086EB2F /* NotificationSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationSettings.swift; sourceTree = "<group>"; };
 		0763AA5B2313FCE1008DE32A /* TimeOfDay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeOfDay.swift; sourceTree = "<group>"; };
 		0763AA5C2313FCE1008DE32A /* ActiveTimeWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActiveTimeWindow.swift; sourceTree = "<group>"; };
 		0763AA5D2313FCE1008DE32A /* WeekDays.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeekDays.swift; sourceTree = "<group>"; };
@@ -737,6 +739,7 @@
 				BC59062A208E566200A098A3 /* NotificationToken.swift */,
 				BC590629208E566200A098A3 /* PetDetails.swift */,
 				BCFE5DC420A063B500B89104 /* Stats.swift */,
+				07541D84233891FD0086EB2F /* NotificationSettings.swift */,
 				FCE43DAD20DCFA22004A2E89 /* DisplayDetails.swift */,
 				BCF23D0220EA0B9A009FE79C /* AssetDailySummary.swift */,
 				22CF879B2252A62B0085CBF5 /* Light.swift */,
@@ -1409,6 +1412,7 @@
 				0763AA612313FCE1008DE32A /* WeekDays.swift in Sources */,
 				BC8DFC0720EC450D006B99E6 /* ActivitySettings.swift in Sources */,
 				0763AA622313FCE1008DE32A /* NotificationRules.swift in Sources */,
+				07541D85233891FD0086EB2F /* NotificationSettings.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1657,7 +1661,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1707,7 +1711,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -1733,7 +1737,7 @@
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/List/Pets.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.moj.mobile.ios.sdk.Pets;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1761,7 +1765,7 @@
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/List/Pets.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.moj.mobile.ios.sdk.Pets;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1788,7 +1792,7 @@
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/List/Accounts.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.moj.mobile.ios.sdk.Accounts;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1816,7 +1820,7 @@
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/List/Accounts.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.moj.mobile.ios.sdk.Accounts;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1843,7 +1847,7 @@
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/List/Vehicles.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.moj.mobile.ios.sdk.Vehicles;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1871,7 +1875,7 @@
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/List/Vehicles.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.moj.mobile.ios.sdk.Vehicles;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1926,7 +1930,7 @@
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/List/Core.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.moj.mobile.ios.sdk.Core;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1954,7 +1958,7 @@
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/List/Core.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.moj.mobile.ios.sdk.Core;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1981,7 +1985,7 @@
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/List/Images.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.moj.mobile.ios.sdk.Images;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2009,7 +2013,7 @@
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/List/Images.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.moj.mobile.ios.sdk.Images;
 				PRODUCT_NAME = "$(TARGET_NAME)";
