@@ -19,6 +19,7 @@ public enum EngineOilLevelWarning: String, Codable {
     case veryLow = "Very Low"
     case low = "Low"
     case high = "High"
+    case none = "None"
     case unknown = "Unknown"
     
     public init(from decoder: Decoder) throws {
