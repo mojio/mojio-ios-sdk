@@ -16,7 +16,7 @@
 import Foundation
 
 // Risk Severity
-public enum RiskSeverity: String, Codable {
+public enum RiskSeverity: String, Codable, Equatable {
     case unknown = "Unknown"
     case low = "Low"
     case medium = "Medium"

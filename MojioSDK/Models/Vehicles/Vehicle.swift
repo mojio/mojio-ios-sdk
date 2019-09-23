@@ -296,7 +296,7 @@ public struct VehicleUpdate: Codable {
     public var name: String?
     public var licensePlate: String?
     public var vin: String?
-    public var odometer: Odometer?
+    public var odometer: OdometerUpdate?
     
     public enum CodingKeys: String, CodingKey {
         case name = "Name"
@@ -306,11 +306,12 @@ public struct VehicleUpdate: Codable {
     }
     
     public init(vehicle: Vehicle? = nil) {
+        let odometer = vehicle?.odometer.map { OdometerUpdate(baseUnit: $0.baseUnit, baseValue: $0.baseValue, unit: $0.unit, value: $0.value, timestamp: $0.timestamp, rolloverValue: $0.rolloverValue) }
         self.init(
             name: vehicle?.name,
             licensePlate: vehicle?.licensePlate,
             vin: vehicle?.vin,
-            odometer: vehicle?.odometer
+            odometer: odometer
         )
     }
     
@@ -318,7 +319,7 @@ public struct VehicleUpdate: Codable {
         name: String? = nil,
         licensePlate: String? = nil,
         vin: String? = nil,
-        odometer: Odometer? = nil) {
+        odometer: OdometerUpdate? = nil) {
         
         self.name = name
         self.licensePlate = licensePlate
