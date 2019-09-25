@@ -16,7 +16,7 @@
 import Foundation
 
 public enum EngineOilLevelWarning: String, Codable {
-    case veryLow = "Very Low"
+    case veryLow = "VeryLow"
     case low = "Low"
     case high = "High"
     case none = "None"
