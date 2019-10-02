@@ -21,19 +21,30 @@ public enum LightType: String, Codable {
     case breathing = "Breathing"
     case blinking = "Blinking"
 }
+public enum ColorType: String, Codable {
+    case red = "Red"
+    case greed = "Greed"
+    case blue = "Blue"
+}
 
 public protocol LightModel: Codable {
     var enabled: Bool? { get }
     var type: LightType? { get }
+    var color: ColorType? { get }
+    var durationInSeconds: Int? { get }
 }
 
 public struct Light: LightModel {
     public let enabled: Bool?
     public let type: LightType?
+    public let color: ColorType?
+    public let durationInSeconds: Int?
     
     public enum CodingKeys: String, CodingKey {
         case enabled = "Enabled"
         case type = "Type"
+        case color = "Color"
+        case durationInSeconds = "DurationInSeconds"
     }
     
     public init(from decoder: Decoder) throws {
@@ -42,6 +53,8 @@ public struct Light: LightModel {
         do {
             self.enabled = try container.decodeIfPresent(Bool.self, forKey: .enabled)
             self.type = try container.decodeIfPresent(LightType.self, forKey: .type)
+            self.color = try container.decodeIfPresent(ColorType.self, forKey: .color)
+            self.durationInSeconds = try container.decodeIfPresent(Int.self, forKey: .durationInSeconds)
         }
         catch {
             debugPrint(error)
@@ -53,10 +66,14 @@ public struct Light: LightModel {
 public struct LightUpdate: Codable {
     public var enabled: Bool?
     public var type: LightType?
+    public var color: ColorType?
+    public var durationInSeconds: Int?
     
     public enum CodingKeys: String, CodingKey {
         case enabled = "Enabled"
         case type = "Type"
+        case color = "Color"
+        case durationInSeconds = "DurationInSeconds"
     }
     
     public func encode(to encoder: Encoder) throws {
@@ -64,11 +81,15 @@ public struct LightUpdate: Codable {
         
         try container.encodeIfPresent(self.enabled, forKey: .enabled)
         try container.encodeIfPresent(self.type, forKey: .type)
+        try container.encodeIfPresent(self.color, forKey: .color)
+        try container.encodeIfPresent(self.durationInSeconds, forKey: .durationInSeconds)
     }
     
-    public init(enabled: Bool? = nil, type: LightType? = nil) {
+    public init(enabled: Bool? = nil, type: LightType? = nil, color: ColorType? = nil, durationInSeconds: Int? = nil) {
         
         self.enabled = enabled
         self.type = type
+        self.color = color
+        self.durationInSeconds = durationInSeconds
     }
 }

@@ -24,15 +24,18 @@ public enum BuzzerType: String, Codable {
 public protocol BuzzerModel: Codable {
     var enabled: Bool? { get }
     var type: BuzzerType? { get }
+    var durationInSeconds: Int? { get }
 }
 
 public struct Buzzer: BuzzerModel {
     public let enabled: Bool?
     public let type: BuzzerType?
+    public let durationInSeconds: Int?
     
     public enum CodingKeys: String, CodingKey {
         case enabled = "Enabled"
         case type = "Type"
+        case durationInSeconds = "DurationInSeconds"
     }
     
     public init(from decoder: Decoder) throws {
@@ -41,6 +44,7 @@ public struct Buzzer: BuzzerModel {
         do {
             self.enabled = try container.decodeIfPresent(Bool.self, forKey: .enabled)
             self.type = try container.decodeIfPresent(BuzzerType.self, forKey: .type)
+            self.durationInSeconds = try container.decodeIfPresent(Int.self, forKey: .durationInSeconds)
         }
         catch {
             debugPrint(error)
@@ -52,10 +56,12 @@ public struct Buzzer: BuzzerModel {
 public struct BuzzerUpdate: Codable {
     public var enabled: Bool?
     public var type: BuzzerType?
+    public var durationInSeconds: Int?
     
     public enum CodingKeys: String, CodingKey {
         case enabled = "Enabled"
         case type = "Type"
+        case durationInSeconds = "DurationInSeconds"
     }
     
     public func encode(to encoder: Encoder) throws {
@@ -63,11 +69,13 @@ public struct BuzzerUpdate: Codable {
         
         try container.encodeIfPresent(self.enabled, forKey: .enabled)
         try container.encodeIfPresent(self.type, forKey: .type)
+        try container.encodeIfPresent(self.durationInSeconds, forKey: .durationInSeconds)
     }
     
-    public init(enabled: Bool? = nil, type: BuzzerType? = nil) {
+    public init(enabled: Bool? = nil, type: BuzzerType? = nil, durationInSeconds: Int? = nil) {
         
         self.enabled = enabled
         self.type = type
+        self.durationInSeconds = durationInSeconds
     }
 }
