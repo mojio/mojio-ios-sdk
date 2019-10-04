@@ -18,10 +18,10 @@ import SwiftDate
 
 internal extension String {
     
-    internal static let empty = String()
+    static let empty = String()
     
     // Date conversion
-    internal var toDate: Date? {
+    var toDate: Date? {
         
         if let date =  DateInRegion(self, format:  ISOFormatter.Options.withFullDate.dateFormat, region: Region.ISO) {
             return date.date
@@ -42,7 +42,7 @@ internal extension String {
         return nil
     }
 
-    internal var dateFromISO: Date? {
+    var dateFromISO: Date? {
         if let date : Date = self.toDate(ISOFormatter.Options.withInternetDateTime.dateFormat, region: Region.ISO)?.date {
             return date
         }

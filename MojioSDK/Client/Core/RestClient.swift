@@ -382,7 +382,7 @@ open class RestClient {
         }
         
         // Add version header if needed
-        if let versionHeader = self.versionHeader {
+        if self.versionHeader != nil {
             headers["x-mojio-version"] = "2018-09-01"
         }
         
@@ -608,7 +608,7 @@ open class RestClient {
 }
 
 public extension Dictionary {
-    public mutating func update(_ updateDict: Dictionary) {
+    mutating func update(_ updateDict: Dictionary) {
         for (key, value) in updateDict {
             self.updateValue(value, forKey:key)
         }

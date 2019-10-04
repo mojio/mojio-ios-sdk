@@ -53,7 +53,7 @@ public struct Heading: HeadingModel {
 
 public extension Heading  {
     
-    public init(from decoder: Decoder, with deviceMeasurements: DeviceMeasurements) throws {
+    init(from decoder: Decoder, with deviceMeasurements: DeviceMeasurements) throws {
         
         let container = try decoder.container(keyedBy: DynamicCodingKey.self)
         
@@ -71,7 +71,7 @@ public extension Heading  {
             leftTurn: leftTurn)
     }
     
-    public func encode(with encoder: Encoder) throws {
+    func encode(with encoder: Encoder) throws {
         
         var container = encoder.container(keyedBy: CodingKeys.self)
         
