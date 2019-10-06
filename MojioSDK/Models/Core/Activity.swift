@@ -286,11 +286,24 @@ public enum TimelineActivityType: String, Codable {
     case oilLevelWarning = "OilLevelWarning"
     case oilPressureWarning = "OilPressureWarning"
     case oilTemperatureWarning = "OilTemperatureWarning"
-    case oilLevel = "OilLevel"
-    case oilPressure = "OilPressure"
-    case oilTemperature = "OilTemperature"
     case airMaintenance = "AirFilterPredictiveMaintenance"
     case batteryMaintenance = "BatteryPredictiveMaintenance"
+    case unknown
+    
+    public init(from decoder: Decoder) throws {
+        
+        let label = try decoder.singleValueContainer().decode(String.self)
+        
+        if label == "OilLevel" {
+            self = .oilLevelWarning
+        }
+        else if label == "OilPressure" {
+            self = .oilPressureWarning
+        }
+        else {
+            self = TimelineActivityType(rawValue: label) ?? .unknown
+        }
+    }
 }
 
 public protocol RootActivityModel: ActivityModelBase, PrimaryKey {
