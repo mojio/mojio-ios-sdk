@@ -22,7 +22,7 @@ public struct TirePressureStatus: Codable {
     public var timestamp: Date?
     public var value: String?
     
-    public enum CodingKeys: String, CodingKey {
+    public enum CodingKeys: String, CodingKey, CompoundWordStyle {
         case timestamp = "_ts"
         case value = "val"
     }
@@ -32,7 +32,7 @@ public struct TirePressureStatus: Codable {
         do {
             let container = try decoder.container(keyedBy: DynamicCodingKey.self)
             self.timestamp = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.timestamp).flatMap { $0.dateFromISO }
-            self.value = try container.decodeIfPresentIgnoringCase(Bool.self, forKey: CodingKeys.value)
+            self.value = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.value)
             
         }
         catch {
@@ -55,7 +55,6 @@ public protocol TirePressureModel: Codable {
     
     var timestamp: Date? { get }
     var tirePressureWarning: Bool? { get }
-    var pressureLowWarning: Bool? { get }
     var RFTirePressureStatus: TirePressureStatus? { get }
     var RRTirePressureStatus: TirePressureStatus? { get }
     var RROTirePresssureStatus: TirePressureStatus? { get }
@@ -96,12 +95,12 @@ public struct TirePressure: TirePressureModel {
             
             self.timestamp = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.timestamp).flatMap { $0.dateFromISO }
             self.tirePressureWarning = try container.decodeIfPresentIgnoringCase(Bool.self, forKey: CodingKeys.tirePressureWarning)
-            self.RFTirePressureStatus = try container.decodeIfPresentIgnoringCase(Bool.TirePressureStatus, forKey: CodingKeys.RFTirePressureStatus)
-            self.RRTirePressureStatus = try container.decodeIfPresentIgnoringCase(Bool.TirePressureStatus, forKey: CodingKeys.RRTirePressureStatus)
-            self.RROTirePresssureStatus = try container.decodeIfPresentIgnoringCase(Bool.TirePressureStatus, forKey: CodingKeys.RROTirePresssureStatus)
-            self.LFTirePressureStatus = try container.decodeIfPresentIgnoringCase(Bool.TirePressureStatus, forKey: CodingKeys.LFTirePressureStatus)
-            self.LRTirePressureStatus = try container.decodeIfPresentIgnoringCase(Bool.TirePressureStatus, forKey: CodingKeys.LRTirePressureStatus)
-            self.LROTirePressureStatus = try container.decodeIfPresentIgnoringCase(Bool.TirePressureStatus, forKey: CodingKeys.LROTirePressureStatus)
+            self.RFTirePressureStatus = try container.decodeIfPresentIgnoringCase(TirePressureStatus.self, forKey: CodingKeys.RFTirePressureStatus)
+            self.RRTirePressureStatus = try container.decodeIfPresentIgnoringCase(TirePressureStatus.self, forKey: CodingKeys.RRTirePressureStatus)
+            self.RROTirePresssureStatus = try container.decodeIfPresentIgnoringCase(TirePressureStatus.self, forKey: CodingKeys.RROTirePresssureStatus)
+            self.LFTirePressureStatus = try container.decodeIfPresentIgnoringCase(TirePressureStatus.self, forKey: CodingKeys.LFTirePressureStatus)
+            self.LRTirePressureStatus = try container.decodeIfPresentIgnoringCase(TirePressureStatus.self, forKey: CodingKeys.LRTirePressureStatus)
+            self.LROTirePressureStatus = try container.decodeIfPresentIgnoringCase(TirePressureStatus.self, forKey: CodingKeys.LROTirePressureStatus)
             
         }
         catch {
