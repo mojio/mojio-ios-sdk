@@ -55,6 +55,7 @@ public enum ActivityType : String, Codable {
     case oilLevelWarning = "OilLevelWarning"
     case oilPressureWarning = "OilPressureWarning"
     case oilTemperatureWarning = "OilTemperatureWarning"
+    case tirePressure = "TirePressure"
     case airMaintenance = "AirFilterPredictiveMaintenance"
     case batteryMaintenance = "BatteryPredictiveMaintenance"
     case unkonwn
@@ -286,6 +287,7 @@ public enum TimelineActivityType: String, Codable {
     case oilLevelWarning = "OilLevelWarning"
     case oilPressureWarning = "OilPressureWarning"
     case oilTemperatureWarning = "OilTemperatureWarning"
+    case tirePressure = "TirePressure"
     case airMaintenance = "AirFilterPredictiveMaintenance"
     case batteryMaintenance = "BatteryPredictiveMaintenance"
     case unknown
