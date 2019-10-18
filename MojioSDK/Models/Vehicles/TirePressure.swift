@@ -17,10 +17,40 @@ import Foundation
 
 
 
+public enum TirePressureLevel: String, Codable {
+    case unknown = "Unknown"
+    case normal = "Normal"
+    case low = "Low"
+    case fault = "Fault"
+    case alert = "Alert"
+    
+    public init(from decoder: Decoder) throws {
+        let label = try decoder.singleValueContainer().decode(String.self)
+        self = TirePressureLevel(rawValue: label) ?? .unknown
+    }
+    
+    public var level: Int {
+        switch self {
+        case .unknown:
+            return 0
+        case .normal:
+            return 1
+        case .fault:
+            return 2
+        case .low:
+            return 3
+        case .alert:
+            return 4
+        }
+        
+    }
+}
+
+
 public struct TirePressureStatus: Codable {
     
     public var timestamp: Date?
-    public var value: String?
+    public var value: TirePressureLevel?
     
     public enum CodingKeys: String, CodingKey, CompoundWordStyle {
         case timestamp = "_ts"
@@ -32,7 +62,7 @@ public struct TirePressureStatus: Codable {
         do {
             let container = try decoder.container(keyedBy: DynamicCodingKey.self)
             self.timestamp = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.timestamp).flatMap { $0.dateFromISO }
-            self.value = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.value)
+            self.value = try container.decodeIfPresentIgnoringCase(TirePressureLevel.self, forKey: CodingKeys.value)
             
         }
         catch {
@@ -47,6 +77,7 @@ public struct TirePressureStatus: Codable {
         try container.encodeIfPresent(self.timestamp, forKey: .timestamp)
         try container.encodeIfPresent(self.value, forKey: .value)
     }
+    
 }
 
 
@@ -122,6 +153,7 @@ public struct TirePressure: TirePressureModel {
         try container.encodeIfPresent(self.LRTirePressureStatus, forKey: .LRTirePressureStatus)
         try container.encodeIfPresent(self.LROTirePressureStatus, forKey: .LROTirePressureStatus)
     }
+    
 }
 
 
