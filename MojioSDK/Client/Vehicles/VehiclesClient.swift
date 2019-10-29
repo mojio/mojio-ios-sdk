@@ -31,7 +31,8 @@ public enum VehiclesEndpoint: String {
     case serviceSchedule = "serviceschedule/"
     case next = "next/"
     case activities = "activities/"
-    case notificationSettings = "activities/settings/"
+    //case notificationSettings = "activities/settings/"
+    case notificationSettings = "notificationsettings/"
     case wifiRadio = "wifiradio/"
     case transactions = "transactions/"
     case geofences = "geofences/"
@@ -39,7 +40,7 @@ public enum VehiclesEndpoint: String {
     case statistics = "statistics/"
     case diagnosticCodes = "diagnosticcodes/"
     case polyline = "polyline/"
-    case settings = "settings/"
+    //case settings = "settings/"
     case timeline = "timeline/assets/"
 
     // Storage
@@ -115,7 +116,8 @@ open class VehiclesClient: RestClient {
     
     open func notificationSettings() -> Self {
         self.requestEntity = VehiclesEndpoint.notificationSettings.rawValue
-        self.requestUrl = self.requestUrl! + self.requestEntity
+        //self.requestUrl = self.requestUrl! + self.requestEntity
+        self.requestUrl = self.requestUrl! + "/" + self.requestEntity
         return self
     }
     
@@ -220,12 +222,12 @@ open class VehiclesClient: RestClient {
         return self
     }
     
-    public func settings() -> Self {
-        self.requestEntity = VehiclesEndpoint.settings.rawValue
-        self.requestUrl = self.requestUrl! + self.requestEntity
-        
-        return self
-    }
+//    public func settings() -> Self {
+//        self.requestEntity = VehiclesEndpoint.settings.rawValue
+//        self.requestUrl = self.requestUrl! + self.requestEntity
+//
+//        return self
+//    }
     
     open func timeline(assetId: String) -> Self {
         self.requestEntity = VehiclesEndpoint.timeline.rawValue
@@ -286,8 +288,13 @@ open class VehiclesClient: RestClient {
                 return try JSONDecoder().decode(NextServiceSchedule.self, from: responseData)
             
             case .notificationSettings:
-                return try JSONDecoder().decode(NotificationsSettings.self, from: responseData)
-            
+                //return try JSONDecoder().decode(NotificationsSettings.self, from: responseData)
+                do {
+                    return try JSONDecoder().decode(ResponseArray<VehicleActivitySettings>.self, from: responseData)
+                }
+                catch {
+                    return try JSONDecoder().decode(VehicleActivitySettings.self, from: responseData)
+                }
             case .geofences:
                 do {
                     return try JSONDecoder().decode(ResponseArray<Geofence>.self, from: responseData)
@@ -338,13 +345,13 @@ open class VehiclesClient: RestClient {
                 let response = try JSONDecoder().decode([String: String].self, from: responseData)
                 return response["State"]
                 
-            case .settings:
-                do {
-                    return try JSONDecoder().decode(ResponseArray<VehicleActivitySettings>.self, from: responseData)
-                }
-                catch {
-                    return try JSONDecoder().decode(VehicleActivitySettings.self, from: responseData)
-                }
+//            case .settings:
+//                do {
+//                    return try JSONDecoder().decode(ResponseArray<VehicleActivitySettings>.self, from: responseData)
+//                }
+//                catch {
+//                    return try JSONDecoder().decode(VehicleActivitySettings.self, from: responseData)
+//                }
             case .tags:
                 return try JSONDecoder().decode(Array<String>.self, from: responseData)
                 
