@@ -42,6 +42,23 @@ extension SpeedThreshold {
     }
 }
 
+public enum DisturbanceThreshold: String, Codable {
+    
+    case low = "Low"
+    case medium = "Medium"
+    case high = "High"
+    case unknown
+    
+    public init(from decoder: Decoder) throws {
+        let label = try decoder.singleValueContainer().decode(String.self)
+        self = DisturbanceThreshold(rawValue: label) ?? .unknown
+    }
+    
+    public static var all: [DisturbanceThreshold] {
+        return [.low, .medium, .high]
+    }
+}
+
 public protocol VehicleActivitySettingsModel: Codable {
     associatedtype S: SpeedThresholdModel
     
@@ -65,9 +82,20 @@ public protocol VehicleActivitySettingsModel: Codable {
     var enableSMSActivity: Bool? { get }
     var enableVehicleCompatibilityActivity: Bool? { get }
     var speedThreshold: S? { get }
+    
+    var enableMainFirmwareCompatibilityActivity: Bool? { get }
+    var enableHardwareVersionCompatibilityActivity: Bool? { get }
+    var enableServiceScheduleActivity: Bool? { get }
+    var enableSeatbeltDisengagedActivity: Bool? { get }
+    var enableSeatbeltEngagedActivity: Bool? { get }
+    var enableEngineOilLevelWarningActivity: Bool? { get }
+    var enableEngineOilPressureLowWarningActivity: Bool? { get }
+    var enableTirePressureWarningActivity: Bool? { get }
+    var enableAirFilterMaintenanceActivity: Bool? { get }
 }
 
 public struct VehicleActivitySettings: VehicleActivitySettingsModel {
+    
     public typealias S = SpeedThreshold
     
     public let enableTripStartActivity: Bool?
@@ -91,26 +119,46 @@ public struct VehicleActivitySettings: VehicleActivitySettingsModel {
     public let enableVehicleCompatibilityActivity: Bool?
     public let speedThreshold: SpeedThreshold?
     
+    public let enableMainFirmwareCompatibilityActivity: Bool?
+    public let enableHardwareVersionCompatibilityActivity: Bool?
+    public let enableServiceScheduleActivity: Bool?
+    public let enableSeatbeltDisengagedActivity: Bool?
+    public let enableSeatbeltEngagedActivity: Bool?
+    public let enableEngineOilLevelWarningActivity: Bool?
+    public let enableEngineOilPressureLowWarningActivity: Bool?
+    public let enableTirePressureWarningActivity: Bool?
+    public let enableAirFilterMaintenanceActivity: Bool?
+    
     public enum CodingKeys: String, CodingKey {
-        case enableTripStartActivity = "EnableTripStartActivity"
-        case enableTripCompletedActivity = "EnableTripCompletedActivity"
-        case enableLowFuelActivity = "EnableLowFuelActivity"
-        case enableLowBatteryActivity = "EnableLowBatteryActivity"
-        case enableSpeedActivity = "EnableSpeedActivity"
-        case enableDtcActivity = "EnableDtcActivity"
-        case enableCheckEngineActivity = "EnableCheckEngineActivity"
-        case enableTowActivity = "EnableTowActivity"
-        case enableMaintenanceActivity = "EnableMaintenanceActivity"
-        case enableRecallActivity = "EnableRecallActivity"
-        case enableServiceBulletinActivity = "EnableServiceBulletinActivity"
-        case enableDisturbanceActivity = "EnableDisturbanceActivity"
-        case disturbanceThreshold = "DisturbanceThreshold"
-        case enableAccidentActivity = "EnableAccidentActivity"
-        case enableDeviceUnpluggedActivity = "EnableDeviceUnpluggedActivity"
-        case enableVehicleConnectedActivity = "EnableVehicleConnectedActivity"
-        case enableDeviceUpdatedActivity = "EnableDeviceUpdatedActivity"
-        case enableSMSActivity = "EnableSMSActivity"
-        case enableVehicleCompatibilityActivity = "EnableVehicleCompatibilityActivity"
-        case speedThreshold = "SpeedThreshold"
+        case enableTripStartActivity
+        case enableTripCompletedActivity
+        case enableLowFuelActivity
+        case enableLowBatteryActivity
+        case enableSpeedActivity
+        case enableDtcActivity
+        case enableCheckEngineActivity
+        case enableTowActivity
+        case enableMaintenanceActivity
+        case enableRecallActivity
+        case enableServiceBulletinActivity
+        case enableDisturbanceActivity
+        case disturbanceThreshold
+        case enableAccidentActivity
+        case enableDeviceUnpluggedActivity
+        case enableVehicleConnectedActivity
+        case enableDeviceUpdatedActivity
+        case enableSMSActivity
+        case enableVehicleCompatibilityActivity
+        case speedThreshold
+        
+        case enableMainFirmwareCompatibilityActivity
+        case enableHardwareVersionCompatibilityActivity
+        case enableServiceScheduleActivity
+        case enableSeatbeltDisengagedActivity
+        case enableSeatbeltEngagedActivity
+        case enableEngineOilLevelWarningActivity
+        case enableEngineOilPressureLowWarningActivity
+        case enableTirePressureWarningActivity
+        case enableAirFilterMaintenanceActivity 
     }
 }

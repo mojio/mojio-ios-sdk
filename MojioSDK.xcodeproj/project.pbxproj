@@ -47,7 +47,6 @@
 		37318905209C7D0800E61E3A /* MeasurementStatisticsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37318904209C7D0800E61E3A /* MeasurementStatisticsTests.swift */; };
 		37318907209C821900E61E3A /* ScoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37318906209C821800E61E3A /* ScoreTests.swift */; };
 		37318909209C82D300E61E3A /* MojioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37318908209C82D200E61E3A /* MojioTests.swift */; };
-		3731890B209C843B00E61E3A /* NotificationSettingsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3731890A209C843B00E61E3A /* NotificationSettingsTests.swift */; };
 		3731890D209C850300E61E3A /* SettingsGeofenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3731890C209C850300E61E3A /* SettingsGeofenceTests.swift */; };
 		3731890F209C879500E61E3A /* SpeedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3731890E209C879500E61E3A /* SpeedTests.swift */; };
 		37318911209C898300E61E3A /* OdometerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37318910209C898300E61E3A /* OdometerTests.swift */; };
@@ -203,7 +202,6 @@
 		BCFE5DEC20A06D0F00B89104 /* MojioImages.h in Headers */ = {isa = PBXBuildFile; fileRef = BCFE5DEB20A06D0F00B89104 /* MojioImages.h */; };
 		D009A80B61C9D6550635708D /* Pods_Images.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AC5F41DEA5DCBD659660E3D /* Pods_Images.framework */; };
 		D7112A703D780DA0A8F7DF2B /* Pods_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD90E2B243EAB55CA90E328E /* Pods_Tests.framework */; };
-		E06C95691D25CA2A006AECBB /* NotificationsSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06C95671D25CA2A006AECBB /* NotificationsSettings.swift */; };
 		F9623AAE1D935D74005C10F2 /* IdleState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9623AAD1D935D74005C10F2 /* IdleState.swift */; };
 		F9E9FDAE1D93122A00DCB690 /* HarshEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E9FDAD1D93122A00DCB690 /* HarshEvent.swift */; };
 		FCE43DA820DCDABC004A2E89 /* EntityAppearanceColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE43DA720DCDABC004A2E89 /* EntityAppearanceColor.swift */; };
@@ -271,7 +269,6 @@
 		37318904209C7D0800E61E3A /* MeasurementStatisticsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementStatisticsTests.swift; sourceTree = "<group>"; };
 		37318906209C821800E61E3A /* ScoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreTests.swift; sourceTree = "<group>"; };
 		37318908209C82D200E61E3A /* MojioTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MojioTests.swift; sourceTree = "<group>"; };
-		3731890A209C843B00E61E3A /* NotificationSettingsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingsTests.swift; sourceTree = "<group>"; };
 		3731890C209C850300E61E3A /* SettingsGeofenceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsGeofenceTests.swift; sourceTree = "<group>"; };
 		3731890E209C879500E61E3A /* SpeedTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedTests.swift; sourceTree = "<group>"; };
 		37318910209C898300E61E3A /* OdometerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OdometerTests.swift; sourceTree = "<group>"; };
@@ -415,7 +412,6 @@
 		BCFE5DEB20A06D0F00B89104 /* MojioImages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MojioImages.h; sourceTree = "<group>"; };
 		BD90E2B243EAB55CA90E328E /* Pods_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBECCB4E37C032ECAC611DCE /* Pods_Vehicles.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Vehicles.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E06C95671D25CA2A006AECBB /* NotificationsSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsSettings.swift; sourceTree = "<group>"; };
 		E06C95681D25CA2A006AECBB /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		F9623AAD1D935D74005C10F2 /* IdleState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdleState.swift; sourceTree = "<group>"; };
 		F9E9FDAD1D93122A00DCB690 /* HarshEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HarshEvent.swift; sourceTree = "<group>"; };
@@ -540,7 +536,6 @@
 				37318904209C7D0800E61E3A /* MeasurementStatisticsTests.swift */,
 				37318906209C821800E61E3A /* ScoreTests.swift */,
 				37318908209C82D200E61E3A /* MojioTests.swift */,
-				3731890A209C843B00E61E3A /* NotificationSettingsTests.swift */,
 				3731890C209C850300E61E3A /* SettingsGeofenceTests.swift */,
 				3731890E209C879500E61E3A /* SpeedTests.swift */,
 				37318910209C898300E61E3A /* OdometerTests.swift */,
@@ -687,7 +682,6 @@
 				F9623AAD1D935D74005C10F2 /* IdleState.swift */,
 				BC879B531CBEFFDD00F9177B /* MeasurementStats.swift */,
 				BC879B541CBEFFDD00F9177B /* Mojio.swift */,
-				E06C95671D25CA2A006AECBB /* NotificationsSettings.swift */,
 				BC879B591CBEFFDD00F9177B /* Score.swift */,
 				BC879B5C1CBEFFDD00F9177B /* Trip.swift */,
 				BC94271A1F01E17D00B7424A /* TripPolyline.swift */,
@@ -1454,7 +1448,6 @@
 				BC879B3B1CBEFFC000F9177B /* PlatformServiceSchedule.swift in Sources */,
 				BC879B7B1CBEFFDD00F9177B /* Vehicle.swift in Sources */,
 				BC879B751CBEFFDD00F9177B /* RPM.swift in Sources */,
-				E06C95691D25CA2A006AECBB /* NotificationsSettings.swift in Sources */,
 				BC879B3C1CBEFFC000F9177B /* Recall.swift in Sources */,
 				72B30077210B139D00608978 /* CompoundWordStyle.swift in Sources */,
 				BC879B421CBEFFC000F9177B /* Warranty.swift in Sources */,
@@ -1487,7 +1480,6 @@
 				37318901209B550100E61E3A /* IdleEventTests.swift in Sources */,
 				37318934209CA94900E61E3A /* WarrantyTests.swift in Sources */,
 				373188D9209B3F3800E61E3A /* TimePeriodTests.swift in Sources */,
-				3731890B209C843B00E61E3A /* NotificationSettingsTests.swift in Sources */,
 				373188EF209B461800E61E3A /* FuelLevelTests.swift in Sources */,
 				373188FD209B4E7300E61E3A /* HeadingTests.swift in Sources */,
 				72B30072210B069100608978 /* StringExt.swift in Sources */,
