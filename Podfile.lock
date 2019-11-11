@@ -1,8 +1,8 @@
 PODS:
-  - Alamofire (4.9.0)
-  - AlamofireImage (3.5.2):
-    - Alamofire (~> 4.8)
-  - KeychainSwift (17.0.0)
+  - Alamofire (4.9.1)
+  - AlamofireImage (3.6.0):
+    - Alamofire (~> 4.9)
+  - KeychainSwift (18.0.0)
   - MojioCore (3.0.0):
     - Alamofire
     - KeychainSwift
@@ -59,13 +59,13 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   SwiftWebSocket:
-    :commit: f007b86aaaa9a437ca368af3ce81daacfa122f06
+    :commit: cf7aeb18bd90c6797e09a69e396cbae53d94d59b
     :git: https://github.com/mojio/SwiftWebSocket
 
 SPEC CHECKSUMS:
-  Alamofire: afc3e7c6db61476cb45cdd23fed06bad03bbc321
-  AlamofireImage: 63cfe3baf1370be6c498149687cf6db3e3b00999
-  KeychainSwift: 9f43f562dffc88af6efadb57d74b14c598eb337f
+  Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
+  AlamofireImage: be9963c6582d68b39e89191f64c82a7d7bf40fdd
+  KeychainSwift: c46e1438d121e47459fb304ac88c5e058a2a91ed
   MojioCore: 25c7212594e08cf3d0d5f02459846b277b1ada83
   OHHTTPStubs: 9cbce6364bec557cc3439aa6bb7514670d780881
   SwiftDate: fa2bb3962056bb44047b4b85a30044e5eae30b03
@@ -74,4 +74,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 64cf1cd43246e84af3582ca30112f1fd56832704
 
-COCOAPODS: 1.8.3
+COCOAPODS: 1.8.4

@@ -92,7 +92,7 @@ public final class KeychainManager: AuthTokenManager {
         
         guard let authToken = authToken else { return }
         do {
-            self.keychainSwift.set(try self.encoder.encode(authToken), forKey: KeychainKey.authToken.rawValue, withAccess: .accessibleAlwaysThisDeviceOnly)
+            self.keychainSwift.set(try self.encoder.encode(authToken), forKey: KeychainKey.authToken.rawValue, withAccess: .accessibleAfterFirstUnlockThisDeviceOnly)
         }
         catch let error {
             debugPrint(error)
