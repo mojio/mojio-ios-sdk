@@ -89,6 +89,10 @@ class VehicleTests: XCTestCase {
             XCTAssertNotNil(model.vinDetails)
             XCTAssertNotNil(model.towState)
             XCTAssertNotNil(model.parkedState)
+            XCTAssertNotNil(model.predictiveMaintenance?.airFilter)
+            XCTAssert(model.predictiveMaintenance!.airFilter!.warning)
+            XCTAssertNotNil(model.predictiveMaintenance?.battery)
+            XCTAssert(model.predictiveMaintenance!.battery!.warning)
             XCTAssertNotNil(model.ownerGroups)
             XCTAssertEqual(model.id, "00000000-0000-0000-0000-000000000000")
             XCTAssertNotNil(model.tags)
@@ -362,6 +366,16 @@ extension VehicleTests {
             "Tags": [
                 "string"
             ],
+            "PredictiveMaintenance": {
+                "Battery": {
+                    "Timestamp": "2019-11-08T01:01:06.786Z",
+                    "Warning": true
+                },
+                "AirFilter": {
+                    "Timestamp": "2019-11-08T01:01:22.836Z",
+                    "Warning": true
+                }
+            },
             "VirtualOdometer": {
                 "RolloverValue": 0,
                 "BaseUnit": "Meters",

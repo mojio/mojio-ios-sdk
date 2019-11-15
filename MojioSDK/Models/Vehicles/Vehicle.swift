@@ -37,6 +37,7 @@ public protocol VehicleModel: Codable, PrimaryKey {
     associatedtype R: RPMModel
     associatedtype EO: EngineOilModel
     associatedtype TP: TirePressureModel
+    associatedtype PM: PredictiveMaintenanceModel
     
     var id: String { get }
     var name: String? { get }
@@ -80,6 +81,7 @@ public protocol VehicleModel: Codable, PrimaryKey {
     var lastModified: Date? { get }
     var engineOil: EO? { get }
     var tirePressure: TP? { get }
+    var predictiveMaintenance: PM? { get }
 }
 
 public struct Vehicle: VehicleModel {
@@ -103,6 +105,7 @@ public struct Vehicle: VehicleModel {
     public typealias L = Location
     public typealias EO = EngineOil
     public typealias TP = TirePressure
+    public typealias PM = PredictiveMaintenance
     
     public var id: String
     public var name: String?
@@ -146,6 +149,7 @@ public struct Vehicle: VehicleModel {
     public var lastModified: Date?
     public var engineOil: EO?
     public var tirePressure: TP?
+    public var predictiveMaintenance: PM?
     
     public enum CodingKeys: String, CodingKey {
         case id = "Id"
@@ -190,6 +194,7 @@ public struct Vehicle: VehicleModel {
         case lastModified = "LastModified"
         case engineOil = "EngineOil"
         case tirePressure = "TirePressure"
+        case predictiveMaintenance = "PredictiveMaintenance"
     }
     
     public init(from decoder: Decoder) throws {
@@ -239,6 +244,7 @@ public struct Vehicle: VehicleModel {
             self.lastModified = try container.decodeIfPresent(String.self, forKey: .lastModified).flatMap { $0.dateFromISO }
             self.engineOil = try container.decodeIfPresent(EngineOil.self, forKey: .engineOil)
             self.tirePressure = try container.decodeIfPresent(TirePressure.self, forKey: .tirePressure)
+            self.predictiveMaintenance = try container.decodeIfPresent(PredictiveMaintenance.self, forKey: .predictiveMaintenance)
         }
         catch {
             debugPrint(error)
@@ -292,6 +298,7 @@ public struct Vehicle: VehicleModel {
         try container.encodeIfPresent(self.lastModified, forKey: .lastModified)
         try container.encodeIfPresent(self.engineOil, forKey: .engineOil)
         try container.encodeIfPresent(self.tirePressure, forKey: .tirePressure)
+        try container.encodeIfPresent(self.predictiveMaintenance, forKey: .predictiveMaintenance)
     }
 }
 
