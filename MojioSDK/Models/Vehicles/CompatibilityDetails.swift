@@ -51,9 +51,9 @@ public struct CompatibilityDetails: CompatibilityDetailsModel {
         do {
             let container = try decoder.container(keyedBy: CodingKeys.self)
             
-            self.lastChecked = try container.decodeIfPresent(String.self, forKey: .lastChecked).flatMap { $0.dateFromISO }
-            self.changed = try container.decodeIfPresent(Bool.self, forKey: .changed) ?? false
-            self.level = try container.decodeIfPresent(VehicleCompatibilityLevel.self, forKey: .level)
+            self.lastChecked = try container.decodeIfPresentIgnoringCase(String.self, forKey: .lastChecked).flatMap { $0.dateFromISO }
+            self.changed = try container.decodeIfPresentIgnoringCase(Bool.self, forKey: .changed) ?? false
+            self.level = try container.decodeIfPresentIgnoringCase(VehicleCompatibilityLevel.self, forKey: .level)
         }
         catch {
             debugPrint(error)

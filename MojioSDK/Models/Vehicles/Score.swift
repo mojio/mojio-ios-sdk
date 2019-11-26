@@ -55,10 +55,10 @@ public struct Score: ScoreModel {
         do {
             let container = try decoder.container(keyedBy: CodingKeys.self)
             
-            self.scoringMethod = try container.decodeIfPresent(ScoreMethods.self, forKey: .scoringMethod)
-            self.value = try container.decodeIfPresent(Double.self, forKey: .value) ?? 0
-            self.percentile = try container.decodeIfPresent(Double.self, forKey: .percentile) ?? 0
-            self.average = try container.decodeIfPresent(Double.self, forKey: .average) ?? 0
+            self.scoringMethod = try container.decodeIfPresentIgnoringCase(ScoreMethods.self, forKey: .scoringMethod)
+            self.value = try container.decodeIfPresentIgnoringCase(Double.self, forKey: .value) ?? 0
+            self.percentile = try container.decodeIfPresentIgnoringCase(Double.self, forKey: .percentile) ?? 0
+            self.average = try container.decodeIfPresentIgnoringCase(Double.self, forKey: .average) ?? 0
         }
         catch {
             debugPrint(error)

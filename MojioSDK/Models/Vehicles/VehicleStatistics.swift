@@ -53,13 +53,13 @@ public struct VehicleStatistics: VehicleStatsModel {
         do {
             let container = try decoder.container(keyedBy: CodingKeys.self)
             
-            self.estimatedFuelLevel = try container.decodeIfPresent(FuelLevel.self, forKey: .estimatedFuelLevel)
-            self.estimatedFuelVolume = try container.decodeIfPresent(FuelVolume.self, forKey: .estimatedFuelVolume)
-            self.averageFuelEfficiency = try container.decodeIfPresent(FuelEfficiency.self, forKey: .averageFuelEfficiency)
+            self.estimatedFuelLevel = try container.decodeIfPresentIgnoringCase(FuelLevel.self, forKey: .estimatedFuelLevel)
+            self.estimatedFuelVolume = try container.decodeIfPresentIgnoringCase(FuelVolume.self, forKey: .estimatedFuelVolume)
+            self.averageFuelEfficiency = try container.decodeIfPresentIgnoringCase(FuelEfficiency.self, forKey: .averageFuelEfficiency)
             
-            self.totalRange = try container.decodeIfPresent(Distance.self, forKey: .totalRange)
-            self.currentRange = try container.decodeIfPresent(Distance.self, forKey: .currentRange)
-            self.lastFillUpDate = try container.decodeIfPresent(String.self, forKey: .lastFillUpDate).flatMap { $0.dateFromISO }
+            self.totalRange = try container.decodeIfPresentIgnoringCase(Distance.self, forKey: .totalRange)
+            self.currentRange = try container.decodeIfPresentIgnoringCase(Distance.self, forKey: .currentRange)
+            self.lastFillUpDate = try container.decodeIfPresentIgnoringCase(String.self, forKey: .lastFillUpDate).flatMap { $0.dateFromISO }
         }
         catch {
             debugPrint(error)

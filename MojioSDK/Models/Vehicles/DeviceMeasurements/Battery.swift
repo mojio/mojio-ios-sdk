@@ -59,10 +59,10 @@ extension Battery {
         
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
-        let connected = try container.decodeIfPresent(Bool.self, forKey: .connected) ?? false
-        let riskSeverity = try container.decodeIfPresent(RiskSeverity.self, forKey: .riskSeverity)
-        let lowVoltageDuration = try container.decodeIfPresent(TimePeriod.self, forKey: .lowVoltageDuration)
-        let highVoltageDuration = try container.decodeIfPresent(TimePeriod.self, forKey: .highVoltageDuration)
+        let connected = try container.decodeIfPresentIgnoringCase(Bool.self, forKey: .connected) ?? false
+        let riskSeverity = try container.decodeIfPresentIgnoringCase(RiskSeverity.self, forKey: .riskSeverity)
+        let lowVoltageDuration = try container.decodeIfPresentIgnoringCase(TimePeriod.self, forKey: .lowVoltageDuration)
+        let highVoltageDuration = try container.decodeIfPresentIgnoringCase(TimePeriod.self, forKey: .highVoltageDuration)
         
         self.init(baseUnit: deviceMeasurements.baseUnit ?? .unknown, baseValue: deviceMeasurements.baseValue, unit: deviceMeasurements.unit ?? .unknown, value: deviceMeasurements.value, timestamp: deviceMeasurements.timestamp, connected: connected, riskSeverity: riskSeverity, lowVoltageDuration: lowVoltageDuration, highVoltageDuration: highVoltageDuration)
     }

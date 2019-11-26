@@ -78,18 +78,18 @@ public struct Geofence: GeofenceModel {
         do {
             let container = try decoder.container(keyedBy: CodingKeys.self)
             
-            self.id = try container.decodeIfPresent(String.self, forKey: .id) ?? String.empty
-            self.ownerId = try container.decodeIfPresent(String.self, forKey: .ownerId)
-            self.name = try container.decodeIfPresent(String.self, forKey: .name)
-            self.description = try container.decodeIfPresent(String.self, forKey: .description)
-            self.region = try container.decodeIfPresent(G.self, forKey: .region)
-            self.notificationSetting = try container.decodeIfPresent(GeofenceNotificationType.self, forKey: .notificationSetting)
-            self.enabled = try container.decodeIfPresent(Bool.self, forKey: .enabled) ?? false
-            self.vehicleIds = try container.decodeIfPresent([String].self, forKey: .vehicleIds) ?? []
-            self.tags = try container.decodeIfPresent([String].self, forKey: .tags) ?? []
-            self.deleted = try container.decodeIfPresent(Bool.self, forKey: .deleted)
-            self.createdOn = try container.decodeIfPresent(String.self, forKey: .createdOn).flatMap { $0.dateFromISO }
-            self.lastModified = try container.decodeIfPresent(String.self, forKey: .lastModified).flatMap { $0.dateFromISO }
+            self.id = try container.decodeIfPresentIgnoringCase(String.self, forKey: .id) ?? String.empty
+            self.ownerId = try container.decodeIfPresentIgnoringCase(String.self, forKey: .ownerId)
+            self.name = try container.decodeIfPresentIgnoringCase(String.self, forKey: .name)
+            self.description = try container.decodeIfPresentIgnoringCase(String.self, forKey: .description)
+            self.region = try container.decodeIfPresentIgnoringCase(G.self, forKey: .region)
+            self.notificationSetting = try container.decodeIfPresentIgnoringCase(GeofenceNotificationType.self, forKey: .notificationSetting)
+            self.enabled = try container.decodeIfPresentIgnoringCase(Bool.self, forKey: .enabled) ?? false
+            self.vehicleIds = try container.decodeIfPresentIgnoringCase([String].self, forKey: .vehicleIds) ?? []
+            self.tags = try container.decodeIfPresentIgnoringCase([String].self, forKey: .tags) ?? []
+            self.deleted = try container.decodeIfPresentIgnoringCase(Bool.self, forKey: .deleted)
+            self.createdOn = try container.decodeIfPresentIgnoringCase(String.self, forKey: .createdOn).flatMap { $0.dateFromISO }
+            self.lastModified = try container.decodeIfPresentIgnoringCase(String.self, forKey: .lastModified).flatMap { $0.dateFromISO }
         }
         catch {
             debugPrint(error)

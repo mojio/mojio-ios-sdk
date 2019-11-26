@@ -45,11 +45,11 @@ public struct Polyline: TripPolylineModel {
         do {
             let container = try decoder.container(keyedBy: CodingKeys.self)
             
-            self.id = try container.decode(String.self, forKey: .id)
-            self.polyline = try container.decodeIfPresent(String.self, forKey: .polyline)
-            self.createdOn = try container.decodeIfPresent(String.self, forKey: .createdOn).flatMap { $0.dateFromISO }
-            self.lastModified = try container.decodeIfPresent(String.self, forKey: .lastModified).flatMap { $0.dateFromISO }
-            self.deleted = try container.decodeIfPresent(Bool.self, forKey: .deleted) ?? false
+            self.id = try container.decodeIgnoringCase(String.self, forKey: .id)
+            self.polyline = try container.decodeIfPresentIgnoringCase(String.self, forKey: .polyline)
+            self.createdOn = try container.decodeIfPresentIgnoringCase(String.self, forKey: .createdOn).flatMap { $0.dateFromISO }
+            self.lastModified = try container.decodeIfPresentIgnoringCase(String.self, forKey: .lastModified).flatMap { $0.dateFromISO }
+            self.deleted = try container.decodeIfPresentIgnoringCase(Bool.self, forKey: .deleted) ?? false
         }
         catch {
             debugPrint(error)

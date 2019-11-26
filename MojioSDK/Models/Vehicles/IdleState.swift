@@ -47,10 +47,10 @@ public struct IdleState: IdleStateModel {
         do {
             let container = try decoder.container(keyedBy: CodingKeys.self)
             
-            self.timestamp = try container.decodeIfPresent(String.self, forKey: .timestamp).flatMap { $0.dateFromISO }
-            self.value = try container.decodeIfPresent(Bool.self, forKey: .value) ?? false
-            self.startTime = try container.decodeIfPresent(String.self, forKey: .startTime)
-            self.duration = try container.decodeIfPresent(TimePeriod.self, forKey: .duration)
+            self.timestamp = try container.decodeIfPresentIgnoringCase(String.self, forKey: .timestamp).flatMap { $0.dateFromISO }
+            self.value = try container.decodeIfPresentIgnoringCase(Bool.self, forKey: .value) ?? false
+            self.startTime = try container.decodeIfPresentIgnoringCase(String.self, forKey: .startTime)
+            self.duration = try container.decodeIfPresentIgnoringCase(TimePeriod.self, forKey: .duration)
         }
         catch {
             debugPrint(error)

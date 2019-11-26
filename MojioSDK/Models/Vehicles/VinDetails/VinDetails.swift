@@ -79,30 +79,30 @@ public struct VinDetails: VinDetailsModel {
         do {
             let container = try decoder.container(keyedBy: CodingKeys.self)
             
-            self.timestamp = try container.decodeIfPresent(String.self, forKey: .timestamp).flatMap { $0.dateFromISO }
+            self.timestamp = try container.decodeIfPresentIgnoringCase(String.self, forKey: .timestamp).flatMap { $0.dateFromISO }
             
-            self.vin = try container.decodeIfPresent(String.self, forKey: .vin)
-            self.year = try container.decodeIfPresent(Int.self, forKey: .year) ?? 0
-            self.make = try container.decodeIfPresent(String.self, forKey: .make)
-            self.model = try container.decodeIfPresent(String.self, forKey: .model)
+            self.vin = try container.decodeIfPresentIgnoringCase(String.self, forKey: .vin)
+            self.year = try container.decodeIfPresentIgnoringCase(Int.self, forKey: .year) ?? 0
+            self.make = try container.decodeIfPresentIgnoringCase(String.self, forKey: .make)
+            self.model = try container.decodeIfPresentIgnoringCase(String.self, forKey: .model)
             
-            self.engine = try container.decodeIfPresent(String.self, forKey: .engine)
-            self.cylinders = try container.decodeIfPresent(Int.self, forKey: .cylinders)
-            self.totalFuelCapacity = try container.decodeIfPresent(FuelCapacity.self, forKey: .totalFuelCapacity)
+            self.engine = try container.decodeIfPresentIgnoringCase(String.self, forKey: .engine)
+            self.cylinders = try container.decodeIfPresentIgnoringCase(Int.self, forKey: .cylinders)
+            self.totalFuelCapacity = try container.decodeIfPresentIgnoringCase(FuelCapacity.self, forKey: .totalFuelCapacity)
             
-            self.fuelType = try container.decodeIfPresent(String.self, forKey: .fuelType)
+            self.fuelType = try container.decodeIfPresentIgnoringCase(String.self, forKey: .fuelType)
             
-            self.cityFuelEfficiency = try container.decodeIfPresent(Double.self, forKey: .cityFuelEfficiency) ?? 0
+            self.cityFuelEfficiency = try container.decodeIfPresentIgnoringCase(Double.self, forKey: .cityFuelEfficiency) ?? 0
             
-            self.highwayFuelEfficiency = try container.decodeIfPresent(Double.self, forKey: .highwayFuelEfficiency) ?? 0
+            self.highwayFuelEfficiency = try container.decodeIfPresentIgnoringCase(Double.self, forKey: .highwayFuelEfficiency) ?? 0
             
-            self.combinedFuelEfficiency = try container.decodeIfPresent(Double.self, forKey: .combinedFuelEfficiency) ?? 0
+            self.combinedFuelEfficiency = try container.decodeIfPresentIgnoringCase(Double.self, forKey: .combinedFuelEfficiency) ?? 0
             
-            self.transmission = try container.decodeIfPresent(String.self, forKey: .transmission)
+            self.transmission = try container.decodeIfPresentIgnoringCase(String.self, forKey: .transmission)
             
-            self.message = try container.decodeIfPresent(String.self, forKey: .message)
+            self.message = try container.decodeIfPresentIgnoringCase(String.self, forKey: .message)
             
-            self.success = try container.decodeIfPresent(Bool.self, forKey: .success) ?? false
+            self.success = try container.decodeIfPresentIgnoringCase(Bool.self, forKey: .success) ?? false
         }
         catch {
             debugPrint(error)

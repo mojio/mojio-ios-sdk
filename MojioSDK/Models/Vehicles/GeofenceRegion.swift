@@ -56,11 +56,11 @@ public struct GeofenceRegion: GeofenceRegionModel {
         do {
             let container = try decoder.container(keyedBy: CodingKeys.self)
             
-            self.type = try container.decodeIfPresent(GeofenceRegionType.self, forKey: .type)
-            self.latitude = try container.decodeIfPresent(Double.self, forKey: .latitude)
-            self.longitude = try container.decodeIfPresent(Double.self, forKey: .longitude)
-            self.radius = try container.decodeIfPresent(D.self, forKey: .radius)
-            self.polygon = try container.decodeIfPresent(String.self, forKey: .polygon)
+            self.type = try container.decodeIfPresentIgnoringCase(GeofenceRegionType.self, forKey: .type)
+            self.latitude = try container.decodeIfPresentIgnoringCase(Double.self, forKey: .latitude)
+            self.longitude = try container.decodeIfPresentIgnoringCase(Double.self, forKey: .longitude)
+            self.radius = try container.decodeIfPresentIgnoringCase(D.self, forKey: .radius)
+            self.polygon = try container.decodeIfPresentIgnoringCase(String.self, forKey: .polygon)
         }
         catch {
             debugPrint(error)

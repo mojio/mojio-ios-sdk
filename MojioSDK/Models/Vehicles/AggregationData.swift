@@ -61,15 +61,15 @@ public struct AggregationData: AggregationDataModel {
             
             let container = try decoder.container(keyedBy: CodingKeys.self)
             
-            self.total = try container.decodeIfPresent(Double.self, forKey: .total) ?? 0
-            self.average = try container.decodeIfPresent(Double.self, forKey: .average) ?? 0
-            self.max = try container.decodeIfPresent(Double.self, forKey: .max) ?? 0
-            self.min = try container.decodeIfPresent(Double.self, forKey: .min) ?? 0
-            self.units = try container.decodeIfPresent(String.self, forKey: .units)
-            self.date = try container.decodeIfPresent(String.self, forKey: .date).flatMap { $0.dateFromISO }
-            self.endDate = try container.decodeIfPresent(String.self, forKey: .endDate).flatMap { $0.dateFromISO }
-            self.count = try container.decodeIfPresent(Int.self, forKey: .count) ?? 0
-            self.tripCount = try container.decodeIfPresent(Int.self, forKey: .tripCount) ?? 0
+            self.total = try container.decodeIfPresentIgnoringCase(Double.self, forKey: .total) ?? 0
+            self.average = try container.decodeIfPresentIgnoringCase(Double.self, forKey: .average) ?? 0
+            self.max = try container.decodeIfPresentIgnoringCase(Double.self, forKey: .max) ?? 0
+            self.min = try container.decodeIfPresentIgnoringCase(Double.self, forKey: .min) ?? 0
+            self.units = try container.decodeIfPresentIgnoringCase(String.self, forKey: .units)
+            self.date = try container.decodeIfPresentIgnoringCase(String.self, forKey: .date).flatMap { $0.dateFromISO }
+            self.endDate = try container.decodeIfPresentIgnoringCase(String.self, forKey: .endDate).flatMap { $0.dateFromISO }
+            self.count = try container.decodeIfPresentIgnoringCase(Int.self, forKey: .count) ?? 0
+            self.tripCount = try container.decodeIfPresentIgnoringCase(Int.self, forKey: .tripCount) ?? 0
         }
         catch {
             debugPrint(error)

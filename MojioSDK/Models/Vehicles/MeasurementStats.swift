@@ -67,17 +67,17 @@ public struct MeasurementStats: MeasurementStatsModel {
         do {
             let container = try decoder.container(keyedBy: CodingKeys.self)
             
-            self.numOfSamples = try container.decodeIfPresent(Double.self, forKey: .numOfSamples) ?? 0
-            self.average = try container.decodeIfPresent(Double.self, forKey: .average) ?? 0
-            self.variance = try container.decodeIfPresent(Double.self, forKey: .variance) ?? 0
-            self.stdDev = try container.decodeIfPresent(Double.self, forKey: .stdDev) ?? 0
-            self.indexOfDispersion = try container.decodeIfPresent(Double.self, forKey: .indexOfDispersion) ?? 0
-            self.coeffOfVariation = try container.decodeIfPresent(Double.self, forKey: .coeffOfVariation) ?? 0
-            self.m2 = try container.decodeIfPresent(Double.self, forKey: .m2) ?? 0
-            self.min = try container.decodeIfPresent(Double.self, forKey: .min) ?? 0
-            self.max = try container.decodeIfPresent(Double.self, forKey: .max) ?? 0
-            self.standardScore = try container.decodeIfPresent(Score.self, forKey: .standardScore)
-            self.minMaxScore = try container.decodeIfPresent(Score.self, forKey: .minMaxScore)
+            self.numOfSamples = try container.decodeIfPresentIgnoringCase(Double.self, forKey: .numOfSamples) ?? 0
+            self.average = try container.decodeIfPresentIgnoringCase(Double.self, forKey: .average) ?? 0
+            self.variance = try container.decodeIfPresentIgnoringCase(Double.self, forKey: .variance) ?? 0
+            self.stdDev = try container.decodeIfPresentIgnoringCase(Double.self, forKey: .stdDev) ?? 0
+            self.indexOfDispersion = try container.decodeIfPresentIgnoringCase(Double.self, forKey: .indexOfDispersion) ?? 0
+            self.coeffOfVariation = try container.decodeIfPresentIgnoringCase(Double.self, forKey: .coeffOfVariation) ?? 0
+            self.m2 = try container.decodeIfPresentIgnoringCase(Double.self, forKey: .m2) ?? 0
+            self.min = try container.decodeIfPresentIgnoringCase(Double.self, forKey: .min) ?? 0
+            self.max = try container.decodeIfPresentIgnoringCase(Double.self, forKey: .max) ?? 0
+            self.standardScore = try container.decodeIfPresentIgnoringCase(Score.self, forKey: .standardScore)
+            self.minMaxScore = try container.decodeIfPresentIgnoringCase(Score.self, forKey: .minMaxScore)
         }
         catch {
             debugPrint(error)

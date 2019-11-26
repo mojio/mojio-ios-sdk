@@ -53,11 +53,11 @@ public struct Accelerometer: AccelerometerModel {
             
             let container = try decoder.container(keyedBy: CodingKeys.self)
             
-            self.x = try container.decodeIfPresent(ProperAcceleration.self, forKey: .x)
-            self.y = try container.decodeIfPresent(ProperAcceleration.self, forKey: .y)
-            self.z = try container.decodeIfPresent(ProperAcceleration.self, forKey: .z)
-            self.magnitude = try container.decodeIfPresent(ProperAcceleration.self, forKey: .magnitude)
-            self.samplingInterval = try container.decodeIfPresent(TimePeriod.self, forKey: .samplingInterval)
+            self.x = try container.decodeIfPresentIgnoringCase(ProperAcceleration.self, forKey: .x)
+            self.y = try container.decodeIfPresentIgnoringCase(ProperAcceleration.self, forKey: .y)
+            self.z = try container.decodeIfPresentIgnoringCase(ProperAcceleration.self, forKey: .z)
+            self.magnitude = try container.decodeIfPresentIgnoringCase(ProperAcceleration.self, forKey: .magnitude)
+            self.samplingInterval = try container.decodeIfPresentIgnoringCase(TimePeriod.self, forKey: .samplingInterval)
         }
         catch {
             debugPrint(error)

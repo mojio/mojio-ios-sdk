@@ -73,12 +73,12 @@ public struct WifiRadio: WifiRadioModel {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         do {
-            self.timestamp = try container.decodeIfPresent(String.self, forKey: .timestamp).flatMap { $0.dateFromISO }
-            self.ssid = try container.decodeIfPresent(String.self, forKey: .ssid)
-            self.password = try container.decodeIfPresent(String.self, forKey: .password)
-            self.allowRoaming = try container.decodeIfPresent(Bool.self, forKey: .allowRoaming)
-            self.status = try container.decodeIfPresent(WifiRadioStatus.self, forKey: .status)
-            self.strength = try container.decodeIfPresent(Double.self, forKey: .strength)
+            self.timestamp = try container.decodeIfPresentIgnoringCase(String.self, forKey: .timestamp).flatMap { $0.dateFromISO }
+            self.ssid = try container.decodeIfPresentIgnoringCase(String.self, forKey: .ssid)
+            self.password = try container.decodeIfPresentIgnoringCase(String.self, forKey: .password)
+            self.allowRoaming = try container.decodeIfPresentIgnoringCase(Bool.self, forKey: .allowRoaming)
+            self.status = try container.decodeIfPresentIgnoringCase(WifiRadioStatus.self, forKey: .status)
+            self.strength = try container.decodeIfPresentIgnoringCase(Double.self, forKey: .strength)
         }
         catch {
             debugPrint(error)

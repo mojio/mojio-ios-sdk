@@ -57,16 +57,16 @@ public struct DiagnosticCode: DiagnosticCodeModel {
         do {
             let container = try decoder.container(keyedBy: CodingKeys.self)
             
-            self.ignored = try container.decodeIfPresent(Bool.self, forKey: .ignored) ?? false
-            self.code = try container.decodeIfPresent(String.self, forKey: .code)
-            self.description = try container.decodeIfPresent(String.self, forKey: .description)
-            self.timestamp = try container.decodeIfPresent(String.self, forKey: .timestamp).flatMap { $0.dateFromISO }
+            self.ignored = try container.decodeIfPresentIgnoringCase(Bool.self, forKey: .ignored) ?? false
+            self.code = try container.decodeIfPresentIgnoringCase(String.self, forKey: .code)
+            self.description = try container.decodeIfPresentIgnoringCase(String.self, forKey: .description)
+            self.timestamp = try container.decodeIfPresentIgnoringCase(String.self, forKey: .timestamp).flatMap { $0.dateFromISO }
             
-            self.severity = try container.decodeIfPresent(String.self, forKey: .severity)
-            self.instructions = try container.decodeIfPresent(String.self, forKey: .instructions)
+            self.severity = try container.decodeIfPresentIgnoringCase(String.self, forKey: .severity)
+            self.instructions = try container.decodeIfPresentIgnoringCase(String.self, forKey: .instructions)
             
-            self.stateType = try container.decodeIfPresent(String.self, forKey: .stateType)
-            self.diagnosticCodeType = try container.decodeIfPresent(String.self, forKey: .diagnosticCodeType)
+            self.stateType = try container.decodeIfPresentIgnoringCase(String.self, forKey: .stateType)
+            self.diagnosticCodeType = try container.decodeIfPresentIgnoringCase(String.self, forKey: .diagnosticCodeType)
         }
         catch {
             debugPrint(error)
