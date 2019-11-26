@@ -40,7 +40,7 @@ public struct VehicleStatistics: VehicleStatsModel {
     public let currentRange: Distance?
     public let lastFillUpDate: Date?
     
-    public enum CodingKeys: String, CodingKey {
+    public enum CodingKeys: String, CodingKey, CompoundWordStyle {
         case estimatedFuelLevel = "EstimatedFuelLevel"
         case estimatedFuelVolume = "EstimatedFuelVolume"
         case averageFuelEfficiency = "AverageFuelEfficiency"
@@ -51,15 +51,15 @@ public struct VehicleStatistics: VehicleStatsModel {
     
     public init(from decoder: Decoder) throws {
         do {
-            let container = try decoder.container(keyedBy: CodingKeys.self)
+            let container = try decoder.container(keyedBy: DynamicCodingKey.self)
             
-            self.estimatedFuelLevel = try container.decodeIfPresent(FuelLevel.self, forKey: .estimatedFuelLevel)
-            self.estimatedFuelVolume = try container.decodeIfPresent(FuelVolume.self, forKey: .estimatedFuelVolume)
-            self.averageFuelEfficiency = try container.decodeIfPresent(FuelEfficiency.self, forKey: .averageFuelEfficiency)
+            self.estimatedFuelLevel = try container.decodeIfPresentIgnoringCase(FuelLevel.self, forKey: CodingKeys.estimatedFuelLevel)
+            self.estimatedFuelVolume = try container.decodeIfPresentIgnoringCase(FuelVolume.self, forKey: CodingKeys.estimatedFuelVolume)
+            self.averageFuelEfficiency = try container.decodeIfPresentIgnoringCase(FuelEfficiency.self, forKey: CodingKeys.averageFuelEfficiency)
             
-            self.totalRange = try container.decodeIfPresent(Distance.self, forKey: .totalRange)
-            self.currentRange = try container.decodeIfPresent(Distance.self, forKey: .currentRange)
-            self.lastFillUpDate = try container.decodeIfPresent(String.self, forKey: .lastFillUpDate).flatMap { $0.dateFromISO }
+            self.totalRange = try container.decodeIfPresentIgnoringCase(Distance.self, forKey: CodingKeys.totalRange)
+            self.currentRange = try container.decodeIfPresentIgnoringCase(Distance.self, forKey: CodingKeys.currentRange)
+            self.lastFillUpDate = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.lastFillUpDate).flatMap { $0.dateFromISO }
         }
         catch {
             debugPrint(error)

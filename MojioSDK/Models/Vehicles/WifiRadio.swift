@@ -53,7 +53,7 @@ public enum WifiRadioStatus: String, Codable {
 
 public struct WifiRadio: WifiRadioModel {
     
-    public enum CodingKeys: String, CodingKey {
+    public enum CodingKeys: String, CodingKey, CompoundWordStyle {
         case timestamp = "Timestamp"
         case ssid = "SSID"
         case password = "Password"
@@ -70,15 +70,15 @@ public struct WifiRadio: WifiRadioModel {
     public let strength: Double?
     
     public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let container = try decoder.container(keyedBy: DynamicCodingKey.self)
         
         do {
-            self.timestamp = try container.decodeIfPresent(String.self, forKey: .timestamp).flatMap { $0.dateFromISO }
-            self.ssid = try container.decodeIfPresent(String.self, forKey: .ssid)
-            self.password = try container.decodeIfPresent(String.self, forKey: .password)
-            self.allowRoaming = try container.decodeIfPresent(Bool.self, forKey: .allowRoaming)
-            self.status = try container.decodeIfPresent(WifiRadioStatus.self, forKey: .status)
-            self.strength = try container.decodeIfPresent(Double.self, forKey: .strength)
+            self.timestamp = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.timestamp).flatMap { $0.dateFromISO }
+            self.ssid = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.ssid)
+            self.password = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.password)
+            self.allowRoaming = try container.decodeIfPresentIgnoringCase(Bool.self, forKey: CodingKeys.allowRoaming)
+            self.status = try container.decodeIfPresentIgnoringCase(WifiRadioStatus.self, forKey: CodingKeys.status)
+            self.strength = try container.decodeIfPresentIgnoringCase(Double.self, forKey: CodingKeys.strength)
         }
         catch {
             debugPrint(error)

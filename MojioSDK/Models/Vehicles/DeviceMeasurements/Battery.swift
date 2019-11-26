@@ -45,7 +45,7 @@ public struct Battery: BatteryModel {
     public var lowVoltageDuration: T? = nil
     public var highVoltageDuration: T? = nil
     
-    public enum CodingKeys: String, CodingKey {
+    public enum CodingKeys: String, CodingKey, CompoundWordStyle {
         case connected = "Connected"
         case riskSeverity = "RiskSeverity"
         case lowVoltageDuration = "LowVoltageDuration"
@@ -57,12 +57,12 @@ extension Battery {
     
     public init(from decoder: Decoder, with deviceMeasurements: DeviceMeasurements) throws {
         
-        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let container = try decoder.container(keyedBy: DynamicCodingKey.self)
         
-        let connected = try container.decodeIfPresent(Bool.self, forKey: .connected) ?? false
-        let riskSeverity = try container.decodeIfPresent(RiskSeverity.self, forKey: .riskSeverity)
-        let lowVoltageDuration = try container.decodeIfPresent(TimePeriod.self, forKey: .lowVoltageDuration)
-        let highVoltageDuration = try container.decodeIfPresent(TimePeriod.self, forKey: .highVoltageDuration)
+        let connected = try container.decodeIfPresentIgnoringCase(Bool.self, forKey: CodingKeys.connected) ?? false
+        let riskSeverity = try container.decodeIfPresentIgnoringCase(RiskSeverity.self, forKey: CodingKeys.riskSeverity)
+        let lowVoltageDuration = try container.decodeIfPresentIgnoringCase(TimePeriod.self, forKey: CodingKeys.lowVoltageDuration)
+        let highVoltageDuration = try container.decodeIfPresentIgnoringCase(TimePeriod.self, forKey: CodingKeys.highVoltageDuration)
         
         self.init(baseUnit: deviceMeasurements.baseUnit ?? .unknown, baseValue: deviceMeasurements.baseValue, unit: deviceMeasurements.unit ?? .unknown, value: deviceMeasurements.value, timestamp: deviceMeasurements.timestamp, connected: connected, riskSeverity: riskSeverity, lowVoltageDuration: lowVoltageDuration, highVoltageDuration: highVoltageDuration)
     }

@@ -43,7 +43,7 @@ public struct GeofenceRegion: GeofenceRegionModel {
     public let radius: D?
     public let polygon: String?
     
-    public enum CodingKeys: String, CodingKey {
+    public enum CodingKeys: String, CodingKey, CompoundWordStyle {
         case type = "Type"
         case latitude = "Lat"
         case longitude = "Lng"
@@ -54,13 +54,13 @@ public struct GeofenceRegion: GeofenceRegionModel {
     public init(from decoder: Decoder) throws {
         
         do {
-            let container = try decoder.container(keyedBy: CodingKeys.self)
+            let container = try decoder.container(keyedBy: DynamicCodingKey.self)
             
-            self.type = try container.decodeIfPresent(GeofenceRegionType.self, forKey: .type)
-            self.latitude = try container.decodeIfPresent(Double.self, forKey: .latitude)
-            self.longitude = try container.decodeIfPresent(Double.self, forKey: .longitude)
-            self.radius = try container.decodeIfPresent(D.self, forKey: .radius)
-            self.polygon = try container.decodeIfPresent(String.self, forKey: .polygon)
+            self.type = try container.decodeIfPresentIgnoringCase(GeofenceRegionType.self, forKey: CodingKeys.type)
+            self.latitude = try container.decodeIfPresentIgnoringCase(Double.self, forKey: CodingKeys.latitude)
+            self.longitude = try container.decodeIfPresentIgnoringCase(Double.self, forKey: CodingKeys.longitude)
+            self.radius = try container.decodeIfPresentIgnoringCase(D.self, forKey: CodingKeys.radius)
+            self.polygon = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.polygon)
         }
         catch {
             debugPrint(error)

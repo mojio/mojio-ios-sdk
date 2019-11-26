@@ -58,7 +58,7 @@ public struct Geofence: GeofenceModel {
     public let createdOn: Date?
     public let lastModified: Date?
     
-    public enum CodingKeys: String, CodingKey {
+    public enum CodingKeys: String, CodingKey, CompoundWordStyle {
         case id = "Id"
         case ownerId = "OwnerId"
         case name = "Name"
@@ -76,20 +76,20 @@ public struct Geofence: GeofenceModel {
     public init(from decoder: Decoder) throws {
         
         do {
-            let container = try decoder.container(keyedBy: CodingKeys.self)
+            let container = try decoder.container(keyedBy: DynamicCodingKey.self)
             
-            self.id = try container.decodeIfPresent(String.self, forKey: .id) ?? String.empty
-            self.ownerId = try container.decodeIfPresent(String.self, forKey: .ownerId)
-            self.name = try container.decodeIfPresent(String.self, forKey: .name)
-            self.description = try container.decodeIfPresent(String.self, forKey: .description)
-            self.region = try container.decodeIfPresent(G.self, forKey: .region)
-            self.notificationSetting = try container.decodeIfPresent(GeofenceNotificationType.self, forKey: .notificationSetting)
-            self.enabled = try container.decodeIfPresent(Bool.self, forKey: .enabled) ?? false
-            self.vehicleIds = try container.decodeIfPresent([String].self, forKey: .vehicleIds) ?? []
-            self.tags = try container.decodeIfPresent([String].self, forKey: .tags) ?? []
-            self.deleted = try container.decodeIfPresent(Bool.self, forKey: .deleted)
-            self.createdOn = try container.decodeIfPresent(String.self, forKey: .createdOn).flatMap { $0.dateFromISO }
-            self.lastModified = try container.decodeIfPresent(String.self, forKey: .lastModified).flatMap { $0.dateFromISO }
+            self.id = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.id) ?? String.empty
+            self.ownerId = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.ownerId)
+            self.name = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.name)
+            self.description = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.description)
+            self.region = try container.decodeIfPresentIgnoringCase(G.self, forKey: CodingKeys.region)
+            self.notificationSetting = try container.decodeIfPresentIgnoringCase(GeofenceNotificationType.self, forKey: CodingKeys.notificationSetting)
+            self.enabled = try container.decodeIfPresentIgnoringCase(Bool.self, forKey: CodingKeys.enabled) ?? false
+            self.vehicleIds = try container.decodeIfPresentIgnoringCase([String].self, forKey: CodingKeys.vehicleIds) ?? []
+            self.tags = try container.decodeIfPresentIgnoringCase([String].self, forKey: CodingKeys.tags) ?? []
+            self.deleted = try container.decodeIfPresentIgnoringCase(Bool.self, forKey: CodingKeys.deleted)
+            self.createdOn = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.createdOn).flatMap { $0.dateFromISO }
+            self.lastModified = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.lastModified).flatMap { $0.dateFromISO }
         }
         catch {
             debugPrint(error)

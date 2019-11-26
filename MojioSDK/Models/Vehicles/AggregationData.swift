@@ -43,7 +43,7 @@ public struct AggregationData: AggregationDataModel {
     public let count        : Int
     public let tripCount    : Int
     
-    public enum CodingKeys: String, CodingKey {
+    public enum CodingKeys: String, CodingKey, CompoundWordStyle {
         case total = "Total"
         case average = "Average"
         case max = "Max"
@@ -59,17 +59,17 @@ public struct AggregationData: AggregationDataModel {
         
         do {
             
-            let container = try decoder.container(keyedBy: CodingKeys.self)
+            let container = try decoder.container(keyedBy: DynamicCodingKey.self)
             
-            self.total = try container.decodeIfPresent(Double.self, forKey: .total) ?? 0
-            self.average = try container.decodeIfPresent(Double.self, forKey: .average) ?? 0
-            self.max = try container.decodeIfPresent(Double.self, forKey: .max) ?? 0
-            self.min = try container.decodeIfPresent(Double.self, forKey: .min) ?? 0
-            self.units = try container.decodeIfPresent(String.self, forKey: .units)
-            self.date = try container.decodeIfPresent(String.self, forKey: .date).flatMap { $0.dateFromISO }
-            self.endDate = try container.decodeIfPresent(String.self, forKey: .endDate).flatMap { $0.dateFromISO }
-            self.count = try container.decodeIfPresent(Int.self, forKey: .count) ?? 0
-            self.tripCount = try container.decodeIfPresent(Int.self, forKey: .tripCount) ?? 0
+            self.total = try container.decodeIfPresentIgnoringCase(Double.self, forKey: CodingKeys.total) ?? 0
+            self.average = try container.decodeIfPresentIgnoringCase(Double.self, forKey: CodingKeys.average) ?? 0
+            self.max = try container.decodeIfPresentIgnoringCase(Double.self, forKey: CodingKeys.max) ?? 0
+            self.min = try container.decodeIfPresentIgnoringCase(Double.self, forKey: CodingKeys.min) ?? 0
+            self.units = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.units)
+            self.date = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.date).flatMap { $0.dateFromISO }
+            self.endDate = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.endDate).flatMap { $0.dateFromISO }
+            self.count = try container.decodeIfPresentIgnoringCase(Int.self, forKey: CodingKeys.count) ?? 0
+            self.tripCount = try container.decodeIfPresentIgnoringCase(Int.self, forKey: CodingKeys.tripCount) ?? 0
         }
         catch {
             debugPrint(error)
