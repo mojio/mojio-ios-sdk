@@ -40,7 +40,7 @@ public struct CompatibilityDetails: CompatibilityDetailsModel {
     public let changed: Bool
     public let lastChecked: Date?
     
-    public enum CodingKeys: String, CodingKey {
+    public enum CodingKeys: String, CodingKey, CompoundWordStyle {
         case level = "Level"
         case changed = "Changed"
         case lastChecked = "LastChecked"
@@ -49,11 +49,11 @@ public struct CompatibilityDetails: CompatibilityDetailsModel {
     public init(from decoder: Decoder) throws {
         
         do {
-            let container = try decoder.container(keyedBy: CodingKeys.self)
+            let container = try decoder.container(keyedBy: DynamicCodingKey.self)
             
-            self.lastChecked = try container.decodeIfPresentIgnoringCase(String.self, forKey: .lastChecked).flatMap { $0.dateFromISO }
-            self.changed = try container.decodeIfPresentIgnoringCase(Bool.self, forKey: .changed) ?? false
-            self.level = try container.decodeIfPresentIgnoringCase(VehicleCompatibilityLevel.self, forKey: .level)
+            self.lastChecked = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.lastChecked).flatMap { $0.dateFromISO }
+            self.changed = try container.decodeIfPresentIgnoringCase(Bool.self, forKey: CodingKeys.changed) ?? false
+            self.level = try container.decodeIfPresentIgnoringCase(VehicleCompatibilityLevel.self, forKey: CodingKeys.level)
         }
         catch {
             debugPrint(error)

@@ -43,7 +43,7 @@ public struct Score: ScoreModel {
     public let percentile: Double
     public let average: Double
     
-    public enum CodingKeys: String, CodingKey {
+    public enum CodingKeys: String, CodingKey, CompoundWordStyle {
         case scoringMethod = "ScoringMethod"
         case value = "Value"
         case percentile = "Percentile"
@@ -53,12 +53,12 @@ public struct Score: ScoreModel {
     public init(from decoder: Decoder) throws {
         
         do {
-            let container = try decoder.container(keyedBy: CodingKeys.self)
+            let container = try decoder.container(keyedBy: DynamicCodingKey.self)
             
-            self.scoringMethod = try container.decodeIfPresentIgnoringCase(ScoreMethods.self, forKey: .scoringMethod)
-            self.value = try container.decodeIfPresentIgnoringCase(Double.self, forKey: .value) ?? 0
-            self.percentile = try container.decodeIfPresentIgnoringCase(Double.self, forKey: .percentile) ?? 0
-            self.average = try container.decodeIfPresentIgnoringCase(Double.self, forKey: .average) ?? 0
+            self.scoringMethod = try container.decodeIfPresentIgnoringCase(ScoreMethods.self, forKey: CodingKeys.scoringMethod)
+            self.value = try container.decodeIfPresentIgnoringCase(Double.self, forKey: CodingKeys.value) ?? 0
+            self.percentile = try container.decodeIfPresentIgnoringCase(Double.self, forKey: CodingKeys.percentile) ?? 0
+            self.average = try container.decodeIfPresentIgnoringCase(Double.self, forKey: CodingKeys.average) ?? 0
         }
         catch {
             debugPrint(error)

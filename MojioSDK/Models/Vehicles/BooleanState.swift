@@ -25,7 +25,7 @@ public struct BooleanState: BooleanStateModel {
     public let timestamp: Date?
     public let value: Bool
     
-    public enum CodingKeys: String, CodingKey {
+    public enum CodingKeys: String, CodingKey, CompoundWordStyle {
         case timestamp = "Timestamp"
         case value = "Value"
     }
@@ -33,10 +33,10 @@ public struct BooleanState: BooleanStateModel {
     public init(from decoder: Decoder) throws {
         
         do {
-            let container = try decoder.container(keyedBy: CodingKeys.self)
+            let container = try decoder.container(keyedBy: DynamicCodingKey.self)
             
-            self.timestamp = try container.decodeIfPresentIgnoringCase(String.self, forKey: .timestamp).flatMap { $0.dateFromISO }
-            self.value = try container.decodeIgnoringCase(Bool.self, forKey: .value)
+            self.timestamp = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.timestamp).flatMap { $0.dateFromISO }
+            self.value = try container.decodeIgnoringCase(Bool.self, forKey: CodingKeys.value)
         }
         catch {
             debugPrint(error)

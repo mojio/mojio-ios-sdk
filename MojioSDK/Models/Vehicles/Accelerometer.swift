@@ -39,7 +39,7 @@ public struct Accelerometer: AccelerometerModel {
     public var magnitude: A? = nil
     public var samplingInterval: T? = nil
     
-    public enum CodingKeys: String, CodingKey {
+    public enum CodingKeys: String, CodingKey, CompoundWordStyle {
         case x = "X"
         case y = "Y"
         case z = "Z"
@@ -51,13 +51,13 @@ public struct Accelerometer: AccelerometerModel {
         
         do {
             
-            let container = try decoder.container(keyedBy: CodingKeys.self)
+            let container = try decoder.container(keyedBy: DynamicCodingKey.self)
             
-            self.x = try container.decodeIfPresentIgnoringCase(ProperAcceleration.self, forKey: .x)
-            self.y = try container.decodeIfPresentIgnoringCase(ProperAcceleration.self, forKey: .y)
-            self.z = try container.decodeIfPresentIgnoringCase(ProperAcceleration.self, forKey: .z)
-            self.magnitude = try container.decodeIfPresentIgnoringCase(ProperAcceleration.self, forKey: .magnitude)
-            self.samplingInterval = try container.decodeIfPresentIgnoringCase(TimePeriod.self, forKey: .samplingInterval)
+            self.x = try container.decodeIfPresentIgnoringCase(ProperAcceleration.self, forKey: CodingKeys.x)
+            self.y = try container.decodeIfPresentIgnoringCase(ProperAcceleration.self, forKey: CodingKeys.y)
+            self.z = try container.decodeIfPresentIgnoringCase(ProperAcceleration.self, forKey: CodingKeys.z)
+            self.magnitude = try container.decodeIfPresentIgnoringCase(ProperAcceleration.self, forKey: CodingKeys.magnitude)
+            self.samplingInterval = try container.decodeIfPresentIgnoringCase(TimePeriod.self, forKey: CodingKeys.samplingInterval)
         }
         catch {
             debugPrint(error)

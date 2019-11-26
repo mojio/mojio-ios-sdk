@@ -35,7 +35,7 @@ public struct IdleState: IdleStateModel {
     public var startTime: String? = nil
     public var duration: T? = nil
     
-    public enum CodingKeys: String, CodingKey {
+    public enum CodingKeys: String, CodingKey, CompoundWordStyle {
         case timestamp = "Timestamp"
         case value = "Value"
         case startTime = "StartTime"
@@ -45,12 +45,12 @@ public struct IdleState: IdleStateModel {
     public init(from decoder: Decoder) throws {
         
         do {
-            let container = try decoder.container(keyedBy: CodingKeys.self)
+            let container = try decoder.container(keyedBy: DynamicCodingKey.self)
             
-            self.timestamp = try container.decodeIfPresentIgnoringCase(String.self, forKey: .timestamp).flatMap { $0.dateFromISO }
-            self.value = try container.decodeIfPresentIgnoringCase(Bool.self, forKey: .value) ?? false
-            self.startTime = try container.decodeIfPresentIgnoringCase(String.self, forKey: .startTime)
-            self.duration = try container.decodeIfPresentIgnoringCase(TimePeriod.self, forKey: .duration)
+            self.timestamp = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.timestamp).flatMap { $0.dateFromISO }
+            self.value = try container.decodeIfPresentIgnoringCase(Bool.self, forKey: CodingKeys.value) ?? false
+            self.startTime = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.startTime)
+            self.duration = try container.decodeIfPresentIgnoringCase(TimePeriod.self, forKey: CodingKeys.duration)
         }
         catch {
             debugPrint(error)

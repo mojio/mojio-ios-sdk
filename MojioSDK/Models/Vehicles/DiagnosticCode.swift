@@ -41,7 +41,7 @@ public struct DiagnosticCode: DiagnosticCodeModel {
     public var stateType: String? = nil
     public var diagnosticCodeType: String? = nil
 
-    public enum CodingKeys: String, CodingKey {
+    public enum CodingKeys: String, CodingKey, CompoundWordStyle {
         case ignored = "Ignored"
         case code = "Code"
         case description = "Description"
@@ -55,18 +55,18 @@ public struct DiagnosticCode: DiagnosticCodeModel {
     public init(from decoder: Decoder) throws {
         
         do {
-            let container = try decoder.container(keyedBy: CodingKeys.self)
+            let container = try decoder.container(keyedBy: DynamicCodingKey.self)
             
-            self.ignored = try container.decodeIfPresentIgnoringCase(Bool.self, forKey: .ignored) ?? false
-            self.code = try container.decodeIfPresentIgnoringCase(String.self, forKey: .code)
-            self.description = try container.decodeIfPresentIgnoringCase(String.self, forKey: .description)
-            self.timestamp = try container.decodeIfPresentIgnoringCase(String.self, forKey: .timestamp).flatMap { $0.dateFromISO }
+            self.ignored = try container.decodeIfPresentIgnoringCase(Bool.self, forKey: CodingKeys.ignored) ?? false
+            self.code = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.code)
+            self.description = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.description)
+            self.timestamp = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.timestamp).flatMap { $0.dateFromISO }
             
-            self.severity = try container.decodeIfPresentIgnoringCase(String.self, forKey: .severity)
-            self.instructions = try container.decodeIfPresentIgnoringCase(String.self, forKey: .instructions)
+            self.severity = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.severity)
+            self.instructions = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.instructions)
             
-            self.stateType = try container.decodeIfPresentIgnoringCase(String.self, forKey: .stateType)
-            self.diagnosticCodeType = try container.decodeIfPresentIgnoringCase(String.self, forKey: .diagnosticCodeType)
+            self.stateType = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.stateType)
+            self.diagnosticCodeType = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.diagnosticCodeType)
         }
         catch {
             debugPrint(error)

@@ -32,7 +32,7 @@ public struct Polyline: TripPolylineModel {
     public let lastModified: Date?
     public let deleted: Bool
     
-    public enum CodingKeys: String, CodingKey {
+    public enum CodingKeys: String, CodingKey, CompoundWordStyle {
         case id = "Id"
         case polyline = "Polyline"
         case createdOn = "CreatedOn"
@@ -43,13 +43,13 @@ public struct Polyline: TripPolylineModel {
     public init(from decoder: Decoder) throws {
         
         do {
-            let container = try decoder.container(keyedBy: CodingKeys.self)
+            let container = try decoder.container(keyedBy: DynamicCodingKey.self)
             
-            self.id = try container.decodeIgnoringCase(String.self, forKey: .id)
-            self.polyline = try container.decodeIfPresentIgnoringCase(String.self, forKey: .polyline)
-            self.createdOn = try container.decodeIfPresentIgnoringCase(String.self, forKey: .createdOn).flatMap { $0.dateFromISO }
-            self.lastModified = try container.decodeIfPresentIgnoringCase(String.self, forKey: .lastModified).flatMap { $0.dateFromISO }
-            self.deleted = try container.decodeIfPresentIgnoringCase(Bool.self, forKey: .deleted) ?? false
+            self.id = try container.decodeIgnoringCase(String.self, forKey: CodingKeys.id)
+            self.polyline = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.polyline)
+            self.createdOn = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.createdOn).flatMap { $0.dateFromISO }
+            self.lastModified = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.lastModified).flatMap { $0.dateFromISO }
+            self.deleted = try container.decodeIfPresentIgnoringCase(Bool.self, forKey: CodingKeys.deleted) ?? false
         }
         catch {
             debugPrint(error)
