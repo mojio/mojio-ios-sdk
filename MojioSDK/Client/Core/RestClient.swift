@@ -152,11 +152,13 @@ open class RestClient {
     
     open func v1() -> Self {
         self.requestUrl = self.requestUrl! + "v1/"
+        self.pushUrl = self.pushUrl.map { $0 + "v1/" }
         return self
     }
     
     open func v2() -> Self {
         self.requestUrl = self.requestUrl! + "v2/"
+        self.pushUrl = self.pushUrl.map { $0 + "v2/" }
         return self
     }
     
