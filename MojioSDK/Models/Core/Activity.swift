@@ -127,6 +127,51 @@ public struct ActivityLocation: ActivityLocationModel {
     }
 }
 
+
+public protocol ActivityTirePressureModel: Codable {
+    var tirePressureWarning: Bool? {get}
+    var rf_Status: String? {get}
+    var rr_Status: String? {get}
+    var rro_Status: String? {get}
+    var lf_Status: String? {get}
+    var lr_Status: String? {get}
+    var lro_Status: String? {get}
+}
+
+
+public struct ActivityTirePressure: ActivityTirePressureModel {
+    public let tirePressureWarning: Bool?
+    public let rf_Status: String?
+    public let rr_Status: String?
+    public let rro_Status: String?
+    public let lf_Status: String?
+    public let lr_Status: String?
+    public let lro_Status: String?
+    
+    enum CodingKeys: String, CodingKey, CompoundWordStyle {
+        case tirePressureWarning = "tp_wrn"
+        case rf_Status = "rftp_st"
+        case rr_Status = "rrtp_st"
+        case rro_Status = "rrotp_st"
+        case lf_Status = "lftp_st"
+        case lr_Status = "lrtp_st"
+        case lro_Status = "lrotp_st"
+    }
+    
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: DynamicCodingKey.self)
+        
+        self.tirePressureWarning = try container.decodeIfPresentIgnoringCase(Bool.self, forKey: CodingKeys.tirePressureWarning)
+        self.rf_Status = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.rf_Status)
+        self.rr_Status = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.rr_Status)
+        self.rro_Status = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.rro_Status)
+        self.lf_Status = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.lf_Status)
+        self.lr_Status = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.lr_Status)
+        self.lro_Status = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.lro_Status)
+    }
+    
+}
+
 public protocol ActivityModelBase: Codable {
     typealias S = [String: String]
     typealias T = [String]
@@ -183,6 +228,8 @@ public struct Activity: ActivityModel {
     
     public let attributedTo: ActivityModel?
     
+    public let tirePressure: ActivityTirePressure?
+    
     enum CodingKeys: String, CodingKey, CompoundWordStyle {
         case id = "Id"
         case type = "Type"
@@ -204,6 +251,7 @@ public struct Activity: ActivityModel {
         case latitude = "Latitude"
         case longitude = "Longitude"
         case altitude = "Altitude"
+        case tirePressure = "TirePressureObject"
     }
     
     public init(from decoder: Decoder) throws {
@@ -226,7 +274,7 @@ public struct Activity: ActivityModel {
         self.polyline = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.polyline)
         self.tags = try container.decodeIfPresentIgnoringCase(T.self, forKey: CodingKeys.tags) ?? []
         self.attributedTo = try container.decodeIfPresentIgnoringCase(Activity.self, forKey: CodingKeys.attributedTo)
-        
+        self.tirePressure = try container.decodeIfPresentIgnoringCase(ActivityTirePressure.self, forKey: CodingKeys.tirePressure)
         
         var encodedLocation = try container.decodeIfPresentIgnoringCase(ActivityLocation.self, forKey: CodingKeys.location)
         
@@ -261,6 +309,7 @@ public struct Activity: ActivityModel {
         try container.encode (self.polyline, forKey: .polyline)
         try container.encode (self.tags, forKey: .tags)
         try container.encode ((self.attributedTo as? Activity), forKey: .attributedTo)
+        try container.encode (self.tirePressure, forKey: .tirePressure)
     }
 }
 
