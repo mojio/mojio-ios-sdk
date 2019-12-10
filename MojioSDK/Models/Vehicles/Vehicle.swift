@@ -321,7 +321,7 @@ public struct VehicleUpdate: Codable {
         case name = "Name"
         case licensePlate = "LicensePlate"
         case vin = "VIN"
-        case odometer = "Odometer"
+        case odometer = "RealOdometer"
     }
     
     public init(vehicle: Vehicle? = nil) {
