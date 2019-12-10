@@ -57,6 +57,7 @@ public protocol VehicleModel: Codable, PrimaryKey {
     var speed: S? { get }
     var odometer: O? { get }
     var virtualOdometer: O? { get }
+    var realOdometer: O? { get }
     var rpm: R? { get }
     var fuelEfficiency: FE? { get }
     var fuelEfficiencyCalculationMethod: FuelEfficiencyCalculationMethod? { get }
@@ -125,6 +126,7 @@ public struct Vehicle: VehicleModel {
     public var speed: S?
     public var odometer: O?
     public var virtualOdometer: O?
+    public var realOdometer: O?
     public var rpm: R?
     public var fuelEfficiency: FE?
     public var fuelEfficiencyCalculationMethod: FuelEfficiencyCalculationMethod?
@@ -170,6 +172,7 @@ public struct Vehicle: VehicleModel {
         case speed = "Speed"
         case odometer = "Odometer"
         case virtualOdometer = "VirtualOdometer"
+        case realOdometer = "RealOdometer"
         case rpm = "RPM"
         case fuelEfficiency = "FuelEfficiency"
         case fuelEfficiencyCalculationMethod = "FuelEfficiencyCalculationMethod"
@@ -220,6 +223,7 @@ public struct Vehicle: VehicleModel {
             self.speed = try container.decodeIfPresentIgnoringCase(Speed.self, forKey: CodingKeys.speed)
             self.odometer = try container.decodeIfPresentIgnoringCase(Odometer.self, forKey: CodingKeys.odometer)
             self.virtualOdometer = try container.decodeIfPresentIgnoringCase(Odometer.self, forKey: CodingKeys.virtualOdometer)
+            self.realOdometer = try container.decodeIfPresentIgnoringCase(Odometer.self, forKey: CodingKeys.realOdometer)
             self.rpm = try container.decodeIfPresentIgnoringCase(RPM.self, forKey: CodingKeys.rpm)
             self.fuelEfficiency = try container.decodeIfPresentIgnoringCase(FuelEfficiency.self, forKey: CodingKeys.fuelEfficiency)
             self.fuelEfficiencyCalculationMethod = try container.decodeIfPresentIgnoringCase(FuelEfficiencyCalculationMethod.self, forKey: CodingKeys.fuelEfficiencyCalculationMethod)
@@ -274,6 +278,7 @@ public struct Vehicle: VehicleModel {
         try container.encodeIfPresent(self.speed, forKey: .speed)
         try container.encodeIfPresent(self.odometer, forKey: .odometer)
         try container.encodeIfPresent(self.virtualOdometer, forKey: .virtualOdometer)
+        try container.encodeIfPresent(self.realOdometer, forKey: .realOdometer)
         try container.encodeIfPresent(self.rpm, forKey: .rpm)
         try container.encodeIfPresent(self.fuelEfficiency, forKey: .fuelEfficiency)
         try container.encodeIfPresent(self.fuelEfficiencyCalculationMethod, forKey: .fuelEfficiencyCalculationMethod)

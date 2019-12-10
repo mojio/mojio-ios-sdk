@@ -73,6 +73,7 @@ class VehicleTests: XCTestCase {
             XCTAssertNotNil(model.speed)
             XCTAssertNotNil(model.odometer)
             XCTAssertNotNil(model.virtualOdometer)
+            XCTAssertNotNil(model.realOdometer)
             XCTAssertNotNil(model.rpm)
             XCTAssertNotNil(model.fuelEfficiency)
             XCTAssertEqual(model.fuelEfficiencyCalculationMethod, .query)
@@ -384,6 +385,14 @@ extension VehicleTests {
                 "Unit": "Meters",
                 "Value": 0
             },
+            "RealOdometer": {
+                "RolloverValue": 0,
+                "BaseUnit": "Meters",
+                "Timestamp": "2019-12-10T09:00:31.438Z",
+                "BaseValue": 0,
+                "Unit": "Meters",
+                "Value": 0
+        },
             "Id": "00000000-0000-0000-0000-000000000000",
             "CreatedOn": "2017-11-10T07:07:45.031Z",
             "LastModified": "2017-11-10T07:07:45.031Z",
