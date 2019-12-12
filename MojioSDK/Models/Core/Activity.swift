@@ -128,25 +128,53 @@ public struct ActivityLocation: ActivityLocationModel {
 }
 
 
-public protocol ActivityTirePressureModel: Codable {
-    var tirePressureWarning: Bool? {get}
-    var rf_Status: String? {get}
-    var rr_Status: String? {get}
-    var rro_Status: String? {get}
-    var lf_Status: String? {get}
-    var lr_Status: String? {get}
-    var lro_Status: String? {get}
+public enum ActivityTirePressureLevel: String, Codable {
+    case unknown = "Unknown"
+    case normal = "Normal"
+    case low = "Low"
+    case fault = "Fault"
+    case alert = "Alert"
+    
+    public init(from decoder: Decoder) throws {
+        let label = try decoder.singleValueContainer().decode(String.self)
+        self = ActivityTirePressureLevel(rawValue: label) ?? .unknown
+    }
+    
+    public var level: Int {
+        switch self {
+        case .unknown:
+            return 0
+        case .normal:
+            return 1
+        case .fault:
+            return 2
+        case .low:
+            return 3
+        case .alert:
+            return 4
+        }
+        
+    }
 }
 
+public protocol ActivityTirePressureModel: Codable {
+    var tirePressureWarning: Bool? {get}
+    var rf_Status: ActivityTirePressureLevel? {get}
+    var rr_Status: ActivityTirePressureLevel? {get}
+    var rro_Status: ActivityTirePressureLevel? {get}
+    var lf_Status: ActivityTirePressureLevel? {get}
+    var lr_Status: ActivityTirePressureLevel? {get}
+    var lro_Status: ActivityTirePressureLevel? {get}
+}
 
 public struct ActivityTirePressure: ActivityTirePressureModel {
     public let tirePressureWarning: Bool?
-    public let rf_Status: String?
-    public let rr_Status: String?
-    public let rro_Status: String?
-    public let lf_Status: String?
-    public let lr_Status: String?
-    public let lro_Status: String?
+    public let rf_Status: ActivityTirePressureLevel?
+    public let rr_Status: ActivityTirePressureLevel?
+    public let rro_Status: ActivityTirePressureLevel?
+    public let lf_Status: ActivityTirePressureLevel?
+    public let lr_Status: ActivityTirePressureLevel?
+    public let lro_Status: ActivityTirePressureLevel?
     
     enum CodingKeys: String, CodingKey, CompoundWordStyle {
         case tirePressureWarning = "tp_wrn"
@@ -162,12 +190,12 @@ public struct ActivityTirePressure: ActivityTirePressureModel {
         let container = try decoder.container(keyedBy: DynamicCodingKey.self)
         
         self.tirePressureWarning = try container.decodeIfPresentIgnoringCase(Bool.self, forKey: CodingKeys.tirePressureWarning)
-        self.rf_Status = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.rf_Status)
-        self.rr_Status = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.rr_Status)
-        self.rro_Status = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.rro_Status)
-        self.lf_Status = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.lf_Status)
-        self.lr_Status = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.lr_Status)
-        self.lro_Status = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.lro_Status)
+        self.rf_Status = try container.decodeIfPresentIgnoringCase(ActivityTirePressureLevel.self, forKey: CodingKeys.rf_Status)
+        self.rr_Status = try container.decodeIfPresentIgnoringCase(ActivityTirePressureLevel.self, forKey: CodingKeys.rr_Status)
+        self.rro_Status = try container.decodeIfPresentIgnoringCase(ActivityTirePressureLevel.self, forKey: CodingKeys.rro_Status)
+        self.lf_Status = try container.decodeIfPresentIgnoringCase(ActivityTirePressureLevel.self, forKey: CodingKeys.lf_Status)
+        self.lr_Status = try container.decodeIfPresentIgnoringCase(ActivityTirePressureLevel.self, forKey: CodingKeys.lr_Status)
+        self.lro_Status = try container.decodeIfPresentIgnoringCase(ActivityTirePressureLevel.self, forKey: CodingKeys.lro_Status)
     }
     
 }
