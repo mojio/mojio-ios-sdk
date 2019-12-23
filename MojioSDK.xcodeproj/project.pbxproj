@@ -22,6 +22,7 @@
 		2EBF12BE1FB986FE00F068B2 /* FuelVolume.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF12BD1FB986FE00F068B2 /* FuelVolume.swift */; };
 		32D2EC310E53177F966BBECD /* Pods_Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D5E15756B96D0AEF2C4AE0A /* Pods_Accounts.framework */; };
 		36B0E43D20FE21DA006F897B /* VehicleActivitySettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36B0E43B20FE16A4006F897B /* VehicleActivitySettings.swift */; };
+		372150DD23B0B752001D7B1D /* SpeedingViolation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 372150DC23B0B752001D7B1D /* SpeedingViolation.swift */; };
 		373188D6209B363800E61E3A /* ProperAccelerationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373188D5209B363800E61E3A /* ProperAccelerationTests.swift */; };
 		373188D9209B3F3800E61E3A /* TimePeriodTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373188D8209B3F3800E61E3A /* TimePeriodTests.swift */; };
 		373188DB209B3FD100E61E3A /* AccelerationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373188DA209B3FD100E61E3A /* AccelerationTests.swift */; };
@@ -245,6 +246,7 @@
 		3199A593F23CF5B6C1D57E7F /* Pods_Core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Core.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3682365F20EAA54E00E21086 /* ActivitySettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivitySettings.swift; sourceTree = "<group>"; };
 		36B0E43B20FE16A4006F897B /* VehicleActivitySettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleActivitySettings.swift; sourceTree = "<group>"; };
+		372150DC23B0B752001D7B1D /* SpeedingViolation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedingViolation.swift; sourceTree = "<group>"; };
 		373188D5209B363800E61E3A /* ProperAccelerationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProperAccelerationTests.swift; sourceTree = "<group>"; };
 		373188D8209B3F3800E61E3A /* TimePeriodTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePeriodTests.swift; sourceTree = "<group>"; };
 		373188DA209B3FD100E61E3A /* AccelerationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccelerationTests.swift; sourceTree = "<group>"; };
@@ -700,6 +702,7 @@
 				37BC6C852312A1CA0054B420 /* EngineOil.swift */,
 				AEBC417523514905002F5941 /* TirePressure.swift */,
 				377BD260237563F500228716 /* PredictiveMaintenance.swift */,
+				372150DC23B0B752001D7B1D /* SpeedingViolation.swift */,
 			);
 			path = Vehicles;
 			sourceTree = "<group>";
@@ -1463,6 +1466,7 @@
 				BC879B741CBEFFDD00F9177B /* ProperAcceleration.swift in Sources */,
 				F9623AAE1D935D74005C10F2 /* IdleState.swift in Sources */,
 				BC879B3E1CBEFFC000F9177B /* ServiceSchedule.swift in Sources */,
+				372150DD23B0B752001D7B1D /* SpeedingViolation.swift in Sources */,
 				BC879B651CBEFFDD00F9177B /* BooleanState.swift in Sources */,
 				BC879B3A1CBEFFC000F9177B /* NextServiceSchedule.swift in Sources */,
 				BC879B761CBEFFDD00F9177B /* Score.swift in Sources */,
