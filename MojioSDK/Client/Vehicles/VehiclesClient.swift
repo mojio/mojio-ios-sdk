@@ -346,7 +346,7 @@ open class VehiclesClient: RestClient {
                 
             case .speedingViolations:
                 do {
-                    return try JSONDecoder().decode(ResponseArray<SpeedingViolation>.self, from: responseData)
+                    return try JSONDecoder().decode([SpeedingViolation].self, from: responseData)
                 }
                 catch {
                     return try JSONDecoder().decode(SpeedingViolation.self, from: responseData)
