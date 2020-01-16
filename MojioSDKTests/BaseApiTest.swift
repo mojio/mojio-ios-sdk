@@ -12,7 +12,7 @@ import XCTest
 
 class BaseApiTest: XCTestCase {
     
-    let authClient : AuthClient = AuthClient(clientId: "81d705ec-4025-4d96-9b30-53d2a43eaa24", clientSecretKey: "2299d863-5a3a-4aea-8bd1-0caf32a412d5", clientRedirectURI: "sdkdev://io.moj")
+    let authClient : AuthClient = AuthClient(clientId: "<CLIENT_ID>", clientSecretKey: "<CLIENT_SECRET>", clientRedirectURI: "sdkdev://io.moj")
     
     override func setUp() {
         super.setUp()

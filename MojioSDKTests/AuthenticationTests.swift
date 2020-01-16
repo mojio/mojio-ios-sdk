@@ -12,7 +12,7 @@ import XCTest
 
 class AuthenticationTests: XCTestCase {
     
-    let authClient : AuthClient = AuthClient(clientId: "81d705ec-4025-4d96-9b30-53d2a43eaa24", clientSecretKey: "2299d863-5a3a-4aea-8bd1-0caf32a412d5", clientRedirectURI: "sdkdev://io.moj")
+    let authClient : AuthClient = AuthClient(clientId: "<CLIENT_ID>", clientSecretKey: "<CLIENT_SECRET>", clientRedirectURI: "sdkdev://io.moj")
     
     override func setUp() {
         super.setUp()
@@ -71,7 +71,7 @@ class AuthenticationTests: XCTestCase {
     
     func performLogin () {
         
-        let urlRequest : NSURLRequest = NSURLRequest(URL: NSURL(string: "sdkdev://io.moj#access_token=9be67364-3f78-4539-ae64-5861c4dd3584&token_type=bearer&expires_in=43200")!)
+        let urlRequest : NSURLRequest = NSURLRequest(URL: NSURL(string: "sdkdev://io.moj#access_token=<ACCESS-TOKEN>&token_type=bearer&expires_in=43200")!)
         
         self.authClient.loginCompletion = { (authToken) in
             XCTAssert(true, "Login successful")
