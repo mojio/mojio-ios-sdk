@@ -440,7 +440,9 @@ public struct RootActivity: RootActivityModel {
     public let object: A?
     public let origin: A?
     public let audience: A?
-    
+    public let userId: String?
+    public let messageId: String?
+
     enum CodingKeys: String, CodingKey, CompoundWordStyle {
         case id = "Id"
         case type = "Type"
@@ -466,6 +468,8 @@ public struct RootActivity: RootActivityModel {
         case origin = "Origin"
         case attributedTo = "AttributedTo"
         case audience = "Audience"
+        case userId = "UserId"
+        case messageId = "MessageId"
     }
     
     public init(from decoder: Decoder) throws {
@@ -473,6 +477,8 @@ public struct RootActivity: RootActivityModel {
         let container = try decoder.container(keyedBy: DynamicCodingKey.self)
         
         self.id = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.id) ?? String.empty
+        self.userId = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.userId) ?? String.empty
+        self.messageId = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.messageId) ?? String.empty
         self.type = try container.decodeIfPresentIgnoringCase(ActivityType.self, forKey: CodingKeys.type)
         self.href = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.href)
         self.name = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.name)
@@ -523,6 +529,8 @@ public struct RootActivity: RootActivityModel {
     {
         var container = encoder.container (keyedBy: CodingKeys.self)
         try container.encode (self.id, forKey: .id)
+        try container.encode (self.userId, forKey: .userId)
+        try container.encode (self.messageId, forKey: .messageId)
         try container.encode (self.type, forKey: .type)
         try container.encode (self.href, forKey: .href)
         try container.encode (self.name, forKey: .name)

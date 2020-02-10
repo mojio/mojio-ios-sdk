@@ -26,6 +26,9 @@ class ActivityTests: XCTestCase {
         XCTAssertNotNil(event.actor)
         XCTAssertNotNil(event.target)
         XCTAssertNotNil(event.location)
+        XCTAssertEqual(event.userId, "7f7e6eec-8f2e-4d00-8ced-e22949e21cda")
+        XCTAssertEqual(event.messageId, "71606402-8d8c-436f-b896-5047e4f82694")
+        XCTAssertEqual(event.id, "51183a95-0efb-4f37-b2a5-f2631971a0e4")
     }
     
     func testParseTarget() {
@@ -112,6 +115,7 @@ class ActivityTests: XCTestCase {
   ],
   "UserId": "7f7e6eec-8f2e-4d00-8ced-e22949e21cda",
   "Id": "51183a95-0efb-4f37-b2a5-f2631971a0e4",
+  "MessageId": "71606402-8d8c-436f-b896-5047e4f82694",
   "Context": "http://www.w3.org/ns/activitystreams#Move",
   "Type": "Move",
   "Name": "Possible Disturbance Has Been Detected",
