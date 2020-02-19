@@ -51,6 +51,7 @@ public protocol TripModel: Codable, PrimaryKey {
     
     associatedtype A: AccelerationModel
     
+    associatedtype P: TripPropertiesModel
 
     var id: String { get }
     
@@ -115,6 +116,8 @@ public protocol TripModel: Codable, PrimaryKey {
     var driverScore: Int? { get }
     
     var averageDriverScore: Int? { get }
+
+    var properties: P? { get }
 }
 
 public struct Trip: TripModel {
@@ -139,7 +142,9 @@ public struct Trip: TripModel {
     
     public typealias A = Acceleration
     
+    public typealias P = TripProperties
     
+
     public let id: String
     
     public let vehicleId: String?
@@ -205,7 +210,8 @@ public struct Trip: TripModel {
     
     public let averageDriverScore: Int?
     
-    
+    public let properties: TripProperties?
+
     public enum CodingKeys: String, CodingKey, CompoundWordStyle {
         case id = "Id"
         case vehicleId = "VehicleId"
@@ -240,6 +246,8 @@ public struct Trip: TripModel {
 
         case driverScore = "DriverScore"
         case averageDriverScore = "AverageDriverScore"
+        
+        case properties = "properties"
     }
     
     public init(from decoder: Decoder) throws {
@@ -339,6 +347,8 @@ public struct Trip: TripModel {
             else {
                 self.averageDriverScore = nil
             }
+            
+            self.properties = try container.decodeIfPresentIgnoringCase(TripProperties.self, forKey: CodingKeys.properties)
         }
         catch {
             debugPrint(error)
