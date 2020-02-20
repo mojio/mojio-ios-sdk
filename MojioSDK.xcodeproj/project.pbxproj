@@ -87,6 +87,7 @@
 		72B30078210B139D00608978 /* CompoundWordStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B30073210B072A00608978 /* CompoundWordStyle.swift */; };
 		72B3007B210B15B200608978 /* DynamicCodingKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B3007A210B15B200608978 /* DynamicCodingKey.swift */; };
 		75F77F0E1D19F504000CC2B4 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 75F77F0D1D19F504000CC2B4 /* libz.tbd */; };
+		85D5EDDA23FD8E47009C8C3C /* TripProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D5EDD923FD8E47009C8C3C /* TripProperties.swift */; };
 		887014791DA833CA00EFEC6D /* VehicleStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887014781DA833CA00EFEC6D /* VehicleStatistics.swift */; };
 		917178A122C5E29BB3016930 /* Pods_Pets.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 900BE0216536E43DFAA6B957 /* Pods_Pets.framework */; };
 		AE4DB04B22B05DF600B30DBB /* Buzzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4DB04A22B05DF600B30DBB /* Buzzer.swift */; };
@@ -312,6 +313,7 @@
 		72B3007A210B15B200608978 /* DynamicCodingKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicCodingKey.swift; sourceTree = "<group>"; };
 		75F77F0D1D19F504000CC2B4 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		7C53B314962CF951A9E02078 /* Pods-Pets.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pets.release.xcconfig"; path = "Target Support Files/Pods-Pets/Pods-Pets.release.xcconfig"; sourceTree = "<group>"; };
+		85D5EDD923FD8E47009C8C3C /* TripProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripProperties.swift; sourceTree = "<group>"; };
 		8808C2341EB1483A00A41A8B /* PrimaryKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimaryKey.swift; sourceTree = "<group>"; };
 		887014781DA833CA00EFEC6D /* VehicleStatistics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VehicleStatistics.swift; sourceTree = "<group>"; };
 		900BE0216536E43DFAA6B957 /* Pods_Pets.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pets.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -689,6 +691,7 @@
 				BC879B591CBEFFDD00F9177B /* Score.swift */,
 				BC879B5C1CBEFFDD00F9177B /* Trip.swift */,
 				BC94271A1F01E17D00B7424A /* TripPolyline.swift */,
+				85D5EDD923FD8E47009C8C3C /* TripProperties.swift */,
 				BC5F7F021CC58D4000FAB205 /* Units.swift */,
 				BC879B5E1CBEFFDD00F9177B /* Vehicle.swift */,
 				887014781DA833CA00EFEC6D /* VehicleStatistics.swift */,
@@ -1416,6 +1419,7 @@
 				BC879B771CBEFFDD00F9177B /* Speed.swift in Sources */,
 				BC879B701CBEFFDD00F9177B /* MeasurementStats.swift in Sources */,
 				644214DE1D9E6500005A86C5 /* AggregationData.swift in Sources */,
+				85D5EDDA23FD8E47009C8C3C /* TripProperties.swift in Sources */,
 				375206FE20AAFD1600102273 /* SettingsGeofence.swift in Sources */,
 				377BD261237563F500228716 /* PredictiveMaintenance.swift in Sources */,
 				BC879B641CBEFFDD00F9177B /* Battery.swift in Sources */,
