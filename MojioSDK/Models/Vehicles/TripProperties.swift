@@ -26,16 +26,19 @@ public protocol TripPropertiesModel: Codable {
 public protocol TripPropertiesDetailsModel: Codable {
     var purpose: String? { get }
     var notes: String? { get }
+    var lastUpdated: Date? { get }
 }
 
 public struct TripPropertiesDetails: TripPropertiesDetailsModel {
     
     public let purpose: String?
     public let notes: String?
+    public let lastUpdated: Date?
 
     public enum CodingKeys: String, CodingKey, CompoundWordStyle {
         case purpose = "purpose"
         case notes = "notes"
+        case lastUpdated = "lastUpdatedByUserTimeStamp"
     }
     
     public init(from decoder: Decoder) throws {
@@ -45,6 +48,7 @@ public struct TripPropertiesDetails: TripPropertiesDetailsModel {
 
             self.purpose = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.purpose)
             self.notes = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.notes)
+            self.lastUpdated = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.lastUpdated).flatMap { $0.dateFromISO }
         }
         catch {
             debugPrint(error)
@@ -58,6 +62,7 @@ public struct TripPropertiesDetails: TripPropertiesDetailsModel {
 
         try container.encodeIfPresent(self.purpose, forKey: .purpose)
         try container.encodeIfPresent(self.notes, forKey: .notes)
+        try container.encodeIfPresent(self.lastUpdated, forKey: .lastUpdated)
     }
 }
 
