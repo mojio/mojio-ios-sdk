@@ -526,7 +526,7 @@ open class RestClient {
             if let parsedData = self.parseData(responseData) {
                 completion(parsedData, headers)
             }
-            else if let httpMethod = response.request?.httpMethod, httpMethod == HTTPMethod.delete.rawValue {
+            else if let httpMethod = response.request?.httpMethod, httpMethod == HTTPMethod.delete.rawValue || httpMethod == HTTPMethod.patch.rawValue {
                 completion(true, headers)
             }
             else {
