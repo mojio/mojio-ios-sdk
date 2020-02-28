@@ -95,3 +95,32 @@ public struct TripProperties: TripPropertiesModel {
         try container.encodeIfPresent(self.details, forKey: .details)
     }
 }
+
+public struct TripPropertiesUpdate: Codable {
+    public let vehicleId: String
+    public let purpose: String?
+    public let notes: String?
+    
+    public enum CodingKeys: String, CodingKey {
+        case vehicleId = "vehicleid"
+        case purpose = "purpose"
+        case notes = "notes"
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        try container.encode(self.vehicleId, forKey: .vehicleId)
+        try container.encodeIfPresent(self.purpose, forKey: .purpose)
+        try container.encodeIfPresent(self.notes, forKey: .notes)
+    }
+    
+    public init(vehicleId: String,
+                purpose: String? = nil,
+                notes: String? = nil) {
+        
+        self.vehicleId = vehicleId
+        self.purpose = purpose
+        self.notes = notes
+    }
+}
