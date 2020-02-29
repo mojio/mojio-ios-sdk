@@ -45,6 +45,7 @@ public enum VehiclesEndpoint: String {
     // Parameters: Type, Id, Key
     // e.g. trips/{id}/store/{key}
     case storage = "%@%@/store/%@"
+    case details = "details"
 }
 
 open class VehiclesClient: RestClient {
@@ -80,6 +81,13 @@ open class VehiclesClient: RestClient {
     open func tags(_ tagId: String) -> Self {
         self.requestEntity = VehiclesEndpoint.tags.rawValue
         self.requestUrl = self.requestUrl! + self.requestEntity + tagId + "/"
+        
+        return self
+    }
+    
+    open func details() -> Self {
+        self.requestEntity = VehiclesEndpoint.details.rawValue
+        self.requestUrl = self.requestUrl! + self.requestEntity
         
         return self
     }
