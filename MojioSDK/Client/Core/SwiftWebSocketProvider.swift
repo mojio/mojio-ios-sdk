@@ -48,17 +48,17 @@ class SwiftWebSocketWrapper: WebSocketProvider {
     }
     
     private func configure() {
-        self.webSocket.event.open = {
-            self.onConnect()
+        self.webSocket.event.open = { [weak self] in
+            self?.onConnect()
         }
-        self.webSocket.event.end = { _, _, _, error in
-            self.onDisconnect(error)
+        self.webSocket.event.end = { [weak self] _, _, _, error in
+            self?.onDisconnect(error)
         }
-        self.webSocket.event.message = { data in
-            self.onMessage(data)
+        self.webSocket.event.message = { [weak self] data in
+            self?.onMessage(data)
         }
-        self.webSocket.event.pong = { data in
-            self.onPong(data)
+        self.webSocket.event.pong = { [weak self] data in
+            self?.onPong(data)
         }
     }
 }
