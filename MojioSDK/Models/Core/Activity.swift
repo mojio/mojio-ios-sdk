@@ -257,8 +257,6 @@ public struct Activity: ActivityModel {
     public let attributedTo: ActivityModel?
     
     public let tirePressure: ActivityTirePressure?
-    public let driverScore: Int?
-    public let averageDriverScore: Int?
 
     enum CodingKeys: String, CodingKey, CompoundWordStyle {
         case id = "Id"
@@ -282,8 +280,6 @@ public struct Activity: ActivityModel {
         case longitude = "Longitude"
         case altitude = "Altitude"
         case tirePressure = "TirePressureObject"
-        case driverScore = "DriverScore"
-        case averageDriverScore = "AverageDriverScore"
     }
     
     public init(from decoder: Decoder) throws {
@@ -307,20 +303,6 @@ public struct Activity: ActivityModel {
         self.tags = try container.decodeIfPresentIgnoringCase(T.self, forKey: CodingKeys.tags) ?? []
         self.attributedTo = try container.decodeIfPresentIgnoringCase(Activity.self, forKey: CodingKeys.attributedTo)
         self.tirePressure = try container.decodeIfPresentIgnoringCase(ActivityTirePressure.self, forKey: CodingKeys.tirePressure)
-
-        if let driverScore = try container.decodeIfPresentIgnoringCase(Float.self, forKey: CodingKeys.driverScore) {
-            self.driverScore = Int(driverScore * 100)
-        }
-        else {
-            self.driverScore = nil
-        }
-        
-        if let averageDriverScore = try container.decodeIfPresentIgnoringCase(Float.self, forKey: CodingKeys.averageDriverScore) {
-            self.averageDriverScore = Int(averageDriverScore * 100)
-        }
-        else {
-            self.averageDriverScore = nil
-        }
 
         var encodedLocation = try container.decodeIfPresentIgnoringCase(ActivityLocation.self, forKey: CodingKeys.location)
         
@@ -356,8 +338,6 @@ public struct Activity: ActivityModel {
         try container.encode (self.tags, forKey: .tags)
         try container.encode ((self.attributedTo as? Activity), forKey: .attributedTo)
         try container.encode (self.tirePressure, forKey: .tirePressure)
-        try container.encodeIfPresent(self.driverScore, forKey: .driverScore)
-        try container.encodeIfPresent(self.averageDriverScore, forKey: .averageDriverScore)
     }
 }
 
@@ -463,6 +443,9 @@ public struct RootActivity: RootActivityModel {
     public let userId: String?
     public let messageId: String?
 
+    public let driverScore: Int?
+    public let averageDriverScore: Int?
+
     enum CodingKeys: String, CodingKey, CompoundWordStyle {
         case id = "Id"
         case type = "Type"
@@ -490,6 +473,8 @@ public struct RootActivity: RootActivityModel {
         case audience = "Audience"
         case userId = "UserId"
         case messageId = "MessageId"
+        case driverScore = "DriverScore"
+        case averageDriverScore = "AverageDriverScore"
     }
     
     public init(from decoder: Decoder) throws {
@@ -543,7 +528,21 @@ public struct RootActivity: RootActivityModel {
             self.target = nil
             self.location = try container.decodeIfPresentIgnoringCase(ActivityLocation.self, forKey: CodingKeys.location)
         }
-    }
+        
+        if let driverScore = try container.decodeIfPresentIgnoringCase(Float.self, forKey: CodingKeys.driverScore) {
+            self.driverScore = Int(driverScore * 100)
+        }
+        else {
+            self.driverScore = nil
+        }
+        
+        if let averageDriverScore = try container.decodeIfPresentIgnoringCase(Float.self, forKey: CodingKeys.averageDriverScore) {
+            self.averageDriverScore = Int(averageDriverScore * 100)
+        }
+        else {
+            self.averageDriverScore = nil
+        }
+}
     
     public func encode (to encoder: Encoder) throws
     {
@@ -574,6 +573,9 @@ public struct RootActivity: RootActivityModel {
         try container.encode ((self.object), forKey: .object)
         try container.encode ((self.origin), forKey: .origin)
         try container.encode ((self.audience), forKey: .audience)
+        
+        try container.encodeIfPresent(self.driverScore, forKey: .driverScore)
+        try container.encodeIfPresent(self.averageDriverScore, forKey: .averageDriverScore)
     }
 }
 
