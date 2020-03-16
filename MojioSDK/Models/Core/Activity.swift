@@ -257,7 +257,9 @@ public struct Activity: ActivityModel {
     public let attributedTo: ActivityModel?
     
     public let tirePressure: ActivityTirePressure?
-    
+    public let driverScore: Int?
+    public let averageDriverScore: Int?
+
     enum CodingKeys: String, CodingKey, CompoundWordStyle {
         case id = "Id"
         case type = "Type"
@@ -280,6 +282,8 @@ public struct Activity: ActivityModel {
         case longitude = "Longitude"
         case altitude = "Altitude"
         case tirePressure = "TirePressureObject"
+        case driverScore = "DriverScore"
+        case averageDriverScore = "AverageDriverScore"
     }
     
     public init(from decoder: Decoder) throws {
@@ -303,7 +307,21 @@ public struct Activity: ActivityModel {
         self.tags = try container.decodeIfPresentIgnoringCase(T.self, forKey: CodingKeys.tags) ?? []
         self.attributedTo = try container.decodeIfPresentIgnoringCase(Activity.self, forKey: CodingKeys.attributedTo)
         self.tirePressure = try container.decodeIfPresentIgnoringCase(ActivityTirePressure.self, forKey: CodingKeys.tirePressure)
+
+        if let driverScore = try container.decodeIfPresentIgnoringCase(Float.self, forKey: CodingKeys.driverScore) {
+            self.driverScore = Int(driverScore * 100)
+        }
+        else {
+            self.driverScore = nil
+        }
         
+        if let averageDriverScore = try container.decodeIfPresentIgnoringCase(Float.self, forKey: CodingKeys.averageDriverScore) {
+            self.averageDriverScore = Int(averageDriverScore * 100)
+        }
+        else {
+            self.averageDriverScore = nil
+        }
+
         var encodedLocation = try container.decodeIfPresentIgnoringCase(ActivityLocation.self, forKey: CodingKeys.location)
         
         if encodedLocation == nil,
@@ -338,6 +356,8 @@ public struct Activity: ActivityModel {
         try container.encode (self.tags, forKey: .tags)
         try container.encode ((self.attributedTo as? Activity), forKey: .attributedTo)
         try container.encode (self.tirePressure, forKey: .tirePressure)
+        try container.encodeIfPresent(self.driverScore, forKey: .driverScore)
+        try container.encodeIfPresent(self.averageDriverScore, forKey: .averageDriverScore)
     }
 }
 
