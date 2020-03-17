@@ -252,6 +252,11 @@ open class RestClient {
         return self
     }
     
+    open func withTags(tags: [String]) -> Self {
+        self.requestParams["tags"] = tags.joined(separator: ",")
+        return self
+    }
+    
     open func continueNext() -> Self {
         self.doNext = true
         return self

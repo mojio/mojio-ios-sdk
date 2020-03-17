@@ -101,6 +101,14 @@ open class VehiclesClient: RestClient {
         return self
     }
     
+    open func trips(for vehicleId: String) -> Self {
+        self.requestEntity = VehiclesEndpoint.trips.rawValue
+        self.requestParams["vehicleId"] = vehicleId
+        self.requestUrl = self.requestUrl! + self.requestEntity
+
+        return self
+    }
+    
     open func vehicles(_ vehicleId: String? = nil) -> Self {
         self.requestEntity = VehiclesEndpoint.vehicles.rawValue
         self.requestEntityId = vehicleId
