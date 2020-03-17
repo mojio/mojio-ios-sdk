@@ -257,7 +257,7 @@ public struct Activity: ActivityModel {
     public let attributedTo: ActivityModel?
     
     public let tirePressure: ActivityTirePressure?
-    
+
     enum CodingKeys: String, CodingKey, CompoundWordStyle {
         case id = "Id"
         case type = "Type"
@@ -303,7 +303,7 @@ public struct Activity: ActivityModel {
         self.tags = try container.decodeIfPresentIgnoringCase(T.self, forKey: CodingKeys.tags) ?? []
         self.attributedTo = try container.decodeIfPresentIgnoringCase(Activity.self, forKey: CodingKeys.attributedTo)
         self.tirePressure = try container.decodeIfPresentIgnoringCase(ActivityTirePressure.self, forKey: CodingKeys.tirePressure)
-        
+
         var encodedLocation = try container.decodeIfPresentIgnoringCase(ActivityLocation.self, forKey: CodingKeys.location)
         
         if encodedLocation == nil,
@@ -443,6 +443,9 @@ public struct RootActivity: RootActivityModel {
     public let userId: String?
     public let messageId: String?
 
+    public let driverScore: Int?
+    public let averageDriverScore: Int?
+
     enum CodingKeys: String, CodingKey, CompoundWordStyle {
         case id = "Id"
         case type = "Type"
@@ -470,6 +473,8 @@ public struct RootActivity: RootActivityModel {
         case audience = "Audience"
         case userId = "UserId"
         case messageId = "MessageId"
+        case driverScore = "DriverScore"
+        case averageDriverScore = "AverageDriverScore"
     }
     
     public init(from decoder: Decoder) throws {
@@ -523,6 +528,9 @@ public struct RootActivity: RootActivityModel {
             self.target = nil
             self.location = try container.decodeIfPresentIgnoringCase(ActivityLocation.self, forKey: CodingKeys.location)
         }
+        
+        self.driverScore = try container.decodeIfPresentIgnoringCase(Float.self, forKey: CodingKeys.driverScore).flatMap { Int($0 * 100) }
+        self.averageDriverScore = try container.decodeIfPresentIgnoringCase(Float.self, forKey: CodingKeys.averageDriverScore).flatMap { Int($0 * 100) }
     }
     
     public func encode (to encoder: Encoder) throws
@@ -554,6 +562,9 @@ public struct RootActivity: RootActivityModel {
         try container.encode ((self.object), forKey: .object)
         try container.encode ((self.origin), forKey: .origin)
         try container.encode ((self.audience), forKey: .audience)
+        
+        try container.encodeIfPresent(self.driverScore, forKey: .driverScore)
+        try container.encodeIfPresent(self.averageDriverScore, forKey: .averageDriverScore)
     }
 }
 
