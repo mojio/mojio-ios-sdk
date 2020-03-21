@@ -70,6 +70,15 @@ public enum RestEndpoint: String {
     case base = "/"
 }
 
+public let RestClientRequestNotificationName: NSNotification.Name = NSNotification.Name(rawValue: "RestClientRequest")
+
+public struct RestClientRequestDebugInfo {
+    public let urlString: String
+    public let cURLRepresentation: String
+    public let duration: TimeInterval
+    public let timestamp: Date
+}
+
 open class RestClient {
     
     public static let RestClientResponseStatusCodeKey = "statusCode"
@@ -361,6 +370,16 @@ open class RestClient {
             encoding: URLEncoding(destination: .methodDependent),
             headers: self.defaultHeaders)
             .responseData(queue: self.dispatchQueue) {response in
+
+                // PHIOS-5207: post request notification for any loggers
+                let duration = response.timeline.requestDuration
+                let timestamp = Date()
+                let debugObj = RestClientRequestDebugInfo(urlString: self.requestUrl!,
+                                                          cURLRepresentation: response.request?.debugDescription ?? "UNAVAILABLE",
+                                                          duration: duration,
+                                                          timestamp: timestamp)
+                NotificationCenter.default.post(name: RestClientRequestNotificationName, object: debugObj)
+
                 self.handleResponse(response, completion: completion, failure: failure)
         }
         
