@@ -369,21 +369,24 @@ open class RestClient {
             },
             encoding: URLEncoding(destination: .methodDependent),
             headers: self.defaultHeaders)
-            .responseData(queue: self.dispatchQueue) {response in
-
-                // PHIOS-5207: post request notification for any loggers
-                let duration = response.timeline.requestDuration
-                let timestamp = Date()
-                let debugObj = RestClientRequestDebugInfo(urlString: self.requestUrl!,
-                                                          cURLRepresentation: response.request?.debugDescription ?? "UNAVAILABLE",
-                                                          duration: duration,
-                                                          timestamp: timestamp)
-                NotificationCenter.default.post(name: RestClientRequestNotificationName, object: debugObj)
-
-                self.handleResponse(response, completion: completion, failure: failure)
-        }
-        
+            
+            
+        let debugDesc = request.debugDescription
         print(request)
+
+        request.responseData(queue: self.dispatchQueue) {response in
+            
+            // PHIOS-5207: post request notification for any loggers
+            let duration = response.timeline.requestDuration
+            let timestamp = Date()
+            let debugObj = RestClientRequestDebugInfo(urlString: self.requestUrl!,
+                                                      cURLRepresentation: debugDesc,
+                                                      duration: duration,
+                                                      timestamp: timestamp)
+            NotificationCenter.default.post(name: RestClientRequestNotificationName, object: debugObj)
+
+            self.handleResponse(response, completion: completion, failure: failure)
+        }
     }
     
     fileprivate class CustomStringEncoding: ParameterEncoding {
