@@ -70,8 +70,6 @@ public enum RestEndpoint: String {
     case base = "/"
 }
 
-public let RestClientRequestNotificationName: NSNotification.Name = NSNotification.Name(rawValue: "RestClientRequest")
-
 public struct RestClientRequestDebugInfo {
     public let urlString: String
     public let cURLRepresentation: String
@@ -352,10 +350,10 @@ open class RestClient {
      return self.query(top, skip: skip, filter: filter, select: select, orderby: orderby, since: nil, before: nil, fields: nil)
      }*/
     open func run(completion: @escaping (_ response: Codable?) -> Void, failure: @escaping (_ error: Any?) -> Void) {
-        self.run(completion: {response, headers in completion(response)}, failure: failure)
+        self.run(completion: {response, headers, debugInfo in completion(response)}, failure: failure)
     }
     
-    internal func run(completion: @escaping (_ response: Codable?, _ headers: [String:String]) -> Void, failure: @escaping (_ error: Any?) -> Void) {
+    internal func run(completion: @escaping (_ response: Codable?, _ headers: [String:String], _ debugInfo: RestClientRequestDebugInfo?) -> Void, failure: @escaping (_ error: Any?) -> Void) {
         
         let request = self.sessionManager.request(
             self.requestUrl!,
@@ -370,22 +368,15 @@ open class RestClient {
             encoding: URLEncoding(destination: .methodDependent),
             headers: self.defaultHeaders)
             
-            
         let debugDesc = request.debugDescription
         print(request)
 
         request.responseData(queue: self.dispatchQueue) {response in
             
             // PHIOS-5207: post request notification for any loggers
-            let duration = response.timeline.requestDuration
-            let timestamp = Date()
-            let debugObj = RestClientRequestDebugInfo(urlString: self.requestUrl!,
-                                                      cURLRepresentation: debugDesc,
-                                                      duration: duration,
-                                                      timestamp: timestamp)
-            NotificationCenter.default.post(name: RestClientRequestNotificationName, object: debugObj)
+            let debugObj = self.handleDebugInfo(debugDesc, response)
 
-            self.handleResponse(response, completion: completion, failure: failure)
+            self.handleResponse(response, debugObj, completion: completion, failure: failure)
         }
     }
     
@@ -424,10 +415,10 @@ open class RestClient {
     }
     
     open func runStringBody(string: String, completion: @escaping (_ response: Codable?) -> Void, failure: @escaping (_ error: Any?) -> Void) {
-        self.runStringBody(string: string, completion: {response, headers in completion(response)}, failure: failure)
+        self.runStringBody(string: string, completion: {response, headers, debugInfo in completion(response)}, failure: failure)
     }
     
-    internal func runStringBody(string: String, completion: @escaping (_ response: Codable?, _ headers: [String:String]) -> Void, failure: @escaping (_ error: Any?) -> Void) {
+    internal func runStringBody(string: String, completion: @escaping (_ response: Codable?, _ headers: [String:String], _ debugInfo: RestClientRequestDebugInfo?) -> Void, failure: @escaping (_ error: Any?) -> Void) {
         
         let request = self.sessionManager.request(
             self.requestUrl!,
@@ -435,18 +426,24 @@ open class RestClient {
             parameters: [:],
             encoding: CustomStringEncoding(customString: string),
             headers: self.defaultHeaders)
-            .responseData(queue: self.dispatchQueue) {response in
-                self.handleResponse(response, completion: completion, failure: failure)
-        }
-        
+            
+        let debugDesc = request.debugDescription
         print(request)
+        
+        request.responseData(queue: self.dispatchQueue) {response in
+            
+            // PHIOS-5207: post request notification for any loggers
+            let debugObj = self.handleDebugInfo(debugDesc, response)
+
+            self.handleResponse(response, debugObj, completion: completion, failure: failure)
+        }
     }
     
     open func runEncodeJSON(jsonObject: [String: Codable], completion: @escaping (_ response: Codable?) -> Void, failure: @escaping (_ error: Any?) -> Void) {
-        self.runEncodeJSON(jsonObject: jsonObject, completion: {response, headers in completion(response)}, failure: failure)
+        self.runEncodeJSON(jsonObject: jsonObject, completion: {response, headers, debugInfo in completion(response)}, failure: failure)
     }
     
-    internal func runEncodeJSON(jsonObject: [String: Codable], completion: @escaping (_ response: Codable?, _ headers: [String:String]) -> Void, failure: @escaping (_ error: Any?) -> Void) {
+    internal func runEncodeJSON(jsonObject: [String: Codable], completion: @escaping (_ response: Codable?, _ headers: [String:String], _ debugInfo: RestClientRequestDebugInfo?) -> Void, failure: @escaping (_ error: Any?) -> Void) {
         
         let request = self.sessionManager.request(
             self.requestUrl!,
@@ -454,11 +451,17 @@ open class RestClient {
             parameters: jsonObject,
             encoding: JSONEncoding.default,
             headers: self.defaultHeaders)
-            .responseData(queue: self.dispatchQueue) {response in
-                self.handleResponse(response, completion: completion, failure: failure)
-        }
-        
+                
+        let debugDesc = request.debugDescription
         print(request)
+        
+        request.responseData(queue: self.dispatchQueue) {response in
+                            
+            // PHIOS-5207: post request notification for any loggers
+            let debugObj = self.handleDebugInfo(debugDesc, response)
+
+            self.handleResponse(response, debugObj, completion: completion, failure: failure)
+        }
     }
     
     fileprivate class CodableJSONEncoding<T: Encodable>: ParameterEncoding {
@@ -490,11 +493,11 @@ open class RestClient {
         }
     }
     
-    open func runEncodeJSON<T: Codable>(codableObject: T, completion: @escaping (_ response: Codable?) -> Void, failure: @escaping (_ error: Any?) -> Void) {
-        self.runEncodeJSON(codableObject: codableObject, completion: {response, headers in completion(response)}, failure: failure)
+    open func runEncodeJSON<T: Codable>(codableObject: T, _ debugInfo: RestClientRequestDebugInfo?, completion: @escaping (_ response: Codable?) -> Void, failure: @escaping (_ error: Any?) -> Void) {
+        self.runEncodeJSON(codableObject: codableObject, completion: {response, headers, debugInfo in completion(response)}, failure: failure)
     }
     
-    internal func runEncodeJSON<T: Codable>(codableObject: T, completion: @escaping (_ response: Codable?, _ headers: [String:String]) -> Void, failure: @escaping (_ error: Any?) -> Void) {
+    internal func runEncodeJSON<T: Codable>(codableObject: T, completion: @escaping (_ response: Codable?, _ headers: [String:String], _ debugInfo: RestClientRequestDebugInfo?) -> Void, failure: @escaping (_ error: Any?) -> Void) {
         
         let request = self.sessionManager.request(
             self.requestUrl!,
@@ -502,18 +505,24 @@ open class RestClient {
             parameters: self.requestParams,
             encoding: CodableJSONEncoding<T>(codableObject: codableObject),
             headers: self.defaultHeaders)
-            .responseData(queue: self.dispatchQueue) {response in
-                self.handleResponse(response, completion: completion, failure: failure)
-        }
         
+        let debugDesc = request.debugDescription
         print(request)
+        
+        request.responseData(queue: self.dispatchQueue) {response in
+            
+            // PHIOS-5207: post request notification for any loggers
+            let debugObj = self.handleDebugInfo(debugDesc, response)
+
+            self.handleResponse(response, debugObj, completion: completion, failure: failure)
+        }
     }
     
     open func runEncodeUrl(_ parameters: [String: Any], completion: @escaping (_ response: Codable?) -> Void, failure: @escaping (_ error: Any?) -> Void) {
-        self.runEncodeUrl(parameters, completion: {response, headers in completion(response) }, failure: failure)
+        self.runEncodeUrl(parameters, completion: {response, headers, debugInfo in completion(response) }, failure: failure)
     }
     
-    internal func runEncodeUrl(_ parameters: [String: Any], completion: @escaping (_ response: Codable?, _ headers: [String:String]) -> Void, failure: @escaping (_ error: Any?) -> Void) {
+    internal func runEncodeUrl(_ parameters: [String: Any], completion: @escaping (_ response: Codable?, _ headers: [String:String], _ debugInfo: RestClientRequestDebugInfo?) -> Void, failure: @escaping (_ error: Any?) -> Void) {
         
         // Before every request, make sure access token exists
         var headers: [String:String] = [:]
@@ -528,14 +537,31 @@ open class RestClient {
             parameters: parameters,
             encoding: URLEncoding(destination: .methodDependent),
             headers: headers)
-            .responseData(queue: self.dispatchQueue) {response in
-                self.handleResponse(response, completion: completion, failure: failure)
-        }
         
+        let debugDesc = request.debugDescription
         print(request)
+        
+        request.responseData(queue: self.dispatchQueue) {response in
+            
+            // PHIOS-5207: post request notification for any loggers
+            let debugObj = self.handleDebugInfo(debugDesc, response)
+
+            self.handleResponse(response, debugObj, completion: completion, failure: failure)
+        }
     }
     
-    open func handleResponse(_ response: DataResponse<Data>, completion: @escaping (_ response: Codable?, _ headers: [String:String]) -> Void, failure: @escaping (_ error: Any?) -> Void){
+    internal func handleDebugInfo(_ cURLRepresentation: String, _ response: DataResponse<Data>) -> RestClientRequestDebugInfo {
+        
+        let duration = response.timeline.requestDuration
+        let timestamp = Date()
+        let debugObj = RestClientRequestDebugInfo(urlString: response.response?.url?.absoluteString ?? "URL_UNAVAILABLE",
+                                                  cURLRepresentation: cURLRepresentation,
+                                                  duration: duration,
+                                                  timestamp: timestamp)
+        return debugObj
+    }
+    
+    open func handleResponse(_ response: DataResponse<Data>, _ debugInfo: RestClientRequestDebugInfo?, completion: @escaping (_ response: Codable?, _ headers: [String:String], _ debugInfo: RestClientRequestDebugInfo?) -> Void, failure: @escaping (_ error: Any?) -> Void){
         
         // Purpose?
         var headers: [String:String] = [:]
@@ -551,10 +577,10 @@ open class RestClient {
             let responseData = response.data
         {
             if let parsedData = self.parseData(responseData) {
-                completion(parsedData, headers)
+                completion(parsedData, headers, debugInfo)
             }
             else if let httpMethod = response.request?.httpMethod, httpMethod == HTTPMethod.delete.rawValue || httpMethod == HTTPMethod.patch.rawValue {
-                completion(true, headers)
+                completion(true, headers, debugInfo)
             }
             else {
                 failure(self.parseError(response))
