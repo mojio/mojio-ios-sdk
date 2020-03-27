@@ -493,7 +493,7 @@ open class RestClient {
         }
     }
     
-    open func runEncodeJSON<T: Codable>(codableObject: T, _ debugInfo: RestClientRequestDebugInfo?, completion: @escaping (_ response: Codable?) -> Void, failure: @escaping (_ error: Any?) -> Void) {
+    open func runEncodeJSON<T: Codable>(codableObject: T, completion: @escaping (_ response: Codable?) -> Void, failure: @escaping (_ error: Any?) -> Void) {
         self.runEncodeJSON(codableObject: codableObject, completion: {response, headers, debugInfo in completion(response)}, failure: failure)
     }
     
