@@ -550,7 +550,7 @@ open class RestClient {
         }
     }
     
-    internal func handleDebugInfo(_ cURLRepresentation: String, _ response: DataResponse<Data>) -> RestClientRequestDebugInfo {
+    open func handleDebugInfo(_ cURLRepresentation: String, _ response: DataResponse<Data>) -> RestClientRequestDebugInfo {
         
         let duration = response.timeline.requestDuration
         let timestamp = Date()

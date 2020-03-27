@@ -66,7 +66,7 @@ open class ImagesClient: RestClient {
                           urlParams: [String: Any]? = nil,
                           completion: @escaping (Image?) -> Void,
                           failure: @escaping (Any?) -> Void) {
-        return self.uploadImage(imageData, mimeType: mimeType, urlParams: urlParams, completion: {response, headers in completion(response as? Image)}, failure: failure)
+        return self.uploadImage(imageData, mimeType: mimeType, urlParams: urlParams, completion: {response, headers, debugInfo in completion(response as? Image)}, failure: failure)
     }
 
     open func uploadImage<I: ImageModel>(_ imageData: Data,
@@ -74,10 +74,10 @@ open class ImagesClient: RestClient {
                                          urlParams: [String: Any]? = nil,
                                          completion: @escaping (I?) -> Void,
                                          failure: @escaping (Any?) -> Void) {
-        return self.uploadImage(imageData, mimeType: mimeType, urlParams: urlParams, completion: {response, headers in completion(response as? I)}, failure: failure)
+        return self.uploadImage(imageData, mimeType: mimeType, urlParams: urlParams, completion: {response, headers, debugInfo in completion(response as? I)}, failure: failure)
     }
     
-    internal func uploadImage(_ imageData: Data, mimeType: MimeType.Image, urlParams: [String: Any]? = nil, completion: @escaping (_ response: Codable?, _ headers: [String : String]) -> Void, failure: @escaping (_ error: Any?) -> Void) {
+    internal func uploadImage(_ imageData: Data, mimeType: MimeType.Image, urlParams: [String: Any]? = nil, completion: @escaping (_ response: Codable?, _ headers: [String : String], _ debugInfo: RestClientRequestDebugInfo?) -> Void, failure: @escaping (_ error: Any?) -> Void) {
         
         guard let requestUrl = self.requestUrl.flatMap({ URL(string: $0) }) else {
             failure(nil)
@@ -99,8 +99,10 @@ open class ImagesClient: RestClient {
                 
                 switch result {
                 case .success(let request, _, _):
+                    let curlString = request.debugDescription
                     request.responseData(queue: self.dispatchQueue) {response in
-                        self.handleResponse(response, completion: completion, failure: failure)
+                        let debugInfo = self.handleDebugInfo(curlString, response)
+                        self.handleResponse(response, debugInfo, completion: completion, failure: failure)
                     }
                 case .failure(let encodingError):
                     failure(encodingError)
