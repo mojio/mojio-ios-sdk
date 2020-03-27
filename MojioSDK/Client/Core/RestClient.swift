@@ -253,7 +253,7 @@ open class RestClient {
     }
     
     open func withTags(tags: [String]) -> Self {
-        self.requestParams["tags"] = tags.joined(separator: ",")
+        self.requestParams["tags"] = tags
         return self
     }
     
