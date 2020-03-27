@@ -260,7 +260,7 @@ open class RestClient {
     }
     
     open func withTags(tags: [String]) -> Self {
-        self.requestParams["tags"] = tags.joined(separator: ",")
+        self.requestParams["tags"] = tags
         return self
     }
     
@@ -349,11 +349,11 @@ open class RestClient {
      public func query(top: String?, skip: String?, filter: String?, select: String?, orderby: String?) -> Self {
      return self.query(top, skip: skip, filter: filter, select: select, orderby: orderby, since: nil, before: nil, fields: nil)
      }*/
-    open func run(completion: @escaping (_ response: Codable?) -> Void, failure: @escaping (_ error: Any?) -> Void) {
-        self.run(completion: {response, headers, debugInfo in completion(response)}, failure: failure)
+    open func run(arrayEncoding: URLEncoding.ArrayEncoding = .noBrackets, completion: @escaping (_ response: Codable?) -> Void, failure: @escaping (_ error: Any?) -> Void) {
+        self.run(arrayEncoding: arrayEncoding, completion: {response, headers, debugInfo in completion(response)}, failure: failure)
     }
     
-    internal func run(completion: @escaping (_ response: Codable?, _ headers: [String:String], _ debugInfo: RestClientRequestDebugInfo?) -> Void, failure: @escaping (_ error: Any?) -> Void) {
+    internal func run(arrayEncoding: URLEncoding.ArrayEncoding, completion: @escaping (_ response: Codable?, _ headers: [String:String], _ debugInfo: RestClientRequestDebugInfo?) -> Void, failure: @escaping (_ error: Any?) -> Void) {
         
         let request = self.sessionManager.request(
             self.requestUrl!,
@@ -365,7 +365,7 @@ open class RestClient {
                 
                 return $0
             },
-            encoding: URLEncoding(destination: .methodDependent),
+            encoding: URLEncoding(destination: .methodDependent, arrayEncoding: arrayEncoding),
             headers: self.defaultHeaders)
             
         let debugDesc = request.debugDescription

@@ -208,7 +208,8 @@ public protocol ActivityModelBase: Codable {
     var href: String? { get }
     var name: String? { get }
     var nameMap: S { get }
-    
+    var value: String? { get }
+
     var location: ActivityLocationModel? {get}
     
     var startTime: Date? { get }
@@ -237,6 +238,7 @@ public struct Activity: ActivityModel {
     public let href: String?
     public let name: String?
     public let nameMap: S
+    public let value: String?
     
     public let location: ActivityLocationModel?
     
@@ -264,6 +266,7 @@ public struct Activity: ActivityModel {
         case href = "HRef"
         case name = "Name"
         case nameMap = "NameMap"
+        case value = "Value"
         case location = "Location"
         case startTime = "StartTime"
         case endTime = "EndTime"
@@ -291,6 +294,7 @@ public struct Activity: ActivityModel {
         self.href = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.href)
         self.name = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.name)
         self.nameMap = try container.decodeIfPresentIgnoringCase(S.self, forKey: CodingKeys.nameMap) ?? [:]
+        self.value = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.value)
         self.startTime = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.startTime).flatMap { $0.dateFromISO }
         self.endTime = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.endTime).flatMap { $0.dateFromISO }
         self.context = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.context)
@@ -325,6 +329,7 @@ public struct Activity: ActivityModel {
         try container.encode (self.href, forKey: .href)
         try container.encode (self.name, forKey: .name)
         try container.encode (self.nameMap, forKey: .nameMap)
+        try container.encode (self.value, forKey: .value)
         try container.encode ((self.location as? ActivityLocation), forKey: .location)
         try container.encode (self.startTime, forKey: .startTime)
         try container.encode (self.endTime, forKey: .endTime)
@@ -415,6 +420,7 @@ public struct RootActivity: RootActivityModel {
     public let href: String?
     public let name: String?
     public let nameMap: S
+    public let value: String?
     
     public let location: ActivityLocationModel?
     
@@ -452,6 +458,7 @@ public struct RootActivity: RootActivityModel {
         case href = "HRef"
         case name = "Name"
         case nameMap = "NameMap"
+        case value = "Value"
         case location = "Location"
         case startTime = "StartTime"
         case endTime = "EndTime"
@@ -488,6 +495,7 @@ public struct RootActivity: RootActivityModel {
         self.href = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.href)
         self.name = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.name)
         self.nameMap = try container.decodeIfPresentIgnoringCase(S.self, forKey: CodingKeys.nameMap) ?? [:]
+        self.value = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.value)
         self.startTime = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.startTime).flatMap { $0.dateFromISO }
         self.endTime = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.endTime).flatMap { $0.dateFromISO }
         self.context = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.context)
@@ -543,6 +551,7 @@ public struct RootActivity: RootActivityModel {
         try container.encode (self.href, forKey: .href)
         try container.encode (self.name, forKey: .name)
         try container.encode (self.nameMap, forKey: .nameMap)
+        try container.encode (self.value, forKey: .value)
         try container.encode ((self.location as? ActivityLocation), forKey: .location)
         try container.encode (self.startTime, forKey: .startTime)
         try container.encode (self.endTime, forKey: .endTime)
