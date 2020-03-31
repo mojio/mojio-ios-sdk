@@ -70,13 +70,6 @@ public enum RestEndpoint: String {
     case base = "/"
 }
 
-public struct RestClientRequestDebugInfo {
-    public let urlString: String
-    public let cURLRepresentation: String
-    public let duration: TimeInterval
-    public let timestamp: Date
-}
-
 open class RestClient {
     
     public static let RestClientResponseStatusCodeKey = "statusCode"
@@ -120,16 +113,19 @@ open class RestClient {
     
     public let sessionManager: SessionManager
     internal var keychainManager: KeychainManager
+    private let arrayEncoding: URLEncoding.ArrayEncoding
     
     public init(
         clientEnvironment: ClientEnvironment,
         sessionManager: SessionManager = SessionManager.default,
-        keychainManager: KeychainManager? = nil) {
+        keychainManager: KeychainManager? = nil,
+        arrayEncoding: URLEncoding.ArrayEncoding = .noBrackets) {
         
         self.requestUrl = clientEnvironment.getApiEndpoint()
         self.pushUrl = clientEnvironment.getPushWSEndpoint()
         self.sessionManager = sessionManager
         self.keychainManager = keychainManager ?? KeychainManager.sharedInstance
+        self.arrayEncoding = arrayEncoding
     }
     
     open func get() -> Self {
@@ -349,11 +345,15 @@ open class RestClient {
      public func query(top: String?, skip: String?, filter: String?, select: String?, orderby: String?) -> Self {
      return self.query(top, skip: skip, filter: filter, select: select, orderby: orderby, since: nil, before: nil, fields: nil)
      }*/
-    open func run(arrayEncoding: URLEncoding.ArrayEncoding = .noBrackets, completion: @escaping (_ response: Codable?, _ debugInfo: RestClientRequestDebugInfo?) -> Void, failure: @escaping (_ error: Any?) -> Void) {
-        self.run(arrayEncoding: arrayEncoding, completion: {response, headers, debugInfo in completion(response, debugInfo)}, failure: failure)
+    open func run(debug: ((_ request: Request?, _ response: DataResponse<Data>?, _ date: Date?) -> Void)? = nil,
+                  completion: @escaping (_ response: Codable?) -> Void,
+                  failure: @escaping (_ error: Any?) -> Void) {
+        self.run(debug: debug, completion: {response, headers in completion(response)}, failure: failure)
     }
     
-    internal func run(arrayEncoding: URLEncoding.ArrayEncoding, completion: @escaping (_ response: Codable?, _ headers: [String:String], _ debugInfo: RestClientRequestDebugInfo?) -> Void, failure: @escaping (_ error: Any?) -> Void) {
+    internal func run(debug: ((_ request: Request?, _ response: DataResponse<Data>?, _ date: Date?) -> Void)? = nil,
+                      completion: @escaping (_ response: Codable?, _ headers: [String:String]) -> Void,
+                      failure: @escaping (_ error: Any?) -> Void) {
         
         let request = self.sessionManager.request(
             self.requestUrl!,
@@ -365,18 +365,15 @@ open class RestClient {
                 
                 return $0
             },
-            encoding: URLEncoding(destination: .methodDependent, arrayEncoding: arrayEncoding),
+            encoding: URLEncoding(destination: .methodDependent, arrayEncoding: self.arrayEncoding),
             headers: self.defaultHeaders)
             
-        let debugDesc = request.debugDescription
-        print(request)
-
         request.responseData(queue: self.dispatchQueue) {response in
             
             // PHIOS-5207: post request notification for any loggers
-            let debugObj = self.handleDebugInfo(debugDesc, response)
+            debug?(request, response, Date())
 
-            self.handleResponse(response, debugObj, completion: completion, failure: failure)
+            self.handleResponse(response, completion: completion, failure: failure)
         }
     }
     
@@ -414,11 +411,17 @@ open class RestClient {
         return headers
     }
     
-    open func runStringBody(string: String, completion: @escaping (_ response: Codable?, _ debugInfo: RestClientRequestDebugInfo?) -> Void, failure: @escaping (_ error: Any?) -> Void) {
-        self.runStringBody(string: string, completion: {response, headers, debugInfo in completion(response, debugInfo)}, failure: failure)
+    open func runStringBody(string: String,
+                            debug: ((_ request: Request?, _ response: DataResponse<Data>?, _ date: Date?) -> Void)? = nil,
+                            completion: @escaping (_ response: Codable?) -> Void,
+                            failure: @escaping (_ error: Any?) -> Void) {
+        self.runStringBody(string: string, debug: debug, completion: {response, headers in completion(response)}, failure: failure)
     }
     
-    internal func runStringBody(string: String, completion: @escaping (_ response: Codable?, _ headers: [String:String], _ debugInfo: RestClientRequestDebugInfo?) -> Void, failure: @escaping (_ error: Any?) -> Void) {
+    internal func runStringBody(string: String,
+                                debug: ((_ request: Request?, _ response: DataResponse<Data>?, _ date: Date?) -> Void)? = nil,
+                                completion: @escaping (_ response: Codable?, _ headers: [String:String]) -> Void,
+                                failure: @escaping (_ error: Any?) -> Void) {
         
         let request = self.sessionManager.request(
             self.requestUrl!,
@@ -427,23 +430,26 @@ open class RestClient {
             encoding: CustomStringEncoding(customString: string),
             headers: self.defaultHeaders)
             
-        let debugDesc = request.debugDescription
-        print(request)
-        
-        request.responseData(queue: self.dispatchQueue) {response in
+            request.responseData(queue: self.dispatchQueue) {response in
             
             // PHIOS-5207: post request notification for any loggers
-            let debugObj = self.handleDebugInfo(debugDesc, response)
+            debug?(request, response, Date())
 
-            self.handleResponse(response, debugObj, completion: completion, failure: failure)
+            self.handleResponse(response, completion: completion, failure: failure)
         }
     }
     
-    open func runEncodeJSON(jsonObject: [String: Codable], completion: @escaping (_ response: Codable?, _ debugInfo: RestClientRequestDebugInfo?) -> Void, failure: @escaping (_ error: Any?) -> Void) {
-        self.runEncodeJSON(jsonObject: jsonObject, completion: {response, headers, debugInfo in completion(response, debugInfo)}, failure: failure)
+    open func runEncodeJSON(jsonObject: [String: Codable],
+                            debug: ((_ request: Request?, _ response: DataResponse<Data>?, _ date: Date?) -> Void)? = nil,
+                            completion: @escaping (_ response: Codable?) -> Void,
+                            failure: @escaping (_ error: Any?) -> Void) {
+        self.runEncodeJSON(jsonObject: jsonObject, debug: debug, completion: {response, headers in completion(response)}, failure: failure)
     }
     
-    internal func runEncodeJSON(jsonObject: [String: Codable], completion: @escaping (_ response: Codable?, _ headers: [String:String], _ debugInfo: RestClientRequestDebugInfo?) -> Void, failure: @escaping (_ error: Any?) -> Void) {
+    internal func runEncodeJSON(jsonObject: [String: Codable],
+                                debug: ((_ request: Request?, _ response: DataResponse<Data>?, _ date: Date?) -> Void)? = nil,
+                                completion: @escaping (_ response: Codable?, _ headers: [String:String]) -> Void,
+                                failure: @escaping (_ error: Any?) -> Void) {
         
         let request = self.sessionManager.request(
             self.requestUrl!,
@@ -452,15 +458,12 @@ open class RestClient {
             encoding: JSONEncoding.default,
             headers: self.defaultHeaders)
                 
-        let debugDesc = request.debugDescription
-        print(request)
-        
         request.responseData(queue: self.dispatchQueue) {response in
                             
             // PHIOS-5207: post request notification for any loggers
-            let debugObj = self.handleDebugInfo(debugDesc, response)
+            debug?(request, response, Date())
 
-            self.handleResponse(response, debugObj, completion: completion, failure: failure)
+            self.handleResponse(response, completion: completion, failure: failure)
         }
     }
     
@@ -493,11 +496,17 @@ open class RestClient {
         }
     }
     
-    open func runEncodeJSON<T: Codable>(codableObject: T, completion: @escaping (_ response: Codable?, _ debugInfo: RestClientRequestDebugInfo?) -> Void, failure: @escaping (_ error: Any?) -> Void) {
-        self.runEncodeJSON(codableObject: codableObject, completion: {response, headers, debugInfo in completion(response, debugInfo)}, failure: failure)
+    open func runEncodeJSON<T: Codable>(codableObject: T,
+                                        debug: ((_ request: Request?, _ response: DataResponse<Data>?, _ date: Date?) -> Void)? = nil,
+                                        completion: @escaping (_ response: Codable?) -> Void,
+                                        failure: @escaping (_ error: Any?) -> Void) {
+        self.runEncodeJSON(codableObject: codableObject, debug: debug, completion: {response, headers in completion(response)}, failure: failure)
     }
     
-    internal func runEncodeJSON<T: Codable>(codableObject: T, completion: @escaping (_ response: Codable?, _ headers: [String:String], _ debugInfo: RestClientRequestDebugInfo?) -> Void, failure: @escaping (_ error: Any?) -> Void) {
+    internal func runEncodeJSON<T: Codable>(codableObject: T,
+                                            debug: ((_ request: Request?, _ response: DataResponse<Data>?, _ date: Date?) -> Void)? = nil,
+                                            completion: @escaping (_ response: Codable?, _ headers: [String:String]) -> Void,
+                                            failure: @escaping (_ error: Any?) -> Void) {
         
         let request = self.sessionManager.request(
             self.requestUrl!,
@@ -506,23 +515,24 @@ open class RestClient {
             encoding: CodableJSONEncoding<T>(codableObject: codableObject),
             headers: self.defaultHeaders)
         
-        let debugDesc = request.debugDescription
-        print(request)
-        
         request.responseData(queue: self.dispatchQueue) {response in
             
             // PHIOS-5207: post request notification for any loggers
-            let debugObj = self.handleDebugInfo(debugDesc, response)
+            debug?(request, response, Date())
 
-            self.handleResponse(response, debugObj, completion: completion, failure: failure)
+            self.handleResponse(response, completion: completion, failure: failure)
         }
     }
     
-    open func runEncodeUrl(_ parameters: [String: Any], completion: @escaping (_ response: Codable?, _ debugInfo: RestClientRequestDebugInfo?) -> Void, failure: @escaping (_ error: Any?) -> Void) {
-        self.runEncodeUrl(parameters, completion: {response, headers, debugInfo in completion(response, debugInfo) }, failure: failure)
+    open func runEncodeUrl(_ parameters: [String: Any],
+                           completion: @escaping (_ response: Codable?) -> Void, failure: @escaping (_ error: Any?) -> Void) {
+        self.runEncodeUrl(parameters, completion: {response, headers in completion(response) }, failure: failure)
     }
     
-    internal func runEncodeUrl(_ parameters: [String: Any], completion: @escaping (_ response: Codable?, _ headers: [String:String], _ debugInfo: RestClientRequestDebugInfo?) -> Void, failure: @escaping (_ error: Any?) -> Void) {
+    internal func runEncodeUrl(_ parameters: [String: Any],
+                               debug: ((_ request: Request?, _ response: DataResponse<Data>?, _ date: Date?) -> Void)? = nil,
+                               completion: @escaping (_ response: Codable?, _ headers: [String:String]) -> Void,
+                               failure: @escaping (_ error: Any?) -> Void) {
         
         // Before every request, make sure access token exists
         var headers: [String:String] = [:]
@@ -538,30 +548,16 @@ open class RestClient {
             encoding: URLEncoding(destination: .methodDependent),
             headers: headers)
         
-        let debugDesc = request.debugDescription
-        print(request)
-        
         request.responseData(queue: self.dispatchQueue) {response in
             
             // PHIOS-5207: post request notification for any loggers
-            let debugObj = self.handleDebugInfo(debugDesc, response)
+            debug?(request, response, Date())
 
-            self.handleResponse(response, debugObj, completion: completion, failure: failure)
+            self.handleResponse(response, completion: completion, failure: failure)
         }
     }
     
-    open func handleDebugInfo(_ cURLRepresentation: String, _ response: DataResponse<Data>) -> RestClientRequestDebugInfo {
-        
-        let duration = response.timeline.requestDuration
-        let timestamp = Date()
-        let debugObj = RestClientRequestDebugInfo(urlString: response.response?.url?.absoluteString ?? "URL_UNAVAILABLE",
-                                                  cURLRepresentation: cURLRepresentation,
-                                                  duration: duration,
-                                                  timestamp: timestamp)
-        return debugObj
-    }
-    
-    open func handleResponse(_ response: DataResponse<Data>, _ debugInfo: RestClientRequestDebugInfo?, completion: @escaping (_ response: Codable?, _ headers: [String:String], _ debugInfo: RestClientRequestDebugInfo?) -> Void, failure: @escaping (_ error: Any?) -> Void){
+    open func handleResponse(_ response: DataResponse<Data>, completion: @escaping (_ response: Codable?, _ headers: [String:String]) -> Void, failure: @escaping (_ error: Any?) -> Void){
         
         // Purpose?
         var headers: [String:String] = [:]
@@ -577,10 +573,10 @@ open class RestClient {
             let responseData = response.data
         {
             if let parsedData = self.parseData(responseData) {
-                completion(parsedData, headers, debugInfo)
+                completion(parsedData, headers)
             }
             else if let httpMethod = response.request?.httpMethod, httpMethod == HTTPMethod.delete.rawValue || httpMethod == HTTPMethod.patch.rawValue {
-                completion(true, headers, debugInfo)
+                completion(true, headers)
             }
             else {
                 failure(self.parseError(response))
@@ -591,11 +587,17 @@ open class RestClient {
         }
     }
     
-    open func runCustomStringBody(string: String, completion: @escaping (_ response: Any, _ debugInfo: RestClientRequestDebugInfo?) -> Void, failure: @escaping (_ error: Any?) -> Void) {
-        self.runCustomStringBody(string: string, completion: {response, headers, debugInfo in completion(response, debugInfo)}, failure: failure)
+    open func runCustomStringBody(string: String,
+                                  debug: ((_ request: Request?, _ response: DataResponse<Any>?, _ date: Date?) -> Void)? = nil,
+                                  completion: @escaping (_ response: Any) -> Void,
+                                  failure: @escaping (_ error: Any?) -> Void) {
+        self.runCustomStringBody(string: string, completion: {response, headers in completion(response)}, failure: failure)
     }
     
-    open func runCustomStringBody(string: String, completion: @escaping (_ response: Any, _ headers: [String : Any?], _ debugInfo: RestClientRequestDebugInfo?) -> Void, failure: @escaping (_ error: Any?) -> Void) {
+    open func runCustomStringBody(string: String,
+                                  debug: ((_ request: Request?, _ response: DataResponse<Any>?, _ date: Date?) -> Void)? = nil,
+                                  completion: @escaping (_ response: Any, _ headers: [String : Any?]) -> Void,
+                                  failure: @escaping (_ error: Any?) -> Void) {
         
         let request = self.sessionManager.request(
             self.requestUrl!,
@@ -605,23 +607,24 @@ open class RestClient {
             headers: self.defaultHeaders)
             
         
-        let debugDesc = request.debugDescription
-        print(request)
-
-        request.responseJSON(queue: self.dispatchQueue, options: .allowFragments) {response in
+            request.responseJSON(queue: self.dispatchQueue, options: .allowFragments) {response in
             
             // PHIOS-5207: post request notification for any loggers
-            let debugObj = self.handleCustomJSONDebugInfo(debugDesc, response)
+            debug?(request, response, Date())
 
-            self.handleCustomJSONResponse(response, debugObj, completion: completion, failure: failure)
+            self.handleCustomJSONResponse(response, completion: completion, failure: failure)
         }
     }
     
-    open func runCustomJSON(completion: @escaping (_ response: Any, _ debugInfo: RestClientRequestDebugInfo?) -> Void, failure: @escaping (_ error: Any?) -> Void) {
-        self.runCustomJSON(completion: {response, headers, debugInfo in completion(response, debugInfo)}, failure: failure)
+    open func runCustomJSON(debug: ((_ request: Request?, _ response: DataResponse<Any>?, _ date: Date?) -> Void)? = nil,
+                            completion: @escaping (_ response: Any) -> Void,
+                            failure: @escaping (_ error: Any?) -> Void) {
+        self.runCustomJSON(debug: debug, completion: {response, headers in completion(response)}, failure: failure)
     }
     
-    open func runCustomJSON(completion: @escaping (_ response: Any, _ headers: [String : Any?], _ debugInfo: RestClientRequestDebugInfo?) -> Void, failure: @escaping (_ error: Any?) -> Void) {
+    open func runCustomJSON(debug: ((_ request: Request?, _ response: DataResponse<Any>?, _ date: Date?) -> Void)? = nil,
+                            completion: @escaping (_ response: Any, _ headers: [String : Any?]) -> Void,
+                            failure: @escaping (_ error: Any?) -> Void) {
         
         let request = self.sessionManager.request(
             self.requestUrl!,
@@ -636,30 +639,16 @@ open class RestClient {
             encoding: URLEncoding(destination: .methodDependent),
             headers: self.defaultHeaders)
             
-        let debugDesc = request.debugDescription
-        print(request)
-
         request.responseJSON(queue: self.dispatchQueue, options: .allowFragments) {response in
             
             // PHIOS-5207: post request notification for any loggers
-            let debugObj = self.handleCustomJSONDebugInfo(debugDesc, response)
+            debug?(request, response, Date())
 
-            self.handleCustomJSONResponse(response, debugObj, completion: completion, failure: failure)
+            self.handleCustomJSONResponse(response, completion: completion, failure: failure)
         }
     }
     
-    open func handleCustomJSONDebugInfo(_ cURLRepresentation: String, _ response: DataResponse<Any>) -> RestClientRequestDebugInfo {
-        
-        let duration = response.timeline.requestDuration
-        let timestamp = Date()
-        let debugObj = RestClientRequestDebugInfo(urlString: response.response?.url?.absoluteString ?? "URL_UNAVAILABLE",
-                                                  cURLRepresentation: cURLRepresentation,
-                                                  duration: duration,
-                                                  timestamp: timestamp)
-        return debugObj
-    }
-
-    func handleCustomJSONResponse(_ response: DataResponse<Any>, _ debugInfo: RestClientRequestDebugInfo?, completion: @escaping (_ response: Any, _ headers: [String : Any?], _ debugInfo: RestClientRequestDebugInfo?) -> Void, failure: @escaping (_ error: Any?) -> Void){
+    func handleCustomJSONResponse(_ response: DataResponse<Any>, completion: @escaping (_ response: Any, _ headers: [String : Any?]) -> Void, failure: @escaping (_ error: Any?) -> Void){
         if response.response?.statusCode == 200 || response.response?.statusCode == 201 {
             let headers: [String : Any?] = [
                 "ResponseDate" : (response.response?.allHeaderFields["Date"] as? String)?.toDate,
@@ -667,10 +656,10 @@ open class RestClient {
             ]
 
             if let responseString = response.result.value as? String {
-                completion(responseString, headers, debugInfo)
+                completion(responseString, headers)
             }
             else {
-                completion(true, headers, debugInfo)
+                completion(true, headers)
             }
         }
         else {
