@@ -119,8 +119,10 @@ open class ImagesClient: RestClient {
         }
     }
     
-    open func runImage(completion: @escaping (UIImage?) -> Void, failure: @escaping (Any?) -> Void) {
-        
+    open func runImage(debug: ((_ request: Request?, _ response: DataResponse<Data>?, _ date: Date?) -> Void)? = nil,
+                       completion: @escaping (UIImage?) -> Void,
+                       failure: @escaping (Any?) -> Void) {
+
         guard let requestUrl = self.requestUrl else {
             failure(nil)
             return
@@ -133,6 +135,9 @@ open class ImagesClient: RestClient {
             encoding: URLEncoding(destination: .methodDependent),
             headers: self.defaultHeaders)
             .responseImage {response in
+                // PHIOS-5207: post request notification for any loggers
+                debug?(request, response, Date())
+                
                 completion(response.result.value)
         }
         
