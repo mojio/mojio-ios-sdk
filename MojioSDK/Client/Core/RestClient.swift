@@ -70,13 +70,6 @@ public enum RestEndpoint: String {
     case base = "/"
 }
 
-public struct RestClientRequestDebugInfo {
-    public let urlString: String
-    public let cURLRepresentation: String
-    public let duration: TimeInterval
-    public let timestamp: Date
-}
-
 open class RestClient {
     
     public static let RestClientResponseStatusCodeKey = "statusCode"
@@ -655,17 +648,6 @@ open class RestClient {
         }
     }
     
-    open func handleCustomJSONDebugInfo(_ cURLRepresentation: String, _ response: DataResponse<Any>) -> RestClientRequestDebugInfo {
-        
-        let duration = response.timeline.requestDuration
-        let timestamp = Date()
-        let debugObj = RestClientRequestDebugInfo(urlString: response.response?.url?.absoluteString ?? "URL_UNAVAILABLE",
-                                                  cURLRepresentation: cURLRepresentation,
-                                                  duration: duration,
-                                                  timestamp: timestamp)
-        return debugObj
-    }
-
     func handleCustomJSONResponse(_ response: DataResponse<Any>, completion: @escaping (_ response: Any, _ headers: [String : Any?]) -> Void, failure: @escaping (_ error: Any?) -> Void){
         if response.response?.statusCode == 200 || response.response?.statusCode == 201 {
             let headers: [String : Any?] = [
