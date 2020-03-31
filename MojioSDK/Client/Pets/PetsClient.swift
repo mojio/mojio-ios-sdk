@@ -48,7 +48,8 @@ open class PetsClient: RestClient {
     public override init(
         clientEnvironment: ClientEnvironment,
         sessionManager: SessionManager = SessionManager.default,
-        keychainManager: KeychainManager? = nil) {
+        keychainManager: KeychainManager? = nil,
+        arrayEncoding: URLEncoding.ArrayEncoding = .noBrackets) {
         
         super.init(clientEnvironment: clientEnvironment, sessionManager: sessionManager, keychainManager: keychainManager)
         self.requestUrl = clientEnvironment.getTrackerEndpoint()
