@@ -119,7 +119,7 @@ open class ImagesClient: RestClient {
         }
     }
     
-    open func runImage(debug: ((_ request: Request?, _ response: DataResponse<UIImage>) -> Void)? = nil,
+    open func runImage(debug: ((_ request: Request?, _ response: DataResponse<UIImage>?) -> Void)? = nil,
                        completion: @escaping (UIImage?) -> Void,
                        failure: @escaping (Any?) -> Void) {
 
