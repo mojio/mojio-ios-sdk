@@ -65,7 +65,7 @@ open class ImagesClient: RestClient {
     open func uploadImage(_ imageData: Data,
                           mimeType: MimeType.Image,
                           urlParams: [String: Any]? = nil,
-                          debug: ((_ request: Request?, _ response: DataResponse<Data>?, _ date: Date?) -> Void)? = nil,
+                          debug: ((_ request: Request?, _ response: DataResponse<Data>?) -> Void)? = nil,
                           completion: @escaping (Image?) -> Void,
                           failure: @escaping (Any?) -> Void) {
         return self.uploadImage(imageData, mimeType: mimeType, urlParams: urlParams, debug: debug, completion: {response, headers in completion(response as? Image)}, failure: failure)
@@ -74,7 +74,7 @@ open class ImagesClient: RestClient {
     open func uploadImage<I: ImageModel>(_ imageData: Data,
                                          mimeType: MimeType.Image,
                                          urlParams: [String: Any]? = nil,
-                                         debug: ((_ request: Request?, _ response: DataResponse<Data>?, _ date: Date?) -> Void)? = nil,
+                                         debug: ((_ request: Request?, _ response: DataResponse<Data>?) -> Void)? = nil,
                                          completion: @escaping (I?) -> Void,
                                          failure: @escaping (Any?) -> Void) {
         return self.uploadImage(imageData, mimeType: mimeType, urlParams: urlParams, debug: debug, completion: {response, headers in completion(response as? I)}, failure: failure)
@@ -83,7 +83,7 @@ open class ImagesClient: RestClient {
     internal func uploadImage(_ imageData: Data,
                               mimeType: MimeType.Image,
                               urlParams: [String: Any]? = nil,
-                              debug: ((_ request: Request?, _ response: DataResponse<Data>?, _ date: Date?) -> Void)? = nil,
+                              debug: ((_ request: Request?, _ response: DataResponse<Data>?) -> Void)? = nil,
                               completion: @escaping (_ response: Codable?, _ headers: [String : String]) -> Void,
                               failure: @escaping (_ error: Any?) -> Void) {
         
@@ -109,7 +109,7 @@ open class ImagesClient: RestClient {
                 case .success(let request, _, _):
                     request.responseData(queue: self.dispatchQueue) {response in
                         // PHIOS-5207: post request notification for any loggers
-                        debug?(request, response, Date())
+                        debug?(request, response)
                         
                         self.handleResponse(response, completion: completion, failure: failure)
                     }
@@ -119,7 +119,7 @@ open class ImagesClient: RestClient {
         }
     }
     
-    open func runImage(debug: ((_ request: Request?, _ response: DataResponse<UIImage>, _ date: Date?) -> Void)? = nil,
+    open func runImage(debug: ((_ request: Request?, _ response: DataResponse<UIImage>) -> Void)? = nil,
                        completion: @escaping (UIImage?) -> Void,
                        failure: @escaping (Any?) -> Void) {
 
@@ -137,7 +137,7 @@ open class ImagesClient: RestClient {
         
         request.responseImage {response in
             // PHIOS-5207: post request notification for any loggers
-            debug?(request, response, Date())
+            debug?(request, response)
             
             completion(response.result.value)
         }
