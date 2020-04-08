@@ -232,6 +232,11 @@ open class RestClient {
         return self
     }
     
+    open func sortOrder(_ sortOrder: String) -> Self {
+        self.requestParams["sortOrder"] = sortOrder
+        return self
+    }
+    
     open func orderby(orderby: String) -> Self {
         self.requestParams["orderby"] = orderby
         return self
@@ -292,7 +297,7 @@ open class RestClient {
         }
     }
     
-    open func query(top: String? = nil, skip: String? = nil, filter: String? = nil, select: String? = nil, orderby: String? = nil, count: String? = nil, since: Date? = nil, before: Date? = nil, fields: [String]? = nil) -> Self {
+    open func query(top: String? = nil, skip: String? = nil, filter: String? = nil, select: String? = nil, sortOrder: String? = nil, orderby: String? = nil, count: String? = nil, since: Date? = nil, before: Date? = nil, fields: [String]? = nil) -> Self {
         
         var requestParams: Parameters = [:]
         
@@ -310,6 +315,10 @@ open class RestClient {
         
         if let select = select {
             requestParams["select"] = select
+        }
+        
+        if let sortOrder = sortOrder {
+            requestParams["sortOrder"] = sortOrder
         }
         
         if let orderby = orderby {
