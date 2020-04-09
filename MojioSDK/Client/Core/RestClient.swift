@@ -536,7 +536,7 @@ open class RestClient {
     open func runEncodeUrl(_ parameters: [String: Any],
                            debug: ((_ request: Request?, _ response: DataResponse<Data>?) -> Void)? = nil,
                            completion: @escaping (_ response: Codable?) -> Void, failure: @escaping (_ error: Any?) -> Void) {
-        self.runEncodeUrl(parameters, completion: {response, headers in completion(response) }, failure: failure)
+        self.runEncodeUrl(parameters, debug: debug, completion: {response, headers in completion(response) }, failure: failure)
     }
     
     internal func runEncodeUrl(_ parameters: [String: Any],
