@@ -554,7 +554,7 @@ open class RestClient {
         let request = self.sessionManager.request(
             self.requestUrl!,
             method: self.requestMethod,
-            parameters: parameters,
+            parameters: parameters.merging(self.requestParams) { (current, _) in current },
             encoding: URLEncoding(destination: .methodDependent),
             headers: headers)
         
