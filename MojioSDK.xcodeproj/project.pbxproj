@@ -1645,7 +1645,6 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALID_ARCHS = arm64;
 			};
 			name = Debug;
 		};
@@ -1696,7 +1695,6 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
-				VALID_ARCHS = arm64;
 			};
 			name = Release;
 		};
@@ -1716,7 +1714,6 @@
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/List/Pets.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.moj.mobile.ios.sdk.Pets;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1743,7 +1740,6 @@
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/List/Pets.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.moj.mobile.ios.sdk.Pets;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1769,7 +1765,6 @@
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/List/Accounts.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.moj.mobile.ios.sdk.Accounts;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1796,7 +1791,6 @@
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/List/Accounts.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.moj.mobile.ios.sdk.Accounts;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1822,7 +1816,6 @@
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/List/Vehicles.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.moj.mobile.ios.sdk.Vehicles;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1849,7 +1842,6 @@
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/List/Vehicles.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.moj.mobile.ios.sdk.Vehicles;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1901,7 +1893,6 @@
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/List/Core.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.moj.mobile.ios.sdk.Core;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1928,7 +1919,6 @@
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/List/Core.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.moj.mobile.ios.sdk.Core;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1954,7 +1944,6 @@
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/List/Images.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.moj.mobile.ios.sdk.Images;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1981,7 +1970,6 @@
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/List/Images.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.moj.mobile.ios.sdk.Images;
 				PRODUCT_NAME = "$(TARGET_NAME)";

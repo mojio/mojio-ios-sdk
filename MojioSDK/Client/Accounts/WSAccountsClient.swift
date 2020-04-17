@@ -30,7 +30,7 @@ open class WSAccountsClient: AccountsClient {
     
     internal init(
         clientEnvironment: ClientEnvironment,
-        sessionManager: SessionManager = SessionManager.default,
+        sessionManager: Session = Session.default,
         keychainManager: KeychainManager = KeychainManager.sharedInstance
         ) {
         self.webSocketFactory = SwiftWebSocketFactory()
@@ -40,7 +40,7 @@ open class WSAccountsClient: AccountsClient {
     
     public init(
         clientEnvironment: ClientEnvironment,
-        sessionManager: SessionManager = SessionManager.default,
+        sessionManager: Session = Session.default,
         keychainManager: KeychainManager = KeychainManager.sharedInstance,
         publicKeys: [SecKey]? = nil,
         webSocketFactory: WebSocketFactory = SwiftWebSocketFactory()
@@ -58,11 +58,11 @@ open class WSAccountsClient: AccountsClient {
     open func watch(next: @escaping ((Any) -> Void), completion: @escaping (() -> Void), failure: @escaping ((Error) -> Void), file: String = #file) -> WebSocketProvider {
         
         var request = URLRequest(url: URL(string:super.pushUrl!)!)
-        request.allHTTPHeaderFields = ClientHeaders().defaultRequestHeaders
-        
+        var headers = ClientHeaders().defaultRequestHeaders
         if let accessToken: String = super.accessToken() {
-            request.addValue("Bearer " + accessToken, forHTTPHeaderField: "Authorization")
+            headers.add(.authorization(bearerToken: accessToken))
         }
+        request.allHTTPHeaderFields = headers.dictionary
         
         webSocketFactory.callbackQueue = self.wsDispatchQueue
         webSocketFactory.pinnedPublicKeys = self.publicKeys
@@ -72,7 +72,8 @@ open class WSAccountsClient: AccountsClient {
         webSocket.onDisconnect = { error in
             if let error = error {
                 failure(MojioError(code: "WebSocketError", message: "Error received \(error)"))
-            } else {
+            }
+            else {
                 completion()
             }
         }

@@ -1,8 +1,8 @@
 PODS:
-  - Alamofire (4.9.1)
-  - AlamofireImage (3.6.0):
-    - Alamofire (~> 4.9)
-  - KeychainSwift (18.0.0)
+  - Alamofire (5.1.0)
+  - AlamofireImage (4.1.0):
+    - Alamofire (~> 5.1)
+  - KeychainSwift (19.0.0)
   - MojioCore (3.0.0):
     - Alamofire
     - KeychainSwift
@@ -11,20 +11,20 @@ PODS:
     - SwiftDate
     - SwiftWebSocket
     - SwiftyJSON
-  - OHHTTPStubs (8.0.0):
-    - OHHTTPStubs/Default (= 8.0.0)
-  - OHHTTPStubs/Core (8.0.0)
-  - OHHTTPStubs/Default (8.0.0):
+  - OHHTTPStubs (9.0.0):
+    - OHHTTPStubs/Default (= 9.0.0)
+  - OHHTTPStubs/Core (9.0.0)
+  - OHHTTPStubs/Default (9.0.0):
     - OHHTTPStubs/Core
     - OHHTTPStubs/JSON
     - OHHTTPStubs/NSURLSession
     - OHHTTPStubs/OHPathHelpers
-  - OHHTTPStubs/JSON (8.0.0):
+  - OHHTTPStubs/JSON (9.0.0):
     - OHHTTPStubs/Core
-  - OHHTTPStubs/NSURLSession (8.0.0):
+  - OHHTTPStubs/NSURLSession (9.0.0):
     - OHHTTPStubs/Core
-  - OHHTTPStubs/OHPathHelpers (8.0.0)
-  - OHHTTPStubs/Swift (8.0.0):
+  - OHHTTPStubs/OHPathHelpers (9.0.0)
+  - OHHTTPStubs/Swift (9.0.0):
     - OHHTTPStubs/Default
   - SwiftDate (6.1.0)
   - SwiftWebSocket (2.7.0)
@@ -59,19 +59,19 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   SwiftWebSocket:
-    :commit: cf7aeb18bd90c6797e09a69e396cbae53d94d59b
+    :commit: 9116346a52c00eb1bf91bb92009f76c6eee62231
     :git: https://github.com/mojio/SwiftWebSocket
 
 SPEC CHECKSUMS:
-  Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
-  AlamofireImage: be9963c6582d68b39e89191f64c82a7d7bf40fdd
-  KeychainSwift: c46e1438d121e47459fb304ac88c5e058a2a91ed
+  Alamofire: 9d5c5f602928e512395b30950c5984eca840093c
+  AlamofireImage: c4a2ba349885fb3064feb74d2e547bd42ce9be10
+  KeychainSwift: a06190cf933ad46b1e0abc3d77d29c06331715c7
   MojioCore: 25c7212594e08cf3d0d5f02459846b277b1ada83
-  OHHTTPStubs: 9cbce6364bec557cc3439aa6bb7514670d780881
+  OHHTTPStubs: cb29d2a9d09a828ecb93349a2b0c64f99e0db89f
   SwiftDate: fa2bb3962056bb44047b4b85a30044e5eae30b03
   SwiftWebSocket: 612c9729fd503cb6b0b8b45390c788686dac306f
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
 
-PODFILE CHECKSUM: 64cf1cd43246e84af3582ca30112f1fd56832704
+PODFILE CHECKSUM: a0bcc42583317bd1c9862741eb48016605d9cc45
 
 COCOAPODS: 1.9.1

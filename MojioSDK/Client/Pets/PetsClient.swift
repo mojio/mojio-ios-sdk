@@ -47,7 +47,7 @@ open class PetsClient: RestClient {
     
     public override init(
         clientEnvironment: ClientEnvironment,
-        sessionManager: SessionManager = SessionManager.default,
+        sessionManager: Session = Session.default,
         keychainManager: KeychainManager? = nil,
         arrayEncoding: URLEncoding.ArrayEncoding = .noBrackets) {
         
