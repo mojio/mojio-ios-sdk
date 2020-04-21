@@ -30,7 +30,7 @@ open class WSVehiclesClient: VehiclesClient {
     
     internal init(
         clientEnvironment: ClientEnvironment,
-        sessionManager: SessionManager = SessionManager.default,
+        sessionManager: Session = Session.default,
         keychainManager: KeychainManager = KeychainManager.sharedInstance
     ) {
         self.webSocketFactory = SwiftWebSocketFactory()
@@ -40,7 +40,7 @@ open class WSVehiclesClient: VehiclesClient {
     
     public init(
         clientEnvironment: ClientEnvironment,
-        sessionManager: SessionManager = SessionManager.default,
+        sessionManager: Session = Session.default,
         keychainManager: KeychainManager? = nil,
         publicKeys: [SecKey]? = nil,
         webSocketFactory: WebSocketFactory = SwiftWebSocketFactory()) {
@@ -58,11 +58,11 @@ open class WSVehiclesClient: VehiclesClient {
     open func watch(next: @escaping ((Any) -> Void), completion: @escaping (() -> Void), failure: @escaping ((Error) -> Void), file: String = #file) -> WebSocketProvider {
     
         var request = URLRequest(url: URL(string:super.pushUrl!)!)
-        request.allHTTPHeaderFields = ClientHeaders().defaultRequestHeaders
-        
+        var headers = ClientHeaders().defaultRequestHeaders
         if let accessToken: String = super.accessToken() {
-            request.addValue("Bearer " + accessToken, forHTTPHeaderField: "Authorization")
+            headers.add(.authorization(bearerToken: accessToken))
         }
+        request.allHTTPHeaderFields = headers.dictionary
         
         webSocketFactory.callbackQueue = self.wsDispatchQueue
         webSocketFactory.pinnedPublicKeys = self.publicKeys

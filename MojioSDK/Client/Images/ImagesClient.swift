@@ -39,7 +39,7 @@ open class ImagesClient: RestClient {
     
     public override init(
         clientEnvironment: ClientEnvironment,
-        sessionManager: SessionManager = SessionManager.default,
+        sessionManager: Session = Session.default,
         keychainManager: KeychainManager? = nil,
         arrayEncoding: URLEncoding.ArrayEncoding = .noBrackets) {
         
@@ -62,12 +62,13 @@ open class ImagesClient: RestClient {
         return self
     }
 
-    open func uploadImage<I: ImageModel>(_ imageData: Data,
-                                         mimeType: MimeType.Image,
-                                         urlParams: [String: Any]? = nil,
-                                         debug: ((_ request: Request?, _ response: DataResponse<Data>?) -> Void)? = nil,
-                                         completion: @escaping (I?) -> Void,
-                                         failure: @escaping (Any?) -> Void) {
+    open func uploadImage<I: ImageModel>(
+        _ imageData: Data,
+        mimeType: MimeType.Image,
+        urlParams: [String: Any]? = nil,
+        debug: ((_ request: Request?, _ response: AFDataResponse<Data>?) -> Void)? = nil,
+        completion: @escaping (I?) -> Void,
+        failure: @escaping (Any?) -> Void) {
         
         guard let requestUrl = self.requestUrl.flatMap({ URL(string: $0) }) else {
             failure(nil)
@@ -80,30 +81,21 @@ open class ImagesClient: RestClient {
         
         let encodedUrl = (try? URLEncoding(destination: .queryString, boolEncoding: .literal).encode(URLRequest(url: requestUrl), with: urlParams))?.url ?? requestUrl
         
-        self.sessionManager.upload(
-            multipartFormData: {multipartFormData in
-                multipartFormData.append(imageData, withName: name, fileName: fileName, mimeType: mimeType.rawValue)
-        },
+        let request = self.sessionManager.upload(
+            multipartFormData: { $0.append(imageData, withName: name, fileName: fileName, mimeType: mimeType.rawValue) },
             to: encodedUrl,
-            headers: self.defaultHeaders) {result in
-                
-                switch result {
-                case .success(let request, _, _):
-                    request.responseData(queue: self.dispatchQueue) {response in
-                        // PHIOS-5207: post request notification for any loggers
-                        debug?(request, response)
-                        
-                        self.handleResponse(response, completion: {response in completion(response as? I)}, failure: failure)
-                    }
-                case .failure(let encodingError):
-                    failure(encodingError)
-                }
+            headers: self.defaultHeaders)
+        
+        request.responseData(queue: self.dispatchQueue) { response in
+            debug?(request, response) // PHIOS-5207: post request notification for any loggers
+            self.handleResponse(response, completion: { completion($0 as? I) }, failure: failure)
         }
     }
     
-    open func runImage(debug: ((_ request: Request?, _ response: DataResponse<UIImage>?) -> Void)? = nil,
-                       completion: @escaping (UIImage?) -> Void,
-                       failure: @escaping (Any?) -> Void) {
+    open func runImage(
+        debug: ((_ request: Request?, _ response: AFDataResponse<UIImage>?) -> Void)? = nil,
+        completion: @escaping (UIImage?) -> Void,
+        failure: @escaping (Any?) -> Void) {
 
         guard let requestUrl = self.requestUrl else {
             failure(nil)
@@ -117,11 +109,9 @@ open class ImagesClient: RestClient {
             encoding: URLEncoding(destination: .methodDependent),
             headers: self.defaultHeaders)
         
-        request.responseImage {response in
-            // PHIOS-5207: post request notification for any loggers
-            debug?(request, response)
-            
-            completion(response.result.value)
+        request.responseImage { response in
+            debug?(request, response) // PHIOS-5207: post request notification for any loggers
+            completion(try? response.result.get())
         }
         
         print(request)
@@ -143,7 +133,7 @@ open class ImagesClient: RestClient {
         }
     }
     
-    override open func parseError(_ response: DataResponse<Data>) -> Error {
+    override open func parseError(_ response: AFDataResponse<Data>) -> Error {
         return response.error ?? MojioError(code: nil)
     }
 }

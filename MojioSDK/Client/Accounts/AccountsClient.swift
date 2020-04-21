@@ -45,7 +45,7 @@ open class AccountsClient: RestClient {
         super.init(clientEnvironment: ClientEnvironment())
     }
     
-    public init(clientEnvironment: ClientEnvironment, sessionManager: SessionManager = SessionManager.default) {
+    public init(clientEnvironment: ClientEnvironment, sessionManager: Session = Session.default) {
         super.init(clientEnvironment: clientEnvironment, sessionManager: sessionManager)
     }
     
