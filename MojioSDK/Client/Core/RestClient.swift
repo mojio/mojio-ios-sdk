@@ -522,7 +522,8 @@ open class RestClient {
             else if let httpMethod = response.request?.httpMethod,
                 httpMethod == HTTPMethod.post.rawValue ||
                 httpMethod == HTTPMethod.delete.rawValue ||
-                httpMethod == HTTPMethod.patch.rawValue {
+                httpMethod == HTTPMethod.patch.rawValue ||
+                httpMethod == HTTPMethod.put.rawValue {
                 
                 completion(true)
             }
