@@ -17,7 +17,6 @@
 		22CF879C2252A62B0085CBF5 /* Light.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CF879B2252A62B0085CBF5 /* Light.swift */; };
 		22CF879E2252A6840085CBF5 /* TemperatureAlarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CF879D2252A6840085CBF5 /* TemperatureAlarm.swift */; };
 		2C58943920FD932000DE18BE /* VehicleAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C58943820FD932000DE18BE /* VehicleAppearance.swift */; };
-		2C58943D20FD968D00DE18BE /* VehicleAppearanceStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C58943C20FD968D00DE18BE /* VehicleAppearanceStyle.swift */; };
 		2E8BC6671FB343FB00A165C3 /* AccelerometerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8BC6661FB343FB00A165C3 /* AccelerometerTests.swift */; };
 		2EBF12BE1FB986FE00F068B2 /* FuelVolume.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF12BD1FB986FE00F068B2 /* FuelVolume.swift */; };
 		32D2EC310E53177F966BBECD /* Pods_Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D5E15756B96D0AEF2C4AE0A /* Pods_Accounts.framework */; };
@@ -207,7 +206,6 @@
 		D7112A703D780DA0A8F7DF2B /* Pods_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD90E2B243EAB55CA90E328E /* Pods_Tests.framework */; };
 		F9623AAE1D935D74005C10F2 /* IdleState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9623AAD1D935D74005C10F2 /* IdleState.swift */; };
 		F9E9FDAE1D93122A00DCB690 /* HarshEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E9FDAD1D93122A00DCB690 /* HarshEvent.swift */; };
-		FCE43DA820DCDABC004A2E89 /* EntityAppearanceColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE43DA720DCDABC004A2E89 /* EntityAppearanceColor.swift */; };
 		FCE43DAE20DCFA22004A2E89 /* DisplayDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE43DAD20DCFA22004A2E89 /* DisplayDetails.swift */; };
 		FCF6B2A622DF65EB00B21DD9 /* TermsAndConditionsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF6B2A522DF65EB00B21DD9 /* TermsAndConditionsModel.swift */; };
 		FD5B1ED37FC23A098E0CA422 /* Pods_Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3199A593F23CF5B6C1D57E7F /* Pods_Core.framework */; };
@@ -235,7 +233,6 @@
 		22CF879B2252A62B0085CBF5 /* Light.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Light.swift; sourceTree = "<group>"; };
 		22CF879D2252A6840085CBF5 /* TemperatureAlarm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperatureAlarm.swift; sourceTree = "<group>"; };
 		2C58943820FD932000DE18BE /* VehicleAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleAppearance.swift; sourceTree = "<group>"; };
-		2C58943C20FD968D00DE18BE /* VehicleAppearanceStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VehicleAppearanceStyle.swift; sourceTree = "<group>"; };
 		2E5767401FB4536A008F16F6 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		2E8BC6661FB343FB00A165C3 /* AccelerometerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccelerometerTests.swift; sourceTree = "<group>"; };
 		2EBF12BD1FB986FE00F068B2 /* FuelVolume.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FuelVolume.swift; sourceTree = "<group>"; };
@@ -422,7 +419,6 @@
 		F9623AAD1D935D74005C10F2 /* IdleState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdleState.swift; sourceTree = "<group>"; };
 		F9E9FDAD1D93122A00DCB690 /* HarshEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HarshEvent.swift; sourceTree = "<group>"; };
 		FCB3BD9489B301FCA31FF5F8 /* Pods-Accounts.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Accounts.debug.xcconfig"; path = "Target Support Files/Pods-Accounts/Pods-Accounts.debug.xcconfig"; sourceTree = "<group>"; };
-		FCE43DA720DCDABC004A2E89 /* EntityAppearanceColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityAppearanceColor.swift; sourceTree = "<group>"; };
 		FCE43DAD20DCFA22004A2E89 /* DisplayDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayDetails.swift; sourceTree = "<group>"; };
 		FCF6B2A522DF65EB00B21DD9 /* TermsAndConditionsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndConditionsModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -701,7 +697,6 @@
 				375206FB20AADD3B00102273 /* GeofenceRegion.swift */,
 				375206FD20AAFD1600102273 /* SettingsGeofence.swift */,
 				2C58943820FD932000DE18BE /* VehicleAppearance.swift */,
-				2C58943C20FD968D00DE18BE /* VehicleAppearanceStyle.swift */,
 				37BC6C852312A1CA0054B420 /* EngineOil.swift */,
 				AEBC417523514905002F5941 /* TirePressure.swift */,
 				377BD260237563F500228716 /* PredictiveMaintenance.swift */,
@@ -762,7 +757,6 @@
 				8808C2341EB1483A00A41A8B /* PrimaryKey.swift */,
 				BC590657208E7ACC00A098A3 /* ResponseArray.swift */,
 				E06C95681D25CA2A006AECBB /* Result.swift */,
-				FCE43DA720DCDABC004A2E89 /* EntityAppearanceColor.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -1450,7 +1444,6 @@
 				BC879B721CBEFFDD00F9177B /* Odometer.swift in Sources */,
 				BC94271B1F01E17D00B7424A /* TripPolyline.swift in Sources */,
 				BC879B661CBEFFDD00F9177B /* DiagnosticCode.swift in Sources */,
-				2C58943D20FD968D00DE18BE /* VehicleAppearanceStyle.swift in Sources */,
 				37BC6C862312A1CA0054B420 /* EngineOil.swift in Sources */,
 				BC879B3D1CBEFFC000F9177B /* ServiceBulletin.swift in Sources */,
 				375206FC20AADD3B00102273 /* GeofenceRegion.swift in Sources */,
@@ -1540,7 +1533,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				BCFE58D5209AF70B00B89104 /* KeychainManager.swift in Sources */,
-				FCE43DA820DCDABC004A2E89 /* EntityAppearanceColor.swift in Sources */,
 				72B3007B210B15B200608978 /* DynamicCodingKey.swift in Sources */,
 				BCFE58D6209AF70B00B89104 /* PetsError.swift in Sources */,
 				BCFE58DA209AF70B00B89104 /* TimeIntervalExt.swift in Sources */,
