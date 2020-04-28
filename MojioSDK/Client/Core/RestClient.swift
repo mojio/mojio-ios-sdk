@@ -29,7 +29,7 @@ open class ClientHeaders {
         self.languages = languages
     }
 
-    open var defaultRequestHeaders: [String:String] {
+    open var defaultRequestHeaders: HTTPHeaders {
         // Accept-Language HTTP Header; see https://tools.ietf.org/html/rfc7231#section-5.3.5
         let acceptLanguage = self.languages
             .prefix(self.languageWeights.count)
@@ -44,7 +44,7 @@ open class ClientHeaders {
             }
             .joined(separator: ", ")
         
-        return ["Accept-Language": languages.count > 0 ? acceptLanguage : "en"]
+        return HTTPHeaders([.acceptLanguage(languages.count > 0 ? acceptLanguage : "en")])
     }
 }
 
@@ -120,18 +120,21 @@ open class RestClient {
     
     open var dispatchQueue = RestClient.defaultDispatchQueue
     
-    public let sessionManager: SessionManager
+    public let sessionManager: Session
     internal var keychainManager: KeychainManager
+    private let arrayEncoding: URLEncoding.ArrayEncoding
     
     public init(
         clientEnvironment: ClientEnvironment,
-        sessionManager: SessionManager = SessionManager.default,
-        keychainManager: KeychainManager? = nil) {
+        sessionManager: Session = Session.default,
+        keychainManager: KeychainManager? = nil,
+        arrayEncoding: URLEncoding.ArrayEncoding = .noBrackets) {
         
         self.requestUrl = clientEnvironment.getApiEndpoint()
         self.pushUrl = clientEnvironment.getPushWSEndpoint()
         self.sessionManager = sessionManager
         self.keychainManager = keychainManager ?? KeychainManager.sharedInstance
+        self.arrayEncoding = arrayEncoding
     }
     
     open func get() -> Self {
@@ -243,6 +246,11 @@ open class RestClient {
         return self
     }
     
+    open func sortOrder(_ sortOrder: String) -> Self {
+        self.requestParams["sortOrder"] = sortOrder
+        return self
+    }
+    
     open func orderby(orderby: String) -> Self {
         self.requestParams["orderby"] = orderby
         return self
@@ -303,7 +311,7 @@ open class RestClient {
         }
     }
     
-    open func query(top: String? = nil, skip: String? = nil, filter: String? = nil, select: String? = nil, orderby: String? = nil, count: String? = nil, since: Date? = nil, before: Date? = nil, fields: [String]? = nil) -> Self {
+    open func query(top: String? = nil, skip: String? = nil, filter: String? = nil, select: String? = nil, sortOrder: String? = nil, orderby: String? = nil, count: String? = nil, since: Date? = nil, before: Date? = nil, fields: [String]? = nil) -> Self {
         
         var requestParams: Parameters = [:]
         
@@ -321,6 +329,10 @@ open class RestClient {
         
         if let select = select {
             requestParams["select"] = select
+        }
+        
+        if let sortOrder = sortOrder {
+            requestParams["sortOrder"] = sortOrder
         }
         
         if let orderby = orderby {
@@ -351,16 +363,10 @@ open class RestClient {
         self.dispatchQueue = queue
     }
     
-    /*
-     Don't need this helper function given default values in the other query function
-     public func query(top: String?, skip: String?, filter: String?, select: String?, orderby: String?) -> Self {
-     return self.query(top, skip: skip, filter: filter, select: select, orderby: orderby, since: nil, before: nil, fields: nil)
-     }*/
-    open func run(arrayEncoding: URLEncoding.ArrayEncoding = .noBrackets, completion: @escaping (_ response: Codable?) -> Void, failure: @escaping (_ error: Any?) -> Void) {
-        self.run(arrayEncoding: arrayEncoding, completion: {response, headers in completion(response)}, failure: failure)
-    }
-    
-    internal func run(arrayEncoding: URLEncoding.ArrayEncoding, completion: @escaping (_ response: Codable?, _ headers: [String:String]) -> Void, failure: @escaping (_ error: Any?) -> Void) {
+    open func run(
+        debug: ((_ request: Request?, _ response: AFDataResponse<Data>?) -> Void)? = nil,
+        completion: @escaping (_ response: Codable?) -> Void,
+        failure: @escaping (_ error: Any?) -> Void) {
         
         let request = self.sessionManager.request(
             self.requestUrl!,
@@ -372,13 +378,13 @@ open class RestClient {
                 
                 return $0
             },
-            encoding: URLEncoding(destination: .methodDependent, arrayEncoding: arrayEncoding),
+            encoding: URLEncoding(destination: .methodDependent, arrayEncoding: self.arrayEncoding),
             headers: self.defaultHeaders)
-            .responseData(queue: self.dispatchQueue) {response in
-                self.handleResponse(response, completion: completion, failure: failure)
+            
+        request.responseData(queue: self.dispatchQueue) { response in
+            debug?(request, response) // PHIOS-5207: post request notification for any loggers
+            self.handleResponse(response, completion: completion, failure: failure)
         }
-        
-        print(request)
     }
     
     fileprivate class CustomStringEncoding: ParameterEncoding {
@@ -397,32 +403,30 @@ open class RestClient {
         }
     }
     
-    open var defaultHeaders: [String:String] {
+    open var defaultHeaders: HTTPHeaders {
         var headers = ClientHeaders().defaultRequestHeaders
         
-        headers.update(["Content-Type": "application/json", "Accept": "application/json"])
+        headers.update(.contentType("application/json"))
+        headers.update(.accept("application/json"))
         
         // Before every request, make sure access token exists
         if let accessToken: String = self.accessToken() {
-            headers["Authorization"] = "Bearer " + accessToken
+            headers.update(.authorization(bearerToken: accessToken))
         }
         
         // Add version header if needed
-        if let version = self.versionHeader {
-            headers[XMojioVersion.versionHeaderKey] = version
-        }
-        else {
-            headers[XMojioVersion.versionHeaderKey] = XMojioVersion.current.rawValue
+        if let versionHeader = self.versionHeader {
+            headers.update(name: XMojioVersion.versionHeaderKey, value: versionHeader)
         }
         
         return headers
     }
     
-    open func runStringBody(string: String, completion: @escaping (_ response: Codable?) -> Void, failure: @escaping (_ error: Any?) -> Void) {
-        self.runStringBody(string: string, completion: {response, headers in completion(response)}, failure: failure)
-    }
-    
-    internal func runStringBody(string: String, completion: @escaping (_ response: Codable?, _ headers: [String:String]) -> Void, failure: @escaping (_ error: Any?) -> Void) {
+    open func runStringBody(
+        string: String,
+        debug: ((_ request: Request?, _ response: AFDataResponse<Data>?) -> Void)? = nil,
+        completion: @escaping (_ response: Codable?) -> Void,
+        failure: @escaping (_ error: Any?) -> Void) {
         
         let request = self.sessionManager.request(
             self.requestUrl!,
@@ -430,18 +434,18 @@ open class RestClient {
             parameters: [:],
             encoding: CustomStringEncoding(customString: string),
             headers: self.defaultHeaders)
-            .responseData(queue: self.dispatchQueue) {response in
-                self.handleResponse(response, completion: completion, failure: failure)
+            
+        request.responseData(queue: self.dispatchQueue) { response in
+            debug?(request, response) // PHIOS-5207: post request notification for any loggers
+            self.handleResponse(response, completion: completion, failure: failure)
         }
-        
-        print(request)
     }
     
-    open func runEncodeJSON(jsonObject: [String: Codable], completion: @escaping (_ response: Codable?) -> Void, failure: @escaping (_ error: Any?) -> Void) {
-        self.runEncodeJSON(jsonObject: jsonObject, completion: {response, headers in completion(response)}, failure: failure)
-    }
-    
-    internal func runEncodeJSON(jsonObject: [String: Codable], completion: @escaping (_ response: Codable?, _ headers: [String:String]) -> Void, failure: @escaping (_ error: Any?) -> Void) {
+    open func runEncodeJSON(
+        jsonObject: [String: Codable],
+        debug: ((_ request: Request?, _ response: AFDataResponse<Data>?) -> Void)? = nil,
+        completion: @escaping (_ response: Codable?) -> Void,
+        failure: @escaping (_ error: Any?) -> Void) {
         
         let request = self.sessionManager.request(
             self.requestUrl!,
@@ -449,11 +453,11 @@ open class RestClient {
             parameters: jsonObject,
             encoding: JSONEncoding.default,
             headers: self.defaultHeaders)
-            .responseData(queue: self.dispatchQueue) {response in
-                self.handleResponse(response, completion: completion, failure: failure)
+                
+        request.responseData(queue: self.dispatchQueue) { response in
+            debug?(request, response) // PHIOS-5207: post request notification for any loggers
+            self.handleResponse(response, completion: completion, failure: failure)
         }
-        
-        print(request)
     }
     
     fileprivate class CodableJSONEncoding<T: Encodable>: ParameterEncoding {
@@ -485,11 +489,11 @@ open class RestClient {
         }
     }
     
-    open func runEncodeJSON<T: Codable>(codableObject: T, completion: @escaping (_ response: Codable?) -> Void, failure: @escaping (_ error: Any?) -> Void) {
-        self.runEncodeJSON(codableObject: codableObject, completion: {response, headers in completion(response)}, failure: failure)
-    }
-    
-    internal func runEncodeJSON<T: Codable>(codableObject: T, completion: @escaping (_ response: Codable?, _ headers: [String:String]) -> Void, failure: @escaping (_ error: Any?) -> Void) {
+    open func runEncodeJSON<T: Codable>(
+        codableObject: T,
+        debug: ((_ request: Request?, _ response: AFDataResponse<Data>?) -> Void)? = nil,
+        completion: @escaping (_ response: Codable?) -> Void,
+        failure: @escaping (_ error: Any?) -> Void) {
         
         let request = self.sessionManager.request(
             self.requestUrl!,
@@ -497,59 +501,45 @@ open class RestClient {
             parameters: self.requestParams,
             encoding: CodableJSONEncoding<T>(codableObject: codableObject),
             headers: self.defaultHeaders)
-            .responseData(queue: self.dispatchQueue) {response in
-                self.handleResponse(response, completion: completion, failure: failure)
-        }
         
-        print(request)
+        request.responseData(queue: self.dispatchQueue) { response in
+            debug?(request, response) // PHIOS-5207: post request notification for any loggers
+            self.handleResponse(response, completion: completion, failure: failure)
+        }
     }
     
-    open func runEncodeUrl(_ parameters: [String: Any], completion: @escaping (_ response: Codable?) -> Void, failure: @escaping (_ error: Any?) -> Void) {
-        self.runEncodeUrl(parameters, completion: {response, headers in completion(response) }, failure: failure)
-    }
-    
-    internal func runEncodeUrl(_ parameters: [String: Any], completion: @escaping (_ response: Codable?, _ headers: [String:String]) -> Void, failure: @escaping (_ error: Any?) -> Void) {
-        
-        // Before every request, make sure access token exists
-        var headers: [String:String] = [:]
-        
-        if let accessToken: String = self.accessToken() {
-            headers["Authorization"] = "Bearer " + accessToken
-        }
+    open func runEncodeUrl(
+        _ parameters: [String: Any],
+        debug: ((_ request: Request?, _ response: AFDataResponse<Data>?) -> Void)? = nil,
+        completion: @escaping (_ response: Codable?) -> Void,
+        failure: @escaping (_ error: Any?) -> Void) {
         
         let request = self.sessionManager.request(
             self.requestUrl!,
             method: self.requestMethod,
-            parameters: parameters,
+            parameters: parameters.merging(self.requestParams) { (current, _) in current },
             encoding: URLEncoding(destination: .methodDependent),
-            headers: headers)
-            .responseData(queue: self.dispatchQueue) {response in
-                self.handleResponse(response, completion: completion, failure: failure)
-        }
+            headers: self.defaultHeaders)
         
-        print(request)
+        request.responseData(queue: self.dispatchQueue) { response in
+            debug?(request, response) // PHIOS-5207: post request notification for any loggers
+            self.handleResponse(response, completion: completion, failure: failure)
+        }
     }
     
-    open func handleResponse(_ response: DataResponse<Data>, completion: @escaping (_ response: Codable?, _ headers: [String:String]) -> Void, failure: @escaping (_ error: Any?) -> Void){
+    open func handleResponse(_ response: AFDataResponse<Data>, completion: @escaping (_ response: Codable?) -> Void, failure: @escaping (_ error: Any?) -> Void){
         
-        // Purpose?
-        var headers: [String:String] = [:]
-        
-        headers["LocalDate"] = Date().toISO(.withInternetDateTime)
-        
-        if let respDateStr = (response.response?.allHeaderFields["Date"] as? String), let _ = respDateStr.toDate {
-            headers["ResponseDate"] = respDateStr
-        }
-        
-        if
-            response.response?.statusCode == 200 || response.response?.statusCode == 201,
-            let responseData = response.data
-        {
-            if let parsedData = self.parseData(responseData) {
-                completion(parsedData, headers)
+        if let statusCode = response.response?.statusCode, 200...299 ~= statusCode {
+            if let responseData = response.data, let parsedData = self.parseData(responseData) {
+                completion(parsedData)
             }
-            else if let httpMethod = response.request?.httpMethod, httpMethod == HTTPMethod.delete.rawValue || httpMethod == HTTPMethod.patch.rawValue {
-                completion(true, headers)
+            else if let httpMethod = response.request?.httpMethod,
+                httpMethod == HTTPMethod.post.rawValue ||
+                httpMethod == HTTPMethod.delete.rawValue ||
+                httpMethod == HTTPMethod.patch.rawValue ||
+                httpMethod == HTTPMethod.put.rawValue {
+                
+                completion(true)
             }
             else {
                 failure(self.parseError(response))
@@ -560,24 +550,46 @@ open class RestClient {
         }
     }
     
-    open func runCustomStringBody(string: String, completion: @escaping (_ response: Any) -> Void, failure: @escaping (_ error: Any?) -> Void) {
+    open func runCustomStringBody(
+        string: String,
+        debug: ((_ request: Request?, _ response: AFDataResponse<Any>?) -> Void)? = nil,
+        completion: @escaping (_ response: Any) -> Void,
+        failure: @escaping (_ error: Any?) -> Void) {
+        
         self.runCustomStringBody(string: string, completion: {response, headers in completion(response)}, failure: failure)
     }
     
-    open func runCustomStringBody(string: String, completion: @escaping (_ response: Any, _ headers: [String : Any?]) -> Void, failure: @escaping (_ error: Any?) -> Void) {
+    open func runCustomStringBody(
+        string: String,
+        debug: ((_ request: Request?, _ response: AFDataResponse<Any>?) -> Void)? = nil,
+        completion: @escaping (_ response: Any, _ headers: [String : Any?]) -> Void,
+        failure: @escaping (_ error: Any?) -> Void) {
         
-        let request = self.sessionManager.request(self.requestUrl!, method: self.requestMethod, parameters: [:], encoding: CustomStringEncoding(customString: string), headers: self.defaultHeaders).responseJSON(queue: self.dispatchQueue, options: .allowFragments) {response in
+        let request = self.sessionManager.request(
+            self.requestUrl!,
+            method: self.requestMethod,
+            parameters: [:],
+            encoding: CustomStringEncoding(customString: string),
+            headers: self.defaultHeaders)
+        
+        request.responseJSON(queue: self.dispatchQueue, options: .allowFragments) { response in
+            debug?(request, response) // PHIOS-5207: post request notification for any logger
             self.handleCustomJSONResponse(response, completion: completion, failure: failure)
         }
+    }
+    
+    open func runCustomJSON(
+        debug: ((_ request: Request?, _ response: AFDataResponse<Any>?) -> Void)? = nil,
+        completion: @escaping (_ response: Any) -> Void,
+        failure: @escaping (_ error: Any?) -> Void) {
         
-        print(request)
+        self.runCustomJSON(debug: debug, completion: {response, headers in completion(response)}, failure: failure)
     }
     
-    open func runCustomJSON(completion: @escaping (_ response: Any) -> Void, failure: @escaping (_ error: Any?) -> Void) {
-        self.runCustomJSON(completion: {response, headers in completion(response)}, failure: failure)
-    }
-    
-    open func runCustomJSON(completion: @escaping (_ response: Any, _ headers: [String : Any?]) -> Void, failure: @escaping (_ error: Any?) -> Void) {
+    open func runCustomJSON(
+        debug: ((_ request: Request?, _ response: AFDataResponse<Any>?) -> Void)? = nil,
+        completion: @escaping (_ response: Any, _ headers: [String : Any?]) -> Void,
+        failure: @escaping (_ error: Any?) -> Void) {
         
         let request = self.sessionManager.request(
             self.requestUrl!,
@@ -590,22 +602,23 @@ open class RestClient {
                 return $0
             },
             encoding: URLEncoding(destination: .methodDependent),
-            headers: self.defaultHeaders).responseJSON(queue: self.dispatchQueue, options: .allowFragments) {response in
-                self.handleCustomJSONResponse(response, completion: completion, failure: failure)
+            headers: self.defaultHeaders)
+            
+        request.responseJSON(queue: self.dispatchQueue, options: .allowFragments) { response in
+            debug?(request, response) // PHIOS-5207: post request notification for any loggers
+            self.handleCustomJSONResponse(response, completion: completion, failure: failure)
         }
-        
-        print(request)
     }
     
-    func handleCustomJSONResponse(_ response: DataResponse<Any>, completion: @escaping (_ response: Any, _ headers: [String : Any?]) -> Void, failure: @escaping (_ error: Any?) -> Void){
-        if response.response?.statusCode == 200 || response.response?.statusCode == 201 {
+    func handleCustomJSONResponse(_ response: AFDataResponse<Any>, completion: @escaping (_ response: Any, _ headers: [String : Any?]) -> Void, failure: @escaping (_ error: Any?) -> Void){
+        if let statusCode = response.response?.statusCode, 200...299 ~= statusCode {
             let headers: [String : Any?] = [
                 "ResponseDate" : (response.response?.allHeaderFields["Date"] as? String)?.toDate,
                 "LocalDate" : Date()
             ]
-            
-            if let responseString = response.result.value as? String {
-                completion(responseString, headers);
+
+            if case .success(let value) = response.result, let responseString = value as? String {
+                completion(responseString, headers)
             }
             else {
                 completion(true, headers)
@@ -613,10 +626,11 @@ open class RestClient {
         }
         else {
             var errorInfo : [String : Any] = [RestClient.RestClientResponseStatusCodeKey : response.response?.statusCode ?? 0]
-            if let responseDict = response.result.value as? Dictionary<String,Any> {
+
+            if case .success(let value) = response.result, let responseDict = value as? Dictionary<String,Any> {
                 errorInfo.update(responseDict)
             }
-            else if let responseError = response.result.error as NSError? {
+            else if case .failure(let error) = response.result, let responseError = error as NSError? {
                 errorInfo.update(responseError.userInfo)
             }
             failure (errorInfo)
@@ -627,7 +641,7 @@ open class RestClient {
         return nil
     }
     
-    open func parseError(_ response: DataResponse<Data>) -> Error {
+    open func parseError(_ response: AFDataResponse<Data>) -> Error {
         return MojioError(code: nil)
     }
     

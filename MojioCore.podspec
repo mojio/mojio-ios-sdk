@@ -7,7 +7,7 @@ Pod::Spec.new do |spec|
     spec.authors = {"Mojio, Inc." => 'support@moj.io'}
     spec.social_media_url = "https://twitter.com/getmojio"
 
-    spec.platform = :ios, "9.0"
+    spec.platform = :ios, "11.0"
     spec.requires_arc = true
     spec.source = { git: "https://github.com/mojio/mojio-ios-sdk.git", branch: "phoenix", submodules: true }
 

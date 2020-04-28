@@ -100,18 +100,23 @@ open class AuthClient: AuthControllerDelegate {
     open var loginFailure: ((_ response: Any?) -> Void)? = nil
     open var authController: AuthViewController?
     
-    open var requestHeaders: [String: String] = ClientHeaders().defaultRequestHeaders
+    open var defaultHeaders: HTTPHeaders {
+        var headers = ClientHeaders().defaultRequestHeaders
+        headers.update(.accept("application/json"))
+        headers.update(.contentType("application/json"))
+        return headers
+    }
     
     // Default to global concurrent queue with default priority
     public static var defaultDispatchQueue = DispatchQueue.global()
     fileprivate var dispatchQueue = AuthClient.defaultDispatchQueue
     
     fileprivate var clientEnvironment: ClientEnvironment
-    internal let sessionManager: SessionManager
+    internal let sessionManager: Session
     
     private var keychainManager: KeychainManager
     
-    public init(clientEnvironment: ClientEnvironment, clientId: String, clientSecretKey: String, clientRedirectURI: String, sessionManager: SessionManager = SessionManager.default, keychainManager: KeychainManager = KeychainManager.sharedInstance) {
+    public init(clientEnvironment: ClientEnvironment, clientId: String, clientSecretKey: String, clientRedirectURI: String, sessionManager: Session = Session.default, keychainManager: KeychainManager = KeychainManager.sharedInstance) {
         self.clientEnvironment = clientEnvironment
         self.sessionManager = sessionManager
         
@@ -126,10 +131,6 @@ open class AuthClient: AuthControllerDelegate {
     
     open func dispatch(queue: DispatchQueue) {
         self.dispatchQueue = queue
-    }
-    
-    open func resetRequestHeaders() {
-        self.requestHeaders = ClientHeaders().defaultRequestHeaders
     }
     
     open func loginViewController(_ completion: ((_ authToken: AuthToken) -> Void)?, failure: ((_ response: Any?) -> Void)?) {
@@ -229,42 +230,35 @@ open class AuthClient: AuthControllerDelegate {
         // The token endpoint is used for the resource owner flow
         let loginEndpoint = self.tokenUrl
         
-        self.requestHeaders.update(["Authorization": self.generateBasicAuthHeader()])
-        
-        let request = self.sessionManager.request(
-            loginEndpoint,
-            method: .post,
-            parameters: [
-                "grant_type": "password",
-                "password": password,
-                "username": username,
-                "client_id": self.clientId,
-                "client_secret": self.clientSecretKey,
-                "scope": "full offline_access"
-            ],
-            encoding: URLEncoding(destination: .methodDependent),
-            headers: self.self.requestHeaders).responseJSON(queue: self.dispatchQueue, options: .allowFragments) {response in
-                
+        var headers = self.defaultHeaders
+        headers.update(.authorization(self.generateBasicAuthHeader()))
+
+        let parameters = [
+            "grant_type": "password",
+            "password": password,
+            "username": username,
+            "client_id": self.clientId,
+            "client_secret": self.clientSecretKey,
+            "scope": "full offline_access"
+        ]
+
+        let request = self.sessionManager
+            .request(loginEndpoint, method: .post, parameters: parameters, encoding: URLEncoding(destination: .methodDependent), headers: headers)
+            .responseJSON(queue: self.dispatchQueue, options: .allowFragments) { response in
                 self.postLogin(response: response, completion: completion, failure: failure)
-        }
-        
+            }
         print(request)
     }
     
     // Login
-    open func login(_ token: String,
-                    firstName: String? = nil,
-                    lastName: String? = nil,
-                    email: String? = nil,
-                    customParameters: [String: Any]? = nil,
-                    completion: @escaping (_ authToken: AuthToken) -> Void,
-                    failure: @escaping (_ response: [String: Any]?) -> Void) {
+    open func login(_ token: String, firstName: String? = nil, lastName: String? = nil, email: String? = nil, customParameters: [String: Any]? = nil, completion: @escaping (_ authToken: AuthToken) -> Void, failure: @escaping (_ response: [String: Any]?) -> Void) {
         
         // The token endpoint is used for the resource owner flow
         let loginEndpoint = self.tokenUrl
         
-        self.requestHeaders.update(["Authorization": self.generateBasicAuthHeader()])
-        
+        var headers = self.defaultHeaders
+        headers.update(.authorization(self.generateBasicAuthHeader()))
+
         var parameters: Parameters = [:]
         if let extraParams = customParameters {
             extraParams.forEach { parameters.updateValue($1, forKey: $0) }
@@ -283,25 +277,22 @@ open class AuthClient: AuthControllerDelegate {
             parameters["email"] = eml
         }
         
-        let request = self.sessionManager.request(
-            loginEndpoint,
-            method: .post,
-            parameters: parameters,
-            encoding: URLEncoding(destination: .methodDependent),
-            headers: self.requestHeaders).responseJSON(queue: self.dispatchQueue, options: .allowFragments) {response in
-                
+        let request = self.sessionManager
+            .request(loginEndpoint, method: .post, parameters: parameters, encoding: URLEncoding(destination: .methodDependent), headers: headers)
+            .responseJSON(queue: self.dispatchQueue, options: .allowFragments) { response in
                 self.postLogin(response: response, completion: completion, failure: failure)
-        }
+            }
         
         print(request)
     }
     
-    fileprivate func postLogin(response: DataResponse<Any>, completion: @escaping (_ authToken: AuthToken) -> Void, failure: @escaping (_ response: [String: Any]?) -> Void) {
+    fileprivate func postLogin(response: AFDataResponse<Any>, completion: @escaping (_ authToken: AuthToken) -> Void, failure: @escaping (_ response: [String: Any]?) -> Void) {
         
         if response.response?.statusCode == 200 {
             
             guard
-                let responseJSON = response.result.value as? [String: AnyObject],
+                case .success(let value) = response.result,
+                let responseJSON = value as? [String: AnyObject],
                 let expiry: Double = responseJSON["expires_in"] as? Double,
                 let accessToken = responseJSON["access_token"] as? String else {
                     
@@ -324,10 +315,10 @@ open class AuthClient: AuthControllerDelegate {
             }
         }
         else {
-            if let dictionary = response.result.value as? [String: Any] {
+            if case .success(let value) = response.result, let dictionary = value as? [String: Any] {
                 failure(dictionary)
             }
-            else if let responseError = response.result.error as NSError? {
+            else if case .failure(let error) = response.result, let responseError = error as NSError? {
                 failure(responseError.userInfo)
             }
             else {
@@ -350,29 +341,27 @@ open class AuthClient: AuthControllerDelegate {
             return
         }
         
-        var parameters: [String: Any] = ["grant_type": "refresh_token",
-                                         "refresh_token": refreshToken,
-                                         "client_id": self.clientId,
-                                         "client_secret": self.clientSecretKey,
-                                         "redirect_uri": self.clientRedirectURL]
+        var parameters: [String: Any] = [
+            "grant_type": "refresh_token",
+            "refresh_token": refreshToken,
+            "client_id": self.clientId,
+            "client_secret": self.clientSecretKey,
+            "redirect_uri": self.clientRedirectURL]
         
         additionalParameters.forEach { parameters[$0] = $1 }
         
-        let request = self.sessionManager.request(authorizeEndpoint,
-                                        method: .post,
-                                        parameters: parameters,
-                                        encoding: URLEncoding(destination: .methodDependent))
-            .responseJSON(queue: self.dispatchQueue, options: .allowFragments) {response in
-                
+        let request = self.sessionManager
+            .request(authorizeEndpoint, method: .post, parameters: parameters, encoding: URLEncoding(destination: .methodDependent))
+            .responseJSON(queue: self.dispatchQueue, options: .allowFragments) { response in
                 if response.response?.statusCode == 200 {
-                    
                     guard
-                        let responseJSON = response.result.value as? [String: AnyObject],
+                        case .success(let value) = response.result,
+                        let responseJSON = value as? [String: AnyObject],
                         let expiry: Double = responseJSON["expires_in"] as? Double,
                         let accessToken = responseJSON["access_token"] as? String else {
                             
-                            failure(Errors.wrongResponseFormat)
-                            return
+                        failure(Errors.wrongResponseFormat)
+                        return
                     }
                     
                     let authToken = AuthToken(
@@ -389,17 +378,17 @@ open class AuthClient: AuthControllerDelegate {
                     }
                 }
                 else {
-                    if let responseDict = response.result.value as? [String : Any] {
+                    if case .success(let value) = response.result, let responseDict = value as? [String : Any] {
                         failure(responseDict)
                     }
-                    else if let responseError = response.result.error as NSError? {
+                    else if case .failure(let error) = response.result, let responseError = error as NSError? {
                         failure(responseError.userInfo)
                     }
                     else {
                         return failure(nil)
                     }
                 }
-        }
+            }
         
         print(request)
     }
@@ -412,43 +401,42 @@ open class AuthClient: AuthControllerDelegate {
     open func register(_ mobile: String, email: String, password: String, completion: @escaping (_ authToken: AuthToken) -> Void, failure: @escaping (_ response: [String: Any]?) -> Void) {
         
         let registerEndpoint = self.clientEnvironment.getIdentityEndpoint() + AccountClientEndpoint.register.rawValue
-        self.requestHeaders.update(["Authorization": self.generateBasicAuthHeader(), "Content-Type": "application/json", "Accept": "application/json"])
         
+        var headers = self.defaultHeaders
+        headers.update(.authorization(self.generateBasicAuthHeader()))
+
         var param = ["Email": email, "Password": password, "ConfirmPassword": password]
         
-        if mobile != ""
-        {
+        if mobile != "" {
             param["PhoneNumber"] = mobile
         }
         
         // Step 1: Create an account for the user
-        let request = self.sessionManager.request(registerEndpoint, method: .post, parameters: param, encoding: JSONEncoding.default, headers: self.requestHeaders).responseJSON(queue: self.dispatchQueue, options: .allowFragments) {response in
-            
-            if response.response?.statusCode == 200 {
-                
-                // Step 2: If account creation was successful, log the user in
-                self.resetRequestHeaders()
-                self.login(email, password: password, completion: {authToken in
+        let request = self.sessionManager
+            .request(registerEndpoint, method: .post, parameters: param, encoding: JSONEncoding.default, headers: headers)
+            .responseJSON(queue: self.dispatchQueue, options: .allowFragments) { response in
+                if response.response?.statusCode == 200 {
                     
-                    completion(authToken)
-                    
-                }, failure: {response in
-                    failure(response)
-                })
-                
-            }
-            else {
-                if let responseDict = response.result.value as? [String : Any] {
-                    failure(responseDict)
-                }
-                else if let responseError = response.result.error as NSError? {
-                    failure(responseError.userInfo)
+                    // Step 2: If account creation was successful, log the user in
+                    self.login(
+                        email,
+                        password: password,
+                        completion: { completion($0) },
+                        failure: { failure($0) }
+                    )
                 }
                 else {
-                    return failure(nil)
+                    if case .success(let value) = response.result, let responseDict = value as? [String : Any] {
+                        failure(responseDict)
+                    }
+                    else if case .failure(let error) = response.result, let responseError = error as NSError? {
+                        failure(responseError.userInfo)
+                    }
+                    else {
+                        return failure(nil)
+                    }
                 }
             }
-        }
         
         print(request)
     }
@@ -458,46 +446,50 @@ open class AuthClient: AuthControllerDelegate {
         
         let verifyEndpoint = self.tokenUrl
         
-        self.requestHeaders.update(["Accept": "application/json", "Authorization": self.generateBasicAuthHeader()])
+        var headers = self.defaultHeaders
+        headers.update(.authorization(self.generateBasicAuthHeader()))
+
+        let parameters = ["client_id": self.clientId, "client_secret": self.clientSecretKey, "grant_type": "phone", "phone_number": mobile, "pin": pin]
         
-        let request = self.sessionManager.request(verifyEndpoint, method: .post, parameters: ["client_id": self.clientId, "client_secret": self.clientSecretKey, "grant_type": "phone", "phone_number": mobile, "pin": pin], encoding: URLEncoding(destination: .methodDependent), headers: ["Accept": "application/json", "Authorization": self.generateBasicAuthHeader()]).responseJSON(queue: self.dispatchQueue, options: .allowFragments) {response in
-            
-            if response.response?.statusCode == 200 {
-                
-                guard
-                    let responseJSON = response.result.value as? [String: AnyObject],
-                    let expiry: Double = responseJSON["expires_in"] as? Double,
-                    let accessToken = responseJSON["access_token"] as? String else {
-                        
+        let request = self.sessionManager
+            .request(verifyEndpoint, method: .post, parameters: parameters, encoding: URLEncoding(destination: .methodDependent), headers: headers)
+            .responseJSON(queue: self.dispatchQueue, options: .allowFragments) { response in
+                if response.response?.statusCode == 200 {
+                    guard
+                        case .success(let value) = response.result,
+                        let responseJSON = value as? [String: AnyObject],
+                        let expiry: Double = responseJSON["expires_in"] as? Double,
+                        let accessToken = responseJSON["access_token"] as? String else {
+                            
                         failure(Errors.wrongResponseFormat)
                         return
-                }
-                
-                let authToken = AuthToken(
-                    accessToken: accessToken,
-                    expiry: Date(timeIntervalSinceNow: expiry),
-                    refreshToken: (responseJSON["refresh_token"] as? String),
-                    uniqueId: self.clientEnvironment.getRegion().regionType.rawValue)
-                
-                if authToken.isValid {
-                    completion(authToken)
+                    }
+                    
+                    let authToken = AuthToken(
+                        accessToken: accessToken,
+                        expiry: Date(timeIntervalSinceNow: expiry),
+                        refreshToken: (responseJSON["refresh_token"] as? String),
+                        uniqueId: self.clientEnvironment.getRegion().regionType.rawValue)
+                    
+                    if authToken.isValid {
+                        completion(authToken)
+                    }
+                    else {
+                        failure(nil)
+                    }
                 }
                 else {
-                    failure(nil)
+                    if case .success(let value) = response.result, let dictionary = value as? [String: Any] {
+                        failure(dictionary)
+                    }
+                        /*else if let error = response.result.error {
+                         failure(error.userInfo)
+                         }*/
+                    else {
+                        failure(nil)
+                    }
                 }
             }
-            else {
-                if let dictionary = response.result.value as? [String: Any] {
-                    failure(dictionary)
-                }
-                    /*else if let error = response.result.error {
-                     failure(error.userInfo)
-                     }*/
-                else {
-                    failure(nil)
-                }
-            }
-        }
         
         print(request)
     }
@@ -507,17 +499,21 @@ open class AuthClient: AuthControllerDelegate {
         
         let verifyEndpoint = self.clientEnvironment.getIdentityEndpoint() + AccountClientEndpoint.resendPin.rawValue
         
-        self.requestHeaders.update(["Accept": "application/json", "Authorization": self.generateBasicAuthHeader()])
+        var headers = self.defaultHeaders
+        headers.update(.authorization(self.generateBasicAuthHeader()))
+
+        let parameters = ["PhoneNumber": mobile, "grant_type": "phone"]
         
-        let request = self.sessionManager.request(verifyEndpoint, method: .post, parameters: ["PhoneNumber": mobile, "grant_type": "phone"], encoding: JSONEncoding.default, headers: ["Accept": "application/json", "Authorization": self.generateBasicAuthHeader()]).responseJSON(queue: self.dispatchQueue, options: .allowFragments) {response in
-            
-            if response.response?.statusCode == 200 {
-                completion?()
+        let request = self.sessionManager
+            .request(verifyEndpoint, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
+            .responseJSON(queue: self.dispatchQueue, options: .allowFragments) {response in
+                if response.response?.statusCode == 200 {
+                    completion?()
+                }
+                else {
+                    failure?()
+                }
             }
-            else {
-                failure?()
-            }
-        }
         
         print(request)
     }
@@ -527,21 +523,21 @@ open class AuthClient: AuthControllerDelegate {
         
         let forgotEndpoint = self.clientEnvironment.getIdentityEndpoint() + AccountClientEndpoint.forgot.rawValue
         
-        self.requestHeaders.update(["Accept": "application/json", "Authorization": self.generateBasicAuthHeader()])
+        var headers = self.defaultHeaders
+        headers.update(.authorization(self.generateBasicAuthHeader()))
+
+        let parameters = ["UserNameEmailOrPhone": emailOrPhoneNumber]
         
-        let request = self.sessionManager.request(forgotEndpoint,
-                                                  method: .post,
-                                                  parameters: ["UserNameEmailOrPhone": emailOrPhoneNumber],
-                                                  encoding: JSONEncoding.default,
-                                                  headers: ["Accept": "application/json", "Authorization": self.generateBasicAuthHeader()])
-            .responseJSON(queue: self.dispatchQueue, options: .allowFragments) {response in
-                
+        let request = self.sessionManager
+            .request(forgotEndpoint, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
+            .responseJSON(queue: self.dispatchQueue, options: .allowFragments) { response in
                 if response.response?.statusCode == 200 {
-                    completion(response.result.value as? [String: Any])
-                } else {
-                    failure(response.result.value as? [String: Any])
+                    completion((try? response.result.get()) as? [String: Any])
                 }
-        }
+                else {
+                    failure((try? response.result.get()) as? [String: Any])
+                }
+            }
         
         print(request)
     }
@@ -550,22 +546,21 @@ open class AuthClient: AuthControllerDelegate {
         
         let resetEndpoint = self.clientEnvironment.getIdentityEndpoint() + AccountClientEndpoint.reset.rawValue
         
-        self.requestHeaders.update(["Accept": "application/json", "Authorization": self.generateBasicAuthHeader()])
+        var headers = self.defaultHeaders
+        headers.update(.authorization(self.generateBasicAuthHeader()))
+
+        let parameters = ["ResetToken": resetToken, "Password": password, "ConfirmPassword": password]
         
-        let request = self.sessionManager.request(resetEndpoint,
-                                                  method: .post,
-                                                  parameters: ["ResetToken": resetToken, "Password": password, "ConfirmPassword": password],
-                                                  encoding: JSONEncoding.default,
-                                                  headers: ["Accept": "application/json", "Authorization": self.generateBasicAuthHeader()])
-            .responseJSON(queue: self.dispatchQueue, options: .allowFragments) {response in
-                
+        let request = self.sessionManager
+            .request(resetEndpoint, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
+            .responseJSON(queue: self.dispatchQueue, options: .allowFragments) { response in
                 if response.response?.statusCode == 200 {
-                    completion(response.result.value as? [String: Any])
+                    completion((try? response.result.get()) as? [String: Any])
                 }
                 else {
-                    failure(response.result.value as? [String: Any])
+                    failure((try? response.result.get()) as? [String: Any])
                 }
-        }
+            }
         
         print(request)
     }
@@ -620,6 +615,9 @@ open class AuthClient: AuthControllerDelegate {
 
 extension AuthClient {
     public func deleteUserToken(with userName: String, password: String, completion: @escaping (AuthToken) -> Void, failure: @escaping (_ response: [String: Any]?) -> Void)  {
+        
+        let endPoint = self.clientEnvironment.getIdentityEndpoint() + AuthClientEndpoint.token.rawValue
+        
         let parameters = [
             "username": userName,
             "password": password,
@@ -629,23 +627,16 @@ extension AuthClient {
             "grant_type": "password"
         ]
         
-        var headers = [
-            "Accept": "application/json"
-        ]
-        
+        var headers = self.defaultHeaders
         if let accessToken = self.authToken?.accessToken {
-            headers["Authorization"] = "Bearer " + accessToken
+            headers.update(.authorization(bearerToken: accessToken))
         }
-        
-        Alamofire
-            .request(self.clientEnvironment.getIdentityEndpoint() + AuthClientEndpoint.token.rawValue,
-                     method: .post,
-                     parameters: parameters,
-                     encoding: URLEncoding.default,
-                     headers: headers)
-            .responseJSON(queue: self.dispatchQueue, options: .allowFragments) {response in
+
+        self.sessionManager
+            .request(endPoint, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: headers)
+            .responseJSON(queue: self.dispatchQueue, options: .allowFragments) { response in
                 if response.response?.statusCode == 200 {
-                    if let dict = response.result.value as? [String: Any],
+                    if case .success(let value) = response.result, let dict = value as? [String: Any],
                         let expiry: Double = dict["expires_in"] as? Double {
                         let authToken = AuthToken(
                             accessToken: (dict["access_token"] as? String) ?? String.empty,
@@ -661,10 +652,10 @@ extension AuthClient {
                         }
                     }
                 }
-                else if let responseDict = response.result.value as? [String : Any] {
+                else if case .success(let value) = response.result, let responseDict = value as? [String : Any] {
                     failure(responseDict)
                 }
-                else if let responseError = response.result.error as NSError? {
+                else if case .failure(let error) = response.result, let responseError = error as NSError? {
                     failure(responseError.userInfo)
                 }
                 else {
@@ -676,14 +667,12 @@ extension AuthClient {
 
 extension AuthClient {
     public func sendVerificationCode(to phoneNumber: String, completion: (() -> Void)?, failure: @escaping (_ response: [String: Any]?) -> Void) {
+        
         let verifyEndpoint = self.clientEnvironment.getIdentityEndpoint() + AccountClientEndpoint.sendVerifictionPhone.rawValue + "?phone=\(phoneNumber)"
         
-        var headers = [
-            "Accept": "application/json"
-        ]
-        
+        var headers = self.defaultHeaders
         if let accessToken = self.authToken?.accessToken {
-            headers["Authorization"] = "Bearer " + accessToken
+            headers.update(.authorization(bearerToken: accessToken))
         }
         
         let request = self.sessionManager
@@ -693,30 +682,27 @@ extension AuthClient {
                 if response.response?.statusCode == 200 {
                     completion?()
                 }
-                else if let responseDict = response.result.value as? [String : Any] {
+                else if case .success(let value) = response.result, let responseDict = value as? [String : Any] {
                     failure(responseDict)
                 }
-                else if let responseError = response.result.error as NSError? {
+                else if case .failure(let error) = response.result, let responseError = error as NSError? {
                     failure(responseError.userInfo)
                 }
                 else {
                     return failure(nil)
                 }
-        }
+            }
         
         print(request)
     }
     
     public func deviceVerify(with pin: String, phoneNumber: String, deviceToken: String, completion: (() -> Void)?,  failure: @escaping (_ response: [String: Any]?) -> Void) {
+        
         let endPoint =  self.clientEnvironment.getIdentityEndpoint() + AccountClientEndpoint.devicesVerify.rawValue
         
-        var headers = [
-            "Accept": "application/json",
-            "Content-Type": "application/json"
-        ]
-        
+        var headers = self.defaultHeaders
         if let accessToken = self.authToken?.accessToken {
-            headers["Authorization"] = "Bearer " + accessToken
+            headers.update(.authorization(bearerToken: accessToken))
         }
         
         let parameters = [
@@ -732,16 +718,16 @@ extension AuthClient {
                 if response.response?.statusCode == 200 {
                     completion?()
                 }
-                else if let responseDict = response.result.value as? [String : Any] {
+                else if case .success(let value) = response.result, let responseDict = value as? [String : Any] {
                     failure(responseDict)
                 }
-                else if let responseError = response.result.error as NSError? {
+                else if case .failure(let error) = response.result, let responseError = error as NSError? {
                     failure(responseError.userInfo)
                 }
                 else {
                     return failure(nil)
                 }
-        }
+            }
         
         print(request)
     }
