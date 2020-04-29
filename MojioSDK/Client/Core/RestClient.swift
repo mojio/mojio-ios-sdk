@@ -170,6 +170,11 @@ open class RestClient {
         return self
     }
     
+    open func v4() -> Self {
+        self.versionHeader = "2020-03-17"
+        return self
+    }
+    
     open func offset(offset: Int) -> Self {
         self.requestParams["skip"] = offset
         return self
@@ -407,8 +412,8 @@ open class RestClient {
         }
         
         // Add version header if needed
-        if self.versionHeader != nil {
-            headers["x-mojio-version"] = "2018-09-01"
+        if let versionHeader = self.versionHeader {
+            headers["x-mojio-version"] = versionHeader
         }
         
         return headers
