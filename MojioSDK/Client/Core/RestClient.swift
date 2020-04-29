@@ -48,15 +48,6 @@ open class ClientHeaders {
     }
 }
 
-public enum XMojioVersion: String {
-    case current = "2018-09-01"
-    case eLogBook = "2020-03-17"
-    
-    static var versionHeaderKey: String {
-        return "x-mojio-version"
-    }
-}
-
 public struct MimeType {
     public enum Image: String, Codable {
         case jpeg = "image/jpeg"
@@ -179,8 +170,8 @@ open class RestClient {
         return self
     }
     
-    open func xMojio(version: XMojioVersion = .current) -> Self {
-        self.versionHeader = version.rawValue
+    open func v4() -> Self {
+        self.versionHeader = "2020-03-17"
         return self
     }
     
@@ -416,7 +407,7 @@ open class RestClient {
         
         // Add version header if needed
         if let versionHeader = self.versionHeader {
-            headers.update(name: XMojioVersion.versionHeaderKey, value: versionHeader)
+            headers.update(name: "x-mojio-version", value: versionHeader)
         }
         
         return headers
