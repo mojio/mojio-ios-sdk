@@ -170,6 +170,11 @@ open class RestClient {
         return self
     }
     
+    open func v4() -> Self {
+        self.versionHeader = "2020-03-17"
+        return self
+    }
+    
     open func offset(offset: Int) -> Self {
         self.requestParams["skip"] = offset
         return self
