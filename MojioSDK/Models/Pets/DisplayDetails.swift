@@ -17,48 +17,38 @@ import Foundation
 import MojioCore
 
 public protocol DisplayDetailsModel: Codable {
-    var showOnMap: Bool? { get }
     var profileImage: String? { get }
 }
 
 public struct DisplayDetails: DisplayDetailsModel {
-    public let showOnMap: Bool?
     public let profileImage: String?
 
     public enum CodingKeys: String, CodingKey {
-        case showOnMap = "ShowOnMap"
         case profileImage = "ProfileImage"
     }
 }
 
 public struct DisplayDetailsUpdate: Codable {
-    public var showOnMap: Bool?
     public var profileImage: String?
 
     public enum CodingKeys: String, CodingKey {
-        case showOnMap = "ShowOnMap"
         case profileImage = "ProfileImage"
     }
 
     public init(from displayDetailsModel: DisplayDetailsModel? = nil) {
         self.init(
-            showOnMap: displayDetailsModel?.showOnMap,
             profileImage: displayDetailsModel?.profileImage
         )
     }
 
-    public init(
-        showOnMap: Bool? = nil,
-        profileImage: String? = nil) {
+    public init(profileImage: String? = nil) {
 
-        self.showOnMap = showOnMap
         self.profileImage = profileImage
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
 
-        try container.encodeIfPresent(self.showOnMap, forKey: .showOnMap)
         try container.encodeIfPresent(self.profileImage, forKey: .profileImage)
     }
 }

@@ -19,7 +19,6 @@ import MojioCore
 public struct VehicleAppearance: Codable {
     
     public var vehicleId: String = String.empty
-    public var showOnMap: Bool?
     public var vehicleImage: VehicleImage?
     
     public struct VehicleImage: Codable {
@@ -40,16 +39,14 @@ public struct VehicleAppearance: Codable {
     
     public enum CodingKeys: String, CodingKey {
         case vehicleId = "VehicleId"
-        case showOnMap = "ShowOnMap"
         case vehicleImage = "VehicleImage"
     }
     
     public init() {}
     
-    public init(vehicleId: String, showOnMap: Bool?) {
+    public init(vehicleId: String) {
         
         self.vehicleId = vehicleId
-        self.showOnMap = showOnMap
     }
     
     public var Id: String? {
@@ -64,7 +61,7 @@ public struct VehicleAppearance: Codable {
 
 extension VehicleAppearance: Equatable {
     public static func == (lhs: VehicleAppearance, rhs: VehicleAppearance) -> Bool {
-        return lhs.vehicleId == rhs.vehicleId && lhs.showOnMap == rhs.showOnMap && lhs.vehicleImage == rhs.vehicleImage
+        return lhs.vehicleId == rhs.vehicleId && lhs.vehicleImage == rhs.vehicleImage
     }
 }
 
