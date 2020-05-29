@@ -118,3 +118,27 @@ public struct UserUpdate: Codable {
         self.lastName = lastName
     }
 }
+
+public struct PrivacyCenterDoNotSellState: Codable {
+    
+    public var doNotShare: Bool? = nil
+    public var crashAnalyticsOptOut: Bool? = nil
+    
+    public enum CodingKeys: String, CodingKey, CompoundWordStyle {
+        case doNotShare = "DoNotShare"
+        case crashAnalyticsOptOut = "CrashAnalyticsOptOut"
+    }
+    
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: DynamicCodingKey.self)
+        
+        do {
+            self.doNotShare = try container.decodeIgnoringCase(Bool.self, forKey: CodingKeys.doNotShare)
+            self.crashAnalyticsOptOut = try container.decodeIgnoringCase(Bool.self, forKey: CodingKeys.crashAnalyticsOptOut)
+        }
+        catch let error {
+            debugPrint(error)
+            throw error
+        }
+    }
+}
