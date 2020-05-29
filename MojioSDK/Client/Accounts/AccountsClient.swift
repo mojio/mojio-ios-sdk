@@ -32,6 +32,7 @@ public enum AccountsEndpoint: String {
     case emails = "emails/"
     case tags = "tags/"
     case activities = "activities/"
+    case privacy = "privacy/"
     
     // Storage
     // Parameters: Type, Id, Key
@@ -77,6 +78,13 @@ open class AccountsClient: RestClient {
         self.requestEntityId = userId
         self.appendRequestUrlEntityId()
         self.appendPushUrlEntityId()
+        
+        return self
+    }
+    
+    open func privacy() -> Self {
+        self.requestEntity = AccountsEndpoint.privacy.rawValue
+        self.requestUrl = self.requestUrl! + self.requestEntity
         
         return self
     }
@@ -190,6 +198,8 @@ open class AccountsClient: RestClient {
                 catch {
                     return try JSONDecoder().decode(User.self, from: responseData)
                 }
+            case .privacy:
+                return try JSONDecoder().decode(PrivacyCenterDoNotSellState.self, from: responseData)
                 
             default:
                 return nil
