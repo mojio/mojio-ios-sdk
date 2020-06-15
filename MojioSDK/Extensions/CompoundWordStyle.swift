@@ -26,6 +26,13 @@ public extension RawRepresentable where Self: CompoundWordStyle, RawValue == Str
     }
     
     var lowerCamelCase: String {
-        return self.rawValue.decapitalizedFirstCharacter
+        let value = self.rawValue
+        if CharacterSet(charactersIn: value).isSubset(of: CharacterSet.uppercaseLetters.union(CharacterSet.decimalDigits)) {
+            // it is an abbreviation so change all letters to lowercase
+            return value.lowercased()
+        }
+        else {
+            return value.decapitalizedFirstCharacter
+        }
     }
 }
