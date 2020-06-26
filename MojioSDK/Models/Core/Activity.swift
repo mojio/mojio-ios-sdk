@@ -623,8 +623,8 @@ public struct Icon: Codable {
 
 public struct TimelineEntities: Codable {
     
-    let entities: ResponseArray<RootActivity>?
-    let moreData: Bool
+    public let entities: ResponseArray<RootActivity>?
+    public let moreData: Bool
     
     public enum CodingKeys: String, CodingKey, CompoundWordStyle {
         case entities = "Entities"
