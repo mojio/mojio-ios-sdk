@@ -261,7 +261,7 @@ public struct Activity: ActivityModel {
     public let attributedTo: ActivityModel?
     
     public let tirePressure: ActivityTirePressure?
-
+    
     enum CodingKeys: String, CodingKey, CompoundWordStyle {
         case id = "Id"
         case type = "Type"
@@ -457,7 +457,12 @@ public struct RootActivity: RootActivityModel {
 
     public let driverScore: Int?
     public let averageDriverScore: Int?
-
+    
+    public let notes: String?
+    public let purpose: String?
+    
+    public let tripActivities: [RootActivity]?
+    
     enum CodingKeys: String, CodingKey, CompoundWordStyle {
         case id = "Id"
         case type = "Type"
@@ -489,6 +494,9 @@ public struct RootActivity: RootActivityModel {
         case messageId = "MessageId"
         case driverScore = "DriverScore"
         case averageDriverScore = "AverageDriverScore"
+        case notes = "Notes"
+        case purpose = "Purpose"
+        case tripActivities = "TripActivities"
     }
     
     public init(from decoder: Decoder) throws {
@@ -547,6 +555,11 @@ public struct RootActivity: RootActivityModel {
         
         self.driverScore = try container.decodeIfPresentIgnoringCase(Float.self, forKey: CodingKeys.driverScore).flatMap { Int($0 * 100) }
         self.averageDriverScore = try container.decodeIfPresentIgnoringCase(Float.self, forKey: CodingKeys.averageDriverScore).flatMap { Int($0 * 100) }
+        
+        self.notes = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.notes)
+        self.purpose = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.purpose)
+        
+        self.tripActivities = try container.decodeIfPresentIgnoringCase([RootActivity].self, forKey: CodingKeys.tripActivities)
     }
     
     public func encode (to encoder: Encoder) throws
@@ -583,6 +596,10 @@ public struct RootActivity: RootActivityModel {
         
         try container.encodeIfPresent(self.driverScore, forKey: .driverScore)
         try container.encodeIfPresent(self.averageDriverScore, forKey: .averageDriverScore)
+        
+        try container.encodeIfPresent(self.notes, forKey: .notes)
+        try container.encodeIfPresent(self.purpose, forKey: .purpose)
+        try container.encodeIfPresent(self.tripActivities, forKey: .tripActivities)
     }
 }
 
@@ -601,5 +618,24 @@ public struct Icon: Codable {
         
         self.name = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.name)
         self.type = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.type)
+    }
+}
+
+public struct TimelineEntities: Codable {
+    
+    let entities: ResponseArray<RootActivity>?
+    let moreData: Bool
+    
+    public enum CodingKeys: String, CodingKey, CompoundWordStyle {
+        case entities = "Entities"
+        case moreData = "MoreData"
+    }
+    
+    public init(from decoder: Decoder) throws {
+        
+        let container = try decoder.container(keyedBy: DynamicCodingKey.self)
+        
+        self.entities = try container.decodeIfPresentIgnoringCase(ResponseArray<RootActivity>.self, forKey: CodingKeys.entities)
+        self.moreData = try container.decodeIfPresentIgnoringCase(Bool.self, forKey: CodingKeys.moreData) ?? false
     }
 }
