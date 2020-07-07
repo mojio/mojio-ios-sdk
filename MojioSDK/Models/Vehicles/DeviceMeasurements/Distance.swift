@@ -30,6 +30,31 @@ public struct Distance: DistanceModel {
     public let unit: U
     public let value: Double
     public let timestamp: Date?
+    
+    public enum CodingKeys: String, CodingKey, CompoundWordStyle {
+        case baseUnit = "BaseUnit"
+        case baseValue = "BaseValue"
+        case unit = "Unit"
+        case value = "Value"
+        case timestamp = "Timestamp"
+    }
+    
+    public init(from decoder: Decoder) throws {
+        
+        do {
+            let container = try decoder.container(keyedBy: DynamicCodingKey.self)
+            
+            self.baseUnit = try container.decodeIfPresentIgnoringCase(U.self, forKey: CodingKeys.baseUnit) ?? .unknown
+            self.baseValue = try container.decodeIfPresentIgnoringCase(Double.self, forKey: CodingKeys.baseValue) ?? 0.0
+            self.unit = try container.decodeIfPresentIgnoringCase(U.self, forKey: CodingKeys.unit) ?? .unknown
+            self.value = try container.decodeIfPresentIgnoringCase(Double.self, forKey: CodingKeys.value) ?? 0.0
+            self.timestamp = try container.decodeIfPresentIgnoringCase(Date.self, forKey: CodingKeys.timestamp)
+        }
+        catch {
+            debugPrint(error)
+            throw error
+        }
+    }
 }
 
 extension Distance {
