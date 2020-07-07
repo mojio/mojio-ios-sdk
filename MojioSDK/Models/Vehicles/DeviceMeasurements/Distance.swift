@@ -48,7 +48,7 @@ public struct Distance: DistanceModel {
             self.baseValue = try container.decodeIfPresentIgnoringCase(Double.self, forKey: CodingKeys.baseValue) ?? 0.0
             self.unit = try container.decodeIfPresentIgnoringCase(U.self, forKey: CodingKeys.unit) ?? .unknown
             self.value = try container.decodeIfPresentIgnoringCase(Double.self, forKey: CodingKeys.value) ?? 0.0
-            self.timestamp = try container.decodeIfPresentIgnoringCase(Date.self, forKey: CodingKeys.timestamp)
+            self.timestamp = try container.decodeIfPresentIgnoringCase(String.self, forKey: Distance.CodingKeys.timestamp).flatMap { $0.dateFromISO }
         }
         catch {
             debugPrint(error)
