@@ -96,25 +96,25 @@ public struct Mojio: MojioModel {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
-        self.id = try container.decode(String.self, forKey: .id)
-        self.name = try container.decodeIfPresent(String.self, forKey: .name)
-        self.imei = try container.decodeIfPresent(String.self, forKey: .imei)
-        self.lastContactTime = try container.decodeIfPresent(String.self, forKey: .lastContactTime).flatMap { $0.dateFromISO }
-        self.wifi = try container.decodeIfPresent(WifiRadio.self, forKey: .wifi)
-        self.gatewayTime = try container.decodeIfPresent(String.self, forKey: .gatewayTime).flatMap { $0.dateFromISO }
-        self.vehicleId = try container.decodeIfPresent(String.self, forKey: .vehicleId)
-        self.location = try container.decodeIfPresent(Location.self, forKey: .location)
-        self.connectedState = try container.decodeIfPresent(BooleanState.self, forKey: .connectedState)
-        self.createdOn = try container.decodeIfPresent(String.self, forKey: .createdOn).flatMap { $0.dateFromISO }
-        self.lastModified = try container.decodeIfPresent(String.self, forKey: .lastModified).flatMap { $0.dateFromISO }
-        self.tags = try container.decodeIfPresent([String].self, forKey: .tags) ?? []
-        self.deleted = try container.decodeIfPresent(Bool.self, forKey: .deleted) ?? false
-        self.msisdn = try container.decodeIfPresent(String.self, forKey: .msisdn)
-        self.vendor = try container.decodeIfPresent(String.self, forKey: .vendor)
-        self.mainFirmware = try container.decodeIfPresent(String.self, forKey: .mainFirmware)
-        self.firmwareVersion = try container.decodeIfPresent(String.self, forKey: .firmwareVersion)
-        self.hardwareVersion = try container.decodeIfPresent(String.self, forKey: .hardwareVersion)
-        self.iccid = try container.decodeIfPresent(String.self, forKey: .iccid)
+        self.id = try container.decodeIgnoringCase(String.self, forKey: .id)
+        self.name = try container.decodeIfPresentIgnoringCase(String.self, forKey: .name)
+        self.imei = try container.decodeIfPresentIgnoringCase(String.self, forKey: .imei)
+        self.lastContactTime = try container.decodeIfPresentIgnoringCase(String.self, forKey: .lastContactTime).flatMap { $0.dateFromISO }
+        self.wifi = try container.decodeIfPresentIgnoringCase(WifiRadio.self, forKey: .wifi)
+        self.gatewayTime = try container.decodeIfPresentIgnoringCase(String.self, forKey: .gatewayTime).flatMap { $0.dateFromISO }
+        self.vehicleId = try container.decodeIfPresentIgnoringCase(String.self, forKey: .vehicleId)
+        self.location = try container.decodeIfPresentIgnoringCase(Location.self, forKey: .location)
+        self.connectedState = try container.decodeIfPresentIgnoringCase(BooleanState.self, forKey: .connectedState)
+        self.createdOn = try container.decodeIfPresentIgnoringCase(String.self, forKey: .createdOn).flatMap { $0.dateFromISO }
+        self.lastModified = try container.decodeIfPresentIgnoringCase(String.self, forKey: .lastModified).flatMap { $0.dateFromISO }
+        self.tags = try container.decodeIfPresentIgnoringCase([String].self, forKey: .tags) ?? []
+        self.deleted = try container.decodeIfPresentIgnoringCase(Bool.self, forKey: .deleted) ?? false
+        self.msisdn = try container.decodeIfPresentIgnoringCase(String.self, forKey: .msisdn)
+        self.vendor = try container.decodeIfPresentIgnoringCase(String.self, forKey: .vendor)
+        self.mainFirmware = try container.decodeIfPresentIgnoringCase(String.self, forKey: .mainFirmware)
+        self.firmwareVersion = try container.decodeIfPresentIgnoringCase(String.self, forKey: .firmwareVersion)
+        self.hardwareVersion = try container.decodeIfPresentIgnoringCase(String.self, forKey: .hardwareVersion)
+        self.iccid = try container.decodeIfPresentIgnoringCase(String.self, forKey: .iccid)
     }
     
     public func encode(to encoder: Encoder) throws {
