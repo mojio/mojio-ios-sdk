@@ -195,6 +195,11 @@ open class RestClient {
         return self
     }
     
+    open func take(count: Int) -> Self {
+        self.requestParams["take"] = count
+        return self
+    }
+    
     open func sortBy(field: String, direction: SortDirection) -> Self {
         self.requestParams["orderby"] = "\(field) \(direction.rawValue)"
         return self
@@ -202,6 +207,12 @@ open class RestClient {
     
     open func includeCount() -> Self {
         self.requestParams["includeCount"] = true
+        return self
+    }
+    
+    open func lastModified(date: Date, includeTime: Bool = false) -> Self {
+        let lmtStr = includeTime ? self.sinceBeforeFormatter.string(from: date) : self.fromToDateFormatter.string(from: date)
+        self.requestParams["lmt"] = lmtStr
         return self
     }
     
