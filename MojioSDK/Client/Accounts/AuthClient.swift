@@ -651,7 +651,7 @@ extension AuthClient {
             headers.update(.authorization(bearerToken: accessToken))
         }
 
-        self.sessionManager
+        let request = self.sessionManager
             .request(endPoint, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: headers)
         request
             .responseJSON(queue: self.dispatchQueue, options: .allowFragments) { response in
