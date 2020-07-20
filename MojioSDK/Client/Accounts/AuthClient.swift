@@ -254,7 +254,7 @@ open class AuthClient: AuthControllerDelegate {
     }
     
     // Login
-    open func login(_ token: String, firstName: String? = nil, lastName: String? = nil, email: String? = nil, customParameters: [String: Any]? = nil, , debug: ((_ request: Request?, _ response: AFDataResponse<Any>?) -> Void)? = nil, completion: @escaping (_ authToken: AuthToken) -> Void, failure: @escaping (_ response: [String: Any]?) -> Void) {
+    open func login(_ token: String, firstName: String? = nil, lastName: String? = nil, email: String? = nil, customParameters: [String: Any]? = nil, debug: ((_ request: Request?, _ response: AFDataResponse<Any>?) -> Void)? = nil, completion: @escaping (_ authToken: AuthToken) -> Void, failure: @escaping (_ response: [String: Any]?) -> Void) {
         
         // The token endpoint is used for the resource owner flow
         let loginEndpoint = self.tokenUrl
