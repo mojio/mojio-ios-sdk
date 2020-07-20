@@ -225,7 +225,7 @@ open class AuthClient: AuthControllerDelegate {
     }
     
     // Login
-    open func login(_ username: String, password: String, completion: @escaping (_ authToken: AuthToken) -> Void, failure: @escaping (_ response: [String: Any]?) -> Void) {
+    open func login(_ username: String, password: String, debug: ((_ request: Request?, _ response: AFDataResponse<Any>?) -> Void)? = nil, completion: @escaping (_ authToken: AuthToken) -> Void, failure: @escaping (_ response: [String: Any]?) -> Void) {
         
         // The token endpoint is used for the resource owner flow
         let loginEndpoint = self.tokenUrl
@@ -244,14 +244,17 @@ open class AuthClient: AuthControllerDelegate {
 
         let request = self.sessionManager
             .request(loginEndpoint, method: .post, parameters: parameters, encoding: URLEncoding(destination: .methodDependent), headers: headers)
+            
+        request
             .responseJSON(queue: self.dispatchQueue, options: .allowFragments) { response in
+                debug?(request, response) // PHIOS-5207: post request notification for any loggers
                 self.postLogin(response: response, completion: completion, failure: failure)
             }
         print(request)
     }
     
     // Login
-    open func login(_ token: String, firstName: String? = nil, lastName: String? = nil, email: String? = nil, customParameters: [String: Any]? = nil, completion: @escaping (_ authToken: AuthToken) -> Void, failure: @escaping (_ response: [String: Any]?) -> Void) {
+    open func login(_ token: String, firstName: String? = nil, lastName: String? = nil, email: String? = nil, customParameters: [String: Any]? = nil, , debug: ((_ request: Request?, _ response: AFDataResponse<Any>?) -> Void)? = nil, completion: @escaping (_ authToken: AuthToken) -> Void, failure: @escaping (_ response: [String: Any]?) -> Void) {
         
         // The token endpoint is used for the resource owner flow
         let loginEndpoint = self.tokenUrl
@@ -279,7 +282,10 @@ open class AuthClient: AuthControllerDelegate {
         
         let request = self.sessionManager
             .request(loginEndpoint, method: .post, parameters: parameters, encoding: URLEncoding(destination: .methodDependent), headers: headers)
+            
+        request
             .responseJSON(queue: self.dispatchQueue, options: .allowFragments) { response in
+                debug?(request, response) // PHIOS-5207: post request notification for any loggers
                 self.postLogin(response: response, completion: completion, failure: failure)
             }
         
@@ -327,13 +333,13 @@ open class AuthClient: AuthControllerDelegate {
         }
     }
     
-    open func refreshAuthToken(with deviceToken: String, _ completion: @escaping (_ authToken: AuthToken) -> Void, failure: @escaping (_ response: [String: Any]?) -> Void) {
+    open func refreshAuthToken(with deviceToken: String, debug: ((_ request: Request?, _ response: AFDataResponse<Any>?) -> Void)? = nil, _ completion: @escaping (_ authToken: AuthToken) -> Void, failure: @escaping (_ response: [String: Any]?) -> Void) {
         let parameters = ["device": deviceToken]
         
-        self.refreshAuthToken(additionalParameters: parameters, completion, failure: failure)
+        self.refreshAuthToken(additionalParameters: parameters, debug: debug, completion, failure: failure)
     }
     
-    open func refreshAuthToken(additionalParameters: [String: Any] = [:], _ completion: @escaping (_ authToken: AuthToken) -> Void, failure: @escaping (_ response: [String: Any]?) -> Void) {
+    open func refreshAuthToken(additionalParameters: [String: Any] = [:], debug: ((_ request: Request?, _ response: AFDataResponse<Any>?) -> Void)? = nil, _ completion: @escaping (_ authToken: AuthToken) -> Void, failure: @escaping (_ response: [String: Any]?) -> Void) {
         let authorizeEndpoint = self.tokenUrl
         
         guard let refreshToken = self.keychainManager.authToken?.refreshToken else {
@@ -352,7 +358,10 @@ open class AuthClient: AuthControllerDelegate {
         
         let request = self.sessionManager
             .request(authorizeEndpoint, method: .post, parameters: parameters, encoding: URLEncoding(destination: .methodDependent))
+            
+        request
             .responseJSON(queue: self.dispatchQueue, options: .allowFragments) { response in
+                debug?(request, response) // PHIOS-5207: post request notification for any loggers
                 if response.response?.statusCode == 200 {
                     guard
                         case .success(let value) = response.result,
@@ -398,7 +407,7 @@ open class AuthClient: AuthControllerDelegate {
     }
     
     // Register
-    open func register(_ mobile: String, email: String, password: String, completion: @escaping (_ authToken: AuthToken) -> Void, failure: @escaping (_ response: [String: Any]?) -> Void) {
+    open func register(_ mobile: String, email: String, password: String, debug: ((_ request: Request?, _ response: AFDataResponse<Any>?) -> Void)? = nil, completion: @escaping (_ authToken: AuthToken) -> Void, failure: @escaping (_ response: [String: Any]?) -> Void) {
         
         let registerEndpoint = self.clientEnvironment.getIdentityEndpoint() + AccountClientEndpoint.register.rawValue
         
@@ -414,7 +423,9 @@ open class AuthClient: AuthControllerDelegate {
         // Step 1: Create an account for the user
         let request = self.sessionManager
             .request(registerEndpoint, method: .post, parameters: param, encoding: JSONEncoding.default, headers: headers)
+        request
             .responseJSON(queue: self.dispatchQueue, options: .allowFragments) { response in
+                debug?(request, response) // PHIOS-5207: post request notification for any loggers
                 if response.response?.statusCode == 200 {
                     
                     // Step 2: If account creation was successful, log the user in
@@ -442,7 +453,7 @@ open class AuthClient: AuthControllerDelegate {
     }
     
     // Verify Phone
-    open func verifyMobilePhone(_ mobile: String, pin: String, completion: @escaping (_ authToken: AuthToken) -> Void, failure: @escaping (_ response: [String: Any]?) -> Void) {
+    open func verifyMobilePhone(_ mobile: String, pin: String, debug: ((_ request: Request?, _ response: AFDataResponse<Any>?) -> Void)? = nil, completion: @escaping (_ authToken: AuthToken) -> Void, failure: @escaping (_ response: [String: Any]?) -> Void) {
         
         let verifyEndpoint = self.tokenUrl
         
@@ -453,7 +464,9 @@ open class AuthClient: AuthControllerDelegate {
         
         let request = self.sessionManager
             .request(verifyEndpoint, method: .post, parameters: parameters, encoding: URLEncoding(destination: .methodDependent), headers: headers)
+        request
             .responseJSON(queue: self.dispatchQueue, options: .allowFragments) { response in
+                debug?(request, response) // PHIOS-5207: post request notification for any loggers
                 if response.response?.statusCode == 200 {
                     guard
                         case .success(let value) = response.result,
@@ -495,7 +508,7 @@ open class AuthClient: AuthControllerDelegate {
     }
     
     // Resend Verification Pin
-    open func resendPhonePin(_ mobile: String, completion: (() -> Void)?, failure: (() -> Void)?) {
+    open func resendPhonePin(_ mobile: String, debug: ((_ request: Request?, _ response: AFDataResponse<Any>?) -> Void)? = nil, completion: (() -> Void)?, failure: (() -> Void)?) {
         
         let verifyEndpoint = self.clientEnvironment.getIdentityEndpoint() + AccountClientEndpoint.resendPin.rawValue
         
@@ -506,7 +519,9 @@ open class AuthClient: AuthControllerDelegate {
         
         let request = self.sessionManager
             .request(verifyEndpoint, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
+        request
             .responseJSON(queue: self.dispatchQueue, options: .allowFragments) {response in
+                debug?(request, response) // PHIOS-5207: post request notification for any loggers
                 if response.response?.statusCode == 200 {
                     completion?()
                 }
@@ -519,7 +534,7 @@ open class AuthClient: AuthControllerDelegate {
     }
     
     // Forgot/Reset Password
-    open func forgotPassword(_ emailOrPhoneNumber: String, completion: @escaping (_ response: [String: Any]?) -> Void, failure: @escaping (_ response: [String: Any]?) -> Void) {
+    open func forgotPassword(_ emailOrPhoneNumber: String, debug: ((_ request: Request?, _ response: AFDataResponse<Any>?) -> Void)? = nil, completion: @escaping (_ response: [String: Any]?) -> Void, failure: @escaping (_ response: [String: Any]?) -> Void) {
         
         let forgotEndpoint = self.clientEnvironment.getIdentityEndpoint() + AccountClientEndpoint.forgot.rawValue
         
@@ -530,7 +545,9 @@ open class AuthClient: AuthControllerDelegate {
         
         let request = self.sessionManager
             .request(forgotEndpoint, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
+        request
             .responseJSON(queue: self.dispatchQueue, options: .allowFragments) { response in
+                debug?(request, response) // PHIOS-5207: post request notification for any loggers
                 if response.response?.statusCode == 200 {
                     completion((try? response.result.get()) as? [String: Any])
                 }
@@ -542,7 +559,7 @@ open class AuthClient: AuthControllerDelegate {
         print(request)
     }
     
-    open func resetPassword(_ resetToken: String, password: String, completion: @escaping (_ response: [String: Any]?) -> Void, failure: @escaping (_ response: [String: Any]?) -> Void) {
+    open func resetPassword(_ resetToken: String, password: String, debug: ((_ request: Request?, _ response: AFDataResponse<Any>?) -> Void)? = nil, completion: @escaping (_ response: [String: Any]?) -> Void, failure: @escaping (_ response: [String: Any]?) -> Void) {
         
         let resetEndpoint = self.clientEnvironment.getIdentityEndpoint() + AccountClientEndpoint.reset.rawValue
         
@@ -553,7 +570,9 @@ open class AuthClient: AuthControllerDelegate {
         
         let request = self.sessionManager
             .request(resetEndpoint, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
+        request
             .responseJSON(queue: self.dispatchQueue, options: .allowFragments) { response in
+                debug?(request, response) // PHIOS-5207: post request notification for any loggers
                 if response.response?.statusCode == 200 {
                     completion((try? response.result.get()) as? [String: Any])
                 }
@@ -614,7 +633,7 @@ open class AuthClient: AuthControllerDelegate {
 }
 
 extension AuthClient {
-    public func deleteUserToken(with userName: String, password: String, completion: @escaping (AuthToken) -> Void, failure: @escaping (_ response: [String: Any]?) -> Void)  {
+    public func deleteUserToken(with userName: String, password: String, debug: ((_ request: Request?, _ response: AFDataResponse<Any>?) -> Void)? = nil, completion: @escaping (AuthToken) -> Void, failure: @escaping (_ response: [String: Any]?) -> Void)  {
         
         let endPoint = self.clientEnvironment.getIdentityEndpoint() + AuthClientEndpoint.token.rawValue
         
@@ -634,7 +653,9 @@ extension AuthClient {
 
         self.sessionManager
             .request(endPoint, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: headers)
+        request
             .responseJSON(queue: self.dispatchQueue, options: .allowFragments) { response in
+                debug?(request, response) // PHIOS-5207: post request notification for any loggers
                 if response.response?.statusCode == 200 {
                     if case .success(let value) = response.result, let dict = value as? [String: Any],
                         let expiry: Double = dict["expires_in"] as? Double {
@@ -666,7 +687,7 @@ extension AuthClient {
 }
 
 extension AuthClient {
-    public func sendVerificationCode(to phoneNumber: String, completion: (() -> Void)?, failure: @escaping (_ response: [String: Any]?) -> Void) {
+    public func sendVerificationCode(to phoneNumber: String, debug: ((_ request: Request?, _ response: AFDataResponse<Any>?) -> Void)? = nil, completion: (() -> Void)?, failure: @escaping (_ response: [String: Any]?) -> Void) {
         
         let verifyEndpoint = self.clientEnvironment.getIdentityEndpoint() + AccountClientEndpoint.sendVerifictionPhone.rawValue + "?phone=\(phoneNumber)"
         
@@ -677,8 +698,9 @@ extension AuthClient {
         
         let request = self.sessionManager
             .request(verifyEndpoint, method: .post, headers: headers)
+        request
             .responseJSON(queue: self.dispatchQueue, options: .allowFragments) { response in
-                
+                debug?(request, response) // PHIOS-5207: post request notification for any loggers
                 if response.response?.statusCode == 200 {
                     completion?()
                 }
@@ -696,7 +718,7 @@ extension AuthClient {
         print(request)
     }
     
-    public func deviceVerify(with pin: String, phoneNumber: String, deviceToken: String, completion: (() -> Void)?,  failure: @escaping (_ response: [String: Any]?) -> Void) {
+    public func deviceVerify(with pin: String, phoneNumber: String, deviceToken: String, debug: ((_ request: Request?, _ response: AFDataResponse<Any>?) -> Void)? = nil, completion: (() -> Void)?,  failure: @escaping (_ response: [String: Any]?) -> Void) {
         
         let endPoint =  self.clientEnvironment.getIdentityEndpoint() + AccountClientEndpoint.devicesVerify.rawValue
         
@@ -713,8 +735,9 @@ extension AuthClient {
         
         let request = self.sessionManager
             .request(endPoint, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
+        request
             .responseJSON(queue: self.dispatchQueue, options: .allowFragments) { response in
-                
+                debug?(request, response) // PHIOS-5207: post request notification for any loggers
                 if response.response?.statusCode == 200 {
                     completion?()
                 }
