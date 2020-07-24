@@ -358,8 +358,41 @@ public struct Activity: ActivityModel {
         self.tripActivities = try container.decodeIfPresentIgnoringCase([RootActivity].self, forKey: CodingKeys.tripActivities)
     }
     
-    public func encode (to encoder: Encoder) throws
-    {
+    public init(from activity: Activity, with notes: String?, purpose: String?) {
+        
+        self.id = activity.id
+        self.type = activity.type
+        self.href = activity.href
+        self.name = activity.name
+        self.nameMap = activity.nameMap
+        self.value = activity.value
+        self.unit = activity.unit
+
+        self.startTime = activity.startTime
+        self.endTime = activity.endTime
+
+        self.context = activity.context
+        self.summary = activity.summary
+        self.summaryMap = activity.summaryMap
+
+        self.published = activity.published
+
+        self.icon = activity.icon
+        self.duration = activity.duration
+        self.polyline = activity.polyline
+        self.tags = activity.tags
+        self.attributedTo = activity.attributedTo
+        self.tirePressure = activity.tirePressure
+
+        self.location = activity.location
+
+        self.tripActivities = activity.tripActivities
+
+        self.notes = notes
+        self.purpose = purpose
+    }
+    
+    public func encode (to encoder: Encoder) throws {
         var container = encoder.container (keyedBy: CodingKeys.self)
         try container.encode (self.id, forKey: .id)
         try container.encode (self.type, forKey: .type)
@@ -605,8 +638,51 @@ public struct RootActivity: RootActivityModel {
         self.averageDriverScore = try container.decodeIfPresentIgnoringCase(Float.self, forKey: CodingKeys.averageDriverScore).flatMap { Int($0 * 100) }
     }
     
-    public func encode (to encoder: Encoder) throws
-    {
+    public init(from activity: RootActivity, result: A?) {
+        
+        self.id = activity.id
+        self.userId = activity.userId
+        self.messageId = activity.messageId
+        self.type = activity.type
+        self.href = activity.href
+        self.name = activity.name
+        self.nameMap = activity.nameMap
+        self.value = activity.value
+        self.unit = activity.unit
+
+        self.startTime = activity.startTime
+        self.endTime = activity.endTime
+
+        self.context = activity.context
+        self.summary = activity.summary
+        self.summaryMap = activity.summaryMap
+
+        self.published = activity.published
+
+        self.icon = activity.icon
+
+        self.duration = activity.duration
+        self.polyline = activity.polyline
+        self.tags = activity.tags
+        self.attributedTo = activity.attributedTo
+        self.timelineType = activity.timelineType
+
+        self.actor = activity.actor
+        self.result = result
+        self.object = activity.object
+        self.origin = activity.origin
+        self.audience = activity.audience
+
+        self.target = activity.target
+
+
+        self.location = activity.location
+
+        self.driverScore = activity.driverScore
+        self.averageDriverScore = activity.averageDriverScore
+    }
+    
+    public func encode (to encoder: Encoder) throws {
         var container = encoder.container (keyedBy: CodingKeys.self)
         try container.encode (self.id, forKey: .id)
         try container.encode (self.userId, forKey: .userId)
