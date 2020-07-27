@@ -392,6 +392,41 @@ public struct Activity: ActivityModel {
         self.purpose = purpose
     }
     
+    public init(from activity: Activity, with tag: String) {
+        
+        self.id = activity.id
+        self.type = activity.type
+        self.href = activity.href
+        self.name = activity.name
+        self.nameMap = activity.nameMap
+        self.value = activity.value
+        self.unit = activity.unit
+
+        self.startTime = activity.startTime
+        self.endTime = activity.endTime
+
+        self.context = activity.context
+        self.summary = activity.summary
+        self.summaryMap = activity.summaryMap
+
+        self.published = activity.published
+
+        self.icon = activity.icon
+        self.duration = activity.duration
+        self.polyline = activity.polyline
+        self.attributedTo = activity.attributedTo
+        self.tirePressure = activity.tirePressure
+
+        self.location = activity.location
+
+        self.tripActivities = activity.tripActivities
+
+        self.notes = activity.notes
+        self.purpose = activity.purpose
+        
+        self.tags = [tag]
+    }
+    
     public func encode (to encoder: Encoder) throws {
         var container = encoder.container (keyedBy: CodingKeys.self)
         try container.encode (self.id, forKey: .id)
