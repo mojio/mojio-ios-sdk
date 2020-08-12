@@ -153,30 +153,35 @@ open class RestClient {
         return self
     }
     
-    open func v0() -> Self {
+    open func v_motion() -> Self {
         self.requestUrl = self.requestUrl! + "motion/"
         return self
     }
     
-    open func v1() -> Self {
+    open func v_1() -> Self {
         self.requestUrl = self.requestUrl! + "v1/"
         self.pushUrl = self.pushUrl.map { $0 + "v1/" }
         return self
     }
     
-    open func v2() -> Self {
+    open func v_2() -> Self {
         self.requestUrl = self.requestUrl! + "v2/"
         self.pushUrl = self.pushUrl.map { $0 + "v2/" }
         return self
     }
     
-    open func v3() -> Self {
+    open func v_2018_09_01() -> Self {
         self.versionHeader = "2018-09-01"
         return self
     }
     
-    open func v4() -> Self {
+    open func v_2020_03_17() -> Self {
         self.versionHeader = "2020-03-17"
+        return self
+    }
+    
+    open func v_2020_06_10() -> Self {
+        self.versionHeader = "2020-06-10"
         return self
     }
     
@@ -190,8 +195,19 @@ open class RestClient {
         return self
     }
     
+    open func take(count: Int) -> Self {
+        self.requestParams["take"] = count
+        return self
+    }
+    
     open func sortBy(field: String, direction: SortDirection) -> Self {
         self.requestParams["orderby"] = "\(field) \(direction.rawValue)"
+        return self
+    }
+    
+    open func lastModified(date: Date, includeTime: Bool = false) -> Self {
+        let lmtStr = includeTime ? self.sinceBeforeFormatter.string(from: date) : self.fromToDateFormatter.string(from: date)
+        self.requestParams["lmt"] = lmtStr
         return self
     }
     
