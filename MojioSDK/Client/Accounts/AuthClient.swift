@@ -324,6 +324,9 @@ open class AuthClient: AuthControllerDelegate {
             if case .success(let value) = response.result, let dictionary = value as? [String: Any] {
                 failure(dictionary)
             }
+            else if case .failure(let error) = response.result, let responseError = error.underlyingError as NSError? {
+                failure(responseError.userInfo)
+            }
             else if case .failure(let error) = response.result, let responseError = error as NSError? {
                 failure(responseError.userInfo)
             }
@@ -439,6 +442,9 @@ open class AuthClient: AuthControllerDelegate {
                 else {
                     if case .success(let value) = response.result, let responseDict = value as? [String : Any] {
                         failure(responseDict)
+                    }
+                    else if case .failure(let error) = response.result, let responseError = error.underlyingError as NSError? {
+                        failure(responseError.userInfo)
                     }
                     else if case .failure(let error) = response.result, let responseError = error as NSError? {
                         failure(responseError.userInfo)
