@@ -58,6 +58,7 @@ public enum ActivityType : String, Codable {
     case tirePressure = "TirePressure"
     case airMaintenance = "AirFilterPredictiveMaintenance"
     case batteryMaintenance = "BatteryPredictiveMaintenance"
+    case emergencyIncident = "EmergencyIncident"
     case unkonwn
 }
 
