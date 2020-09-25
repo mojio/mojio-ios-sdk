@@ -22,7 +22,7 @@ public enum VehicleAppearanceStyle: String, Codable {
     case hatchback = "Hatchback"
     case smart = "Smart car"
     case mini = "Mini"
-    case convertable = "Convertible"
+    case convertible = "Convertible"
     case sports = "Sports car"
     case wagon = "Wagon"
     case pickup = "Pickup"
@@ -34,7 +34,7 @@ public enum VehicleAppearanceStyle: String, Codable {
 
     public static var all: [VehicleAppearanceStyle] {
         return [
-            .sedan, .hatchback, .smart, .mini, .convertable,
+            .sedan, .hatchback, .smart, .mini, .convertible,
             .sports, .wagon, .pickup, .van, .boxTruck, .suv
         ]
     }
