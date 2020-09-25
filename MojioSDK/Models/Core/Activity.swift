@@ -668,11 +668,13 @@ public struct Icon: Codable {
 public struct TimelineEntities: Codable {
 
     public let entities: ResponseArray<RootActivity>?
+    public let inProgressTrip: RootActivity?
     public let moreData: Bool
 
     public enum CodingKeys: String, CodingKey, CompoundWordStyle {
         case entities = "Entities"
         case moreData = "MoreData"
+        case inProgressTrip = "InProgressTrip"
     }
 
     public init(from decoder: Decoder) throws {
@@ -680,6 +682,7 @@ public struct TimelineEntities: Codable {
         let container = try decoder.container(keyedBy: DynamicCodingKey.self)
 
         self.entities = try container.decodeIfPresentIgnoringCase(ResponseArray<RootActivity>.self, forKey: CodingKeys.entities)
+        self.inProgressTrip = try container.decodeIfPresentIgnoringCase(RootActivity.self, forKey: CodingKeys.inProgressTrip)
         self.moreData = try container.decodeIfPresentIgnoringCase(Bool.self, forKey: CodingKeys.moreData) ?? false
     }
 }
