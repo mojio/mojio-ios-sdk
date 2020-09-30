@@ -101,8 +101,10 @@ open class AccountsClient: RestClient {
     
     open func emails (_ email: String? = nil) -> Self {
         self.requestEntity = AccountsEndpoint.emails.rawValue
-        self.requestEntityId = email
-        self.appendRequestUrlEntityId()
+        
+        if let email = email {
+            self.requestParams.update(["email": email])
+        }
         
         return self
     }
