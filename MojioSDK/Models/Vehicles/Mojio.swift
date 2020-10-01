@@ -16,7 +16,7 @@
 import Foundation
 import MojioCore
 
-public enum MojioType: String {
+public enum MojioType: String, Codable {
     case obd2 = "Obd2"
     case virtual = "Virtual"
     case unknown = "Unknown"

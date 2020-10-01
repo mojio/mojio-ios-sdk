@@ -16,7 +16,7 @@
 import Foundation
 import MojioCore
 
-public enum VehicleType: String {
+public enum VehicleType: String, Codable {
     case physical = "Physical"
     case ghost = "Ghost"
     case bluetooth = "Bluetooth"
