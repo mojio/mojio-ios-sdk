@@ -129,7 +129,7 @@ public struct Mojio: MojioModel {
         self.firmwareVersion = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.firmwareVersion)
         self.hardwareVersion = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.hardwareVersion)
         self.iccid = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.iccid)
-        self.mojioType = try container.decodeIfPresent(MojioType.self, forKey: CodingKeys.mojioType)
+        self.mojioType = try container.decodeIfPresentIgnoringCase(MojioType.self, forKey: CodingKeys.mojioType)
     }
     
     public func encode(to encoder: Encoder) throws {

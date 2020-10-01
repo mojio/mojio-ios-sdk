@@ -264,7 +264,7 @@ public struct Vehicle: VehicleModel {
             self.engineOil = try container.decodeIfPresentIgnoringCase(EngineOil.self, forKey: CodingKeys.engineOil)
             self.tirePressure = try container.decodeIfPresentIgnoringCase(TirePressure.self, forKey: CodingKeys.tirePressure)
             self.predictiveMaintenance = try container.decodeIfPresentIgnoringCase(PredictiveMaintenance.self, forKey: CodingKeys.predictiveMaintenance)
-            self.vehicleType = try container.decodeIfPresent(VehicleType.self, forKey: CodingKeys.vehicleType)
+            self.vehicleType = try container.decodeIfPresentIgnoringCase(VehicleType.self, forKey: CodingKeys.vehicleType)
         }
         catch {
             debugPrint(error)
