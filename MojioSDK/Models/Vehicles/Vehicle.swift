@@ -16,6 +16,18 @@
 import Foundation
 import MojioCore
 
+public enum VehicleType: String {
+    case physical = "Physical"
+    case ghost = "Ghost"
+    case bluetooth = "Bluetooth"
+    case unknown = "Unknown"
+
+    public init(from decoder: Decoder) throws {
+        let label = try decoder.singleValueContainer().decode(String.self)
+        self = VehicleType(rawValue: label) ?? .unknown
+    }
+}
+
 public protocol VehicleModel: Codable, PrimaryKey {
     
     associatedtype C: CompatibilityDetailsModel
@@ -83,6 +95,7 @@ public protocol VehicleModel: Codable, PrimaryKey {
     var engineOil: EO? { get }
     var tirePressure: TP? { get }
     var predictiveMaintenance: PM? { get }
+    var vehicleType: VehicleType? { get }
 }
 
 public struct Vehicle: VehicleModel {
@@ -152,6 +165,7 @@ public struct Vehicle: VehicleModel {
     public var engineOil: EO?
     public var tirePressure: TP?
     public var predictiveMaintenance: PM?
+    public var vehicleType: VehicleType?
     
     public enum CodingKeys: String, CodingKey, CompoundWordStyle {
         case id = "Id"
@@ -198,6 +212,7 @@ public struct Vehicle: VehicleModel {
         case engineOil = "EngineOil"
         case tirePressure = "TirePressure"
         case predictiveMaintenance = "PredictiveMaintenance"
+        case vehicleType = "VehicleType"
     }
     
     public init(from decoder: Decoder) throws {
@@ -249,6 +264,7 @@ public struct Vehicle: VehicleModel {
             self.engineOil = try container.decodeIfPresentIgnoringCase(EngineOil.self, forKey: CodingKeys.engineOil)
             self.tirePressure = try container.decodeIfPresentIgnoringCase(TirePressure.self, forKey: CodingKeys.tirePressure)
             self.predictiveMaintenance = try container.decodeIfPresentIgnoringCase(PredictiveMaintenance.self, forKey: CodingKeys.predictiveMaintenance)
+            self.vehicleType = try container.decodeIfPresent(VehicleType.self, forKey: CodingKeys.vehicleType)
         }
         catch {
             debugPrint(error)
@@ -304,6 +320,7 @@ public struct Vehicle: VehicleModel {
         try container.encodeIfPresent(self.engineOil, forKey: .engineOil)
         try container.encodeIfPresent(self.tirePressure, forKey: .tirePressure)
         try container.encodeIfPresent(self.predictiveMaintenance, forKey: .predictiveMaintenance)
+        try container.encodeIfPresent(self.vehicleType, forKey: .vehicleType)
     }
 }
 

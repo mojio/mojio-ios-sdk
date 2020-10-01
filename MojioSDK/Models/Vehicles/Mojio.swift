@@ -16,6 +16,17 @@
 import Foundation
 import MojioCore
 
+public enum MojioType: String {
+    case obd2 = "Obd2"
+    case virtual = "Virtual"
+    case unknown = "Unknown"
+
+    public init(from decoder: Decoder) throws {
+        let label = try decoder.singleValueContainer().decode(String.self)
+        self = MojioType(rawValue: label) ?? .unknown
+    }
+}
+
 public protocol MojioModel: Codable, PrimaryKey {
     
     associatedtype L: LocationModel
@@ -41,6 +52,7 @@ public protocol MojioModel: Codable, PrimaryKey {
     var firmwareVersion: String? { get }
     var hardwareVersion: String? { get }
     var iccid: String? { get }
+    var mojioType: MojioType? { get }
 }
 
 public struct Mojio: MojioModel {
@@ -70,6 +82,7 @@ public struct Mojio: MojioModel {
     public let firmwareVersion: String?
     public let hardwareVersion: String?
     public let iccid: String?
+    public let mojioType: MojioType?
     
     public enum CodingKeys: String, CodingKey, CompoundWordStyle {
         case id = "Id"
@@ -91,6 +104,7 @@ public struct Mojio: MojioModel {
         case firmwareVersion = "FirmwareVersion"
         case hardwareVersion = "HardwareVersion"
         case iccid = "ICCID"
+        case mojioType = "MojioType"
     }
     
     public init(from decoder: Decoder) throws {
@@ -115,6 +129,7 @@ public struct Mojio: MojioModel {
         self.firmwareVersion = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.firmwareVersion)
         self.hardwareVersion = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.hardwareVersion)
         self.iccid = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.iccid)
+        self.mojioType = try container.decodeIfPresent(MojioType.self, forKey: CodingKeys.mojioType)
     }
     
     public func encode(to encoder: Encoder) throws {
@@ -142,6 +157,7 @@ public struct Mojio: MojioModel {
         try container.encodeIfPresent(self.firmwareVersion, forKey: .firmwareVersion)
         try container.encodeIfPresent(self.hardwareVersion, forKey: .hardwareVersion)
         try container.encodeIfPresent(self.iccid, forKey: .iccid)
+        try container.encodeIfPresent(self.mojioType, forKey: .mojioType)
     }
 }
 
