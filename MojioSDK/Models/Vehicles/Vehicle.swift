@@ -23,8 +23,8 @@ public enum VehicleType: String, Codable {
     case unknown = "Unknown"
 
     public init(from decoder: Decoder) throws {
-        let label = try decoder.singleValueContainer().decode(String.self)
-        self = VehicleType(rawValue: label) ?? .unknown
+        let rawValue = try decoder.singleValueContainer().decode(String.self)
+        self = VehicleType(rawValue: rawValue) ?? .unknown
     }
 }
 

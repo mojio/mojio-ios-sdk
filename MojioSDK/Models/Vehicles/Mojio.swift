@@ -22,8 +22,8 @@ public enum MojioType: String, Codable {
     case unknown = "Unknown"
 
     public init(from decoder: Decoder) throws {
-        let label = try decoder.singleValueContainer().decode(String.self)
-        self = MojioType(rawValue: label) ?? .unknown
+        let rawValue = try decoder.singleValueContainer().decode(String.self)
+        self = MojioType(rawValue: rawValue) ?? .unknown
     }
 }
 
