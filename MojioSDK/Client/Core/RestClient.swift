@@ -376,6 +376,13 @@ open class RestClient {
             },
             encoding: URLEncoding(destination: .methodDependent, arrayEncoding: self.arrayEncoding),
             headers: self.defaultHeaders)
+        
+        if let requestUrl = self.requestUrl {
+        
+            if requestUrl.contains("v2/vehicles/activities") {
+                debug?(request, nil)
+            }
+        }
             
         request.responseData(queue: self.dispatchQueue) { response in
             debug?(request, response) // PHIOS-5207: post request notification for any loggers
@@ -526,14 +533,6 @@ open class RestClient {
     open func handleResponse(_ response: AFDataResponse<Data>, completion: @escaping (_ response: Codable?) -> Void, failure: @escaping (_ error: Any?) -> Void){
         
         if let statusCode = response.response?.statusCode, 200...299 ~= statusCode {
-            
-            if let requestUrl = self.requestUrl {
-            
-                if requestUrl.contains("v2/vehicles/activities") {
-                    NSLog("====***====Response for %@: %@", requestUrl, response)
-                }
-            }
-            
             
             if let responseData = response.data, let parsedData = self.parseData(responseData) {
                 completion(parsedData)
