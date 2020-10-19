@@ -20,8 +20,10 @@ public struct VehicleAppearance: Codable {
     
     public var vehicleId: String = String.empty
     public var vehicleImage: VehicleImage?
+    public var color: String?
     
     public struct VehicleImage: Codable {
+        
         public let url: String
         public let hexColor: String
         public let year: String?
@@ -40,13 +42,15 @@ public struct VehicleAppearance: Codable {
     public enum CodingKeys: String, CodingKey {
         case vehicleId = "VehicleId"
         case vehicleImage = "VehicleImage"
+        case color = "Color"
     }
     
     public init() {}
     
-    public init(vehicleId: String) {
+    public init(vehicleId: String, color: String?) {
         
         self.vehicleId = vehicleId
+        self.color = color
     }
     
     public var Id: String? {
@@ -61,7 +65,7 @@ public struct VehicleAppearance: Codable {
 
 extension VehicleAppearance: Equatable {
     public static func == (lhs: VehicleAppearance, rhs: VehicleAppearance) -> Bool {
-        return lhs.vehicleId == rhs.vehicleId && lhs.vehicleImage == rhs.vehicleImage
+        return lhs.vehicleId == rhs.vehicleId && lhs.vehicleImage == rhs.vehicleImage && lhs.color == rhs.color
     }
 }
 
