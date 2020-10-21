@@ -606,8 +606,19 @@ public struct RootActivity: RootActivityModel {
             self.location = try container.decodeIfPresentIgnoringCase(ActivityLocation.self, forKey: CodingKeys.location)
         }
         
-        self.driverScore = try container.decodeIfPresentIgnoringCase(Float.self, forKey: CodingKeys.driverScore).flatMap { Int($0 * 100) }
-        self.averageDriverScore = try container.decodeIfPresentIgnoringCase(Float.self, forKey: CodingKeys.averageDriverScore).flatMap { Int($0 * 100) }
+        do {
+            self.driverScore = try container.decodeIfPresentIgnoringCase(Int.self, forKey: CodingKeys.driverScore)
+        }
+        catch {
+            self.driverScore = try container.decodeIfPresentIgnoringCase(Float.self, forKey: CodingKeys.driverScore).flatMap { Int($0 * 100) }
+        }
+                
+        do {
+            self.averageDriverScore = try container.decodeIfPresentIgnoringCase(Int.self, forKey: CodingKeys.averageDriverScore)
+        }
+        catch {
+            self.averageDriverScore = try container.decodeIfPresentIgnoringCase(Float.self, forKey: CodingKeys.averageDriverScore).flatMap { Int($0 * 100) }
+        }
     }
     
     public func encode (to encoder: Encoder) throws {
