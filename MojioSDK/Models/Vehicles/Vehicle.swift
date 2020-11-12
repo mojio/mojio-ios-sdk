@@ -96,6 +96,7 @@ public protocol VehicleModel: Codable, PrimaryKey {
     var tirePressure: TP? { get }
     var predictiveMaintenance: PM? { get }
     var vehicleType: VehicleType? { get }
+    var alternateId: String? { get } // ID of Bluetooth device linked to virtual vehicles
 }
 
 public struct Vehicle: VehicleModel {
@@ -166,6 +167,7 @@ public struct Vehicle: VehicleModel {
     public var tirePressure: TP?
     public var predictiveMaintenance: PM?
     public var vehicleType: VehicleType?
+    public var alternateId: String?
     
     public enum CodingKeys: String, CodingKey, CompoundWordStyle {
         case id = "Id"
@@ -213,6 +215,7 @@ public struct Vehicle: VehicleModel {
         case tirePressure = "TirePressure"
         case predictiveMaintenance = "PredictiveMaintenance"
         case vehicleType = "VehicleType"
+        case alternateId = "AlternateId"
     }
     
     public init(from decoder: Decoder) throws {
@@ -265,6 +268,7 @@ public struct Vehicle: VehicleModel {
             self.tirePressure = try container.decodeIfPresentIgnoringCase(TirePressure.self, forKey: CodingKeys.tirePressure)
             self.predictiveMaintenance = try container.decodeIfPresentIgnoringCase(PredictiveMaintenance.self, forKey: CodingKeys.predictiveMaintenance)
             self.vehicleType = try container.decodeIfPresentIgnoringCase(VehicleType.self, forKey: CodingKeys.vehicleType)
+            self.alternateId = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.alternateId)
         }
         catch {
             debugPrint(error)
@@ -321,6 +325,7 @@ public struct Vehicle: VehicleModel {
         try container.encodeIfPresent(self.tirePressure, forKey: .tirePressure)
         try container.encodeIfPresent(self.predictiveMaintenance, forKey: .predictiveMaintenance)
         try container.encodeIfPresent(self.vehicleType, forKey: .vehicleType)
+        try container.encodeIfPresent(self.alternateId, forKey: .alternateId)
     }
 }
 
