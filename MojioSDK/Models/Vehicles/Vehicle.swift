@@ -97,6 +97,7 @@ public protocol VehicleModel: Codable, PrimaryKey {
     var predictiveMaintenance: PM? { get }
     var vehicleType: VehicleType? { get }
     var alternateId: String? { get } // ID of Bluetooth device linked to virtual vehicles
+    var deviceExternalId: String? { get }
 }
 
 public struct Vehicle: VehicleModel {
