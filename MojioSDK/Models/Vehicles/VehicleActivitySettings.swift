@@ -59,6 +59,11 @@ public enum DisturbanceThreshold: String, Codable {
     }
 }
 
+public enum LowFuelActivityMode: String, Codable {
+    case low = "Low"
+    case intelligent = "Intelligent"
+}
+
 public protocol VehicleActivitySettingsModel: Codable {
     associatedtype S: SpeedThresholdModel
     
@@ -82,6 +87,7 @@ public protocol VehicleActivitySettingsModel: Codable {
     var enableSMSActivity: Bool? { get }
     var enableVehicleCompatibilityActivity: Bool? { get }
     var speedThreshold: S? { get }
+    var lowFuelActivityMode: LowFuelActivityMode? { get }
     
     var enableMainFirmwareCompatibilityActivity: Bool? { get }
     var enableHardwareVersionCompatibilityActivity: Bool? { get }
@@ -118,6 +124,7 @@ public struct VehicleActivitySettings: VehicleActivitySettingsModel {
     public let enableSMSActivity: Bool?
     public let enableVehicleCompatibilityActivity: Bool?
     public let speedThreshold: SpeedThreshold?
+    public let lowFuelActivityMode: LowFuelActivityMode?
     
     public let enableMainFirmwareCompatibilityActivity: Bool?
     public let enableHardwareVersionCompatibilityActivity: Bool?
@@ -150,6 +157,7 @@ public struct VehicleActivitySettings: VehicleActivitySettingsModel {
         case enableSMSActivity
         case enableVehicleCompatibilityActivity
         case speedThreshold
+        case lowFuelActivityMode
         
         case enableMainFirmwareCompatibilityActivity
         case enableHardwareVersionCompatibilityActivity
