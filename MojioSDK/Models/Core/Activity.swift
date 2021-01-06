@@ -60,6 +60,7 @@ public enum ActivityType : String, Codable {
     case batteryMaintenance = "BatteryPredictiveMaintenance"
     case emergencyIncident = "EmergencyIncident"
     case intelligentFuelLevel = "IntelligentFuelLevel"
+    case media = "Media"
     case unkonwn
 }
 
@@ -263,6 +264,8 @@ public struct Activity: ActivityModel {
     public let attributedTo: ActivityModel?
     
     public let tirePressure: ActivityTirePressure?
+    
+    public let eventMedia: [ApiMedia]
 
     enum CodingKeys: String, CodingKey, CompoundWordStyle {
         case id = "Id"
@@ -288,6 +291,7 @@ public struct Activity: ActivityModel {
         case longitude = "Longitude"
         case altitude = "Altitude"
         case tirePressure = "TirePressureObject"
+        case eventMedia = "EventMedia"
     }
     
     public init(from decoder: Decoder) throws {
@@ -313,6 +317,7 @@ public struct Activity: ActivityModel {
         self.tags = try container.decodeIfPresentIgnoringCase(T.self, forKey: CodingKeys.tags) ?? []
         self.attributedTo = try container.decodeIfPresentIgnoringCase(Activity.self, forKey: CodingKeys.attributedTo)
         self.tirePressure = try container.decodeIfPresentIgnoringCase(ActivityTirePressure.self, forKey: CodingKeys.tirePressure)
+        self.eventMedia = try container.decodeIfPresentIgnoringCase([ApiMedia].self, forKey: CodingKeys.eventMedia) ?? []
 
         var encodedLocation = try container.decodeIfPresentIgnoringCase(ActivityLocation.self, forKey: CodingKeys.location)
         
@@ -350,6 +355,7 @@ public struct Activity: ActivityModel {
         try container.encode (self.tags, forKey: .tags)
         try container.encode ((self.attributedTo as? Activity), forKey: .attributedTo)
         try container.encode (self.tirePressure, forKey: .tirePressure)
+        try container.encode (self.eventMedia, forKey: .eventMedia)
     }
 }
 
