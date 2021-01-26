@@ -266,6 +266,11 @@ public struct Activity: ActivityModel {
     
     public let tirePressure: ActivityTirePressure?
     
+    public let notes: String?
+    public let purpose: String?
+
+    public let tripActivities: [RootActivity]?
+
     public let eventMedia: [ApiMedia]
 
     enum CodingKeys: String, CodingKey, CompoundWordStyle {
@@ -292,6 +297,9 @@ public struct Activity: ActivityModel {
         case longitude = "Longitude"
         case altitude = "Altitude"
         case tirePressure = "TirePressureObject"
+        case notes = "Notes"
+        case purpose = "Purpose"
+        case tripActivities = "TripActivities"
         case eventMedia = "EventMedia"
     }
     
@@ -306,12 +314,35 @@ public struct Activity: ActivityModel {
         self.nameMap = try container.decodeIfPresentIgnoringCase(S.self, forKey: CodingKeys.nameMap) ?? [:]
         self.value = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.value)
         self.unit = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.unit)
-        self.startTime = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.startTime).flatMap { $0.dateFromISO }
-        self.endTime = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.endTime).flatMap { $0.dateFromISO }
+        
+        do {
+            self.startTime = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.startTime).flatMap { $0.dateFromISO
+            }
+        }
+        catch {
+            self.startTime = try container.decodeIfPresentIgnoringCase(Date.self, forKey: CodingKeys.startTime)
+        }
+
+        do {
+            self.endTime = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.endTime).flatMap { $0.dateFromISO
+            }
+        }
+        catch {
+            self.endTime = try container.decodeIfPresentIgnoringCase(Date.self, forKey: CodingKeys.endTime)
+        }
+        
         self.context = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.context)
         self.summary = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.summary)
         self.summaryMap = try container.decodeIfPresentIgnoringCase(S.self, forKey: CodingKeys.summaryMap) ?? [:]
-        self.published = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.published).flatMap { $0.dateFromISO }
+        
+        do {
+            self.published = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.published).flatMap { $0.dateFromISO
+            }
+        }
+        catch {
+            self.published = try container.decodeIfPresentIgnoringCase(Date.self, forKey: CodingKeys.published)
+        }
+        
         self.icon = try container.decodeIfPresentIgnoringCase(Icon.self, forKey: CodingKeys.icon)
         self.duration = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.duration)
         self.polyline = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.polyline)
@@ -331,10 +362,14 @@ public struct Activity: ActivityModel {
         }
         
         self.location = encodedLocation
+        
+        self.notes = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.notes)
+        self.purpose = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.purpose)
+
+        self.tripActivities = try container.decodeIfPresentIgnoringCase([RootActivity].self, forKey: CodingKeys.tripActivities)
     }
     
-    public func encode (to encoder: Encoder) throws
-    {
+    public func encode (to encoder: Encoder) throws {
         var container = encoder.container (keyedBy: CodingKeys.self)
         try container.encode (self.id, forKey: .id)
         try container.encode (self.type, forKey: .type)
@@ -356,6 +391,9 @@ public struct Activity: ActivityModel {
         try container.encode (self.tags, forKey: .tags)
         try container.encode ((self.attributedTo as? Activity), forKey: .attributedTo)
         try container.encode (self.tirePressure, forKey: .tirePressure)
+        try container.encodeIfPresent(self.notes, forKey: .notes)
+        try container.encodeIfPresent(self.purpose, forKey: .purpose)
+        try container.encodeIfPresent(self.tripActivities, forKey: .tripActivities)
         try container.encode (self.eventMedia, forKey: .eventMedia)
     }
 }
@@ -513,12 +551,35 @@ public struct RootActivity: RootActivityModel {
         self.nameMap = try container.decodeIfPresentIgnoringCase(S.self, forKey: CodingKeys.nameMap) ?? [:]
         self.value = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.value)
         self.unit = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.unit)
-        self.startTime = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.startTime).flatMap { $0.dateFromISO }
-        self.endTime = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.endTime).flatMap { $0.dateFromISO }
+        
+        do {
+            self.startTime = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.startTime).flatMap { $0.dateFromISO
+            }
+        }
+        catch {
+            self.startTime = try container.decodeIfPresentIgnoringCase(Date.self, forKey: CodingKeys.startTime)
+        }
+
+          do {
+            self.endTime = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.endTime).flatMap { $0.dateFromISO
+            }
+        }
+        catch {
+            self.endTime = try container.decodeIfPresentIgnoringCase(Date.self, forKey: CodingKeys.endTime)
+        }
+        
         self.context = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.context)
         self.summary = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.summary)
         self.summaryMap = try container.decodeIfPresentIgnoringCase(S.self, forKey: CodingKeys.summaryMap) ?? [:]
-        self.published = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.published).flatMap { $0.dateFromISO }
+        
+        do {
+            self.published = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.published).flatMap { $0.dateFromISO
+            }
+        }
+        catch {
+            self.published = try container.decodeIfPresentIgnoringCase(Date.self, forKey: CodingKeys.published)
+        }
+        
         self.icon = try container.decodeIfPresentIgnoringCase(Icon.self, forKey: CodingKeys.icon)
         
         self.duration = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.duration)
@@ -533,15 +594,15 @@ public struct RootActivity: RootActivityModel {
         self.origin = try container.decodeIfPresentIgnoringCase(A.self, forKey: CodingKeys.origin)
         self.audience = try container.decodeIfPresentIgnoringCase(A.self, forKey: CodingKeys.audience)
         
+        self.target = try container.decodeIfPresentIgnoringCase(A.self, forKey: CodingKeys.target)
+        
         if
             let location = try container.decodeIfPresentIgnoringCase(ActivityLocation.self, forKey: CodingKeys.target),
             location.hasCoordinate
         {
             self.location = location
-            self.target = nil
         }
         else if let target = try container.decodeIfPresentIgnoringCase(A.self, forKey: CodingKeys.target) {
-            self.target = target
             if let location = try container.decodeIfPresentIgnoringCase(ActivityLocation.self, forKey: CodingKeys.location) {
                 self.location = location
             }
@@ -550,16 +611,25 @@ public struct RootActivity: RootActivityModel {
             }
         }
         else {
-            self.target = nil
             self.location = try container.decodeIfPresentIgnoringCase(ActivityLocation.self, forKey: CodingKeys.location)
         }
         
-        self.driverScore = try container.decodeIfPresentIgnoringCase(Float.self, forKey: CodingKeys.driverScore).flatMap { Int($0 * 100) }
-        self.averageDriverScore = try container.decodeIfPresentIgnoringCase(Float.self, forKey: CodingKeys.averageDriverScore).flatMap { Int($0 * 100) }
+        do {
+            self.driverScore = try container.decodeIfPresentIgnoringCase(Int.self, forKey: CodingKeys.driverScore)
+        }
+        catch {
+            self.driverScore = try container.decodeIfPresentIgnoringCase(Float.self, forKey: CodingKeys.driverScore).flatMap { Int($0 * 100) }
+        }
+                
+        do {
+            self.averageDriverScore = try container.decodeIfPresentIgnoringCase(Int.self, forKey: CodingKeys.averageDriverScore)
+        }
+        catch {
+            self.averageDriverScore = try container.decodeIfPresentIgnoringCase(Float.self, forKey: CodingKeys.averageDriverScore).flatMap { Int($0 * 100) }
+        }
     }
     
-    public func encode (to encoder: Encoder) throws
-    {
+    public func encode (to encoder: Encoder) throws {
         var container = encoder.container (keyedBy: CodingKeys.self)
         try container.encode (self.id, forKey: .id)
         try container.encode (self.userId, forKey: .userId)
@@ -589,6 +659,7 @@ public struct RootActivity: RootActivityModel {
         try container.encode ((self.object), forKey: .object)
         try container.encode ((self.origin), forKey: .origin)
         try container.encode ((self.audience), forKey: .audience)
+        try container.encode ((self.target), forKey: .target)
         
         try container.encodeIfPresent(self.driverScore, forKey: .driverScore)
         try container.encodeIfPresent(self.averageDriverScore, forKey: .averageDriverScore)
@@ -610,5 +681,27 @@ public struct Icon: Codable {
         
         self.name = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.name)
         self.type = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.type)
+    }
+}
+
+public struct TimelineEntities: Codable {
+
+    public let entities: ResponseArray<RootActivity>?
+    public let inProgressTrip: RootActivity?
+    public let moreData: Bool
+
+    public enum CodingKeys: String, CodingKey, CompoundWordStyle {
+        case entities = "Entities"
+        case moreData = "MoreData"
+        case inProgressTrip = "InProgressTrip"
+    }
+
+    public init(from decoder: Decoder) throws {
+
+        let container = try decoder.container(keyedBy: DynamicCodingKey.self)
+
+        self.entities = try container.decodeIfPresentIgnoringCase(ResponseArray<RootActivity>.self, forKey: CodingKeys.entities)
+        self.inProgressTrip = try container.decodeIfPresentIgnoringCase(RootActivity.self, forKey: CodingKeys.inProgressTrip)
+        self.moreData = try container.decodeIfPresentIgnoringCase(Bool.self, forKey: CodingKeys.moreData) ?? false
     }
 }
