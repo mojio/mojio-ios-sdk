@@ -61,6 +61,7 @@ public enum ActivityType : String, Codable {
     case emergencyIncident = "EmergencyIncident"
     case intelligentFuelLevel = "IntelligentFuelLevel"
     case media = "Media"
+    case group = "Group"
     case unkonwn
 }
 
