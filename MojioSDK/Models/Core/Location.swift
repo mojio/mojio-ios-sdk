@@ -165,8 +165,15 @@ extension Location {
         self.lat = coreLocation.coordinate.latitude
         self.lng = coreLocation.coordinate.longitude
         self.altitude = coreLocation.altitude
-        let heading = coreHeading?.trueHeading ?? 0
-        self.locationHeading = Heading(baseUnit: .degree, baseValue: 0.0, unit: .degree, value: heading, timestamp: nil, direction: nil, leftTurn: false)
+        if let heading = coreHeading {
+            self.locationHeading = Heading(baseUnit: .degree, baseValue: 0.0, unit: .degree, value: heading.trueHeading, timestamp: heading.timestamp, direction: nil, leftTurn: false)
+        }
+        else if coreLocation.course >= 0 {
+            self.locationHeading = Heading(baseUnit: .degree, baseValue: 0.0, unit: .degree, value: coreLocation.course, timestamp: coreLocation.timestamp, direction: nil, leftTurn: false)
+        }
+        else {
+            self.locationHeading = nil
+        }
         self.timestamp = coreLocation.timestamp
         self.radius = 0
         self.dilution = 0
