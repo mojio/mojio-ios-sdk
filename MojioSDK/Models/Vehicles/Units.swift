@@ -142,6 +142,17 @@ public enum BatteryVoltageUnit: String, Codable {
     }
 }
 
+public enum BatteryAmperageUnit: String, Codable {
+    case milliamps = "Milliamps"
+    case amps = "Amps"
+    case unknown = "Unknown"
+    
+    public init(from decoder: Decoder) throws {
+        let label = try decoder.singleValueContainer().decode(String.self)
+        self = BatteryAmperageUnit(rawValue: label) ?? .unknown
+    }
+}
+
 // Fuel
 public enum FuelType: String, Codable {
     case query = "Query"

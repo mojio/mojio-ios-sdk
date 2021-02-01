@@ -90,6 +90,14 @@
 		72B30078210B139D00608978 /* CompoundWordStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B30073210B072A00608978 /* CompoundWordStyle.swift */; };
 		72B3007B210B15B200608978 /* DynamicCodingKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B3007A210B15B200608978 /* DynamicCodingKey.swift */; };
 		75F77F0E1D19F504000CC2B4 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 75F77F0D1D19F504000CC2B4 /* libz.tbd */; };
+		85AFEEE125C802960053FA89 /* Seatbelt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85AFEEE025C802960053FA89 /* Seatbelt.swift */; };
+		85AFEEE925C810880053FA89 /* Seats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85AFEEE825C810880053FA89 /* Seats.swift */; };
+		85AFEEF125C813110053FA89 /* BrakeFluid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85AFEEF025C813110053FA89 /* BrakeFluid.swift */; };
+		85AFEEF925C8168D0053FA89 /* NextService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85AFEEF825C8168D0053FA89 /* NextService.swift */; };
+		85AFEF0125C81C8F0053FA89 /* HybridBattery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85AFEF0025C81C8F0053FA89 /* HybridBattery.swift */; };
+		85AFEF0925C820520053FA89 /* Voltage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85AFEF0825C820520053FA89 /* Voltage.swift */; };
+		85AFEF1125C83DCD0053FA89 /* Amperage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85AFEF1025C83DCD0053FA89 /* Amperage.swift */; };
+		85AFEF1925C8416F0053FA89 /* HybridEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85AFEF1825C8416F0053FA89 /* HybridEngine.swift */; };
 		85D5EDDA23FD8E47009C8C3C /* TripProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D5EDD923FD8E47009C8C3C /* TripProperties.swift */; };
 		887014791DA833CA00EFEC6D /* VehicleStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887014781DA833CA00EFEC6D /* VehicleStatistics.swift */; };
 		8F514528A4F9504A071CD3DE /* Pods_Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9960D8F3A0D13E54F71D6485 /* Pods_Core.framework */; };
@@ -312,6 +320,14 @@
 		72B3007A210B15B200608978 /* DynamicCodingKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicCodingKey.swift; sourceTree = "<group>"; };
 		75F77F0D1D19F504000CC2B4 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		840F431FEB572370F8073EC8 /* Pods-Pets.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pets.release.xcconfig"; path = "Target Support Files/Pods-Pets/Pods-Pets.release.xcconfig"; sourceTree = "<group>"; };
+		85AFEEE025C802960053FA89 /* Seatbelt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Seatbelt.swift; sourceTree = "<group>"; };
+		85AFEEE825C810880053FA89 /* Seats.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Seats.swift; sourceTree = "<group>"; };
+		85AFEEF025C813110053FA89 /* BrakeFluid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrakeFluid.swift; sourceTree = "<group>"; };
+		85AFEEF825C8168D0053FA89 /* NextService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NextService.swift; sourceTree = "<group>"; };
+		85AFEF0025C81C8F0053FA89 /* HybridBattery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HybridBattery.swift; sourceTree = "<group>"; };
+		85AFEF0825C820520053FA89 /* Voltage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Voltage.swift; sourceTree = "<group>"; };
+		85AFEF1025C83DCD0053FA89 /* Amperage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Amperage.swift; sourceTree = "<group>"; };
+		85AFEF1825C8416F0053FA89 /* HybridEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HybridEngine.swift; sourceTree = "<group>"; };
 		85D5EDD923FD8E47009C8C3C /* TripProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripProperties.swift; sourceTree = "<group>"; };
 		8808C2341EB1483A00A41A8B /* PrimaryKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimaryKey.swift; sourceTree = "<group>"; };
 		887014781DA833CA00EFEC6D /* VehicleStatistics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VehicleStatistics.swift; sourceTree = "<group>"; };
@@ -591,9 +607,11 @@
 		37BC6C842312A0C00054B420 /* DeviceMeasurements */ = {
 			isa = PBXGroup;
 			children = (
+				85AFEF1025C83DCD0053FA89 /* Amperage.swift */,
 				BC879B431CBEFFDD00F9177B /* Acceleration.swift */,
 				BC879B471CBEFFDD00F9177B /* Battery.swift */,
 				BC31E3CD1D419E80001649A7 /* Distance.swift */,
+				37BC6C8223129E4B0054B420 /* EngineOilTemperature.swift */,
 				BC879B4C1CBEFFDD00F9177B /* FuelCapacity.swift */,
 				BC879B4D1CBEFFDD00F9177B /* FuelEfficiency.swift */,
 				BC879B4E1CBEFFDD00F9177B /* FuelLevel.swift */,
@@ -603,7 +621,7 @@
 				BC879B581CBEFFDD00F9177B /* RPM.swift */,
 				BC879B5A1CBEFFDD00F9177B /* Speed.swift */,
 				BC879B4A1CBEFFDD00F9177B /* TimePeriod.swift */,
-				37BC6C8223129E4B0054B420 /* EngineOilTemperature.swift */,
+				85AFEF0825C820520053FA89 /* Voltage.swift */,
 			);
 			path = DeviceMeasurements;
 			sourceTree = "<group>";
@@ -680,16 +698,22 @@
 				37BC6C842312A0C00054B420 /* DeviceMeasurements */,
 				BC879B441CBEFFDD00F9177B /* Accelerometer.swift */,
 				644214DD1D9E6500005A86C5 /* AggregationData.swift */,
+				85AFEEF025C813110053FA89 /* BrakeFluid.swift */,
 				BC879B481CBEFFDD00F9177B /* BooleanState.swift */,
 				BC92329A1E7FC52900BD4038 /* CompatibilityDetails.swift */,
 				BC879B491CBEFFDD00F9177B /* DiagnosticCode.swift */,
 				BCF2DE491D454B8D00EDD376 /* Geofence.swift */,
 				F9E9FDAD1D93122A00DCB690 /* HarshEvent.swift */,
 				BCFCEB031F019FF20096C9B4 /* HarshEventState.swift */,
+				85AFEF1825C8416F0053FA89 /* HybridEngine.swift */,
+				85AFEF0025C81C8F0053FA89 /* HybridBattery.swift */,
 				BCFCEB051F01A2C70096C9B4 /* IdleEvent.swift */,
 				F9623AAD1D935D74005C10F2 /* IdleState.swift */,
 				BC879B531CBEFFDD00F9177B /* MeasurementStats.swift */,
 				BC879B541CBEFFDD00F9177B /* Mojio.swift */,
+				85AFEEF825C8168D0053FA89 /* NextService.swift */,
+				85AFEEE025C802960053FA89 /* Seatbelt.swift */,
+				85AFEEE825C810880053FA89 /* Seats.swift */,
 				BC879B591CBEFFDD00F9177B /* Score.swift */,
 				BC879B5C1CBEFFDD00F9177B /* Trip.swift */,
 				BC94271A1F01E17D00B7424A /* TripPolyline.swift */,
@@ -1436,7 +1460,9 @@
 				BCC8A4A01D19EABF00E14E2B /* WSVehiclesClient.swift in Sources */,
 				BCF2DE4A1D454B8D00EDD376 /* Geofence.swift in Sources */,
 				BC879B6B1CBEFFDD00F9177B /* FuelLevel.swift in Sources */,
+				85AFEF1925C8416F0053FA89 /* HybridEngine.swift in Sources */,
 				BCFCEB061F01A2C70096C9B4 /* IdleEvent.swift in Sources */,
+				85AFEF0925C820520053FA89 /* Voltage.swift in Sources */,
 				BCFE5910209AF92400B89104 /* TimeIntervalExt.swift in Sources */,
 				3781A95622538F84004E093F /* DynamicCodingKey.swift in Sources */,
 				BC879B791CBEFFDD00F9177B /* Trip.swift in Sources */,
@@ -1453,12 +1479,15 @@
 				BC879B721CBEFFDD00F9177B /* Odometer.swift in Sources */,
 				BC94271B1F01E17D00B7424A /* TripPolyline.swift in Sources */,
 				BC879B661CBEFFDD00F9177B /* DiagnosticCode.swift in Sources */,
+				85AFEEE925C810880053FA89 /* Seats.swift in Sources */,
 				37BC6C862312A1CA0054B420 /* EngineOil.swift in Sources */,
+				85AFEF1125C83DCD0053FA89 /* Amperage.swift in Sources */,
 				BC879B3D1CBEFFC000F9177B /* ServiceBulletin.swift in Sources */,
 				375206FC20AADD3B00102273 /* GeofenceRegion.swift in Sources */,
 				BC879B3F1CBEFFC000F9177B /* Transmission.swift in Sources */,
 				887014791DA833CA00EFEC6D /* VehicleStatistics.swift in Sources */,
 				BC879B3B1CBEFFC000F9177B /* PlatformServiceSchedule.swift in Sources */,
+				85AFEF0125C81C8F0053FA89 /* HybridBattery.swift in Sources */,
 				BC879B7B1CBEFFDD00F9177B /* Vehicle.swift in Sources */,
 				BC879B751CBEFFDD00F9177B /* RPM.swift in Sources */,
 				BC879B3C1CBEFFC000F9177B /* Recall.swift in Sources */,
@@ -1476,7 +1505,10 @@
 				372150DD23B0B752001D7B1D /* SpeedingViolation.swift in Sources */,
 				BC879B651CBEFFDD00F9177B /* BooleanState.swift in Sources */,
 				BC879B3A1CBEFFC000F9177B /* NextServiceSchedule.swift in Sources */,
+				85AFEEF925C8168D0053FA89 /* NextService.swift in Sources */,
 				BC879B761CBEFFDD00F9177B /* Score.swift in Sources */,
+				85AFEEE125C802960053FA89 /* Seatbelt.swift in Sources */,
+				85AFEEF125C813110053FA89 /* BrakeFluid.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
