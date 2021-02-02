@@ -33,7 +33,7 @@ public protocol HybridBatteryModel: Codable {
     var timestamp: Date? { get }
     var voltage: Voltage? { get }
     var amperage: Amperage? { get }
-    var chargeLevel: PercentageUnit? { get }
+    var chargeLevel: FuelLevel? { get }
     var chargingStatus: HybridBatteryChargingStatus? { get }
 }
 
@@ -42,7 +42,7 @@ public struct HybridBattery: HybridBatteryModel {
     public var timestamp: Date? = nil
     public var voltage: Voltage? = nil
     public var amperage: Amperage? = nil
-    public var chargeLevel: PercentageUnit? = nil
+    public var chargeLevel: FuelLevel? = nil
     public var chargingStatus: HybridBatteryChargingStatus? = nil
 
     public enum CodingKeys: String, CodingKey, CompoundWordStyle {
@@ -61,7 +61,7 @@ public struct HybridBattery: HybridBatteryModel {
             self.timestamp = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.timestamp).flatMap { $0.dateFromISO }
             self.voltage = try container.decodeIfPresentIgnoringCase(Voltage.self, forKey: CodingKeys.hybridBatteryVoltage)
             self.amperage = try container.decodeIfPresentIgnoringCase(Amperage.self, forKey: CodingKeys.hybridBatteryCurrent)
-            self.chargeLevel = try container.decodeIfPresentIgnoringCase(PercentageUnit.self, forKey: CodingKeys.hybridBatteryChargeLevel)
+            self.chargeLevel = try container.decodeIfPresentIgnoringCase(FuelLevel.self, forKey: CodingKeys.hybridBatteryChargeLevel)
             self.chargingStatus = try container.decodeIfPresentIgnoringCase(HybridBatteryChargingStatus.self, forKey: CodingKeys.hybridBatteryChargingStatus)
         }
         catch {
