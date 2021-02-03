@@ -1,6 +1,6 @@
 /******************************************************************************
  * Moj.io Inc. CONFIDENTIAL
- * 2021 Copyright Moj.io Inc.
+ * 2017 Copyright Moj.io Inc.
  * All Rights Reserved.
  *
  * NOTICE:  All information contained herein is, and remains, the property of
@@ -62,7 +62,6 @@ public enum ActivityType : String, Codable {
     case intelligentFuelLevel = "IntelligentFuelLevel"
     case media = "Media"
     case group = "Group"
-    case lowBrakeFluidWarning = "LowBrakeFluidWarning"
     case unkonwn
 }
 
