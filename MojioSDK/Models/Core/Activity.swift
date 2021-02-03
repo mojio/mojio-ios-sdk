@@ -63,6 +63,7 @@ public enum ActivityType : String, Codable {
     case media = "Media"
     case group = "Group"
     case lowBrakeFluidWarning = "LowBrakeFluidWarning"
+    case maintenanceReminder = "MaintenanceReminder"
     case unkonwn
 }
 
