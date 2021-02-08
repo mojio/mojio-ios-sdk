@@ -41,6 +41,7 @@ public enum VehiclesEndpoint: String {
     case polyline = "polyline/"
     case timeline = "timeline/assets/"
     case speedingViolations = "speedingviolations/"
+    case completedMaintenance = "maintenance/completed"
     // Storage
     // Parameters: Type, Id, Key
     // e.g. trips/{id}/store/{key}
@@ -251,6 +252,13 @@ open class VehiclesClient: RestClient {
         return self
     }
     
+    open func completedMaintenance() -> Self {
+        self.requestEntity = VehiclesEndpoint.completedMaintenance.rawValue
+        self.requestUrl = self.requestUrl! + self.requestEntity
+        
+        return self
+    }
+    
     open override func parseData(_ responseData: Data) -> Codable? {
         
         do {
@@ -367,6 +375,13 @@ open class VehiclesClient: RestClient {
                 }
                 catch {
                     return try JSONDecoder().decode(SpeedingViolation.self, from: responseData)
+                }
+            case .completedMaintenance:
+                do {
+                    return try JSONDecoder().decode([CompletedMaintenance].self, from: responseData)
+                }
+                catch {
+                    return try JSONDecoder().decode(CompletedMaintenance.self, from: responseData)
                 }
                 
             default:

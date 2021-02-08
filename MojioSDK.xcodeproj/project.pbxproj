@@ -74,6 +74,7 @@
 		376656E52514BE3000DE0A96 /* EntityAppearanceColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376656E42514BE3000DE0A96 /* EntityAppearanceColor.swift */; };
 		377BD261237563F500228716 /* PredictiveMaintenance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377BD260237563F500228716 /* PredictiveMaintenance.swift */; };
 		3781A95622538F84004E093F /* DynamicCodingKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B3007A210B15B200608978 /* DynamicCodingKey.swift */; };
+		37975B5825D1714F00F0B1AA /* CompletedMaintenance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37975B5725D1714F00F0B1AA /* CompletedMaintenance.swift */; };
 		37A05331259B737A0080BEF1 /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A05330259B737A0080BEF1 /* Media.swift */; };
 		37BC6C8323129E4B0054B420 /* EngineOilTemperature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BC6C8223129E4B0054B420 /* EngineOilTemperature.swift */; };
 		37BC6C862312A1CA0054B420 /* EngineOil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BC6C852312A1CA0054B420 /* EngineOil.swift */; };
@@ -306,6 +307,7 @@
 		376656DC2514BCCF00DE0A96 /* VehicleAppearanceStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleAppearanceStyle.swift; sourceTree = "<group>"; };
 		376656E42514BE3000DE0A96 /* EntityAppearanceColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityAppearanceColor.swift; sourceTree = "<group>"; };
 		377BD260237563F500228716 /* PredictiveMaintenance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredictiveMaintenance.swift; sourceTree = "<group>"; };
+		37975B5725D1714F00F0B1AA /* CompletedMaintenance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedMaintenance.swift; sourceTree = "<group>"; };
 		37A05330259B737A0080BEF1 /* Media.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
 		37BC6C8223129E4B0054B420 /* EngineOilTemperature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EngineOilTemperature.swift; sourceTree = "<group>"; };
 		37BC6C852312A1CA0054B420 /* EngineOil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EngineOil.swift; sourceTree = "<group>"; };
@@ -732,6 +734,7 @@
 				377BD260237563F500228716 /* PredictiveMaintenance.swift */,
 				372150DC23B0B752001D7B1D /* SpeedingViolation.swift */,
 				376656DC2514BCCF00DE0A96 /* VehicleAppearanceStyle.swift */,
+				37975B5725D1714F00F0B1AA /* CompletedMaintenance.swift */,
 			);
 			path = Vehicles;
 			sourceTree = "<group>";
@@ -1470,6 +1473,7 @@
 				BC92329B1E7FC52900BD4038 /* CompatibilityDetails.swift in Sources */,
 				36B0E43D20FE21DA006F897B /* VehicleActivitySettings.swift in Sources */,
 				BC879B411CBEFFC000F9177B /* VinDetails.swift in Sources */,
+				37975B5825D1714F00F0B1AA /* CompletedMaintenance.swift in Sources */,
 				BCFE5911209AF92400B89104 /* StringExt.swift in Sources */,
 				BC717D9B1DA6EFA20052317C /* ServiceInterval.swift in Sources */,
 				BC717D9A1DA6EFA20052317C /* ServiceEvent.swift in Sources */,
