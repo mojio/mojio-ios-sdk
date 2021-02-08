@@ -66,7 +66,6 @@ open class ImagesClient: RestClient {
         _ imageData: Data,
         mimeType: MimeType.Image,
         urlParams: [String: Any]? = nil,
-        debug: ((_ request: Request?, _ response: AFDataResponse<Data>?) -> Void)? = nil,
         completion: @escaping (I?) -> Void,
         failure: @escaping (Any?) -> Void) {
         
@@ -87,13 +86,11 @@ open class ImagesClient: RestClient {
             headers: self.defaultHeaders)
         
         request.responseData(queue: self.dispatchQueue) { response in
-            debug?(request, response) // PHIOS-5207: post request notification for any loggers
             self.handleResponse(response, completion: { completion($0 as? I) }, failure: failure)
         }
     }
     
     open func runImage(
-        debug: ((_ request: Request?, _ response: AFDataResponse<UIImage>?) -> Void)? = nil,
         completion: @escaping (UIImage?) -> Void,
         failure: @escaping (Any?) -> Void) {
 
@@ -110,7 +107,6 @@ open class ImagesClient: RestClient {
             headers: self.defaultHeaders)
         
         request.responseImage { response in
-            debug?(request, response) // PHIOS-5207: post request notification for any loggers
             completion(try? response.result.get())
         }
         

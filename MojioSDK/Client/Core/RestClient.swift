@@ -376,7 +376,6 @@ open class RestClient {
     }
     
     open func run(
-        debug: ((_ request: Request?, _ response: AFDataResponse<Data>?) -> Void)? = nil,
         completion: @escaping (_ response: Codable?) -> Void,
         failure: @escaping (_ error: Any?) -> Void) {
         
@@ -394,7 +393,6 @@ open class RestClient {
             headers: self.defaultHeaders)
             
         request.responseData(queue: self.dispatchQueue) { response in
-            debug?(request, response) // PHIOS-5207: post request notification for any loggers
             self.handleResponse(response, completion: completion, failure: failure)
         }
     }
@@ -436,7 +434,6 @@ open class RestClient {
     
     open func runStringBody(
         string: String,
-        debug: ((_ request: Request?, _ response: AFDataResponse<Data>?) -> Void)? = nil,
         completion: @escaping (_ response: Codable?) -> Void,
         failure: @escaping (_ error: Any?) -> Void) {
         
@@ -448,14 +445,12 @@ open class RestClient {
             headers: self.defaultHeaders)
             
         request.responseData(queue: self.dispatchQueue) { response in
-            debug?(request, response) // PHIOS-5207: post request notification for any loggers
             self.handleResponse(response, completion: completion, failure: failure)
         }
     }
     
     open func runEncodeJSON(
         jsonObject: [String: Codable],
-        debug: ((_ request: Request?, _ response: AFDataResponse<Data>?) -> Void)? = nil,
         completion: @escaping (_ response: Codable?) -> Void,
         failure: @escaping (_ error: Any?) -> Void) {
         
@@ -467,7 +462,6 @@ open class RestClient {
             headers: self.defaultHeaders)
                 
         request.responseData(queue: self.dispatchQueue) { response in
-            debug?(request, response) // PHIOS-5207: post request notification for any loggers
             self.handleResponse(response, completion: completion, failure: failure)
         }
     }
@@ -503,7 +497,6 @@ open class RestClient {
     
     open func runEncodeJSON<T: Codable>(
         codableObject: T,
-        debug: ((_ request: Request?, _ response: AFDataResponse<Data>?) -> Void)? = nil,
         completion: @escaping (_ response: Codable?) -> Void,
         failure: @escaping (_ error: Any?) -> Void) {
         
@@ -515,14 +508,12 @@ open class RestClient {
             headers: self.defaultHeaders)
         
         request.responseData(queue: self.dispatchQueue) { response in
-            debug?(request, response) // PHIOS-5207: post request notification for any loggers
             self.handleResponse(response, completion: completion, failure: failure)
         }
     }
     
     open func runEncodeUrl(
         _ parameters: [String: Any],
-        debug: ((_ request: Request?, _ response: AFDataResponse<Data>?) -> Void)? = nil,
         completion: @escaping (_ response: Codable?) -> Void,
         failure: @escaping (_ error: Any?) -> Void) {
         
@@ -534,7 +525,6 @@ open class RestClient {
             headers: self.defaultHeaders)
         
         request.responseData(queue: self.dispatchQueue) { response in
-            debug?(request, response) // PHIOS-5207: post request notification for any loggers
             self.handleResponse(response, completion: completion, failure: failure)
         }
     }
@@ -564,7 +554,6 @@ open class RestClient {
     
     open func runCustomStringBody(
         string: String,
-        debug: ((_ request: Request?, _ response: AFDataResponse<Any>?) -> Void)? = nil,
         completion: @escaping (_ response: Any) -> Void,
         failure: @escaping (_ error: Any?) -> Void) {
         
@@ -573,7 +562,6 @@ open class RestClient {
     
     open func runCustomStringBody(
         string: String,
-        debug: ((_ request: Request?, _ response: AFDataResponse<Any>?) -> Void)? = nil,
         completion: @escaping (_ response: Any, _ headers: [String : Any?]) -> Void,
         failure: @escaping (_ error: Any?) -> Void) {
         
@@ -585,21 +573,18 @@ open class RestClient {
             headers: self.defaultHeaders)
         
         request.responseJSON(queue: self.dispatchQueue, options: .allowFragments) { response in
-            debug?(request, response) // PHIOS-5207: post request notification for any logger
             self.handleCustomJSONResponse(response, completion: completion, failure: failure)
         }
     }
     
     open func runCustomJSON(
-        debug: ((_ request: Request?, _ response: AFDataResponse<Any>?) -> Void)? = nil,
         completion: @escaping (_ response: Any) -> Void,
         failure: @escaping (_ error: Any?) -> Void) {
         
-        self.runCustomJSON(debug: debug, completion: {response, headers in completion(response)}, failure: failure)
+        self.runCustomJSON(completion: {response, headers in completion(response)}, failure: failure)
     }
     
     open func runCustomJSON(
-        debug: ((_ request: Request?, _ response: AFDataResponse<Any>?) -> Void)? = nil,
         completion: @escaping (_ response: Any, _ headers: [String : Any?]) -> Void,
         failure: @escaping (_ error: Any?) -> Void) {
         
@@ -617,7 +602,6 @@ open class RestClient {
             headers: self.defaultHeaders)
             
         request.responseJSON(queue: self.dispatchQueue, options: .allowFragments) { response in
-            debug?(request, response) // PHIOS-5207: post request notification for any loggers
             self.handleCustomJSONResponse(response, completion: completion, failure: failure)
         }
     }
