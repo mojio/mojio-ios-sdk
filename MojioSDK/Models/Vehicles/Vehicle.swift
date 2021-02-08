@@ -50,7 +50,13 @@ public protocol VehicleModel: Codable, PrimaryKey {
     associatedtype EO: EngineOilModel
     associatedtype TP: TirePressureModel
     associatedtype PM: PredictiveMaintenanceModel
-    
+    associatedtype SB: SeatbeltModel
+    associatedtype ST: SeatsModel
+    associatedtype BF: BrakeFluidModel
+    associatedtype NS: NextServiceModel
+    associatedtype HB: HybridBatteryModel
+    associatedtype HE: HybridEngineModel
+
     var id: String { get }
     var name: String? { get }
     var licensePlate: String? { get }
@@ -98,6 +104,12 @@ public protocol VehicleModel: Codable, PrimaryKey {
     var vehicleType: VehicleType? { get }
     var alternateId: String? { get } // ID of Bluetooth device linked to virtual vehicles
     var deviceExternalId: String? { get }
+    var seatbelt: SB? { get }
+    var seats: ST? { get }
+    var brakeFluid: BF? { get }
+    var nextService: NS? { get }
+    var hybridBattery: HB? { get }
+    var hybridEngine: HE? { get }
 }
 
 public struct Vehicle: VehicleModel {
@@ -122,7 +134,13 @@ public struct Vehicle: VehicleModel {
     public typealias EO = EngineOil
     public typealias TP = TirePressure
     public typealias PM = PredictiveMaintenance
-    
+    public typealias SB = Seatbelt
+    public typealias ST = Seats
+    public typealias BF = BrakeFluid
+    public typealias NS = NextService
+    public typealias HB = HybridBattery
+    public typealias HE = HybridEngine
+
     public var id: String
     public var name: String?
     public var licensePlate: String?
@@ -170,7 +188,13 @@ public struct Vehicle: VehicleModel {
     public var vehicleType: VehicleType?
     public var alternateId: String?
     public var deviceExternalId: String?
-    
+    public var seatbelt: SB?
+    public var seats: ST?
+    public var brakeFluid: BF?
+    public var nextService: NS?
+    public var hybridBattery: HB?
+    public var hybridEngine: HE?
+
     public enum CodingKeys: String, CodingKey, CompoundWordStyle {
         case id = "Id"
         case name = "Name"
@@ -219,6 +243,12 @@ public struct Vehicle: VehicleModel {
         case vehicleType = "VehicleType"
         case alternateId = "AlternateId"
         case deviceExternalId = "DeviceExternalId"
+        case seatbelt = "Seatbelt"
+        case seats = "Seats"
+        case brakeFluid = "BrakeFluid"
+        case nextService = "NextService"
+        case hybridBattery = "HybridBattery"
+        case hybridEngine = "HybridEngine"
     }
     
     public init(from decoder: Decoder) throws {
@@ -273,6 +303,12 @@ public struct Vehicle: VehicleModel {
             self.vehicleType = try container.decodeIfPresentIgnoringCase(VehicleType.self, forKey: CodingKeys.vehicleType)
             self.alternateId = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.alternateId)
             self.deviceExternalId = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.deviceExternalId)
+            self.seatbelt = try container.decodeIfPresentIgnoringCase(Seatbelt.self, forKey: CodingKeys.seatbelt)
+            self.seats = try container.decodeIfPresentIgnoringCase(Seats.self, forKey: CodingKeys.seats)
+            self.brakeFluid = try container.decodeIfPresentIgnoringCase(BrakeFluid.self, forKey: CodingKeys.brakeFluid)
+            self.nextService = try container.decodeIfPresentIgnoringCase(NextService.self, forKey: CodingKeys.nextService)
+            self.hybridBattery = try container.decodeIfPresentIgnoringCase(HybridBattery.self, forKey: CodingKeys.hybridBattery)
+            self.hybridEngine = try container.decodeIfPresentIgnoringCase(HybridEngine.self, forKey: CodingKeys.hybridEngine)
         }
         catch {
             debugPrint(error)
@@ -331,6 +367,12 @@ public struct Vehicle: VehicleModel {
         try container.encodeIfPresent(self.vehicleType, forKey: .vehicleType)
         try container.encodeIfPresent(self.alternateId, forKey: .alternateId)
         try container.encodeIfPresent(self.deviceExternalId, forKey: .deviceExternalId)
+        try container.encodeIfPresent(self.seatbelt, forKey: .seatbelt)
+        try container.encodeIfPresent(self.seats, forKey: .seats)
+        try container.encodeIfPresent(self.brakeFluid, forKey: .brakeFluid)
+        try container.encodeIfPresent(self.nextService, forKey: .nextService)
+        try container.encodeIfPresent(self.hybridBattery, forKey: .hybridBattery)
+        try container.encodeIfPresent(self.hybridEngine, forKey: .hybridEngine)
     }
 }
 

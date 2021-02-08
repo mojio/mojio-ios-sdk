@@ -62,6 +62,8 @@ public enum ActivityType : String, Codable {
     case intelligentFuelLevel = "IntelligentFuelLevel"
     case media = "Media"
     case group = "Group"
+    case lowBrakeFluidWarning = "LowBrakeFluidWarning"
+    case maintenanceReminder = "MaintenanceReminder"
     case unkonwn
 }
 
@@ -424,6 +426,8 @@ public enum TimelineActivityType: String, Codable {
     case tirePressure = "TirePressure"
     case airMaintenance = "AirFilterPredictiveMaintenance"
     case batteryMaintenance = "BatteryPredictiveMaintenance"
+    case lowBrakeFluidWarning = "LowBrakeFluidWarning"
+    case maintenanceReminder = "MaintenanceReminder"
     case unknown
     
     public init(from decoder: Decoder) throws {
