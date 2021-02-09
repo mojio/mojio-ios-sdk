@@ -428,6 +428,7 @@ public enum TimelineActivityType: String, Codable {
     case batteryMaintenance = "BatteryPredictiveMaintenance"
     case lowBrakeFluidWarning = "LowBrakeFluidWarning"
     case maintenanceReminder = "MaintenanceReminder"
+    case emergencyIncident = "EmergencyIncident"
     case unknown
     
     public init(from decoder: Decoder) throws {
