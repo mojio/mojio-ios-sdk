@@ -94,10 +94,16 @@ public protocol VehicleActivitySettingsModel: Codable {
     var enableServiceScheduleActivity: Bool? { get }
     var enableSeatbeltDisengagedActivity: Bool? { get }
     var enableSeatbeltEngagedActivity: Bool? { get }
+    var enableDriverSeatbeltDisengagedActivity: Bool? { get }
+    var enableDriverSeatbeltEngagedActivity: Bool? { get }
+    var enablePassengerSeatbeltDisengagedActivity: Bool? { get }
+    var enablePassengerSeatbeltEngagedActivity: Bool? { get }
     var enableEngineOilLevelWarningActivity: Bool? { get }
     var enableEngineOilPressureLowWarningActivity: Bool? { get }
     var enableTirePressureWarningActivity: Bool? { get }
     var enableAirFilterMaintenanceActivity: Bool? { get }
+    var enableLowBrakeFluidWarningActivity: Bool? { get }
+    var enableMaintenanceReminderActivity: Bool? { get }
 }
 
 public struct VehicleActivitySettings: VehicleActivitySettingsModel {
@@ -131,11 +137,17 @@ public struct VehicleActivitySettings: VehicleActivitySettingsModel {
     public let enableServiceScheduleActivity: Bool?
     public let enableSeatbeltDisengagedActivity: Bool?
     public let enableSeatbeltEngagedActivity: Bool?
+    public let enableDriverSeatbeltDisengagedActivity: Bool?
+    public let enableDriverSeatbeltEngagedActivity: Bool?
+    public let enablePassengerSeatbeltDisengagedActivity: Bool?
+    public let enablePassengerSeatbeltEngagedActivity: Bool?
     public let enableEngineOilLevelWarningActivity: Bool?
     public let enableEngineOilPressureLowWarningActivity: Bool?
     public let enableTirePressureWarningActivity: Bool?
     public let enableAirFilterMaintenanceActivity: Bool?
-    
+    public let enableLowBrakeFluidWarningActivity: Bool?
+    public let enableMaintenanceReminderActivity: Bool?
+
     public enum CodingKeys: String, CodingKey {
         case enableTripStartActivity
         case enableTripCompletedActivity
@@ -164,9 +176,15 @@ public struct VehicleActivitySettings: VehicleActivitySettingsModel {
         case enableServiceScheduleActivity
         case enableSeatbeltDisengagedActivity
         case enableSeatbeltEngagedActivity
+        case enableDriverSeatbeltDisengagedActivity
+        case enableDriverSeatbeltEngagedActivity
+        case enablePassengerSeatbeltDisengagedActivity
+        case enablePassengerSeatbeltEngagedActivity
         case enableEngineOilLevelWarningActivity
         case enableEngineOilPressureLowWarningActivity
         case enableTirePressureWarningActivity
         case enableAirFilterMaintenanceActivity 
+        case enableLowBrakeFluidWarningActivity
+        case enableMaintenanceReminderActivity
     }
 }
