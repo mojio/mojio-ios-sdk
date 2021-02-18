@@ -73,8 +73,8 @@ public protocol TripModel: Codable, PrimaryKey {
     var createdOn: Date? { get }
     var lastModified: Date? { get }
     
-    var driverScore: Int? { get }
-    var averageDriverScore: Int? { get }
+    var driverScore: Double? { get }
+    var averageDriverScore: Double? { get }
     
     var properties: P? { get }
 }

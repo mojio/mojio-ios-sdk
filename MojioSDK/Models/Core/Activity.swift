@@ -461,6 +461,12 @@ public protocol RootActivityModel: ActivityModelBase, PrimaryKey {
     var object: A? { get }
     var origin: A? { get }
     var audience: A? { get }
+    
+    var userId: String? { get }
+    var messageId: String? { get }
+
+    var driverScore: Double? { get }
+    var averageDriverScore: Double? { get }
 }
 
 public func ==<A: RootActivityModel>(lhs: A, rhs: A) -> Bool {
