@@ -461,6 +461,12 @@ public protocol RootActivityModel: ActivityModelBase, PrimaryKey {
     var object: A? { get }
     var origin: A? { get }
     var audience: A? { get }
+    
+    var userId: String? { get }
+    var messageId: String? { get }
+
+    var driverScore: Double? { get }
+    var averageDriverScore: Double? { get }
 }
 
 public func ==<A: RootActivityModel>(lhs: A, rhs: A) -> Bool {
@@ -507,8 +513,8 @@ public struct RootActivity: RootActivityModel {
     public let userId: String?
     public let messageId: String?
 
-    public let driverScore: Int?
-    public let averageDriverScore: Int?
+    public let driverScore: Double?
+    public let averageDriverScore: Double?
 
     enum CodingKeys: String, CodingKey, CompoundWordStyle {
         case id = "Id"
@@ -619,19 +625,8 @@ public struct RootActivity: RootActivityModel {
             self.location = try container.decodeIfPresentIgnoringCase(ActivityLocation.self, forKey: CodingKeys.location)
         }
         
-        do {
-            self.driverScore = try container.decodeIfPresentIgnoringCase(Int.self, forKey: CodingKeys.driverScore)
-        }
-        catch {
-            self.driverScore = try container.decodeIfPresentIgnoringCase(Float.self, forKey: CodingKeys.driverScore).flatMap { Int($0 * 100) }
-        }
-                
-        do {
-            self.averageDriverScore = try container.decodeIfPresentIgnoringCase(Int.self, forKey: CodingKeys.averageDriverScore)
-        }
-        catch {
-            self.averageDriverScore = try container.decodeIfPresentIgnoringCase(Float.self, forKey: CodingKeys.averageDriverScore).flatMap { Int($0 * 100) }
-        }
+        self.driverScore = try? container.decodeIfPresentIgnoringCase(Double.self, forKey: CodingKeys.driverScore)
+        self.averageDriverScore = try? container.decodeIfPresentIgnoringCase(Double.self, forKey: CodingKeys.averageDriverScore)
     }
     
     public func encode (to encoder: Encoder) throws {
