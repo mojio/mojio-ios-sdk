@@ -24,6 +24,7 @@ open class MojioRegion: MojioRegionPrefix {
     public enum RegionType: String {
         case production = "production-"
         case fut = "fut-"
+        case beta = "beta-"
         case staging = "staging-"
         case load = "load-"
         case develop = "develop-"
