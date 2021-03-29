@@ -385,16 +385,19 @@ public struct VehicleUpdate: Codable {
     public var licensePlate: String?
     public var vin: String?
     public var odometer: OdometerUpdate?
+    public var fuelCapacity: FuelCapacityUpdate?
     
     public enum CodingKeys: String, CodingKey {
         case name = "Name"
         case licensePlate = "LicensePlate"
         case vin = "VIN"
         case odometer = "Odometer"
+        case fuelCapacity = "FuelCapacity"
     }
     
     public init(vehicle: Vehicle? = nil) {
         let odometer = vehicle?.odometer.map { OdometerUpdate(baseUnit: $0.baseUnit, baseValue: $0.baseValue, unit: $0.unit, value: $0.value, timestamp: $0.timestamp, rolloverValue: $0.rolloverValue) }
+
         self.init(
             name: vehicle?.name,
             licensePlate: vehicle?.licensePlate,
@@ -407,12 +410,14 @@ public struct VehicleUpdate: Codable {
         name: String? = nil,
         licensePlate: String? = nil,
         vin: String? = nil,
-        odometer: OdometerUpdate? = nil) {
+        odometer: OdometerUpdate? = nil,
+        fuelCapacity: FuelCapacityUpdate? = nil) {
         
         self.name = name
         self.licensePlate = licensePlate
         self.vin = vin
         self.odometer = odometer
+        self.fuelCapacity = fuelCapacity
     }
     
     public func encode(to encoder: Encoder) throws {
@@ -422,5 +427,6 @@ public struct VehicleUpdate: Codable {
         try container.encodeIfPresent(self.licensePlate, forKey: .licensePlate)
         try container.encodeIfPresent(self.vin, forKey: .vin)
         try container.encodeIfPresent(self.odometer, forKey: .odometer)
+        try container.encodeIfPresent(self.fuelCapacity, forKey: .fuelCapacity)
     }
 }
