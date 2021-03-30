@@ -42,9 +42,9 @@ extension FuelVolume {
     }
 }
 
-public struct FuelCapacityUpdate: DeviceMeasurement {
+public struct FuelVolumeUpdate: DeviceMeasurement {
     
-    public typealias U = FuelCapacityUnit
+    public typealias U = FuelVolumeUnit
     // DeviceMeasurement
     public let baseUnit: U
     public let baseValue: Double
