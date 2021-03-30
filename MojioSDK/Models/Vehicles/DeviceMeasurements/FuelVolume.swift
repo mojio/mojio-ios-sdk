@@ -65,7 +65,5 @@ public struct FuelCapacityUpdate: DeviceMeasurement {
         self.init(baseUnit: deviceMeasurements.baseUnit ?? .unknown, baseValue: deviceMeasurements.baseValue, unit: deviceMeasurements.unit ?? .unknown, value: deviceMeasurements.value, timestamp: deviceMeasurements.timestamp)
     }
     
-    public func encode(with encoder: Encoder) throws {
-        try self.encode(to: encoder)
-    }
+    public func encode(with encoder: Encoder) throws { }
 }
