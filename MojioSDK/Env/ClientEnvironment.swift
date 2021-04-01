@@ -65,7 +65,7 @@ public enum MojioEndpoint {
     case trackerImage
     case image
     case services
-    case seviceLink
+    case serviceLink
 }
 
 open class ClientEnvironment {
@@ -79,7 +79,7 @@ open class ClientEnvironment {
         trackerEndpoint: String?,
         trackerImageEndpoint: String?,
         servicesEndpoint: String?,
-        seviceLinkEndpoint: String?
+        serviceLinkEndpoint: String?
     )
     public static var customEndpoints: CustomEndpoints?
     
@@ -92,7 +92,7 @@ open class ClientEnvironment {
         .tracker: "%@trackerapi.moj.io",
         .trackerImage: "%@trackerapi.moj.io",
         .services: "%@services.moj.io",
-        .seviceLink: "%@servicelink.moj.io"
+        .serviceLink: "%@servicelink.moj.io"
     ]
     
     open func domainFromMojioEndpoint(_ endpoint: MojioEndpoint) -> String {
@@ -114,7 +114,7 @@ open class ClientEnvironment {
         case trackerEndpoint = "https://%@trackerapi.moj.io/"
         case imageEndpoint = "https://%@images.moj.io/"
         case servicesEndpoint = "https://%@services.moj.io/"
-        case seviceLinkEndpoint = "https://%@servicelink.moj.io/"
+        case serviceLinkEndpoint = "https://%@servicelink.moj.io/"
     }
     
     fileprivate var region: MojioRegion = MojioRegion()
@@ -128,7 +128,7 @@ open class ClientEnvironment {
     fileprivate var trackerImageEndpoint: String?
     fileprivate var imageEndpoint: String?
     fileprivate var servicesEndpoint: String?
-    fileprivate var seviceLinkEndpoint: String?
+    fileprivate var serviceLinkEndpoint: String?
     
     public init() {
         self.updateEndPoints()
@@ -157,7 +157,7 @@ open class ClientEnvironment {
                 self.trackerEndpoint = customEndpoints.trackerEndpoint
                 self.trackerImageEndpoint = customEndpoints.trackerEndpoint
                 self.servicesEndpoint = customEndpoints.servicesEndpoint
-                self.seviceLinkEndpoint = customEndpoints.servicesEndpoint
+                self.serviceLinkEndpoint = customEndpoints.servicesEndpoint
             }
             return
         }
@@ -199,8 +199,8 @@ open class ClientEnvironment {
             format: ClientEnvironment.EndPointFormat.servicesEndpoint.rawValue,
             arguments: [self.region.description])
         
-        self.seviceLinkEndpoint = String(
-            format: ClientEnvironment.EndPointFormat.seviceLinkEndpoint.rawValue,
+        self.serviceLinkEndpoint = String(
+            format: ClientEnvironment.EndPointFormat.serviceLinkEndpoint.rawValue,
             arguments: [self.region.description])
     }
     
@@ -244,7 +244,7 @@ open class ClientEnvironment {
         return self.servicesEndpoint!
     }
     
-    open func getSeviceLinkEndpoint () -> String {
-        return self.seviceLinkEndpoint!
+    open func getServiceLinkEndpoint () -> String {
+        return self.serviceLinkEndpoint!
     }
 }
