@@ -41,3 +41,29 @@ extension FuelCapacity {
         
     }
 }
+
+public struct FuelCapacityUpdate: DeviceMeasurement {
+    
+    public typealias U = FuelCapacityUnit
+    // DeviceMeasurement
+    public let baseUnit: U
+    public let baseValue: Double
+    public let unit: U
+    public let value: Double
+    public let timestamp: Date?
+
+    public init(baseUnit: U, baseValue: Double, unit: U, value: Double, timestamp: Date?) {
+        self.baseUnit = baseUnit
+        self.baseValue = baseValue
+        self.unit = unit
+        self.value = value
+        self.timestamp = timestamp
+    }
+    
+    public init(from decoder: Decoder, with deviceMeasurements: DeviceMeasurements) throws {
+        
+        self.init(baseUnit: deviceMeasurements.baseUnit ?? .unknown, baseValue: deviceMeasurements.baseValue, unit: deviceMeasurements.unit ?? .unknown, value: deviceMeasurements.value, timestamp: deviceMeasurements.timestamp)
+    }
+    
+    public func encode(with encoder: Encoder) throws { }
+}

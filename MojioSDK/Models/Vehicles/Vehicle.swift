@@ -38,6 +38,7 @@ public protocol VehicleModel: Codable, PrimaryKey {
     associatedtype FL: FuelLevelModel
     associatedtype FE: FuelEfficiencyModel
     associatedtype FV: FuelVolumeModel
+    associatedtype FC: FuelCapacityModel
     associatedtype HS: HarshEventStateModel
     associatedtype IS: IdleStateModel
     associatedtype BS: BooleanStateModel
@@ -81,6 +82,7 @@ public protocol VehicleModel: Codable, PrimaryKey {
     var fuelEfficiencyCalculationMethod: FuelEfficiencyCalculationMethod? { get }
     var fuelLevel: FL? { get }
     var fuelVolume: FV? { get }
+    var fuelCapacity: FC? { get }
     var fuelType: FuelType? { get }
     var gatewayTime: Date? { get }
     var harshEventState: HS? { get }
@@ -121,6 +123,7 @@ public struct Vehicle: VehicleModel {
     public typealias FL = FuelLevel
     public typealias FE = FuelEfficiency
     public typealias FV = FuelVolume
+    public typealias FC = FuelCapacity
     public typealias HS = HarshEventState
     public typealias IS = IdleState
     public typealias BS = BooleanState
@@ -165,6 +168,7 @@ public struct Vehicle: VehicleModel {
     public var fuelEfficiencyCalculationMethod: FuelEfficiencyCalculationMethod?
     public var fuelLevel: FL?
     public var fuelVolume: FV?
+    public var fuelCapacity: FC?
     public var fuelType: FuelType?
     public var gatewayTime: Date?
     public var harshEventState: HS?
@@ -220,6 +224,7 @@ public struct Vehicle: VehicleModel {
         case fuelEfficiencyCalculationMethod = "FuelEfficiencyCalculationMethod"
         case fuelLevel = "FuelLevel"
         case fuelVolume = "FuelVolume"
+        case fuelCapacity = "FuelCapacity"
         case fuelType = "FuelType"
         case gatewayTime = "GatewayTime"
         case harshEventState = "HarshEventState"
@@ -280,6 +285,7 @@ public struct Vehicle: VehicleModel {
             self.fuelEfficiencyCalculationMethod = try container.decodeIfPresentIgnoringCase(FuelEfficiencyCalculationMethod.self, forKey: CodingKeys.fuelEfficiencyCalculationMethod)
             self.fuelLevel = try container.decodeIfPresentIgnoringCase(FuelLevel.self, forKey: CodingKeys.fuelLevel)
             self.fuelVolume = try container.decodeIfPresentIgnoringCase(FuelVolume.self, forKey: CodingKeys.fuelVolume)
+            self.fuelCapacity = try container.decodeIfPresentIgnoringCase(FuelCapacity.self, forKey: CodingKeys.fuelCapacity)
             self.fuelType = try container.decodeIfPresentIgnoringCase(FuelType.self, forKey: CodingKeys.fuelType)
             self.gatewayTime = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.gatewayTime).flatMap { $0.dateFromISO }
             self.harshEventState = try container.decodeIfPresentIgnoringCase(HarshEventState.self, forKey: CodingKeys.harshEventState)
@@ -344,6 +350,7 @@ public struct Vehicle: VehicleModel {
         try container.encodeIfPresent(self.fuelEfficiencyCalculationMethod, forKey: .fuelEfficiencyCalculationMethod)
         try container.encodeIfPresent(self.fuelLevel, forKey: .fuelLevel)
         try container.encodeIfPresent(self.fuelVolume, forKey: .fuelVolume)
+        try container.encodeIfPresent(self.fuelCapacity, forKey: .fuelCapacity)
         try container.encodeIfPresent(self.fuelType, forKey: .fuelType)
         try container.encodeIfPresent(self.gatewayTime, forKey: .gatewayTime)
         try container.encodeIfPresent(self.harshEventState, forKey: .harshEventState)
@@ -385,21 +392,27 @@ public struct VehicleUpdate: Codable {
     public var licensePlate: String?
     public var vin: String?
     public var odometer: OdometerUpdate?
+    public var estimatedFuelCapacity: FuelCapacityUpdate?
     
     public enum CodingKeys: String, CodingKey {
         case name = "Name"
         case licensePlate = "LicensePlate"
         case vin = "VIN"
         case odometer = "Odometer"
+        case estimatedFuelCapacity = "EstimatedFuelCapacity"
     }
     
     public init(vehicle: Vehicle? = nil) {
         let odometer = vehicle?.odometer.map { OdometerUpdate(baseUnit: $0.baseUnit, baseValue: $0.baseValue, unit: $0.unit, value: $0.value, timestamp: $0.timestamp, rolloverValue: $0.rolloverValue) }
+        
+        let estimatedFuelCapacity = vehicle?.fuelCapacity.map { FuelCapacityUpdate(baseUnit: $0.baseUnit, baseValue: $0.baseValue, unit: $0.unit, value: $0.value, timestamp: $0.timestamp) }
+        
         self.init(
             name: vehicle?.name,
             licensePlate: vehicle?.licensePlate,
             vin: vehicle?.vin,
-            odometer: odometer
+            odometer: odometer,
+            estimatedFuelCapacity: estimatedFuelCapacity
         )
     }
     
@@ -407,12 +420,14 @@ public struct VehicleUpdate: Codable {
         name: String? = nil,
         licensePlate: String? = nil,
         vin: String? = nil,
-        odometer: OdometerUpdate? = nil) {
+        odometer: OdometerUpdate? = nil,
+        estimatedFuelCapacity: FuelCapacityUpdate? = nil) {
         
         self.name = name
         self.licensePlate = licensePlate
         self.vin = vin
         self.odometer = odometer
+        self.estimatedFuelCapacity = estimatedFuelCapacity
     }
     
     public func encode(to encoder: Encoder) throws {
@@ -422,5 +437,6 @@ public struct VehicleUpdate: Codable {
         try container.encodeIfPresent(self.licensePlate, forKey: .licensePlate)
         try container.encodeIfPresent(self.vin, forKey: .vin)
         try container.encodeIfPresent(self.odometer, forKey: .odometer)
+        try container.encodeIfPresent(self.estimatedFuelCapacity, forKey: .estimatedFuelCapacity)
     }
 }
