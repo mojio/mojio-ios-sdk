@@ -41,9 +41,8 @@ public struct Image: ImageModel {
     }
 
     public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: DynamicCodingKeys.self)
-        
         do {
+            let container = try decoder.container(keyedBy: DynamicCodingKey.self)
             self.id = try container.decodeIgnoringCase(String.self, forKey: CodingKeys.id)
             self.ownerId = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.ownerId)
             self.url = try container.decodeIfPresentIgnoringCase(URL.self, forKey: CodingKeys.url)
