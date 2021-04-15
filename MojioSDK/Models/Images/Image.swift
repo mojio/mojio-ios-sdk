@@ -32,7 +32,7 @@ public struct Image: ImageModel {
     public let mimeType: MimeType.Image?
     public let deleted: Bool?
     
-    public enum CodingKeys: String, CodingKey {
+    public enum CodingKeys: String, CodingKey, CompoundWordStyle {
         case id = "Id"
         case ownerId = "OwnerId"
         case url = "Url"
@@ -41,14 +41,14 @@ public struct Image: ImageModel {
     }
 
     public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let container = try decoder.container(keyedBy: DynamicCodingKeys.self)
         
         do {
-            self.id = try container.decode(String.self, forKey: .id)
-            self.ownerId = try container.decodeIfPresent(String.self, forKey: .ownerId)
-            self.url = try container.decodeIfPresent(URL.self, forKey: .url)
-            self.mimeType = try container.decodeIfPresent(MimeType.Image.self, forKey: .mimeType)
-            self.deleted = try container.decodeIfPresent(Bool.self, forKey: .deleted)
+            self.id = try container.decodeIgnoringCase(String.self, forKey: CodingKeys.id)
+            self.ownerId = try container.decodeIfPresentIgnoringCase(String.self, forKey: CodingKeys.ownerId)
+            self.url = try container.decodeIfPresentIgnoringCase(URL.self, forKey: CodingKeys.url)
+            self.mimeType = try container.decodeIfPresentIgnoringCase(MimeType.Image.self, forKey: CodingKeys.mimeType)
+            self.deleted = try container.decodeIfPresentIgnoringCase(Bool.self, forKey: CodingKeys.deleted)
         }
         catch {
             debugPrint(error)
@@ -56,4 +56,3 @@ public struct Image: ImageModel {
         }
     }
 }
-
