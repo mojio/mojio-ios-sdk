@@ -63,6 +63,7 @@ public enum ActivityType : String, Codable {
     case intelligentFuelSavedAndRecommendedFillup = "IntelligentFuelSavedAndRecommendedFillup"
     case intelligentFuelRecommendedFillup = "IntelligentFuelRecommendedFillup"
     case intelligentFuelNotRecommendedFillup = "IntelligentFuelNotRecommendedFillup"
+    case receiptWithSavings = "ReceiptWithSavings"
     case media = "Media"
     case group = "Group"
     case lowBrakeFluidWarning = "LowBrakeFluidWarning"
